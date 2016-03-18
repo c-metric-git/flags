@@ -1,0 +1,245 @@
+<script type="text/javascript">
+	function solrsearch_admin_ajax_updateindex(action, solrcore)
+	{
+		params = {'solrcore':solrcore, 'action':action};
+		var url = '<?php echo Mage::helper("adminhtml")->getUrl('solrbridge_admin/adminhtml_solrsearch/process');?>';
+		solrsearch_admin_ajax_request(url, params);
+	}
+	function solrsearch_admin_ajax_reindex(action, solrcore)
+	{
+		params = {'solrcore':solrcore, 'action':'REINDEX'};
+		var url = '<?php echo Mage::helper("adminhtml")->getUrl('solrbridge_admin/adminhtml_solrsearch/process');?>';
+		solrsearch_admin_ajax_request(url, params);
+	}
+
+	function solrsearch_admin_ajax_updateprice(solrcore)
+	{
+		params = {'solrcore':solrcore, 'action':'REINDEXPRICE'};
+		var url = '<?php echo Mage::helper("adminhtml")->getUrl('solrbridge_admin/adminhtml_solrsearch/process');?>';
+		solrsearch_admin_ajax_request(url, params);
+	}
+
+	function setProgressPercent(core, percent)
+	{
+		$('progress-inner-'+core).setStyle({width:(percent) + '%'});
+		$('progress-inner-'+core).update('<span>'+percent+'% finished</span>');
+	}
+
+	function setPriceProgressPercent(core, percent)
+	{
+		$('progress-price-inner-'+core).setStyle({width:(percent) + '%'});
+		$('progress-price-inner-'+core).update('<span>'+percent+'% finished</span>');
+	}
+
+	function solrsearch_admin_ajax_request(requesturl, params)
+	{
+		new Ajax.Request(
+				requesturl,
+				{
+				parameters:params,
+				evalJSON:'force',
+				onFailure: function(response) {
+					alert(response.responseText);
+					return;
+				},
+				onComplete: function(response) {
+					var json = response.responseText.evalJSON();
+					//console.log(json.status);
+					if(json.status == 'ERROR'){
+						if(json.message.length > 0){
+							var message = json.message.join("\n");
+							alert(message);
+						}
+						return;
+					}
+					if(parseInt(json.percent) > 0){
+						if (typeof json.action !== 'undefined' && json.action == 'REINDEXPRICE')
+						{
+							setPriceProgressPercent(json.solrcore, json.percent);
+						}else{
+							setProgressPercent(json.solrcore, json.percent);
+						}
+					}
+
+					if(json.message.length > 0){
+						messages = [];
+						for(key in json.message) {
+					    	if(isNaN(key) ){
+					    		continue;
+					    	}
+					    	messages.push('<li>'+json.message[key]+'</li>');
+						 }
+
+						var messageUL = new Element('ul').update(messages.join(""));
+						$('logs_'+json.solrcore).update(messageUL);
+						$('wrap_log_'+json.solrcore).show();
+					}
+					if(json.status == 'WAITING') {
+						solrsearch_admin_ajax_request(requesturl, json);
+					}
+					if(parseInt(json.totalsolrdocuments) > 0){
+						$('store_'+json.solrcore+'_solrdocuments').update(json.totalsolrdocuments);
+					}
+
+					if(json.status == 'FINISH') {
+						var message = json.message.join("\n");
+						alert(message);
+						window.location.reload();
+					}else{
+						if(json.remaintime.length > 0){
+							$('store_'+json.solrcore+'_timeremained_value').update(json.remaintime);
+							$('store_'+json.solrcore+'_timeremained_box').show();
+						}
+						if(json.status == 'CONTINUE') {
+							solrsearch_admin_ajax_request(requesturl, json);
+						}else{
+							return;
+						}
+					}
+				}
+			}
+		);
+	}
+	function solrsearch_admin_ajax_truncate(solrcore) {
+		new Ajax.Request(
+			'<?php echo Mage::helper("adminhtml")->getUrl('solrbridge_admin/adminhtml_solrsearch/truncate');?>',{
+				parameters:{
+					'solrcore': solrcore
+				},
+				evalJSON:'force',
+				onFailure: function(response) {
+					alert(response.responseText);
+					return;
+				},
+				onComplete: function(response) {
+					var json = response.responseText.evalJSON();
+					if(json.message.length > 0){
+						var message = json.message.join("\n");
+						alert(message);
+					}
+					window.location.reload();
+				}
+			}
+		);
+	}
+
+	function solrsearch_admin_ajax_thumbs(solrcore) {
+		params = {'solrcore':solrcore};
+		var url = '<?php echo Mage::helper("adminhtml")->getUrl('solrbridge_admin/adminhtml_solrsearch/genthumbs');?>';
+		solrsearch_admin_ajax_request(url, params);
+	}
+</script>
+<div class="solrbridge entry-edit">
+	<div class="content-header">
+		<h2><?php echo Mage::helper('solrsearch')->__('SolrBridge Indices Management') ?></h2>
+	</div>
+	<div>
+	<?php $activeSolrCores = $this->getActiveSolrCores(); ?>
+
+	<ul style="padding-left: 3px;">
+		<?php foreach($activeSolrCores as $core => $infoArray) : ?>
+			<li style="margin-bottom: 20px;">
+				<?php
+			$storeLabels = $infoArray ['labels'];
+
+			$lukeInfo = $infoArray ['solrluke'];
+			$productCount = $infoArray ['productCount'];
+			$websiteid = $infoArray ['websiteids'];
+
+			$solrdocumentCount = 0;
+			if (isset ( $lukeInfo ['index'] ['numDocs'] )) {
+				$solrdocumentCount = ( int ) $lukeInfo ['index'] ['numDocs'];
+			}
+			$action = 'REINDEX';
+			if ($solrdocumentCount > 0) {
+				$action = 'UPDATEINDEX';
+			}
+
+			$percent = 0;
+			if ($productCount > 0) {
+				$percent = round ( ($solrdocumentCount * 100) / $productCount );
+			}
+
+			$websiteidstring = @implode ( ',', array_unique ( $websiteid ) );
+			?>
+
+				<div class="entry-edit-head">
+					<h4>
+						<b><?php echo $infoArray['label'] ?></b>
+					</h4>
+				</div>
+				<div class="fieldset">
+					<div>
+					<div>
+						<b><?php echo Mage::helper('solrsearch')->__('Stores mapped:') ?></b>
+						<span><?php echo @implode(', ', $storeLabels)?></span>
+					</div>
+					<div>
+						<b><?php echo Mage::helper('solrsearch')->__('Status:') ?></b> <span>
+							<span style="font-weight: 700; padding: 2px"
+							id="store_<?php echo $core?>_magentoproducts"><?php echo $productCount?></span><?php echo Mage::helper('solrsearch')->__('Magento products')?>
+							/
+							<span style="font-weight: 700; padding: 2px"
+							id="store_<?php echo $core?>_solrdocuments"><?php echo $solrdocumentCount?></span><?php echo Mage::helper('solrsearch')->__('Solr documents')?>
+						</span>
+					</div>
+					<div style="display: none"
+						id="store_<?php echo $core?>_timeremained_box">
+						<b><?php echo Mage::helper('solrsearch')->__('Estimated remained time:') ?></b>
+						<span id="store_<?php echo $core?>_timeremained_value">0</span>
+					</div>
+				</div>
+				<h4><?php echo $this->__('Full index status')?></h4>
+				<div id="progress-outer-<?php echo $core?>"
+					class="solrbridge_solrsearch_admin_progress_outer">
+					<div id="progress-inner-<?php echo $core?>"
+						class="solrbridge_solrsearch_admin_progress_inner"></div>
+					<script type="text/javascript">
+					setProgressPercent('<?php echo $core?>', '<?php echo $percent?>');
+					</script>
+				</div>
+				<h4><?php echo $this->__('Price index status')?></h4>
+				<div id="progress-price-outer-<?php echo $core?>"
+					class="solrbridge_solrsearch_admin_progress_outer">
+					<div id="progress-price-inner-<?php echo $core?>"
+						class="solrbridge_solrsearch_admin_progress_inner"></div>
+					<script type="text/javascript">
+					setPriceProgressPercent('<?php echo $core?>', '<?php echo $percent?>');
+					</script>
+				</div>
+				<div class="tools">
+					<button style=""
+						onclick="solrsearch_admin_ajax_reindex('<?php echo $action?>','<?php echo $core?>')"
+						class="scalable add" type="button" title="Reindex index">
+						<span><span><span><?php echo $this->__('Re-index')?></span></span></span>
+					</button>
+					<button style=""
+						onclick="solrsearch_admin_ajax_updateindex('<?php echo $action?>','<?php echo $core?>')"
+						class="scalable add" type="button" title="Update index">
+						<span><span><span><?php echo $this->__('Update index')?></span></span></span>
+					</button>
+					<button style=""
+						onclick="solrsearch_admin_ajax_truncate('<?php echo $core?>')"
+						class="scalable add" type="button" title="Empty index">
+						<span><span><span><?php echo $this->__('Empty index')?></span></span></span>
+					</button>
+					<button style=""
+						onclick="solrsearch_admin_ajax_thumbs('<?php echo $core?>')"
+						class="scalable add" type="button" title="Regenerate thumbs">
+						<span><span><span><?php echo $this->__('Re-generate thumbs')?></span></span></span>
+					</button>
+					<button style=""
+						onclick="solrsearch_admin_ajax_updateprice('<?php echo $core?>')"
+						class="scalable add" type="button" title="Update prices">
+						<span><span><span><?php echo $this->__('Update prices')?></span></span></span>
+					</button>
+				</div>
+				<div id="wrap_log_<?php echo $core?>" style="display: none;" class="wrap-log">
+					<div id="logs_<?php echo $core?>" class="container"></div>
+				</div>
+				</div>
+			</li>
+		<?php endforeach; ?>
+	</ul>
+	</div>
+</div>

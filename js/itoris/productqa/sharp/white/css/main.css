@@ -1,0 +1,90 @@
+#itoris_qa_label{
+	color: #666666;
+}
+
+#itoris_qa .text_expand, #itoris_qa_sort_text{
+	color: #666666;
+}
+
+#itoris_qa_select, #itoris_qa_select ul{
+	border: 1px solid #cdcdcd;
+}
+
+#itoris_qa_select ul{
+	border-color: #b6b6b6;
+	background-color: #b6b6b6;
+	color: #ffffff;
+}
+
+#itoris_qa .li_hover{
+	background-color: #ffffff;
+	color: #000000;
+}
+
+#itoris_qa_select_img{
+	background-image: url('../images/select.png');
+}
+
+#itoris_qa .select_up{
+	background-image: url('../images/select_up.png');
+}
+
+#itoris_qa_body{
+	border-color: #e5e5e5;
+	background-color: #ffffff;
+}
+
+#itoris_qa .form_box{
+	background-color: #e5e5e5;
+}
+
+#itoris_qa .question{
+	border: 1px solid #c7c7c7;
+	background-image: url('../images/background.png');
+	background-color: #ebebeb;
+}
+
+#itoris_qa .q_border_r{
+	background-image: url('../images/right_border.png');
+}
+
+#itoris_qa .q_border_l{
+	background-image: url('../images/left_border.png');
+}
+
+#itoris_qa .text_red{
+	color: #ff3300;
+}
+
+#itoris_qa .q_answers{
+	border: 1px solid #b3b3b3;
+	border-bottom-color: #ffffff;
+	border-right-color: #ffffff;
+	background-color: #ffffff;
+	color: #7a7a7a;
+}
+
+#itoris_qa .q_info_block{
+	background-color: #cccccc;
+}
+
+#itoris_qa .info .red{
+	font-style: italic;
+	color: #ff3300;
+}
+
+#itoris_qa .info .gray{
+	color: #999999;
+}
+
+#itoris_qa .text_blue, #itoris_qa .a_info_block .red{
+	color: #6799cc;
+}
+
+#itoris_qa .form .label, #itoris_qa_pages{
+	color: #000000;
+}
+
+#itoris_qa .form .label span, #itoris_productqa_pages .active{
+	color: #ff4100;
+}

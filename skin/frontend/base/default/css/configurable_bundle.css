@@ -1,0 +1,114 @@
+.bundle-info {
+    clear: both;
+    display: block;
+    padding-left: 5px;
+}
+
+.bundle-info-left {
+    min-height: 460px;
+    border: 1px solid #cccccc;
+    border-radius: 8px 8px 8px;
+    overflow: hidden;
+    background-color: #fff;
+    vertical-align: center;
+}
+
+.bundle-info-right {
+}
+
+.bundle-title, .bundle-description {
+    width: 100%;
+}
+
+
+.bundle-option {
+    clear: both;
+    margin: 50px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.bundle-option:last {
+    border-bottom: none;
+}
+
+.bundle-options, .bundle-option-qty {
+    float: left;
+    clear: both;
+    width: 100%;
+    margin: 0 !important;
+}
+
+.bundle-options {
+    min-height: 120px;
+}
+
+.bundle-options label {
+    margin-top: 10px;
+    width: 80px;
+    display: block;
+}
+
+.bundle-options select {
+    width: 100%;
+}
+
+.product-options {
+    clear: both;
+}
+
+.option-required {
+    float: left;
+    clear: right;
+    color: #FF0000;
+}
+
+.selection-name {
+    padding: 10px 0;
+}
+
+.loading {
+    opacity: 0.5;
+}
+
+.out-of-stock-warning {
+    margin: 5px 0;
+    background-image: none !important;
+    padding: 8px 8px 2px 8px !important;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.main-image {
+    margin-bottom: 15px;
+}
+
+.option-box {
+    padding: 0 !important;
+    overflow: hidden;
+}
+
+div.paginator div {
+    text-align: right;
+    float: left;
+}
+
+.pink-heading {
+    color: #fd638f;
+    size: 14px;
+    font-weight: bold;
+    min-height: 80px;
+}
+
+form.product-bundle .single-product {
+    display: none;
+}
+
+.navigation-links {
+    min-height: 42px;
+}

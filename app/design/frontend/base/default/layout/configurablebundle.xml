@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<PRODUCT_TYPE_bundle>
+		<reference name="head">
+            <action method="addItem">
+                <type>skin_js</type>
+                <name>js/configurable_bundle.js</name>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/configurable_bundle.css</stylesheet>
+            </action>
+		</reference>
+	</PRODUCT_TYPE_bundle>
+    <configurablebundle_ajax_attributes>
+        <reference name="content">
+            <block type="core/template" template="configurablebundle/catalog/product/view/type/bundle/option.phtml" />
+        </reference>
+    </configurablebundle_ajax_attributes>    
+    <configurablebundle_ajax_productoptions>
+       <reference name="root">
+            <action method="setTemplate"><template>page/contentonly.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="catalog/product_view_options" name="product.info.options" as="product_options" template="configurablebundle/catalog/product/view/ajaxoptions.phtml">
+                <action method="addOptionRenderer"><type>text</type><block>catalog/product_view_options_type_text</block><template>configurablebundle/catalog/product/view/options/type/text.phtml</template></action>
+                <action method="addOptionRenderer"><type>file</type><block>catalog/product_view_options_type_file</block><template>configurablebundle/catalog/product/view/options/type/file.phtml</template></action>
+                <action method="addOptionRenderer"><type>select</type><block>catalog/product_view_options_type_select</block><template>configurablebundle/catalog/product/view/options/type/select.phtml</template></action>
+                <action method="addOptionRenderer"><type>date</type><block>catalog/product_view_options_type_date</block><template>configurablebundle/catalog/product/view/options/type/date.phtml</template></action>
+            </block>
+            <block type="catalog/product_view" name="product.tierprices" as="tierprices" template="catalog/product/view/tierprices.phtml"/>
+        </reference>
+    </configurablebundle_ajax_productoptions>
+</layout>

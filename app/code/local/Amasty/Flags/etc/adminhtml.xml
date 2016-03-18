@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
+ * @package Amasty_Flags
+ */
+-->
+<config>
+    <menu>
+         <sales>
+             <children>
+                 <amflags translate="title" module="amflags">
+                     <title>Order Flags</title>
+                     <children>
+                         <columns translate="title" module="amflags">
+                             <title>Columns</title>
+                             <action>adminhtml/amflagscolumn</action>
+                         </columns>
+                         <flags translate="title" module="amflags">
+                             <title>Flags</title>
+                             <action>adminhtml/amflagsflag</action>
+                         </flags>
+                     </children>
+                     <sort_order>19</sort_order>
+                 </amflags>
+              </children>
+         </sales>
+    </menu>
+    
+    <translate>
+        <modules>
+            <Amasty_Flags>
+                <files>
+                    <default>Amasty_Flags.csv</default>
+                </files>
+            </Amasty_Flags>
+        </modules>
+    </translate>
+
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <sales>
+                        <children>
+                            <order>
+                                <children>
+                                    <actions>
+                                        <children>
+                                            <assign_flags translate="title">
+                                                <title>Assign Flags</title>
+                                            </assign_flags>
+                                        </children>
+                                    </actions>
+                                </children>
+                            </order>
+                            <amflags translate="title">
+                                <title>Order Flags</title>
+                                    <children>
+                                        <columns translate="title">
+                                            <title>Columns</title>
+                                        </columns>
+                                        <flags translate="title">
+                                            <title>Flags</title>
+                                        </flags>
+                                    </children>
+                                <sort_order>19</sort_order>
+                            </amflags>
+                        </children>
+                    </sales>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

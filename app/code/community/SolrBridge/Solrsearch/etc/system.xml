@@ -1,0 +1,508 @@
+<?xml version="1.0"?>
+<config>    
+    <tabs>
+		<solrbridge translate="label" module="solrsearch">
+			<label>Solr Bridge</label>
+			<sort_order>100</sort_order>
+		</solrbridge>
+	</tabs>
+	<sections>
+		<solrbridge translate="label" module="solrsearch">
+			<label>General settings</label>
+			<tab>solrbridge</tab>
+			<class>separator-top</class>
+			<frontend_type>text</frontend_type>
+			<sort_order>10</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<frontend_model>adminhtml/system_config_form</frontend_model>
+			<groups>
+				<!--GENERAL SETTING -->
+				<settings translate="label" module="solrsearch">
+					<label>General Setting</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<frontend_model>adminhtml/system_config_form_fieldset</frontend_model>
+					<fields>
+						<solr_server_url translate="label comment" module="solrsearch">
+							<label>Solr Server ROOT URL</label>
+							<comment>Must be end with forward slash (/). Example: http://localhost:8080/solr/</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+						</solr_server_url>
+						<relevancy translate="label comment" module="solrsearch">
+							<label>Relevancy</label>
+							<comment>Yes means AND, No means OR. 
+							Example: we have 2 products "Canon PowerShot" 
+							and "Canon Digital Rebel", if this set to Yes and the search keyword = 
+							"Canon powershot" the search result will return only 1 product Canon PowerShot, 
+							if this set to No the search result will return both products.</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+						</relevancy>
+						<allow_part_of_word translate="label comment" module="solrsearch">
+							<label>Allow match part of word</label>
+							<comment>Default is Yes, But if you would like the search result match only whole word please set this to No. 
+							Example: If you have a product Nokia Lumina, assume that you set this to Yes, and you search on the frontend with the keyword "limi" the product will be found on search result and vice versa.</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+						</allow_part_of_word>
+						<solr_server_url_auth translate="label comment" module="solrsearch">
+							<label>Solr Server Authentication(yes/no)</label>
+							<comment>If your solr server is protected by username/password, please set this to yes</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+						</solr_server_url_auth>
+						<solr_server_url_auth_username translate="label comment" module="solrsearch">
+							<label>Solr Server Authentication Username</label>
+							<comment>Leave this blank if your Solr server not protected</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+						</solr_server_url_auth_username>
+						<solr_server_url_auth_password translate="label comment" module="solrsearch">
+							<label>Solr Server Authentication Password</label>
+							<comment>Leave this blank if your Solr server not protected</comment>
+							<frontend_type>password</frontend_type>
+							<sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+						</solr_server_url_auth_password>
+						<solr_index>
+							<label>Solr index</label>
+							<comment>Select which Solr index the store will search in. (If you dont see any core, please goto to Default Config > Solr Bridge > Indices Settings to map your stores into Solr cores)</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>5</sort_order>
+                            <show_in_default>0</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>solrsearch/adminhtml_system_source_config_cores</source_model>
+						</solr_index>						
+						<solr_quick_search_display_thumnail translate="label comment" module="solrsearch">
+							<label>Display thumnail for the instant search</label>							
+							<frontend_type>select</frontend_type>
+							<sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+						</solr_quick_search_display_thumnail>
+						<solr_quick_search_allow_filter translate="label comment" module="solrsearch">
+							<label>Allow filter for instant search</label>							
+							<frontend_type>select</frontend_type>
+							<sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+						</solr_quick_search_allow_filter>	
+						<solr_index_auto_when_product_save translate="label comment" module="solrsearch">
+							<label>Update index immediately after product save.</label>							
+							<frontend_type>select</frontend_type>
+							<sort_order>8</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+						</solr_index_auto_when_product_save>
+						<solr_search_in_category translate="label comment" module="solrsearch">
+							<label>Included category for search.</label>							
+							<frontend_type>select</frontend_type>
+							<sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+						</solr_search_in_category>
+						<use_category_as_facet translate="label comment" module="solrsearch">
+							<label>Used category as facet.</label>							
+							<frontend_type>select</frontend_type>
+							<sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+						</use_category_as_facet>
+						<display_category_as_hierachy translate="label comment" module="solrsearch">
+							<label>Display Category As Hierachy</label>							
+							<frontend_type>select</frontend_type>
+							<sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+						</display_category_as_hierachy>
+						<use_ajax_result_page translate="label comment" module="solrsearch">
+							<label>Use ajax result page</label>
+							<comment>Use ajax behaviour for result page</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</use_ajax_result_page>
+						<use_price_slider translate="label comment" module="solrsearch">
+							<label>Use price slider on search result page</label>
+							<comment>Set this to yes if you would like do use price slider instead of price ranges on search result page.</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>22</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</use_price_slider>
+						<items_per_commit translate="label comment" module="solrsearch">
+							<label>Items per commit(For indexing)</label>
+							<comment>Number of products per Solr commit</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>23</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+						</items_per_commit>
+						<check_instock translate="label comment" module="solrsearch">
+							<label>Check instock</label>
+							<comment>Allow only in stock products in search</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>24</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</check_instock>
+						<check_instock_method translate="label comment" module="solrsearch">
+							<label>Check Instock Method</label>
+							<comment>No: means check isInStock = yes only, Yes: means isInStock = yes and Qty > 0 </comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</check_instock_method>
+						<included_subproduct translate="label comment" module="solrsearch">
+							<label>Included sub products</label>
+							<comment>Include sub products data for search</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>26</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</included_subproduct>
+						<display_keyword_suggestion translate="label comment" module="solrsearch">
+							<label>Display keyword suggestion</label>
+							<comment>Display keyword suggestion on Autocomplete search</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>27</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</display_keyword_suggestion>
+						<currency_position translate="label comment" module="solrsearch">
+							<label>Currency symboy position</label>
+							<comment>Select Yes to display symboy before, select No to display symboy after</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>28</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</currency_position>
+						<allow_multiple_filter translate="label comment" module="solrsearch">
+							<label>Allow multiple filter</label>
+							<comment>Allow multiple filter on search result page</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>29</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</allow_multiple_filter>
+						<excluded_categories translate="label comment" module="solrsearch">
+							<label>Excluded categories from search</label>
+							<comment>Excluded categories from search (categories id separated by comma). Warning: When you change this setting please empty and reindex the whole</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</excluded_categories>
+						<excluded_categories_recusive translate="label comment" module="solrsearch">
+							<label>Recusive Excluded categories</label>
+							<comment>If this set to Yes, then all chidren categories of category id above will be ignored as well. Warning: When you change this setting please empty and reindex the whole.</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>31</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+						</excluded_categories_recusive>
+						<display_brand_suggestion translate="label comment" module="solrsearch">
+							<label>Display Brand/Manufacturer suggestion</label>
+							<comment>Display Brand/Manufacturer on Autocomplete search. If this set to Yes, please dont forget to set the attribute code for Brand/Manufacturer below</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>32</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</display_brand_suggestion>
+						<brand_attribute_code translate="label comment" module="solrsearch">
+							<label>Brand/Manufacturer attribute code</label>
+							<comment>The default value is manufacturer</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>33</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</brand_attribute_code>
+						<search_weight_attribute_code translate="label comment" module="solrsearch">
+							<label>Product search weight</label>
+							<comment>Product search weight attribute code (Must be an integer attribute). 
+							Example: we have 3 products Canon 5d, Canon 6d, and Canon 7d, 
+							if you want the product Canon 7d to be displayed before Canon 5d, and Canon 6d, 
+							just create a product attribute and and set the attribute value heigher than Canon 5d and Canon 6d. 
+							Note: The attribute should be a textfield attribute and Please put the attribute code which you have just created in this setting field.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>34</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</search_weight_attribute_code>
+						<autocomplete_category_redirect translate="label comment" module="solrsearch">
+							<label>Suggest category redirect</label>
+							<comment>This setting allows to controll where suggest category redirect to. Please set this to Yes to redirect to cateory page, set this to No to redirect to search result page.</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</autocomplete_category_redirect>
+						<autocomplete_product_limit translate="label comment" module="solrsearch">
+							<label>Autocomplete products limit</label>
+							<comment>The numer of products will be displayed on autocomplete.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>36</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</autocomplete_product_limit>
+						<autocomplete_brand_limit translate="label comment" module="solrsearch">
+							<label>Autocomplete brands limit</label>
+							<comment>The numer of brands will be displayed on autocomplete.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>37</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</autocomplete_brand_limit>
+						<autocomplete_category_limit translate="label comment" module="solrsearch">
+							<label>Autocomplete categories limit</label>
+							<comment>The numer of categories will be displayed on autocomplete.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>38</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</autocomplete_category_limit>
+						<autocomplete_thumb_size translate="label comment" module="solrsearch">
+							<label>Autocomplete thumb size</label>
+							<comment>Default is 32x32, How large image thumnails will be displayed on autocomplete.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>39</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</autocomplete_thumb_size>
+						<autocomplete_special_offers translate="label comment" module="solrsearch">
+							<label>Autocomplete special offers</label>
+							<comment>Please put product ids separated by comma here, do display special offer on autocomplete search.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</autocomplete_special_offers>
+						<use_tags_for_search translate="label comment" module="solrsearch">
+							<label>Include product tags for search</label>
+							<comment>Please set this to Yes, if you would like to include product tags in search. Note: if this set to Yes, please empty solr index and reindex again.</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>41</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</use_tags_for_search>
+						<write_log translate="label comment" module="solrsearch">
+							<label>Allow write log message</label>
+							<comment>Write solr bridge log message to file in var/solrbridge</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>42</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</write_log>
+						<thread_enable translate="label comment" module="solrsearch">
+							<label>Allow php thread (background running)</label>
+							<comment>
+							Allow thread for Solr Indexing, this will help to improve indexing performanace because the process will running as php thread in the background.
+							This will be helpfull if the store has a lot products which will take hours for Solr indexing.
+							The admin will click the button Update index one time and the indexing process will running in the background.
+							Please make sure PHP CLI enabled in your server.
+							</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>43</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</thread_enable>
+						<remove_store_from_url translate="label comment" module="solrsearch">
+							<label>Remove store from Product Url</label>
+							<comment>
+							Set this to Yes to remove store from Product Url for autocomplete search.
+							</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>44</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</remove_store_from_url>
+						<replace_catalog_layer_nav translate="label comment" module="solrsearch">
+							<label>Replace Catalog Layer Navigation</label>
+							<comment>
+							Set this to Yes to replace Magento Catalog Layer Nagivation with SolrBridge Layer Navigation.
+							</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</replace_catalog_layer_nav>
+						<advanced_autocomplete translate="label comment" module="solrsearch">
+							<label>Use Advanced Autocomplete</label>
+							<comment>
+							If set this to Yes, please make sure that the folder app/etc is writable or just create a new file app/etc/solrbridge.conf and set its permission to 777, after that go to SolrBridge > General settings and click Save configuration so the system will generate a static configuration file for Solr.
+							</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>46</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</advanced_autocomplete>
+						<multiplestore translate="label comment" module="solrsearch">
+							<label>Multiple store mode</label>
+							<comment>
+							Select No if you setup your multiple store by different category root, and the same website. Select Yes if you setup your multiple store by different category root and different website.
+							</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>47</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</multiplestore>
+						<allow_ignore_term translate="label comment" module="solrsearch">
+							<label>Ignore search terms from autocomplete</label>
+							<comment>
+							If set this to Yes, The following search terms will be ignore from Autocomplete search
+							</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>48</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</allow_ignore_term>
+						<ignoresearchterms>
+							<label>Search terms to ignore.</label>
+							<comment>
+							Put search term separated by comma. Note, this field will be updated automatically according to Catalog > Search terms
+							</comment>
+							<frontend_type>textarea</frontend_type>
+							<sort_order>49</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+						</ignoresearchterms>
+						<ajaxprice>
+							<label>Autocomplete Ajax Price.</label>
+							<comment>Set this option to Yes if the autocomplete search display wrong price/special price</comment>
+							<frontend_type>select</frontend_type>
+							<sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+						</ajaxprice>
+					</fields>
+				</settings>
+			</groups>
+		</solrbridge>
+		<solrbridgenav translate="label" module="solrsearch">
+			<label>Layer navigation</label>
+			<tab>solrbridge</tab>
+			<class>separator-top</class>
+			<frontend_type>text</frontend_type>
+			<sort_order>30</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<frontend_model>adminhtml/system_config_form</frontend_model>
+			<groups>
+				<!--GENERAL SETTING -->
+				<settings translate="label" module="solrsearch">
+					<label>Layer navigation</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<frontend_model>adminhtml/system_config_form_fieldset</frontend_model>
+					<fields>
+						
+						<moreless_limit translate="label comment" module="solrsearch">
+							<label>More less limit</label>
+							<comment>If you set this field to x greater than 0 meaning you active more/less feature and the number x is the limit.</comment>
+							<frontend_type>text</frontend_type>
+							<sort_order>23</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+						</moreless_limit>
+					</fields>
+				</settings>			
+			</groups>
+		</solrbridgenav>
+	</sections>
+</config>

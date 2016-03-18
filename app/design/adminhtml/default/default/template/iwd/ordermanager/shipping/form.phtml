@@ -1,0 +1,196 @@
+<?php $helper = $this->helper('iwd_ordermanager'); ?>
+<form id="iwd_shipping_edit_form" method="post">
+    <fieldset>
+        <?php
+        //TODO:!!!
+        //if ($this->getOrder()->getIsVirtual()):
+        ?>
+
+        <div id="order-shipping-method-choose">
+            <dl class="shipment-methods">
+                <?php if ($_shippingRateGroups = $this->getShippingRates()): ?>
+                    <?php foreach ($_shippingRateGroups as $code => $_rates): ?>
+                        <dt><strong><?php echo $this->getCarrierName($code) ?></strong></dt>
+                        <dd>
+                            <ul>
+                                <?php foreach ($_rates as $_code => $_rate): ?>
+                                    <?php $_code = str_replace(' ', '_', $_code); ?>
+                                    <li>
+                                        <?php if ($_rate->getErrorMessage()): ?>
+                                            <ul class="messages">
+                                                <li class="error-msg"><?php echo $_rate->getErrorMessage() ?></li>
+                                            </ul>
+                                        <?php else: ?>
+                                            <?php
+                                            if ($this->isMethodActive($_code)) {
+                                                $_excl = $this->getOrder()->getBaseShippingAmount();
+                                                $_incl = $this->getOrder()->getBaseShippingInclTax();
+                                            } else {
+                                                $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax());
+                                                $_incl = $this->getShippingPrice($_rate->getPrice(), true);
+                                            }
+                                            ?>
+                                            <input name="shipping_method_radio" type="radio"
+                                                   value="<?php echo $_code ?>"
+                                                   id="s_method_<?php echo $_code ?>"
+                                                <?php echo $this->isMethodActive($_code) ? 'checked="checked"' : '' ?>
+                                                />
+                                            <label class="normal" for="s_method_<?php echo $_code ?>">
+                                                <?php echo $_rate->getMethodTitle() ? $_rate->getMethodTitle() : $_rate->getMethodDescription() ?>
+                                                -
+                                                <strong>
+                                                    <?php echo $this->getOrder()->formatBasePrice($_excl); ?>
+                                                    <?php if ($_excl != $_incl): ?>
+                                                        (<?php echo $this->__('Incl. Tax ') . $this->getOrder()->formatBasePrice($_incl); ?>)
+                                                    <?php endif; ?>
+                                                </strong>
+                                            </label>
+                                            <table id="s_method_<?php echo $_code ?>_edit_table" style="display:none">
+                                                <tr>
+                                                    <td class="label">
+                                                        <label for="s_amount_excl_tax_<?php echo $_code ?>">
+                                                            <?php echo $helper->__('Excl. Tax'); ?>
+                                                        </label>
+                                                    </td>
+                                                    <td class="value">
+                                                        <input id="s_amount_excl_tax_<?php echo $_code ?>"
+                                                               class="input-text required-entry validate-number amount_excl_tax"
+                                                               type="text" style="width:50px"
+                                                               data-method = "<?php echo $_code ?>"
+                                                               value="<?php echo number_format($_excl, 2, '.', ''); ?>"
+                                                               name="s_amount_excl_tax[<?php echo $_code ?>]"/>
+                                                        + Tax
+                                                        <input id="s_tax_percent_<?php echo $_code ?>"
+                                                               data-method = "<?php echo $_code ?>"
+                                                               class="input-text required-entry validate-number tax_percent"
+                                                               type="text" style="width:30px"
+                                                               value="<?php $percent =  ($_excl != 0) ? ($_incl / $_excl - 1)*100 : 0; echo number_format($percent, 2, '.', ''); ?>"
+                                                               name="s_tax_percent[<?php echo $_code ?>]"/>%
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="label">
+                                                        <label for="s_amount_incl_tax_<?php echo $_code ?>">
+                                                            <?php echo $helper->__('Incl. Tax'); ?>
+                                                        </label>
+                                                    </td>
+                                                    <td class="value">
+                                                        <input id="s_amount_incl_tax_<?php echo $_code ?>"
+                                                               class="input-text required-entry validate-number amount_incl_tax"
+                                                               type="text" style="width:50px"
+                                                               data-method = "<?php echo $_code ?>"
+                                                               value="<?php echo number_format($_incl, 2, '.', ''); ?>"
+                                                               name="s_amount_incl_tax[<?php echo $_code ?>]"/>
+                                                    </td>
+                                                </tr>
+                                                <?php
+                                                $description = $_rate->getMethodTitle() ? $_rate->getCarrierTitle() . ' - ' . $_rate->getMethodTitle() : $_rate->getMethodDescription();
+                                                $description = $description ? $description : $this->getCarrierName($code);
+                                                ?>
+                                                <input type="hidden" name="s_description[<?php echo $_code ?>]" value="<?php echo $description; ?>"/>
+                                            </table>
+                                        <?php endif ?>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </dd>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
+                <?php /* BEGIN: custom shipping method */ ?>
+                <hr>
+                <dt><strong><?php echo $helper->__('Custom') ?></strong></dt>
+                <dd>
+                    <ul>
+                        <?php
+                        $_code_custom = $this->getCustomMethodCode();
+                        $_excl = $this->getOrder()->getBaseShippingAmount();
+                        $_incl = $this->getOrder()->getBaseShippingInclTax();
+                        ?>
+                        <li>
+                            <input name="shipping_method_radio"
+                                   type="radio" value="<?php echo $_code_custom ?>"
+                                   id="s_method_<?php echo $_code_custom ?>"
+                                <?php echo $this->isMethodActive($_code_custom) ? 'checked="checked"' : '' ?>
+                                />
+                            <label class="normal" for="s_method_<?php echo $_code_custom ?>">
+                                <?php echo $helper->__('Custom shipping method') ?>
+                            </label>
+                        </li>
+                        <table id="s_method_<?php echo $_code_custom ?>_edit_table" style="display:none">
+                            <tr>
+                                <td class="label">
+                                    <label for="shipping_description">
+                                        <?php echo $helper->__('Description'); ?>
+                                    </label>
+                                </td>
+                                <td class="value">
+                                    <input id="shipping_description" class="input-text required-entry" type="text"
+                                        <?php if($this->getActiveMethodRate()): ?>
+                                            value="<?php echo $this->getActiveMethodRate()->getCode() == $_code_custom ?
+                                                $this->getActiveMethodRate()->getMethodDescription() :
+                                                $helper->__('My custom shipping') ?>"
+                                        <?php else: ?>
+                                            value="<?php echo $helper->__('My custom shipping') ?>"
+                                        <?php endif; ?>
+                                           name="s_description[<?php echo $_code_custom ?>]"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label">
+                                    <label for="shipping_amount_excl_tax">
+                                        <?php echo $helper->__('Excl. Tax'); ?>
+                                    </label>
+                                </td>
+                                <td class="value">
+                                    <input id="shipping_amount_excl_tax" style="width:50px"
+                                           class="input-text required-entry validate-number amount_excl_tax"
+                                           value="<?php echo number_format($_excl, 2, '.', ''); ?>"
+                                           data-method = "<?php echo $_code_custom ?>"
+                                           type="text" name="s_amount_excl_tax[<?php echo $_code_custom ?>]"/>
+                                    + Tax
+                                    <input id="s_tax_percent_<?php echo $_code_custom ?>"
+                                           data-method = "<?php echo $_code_custom ?>"
+                                           class="input-text required-entry validate-number tax_percent"
+                                           type="text" style="width:30px"
+                                           value="<?php $percent =  ($_excl != 0) ? ($_incl / $_excl - 1)*100 : 0; echo number_format($percent, 2, '.', ''); ?>"
+                                           name="s_tax_percent[<?php echo $_code_custom ?>]"/>%
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="label">
+                                    <label for="shipping_amount_incl_tax">
+                                        <?php echo $helper->__('Incl. Tax'); ?>
+                                    </label>
+                                </td>
+                                <td class="value">
+                                    <input id="shipping_amount_incl_tax" style="width:50px"
+                                           class="input-text required-entry validate-number amount_incl_tax"
+                                           data-method = "<?php echo $_code_custom ?>"
+                                           value="<?php echo number_format($_incl, 2, '.', ''); ?>"
+                                           type="text" name="s_amount_incl_tax[<?php echo $_code_custom ?>]"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </ul>
+                </dd>
+                <?php /* END: custom shipping method */ ?>
+            </dl>
+        </div>
+
+        <?php echo Mage::app()->getLayout()->createBlock('adminhtml/template')
+            ->setTemplate("iwd/ordermanager/controls.phtml")
+            ->setData("button_onclick_update", "IWD.OrderManager.Shipping.editShippingSubmit()")
+            ->setData("button_onclick_cancel", "IWD.OrderManager.Shipping.editShippingCancel()")
+            ->setData('recalculate', false)
+            ->setData('block', 'shipping')
+            ->toHtml();
+        ?>
+
+        <script type="text/javascript">
+            //<![CDATA[
+            IWD.OrderManager.Shipping.showEditTable();
+            //]]>
+        </script>
+    </fieldset>
+</form>

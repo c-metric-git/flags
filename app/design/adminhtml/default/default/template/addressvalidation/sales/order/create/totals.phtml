@@ -1,0 +1,772 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<table cellspacing="0" cellpadding="8" width="100%">
+    <tbody>
+    <?php echo $this->renderTotals(); ?>
+    <?php echo $this->renderTotals('footer'); ?>
+    </tbody>
+</table>
+<div class="divider"></div>
+<div class="order-totals-bottom">
+    <p>
+        <label for="notify_customer" class="normal"><?php echo Mage::helper('sales')->__('Append Comments') ?></label>
+        <input type="checkbox" id="notify_customer" name="order[comment][customer_note_notify]"
+               value="1" <?php if ($this->getNoteNotify()): ?>checked="true"<?php endif; ?>/>
+    </p>
+    <?php if ($this->canSendNewOrderConfirmationEmail()): ?>
+    <p>
+        <label for="send_confirmation"
+               class="normal"><?php echo Mage::helper('sales')->__('Email Order Confirmation') ?></label>
+        <input type="checkbox" id="send_confirmation" name="order[send_confirmation]" value="1" checked="checked"/>
+    </p>
+    <?php endif; ?>
+    <p><?php echo $this->getButtonHtml(Mage::helper('sales')->__('Submit Order'), 'order.submit()', 'save'); ?></p>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+function ucwords(str) {
+    return str.replace(/^(.)|\s(.)/g, function ($1) {
+        return $1.toUpperCase();
+    });
+}
+function explode(delimiter, string) { // Split a string by string
+
+    var emptyArray = { 0:'' };
+
+    if (arguments.length != 2 || typeof arguments[0] == 'undefined' || typeof arguments[1] == 'undefined') {
+        return null;
+    }
+
+    if (delimiter === '' || delimiter === false || delimiter === null) {
+        return false;
+    }
+
+    if (delimiter === true) {
+        delimiter = '1';
+    }
+    return string.toString().split(delimiter.toString());
+
+}
+
+
+FreaksForm = Class.create();
+
+FreaksForm.prototype = new varienForm();
+
+FreaksForm.prototype.initialize = (function (superConstructor) {
+    return function (formId, validateurl, addressValidateUrl) {
+        superConstructor.call(this, formId);
+        this.addressValidateUrl = addressValidateUrl;
+        /*insert error popup*/
+        //alert('10');
+        /*if(!$('orderShippingAddressUspsValidate')){
+          $('order-shipping_address').insert('<button id="orderShippingAddressUspsValidate" title="Validate with USPS" type="button" class="scalable" onclick="" style=" margin-bottom: 15px;float: right;"><span><span><span>Validate with USPS</span></span></span></button>');
+          }*/
+        this.numbers = 1;
+        if ((!$('window-overlay_form-validate')) && (!$('remember-me-popup-address-validation_form-validate'))) {
+            /*
+           $('order-billing_address').insert('<button id="id_12" title="Validate with USPS" type="button" class="scalable" onclick="" style=""><span><span><span>Validate with USPS</span></span></span></button>'
+           );
+           */
+
+            this.buttonId = $('order-totals').down('button.save').id;
+
+            /*el=$('order-shipping_address');
+           Element.insert( $('id_13'), // element to insert after
+           {'after':el} );*/
+
+            $('order-totals').insert(
+                '<div id="window-overlay_form-validate" class="window-overlay" style="display:none;"></div>' +
+                    '<div id="remember-me-popup-address-validation_form-validate" class="remember-me-popup" style="display:none; width:650px;margin-left:-220px;">' +
+                    '<div class="remember-me-popup-head">' +
+                    '<h3>Address Cannot Be Verified</h3></div>' +
+                    '<div class="remember-me-popup-body">' +
+                    '<p>Please review your address and make any necessary changes by selecting \'Change / Edit Address\'.  You may use your ' +
+                    'original address if no changes are required. (Please note: This may delay receipt of your order.)</p>' +
+                    '<p>' +
+                    '<div>' +
+                    '<label style="width:140px;" accesskey="D">Change / Edit Address </label>' +
+                    '<input id="address_validate_error_validate" type="radio" name="address_validate_error_form-validate" value="validate" checked />' +
+                    '<div></div>' +
+                    '</div>' +
+                    '<div>' +
+                    '<label style="width:140px;" accesskey="C">Use Original Address </label>' +
+                    '<input id="address_validate_error_continue" type="radio" name="address_validate_error_form-validate" value="continue" />' +
+                    '<div id="old_error_address_form-validate" class="address"></div>' +
+                    '</div>' +
+                    '</p>' +
+                    '<div class="remember-me-popup-close-button a-right"' +
+                    'id="remember-me-popup-address-validation-button_form-validate"' +
+                    'onclick="$(\'window-overlay_form-validate\').hide(); $(\'remember-me-popup-address-validation_form-validate\').hide();">' +
+                    '<a href="#" class="remember-me-popup-close button">' +
+                    '<span>Continue</span>' +
+                    '</a>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>'
+            );
+        }
+
+        /*inser notice popup*/
+
+        if (!$('remember-me-popup-address-notice_form-validate')) {
+            $('order-totals').insert(
+                '<div id="remember-me-popup-address-notice_form-validate" class="remember-me-popup" style="display:none;width:650px;margin-left:-220px;">' +
+                    '<div class="remember-me-popup-head">' +
+                    '<h3>Address Validation</h3>' +
+                    '</div>' +
+                    '<div class="remember-me-popup-body">' +
+                    '<p>Please review your address and make any necessary changes by selecting \'Change / Edit Address\'.</p>' +
+                    '<div>' +
+                    '<label style="width:140px;" accesskey="D">Change / Edit Address </label>' +
+                    '<input id="address_validate_notice_change_form-validate" type="radio" name="address_validate_notice_form-validate" value="change" script="$(\'address_validate_notice_validate_form-validate\').checked = true;">' +
+                    '<div></div>' +
+                    '</div>' +
+                    '<div>' +
+                    '<label style="width:140px;" accesskey="C" for="address_validate_notice_continue_form-validate">Use Original Address </label>' +
+                    '<input id="address_validate_notice_continue_form-validate" type="radio"' +
+                    'name="address_validate_notice_form-validate" value="continue"' +
+                    'onclick=" $(\'remember-me-popup-address-notice\').hide()"/>' +
+                    '<div id="old_address_form-validate' + this.buttonId + '" class="address old_address_c"></div>' +
+                    '</div>' +
+                    '<div>' +
+                    '<label style="width:140px;" accesskey="D" for="address_validate_notice_validate_form-validate">Use Suggested Address </label>' +
+                    '<input id="address_validate_notice_validate_form-validate" type="radio"' +
+                    'name="address_validate_notice_form-validate" value="validate"' +
+                    'onclick=" $(\'remember-me-popup-address-notice\').hide()" checked />' +
+                    '<div id="new_address_form-validate" class="address"></div>' +
+                    '</div>' +
+                    '<div id="validation_advice_button_form-validate-' + this.buttonId + '"' +
+                    'onclick="$(\'window-overlay_form-validate\').hide(); $(\'remember-me-popup-address-notice_form-validate\').hide()"' +
+                    'class="remember-me-popup-close-button a-right">' +
+                    '<a class="remember-me-popup-close_button" title=""><span>Continue</span></a>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>'
+            );
+        }
+
+        //$('order-billing_address_fields').down('input').observe('change');
+
+        // alert($('order-totals').down('button.save').id);
+        this.billingAddressCheck = false;
+        this.shippingAddressCheck = false;
+        this.addressCheck = false;
+        /*notice popup*/
+
+        this.topButtonaction = $('submit_order_top_button').readAttribute('onclick');
+        $('submit_order_top_button').writeAttribute('onclick', '');
+
+
+        $('submit_order_top_button').observe('click', this.submitValidate.bindAsEventListener(this));
+
+        $('order-totals').down('button.save').observe('click', this.submitValidate.bindAsEventListener(this));
+
+        $('submit_order_top_button').observe('click', this.submitValidate.bindAsEventListener(this));
+
+        this.buttonaction = $($('order-totals').down('button.save').id).readAttribute('onclick');
+
+        //alert(this.buttonaction);
+
+        $($('order-totals').down('button.save').id).writeAttribute('onclick', '');
+
+        $('validation_advice_button_form-validate-' + this.buttonId).observe('click', this.submitNotice.bindAsEventListener(this));
+        /*error popup*/
+        $('remember-me-popup-address-validation-button_form-validate').observe('click', this.submitError.bindAsEventListener(this));
+
+    };
+})(varienForm.prototype.initialize);
+
+/* submitNotice function----------------------------------------------------*/
+FreaksForm.prototype.submitNotice = function () {
+
+    var submitAction = true;
+    var changeAddress = false;
+
+    if_validate = $$('input:checked[type="radio"][name="address_validate_notice_form-validate"]').pluck('value');
+
+    if (if_validate == 'continue') {/*submit form*/
+        var script_to = $('address_validate_notice_change_form-validate').getAttribute("script");
+
+        if ((this.addressCheck == 'shipping') && (this.billingAddressCheck == true)) {
+            this.shippingAddressCheck = true;
+        } else if ((this.addressCheck == 'billing') || (this.billingAddressCheck == false)) {
+            this.billingAddressCheck = true;
+        }
+        submitAction = true;
+        changeAddress = true;
+    }
+    else if (if_validate == 'change') {/*enter new address and validate more*///alert('enter new address and validate more');
+        var script_to = $('address_validate_notice_change_form-validate').getAttribute("script");
+        submitAction = false;
+    }
+    else {/*use suggested address*/ //alert('use suggested address');
+
+        if (this.addressCheck == 'shipping') {
+            $('order-shipping_address_street1').setValue("");
+        }
+        else {
+            $('order-billing_address_street1').setValue("");
+        }
+
+
+        var script_to = $('address_validate_notice_validate_form-validate').getAttribute("script");
+
+        if ((this.addressCheck == 'shipping') && (this.billingAddressCheck == true)) {
+            this.shippingAddressCheck = true;
+        } else if ((this.addressCheck == 'billing') || (this.billingAddressCheck == false)) {
+            this.billingAddressCheck = true;
+        }
+
+        submitAction = true;
+        changeAddress = true;
+    }
+
+
+    if (submitAction) {
+        script_validate = '<' + 'script' + '>' + script_to + '<' + '/script' + '>';
+        script_validate.evalScripts();
+
+        if (changeAddress) {
+            if ($('order-shipping_same_as_billing').checked) {
+                this.changeAddressField('order-billing_address_street0');
+                this.addressCheck = 'shipping';
+                this.shippingAddressCheck = true;
+            } else {
+                //this.changeAddressField('order-shipping_address_street0');
+            }
+        }
+
+        if ((this.addressCheck == 'shipping') && (this.shippingAddressCheck == true)) {
+            if (changeAddress) {
+                this.changeAddressField('order-shipping_address_street0');
+            }
+
+            // alert('notice buttonaction');
+            script_validate = '<' + 'script' + '>' + this.buttonaction + '<' + '/script' + '>';
+            script_validate.evalScripts();
+            this.addressCheck = 'billing';
+            this.shippingAddressCheck = false;
+            this.billingAddressCheck = false;
+        } else if ((this.addressCheck == 'billing') && (this.billingAddressCheck == true)) {
+
+
+            //alert('notice submitValidate');
+            this.addressCheck = 'shipping';
+            this.submitValidate();
+            //if(changeAddress){this.changeAddressField('order-billing_address_street0');}
+        }
+
+    } else {
+        return false;
+    }
+
+
+},
+    /* submitError function----------------------------------------------------*/
+    FreaksForm.prototype.submitError = function () {
+        if_validate = $$('input:checked[type="radio"][name="address_validate_error_form-validate"]').pluck('value');
+        if (if_validate == 'continue') {
+
+            if ((this.addressCheck == 'shipping') && (this.billingAddressCheck == true)) {
+                // alert('shipping error');
+                script_validate = '<' + 'script' + '>' + this.buttonaction + '<' + '/script' + '>';
+                script_validate.evalScripts();
+                this.addressCheck = 'billing';
+                this.shippingAddressCheck = false;
+                this.billingAddressCheck = false;
+                return false;
+            }
+            else if ((this.addressCheck == 'billing') || (this.billingAddressCheck == false)) {
+                //    alert('billing error');
+                this.billingAddressCheck = true;
+                this.addressCheck = 'shipping';
+
+                if ($('order-shipping_same_as_billing').checked) {
+
+                    //  this.changeAddressField('order-billing_address_street0');
+                    this.addressCheck = 'shipping';
+                    this.shippingAddressCheck = true;
+                    script_validate = '<' + 'script' + '>' + this.buttonaction + '<' + '/script' + '>';
+                    script_validate.evalScripts();
+
+                    this.addressCheck = 'billing';
+                    this.shippingAddressCheck = false;
+                    this.billingAddressCheck = false;
+
+                }
+                else {
+                    this.submitValidate();
+                }
+            }
+
+        } else {
+            return false;
+        }
+        return false;
+
+    },
+
+    /* submit function----------------------------------------------------*/
+    FreaksForm.prototype.submitValidate = function () {
+        /*normalize values*/
+        // alert(this.addressCheck);
+        /*shipping form*/
+        $('order-shipping_address_street0').setValue(ucwords($('order-shipping_address_street0').value.toLowerCase()));
+        $('order-shipping_address_street1').setValue(ucwords($('order-shipping_address_street1').value.toLowerCase()));
+        $('order-shipping_address_city').setValue(ucwords($('order-shipping_address_city').value.toLowerCase()));
+        $('order-shipping_address_region_id').setValue(ucwords($('order-shipping_address_region_id').value.toLowerCase()));
+        $('order-shipping_address_region').setValue(ucwords($('order-shipping_address_region').value.toLowerCase()));
+        $('order-shipping_address_postcode').setValue(ucwords($('order-shipping_address_postcode').value.toLowerCase()));
+        $('order-shipping_address_country_id').setValue(ucwords($('order-shipping_address_country_id').value.toLowerCase()));
+        /*billing form*/
+        $('order-billing_address_street0').setValue(ucwords($('order-billing_address_street0').value.toLowerCase()));
+        $('order-billing_address_street1').setValue(ucwords($('order-billing_address_street1').value.toLowerCase()));
+        $('order-billing_address_city').setValue(ucwords($('order-billing_address_city').value.toLowerCase()));
+        $('order-billing_address_region_id').setValue(ucwords($('order-billing_address_region_id').value.toLowerCase()));
+        $('order-billing_address_region').setValue(ucwords($('order-billing_address_region').value.toLowerCase()));
+        $('order-billing_address_postcode').setValue(ucwords($('order-billing_address_postcode').value.toLowerCase()));
+        $('order-billing_address_country_id').setValue(ucwords($('order-billing_address_country_id').value.toLowerCase()));
+        /*end------------------normalize values*/
+
+
+        /*correctingitems(shipping/billing)*/
+        var correctingitems = new Object();
+        correctingitems['street'] = 'order-shipping_address_street0';
+        correctingitems['street2'] = 'order-shipping_address_street1';
+        correctingitems['city'] = 'order-shipping_address_city';
+        correctingitems['region'] = 'order-shipping_address_region';
+        correctingitems['region_id'] = 'order-shipping_address_region_id';
+        correctingitems['postcode'] = 'order-shipping_address_postcode';
+        correctingitems['country_id'] = 'order-shipping_address_country_id';
+        correctingitems['country'] = 'order-shipping_address_country_id';
+        this.correctingitems = correctingitems;
+
+        var correctingBillingItems = new Object();
+        correctingBillingItems['street'] = 'order-billing_address_street0';
+        correctingBillingItems['street2'] = 'order-billing_address_street1';
+        correctingBillingItems['city'] = 'order-billing_address_city';
+        correctingBillingItems['region'] = 'order-billing_address_region';
+        correctingBillingItems['region_id'] = 'order-billing_address_region_id';
+        correctingBillingItems['postcode'] = 'order-billing_address_postcode';
+        correctingBillingItems['country_id'] = 'order-billing_address_country_id';
+        correctingBillingItems['country'] = 'order-billing_address_country_id';
+        this.correctingBillingItems = correctingBillingItems;
+        /*end----------------correctingitems(shipping/billing)*/
+
+        /*prepare information to request*/
+
+        if ((this.billingAddressCheck == true) && (this.addressCheck == 'shipping')) {
+            if (!this.addressCheck) {
+                this.addressCheck = 'shipping';
+            }
+            var street0 = $('order-shipping_address_street0').value;
+            var street1 = $('order-shipping_address_street1').value;
+            var city = $('order-shipping_address_city').value;
+            var region_id = $('order-shipping_address_region_id').value;
+            var region = $('order-shipping_address_region').value;
+            var postcode = $('order-shipping_address_postcode').value;
+            var country_id = $('order-shipping_address_country_id').value;
+            var region_old_address = $('order-shipping_address_region_id');
+        } else {
+            if (!this.addressCheck) {
+                this.addressCheck = 'billing';
+            }
+            var street0 = $('order-billing_address_street0').value;
+            var street1 = $('order-billing_address_street1').value;
+            var city = $('order-billing_address_city').value;
+            var region_id = $('order-billing_address_region_id').value;
+            var region = $('order-billing_address_region').value;
+            var postcode = $('order-billing_address_postcode').value;
+            var country_id = $('order-billing_address_country_id').value;
+            var region_old_address = $('order-billing_address_region_id');
+        }
+        //  alert(this.addressCheck);
+
+        //  alert('billingAddress '+this.billingAddressCheck);
+        //  alert('shippingAddress '+this.shippingAddressCheck);
+
+        var formarray = new Object();
+        formarray['street'] = street0.replace(/^\s+/, "").replace(/\s+$/, "") + ' ' + street1.replace(/^\s+/, "").replace(/\s+$/, "");
+        ;
+        formarray['city'] = city;
+        formarray['region_id'] = region_id;
+        formarray['region'] = region;
+        formarray['postcode'] = postcode;
+        formarray['country_id'] = country_id;
+        /*end-------prepare information to request*/
+
+
+        // insert old adress to notice popup----------------------------------------------
+        //region_old_address = $('order-shipping_address_region_id');
+
+        var value_of_region = region_old_address.value;
+        value_of_region = region_old_address.select('option[value="' + value_of_region + '"]')[0].innerHTML;
+
+        var oldAddress = formarray['street'].replace(/^\s+/, "").replace(/\s+$/, "") +
+            ', ' + city +
+            ', ' + value_of_region +
+            ', ' + postcode;
+        //alert(oldAddress);
+
+        oldAddressContent = "<div id = \"old_address_content_form-validate\">" + oldAddress + "</div>";
+        oldAddressContent = ucwords(oldAddressContent.toLowerCase());
+
+
+        if ($('old_address_content_form-validate')) {
+            $('old_address_content_form-validate').remove();
+        }
+
+        $('old_address_form-validate' + this.buttonId + '').insert(oldAddressContent);
+        /*address old_address_c*/
+
+        $$('address old_address_c').each(function (item) {
+            item.insert(oldAddressContent);
+            item.insert('777');
+            alert(3)
+        });
+
+        oldAddressErrorContent = "<div id = \"old_error_address_content_form-validate\">" + oldAddress + "</div>";
+        oldAddressErrorContent = ucwords(oldAddressErrorContent.toLowerCase());
+
+        if ($('old_error_address_content_form-validate')) {
+            $('old_error_address_content_form-validate').remove();
+        }
+        $('old_error_address_form-validate').insert(oldAddressErrorContent);
+        // insert old adress to error popup----------------------------------------------
+
+
+        new Ajax.Request('<?php echo Mage::getUrl('addressvalidation/adminhtml_validation/validate');?>', {
+            method:'post',
+            parameters:formarray,
+            onComplete:this._processResult.bind(this),
+            onFailure:this._processFailure.bind(this)
+        });
+    },
+
+    /* _processValidationResult function--------------------------------*/
+    FreaksForm.prototype._processResult = function (transport) {
+        if (typeof varienGlobalEvents != undefined) {
+            varienGlobalEvents.fireEvent('formValidateAjaxComplete', transport);
+        }
+
+        var response = transport.responseText.evalJSON();
+        if (response.errors != '') {
+            $('window-overlay_form-validate').show();
+            $('remember-me-popup-address-validation_form-validate').show();
+            window.scrollTo(0, 0);
+        }
+        else if (response.notices != '') {
+            if (this.addressCheck == 'billing') {
+                this.processValidationResult(response.notices, response.address, this.correctingBillingItems);
+            } else if (this.addressCheck == 'shipping') {
+                this.processValidationResult(response.notices, response.address, this.correctingitems);
+            }
+            $('remember-me-popup-address-notice_form-validate').show();
+            $('window-overlay_form-validate').show();
+            window.scrollTo(0, 0);
+
+        } else {
+            if (this.buttonaction != null) {
+                if (this.addressCheck == 'billing') {
+                    this.billingAddressCheck = true;
+                    this.addressCheck = 'shipping';
+                    // alert(this.addressCheck);
+                    this.submitValidate();
+
+                } else if (this.addressCheck == 'shipping') {
+                    this.shippingAddressCheck = true;
+                    script = "<script>" + this.buttonaction;
+                    script = script + "</";
+                    script = script + "script>";
+                    script.evalScripts();
+                    this.addressCheck = 'billing';
+                    this.shippingAddressCheck = false;
+                    this.billingAddressCheck = false;
+                    return false;
+                }
+            }
+        }
+    },
+
+
+    FreaksForm.prototype.processValidationResult = function (adress_notice, true_address, correctingitems) {
+        // alert('ValidationResult');
+        var notices = $H(adress_notice);
+        var advice_action = '';
+        var advice_no_action = '';
+        var adress_field_value;
+        var street_field_value;
+        var newAddress = '';
+
+        var valid_address = $H(true_address);
+        valid_address.each(function (valid_address_item) {
+            if (valid_address_item.key != 'country' && valid_address_item.key != 'region_id' && valid_address_item.key != 'country_id') {
+                if (notices.keys().indexOf(valid_address_item.key) !== -1) {
+                    newAddress = newAddress + ' <span class="suggest">' + valid_address_item.value + '</span>';
+                } else {
+                    newAddress = newAddress + ' ' + valid_address_item.value;
+                }
+                if (valid_address_item.key != 'postcode') {
+                    newAddress += ',';
+                }
+            }
+        });
+
+        newAddress_ = "<div id = \"new_address_content_form-validate\">" + newAddress + "</div>";
+        if ($('new_address_content_form-validate')) {
+            $('new_address_content_form-validate').remove();
+        }
+        $('new_address_form-validate').insert(newAddress_);
+
+        notices.each(function (notice) {
+
+            valid_address.each(function (valid_address_item) {
+                if (valid_address_item.key == 'street') {
+                    street_field_value = valid_address_item.value;
+                }
+                if (notice.key == valid_address_item.key) {
+                    adress_field_value = valid_address_item.value;
+                }
+            });
+
+
+            if (notice.key == 'region' || notice.key == 'country') {
+                element = $(correctingitems[notice.key]);
+
+                key = notice.key + '_id'; // for example : region = region_id
+
+
+                advice = "<div id=\"" + correctingitems[key] + "_advice\" onClick=\"FreaksForm.prototype.correctingItem('" + correctingitems[key] + "','" + true_address[key] + "',this)\"  class=\"validation-advice\">" + notice.value + "</div>";
+
+
+                advice_action = advice_action + "FreaksForm.prototype.correctingItem('" + correctingitems[key] + "','" + true_address[key] + "'); ";
+                advice_no_action = advice_no_action;
+            }
+
+
+            else {
+                element = $(correctingitems[notice.key]);
+
+                // advice = "<div id=\"" + correctingitems[notice.key] + "_advice\" onClick=\"FreaksForm.prototype.correctingItem('" + correctingitems[notice.key] + "','" + adress_field_value + "',this)\"  class=\"validation-advice\">" + notice.value + "</div>";
+                // Validation.insertAdvice(element, advice);
+
+
+                advice_action = advice_action + "FreaksForm.prototype.correctingItem('" + correctingitems[notice.key] + "','" + adress_field_value + "'); ";
+                advice_no_action = advice_no_action;
+            }
+
+
+            $('address_validate_notice_validate_form-validate').removeAttribute("onclick");
+
+
+            // $('address_validate_notice_continue_form-validate').setAttribute("script", "" + advice_no_action + " ");
+            $('address_validate_notice_validate_form-validate').setAttribute("script", "" + advice_action + " ");
+
+            $('window-overlay_form-validate').show();
+            $('remember-me-popup-address-notice_form-validate').show();
+            window.scrollTo(0, 0);
+
+        });
+
+    };
+
+FreaksForm.prototype.correctingItem = function (elementId, value, advice) {
+    //  alert('correctingItem');
+    // alert(elementId);
+
+    elementSelect = $$('select#' + elementId + '').first();
+
+    if (elementSelect) {
+        $$('select#' + elementId + ' option').each(function (option) {
+            if (option.readAttribute('value') == value) {
+                option.selected = true;
+                throw $break;
+            }
+        });
+    }
+    else {
+        elementInput = $(elementId);
+        if (elementInput) {
+            elementInput.setValue(value);
+        }
+    }
+
+
+};
+
+FreaksForm.prototype.changeAddressField = function (event) {
+    //alert('change address field');
+    var field = $(event);
+    var re = /[^\[]*\[([^\]]*)_address\]\[([^\]]*)\](\[(\d)\])?/;
+    var matchRes = field.name.match(re);
+
+    if (!matchRes) {
+        return;
+    }
+
+    var type = matchRes[1];
+    var name = matchRes[2];
+    var data;
+    this
+
+    if (order.isBillingField(field.id)) {
+        data = order.serializeData(order.billingAddressContainer)
+    }
+    else {
+        data = order.serializeData(order.shippingAddressContainer)
+    }
+    data = data.toObject();
+
+    if ((type == 'billing' && order.shippingAsBilling)
+        || (type == 'shipping' && !order.shippingAsBilling)) {
+        data['reset_shipping'] = true;
+    }
+
+    data['order[' + type + '_address][customer_address_id]'] = $('order-' + type + '_address_customer_address_id').value;
+
+    if (data['reset_shipping']) {
+        this.resetShippingMethod(data);
+    }
+    else {
+        this.saveData(data);
+        if (name == 'country_id' || name == 'customer_address_id') {
+            this.loadArea(['shipping_method', 'billing_method', 'totals', 'items'], true, data);
+            //alert('localarea');
+        }
+        // added for reloading of default sender and default recipient for giftmessages
+        //this.loadArea(['giftmessage'], true, data);
+    }
+
+}
+
+
+FreaksForm.prototype.resetShippingMethod = function (data) {
+    data['reset_shipping'] = 1;
+    order.isShippingMethodReseted = true;
+    this.loadArea(['shipping_method', 'billing_method', 'shipping_address', 'totals', 'giftmessage', 'items'], true, data);
+    //order.submit();
+},
+
+    FreaksForm.prototype.saveData = function (data) {
+        this.loadArea(false, false, data);
+        //order.submit();
+    },
+
+    FreaksForm.prototype.loadArea = function (area, indicator, params) {
+        var url = order.loadBaseUrl;
+        if (area) {
+            area = order.prepareArea(area);
+            url += 'block/' + area;
+        }
+        if (indicator === true) indicator = 'html-body';
+        params = order.prepareParams(params);
+        params.json = true;
+        if (!order.loadingAreas) order.loadingAreas = [];
+        if (indicator) {
+            order.loadingAreas = area;
+            new Ajax.Request(url, {
+                parameters:params,
+                loaderArea:indicator,
+                onSuccess:function (transport) {
+                    var response = transport.responseText.evalJSON();
+                    this.loadAreaResponseHandler(response);
+                }.bind(this),
+
+            });
+
+        }
+        else {
+            new Ajax.Request(url, {parameters:params, loaderArea:indicator});
+        }
+        if (typeof productConfigure != 'undefined' && area instanceof Array && area.indexOf('items' != -1)) {
+            productConfigure.clean('quote_items');
+        }
+    },
+
+    FreaksForm.prototype.loadAreaResponseHandler = function (response) {
+        if (response.error) {
+            //alert(response.message);
+        }
+        if (response.ajaxExpired && response.ajaxRedirect) {
+            setLocation(response.ajaxRedirect);
+        }
+        if (!order.loadingAreas) {
+            order.loadingAreas = [];
+        }
+        if (typeof order.loadingAreas == 'string') {
+            order.loadingAreas = [order.loadingAreas];
+        }
+        if (order.loadingAreas.indexOf('message' == -1)) order.loadingAreas.push('message');
+        for (var i = 0; i < order.loadingAreas.length; i++) {
+            var id = order.loadingAreas[i];
+            if ($(order.getAreaId(id))) {
+                if ('message' != id || response[id]) {
+                    var wrapper = new Element('div');
+                    wrapper.update(response[id] ? response[id] : '');
+                    $(order.getAreaId(id)).update(wrapper);
+                }
+                if ($(order.getAreaId(id)).callback) {
+                    order[$(order.getAreaId(id)).callback]();
+                }
+            }
+        }
+
+        advice = '<div class="validation-advice" id="advice-required-entry-order[has_shipping]" style="">This is a required field.</div>';
+        Validation.insertAdvice($('order-shipping-method-summary').down('input'), advice);
+        //order.submit();
+    }
+
+
+/*this.changeAddressField.bind(this)
+    data = this.serializeData(this.shippingAddressContainer)
+    data = data.toObject();
+    this.resetShippingMethod(data);
+    */
+
+editForm_ = new FreaksForm('edit_form_', '<?php echo $this->getValidationUrl() ?>', '<?php echo Mage::getUrl('addressvalidation/adminhtml_validation/validate');?>');
+//]]>
+</script>
+
+<script type="text/javascript">
+    //<![CDATA[
+    var sendEmailCheckbox = $('send_confirmation');
+    if (sendEmailCheckbox) {
+        Event.observe(sendEmailCheckbox, 'change', notifyCustomerUpdate);
+        notifyCustomerUpdate();
+    }
+
+    function notifyCustomerUpdate() {
+        var sendEmailCheckbox = $('send_confirmation');
+        var notifyCustomerCheckbox = $('notify_customer');
+        if (!sendEmailCheckbox || !notifyCustomerCheckbox)
+            return;
+        notifyCustomerCheckbox.disabled = !sendEmailCheckbox.checked;
+    }
+    //]]>
+</script>

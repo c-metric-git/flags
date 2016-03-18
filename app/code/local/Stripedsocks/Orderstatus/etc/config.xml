@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Stripedsocks_Orderstatus>
+            <version>1.0.0</version>
+        </Stripedsocks_Orderstatus>
+    </modules>
+    <global>
+        <helpers>
+            <sales>
+                <rewrite>
+                    <guest>Stripedsocks_Orderstatus_Sales_Helper_Guest</guest>
+                </rewrite>
+            </sales>
+        </helpers>
+    </global>
+</config>

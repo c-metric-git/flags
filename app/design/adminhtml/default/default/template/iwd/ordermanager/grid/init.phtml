@@ -1,0 +1,10 @@
+<script type="text/javascript">
+    if(typeof(jQueryIWD) == "undefined"){if(typeof(jQuery) != "undefined") {jQueryIWD = jQuery;}} $ji = jQueryIWD;
+    $ji(document).ready(function () {
+        IWD.OrderManager.Grid.iwdViewOrderedItems = "<?php echo Mage::helper('adminhtml')->getUrl('*/sales_grid/orderedItems'); ?>?isAjax=true";
+        IWD.OrderManager.Grid.iwdViewProductItems = "<?php echo Mage::helper('adminhtml')->getUrl('*/sales_grid/productItems'); ?>?isAjax=true";
+        IWD.OrderManager.Grid.isFixGridHeader = <?php echo Mage::getModel('iwd_ordermanager/order_grid')->isFixGridHeader(); ?>;
+        IWD.OrderManager.Grid.statusColors = "<?php echo Mage::getModel('iwd_ordermanager/order_grid')->getStatusColors(); ?>";
+        IWD.OrderManager.Grid.init();
+    });
+</script>

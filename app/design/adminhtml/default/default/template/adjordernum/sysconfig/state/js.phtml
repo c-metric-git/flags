@@ -1,0 +1,91 @@
+<?php
+/**
+ * Custom Order Number Pro
+ *
+ * @category:    AdjustWare
+ * @package:     AdjustWare_Ordernum
+ * @version      5.1.5
+ * @license:     d0NyTkcYcW64yuyl9Cf2M6q3gBilLUVMAwQSumkwPP
+ * @copyright:   Copyright (c) 2015 AITOC, Inc. (http://www.aitoc.com)
+ */
+?>
+<script type="text/javascript">
+
+    var aitOrdernumWarning = Class.create(
+    {
+        initialize: function(controllerUrl,fieldName,form,oldSubmit) 
+        {
+            this.controllerUrl = controllerUrl;
+            this.form = form;
+            this.fieldName = fieldName;
+            this.submit = oldSubmit;
+        },
+
+        process: function() 
+        {
+            var request = $(this.fieldName).serialize(true);
+            var params =  {
+                method: 'post',
+                parameters: request,
+                onSuccess: this.handleResponse.bind(this)
+            };
+            new Ajax.Request(this.controllerUrl, params);
+        },
+
+        handleResponse: function(transport)
+        {
+            if (transport.responseText.isJSON()) 
+            {
+                var response = transport.responseText.evalJSON();
+                if (response.warning)
+                {
+                    this.handleWarning(response);
+                    return;
+                }  
+            }
+            this.saveForm();
+        },
+
+        handleWarning: function()
+        {
+          var messageOne = 'Warning! You are about to change your Level Settings. If you proceed your lower level settings will be overwritten by the upper level settings.';
+          var messageTwo = ' For example, if you change your Setting Level from Store-view (lower level settings) to Website (upper level settings), then your current Store-view settings will be overwritten by new Website settings.Would you like to proceed?';
+          var message = messageOne + messageTwo;
+          if(confirm( message ))
+          {
+              this.saveForm();
+          }
+          return;
+        },
+        
+        saveForm: function()
+        {
+            this.form.submit = this.submit; 
+            this.form.submit();
+        }
+    });
+    
+    var aitOrdernumInitialization = Class.create(
+    {
+        initialize: function() 
+        {
+            this.controllerUrl = '<?php echo $this->getWarningUrl(); ?>';
+            this.initForm();
+        },
+        
+        initForm: function()
+        {
+            var form = $('config_edit_form');
+            var fieldName = 'ordernum_general_settings_level';
+            var oldSubmit = form.submit;
+            var warning = new aitOrdernumWarning(this.controllerUrl,fieldName,form,oldSubmit);
+            form.submit = warning.process.bind(warning);
+        }
+    });
+    
+    new aitOrdernumInitialization();
+    
+    
+    
+
+</script>

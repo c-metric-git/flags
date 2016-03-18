@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    Mage
+ * @package     Mage_GoogleTrustedStore
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+-->
+<config>
+    <sections>
+        <google translate="label" module="googletrustedstore">
+            <groups>
+                <trustedstore translate="label">
+                    <label>Google Trusted Store</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>250</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Google Trusted Store Program</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled>
+                        <account_id translate="label">
+                            <depends><enabled>1</enabled></depends>
+                            <label>Google Trusted Store Merchant ID</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>required-entry validate-digits</validate>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </account_id>
+                        <default_order_cancellation_reason translate="label comment">
+                            <depends><enabled>1</enabled></depends>
+                            <label>Default Order Cancellation Reason</label>
+                            <comment><![CDATA[Used if origin of cancellation is outside of admin.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>googletrustedstore/source_orderCancellationReason</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </default_order_cancellation_reason>
+                        <estimated_ship_date translate="label comment">
+                            <depends><enabled>1</enabled></depends>
+                            <label>Estimated Ship Date</label>
+                            <comment><![CDATA[The estimated days count from order created date, on which you will ship the order; this is not the estimated delivery date.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-not-negative-number</validate>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </estimated_ship_date>
+                        <ftp_username translate="label comment">
+                            <depends><enabled>1</enabled></depends>
+                            <label>FTP Username</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[The same as you entered in Google Merchant Center.]]></comment>
+                            <validate>required-entry</validate>
+                            <sort_order>25</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </ftp_username>
+                        <ftp_password translate="label comment">
+                            <depends><enabled>1</enabled></depends>
+                            <label>FTP Password</label>
+                            <frontend_type>obscure</frontend_type>
+                            <comment><![CDATA[The same as you entered in Google Merchant Center.]]></comment>
+                            <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
+                            <validate>required-entry</validate>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </ftp_password>
+                        <ftp_mode translate="label comment">
+                            <depends><enabled>1</enabled></depends>
+                            <label>FTP mode</label>
+                            <frontend_type>select</frontend_type>
+                            <comment><![CDATA[Passive mode is recommended.]]></comment>
+                            <source_model>googletrustedstore/source_ftpMode</source_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </ftp_mode>
+                        <cancellation_feed_filename translate="label comment">
+                            <depends><enabled>1</enabled></depends>
+                            <label>Cancellation Feed Filename</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>googletrustedstore/backend_feedFilename</backend_model>
+                            <comment><![CDATA[The same as you entered in Google Merchant Center.]]></comment>
+                            <validate>required-entry</validate>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </cancellation_feed_filename>
+                        <shipment_feed_filename translate="label comment">
+                            <depends><enabled>1</enabled></depends>
+                            <label>Shipment Feed Filename</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>googletrustedstore/backend_feedFilename</backend_model>
+                            <comment><![CDATA[The same as you entered in Google Merchant Center.]]></comment>
+                            <validate>required-entry</validate>
+                            <sort_order>45</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </shipment_feed_filename>
+                        <verify_settings translate="label comment">
+                            <frontend_type>button</frontend_type>
+                            <comment><![CDATA[Verify your settings: directory permissions, ftp credentials, cron setup.]]></comment>
+                            <frontend_model>googletrustedstore/adminhtml_system_config_verifySettings</frontend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </verify_settings>
+                        <generate_now translate="label comment">
+                            <frontend_type>button</frontend_type>
+                            <comment><![CDATA[Use this to generate feed files now. Save any configuration changes before executing.]]></comment>
+                            <frontend_model>googletrustedstore/adminhtml_system_config_generateFeeds</frontend_model>
+                            <sort_order>55</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </generate_now>
+                        <upload_now translate="label comment">
+                            <frontend_type>button</frontend_type>
+                            <comment><![CDATA[Use this to perform upload now. Save any configuration changes before executing.]]></comment>
+                            <frontend_model>googletrustedstore/adminhtml_system_config_uploadFeeds</frontend_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </upload_now>
+                        <google_shopping_account_id translate="label comment">
+                            <depends><enabled>1</enabled></depends>
+                            <label>Google Shopping Account ID</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>googletrustedstore/adminhtml_system_config_googleShoppingAccountId</frontend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Use this field to enter your Google Shopping Account ID if GoogleShopping module is unavailable.]]></comment>
+                            <validate>validate-digits</validate>
+                            <sort_order>65</sort_order>
+                        </google_shopping_account_id>
+                        <subscription_for_updates translate="label comment">
+                            <label>Subscribe for updates</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>googletrustedstore/adminhtml_system_config_subscribe</frontend_model>
+                            <backend_model>googletrustedstore/backend_subscribe</backend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Enter your email address to receive important product updates. We will not distribute your information or use your email for any other communication.]]></comment>
+                            <sort_order>70</sort_order>
+                        </subscription_for_updates>
+                        <notification_enabled translate="label">
+                            <label>Email Notification Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>75</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enabled>1</enabled></depends>
+                        </notification_enabled>
+                        <notification_recipient_email translate="label comment">
+                            <label>Notification Recipient Email</label>
+                            <frontend_type>text</frontend_type>
+                            <validate>validate-email required-entry</validate>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><enabled>1</enabled><notification_enabled>1</notification_enabled></depends>
+                        </notification_recipient_email>
+                    </fields>
+                </trustedstore>
+            </groups>
+        </google>
+    </sections>
+</config>

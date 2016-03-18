@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <solrsearch_index_index>
+        <remove name="left.newsletter"/>
+        <remove name="left.permanent.callout"/>
+        <reference name="head">
+			<action method="addCss"><stylesheet>solrsearch/css/popup.css</stylesheet></action>
+        </reference>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="solrsearch/result" name="searchresult" >
+            	<block type="solrsearch/result_title" name="solrsearch_result_title" as="solrsearch_result_title" />
+            	<block type="solrsearch/product_list" name="solrsearch_product_list" template="catalog/product/list.phtml" as="solrsearch_product_list">
+            		<block type="core/text_list" name="product_list.name.after" as="name.after" />
+                    <block type="core/text_list" name="product_list.after" as="after" />
+            		<block type="solrsearch/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                        <block type="solrsearch/html_pager" name="product_list_toolbar_pager"/>
+                    </block>
+                    <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+                    <action method="setColumnCount"><count>4</count></action>
+                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+            	</block>
+            </block>
+        </reference>
+        <reference name="left">
+            <block type="solrsearch/faces" name="searchfaces" as="searchFaces" before="-" >
+            	<block type="solrsearch/faces_price" name="solr_price_facets" as="solr_price_facets" />
+            	<block type="solrsearch/faces_range" name="solr_range_facets" as="solr_range_facets" />
+            </block>
+        </reference>
+    </solrsearch_index_index>
+    
+    <solrsearch_advanced_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="solrsearch/advanced" name="solrsearch_advanced_form" as="solrsearch_advanced_form" template="catalogsearch/advanced/form.phtml" />
+        </reference>
+    </solrsearch_advanced_index>
+    <catalogsearch_advanced_index translate="label">
+    	<remove name="catalogsearch_advanced_form"/>
+        <reference name="content">
+            <block type="solrsearch/advanced" name="solrsearch_advanced_form" as="catalogsearch_advanced_form" template="catalogsearch/advanced/form.phtml" />
+        </reference>
+    </catalogsearch_advanced_index>
+    <solrsearch_advanced_result>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="solrsearch/advanced_result" name="solrsearch_product_list" template="catalog/product/list.phtml" as="solrsearch_product_list">
+           		<block type="core/text_list" name="product_list.name.after" as="name.after" />
+                   <block type="core/text_list" name="product_list.after" as="after" />
+           		<block type="solrsearch/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+                       <block type="solrsearch/html_pager" name="product_list_toolbar_pager"/>
+                   </block>
+                   <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+                   <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+                   <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+                   <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+                   <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+                   <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+           	</block>
+        </reference>
+    </solrsearch_advanced_result>
+    
+    <solrsearch_by_category>
+    	<reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="solrsearch/searchby_category" name="solrsearch_searchby_category" template="solrsearch/searchby/category.phtml" as="solrsearch_searchby_category" />
+        </reference>
+    </solrsearch_by_category>
+    <solrsearch_by_brand>
+    	<reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="solrsearch/searchby_brand" name="solrsearch_searchby_brand" template="solrsearch/searchby/brands.phtml" as="solrsearch_searchby_brand" />
+        </reference>
+    </solrsearch_by_brand>
+    <default>
+    	<reference name="header">
+            <block type="core/template" name="top.search" as="topSearch" template="solrsearch/searchbox.phtml"/>
+        </reference>
+        <reference name="head">
+			<action method="addJs"><script>solrsearch/autocomplete.js</script></action>
+			<action method="addItem"><type>js_css</type><name>solrsearch/autocomplete.css</name></action>
+			<action method="addCss"><stylesheet>solrsearch/css/style.css</stylesheet></action>
+        </reference>
+    </default>
+    <solrbridge_solrsearch_category_view> 
+        <remove name="catalog.leftnav" />
+        <remove name="enterprisecatalog.leftnav"/> 
+        <remove name="category.products" />
+        <reference name="left">
+           <block type="solrsearch/faces" name="searchfaces" as="searchFaces" before="-" >
+            	<block type="solrsearch/faces_price" name="solr_price_facets" as="solr_price_facets" />
+            	<block type="solrsearch/faces_range" name="solr_range_facets" as="solr_range_facets" />
+            </block>
+        </reference>
+        <reference name="content">
+                <block type="solrsearch/category_view" name="solrsearch_category_view" before="-" template="catalog/category/view.phtml">
+                	<block type="solrsearch/product_list" name="solrsearch_product_list" template="catalog/product/list.phtml" as="solrsearch_product_list">
+                		<block type="core/text_list" name="product_list.name.after" as="name.after" />
+                    	<block type="core/text_list" name="product_list.after" as="after" />
+	            		<block type="solrsearch/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+	                        <block type="solrsearch/html_pager" name="product_list_toolbar_pager"/>
+	                    </block>
+	                    <action method="addColumnCountLayoutDepend"><layout>empty</layout><count>6</count></action>
+	                    <action method="addColumnCountLayoutDepend"><layout>one_column</layout><count>5</count></action>
+	                    <action method="addColumnCountLayoutDepend"><layout>two_columns_left</layout><count>4</count></action>
+	                    <action method="addColumnCountLayoutDepend"><layout>two_columns_right</layout><count>4</count></action>
+	                    <action method="addColumnCountLayoutDepend"><layout>three_columns</layout><count>3</count></action>
+	                    <action method="setColumnCount"><count>3</count></action>
+	                    <action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+	            	</block>
+                </block>
+        </reference>
+    </solrbridge_solrsearch_category_view>
+    <catalogsearch_term_popular translate="label">
+    	<remove name="seo.searchterm"/>
+        <reference name="content">
+            <block type="catalogsearch/term" name="solrsearch.searchterm" template="solrsearch/term.phtml"/>
+        </reference>
+    </catalogsearch_term_popular>
+</layout> 

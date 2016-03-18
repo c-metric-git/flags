@@ -1,0 +1,39 @@
+<!--@subject {{var customer.name}} invites you to {{var store.getFrontendName()}} @-->
+<!--@vars
+{"htmlescape var=$customer.name":"Customer Name",
+"var customer.email":"Customer Email"}
+@-->
+<!--@styles
+body,td { color:#2f2f2f; }
+@-->
+<div style="font:13px/1.45em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:13px/1.45em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top">
+                <!-- [ header starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <a href="{{var invitation_url}}"><img src="{{var logo_url}}" alt="{{var logo_alt}}" style="margin-bottom:10px;" border="0"/></a>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- [ middle starts here] -->
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            Dear {{var name}},<br><br>
+
+							{{htmlescape var=$customer.name}} invites you to visit <a href="{{var invitation_url}}">{{var store.getFrontendName()}}</a>:<br><br>
+
+                            {{depend message}}
+                                {{var message}} <br>
+                            {{/depend}}
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

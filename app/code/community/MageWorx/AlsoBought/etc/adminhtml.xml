@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MageWorx
+ * Others Also Bought Extension
+ *
+ * @category   MageWorx
+ * @package    MageWorx_AlsoBought
+ * @copyright  Copyright (c) 2016 MageWorx (http://www.mageworx.com/)
+ */
+-->
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <mageworx_alsobought translate="title" module="mageworx_alsobought">
+                                        <title>MageWorx &gt; Others Also Bought</title>
+                                        <sort_order>600</sort_order>
+                                        <children>
+                                            <main translate="title" module="mageworx_alsobought">
+                                                <title>General Settings</title>
+                                                <sort_order>10</sort_order>
+                                            </main>
+                                        </children>
+                                    </mageworx_alsobought>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

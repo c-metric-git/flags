@@ -1,0 +1,5 @@
+<ul class="rewards-notification-block">
+<?php foreach($this->getRules() as $rule): ?>
+	<li><?php echo $rule->getMessage()?></li>
+<?php endforeach ?>
+</ul>

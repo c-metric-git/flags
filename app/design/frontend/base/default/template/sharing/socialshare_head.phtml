@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * template to add script required for social sharing
+ */
+$horizontalShareSettings = $this->getHorizontalSharingSettings();
+$verticalShareSettings = $this->getVerticalSharingSettings();
+if ($horizontalShareSettings['horizontalShareEnable'] == "1" || $verticalShareSettings['verticalShareEnable'] == "1") {
+    $sharingScript = '<script type="text/javascript">var islrsharing = true; var islrsocialcounter = true;</script> <script type="text/javascript" src="//sharecdn.social9.com/v1/social9.min.js" id="lrsharescript"></script><script type="text/javascript">';
+
+    if ($horizontalShareSettings['horizontalShareEnable'] == "1") {
+        // check horizontal sharing enabled
+        $sharingScript .= $this->getHorizontalSharingScript($horizontalShareSettings);
+    }
+    if ($verticalShareSettings['verticalShareEnable'] == '1') {
+        // check vertical sharing enabled
+        $sharingScript .= $this->getVerticalSharingScript($verticalShareSettings);
+    }
+    $sharingScript .= '</script>';
+    echo $sharingScript;
+}

@@ -1,0 +1,307 @@
+/*
+ * jQuery FlexSlider v2.0
+ * http://www.woothemes.com/flexslider/
+ *
+ * Copyright 2012 WooThemes
+ * Free to use under the GPLv2 license.
+ * http://www.gnu.org/licenses/gpl-2.0.html
+ *
+ * Contributing author: Tyler Smith (@mbmufffin)
+ */
+
+ 
+/* Browser Resets */
+.zeeflexslider a:active,
+.zeeflexslider a:focus  {outline: none;}
+.zeeslides,
+.zeeflex-control-nav,
+.zeeflex-direction-nav {margin: 0; padding: 0; list-style: none;} 
+
+/* FlexSlider Necessary Styles
+*********************************/ 
+.zeeflexslider {margin: 0; padding: 0;}
+.zeeflexslider .zeeslides > li {display: none; -webkit-backface-visibility: hidden;} /* Hide the slides before the JS is loaded. Avoids image jumping */
+.zeeflexslider .zeeslides img {width: 100%; display: block;}
+.zeeflex-pauseplay span {text-transform: capitalize;}
+
+/* Clearfix for the .zeeslides element */
+.zeeslides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;} 
+html[xmlns] .zeeslides {display: block;} 
+* html .zeeslides {height: 1%;}
+
+/* No JavaScript Fallback */
+/* If you are not using another script, such as Modernizr, make sure you
+ * include js that eliminates this class on page load */
+.no-js .zeeslides > li:first-child {display: block;}
+
+.zeeflex-viewport {max-height: 2000px; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; transition: all 1s ease;}
+.loading .zeeflex-viewport {max-height: 300px;}
+
+/*  ThemeZee Slider Layout
+*****************************************/
+#frontpage-slider-wrap {
+	position: relative;
+}
+#frontpage-slider {
+	position: relative;
+	zoom: 1;
+}
+#frontpage-slider  .zeeslides {
+	zoom: 1;
+}
+#frontpage-slider .zeeslide img {
+	max-width: 1340px;
+	width: 100%;
+	max-height: 450px;
+	height: auto;
+}
+
+/* Slider Entry */
+#frontpage-slider .zeeslide {
+	position: relative;
+}
+#frontpage-slider .zeeslide .slide-entry {
+	position: absolute;
+	bottom: 1em;
+	left: 1em;
+	line-height: 1.6em;
+	-ms-word-wrap: break-word;
+	word-wrap: break-word;
+	padding: 1em 1.5em;
+	color: #fff;
+	background: #333;
+	background: rgba(0,0,0,0.7);
+	width: 75%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+#frontpage-slider .zeeslide .slide-entry .slide-title {
+	font-family: 'Bitter', Georgia, Arial, Tahoma;
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #fff;
+	line-height: 1.4em;
+	-ms-word-wrap: break-word;
+	word-wrap: break-word;
+	padding: 0.3em 0;
+}
+#frontpage-slider .zeeslide .slide-entry .slide-title a:link, #frontpage-slider .zeeslide .slide-entry .slide-title a:visited {
+	color: #fff;
+	text-decoration: none;
+}
+#frontpage-slider .zeeslide .slide-entry .slide-title a:hover, #frontpage-slider .zeeslide .slide-entry .slide-title a:active{
+	color: #ccc;
+}
+#frontpage-slider .zeeslide .slide-entry .slide-more-link, 
+#frontpage-slider .zeeslide .slide-entry .slide-more-link:link, 
+#frontpage-slider .zeeslide .slide-entry .slide-more-link:visited {
+	color: #eee;
+	font-style: italic;
+	display: inline-block;
+	margin: 0.3em 0;
+}
+#frontpage-slider .zeeslide .slide-entry.slide-more-link:hover, 
+#frontpage-slider .zeeslide .slide-entry.slide-more-link:active{
+	text-decoration: underline;
+}
+.frontpage-slider-controls {
+	clear: left;
+}
+
+/* Direction Nav */
+.frontpage-slider-controls .zeeflex-direction-nav {
+	position: absolute; 
+	bottom: 1em;
+	right: 1em;
+	*height: 0;
+}
+.frontpage-slider-controls .zeeflex-direction-nav a {
+	display: block;
+	position: absolute;
+	margin: -50px 1em 0 0;
+	width: 50px;
+	height: 50px;
+	background: rgba(0,0,0,0.6);
+	text-align: left;
+	color #fff;
+	font-size: 0;
+	cursor: pointer;
+	-webkit-transition: all 0.2s ease-out;
+	-moz-transition: all 0.2s ease-out;
+	-ms-transition: all 0.2s ease-out;
+	-o-transition: all 0.2s ease-out;
+	transition: all 0.2s ease-out;
+	z-index: 10;
+}
+.frontpage-slider-controls .zeeflex-direction-nav a:hover {
+	text-decoration: none;
+}
+.frontpage-slider-controls .zeeflex-direction-nav a:before {
+	margin: 0.2em;
+	-webkit-font-smoothing: antialiased;
+	display: inline-block;
+	font: normal 36px/1 Genericons;
+	text-decoration: inherit;
+	vertical-align: text-bottom;
+	color: #fff;
+}
+.frontpage-slider-controls .zeeflex-direction-nav a.zeeflex-next:before {
+	content: '\f429';
+}
+.frontpage-slider-controls .zeeflex-direction-nav a.zeeflex-prev:before {
+	content: '\f430';
+}
+.frontpage-slider-controls .zeeflex-direction-nav .zeeflex-next {
+	right: 0;
+}
+.frontpage-slider-controls .zeeflex-direction-nav .zeeflex-prev {
+	right: 51px;
+}
+.frontpage-slider-controls .zeeflex-direction-nav .zeeflex-prev:hover,
+.frontpage-slider-controls .zeeflex-direction-nav .zeeflex-next:hover  {
+	background-color: rgba(0,0,0,0.9);
+}
+
+
+/* Control Nav */
+.frontpage-slider-controls .zeeflex-control-nav {
+	position: absolute; 
+	top: 1.2em;
+	right: 1em;
+}
+.frontpage-slider-controls .zeeflex-control-nav li {
+	margin: 0 4px; 
+	display: inline-block; 
+	zoom: 1; 
+	*display: inline;
+}
+.frontpage-slider-controls .zeeflex-control-nav li a {
+	width: 15px; 
+	height: 15px; 
+	display: block; 
+	background: #777;
+	background: rgba(0,0,0,0.2);
+	cursor: pointer; 
+	text-indent: -9999px; 
+}
+.frontpage-slider-controls .zeeflex-control-nav li a:hover { 
+	background: #888;
+	background: rgba(0,0,0,0.4);
+}
+.frontpage-slider-controls .zeeflex-control-nav li a.zeeflex-active { 
+	background: #888;
+	background: rgba(0,0,0,0.4); 
+	cursor: default; 
+}
+
+/* Media Queries for responsive slider */
+
+/* Smaller screens | <1120px */
+@media only screen and (max-width: 70em) {
+	#frontpage-slider .zeeslide .slide-entry .slide-content,
+	#frontpage-slider .zeeslide .slide-entry .slide-more-link {
+		display: none !important;
+	}
+	#frontpage-slider .zeeslide .slide-entry {
+		padding: 0.4em 0.8em;
+		width: 65%;
+	}
+	#frontpage-slider .zeeslide .slide-entry .slide-title {
+		font-size: 1.3em;
+	}
+}
+/* Tablets (landscape) | <960px */
+@media only screen and (max-width: 60em) {
+	#frontpage-slider .zeeslide .slide-entry .slide-content,
+	#frontpage-slider .zeeslide .slide-entry .slide-more-link {
+		display: inline-block !important;
+	}
+	#frontpage-slider .zeeslide .slide-entry {
+		padding: 1em 1.5em;
+		width: 75%;
+	}
+	#frontpage-slider .zeeslide .slide-entry .slide-title {
+		font-size: 1.5em
+	}
+}
+/* Tablets (portrait) | <800px */
+@media only screen and (max-width: 50em) {
+	#frontpage-slider .zeeslide .slide-entry .slide-content,
+	#frontpage-slider .zeeslide .slide-entry .slide-more-link {
+		display: none !important;
+	}
+	#frontpage-slider .zeeslide .slide-entry {
+		padding: 0.4em 0.8em;
+		width: 65%;
+	}
+	#frontpage-slider .zeeslide .slide-entry .slide-title {
+		font-size: 1.3em;
+	}
+}
+/* Phablets (portrait) | <640px */
+@media only screen and (max-width: 40em) {
+	#frontpage-slider .zeeslide .slide-entry .slide-title {
+		font-size: 1.1em;
+	}
+}	
+/* Smartphones | <480px */
+@media only screen and (max-width: 30em) {
+	#frontpage-slider .zeeslide .slide-entry {
+		width: 75%;
+	}
+	#frontpage-slider .zeeslide .slide-entry .slide-title {
+		font-size: 1.05em;
+	}
+	.frontpage-slider-controls .zeeflex-control-nav {
+		display: none;
+	}
+	.frontpage-slider-controls .zeeflex-direction-nav {
+		bottom: auto;
+		top: 1em;
+	}
+	.frontpage-slider-controls .zeeflex-direction-nav a {
+		margin: 0 1em 0 0;
+		width: 30px;
+		height: 30px;
+	}
+	.frontpage-slider-controls .zeeflex-direction-nav a:before {
+		margin: 0;
+		font-size: 30px;
+	}
+	.frontpage-slider-controls .zeeflex-direction-nav .zeeflex-prev {
+		right: 31px;
+	}
+}
+@media only screen and (max-width: 26em) {
+	#frontpage-slider .zeeslide .slide-entry {
+		bottom: 0.5em;
+		left: 0.5em;
+	}
+	#frontpage-slider .zeeslide .slide-entry .slide-title {
+		font-size: 1.0em;
+		font-weight: normal;
+	}
+	.frontpage-slider-controls .zeeflex-direction-nav {
+		top: 0.5em;
+		right: 0.5em;
+	}
+	.frontpage-slider-controls .zeeflex-direction-nav a {
+		margin: 0 1em 0 0;
+	}
+}
+@media only screen and (max-width: 22em) {
+	#frontpage-slider .zeeslide .slide-entry {
+		bottom: 0;
+		left: 0;
+		padding: 0.3em 0.6em;
+		width: 100%;
+	}
+	#frontpage-slider .zeeslide .slide-entry .slide-title {
+		font-size: 0.95em;
+	}
+	.frontpage-slider-controls .zeeflex-direction-nav {
+		top: 0;
+		right: 0;
+	}
+}

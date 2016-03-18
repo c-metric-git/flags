@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <menu>
+        <system>
+            <children>
+                <iwdall>
+                    <children>
+                        <iwd_ordermanager module="iwd_ordermanager">
+                            <title>Order Manager</title>
+                            <sort_order>1</sort_order>
+                            <action>adminhtml/system_config/edit/section/iwd_ordermanager</action>
+                            <children>
+                                <log_operations module="iwd_ordermanager">
+                                    <title>Log Operations</title>
+                                    <sort_order>0</sort_order>
+                                    <action>adminhtml/confirm/log</action>
+                                </log_operations>
+                                <system_config module="iwd_ordermanager">
+                                    <title>Extension Configuration</title>
+                                    <sort_order>10</sort_order>
+                                    <action>adminhtml/system_config/edit/section/iwd_ordermanager</action>
+                                </system_config>
+                            </children>
+                        </iwd_ordermanager>
+                    </children>
+                </iwdall>
+            </children>
+        </system>
+        <sales>
+            <children>
+                <iwd_ordermanager_backups module="iwd_ordermanager">
+                    <title>Backups Deleted Sales</title>
+                    <sort_order>42</sort_order>
+                    <children>
+                        <sales module="iwd_ordermanager">
+                            <title>Sales</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/sales_backup_sales/index</action>
+                        </sales>
+                        <comments module="iwd_ordermanager">
+                            <title>Comments</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/sales_backup_comments/index</action>
+                        </comments>
+                    </children>
+                </iwd_ordermanager_backups>
+            </children>
+            <children>
+                <iwd_ordermanager_archive module="iwd_ordermanager">
+                <title>Archive Sales</title>
+                <!-- <disabled>1</disabled> -->
+                <sort_order>41</sort_order>
+                    <children>
+                        <archive_orders module="iwd_ordermanager">
+                            <title>Orders</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/sales_archive_order/index</action>
+                        </archive_orders>
+                        <archive_invoices module="iwd_ordermanager">
+                            <title>Invoices</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/sales_archive_invoice/index</action>
+                        </archive_invoices>
+                        <archive_creditmemos module="iwd_ordermanager">
+                            <title>Credit Memos</title>
+                            <sort_order>30</sort_order>
+                            <action>adminhtml/sales_archive_creditmemo/index</action>
+                        </archive_creditmemos>
+                        <archive_shipments module="iwd_ordermanager">
+                            <title>Shipments</title>
+                            <sort_order>40</sort_order>
+                            <action>adminhtml/sales_archive_shipment/index</action>
+                        </archive_shipments>
+                    </children>
+                </iwd_ordermanager_archive>
+            </children>
+        </sales>
+    </menu>
+    <acl>
+        <resources>
+            <all>Allow everything</all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <iwd_ordermanager translate="title" module="iwd_ordermanager">
+                                        <title>IWD Order Manager</title>
+                                    </iwd_ordermanager>
+                                </children>
+                            </config>
+                            <iwdall>
+                                <children>
+                                    <iwd_ordermanager translate="title">
+                                        <title>IWD Order Manager</title>
+                                        <children>
+                                            <log_operations translate="title"><title>Log Operations</title></log_operations>
+                                        </children>
+                                    </iwd_ordermanager>
+                                </children>
+                            </iwdall>
+                        </children>
+                    </system>
+                    <sales>
+                        <children>
+                           <iwd_ordermanager_archive translate="title">
+                                <title>IWD Order Manager - Archive</title>
+                                <children>
+                                    <archive_orders translate="title"><title>Archive Orders</title></archive_orders>
+                                    <archive_invoices translate="title"><title>Archive Invoices</title></archive_invoices>
+                                    <archive_creditmemos translate="title"><title>Archive Credit Memos</title></archive_creditmemos>
+                                    <archive_shipments translate="title"><title>Archive Shipments</title></archive_shipments>
+                                </children>
+                           </iwd_ordermanager_archive>
+                           <iwd_ordermanager_backups translate="title">
+                               <title>IWD Order Manager - Backups</title>
+                               <children>
+                                   <sales translate="title"><title>Backup Sales</title></sales>
+                                   <comments translate="title"><title>Backup Comments</title></comments>
+                               </children>
+                           </iwd_ordermanager_backups>
+                        </children>
+                    </sales>
+                    <iwd_ordermanager>
+                        <title>IWD Order Manager</title>
+                        <children>
+                            <order>
+                                <title>Order</title>
+                                <children>
+                                    <actions>
+                                        <title>Actions</title>
+                                        <children>
+                                            <delete translate="title"><title>Delete</title></delete>
+                                            <archive translate="title"><title>Archive</title></archive>
+                                            <update_status translate="title"><title>Update Status</title></update_status>
+                                            <archive_restore translate="title"><title>Restore Archive</title></archive_restore>
+                                            <edit_order_information translate="title"><title>Edit Order Information</title></edit_order_information>
+                                            <edit_account_information translate="title"><title>Edit Account Information</title></edit_account_information>
+                                            <edit_address translate="title"><title>Edit Address</title></edit_address>
+                                            <edit_payment translate="title"><title>Edit Payment</title></edit_payment>
+                                            <edit_shipping translate="title"><title>Edit Shipping end Handling Information</title></edit_shipping>
+                                            <edit_order_items translate="title"><title>Edit Order Items</title></edit_order_items>
+                                            <edit_comment translate="title"><title>Edit Comment</title></edit_comment>
+                                            <delete_comment translate="title"><title>Delete Comment</title></delete_comment>
+                                        </children>
+                                    </actions>
+                                </children>
+                            </order>
+                            <invoice>
+                                <title>Invoice</title>
+                                <children>
+                                    <actions translate="title">
+                                        <title>Actions</title>
+                                        <children>
+                                            <delete translate="title"><title>Delete</title></delete>
+                                        </children>
+                                    </actions>
+                                </children>
+                            </invoice>
+                            <shipment>
+                                <title>Shipment</title>
+                                <children>
+                                    <actions translate="title">
+                                        <title>Actions</title>
+                                        <children>
+                                            <delete translate="title"><title>Delete</title></delete>
+                                        </children>
+                                    </actions>
+                                </children>
+                            </shipment>
+                            <creditmemo>
+                                <title>Credit Memo</title>
+                                <children>
+                                    <actions translate="title">
+                                        <title>Actions</title>
+                                        <children>
+                                            <delete translate="title"><title>Delete</title></delete>
+                                        </children>
+                                    </actions>
+                                </children>
+                            </creditmemo>
+                        </children>
+                    </iwd_ordermanager>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

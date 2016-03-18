@@ -1,0 +1,9 @@
+<ul class="messages">
+<li class="success-msg">
+	<ul>
+		<?php foreach($this->getRules() as $rule): ?>
+		<li><?php echo $rule->getMessage()?></li>
+		<?php endforeach ?>
+	</ul>
+</li>
+</ul>

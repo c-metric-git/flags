@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config>
+	<menu>
+		<solrbridge module="searchrequest">
+			<children>
+				<searchrequest translate="title" module="searchrequest">
+					<title>Search Request</title>
+					<sort_order>71</sort_order>
+					<action>searchrequest/adminhtml_request/index</action>
+				</searchrequest>
+			</children>
+		</solrbridge>
+		
+	</menu>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<solrbridge translate="title">
+                        <title>SolrBridge</title>
+                        <sort_order>31</sort_order>
+                        <children>
+                            <searchrequest translate="title">
+                                <title>Search Request Management</title>
+                                <sort_order>140</sort_order>
+                            </searchrequest>
+                        </children>
+                    </solrbridge>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+</config>

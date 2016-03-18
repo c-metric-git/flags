@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <teamdesk_importmodule_index_index>
+        <reference name="content">
+            <block type="importmodule/index" name="importmodule" template="importmodule/index.phtml" />
+        </reference>  
+    </teamdesk_importmodule_index_index>
+</layout>

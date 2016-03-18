@@ -1,0 +1,51 @@
+<?php
+/**
+ * category import template
+ *
+ * @see Santhosh_Import_Block_Adminhtml_Category_Import
+ */
+?>
+<div class="content-header">    
+    <table cellspacing="0">
+        <tbody>
+            <tr>
+                <td style="width: 50%;"><h3 class="icon-head head-upcoming"><?php echo $this->getTitle(); ?></h3></td>
+                <td class="a-right">&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="entry-edit">
+    <form action="" method="post" id="import-form" name="import-form">
+        <fieldset id="my-fieldset">
+            <table cellspacing="0" class="form-list">
+                <tr>
+                    <td colspan="2" class="label">
+                       <input type="radio" name="import_type" value="SS_categories">&nbsp;&nbsp;<b><?php echo $this->__('Import SS Categories')?></b>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="label">
+                       <input type="radio" name="import_type" value="SS_products">&nbsp;&nbsp;<b><?php echo $this->__('Import SS Products')?></b>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="label">
+                       <input type="radio" name="import_type" value="FL_categories">&nbsp;&nbsp;<b><?php echo $this->__('Import FL Categories')?></b>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="label">
+                       <input type="radio" name="import_type" value="FL_products">&nbsp;&nbsp;<b><?php echo $this->__('Import FL Products')?></b>
+                    </td>
+                </tr>
+                <tr align="center">
+                    <td colspan="2" class="button">
+                        <button type="submit"><?php echo $this->__('Submit'); ?></button>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+        <input type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" name="form_key">
+    </form>
+</div>

@@ -1,0 +1,442 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+<?php
+/**
+ * @see Mage_Adminhtml_Block_Widget_Form_Container
+ */
+ ?>
+<?php echo $this->getFormInitScripts() ?>
+<div class="content-header">
+    <?php echo $this->getHeaderHtml() ?>
+    <p class="form-buttons"><?php echo $this->getButtonsHtml('header') ?></p>
+</div>
+<?php echo $this->getFormHtml() ?>
+<?php if ($this->hasFooterButtons()): ?>
+    <div class="content-footer">
+        <p class="form-buttons"><?php echo $this->getButtonsHtml('footer') ?></p>
+    </div>
+<?php endif; ?>
+
+
+<script type="text/javascript">
+//<![CDATA[
+function ucwords( str ) {   
+    return str.replace(/^(.)|\s(.)/g, function ( $1 ) { return $1.toUpperCase ( ); } );
+}
+function explode( delimiter, string ) { // Split a string by string
+
+			var emptyArray = { 0: '' };
+
+			if ( arguments.length != 2|| typeof arguments[0] == 'undefined'|| typeof arguments[1] == 'undefined' )
+			{
+				return null;
+			}
+		 
+			if ( delimiter === ''|| delimiter === false|| delimiter === null )
+			{
+				return false;
+			}
+
+			if ( delimiter === true ) {
+				delimiter = '1';
+			}
+			return string.toString().split ( delimiter.toString() );
+			
+     }
+
+
+	FreaksForm = Class.create();
+	
+    FreaksForm.prototype = new varienForm();
+	
+	FreaksForm.prototype.initialize = (function(superConstructor) {
+    return function(formId,validateurl,addressValidateUrl) {
+        superConstructor.call(this, formId);   
+		this.addressValidateUrl = addressValidateUrl;
+		/*insert error popup*/
+		
+		if((!$('window-overlay_form-validate')) && (!$('remember-me-popup-address-validation_form-validate')))
+		{
+		$('edit_form').insert(
+		'<div id="window-overlay_form-validate" class="window-overlay" style="display:none;"></div>'+
+		'<div id="remember-me-popup-address-validation_form-validate" class="remember-me-popup" style="display:none; width:650px;margin-left:-220px;">'+
+        '<div class="remember-me-popup-head">'+
+        '<h3>Address Cannot Be Verified</h3></div>'+
+        '<div class="remember-me-popup-body">'+
+        '<p>Please review your address and make any necessary changes by selecting \'Change / Edit Address\'.  You may use your '+
+        'original address if no changes are required. (Please note: This may delay receipt of your order.)</p>'+
+        '<p>'+
+		'<div>'+
+        '<label style="width:140px;" accesskey="D">Change / Edit Address </label>'+
+		'<input id="address_validate_error_validate" type="radio" name="address_validate_error_form-validate" value="validate" checked />'+
+		'<div></div>'+
+        '</div>'+
+	    '<div>'+
+        '<label style="width:140px;" accesskey="C">Use Original Address </label>'+
+		'<input id="address_validate_error_continue" type="radio" name="address_validate_error_form-validate" value="continue" />'+
+		'<div id="old_error_address_form-validate" class="address"></div>'+
+		'</div>'+
+        '</p>'+
+        '<div class="remember-me-popup-close-button a-right"'+
+        'id="remember-me-popup-address-validation-button_form-validate"'+
+        'onclick="$(\'window-overlay_form-validate\').hide(); $(\'remember-me-popup-address-validation_form-validate\').hide();">'+
+        '<a href="#" class="remember-me-popup-close button">'+
+        '<span>Continue</span>'+
+        '</a>'+
+        '</div>'+
+        '</div>'+
+        '</div>'
+		);
+		}
+		
+		/*inser notice popup*/
+		
+		if(!$('remember-me-popup-address-notice_form-validate')){
+		$('edit_form').insert(
+		'<div id="remember-me-popup-address-notice_form-validate" class="remember-me-popup" style="display:none;width:650px;margin-left:-220px;">'+
+        '<div class="remember-me-popup-head">'+
+        '<h3>Address Validation</h3>'+
+        '</div>'+
+        '<div class="remember-me-popup-body">'+
+        '<p>Please review your address and make any necessary changes by selecting \'Change / Edit Address\'.</p>'+
+        '<div>'+
+        '<label style="width:140px;" accesskey="D">Change / Edit Address </label>'+
+		'<input id="address_validate_notice_change_form-validate" type="radio" name="address_validate_notice_form-validate" value="change" script="$(\'address_validate_notice_validate_form-validate\').checked = true;">'+
+		'<div></div>'+
+        '</div>'+
+		'<div>'+
+	    '<label style="width:140px;" accesskey="C" for="address_validate_notice_continue_form-validate">Use Original Address </label>'+
+        '<input id="address_validate_notice_continue_form-validate" type="radio"'+
+        'name="address_validate_notice_form-validate" value="continue"'+
+        'onclick=" $(\'remember-me-popup-address-notice\').hide()"/>'+
+        '<div id="old_address_form-validate" class="address"></div>'+
+		'</div>'+
+        '<div>'+
+        '<label style="width:140px;" accesskey="D" for="address_validate_notice_validate_form-validate">Use Suggested Address </label>'+
+        '<input id="address_validate_notice_validate_form-validate" type="radio"'+
+        'name="address_validate_notice_form-validate" value="validate"'+
+        'onclick=" $(\'remember-me-popup-address-notice\').hide()" checked />'+
+        '<div id="new_address_form-validate" class="address"></div>'+
+        '</div>'+
+		'<div id="validation_advice_button_form-validate"'+
+        'onclick="$(\'window-overlay_form-validate\').hide(); $(\'remember-me-popup-address-notice_form-validate\').hide()"'+
+        'class="remember-me-popup-close-button a-right">'+
+		'<a class="remember-me-popup-close_button" title=""><span>Continue</span></a>'+
+        '</div>'+
+        '</div>'+
+        '</div>'
+		);
+		}
+		
+	/*notice popup*/
+    $('validation_advice_button_form-validate').observe('click', this.submitNotice.bindAsEventListener(this));
+	/*error popup*/
+	$('remember-me-popup-address-validation-button_form-validate').observe('click', this.submitError.bindAsEventListener(this));
+	
+    };
+    })(varienForm.prototype.initialize);
+/* submitNotice function----------------------------------------------------*/
+FreaksForm.prototype.submitNotice = function(){
+ 
+	//  Event.stop(e);
+      var submitAction = true;
+      
+	  if_validate = $$('input:checked[type="radio"][name="address_validate_notice_form-validate"]').pluck('value');
+	  
+	//  alert (if_validate);
+	  
+      if (if_validate=='continue'){/*do nothing*/ //alert('do nothing');
+          var script_to = $('address_validate_notice_continue_form-validate').getAttribute("script");
+	  }	
+      else if(if_validate=='change'){/*enter new address and validate more*///alert('enter new address and validate more');
+	    var script_to = $('address_validate_notice_change_form-validate').getAttribute("script");
+	    submitAction = false;
+	  }
+	  else{/*use suggested address*/ //alert('use suggested address');
+	    $(this.correctingitems['street2']).setValue("");
+	    var script_to = $('address_validate_notice_validate_form-validate').getAttribute("script");
+	}
+	
+	  script_validate ='<'+'script'+'>'+script_to+'<'+'/script'+'>';
+	  script_validate.evalScripts();
+	  
+	  if(submitAction){this._submit();}
+		
+
+},
+/* submitError function----------------------------------------------------*/
+FreaksForm.prototype.submitError = function(){
+//alert('submitError');
+
+	//Event.stop(e);
+	
+
+	if_validate = $$('input:checked[type="radio"][name="address_validate_error_form-validate"]').pluck('value');
+	if (if_validate=='continue'){
+				this._submit();
+	}else{
+	 return false;
+	}
+    return false;
+
+},
+	
+/* submit function----------------------------------------------------*/	
+FreaksForm.prototype.submit = function(){
+		
+//	var curentAddressItem = $('address_list').down('li.on').id;
+	
+  //  var Naddress =  explode('_', curentAddressItem);
+	
+	//var NumberOfAddress = Naddress[2];
+	
+	//var addressVisible = $('customer_info_tabs_addresses_content').visible();
+	
+//	if (true)
+//	{
+	
+			   $('street0').setValue(ucwords($('street0').value.toLowerCase()));
+			   $('street1').setValue(ucwords($('street1').value.toLowerCase()));
+			   $('city').setValue(ucwords($('city').value.toLowerCase()));
+			   $('region_id').setValue(ucwords($('region_id').value.toLowerCase()));
+			   $('region').setValue(ucwords($('region').value.toLowerCase()));
+			   $('postcode').setValue(ucwords($('postcode').value.toLowerCase()));
+			   $('country_id').setValue(ucwords($('country_id').value.toLowerCase()));
+	
+	var street0 = $('street0').value;
+	var street1 = $('street1').value;
+	var city = $('city').value;
+	var region_id = $('region_id').value;
+	var region = $('region').value;
+	var postcode = $('postcode').value;
+	var country_id = $('country_id').value;
+	
+	var formarray = new Object();
+	 		     formarray['street'] = street0.replace(/^\s+/, "").replace(/\s+$/, "") +' '+ street1.replace(/^\s+/, "").replace(/\s+$/, "");;
+				 formarray['city'] = city;
+				 formarray['region_id'] = region_id;
+				 formarray['region'] = region;
+				 formarray['postcode'] = postcode;
+				 formarray['country_id'] = country_id;
+	//alert(NumberOfAddress);
+	
+	
+			var  correctingitems = new Object();
+				 correctingitems['street'] = 'street0';
+			     correctingitems['street2'] = 'street1';
+				 correctingitems['city'] = 'city';
+				 correctingitems['region'] = 'region';
+				 correctingitems['region_id'] = 'region_id';
+				 correctingitems['postcode'] = 'postcode';
+				 correctingitems['country_id'] = 'country_id';
+				 correctingitems['country'] = 'country_id';
+            this.correctingitems = correctingitems;
+	
+	
+	
+	   
+	        // insert old adress to notice popup----------------------------------------------
+	        var region = $('region_id');	 
+            var value_of_region = region.value;
+			value_of_region = region.select('option[value="'+value_of_region+'"]')[0].innerHTML;
+				
+				var oldAddress = formarray['street'].replace(/^\s+/, "").replace(/\s+$/, "")+
+				', '+city+
+				', '+value_of_region+   
+                ', '+postcode;
+				 
+				oldAddressContent = "<div id = \"old_address_content_form-validate\">"+oldAddress+"</div>";
+				oldAddressContent =  ucwords(oldAddressContent.toLowerCase());  
+
+				
+				 if($('old_address_content_form-validate')){$('old_address_content_form-validate').remove();} 
+				
+				$('old_address_form-validate').insert(oldAddressContent);
+				
+				oldAddressErrorContent = "<div id = \"old_error_address_content_form-validate\">"+oldAddress+"</div>";
+				oldAddressErrorContent =  ucwords(oldAddressErrorContent.toLowerCase());  
+			
+            // insert old adress to error popup----------------------------------------------			
+			if($('old_error_address_content_form-validate')){$('old_error_address_content_form-validate').remove();} 
+			$('old_error_address_form-validate').insert(oldAddressErrorContent);
+	      
+	
+        new Ajax.Request('<?php echo Mage::getUrl('addressvalidation/validation/validate');?>',{
+            method: 'post',
+            parameters: formarray,
+            onComplete: this._processResult.bind(this),
+            onFailure: this._processFailure.bind(this)
+        });
+    //  }
+    //  else{
+    //  this._submit();
+	//  }
+    },
+	
+/* _processValidationResult function--------------------------------*/
+FreaksForm.prototype._processResult = function(transport){//alert('transport');
+         //   alert(transport);
+        if (typeof varienGlobalEvents != undefined) {
+                varienGlobalEvents.fireEvent('formValidateAjaxComplete', transport);
+            }
+            var response = transport.responseText.evalJSON();
+			
+		
+			
+            if(response.errors!= ''){
+				//	alert('errors');
+				//	alert(response.errors);
+					$('window-overlay_form-validate').show();
+					$('remember-me-popup-address-validation_form-validate').show();
+					window.scrollTo(0,0);
+            }
+			else if(response.notices != ''){
+				//	alert('notices');
+				//	alert(response.notices);
+					this.processValidationResult(response.notices,response.address,this.correctingitems);
+					$('remember-me-popup-address-notice_form-validate').show();
+					$('window-overlay_form-validate').show();
+					window.scrollTo(0,0);
+            }			
+            else{
+			  //  alert('ok');
+                this._submit();
+            }
+        }, 
+	
+	
+	FreaksForm.prototype.processValidationResult = function(adress_notice,true_address,correctingitems){
+   // alert('ValidationResult');
+	var notices = $H(adress_notice); 
+	var advice_action = '';
+	var advice_no_action ='';
+    var adress_field_value;
+	var street_field_value;
+    var newAddress = '';
+
+    var valid_address= $H(true_address);
+    valid_address.each(function(valid_address_item) {
+        if(valid_address_item.key != 'country' && valid_address_item.key != 'region_id'&&valid_address_item.key != 'country_id'){
+            if(notices.keys().indexOf(valid_address_item.key) !== -1) {
+                newAddress = newAddress +' <span class="suggest">'+valid_address_item.value+'</span>';
+            } else {
+                newAddress = newAddress +' '+valid_address_item.value;
+            }
+            if (valid_address_item.key != 'postcode') { newAddress += ','; }
+        }
+    });
+
+    newAddress_ = "<div id = \"new_address_content_form-validate\">"+newAddress+"</div>";
+    if($('new_address_content_form-validate')){$('new_address_content_form-validate').remove();}
+    $('new_address_form-validate').insert(newAddress_);
+
+    notices.each(function (notice) {
+
+        valid_address.each(function (valid_address_item) {
+		if(valid_address_item.key == 'street'){
+		street_field_value = valid_address_item.value;
+		}
+            if (notice.key == valid_address_item.key) {
+                adress_field_value = valid_address_item.value;
+            }
+        });
+
+        if (notice.key == 'region' || notice.key == 'country') {
+            element = $(correctingitems[notice.key]);
+
+            key = notice.key + '_id'; // for example : region = region_id
+            //correctingitems[key];
+            //alert(correctingitems[key]);
+
+            advice = "<div id=\"" + correctingitems[key] + "_advice\" onClick=\"FreaksForm.prototype.correctingItem('" + correctingitems[key] + "','" + true_address[key] + "',this)\"  class=\"validation-advice\">" + notice.value + "</div>";
+           // Validation.insertAdvice(element, advice);
+
+		advice_action = advice_action + "FreaksForm.prototype.correctingItem('" + correctingitems[key] + "','" + true_address[key] + "'); ";
+        advice_no_action = advice_no_action ;
+		}
+
+
+        else {
+            element = $(correctingitems[notice.key]);
+
+            advice = "<div id=\"" + correctingitems[notice.key] + "_advice\" onClick=\"FreaksForm.prototype.correctingItem('" + correctingitems[notice.key] + "','" + adress_field_value + "',this)\"  class=\"validation-advice\">" + notice.value + "</div>";
+           // Validation.insertAdvice(element, advice);
+		   
+
+		   
+		advice_action = advice_action + "FreaksForm.prototype.correctingItem('" + correctingitems[notice.key] + "','" + adress_field_value + "'); ";
+        advice_no_action = advice_no_action ;
+        }
+        advice_action = advice_action+"FreaksForm.prototype.correctingItem('" + correctingitems['street'] + "','" + street_field_value + "'); ";
+		
+        $('address_validate_notice_continue_form-validate').removeAttribute("onclick");
+        $('address_validate_notice_validate_form-validate').removeAttribute("onclick");
+
+
+        $('address_validate_notice_continue_form-validate').setAttribute("script", "" + advice_no_action + " ");
+        $('address_validate_notice_validate_form-validate').setAttribute("script", "" + advice_action + " ");
+
+        $('window-overlay_form-validate').show();
+        $('remember-me-popup-address-notice_form-validate').show();
+		window.scrollTo(0,0);
+
+    });
+
+};
+
+FreaksForm.prototype.correctingItem = function(elementId, value, advice){
+      //  alert('correctingItem');
+		// alert(elementId);
+
+        elementSelect = $$('select#'+elementId+'').first();
+        
+		if (elementSelect) {
+            $$('select#'+elementId+' option').each(function(option) {
+              if(option.readAttribute('value') == value) {
+                option.selected = true;
+                throw $break; 
+              }
+            });         
+        } 
+		else{        
+		elementInput = $(elementId);
+        if (elementInput) {
+            elementInput.setValue(value);    
+            }
+        }      
+    };
+	
+	
+	
+	
+	editForm = new FreaksForm('edit_form', '<?php echo $this->getValidationUrl() ?>', '<?php echo Mage::getUrl('addressvalidation/adminhtml_validation/validate');?>');
+	//]]>
+</script>
+
+		
+		
+<?php echo $this->getFormScripts() ?>

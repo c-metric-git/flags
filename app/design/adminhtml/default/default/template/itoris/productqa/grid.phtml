@@ -1,0 +1,127 @@
+<?php 
+/**
+ * ITORIS
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the ITORIS's Magento Extensions License Agreement
+ * which is available through the world-wide-web at this URL:
+ * http://www.itoris.com/magento-extensions-license.html
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to sales@itoris.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extensions to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to the license agreement or contact sales@itoris.com for more information.
+ *
+ * @category   ITORIS
+ * @package    ITORIS_PRODUCTQA
+ * @copyright  Copyright (c) 2012 ITORIS INC. (http://www.itoris.com)
+ * @license    http://www.itoris.com/magento-extensions-license.html  Commercial License
+ */
+?>
+<?php
+$numColumns = sizeof($this->getColumns());
+?>
+<?php if($this->getCollection()): ?>
+
+    <?php if($this->canDisplayContainer()): ?>
+        <div id="<?php echo $this->getId() ?>">
+    <?php else: ?>
+        <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <?php endif; ?>
+
+
+    <table cellspacing="0" class="actions">
+        <tr>
+        </tr>
+    </table>
+
+<div class="grid">
+    <div class="hor-scroll">
+    <table cellspacing="0" class="data" id="<?php echo $this->getId() ?>_table">
+        <?php foreach ($this->getColumns() as $_column): ?>
+        <col <?php echo $_column->getHtmlProperty() ?> />
+        <?php endforeach; ?>
+        <?php if ($this->getHeadersVisibility() || $this->getFilterVisibility()): ?>
+            <thead>
+                <?php if ($this->getHeadersVisibility()): ?>
+                    <tr class="headings">
+                    <?php foreach ($this->getColumns() as $_column): ?>
+                        <th<?php echo $_column->getHeaderHtmlProperty() ?>><span class="nobr"><?php echo $_column->getHeaderHtml() ?></span></th>
+                    <?php endforeach; ?>
+                    </tr>
+                <?php endif; ?>
+
+            </thead>
+        <?php endif; ?>
+        <?php if ($this->getCountTotals()): ?>
+            <tfoot>
+                <tr class="totals">
+                <?php foreach ($this->getColumns() as $_column): ?>
+                    <th class="<?php echo $_column->getCssProperty() ?>"><?php echo ($_column->hasTotalsLabel()) ? $_column->getTotalsLabel() : $_column->getRowField($_column->getGrid()->getTotals()) ?>&nbsp;</th>
+                <?php endforeach; ?>
+                </tr>
+            </tfoot>
+        <?php endif; ?>
+
+        <tbody>
+        <?php if (($this->getCollection()->getSize()>0) && (!$this->getIsCollapsed())): ?>
+        <?php foreach ($this->getCollection() as $_index=>$_item): ?>
+            <tr title="<?php echo $this->getRowUrl($_item) ?>"<?php if ($_class = $this->getRowClass($_item)):?> class="<?php echo $_class; ?>"<?php endif;?> >
+            <?php $i=0;foreach ($this->getColumns() as $_column): ?>
+                    <?php $_rowspan = $this->getRowspan($_item, $_column);?>
+                    <td <?php echo ($_rowspan ? 'rowspan="' . $_rowspan . '" ' : '') ?>class="<?php echo $_column->getCssProperty() ?> <?php echo ++$i==$numColumns?'last':'' ?>">
+                        <?php echo (($_html = $_column->getRowField($_item)) != '' ? $_html : '&nbsp;') ?>
+                    </td>
+            <?php endforeach; ?>
+            </tr>
+            <?php if ($_multipleRows = $this->getMultipleRows($_item)):?>
+                <?php foreach ($_multipleRows as $_i):?>
+                <tr>
+                    <?php $i=0;foreach ($this->getMultipleRowColumns($_i) as $_column): ?>
+                        <td class="<?php echo $_column->getCssProperty() ?> <?php echo ++$i==$numColumns-1?'last':'' ?>">
+                            <?php echo (($_html = $_column->getRowField($_i)) != '' ? $_html : '&nbsp;') ?>
+                        </td>
+                    <?php endforeach; ?>
+                </tr>
+                <?php endforeach;?>
+            <?php endif;?>
+        <?php endforeach; ?>
+        <?php elseif ($this->getEmptyText()): ?>
+            <tr>
+                <td class="empty-text <?php echo $this->getEmptyTextClass() ?>" colspan="<?php echo $numColumns ?>"><?php echo $this->getEmptyText() ?></td>
+            </tr>
+        <?php endif; ?>
+        </tbody>
+
+    </table>
+    </div>
+</div>
+<?php if($this->canDisplayContainer()): ?>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+    <?php echo $this->getJsObjectName() ?> = new varienGrid('<?php echo $this->getId() ?>', '<?php echo $this->getGridUrl() ?>', '<?php echo $this->getVarNamePage() ?>', '<?php echo $this->getVarNameSort() ?>', '<?php echo $this->getVarNameDir() ?>', '<?php echo $this->getVarNameFilter() ?>');
+    <?php echo $this->getJsObjectName() ?>.useAjax = '<?php echo $this->getUseAjax() ?>';
+    <?php if($this->getRowClickCallback()): ?>
+        <?php echo $this->getJsObjectName() ?>.rowClickCallback = <?php echo $this->getRowClickCallback() ?>;
+    <?php endif; ?>
+    <?php if($this->getCheckboxCheckCallback()): ?>
+        <?php echo $this->getJsObjectName() ?>.checkboxCheckCallback = <?php echo $this->getCheckboxCheckCallback() ?>;
+    <?php endif; ?>
+    <?php if($this->getRowInitCallback()): ?>
+        <?php echo $this->getJsObjectName() ?>.initRowCallback = <?php echo $this->getRowInitCallback() ?>;
+        <?php echo $this->getJsObjectName() ?>.initGridRows();
+    <?php endif; ?>
+    <?php if($this->getMassactionBlock()->isAvailable()): ?>
+    <?php echo $this->getMassactionBlock()->getJavaScript() ?>
+    <?php endif ?>
+    <?php echo $this->getAdditionalJavaScript(); ?>
+//]]>
+</script>
+<?php endif; ?>
+<?php endif ?>

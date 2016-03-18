@@ -1,0 +1,100 @@
+[19-Jan-2016 05:08:09 UTC] PHP Fatal error:  Maximum execution time of 60 seconds exceeded in /home/stripedsocks/beta/attribute-and-attributeset/size_fl_attributes.php on line 15
+[19-Jan-2016 08:03:25 UTC] PHP Fatal error:  Maximum execution time of 60 seconds exceeded in /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Abstract.php on line 166
+[19-Jan-2016 12:46:35 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty' in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /home/stripedsocks/beta/lib/Varien/Db/Statement/Pdo/Mysql.php(110): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /home/stripedsocks/beta/app/code/core/Zend/Db/Statement.php(291): Varien_Db_Statement_Pdo_Mysql->_execute(Array)
+#3 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Abstract.php(480): Zend_Db_Statement->execute(Array)
+#4 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query('', Array)
+#5 /home/stripedsocks/beta/lib/Varien/Db/Adapter/Pdo/Mysql.php(504): Zend_Db_Adapter_Pdo_Abstract->query('', Array)
+#6 /home/stripedsocks/beta/external_script/delete_product_based-on_store.php(29): Varien_Db_Adapter_Pdo_Mysql->query('')
+#7 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with  in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php on line 235
+[19-Jan-2016 12:46:57 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty' in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /home/stripedsocks/beta/lib/Varien/Db/Statement/Pdo/Mysql.php(110): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /home/stripedsocks/beta/app/code/core/Zend/Db/Statement.php(291): Varien_Db_Statement_Pdo_Mysql->_execute(Array)
+#3 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Abstract.php(480): Zend_Db_Statement->execute(Array)
+#4 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query('', Array)
+#5 /home/stripedsocks/beta/lib/Varien/Db/Adapter/Pdo/Mysql.php(504): Zend_Db_Adapter_Pdo_Abstract->query('', Array)
+#6 /home/stripedsocks/beta/external_script/delete_product_based-on_store.php(29): Varien_Db_Adapter_Pdo_Mysql->query('')
+#7 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with  in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php on line 235
+[19-Jan-2016 12:47:40 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty' in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /home/stripedsocks/beta/lib/Varien/Db/Statement/Pdo/Mysql.php(110): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /home/stripedsocks/beta/app/code/core/Zend/Db/Statement.php(291): Varien_Db_Statement_Pdo_Mysql->_execute(Array)
+#3 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Abstract.php(480): Zend_Db_Statement->execute(Array)
+#4 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query('', Array)
+#5 /home/stripedsocks/beta/lib/Varien/Db/Adapter/Pdo/Mysql.php(504): Zend_Db_Adapter_Pdo_Abstract->query('', Array)
+#6 /home/stripedsocks/beta/external_script/delete_product_based-on_store.php(29): Varien_Db_Adapter_Pdo_Mysql->query('')
+#7 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with  in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php on line 235
+[19-Jan-2016 12:48:50 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty' in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /home/stripedsocks/beta/lib/Varien/Db/Statement/Pdo/Mysql.php(110): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /home/stripedsocks/beta/app/code/core/Zend/Db/Statement.php(291): Varien_Db_Statement_Pdo_Mysql->_execute(Array)
+#3 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Abstract.php(480): Zend_Db_Statement->execute(Array)
+#4 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query('', Array)
+#5 /home/stripedsocks/beta/lib/Varien/Db/Adapter/Pdo/Mysql.php(504): Zend_Db_Adapter_Pdo_Abstract->query('', Array)
+#6 /home/stripedsocks/beta/external_script/delete_product_based-on_store.php(29): Varien_Db_Adapter_Pdo_Mysql->query('')
+#7 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with  in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php on line 235
+[19-Jan-2016 12:49:34 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty' in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /home/stripedsocks/beta/lib/Varien/Db/Statement/Pdo/Mysql.php(110): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /home/stripedsocks/beta/app/code/core/Zend/Db/Statement.php(291): Varien_Db_Statement_Pdo_Mysql->_execute(Array)
+#3 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Abstract.php(480): Zend_Db_Statement->execute(Array)
+#4 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query('', Array)
+#5 /home/stripedsocks/beta/lib/Varien/Db/Adapter/Pdo/Mysql.php(504): Zend_Db_Adapter_Pdo_Abstract->query('', Array)
+#6 /home/stripedsocks/beta/external_script/delete_product_based-on_store.php(29): Varien_Db_Adapter_Pdo_Mysql->query('')
+#7 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with  in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php on line 235
+[19-Jan-2016 12:50:47 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty' in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /home/stripedsocks/beta/lib/Varien/Db/Statement/Pdo/Mysql.php(110): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /home/stripedsocks/beta/app/code/core/Zend/Db/Statement.php(291): Varien_Db_Statement_Pdo_Mysql->_execute(Array)
+#3 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Abstract.php(480): Zend_Db_Statement->execute(Array)
+#4 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query('', Array)
+#5 /home/stripedsocks/beta/lib/Varien/Db/Adapter/Pdo/Mysql.php(504): Zend_Db_Adapter_Pdo_Abstract->query('', Array)
+#6 /home/stripedsocks/beta/external_script/delete_product_based-on_store.php(29): Varien_Db_Adapter_Pdo_Mysql->query('')
+#7 {main}
+
+Next exception 'Zend_Db_Statement_Exception' with  in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php on line 235
+[19-Jan-2016 12:51:55 UTC] PHP Fatal error:  Allowed memory size of 33554432 bytes exhausted (tried to allocate 78 bytes) in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php on line 291
+[19-Jan-2016 12:56:40 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[40001]: Serialization failure: 1213 Deadlock found when trying to get lock; try restarting transaction' in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /home/stripedsocks/beta/lib/Varien/Db/Statement/Pdo/Mysql.php(110): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /home/stripedsocks/beta/app/code/core/Zend/Db/Statement.php(291): Varien_Db_Statement_Pdo_Mysql->_execute(Array)
+#3 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Abstract.php(480): Zend_Db_Statement->execute(Array)
+#4 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query('UPDATE `index_p...', Array)
+#5 /home/stripedsocks/beta/lib/Varien/Db/Adapter/Pdo/Mysql.php(504): Zend_Db_Adapter_Pdo_Abstract->query('UPDATE `index_p...', Array)
+#6 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Abstract.php(635): Varien_Db_Adapter_Pdo_Mysql->query('UPDA in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php on line 235
+[29-Feb-2016 07:47:54 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`stripeds_beta`.`eav_attribute`, CONSTRAINT `FK_EAV_ATTRIBUTE_ENTITY_TYPE_ID_EAV_ENTITY_TYPE_ENTITY_TYPE_ID` FOREIGN KEY (`entity_type_id`) REFERENCES `eav_entity_type` (`entity_type_id`) ON D)' in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /home/stripedsocks/beta/lib/Varien/Db/Statement/Pdo/Mysql.php(110): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /home/stripedsocks/beta/app/code/core/Zend/Db/Statement.php(291): Varien_Db_Statement_Pdo_Mysql->_execute(Array)
+#3 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Abstract.php(480): Zend_Db_Statement->execute(Array)
+#4 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query('INSERT INTO `ea...', Array)
+#5 /home/stripedsocks/beta/lib/Varien/ in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php on line 235
+[29-Feb-2016 07:48:22 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`stripeds_beta`.`eav_attribute`, CONSTRAINT `FK_EAV_ATTRIBUTE_ENTITY_TYPE_ID_EAV_ENTITY_TYPE_ENTITY_TYPE_ID` FOREIGN KEY (`entity_type_id`) REFERENCES `eav_entity_type` (`entity_type_id`) ON D)' in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /home/stripedsocks/beta/lib/Varien/Db/Statement/Pdo/Mysql.php(110): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /home/stripedsocks/beta/app/code/core/Zend/Db/Statement.php(291): Varien_Db_Statement_Pdo_Mysql->_execute(Array)
+#3 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Abstract.php(480): Zend_Db_Statement->execute(Array)
+#4 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query('INSERT INTO `ea...', Array)
+#5 /home/stripedsocks/beta/lib/Varien/ in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php on line 235

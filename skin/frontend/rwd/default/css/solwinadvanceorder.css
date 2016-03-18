@@ -1,0 +1,97 @@
+#checkout-review-table-wrapper,.myorder-wrapper{
+    width:100%;
+    float: left;
+}
+.myorder,.order_summery,.payment_method {
+    width: 45%;
+    float:left;
+    background-color: #fff;
+    color: #5A5A5C;
+    padding: 15px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    position: relative;
+}
+.myorder-wrapper div:last-child{
+    margin-right: 0;
+}
+.myorder h3,.order_summery h3,.payment_method h3{
+    background-color: #f69838;
+    color: #fff;
+    font-weight: bolder;
+    text-transform: uppercase;
+    margin: -15px -15px 10px;
+    padding: 5px 15px;
+}
+.inner_content {
+    float: left;
+    margin-bottom: 5px;
+    width: 100%;
+}
+.inner_content span,.inner_content label{
+    width:50%;
+    float:left;
+    display: block;
+}
+.inner_content label span{
+    float: right;
+    padding-right: 10px;
+    width: auto;
+}
+.data-table thead th{
+    background: #dee3e3;
+    color: #fff;
+    border-right: 1px solid #f69838;   
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 5px 8px;
+}
+.data-table {
+    border: 1px solid #dee3e3;
+    width: 100%;
+}
+.data-table thead th {
+    background: none repeat scroll 0 0 #dee3e3;
+    border-right: 1px solid #dee3e3;
+    color: #5a5a5c;
+}
+.data-table tfoot {
+    border-bottom: 1px solid #d9dde3;
+}
+.data-table tfoot tr {
+    background-color: #dee3e3 !important;
+}
+.data-table tbody td {
+    color: #5a5a5c;
+}
+.data-table tfoot td {
+    border-right: 1px solid #dee3e3;
+    color:#5a5a5c;
+}
+img.product_img{
+    border: 1px solid #dee3e3;
+    vertical-align: middle;
+}
+.sub-title{
+    color:#5a5a5c;
+    text-transform: uppercase;
+}
+.myorder a.print-icon {
+    background: url("../images/i_print.gif") no-repeat scroll left top rgba(0, 0, 0, 0);
+    border: medium none !important;
+    display: inline-block;
+    font-size: 0;
+    height: 16px;
+    padding: 0;
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    width: 16px;
+}
+.bottom-align{
+    vertical-align: bottom;
+}
+.order-newsletter{
+    display: block;
+    margin-top: 20px;
+}

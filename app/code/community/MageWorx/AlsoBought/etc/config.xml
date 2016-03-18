@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MageWorx
+ * Others Also Bought Extension
+ *
+ * @category   MageWorx
+ * @package    MageWorx_AlsoBought
+ * @copyright  Copyright (c) 2016 MageWorx (http://www.mageworx.com/)
+ */
+-->
+<config>
+    <modules>
+        <MageWorx_AlsoBought>
+            <version>1.1.0</version>
+        </MageWorx_AlsoBought>
+    </modules>
+    
+    <frontend>
+        <translate>
+            <modules>
+                <MageWorx_AlsoBought>
+                    <files>
+                        <default>MageWorx_AlsoBought.csv</default>
+                    </files>
+                </MageWorx_AlsoBought>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <alsobought>
+                    <file>mageworx_alsobought.xml</file>
+                </alsobought>
+            </updates>
+        </layout>
+    </frontend>
+    
+    <global>
+        <models>
+            <mageworx_alsobought>
+                <class>MageWorx_AlsoBought_Model</class>
+            </mageworx_alsobought>
+        </models>
+        <resources>
+            <mageworx_alsobought_setup>
+                <setup>
+                    <module>MageWorx_AlsoBought</module>
+                    <class>Mage_Core_Model_Resource_Setup</class>
+                </setup>
+            </mageworx_alsobought_setup>
+        </resources>
+        <blocks>
+            <mageworx_alsobought>
+                <class>MageWorx_AlsoBought_Block</class>
+            </mageworx_alsobought>
+        </blocks>
+        <helpers>
+            <mageworx_alsobought>
+                <class>MageWorx_AlsoBought_Helper</class>
+            </mageworx_alsobought>
+        </helpers>
+    </global>
+
+    <default>
+        <mageworx_alsobought>
+            <main>
+                <title>Others Also Bought</title>
+                <order_status>complete</order_status>
+                <sort_order>1</sort_order>
+                <products_number>5</products_number>
+            </main>
+        </mageworx_alsobought>
+    </default>
+</config>

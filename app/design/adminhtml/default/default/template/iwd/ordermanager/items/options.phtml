@@ -1,0 +1,15 @@
+<?php
+    $new_item = $this->getData('new_order_item');
+    //$old_item = $this->getData('old_order_item');
+    //$old_options = $this->getOrderOptions($new_item);
+?>
+<?php foreach ($this->getOrderOptions($new_item) as $_option): ?>
+    <dt><?php echo $_option['label'] ?></dt>
+    <dd>
+        <?php if (isset($_option['custom_view']) && $_option['custom_view']): ?>
+            <?php echo $this->getCustomizedOptionValue($_option); ?>
+        <?php else: ?>
+            <?php echo $_option['value']; ?>
+        <?php endif; ?>
+    </dd>
+<?php endforeach; ?>

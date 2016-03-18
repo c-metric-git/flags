@@ -1,0 +1,127 @@
+.rewardssocial-buttons {
+  font-size: 11px;
+  height: 20px;
+  line-height: 20px;
+  margin-bottom: 10px;
+  z-index: 1000;
+  position: relative;
+}
+.rewardssocial-buttons #facebook-message,
+.rewardssocial-buttons #twitter-message,
+.rewardssocial-buttons #referral-message,
+.rewardssocial-buttons #googleplus-message,
+.rewardssocial-buttons #pinterest-message {
+  display: none;
+  position: absolute;
+  background: #333;
+  padding: 2px 5px;
+  color: #fff;
+  margin-top: -25px;
+}
+.rewardssocial-buttons .buttons-facebook-like:hover #facebook-message {
+  display: block;
+}
+.rewardssocial-buttons .buttons-googleplus-one:hover #googleplus-message {
+  display: block;
+}
+.rewardssocial-buttons .buttons-pinterest-pin:hover #pinterest-message {
+  display: block;
+}
+.rewardssocial-buttons .buttons-twitter-like:hover #twitter-message {
+  display: block;
+}
+.rewardssocial-buttons .buttons-referral-like > a {
+  text-decoration: none;
+  line-height: 18px;
+  border-radius: 2px;
+  padding: 0px 3px;
+  font-weight: bold;
+  color: #333;
+  font-size: 11px;
+  border: 1px solid #ccc;
+  background: #ffffff;
+  background: -moz-linear-gradient(top, #ffffff 0%, #eaeaea 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #eaeaea));
+  background: -webkit-linear-gradient(top, #ffffff 0%, #eaeaea 100%);
+  background: -o-linear-gradient(top, #ffffff 0%, #eaeaea 100%);
+  background: -ms-linear-gradient(top, #ffffff 0%, #eaeaea 100%);
+  background: linear-gradient(to bottom, #ffffff 0%, #eaeaea 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#eaeaea', GradientType=0);
+}
+.rewardssocial-buttons .buttons-referral-like:hover #referral-message {
+  display: block;
+}
+.rewardssocial-buttons .fb_iframe_widget {
+  margin-right: 10px;
+  display: block;
+  float: left;
+}
+.rewardssocial-buttons .mst-rewardssocial-tweet {
+  margin-right: 10px;
+  display: block;
+  float: left;
+}
+.rewardssocial-buttons .referral {
+  display: block;
+  float: left;
+}
+.rewardssocial-buttons .status-message {
+  float: left;
+  margin-left: 10px;
+  color: #666;
+}
+.rewardssocial-buttons .buttons-pinterest-pin > a {
+  margin-right: 10px;
+  float: left;
+}
+.rewardssocial-buttons .buttons-googleplus-one > div {
+  float: left !important;
+  margin-right: 10px !important;
+}
+.rewards-notification-message {
+  border-style: solid !important;
+  border-width: 1px !important;
+  min-height: 24px !important;
+  padding: 8px 8px 6px 32px !important;
+  color: #3d6611;
+  border-color: #446423;
+  background-color: #eff5ea;
+  margin-bottom: 10px;
+}
+.rewards-notification-message li {
+  margin-top: 2px;
+}
+.rewards-social-buttons {
+  display: inline-block;
+  float: left;
+}
+.rewards-social-buttons > .fb {
+  position: relative;
+  display: inline-block;
+  margin-top: 0px;
+}
+.rewards-social-buttons > .tw {
+  position: relative;
+  display: inline-block;
+  padding-top: 15px;
+}
+.rewards-social-buttons > .gp {
+  position: relative;
+  display: inline-block;
+  margin-top: 5px;
+}
+.box-account div.fieldset p {
+  margin-bottom: 0px;
+}
+.box-account div.fieldset div.rewards-social-buttons {
+  height: 20px;
+}
+.box-account div.fieldset div.rewards-social-buttons div.tw {
+  padding-top: 0px;
+  position: relative;
+  top: -2px;
+}
+.box-account div.fieldset div.rewards-social-buttons div.fb {
+  position: relative;
+  top: -8px;
+}

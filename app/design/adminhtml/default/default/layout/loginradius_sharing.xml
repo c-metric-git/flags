@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<layout version="1.0.0">
+    <sharing_custom_handle>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>Loginradius/Sharing/js/jquery.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>Loginradius/Sharing/js/jquery.noConflict.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>Loginradius/Sharing/js/jquery.ui.sortable.min.js</name><params/></action>
+            <action method="addItem"><type>skin_js</type><name>Loginradius/Sharing/js/admin-ui.js</name><params/></action>
+            <action method="addItem"><type>skin_css</type><name>Loginradius/Sharing/css/admin-ui.css</name><params/></action>
+        </reference>
+    </sharing_custom_handle>
+</layout>

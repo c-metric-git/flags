@@ -1,0 +1,11 @@
+<div class="buttons-referral-like">
+  <a class="referral" href='<?php echo Mage::getUrl("rewards/referral")?>'><?php echo $this->__('Refer Friends')?></a>
+
+  <?php if ($this->getEstimatedEarnPoints() > 0): ?>
+    <?php if ($this->isAuthorized()): ?>
+    <div id='referral-message'>
+  	<?php echo $this->__('Refer friend and earn %s. More friends more points!',  Mage::helper('rewards')->getPointsName()); ?>
+    </div>
+    <?php endif; ?>
+  <?php endif; ?>
+</div>

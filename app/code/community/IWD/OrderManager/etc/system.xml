@@ -1,0 +1,603 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <iwdall>
+            <label>IWD Extensions</label>
+            <sort_order>210</sort_order>
+            <class>iwd-block</class>
+        </iwdall>
+    </tabs>
+    <sections>
+        <iwd_ordermanager translate="label" module="iwd_ordermanager">
+            <label>Order Manager</label>
+            <tab>iwdall</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>221</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <info>
+                            <label>Version</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_model>iwd_ordermanager/system_config_form_fieldset_extensions</frontend_model>
+                            <comment><![CDATA[]]></comment>
+                        </info>
+                        <user_guide>
+                            <label>Documentations</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_model>iwd_ordermanager/system_config_form_fieldset_documentations</frontend_model>
+                            <comment><![CDATA[]]></comment>
+                        </user_guide>
+                    </fields>
+                </general>
+                <edit translate="label">
+                    <label>Edit Order</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <general_edit type="group" translate="label">
+                            <label>General Settings</label>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <fields>
+                                <change_order_state translate="label">
+                                    <label>Allow Change Order State</label>
+                                    <config_path>iwd_ordermanager/edit/change_order_state</config_path>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>10</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>0</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment><![CDATA[Warning! Do not change the order state (not status!) if you are not confident in their actions]]></comment>
+                                </change_order_state>
+                                <order_status translate="label">
+                                    <label>Order Statuses</label>
+                                    <config_path>iwd_ordermanager/edit/order_status</config_path>
+                                    <frontend_type>multiselect</frontend_type>
+                                    <source_model>iwd_ordermanager/system_config_status_order</source_model>
+                                    <sort_order>20</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>0</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment><![CDATA[Edit orders only with status(es)]]></comment>
+                                </order_status>
+                                <recalculate_shipping translate="label">
+                                    <label>Recalculate Shipping Amount</label>
+                                    <config_path>iwd_ordermanager/edit/recalculate_shipping</config_path>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>250</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>0</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment><![CDATA[Automatically recalculate shipping amount after update items count]]></comment>
+                                </recalculate_shipping>
+                                <is_visible_comment_on_front>
+                                    <label>Is visible comment on front</label>
+                                    <config_path>iwd_ordermanager/edit/is_visible_comment_on_front</config_path>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>40</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>0</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment><![CDATA[Is visible comment about edit order on front?]]></comment>
+                                </is_visible_comment_on_front>
+                            </fields>
+                        </general_edit>
+
+                        <items type="group" translate="label">
+                            <label>Order Items</label>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <fields>
+                                <return_to_stock translate="label">
+                                    <label>Return Item To Stock</label>
+                                    <config_path>iwd_ordermanager/edit/return_to_stock</config_path>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>50</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>0</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment><![CDATA[Automatically return item to stock after remove item or reduce count item]]></comment>
+                                </return_to_stock>
+                                <show_item_image translate="label">
+                                    <label>Show Ordered Item Image</label>
+                                    <config_path>iwd_ordermanager/edit/show_item_image</config_path>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>60</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>0</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment><![CDATA[Show order item image on order view page]]></comment>
+                                </show_item_image>
+                                <validate_inventory>
+                                    <label>Validate Inventory</label>
+                                    <config_path>iwd_ordermanager/edit/validate_inventory</config_path>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>70</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>0</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment><![CDATA[Enable validation of stock qty during order items editing]]></comment>
+                                </validate_inventory>
+                            </fields>
+                        </items>
+
+                        <confirmation type="group" translate="label">
+                            <label>Confirmation Settings</label>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <fields>
+                                <confirm_transaction_email translate="label">
+                                    <label>Edit Order Confirm Email</label>
+                                    <frontend_type>select</frontend_type>
+                                    <config_path>iwd_ordermanager/edit/confirm_transaction_email</config_path>
+                                    <source_model>adminhtml/system_config_source_email_template</source_model>
+                                    <sort_order>80</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>0</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment><![CDATA[]]></comment>
+                                </confirm_transaction_email>
+                                <confirm_transaction_email_guest translate="label">
+                                    <label>Edit Order Confirm Email For Guest</label>
+                                    <config_path>iwd_ordermanager/edit/confirm_transaction_email_guest</config_path>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_email_template</source_model>
+                                    <sort_order>90</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>0</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment><![CDATA[]]></comment>
+                                </confirm_transaction_email_guest>
+                                <confirm_wait_status translate="label">
+                                    <label>Order Status - Wait Confirm</label>
+                                    <config_path>iwd_ordermanager/edit/confirm_wait_status</config_path>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>iwd_ordermanager/system_config_status_order</source_model>
+                                    <sort_order>100</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>0</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment><![CDATA[Change order status when order wait confirm]]></comment>
+                                </confirm_wait_status>
+                                <confirm_success_status translate="label">
+                                    <label>Order Status - Confirmed</label>
+                                    <config_path>iwd_ordermanager/edit/confirm_success_status</config_path>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>iwd_ordermanager/system_config_status_order</source_model>
+                                    <sort_order>110</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>0</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment><![CDATA[Change order status when order confirmed]]></comment>
+                                </confirm_success_status>
+                                <confirm_cancel_status translate="label">
+                                    <label>Order Status - Canceled</label>
+                                    <config_path>iwd_ordermanager/edit/confirm_cancel_status</config_path>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>iwd_ordermanager/system_config_status_order</source_model>
+                                    <sort_order>120</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>0</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment><![CDATA[Change order status when confirm canceled]]></comment>
+                                </confirm_cancel_status>
+                            </fields>
+                        </confirmation>
+
+                        <notification type="group" translate="label">
+                            <label>Notification Settings</label>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <fields>
+                                <transaction_email translate="label">
+                                    <label>Edit Ordered Items Notify Email</label>
+                                    <config_path>iwd_ordermanager/edit/transaction_email</config_path>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_email_template</source_model>
+                                    <sort_order>130</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>0</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment><![CDATA[]]></comment>
+                                </transaction_email>
+                                <transaction_email_guest translate="label">
+                                    <label>Edit Ordered Items Notify For Guest</label>
+                                    <config_path>iwd_ordermanager/edit/transaction_email_guest</config_path>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_email_template</source_model>
+                                    <sort_order>140</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>0</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment><![CDATA[]]></comment>
+                                </transaction_email_guest>
+                            </fields>
+                        </notification>
+
+                        <default type="group" translate="label">
+                            <label>Default Value</label>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <fields>
+                                <confirm_edit_checked translate="label">
+                                    <label>Checked "Confirm Edit"</label>
+                                    <config_path>iwd_ordermanager/edit/confirm_edit_checked</config_path>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>150</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>0</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment><![CDATA[Default value for checkbox "Confirm Edit"]]></comment>
+                                </confirm_edit_checked>
+                                <notify_checked translate="label">
+                                    <label>Checked "Notify Customer"</label>
+                                    <config_path>iwd_ordermanager/edit/notify_checked</config_path>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>160</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>0</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment><![CDATA[Default value for checkbox "Notify Customer by Email"]]></comment>
+                                </notify_checked>
+                                <recalculate_amount_checked>
+                                    <label>Checked "Recalculate Order Amount"</label>
+                                    <config_path>iwd_ordermanager/edit/recalculate_amount_checked</config_path>
+                                    <frontend_type>select</frontend_type>
+                                    <source_model>adminhtml/system_config_source_yesno</source_model>
+                                    <sort_order>180</sort_order>
+                                    <show_in_default>1</show_in_default>
+                                    <show_in_website>0</show_in_website>
+                                    <show_in_store>0</show_in_store>
+                                    <comment><![CDATA[Default value for checkbox "Recalculate Order Amount"]]></comment>
+                                </recalculate_amount_checked>
+                            </fields>
+                        </default>
+                     </fields>
+                </edit>
+                <archive translate="label">
+                    <label>Archive Sales</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable Archive</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[]]></comment>
+                        </enable>
+                        <order_statuses translate="label">
+                            <label>Order Statuses</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>iwd_ordermanager/system_config_status_order</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Archived orders only with status(es)]]></comment>
+                        </order_statuses>
+                        <auto_archive_enable translate="label">
+                            <label>Automatic Archive Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[]]></comment>
+                        </auto_archive_enable>
+                        <auto_archive_after_days translate="label">
+                            <label>Automatic Archive After X Days</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <validate>validate-number required-entry</validate>
+                            <comment><![CDATA[Automatic archive orders created after X days</br>]]></comment>
+                        </auto_archive_after_days>
+                        <auto_archive_frequency translate="label">
+                            <label>Automatic Archive Frequency</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_cron_frequency</source_model>
+                            <backend_model>iwd_ordermanager/system_config_backend_cron</backend_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[]]></comment>
+                        </auto_archive_frequency>
+                        <auto_archive_start_time translate="label">
+                            <label>Automatic Archive Start Time</label>
+                            <frontend_type>time</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[]]></comment>
+                        </auto_archive_start_time>
+                        <run_archive_manually translate="label">
+                            <label>Run Manually</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_model>iwd_ordermanager/system_config_form_fieldset_runarchive</frontend_model>
+                            <comment><![CDATA[You can run archive or restore process manually.]]></comment>
+                        </run_archive_manually>
+                    </fields>
+                </archive>
+                <grid_order translate="label">
+                    <label>Order Grid</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Enable custom order grid]]></comment>
+                        </enable>
+                        <columns translate="label">
+                            <label>Order Grid Columns</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>iwd_ordermanager/system_config_gridcolumn_order</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                            <comment><![CDATA[Select the columns which must to appear in the grid]]></comment>
+                        </columns>
+                        <status_color>
+                            <label>Colors For Statuses</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>iwd_ordermanager/system_config_form_fieldset_color</frontend_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Colorize order grid for statuses]]></comment>
+                        </status_color>
+                        <fix_table_header translate="label">
+                            <label>Fix Grid Header</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Fixing header of order grid]]></comment>
+                        </fix_table_header>
+                    </fields>
+                </grid_order>
+                <customer_orders translate="label">
+                    <label>Customer Orders</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>110</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <orders_grid_columns translate="label">
+                            <label>Customer Orders Grid</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>iwd_ordermanager/system_config_gridcolumn_customergrid</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                            <comment><![CDATA[Select the columns which must to appear in the customer orders grid (on admin)]]></comment>
+                        </orders_grid_columns>
+                        <resent_orders_grid_columns translate="label">
+                            <label>Customer Recent Orders Grid</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>iwd_ordermanager/system_config_gridcolumn_resent</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                            <comment><![CDATA[Select the columns which must to appear in the customer recent orders grid (on admin)]]></comment>
+                        </resent_orders_grid_columns>
+                        <resent_orders_count translate="label">
+                            <label>Recent Orders Count</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <can_be_empty>0</can_be_empty>
+                            <validate>required-entry</validate>
+                            <comment><![CDATA[Show recent orders in grid for customer (on admin)]]></comment>
+                        </resent_orders_count>
+                    </fields>
+                </customer_orders>
+                <iwd_delete_orders translate="label">
+                    <label>Deletion of Orders</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>130</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <allow_del_orders translate="label">
+                            <label>Allow Deletion Of Orders</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Related invoices, shipments and credit memos will be removed too]]></comment>
+                        </allow_del_orders>
+                        <order_status translate="label">
+                            <label>Orders statuses</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>iwd_ordermanager/system_config_status_order</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Delete orders only with status(es)]]></comment>
+                        </order_status>
+                        <delete_downloadable translate="label">
+                            <label>Delete Downloadable Products</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Delete downloadable products after deleting of orders]]></comment>
+                        </delete_downloadable>
+                    </fields>
+                </iwd_delete_orders>
+                <iwd_delete_invoices translate="label">
+                    <label>Deletion of Invoices</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>140</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <allow_del_invoices translate="label">
+                            <label>Allow Deletion Of Invoices</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[]]></comment>
+                        </allow_del_invoices>
+                        <allow_del_related_cm_for_invoices translate="label">
+                            <label>Allow Deletion Of Related Credit Memos</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Allow deletion of related credit memo(s) for invoice(s)]]></comment>
+                        </allow_del_related_cm_for_invoices>
+                        <invoice_status translate="label">
+                            <label>Invoices Statuses</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>iwd_ordermanager/system_config_status_invoice</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Delete invoices only with status(es)]]></comment>
+                        </invoice_status>
+                    </fields>
+                </iwd_delete_invoices>
+                <iwd_delete_creditmemos translate="label">
+                    <label>Deletion of Credit Memos</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>150</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <allow_del_creditmemos translate="label">
+                            <label>Allow Deletion Of Credit Memos</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[]]></comment>
+                        </allow_del_creditmemos>
+                        <creditmemo_status translate="label">
+                            <label>Credit Memos Statuses</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>iwd_ordermanager/system_config_status_creditmemo</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Delete credit memos only with status(es)]]></comment>
+                        </creditmemo_status>
+                    </fields>
+                </iwd_delete_creditmemos>
+                <iwd_delete_shipments translate="label">
+                    <label>Deletion of Shipments</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>160</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <allow_del_shipments translate="label">
+                            <label>Allow Deletion Of Shipments</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[]]></comment>
+                        </allow_del_shipments>
+                    </fields>
+                </iwd_delete_shipments>
+            </groups>
+        </iwd_ordermanager>
+    </sections>
+</config>

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <PostcodeAnywhere_CapturePlus>
+            <version>2.0.6</version>
+        </PostcodeAnywhere_CapturePlus>
+    </modules>
+    <global>
+        <helpers>
+            <captureplus>
+                <class>PostcodeAnywhere_CapturePlus_Helper</class>
+            </captureplus>
+        </helpers>
+        <blocks>
+            <captureplus>
+                <class>PostcodeAnywhere_CapturePlus_Block</class>
+            </captureplus>
+        </blocks>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <captureplus>
+                    <file>captureplus.xml</file>
+                </captureplus>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <captureplus>
+                    <file>captureplus.xml</file>
+                </captureplus>
+            </updates>
+        </layout>
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <captureplus translate="title" module="captureplus">
+                                            <title>Capture Plus Settings</title>
+                                        </captureplus>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+</config>

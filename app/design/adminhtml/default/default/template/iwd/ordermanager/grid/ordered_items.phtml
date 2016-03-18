@@ -1,0 +1,205 @@
+<?php $helper = Mage::helper('core'); ?>
+<div class="popup-table" id="view_ordered_item_<?php echo $this->order_id; ?>">
+    <div class="table-title"><div class="table-title-wrapper gren"><?php echo $helper->__("Ordered items. Order #".$this->getOrderIncrementId()); ?></div></div>
+    <div class="close-popup-table"></div>
+    <table class="data order-tables" cellspacing="0">
+        <col width="1"/>
+        <col width="1"/>
+        <col width="1"/>
+        <col width="1"/>
+        <col width="1"/>
+        <col width="1"/>
+        <col width="1"/>
+        <col width="1"/>
+        <col width="1"/>
+        <col width="1"/>
+        <thead>
+        <tr class="headings" style="background:none repeat scroll 0 0 #6f8992;">
+            <th><?php echo $helper->__('Product') ?></th>
+            <th><span class="nobr"><?php echo $helper->__('Item Status') ?></span></th>
+            <th><span class="nobr"><?php echo $helper->__('Original<br>Price') ?></span></th>
+            <th><?php echo $helper->__('Price') ?></th>
+            <th class="a-center"><?php echo $helper->__('Qty') ?></th>
+            <th><?php echo $helper->__('Subtotal') ?></th>
+            <th><span class="nobr"><?php echo $helper->__('Tax Amount') ?></span></th>
+            <th><span class="nobr"><?php echo $helper->__('Tax Percent') ?></span></th>
+            <th><span class="nobr"><?php echo $helper->__('Discount<br>Amount') ?></span></th>
+            <th class="last"><span class="nobr"><?php echo $helper->__('Row Total') ?></span></th>
+        </tr>
+        </thead>
+        <?php $i = 0;
+        foreach ($this->ordered as $item): ?>
+            <?php if ($item->getParentItem()) continue; ?>
+            <tbody class="<?php echo ($i++) % 2 ? 'even' : 'odd' ?>">
+            <?php if ($item->getProductType() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE): ?>
+                <!-- bundle product -->
+                <tr>
+                    <td>
+                        <h5 class="title">
+                    <span
+                        id="order_item_<?php echo $item->getId() ?>_title"><?php echo $this->htmlEscape($item->getName()) ?></span>
+                        </h5>
+                        <div>
+                            <strong><?php echo $this->helper('sales')->__('SKU') ?>: </strong>
+                            <?php echo implode('<br />', Mage::helper('catalog')->splitSku($this->htmlEscape($item->getSku()))); ?>
+                        </div>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>
+                        <?php if ($item->getQtyOrdered() > 0) echo "Ordered:&nbsp" . $item->getQtyOrdered() * 1; ?>
+                        <?php /*if ($item->getQtyInvoiced() > 0) echo "<br>Invoiced:&nbsp" . $item->getQtyInvoiced()* 1; */?>
+                        <?php if ($item->getQtyShipped() > 0) echo "<br>Shipped:&nbsp" . $item->getQtyShipped()* 1; ?>
+                        <?php /*if ($item->getQtyRefunded() > 0) echo "<br>Refunded:&nbsp" . $item->getQtyRefunded()* 1; */?>
+                        <?php /*if ($item->getQtyCancelled() > 0) echo "<br>Cancelled:&nbsp" . $item->getQtyCancelled()* 1; */?>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <?php $_prevOptionId = false; ?>
+                <?php foreach ($item->getChildrenItems() as $_item): ?>
+                    <?php $attributes = $this->getSelectionAttributes($_item) ?>
+                    <?php if ($_item->getParentItem()): ?>
+                        <?php if ($_prevOptionId != $attributes['option_id']): ?>
+                            <tr>
+                                <td class="last" colspan="12">
+                                    <div class="option-label"><?php echo $attributes['option_label'] ?></div>
+                                </td>
+                            </tr>
+                            <?php $_prevOptionId = $attributes['option_id'] ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <tr>
+                        <td style="padding-left:30px;">
+                            <?php echo $_item->getName(); ?>
+                        </td>
+                        <td class="a-center">
+                            <?php if ($this->canShowPriceInfo($_item)): ?>
+                                <?php echo $_item->getStatus(); ?>
+                            <?php else: ?>
+                                &nbsp;
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if ($this->canShowPriceInfo($_item)): ?>
+                                <span class="price">
+                                <?php echo $helper->currency($_item->getOriginalPrice(), true, false); ?>
+                            </span>
+                            <?php else: ?>
+                                &nbsp;
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if ($this->canShowPriceInfo($_item)): ?>
+                                <b><span class="price">
+                                <?php echo $helper->currency($_item->getPrice(), true, false); ?>
+                                </span></b>
+                            <?php else: ?>
+                                &nbsp;
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if ($_item->getQtyOrdered() > 0) echo "Ordered:&nbsp" . $_item->getQtyOrdered() * 1; ?>
+                            <?php if ($_item->getQtyInvoiced() > 0) echo "<br>Invoiced:&nbsp" . $_item->getQtyInvoiced() * 1; ?>
+                            <?php if ($_item->getQtyShipped() > 0) echo "<br>Shipped:&nbsp" . $_item->getQtyShipped() * 1; ?>
+                            <?php if ($_item->getQtyRefunded() > 0) echo "<br>Refunded:&nbsp" . $_item->getQtyRefunded() * 1; ?>
+                            <?php if ($_item->getQtyCancelled() > 0) echo "<br>Cancelled:&nbsp" . $_item->getQtyCancelled() * 1; ?>
+                        </td>
+                        <td>
+                            <?php if ($this->canShowPriceInfo($_item)): ?>
+                                <b><span class="price">
+                                <?php echo $helper->currency($_item->getRowTotal(), true, false); ?>
+                            </span></b>
+                            <?php else: ?>
+                                &nbsp;
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if ($this->canShowPriceInfo($_item)): ?>
+                                <span class="price">
+                                <?php echo $helper->currency($_item->getTaxAmount(), true, false); ?>
+                            </span>
+                            <?php else: ?>
+                                &nbsp;
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if ($this->canShowPriceInfo($_item)): ?>
+                                <?php echo number_format($_item->getTaxPercent(), 2); ?>%
+                            <?php else: ?>
+                                &nbsp;
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if ($this->canShowPriceInfo($_item)): ?>
+                                <span class="price">
+                                <?php echo $helper->currency($_item->getDiscountAmount(), true, false); ?>
+                            </span>
+                            <?php else: ?>
+                                &nbsp;
+                            <?php endif; ?>
+                        </td>
+                        <td class="a-right">
+                            <?php if ($this->canShowPriceInfo($_item)): ?>
+                                <span class="price">
+                                   <?php echo $helper->currency(
+                                       $_item->getBaseRowTotal() + $_item->getBaseTaxAmount() + $_item->getBaseHiddenTaxAmount() + $_item->getBaseWeeeTaxAppliedRowAmount() - $_item->getBaseDiscountAmount(),
+                                       $_item->getRowTotal() + $_item->getTaxAmount() + $_item->getHiddenTaxAmount() + $_item->getWeeeTaxAppliedRowAmount() - $_item->getDiscountAmount()
+                                   );?>
+                                </span>
+                            <?php else: ?>
+                                &nbsp;
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+
+            <?php else: ?>
+                <!-- simple product -->
+                <tr class="border">
+                    <td><b><?php echo $item->getName(); ?><br>SKU:</b><?php echo $item->getSku(); ?></td>
+                    <td class="a-center"><?php echo $item->getStatus(); ?></td>
+                    <td><span
+                            class="price"><?php echo $helper->currency($item->getOriginalPrice(), true, false); ?></span>
+                    </td>
+                    <td><b><span
+                                class="price"><?php echo $helper->currency($item->getPrice(), true, false); ?></span></b>
+                    </td>
+                    <td>
+                        <?php if ($item->getQtyOrdered() > 0) echo "Ordered:&nbsp" . $item->getQtyOrdered() * 1; ?>
+                        <?php if ($item->getQtyInvoiced() > 0) echo "<br>Invoiced:&nbsp" . $item->getQtyInvoiced()* 1; ?>
+                        <?php if ($item->getQtyShipped() > 0) echo "<br>Shipped:&nbsp" . $item->getQtyShipped()* 1; ?>
+                        <?php if ($item->getQtyRefunded() > 0) echo "<br>Refunded:&nbsp" . $item->getQtyRefunded()* 1; ?>
+                        <?php if ($item->getQtyCancelled() > 0) echo "<br>Cancelled:&nbsp" . $item->getQtyCancelled()* 1; ?>
+                    </td>
+                    <td><b><span
+                                class="price"><?php echo $helper->currency($item->getRowTotal(), true, false); ?></span></b>
+                    </td>
+                    <td><span class="price"><?php echo $helper->currency($item->getTaxAmount(), true, false); ?></span>
+                    </td>
+                    <td><?php echo number_format($item->getTaxPercent(), 2); ?>%</td>
+                    <td><span
+                            class="price"><?php echo $helper->currency($item->getDiscountAmount(), true, false); ?></span>
+                    </td>
+                    <td class="a-right last">
+                        <span class="price">
+                           <?php echo $helper->currency(
+                               $item->getBaseRowTotal() + $item->getBaseTaxAmount() + $item->getBaseHiddenTaxAmount() + $item->getBaseWeeeTaxAppliedRowAmount() - $item->getBaseDiscountAmount(),
+                               $item->getRowTotal() + $item->getTaxAmount() + $item->getHiddenTaxAmount() + $item->getWeeeTaxAppliedRowAmount() - $item->getDiscountAmount()
+                           );?>
+                        </span></td>
+                </tr>
+            <?php endif; ?>
+            </tbody>
+        <?php endforeach; ?>
+    </table>
+    <script>
+        if(typeof(jQueryIWD) == "undefined"){if(typeof(jQuery) != "undefined") {jQueryIWD = jQuery;}} $ji = jQueryIWD;
+        $ji(".popup-table").draggable();
+    </script>
+</div>
+

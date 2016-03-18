@@ -1,0 +1,23 @@
+<?php 
+	$ranges = $this->getFacetPriceRanges();
+?>
+<?php if (count($ranges) > 0):?>
+<dt id="solr_search_price_decimal_expander"
+	onclick="Effect.toggle('content_holder_price_decimal', 'slide', { duration: 0.3 }); $('solr_search_price_decimal_expander').toggleClassName('collapsed'); return false;">
+	<?php echo $this->__('Price');?>
+</dt>
+<dd id="content_holder_price_decimal">
+	<ol>
+		<?php foreach ($ranges as $values):?>
+		
+		<?php 
+		$facetUrl = $this->getFacesUrl(array('fq'=>array('price'=>$values['value'])));
+		?>
+		
+		<li><a href="<?php echo $facetUrl?>" class="facet-item"><?php echo $values['formatted']?>&nbsp;<span>(<?php echo $values['count']?>)</span></a></li>
+		
+		<?php endforeach;?>
+	</ol>
+</dd>
+<?php endif;?>
+

@@ -1,0 +1,189 @@
+.loginRadiusFieldset {
+    position: relative;
+    border: #d7d7d7 1px solid;
+    border-radius: 4px;
+    width: 490px;
+    float: left;
+    padding: 3px 10px 0 10px;
+    margin-bottom: 10px;
+    background-color: #FFFFE0;
+    border: 1px solid #E6DB55;
+}
+
+.loginRadiusHelpDiv {
+    width: 65%;
+    float: left;
+    border-radius: 4px;
+    margin-right: 10px;
+    background-color: #FFFFE0 !important;
+    border: 1px solid #E6DB55 !important;
+    padding-bottom: 5px !important;
+}
+
+.loginRadiusFieldset a, .loginRadiusHelpDiv ul li a {
+    text-decoration: none;
+}
+
+.loginRadiusFieldset a:hover, .loginRadiusHelpDiv ul li a:hover {
+    text-decoration: underline !important
+}
+
+.loginRadiusHelpDiv ul li {
+    list-style-type: disc;
+}
+
+.loginRadiusHelpDiv ul {
+    margin: 0 15px;
+}
+
+loginradius_radio {
+    vertical-align: top;
+    margin-left: 7px
+}
+
+#row_sharing_options_horizontalSharing_horizontalSharingProviders ul li {
+    width: 149px;
+    float: left
+}
+
+#row_sharing_options_messages_redirect td input {
+    margin-right: 2px
+}
+
+#row_sharing_options_verticalSharing_verticalSharingProviders ul li {
+    width: 149px;
+    float: left
+}
+
+#row_sharing_options_verticalSharing_verticalCounterProviders ul li {
+    width: 149px;
+    float: left
+}
+
+#row_sharing_options_horizontalSharing_horizontalCounterProviders ul li {
+    width: 149px;
+    float: left
+}
+
+#loginRadiushorizontalRearrangeSharing li, #loginRadiusverticalRearrangeSharing li {
+    float: left
+}
+
+#row_sharing_options_verticalSharing_verticalSharingTheme td label {
+    float: left !important
+}
+
+#row_sharing_options_messages_iconSize td input {
+    margin-right: 2px
+}
+
+#row_sharing_options_verticalSharing_verticalSharingTheme td input {
+    float: left !important;
+    margin-left: 4px
+}
+
+#row_sharing_options_horizontalSharing_horizontalSharingTheme td input {
+    vertical-align: top
+}
+
+#row_sharing_options_horizontalSharing_horizontalSharingTheme td[class=value] {
+    width: 410px !important
+}
+
+#row_sharing_options_verticalSharing_verticalSharingTheme td.value {
+    width: 410px !important;
+}
+#row_sharing_options_horizontalSharing_horizontalSharingTheme td[class=value] img{
+    margin-bottom:5px;
+}
+
+#row_sharing_options_sharing_verticalSharing td input {
+    vertical-align: top !important;
+    float: left !important;
+    margin-right: 2px
+}
+
+#row_sharing_options_sharing_verticalSharing td label, #row_sharing_options_counter_verticalCounter td label {
+    float: left !important
+}
+
+#row_sharing_options_sharing_horizontalSharing td input {
+    vertical-align: top !important;
+    margin-right: 2px
+}
+
+#row_sharing_options_counter_horizontalCounter td input {
+    vertical-align: top !important;
+    margin-right: 2px
+}
+
+#row_sharing_options_counter_verticalCounter td input {
+    vertical-align: top !important;
+    margin-right: 2px;
+    float: left !important
+}
+
+.lrshare_iconsprite32 {
+    cursor: pointer !important;
+    height: 32px;
+    margin: 4px !important;
+    width: 32px;
+    padding: 0px !important;
+    border: none !important;
+    background: url("lrshare_iconsprite32.png") no-repeat scroll left top transparent;
+    list-style-type: none !important;
+}
+
+#lr_thank_message_container {
+    width: 65%;
+    float: left;
+    height: 99px;
+    Margin-right: 6px;
+}
+
+#lr_extension_info_container {
+    width: 27%;
+}
+
+.lr_admin_configuration_info_fieldsets {
+    border-radius: 6px;
+}
+
+.lr_configuration_info_fieldsets a:hover, .loginRadiusHelpDiv ul li a:hover {
+    text-decoration: underline !important
+}
+
+#sharing_options_horizontalSharing_horizontalSharingTheme32 {
+    margin: 10px 10px 0 0;
+}
+
+#sharing_options_horizontalSharing_horizontalSharingTheme16 {
+    margin: 2px 12px 0 0;
+}
+
+#sharing_options_horizontalSharing_horizontalSharingThemeresponsive {
+    margin: 6px 11px 0 0;
+}
+
+#sharing_options_horizontalSharing_horizontalSharingThemesingle_large {
+    margin: 6px 11px 0 0;
+}
+
+#sharing_options_horizontalSharing_horizontalSharingThemesingle_small {
+    margin: 3px 11px 0 0;
+}
+
+#sharing_options_horizontalSharing_horizontalSharingThemecounter_vertical {
+    margin: 30px 11px 0 0;
+}
+
+#sharing_options_horizontalSharing_horizontalSharingThemecounter_horizontal {
+    margin: 4px 11px 0 0;
+}
+
+fieldset#sharing_options_help table {
+    width: 60% !important;
+}
+
+
+

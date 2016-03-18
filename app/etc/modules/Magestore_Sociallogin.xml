@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Magestore_Sociallogin>
+            <active>true</active>
+            <codePool>local</codePool>
+			<aliasName>Social Login</aliasName>
+        </Magestore_Sociallogin>
+    </modules>
+</config> 

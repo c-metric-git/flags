@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Wizkunde_ConfigurableBundle>
+            <active>false</active>
+            <codePool>local</codePool>
+        </Wizkunde_ConfigurableBundle>
+    </modules>
+</config>

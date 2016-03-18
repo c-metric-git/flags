@@ -1,0 +1,55 @@
+<?php
+    $helper = Mage::helper("iwd_ordermanager");
+?>
+
+<form id="account_information_form_<?php echo $this->order_id ?>" method="post">
+    <div>
+        <ul class="messages">
+            <li class="notice-msg">
+                <?php echo $helper->__("This changes will apply only to this order account information (not customer)"); ?>
+                <?php echo $helper->__("Taxes will not be recalculated."); ?>
+            </li>
+        </ul>
+    </div>
+    <table cellspacing="0" class="form-list form-edit-order">
+        <tbody>
+        <?php
+        foreach ($this->order as $key => $val): ?>
+            <tr>
+                <td class="label">
+                    <label for="<?php echo $key ?>_<?php echo $this->order_id ?>">
+                        <?php echo $val['title']; ?><?php if ($val['required']): ?><span class="required">*</span><?php endif; ?>
+                    </label>
+                </td>
+                <td class="value">
+                    <?php if ($key == 'customer_group_id'): ?>
+                        <select name="<?php echo $key ?>" id="<?php echo $key ?>_<?php echo $this->order_id ?>"
+                                class="validate-group required-entry input-text">
+                            <?php $groups = Mage::helper('customer')->getGroups()->toOptionArray(); ?>
+                            <?php foreach ($groups as $group): ?>
+                                <option value="<?php echo $group['value'] ?>" <?if($val['value']==$group['value']) echo 'selected = "selected"'; ?> ><?php echo $group['label'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    <?php else: ?>
+                        <input id="<?php echo $key ?>_<?php echo $this->order_id ?>"
+                               class="input-text <?php if($key=='customer_email'):?> validate-email required-entry validate-email<?php endif; if($val['required']):?> required-entry<?php endif; ?>"
+                               type="text" value="<?php echo $val['value']; ?>" name="<?php echo $key ?>">
+                    <?php endif; ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+
+    <?php echo Mage::app()->getLayout()->createBlock('adminhtml/template')
+        ->setTemplate("iwd/ordermanager/controls.phtml")
+        ->setData("order_id", $this->order_id)
+        ->setData("button_onclick_update", "IWD.OrderManager.AccountInfo.editCustomerInfoSubmit()")
+        ->setData("button_onclick_cancel", "IWD.OrderManager.AccountInfo.editCustomerInfoCancel()")
+        ->setData('recalculate', false)
+        ->setData('block', 'account')
+        ->toHtml();
+    ?>
+
+    <input type="hidden" value="<?php echo $this->order_id; ?>" name="order_id" id="order_id_<?php echo $this->order_id; ?>">
+</form>

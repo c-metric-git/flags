@@ -1,0 +1,397 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <ordernum translate="label" module="adjordernum" >
+            <label>Custom Numbers</label>
+            <tab>sales</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>500</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label comment" module="adjordernum">
+                    <label>General</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <settings_level translate="label">
+                            <label>Settings Level</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>AdjustWare_Ordernum_Model_Config_State_Source</source_model>
+                            <frontend_model>AdjustWare_Ordernum_Block_Adminhtml_Config_State</frontend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <comment><![CDATA[Please choose your desired settings level first, click Save Config to apply the changes. Then if necessary configure each store-view or website by choosing it from the Current Configuration Scope drop-down.]]></comment>
+                        </settings_level>
+                    </fields>
+                </general>
+                <order translate="label comment" module="adjordernum">
+                    <label>Order</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <prefix translate="label">
+						    <backend_model>adjordernum/backend_validation_prefix</backend_model>
+                            <label>Default Order Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </prefix>
+                        <dateformat translate="label">
+                            <label>Default Order Date Format</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>AdjustWare_Ordernum_Model_Backend_Config_Date_Source</source_model>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </dateformat>
+                        <number translate="label">
+						    <backend_model>adjordernum/backend_validation_increment</backend_model>
+                            <label>Default Order Number</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </number>
+                        <increment translate="label">
+						    <backend_model>adjordernum/backend_validation_increment</backend_model>
+                            <label>Default Order Increment</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </increment>
+                        <random translate="label">
+                            <backend_model>adjordernum/backend_validation_random</backend_model>
+                            <label>Random max limit value</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Set 0 not to use random increment, If random increment is not 0 then increment is randomly used from range starting from "Default Order Increment" and finishing at "Random Max Limit Value".</comment>
+                        </random>
+                        <suffixlength translate="label">
+                            <backend_model>adjordernum/backend_validation_increment</backend_model>
+                            <label>Length random suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Set 0 to not add suffix</comment>
+                        </suffixlength>
+                        <letter translate="label">
+                            <backend_model>adjordernum/backend_validation_letter</backend_model>
+                            <label>Letters suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </letter>
+                        <pad translate="label">
+						    <backend_model>adjordernum/backend_validation_pad</backend_model>
+                            <label>Default Order Number Length</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Desired number length without the prefix and the date. Set to 0 to not add leading zeros to doc number.]]></comment>
+                        </pad>
+						<load translate="label">
+                            <label>Copy Configuration to Invoice, Shipment, Creditmemo</label>
+                            <frontend_type>button</frontend_type>
+                            <frontend_model>adjordernum/adminhtml_config_button_load</frontend_model>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </load>
+                    </fields>
+                </order>
+                <invoice translate="label comment" module="adjordernum">
+                    <label>Invoice</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <prefix translate="label">
+						    <backend_model>adjordernum/backend_validation_prefix</backend_model>
+                            <label>Default Invoice Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </prefix>
+                        <dateformat translate="label">
+                            <label>Default Invoice Date Format</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>AdjustWare_Ordernum_Model_Backend_Config_Date_Source</source_model>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </dateformat>
+                        <number translate="label">
+						    <backend_model>adjordernum/backend_validation_increment</backend_model>
+                            <label>Default Invoice Number</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </number>
+                        <increment translate="label">
+						    <backend_model>adjordernum/backend_validation_increment</backend_model>
+                            <label>Default Invoice Increment</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </increment>
+                        <random translate="label">
+                            <backend_model>adjordernum/backend_validation_random</backend_model>
+                            <label>Random max limit value</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Set 0 not to use random increment, If random increment is not 0 then increment is randomly used from range starting from "Default Invoice Increment" and finishing at "Random Max Limit Value".</comment>
+                        </random>
+                        <suffixlength translate="label">
+                            <backend_model>adjordernum/backend_validation_increment</backend_model>
+                            <label>Length random suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Set 0 to not add suffix</comment>
+                        </suffixlength>
+                        <letter translate="label">
+                            <backend_model>adjordernum/backend_validation_letter</backend_model>
+                            <label>Letters suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </letter>
+                        <pad translate="label">
+						    <backend_model>adjordernum/backend_validation_pad</backend_model>
+                            <label>Default Invoice Number Length</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Desired number length without the prefix and the date. Set to 0 to not add leading zeros to doc number.]]></comment>
+                        </pad>
+                    </fields>
+                </invoice>
+                <shipment translate="label comment" module="adjordernum">
+                    <label>Shipment</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <prefix translate="label">
+						    <backend_model>adjordernum/backend_validation_prefix</backend_model>
+                            <label>Default Shipment Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </prefix>
+                        <dateformat translate="label">
+                            <label>Default Shipment Date Format</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>AdjustWare_Ordernum_Model_Backend_Config_Date_Source</source_model>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </dateformat>
+                        <number translate="label">
+						    <backend_model>adjordernum/backend_validation_increment</backend_model>
+                            <label>Default Shipment Number</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </number>
+                        <increment translate="label">
+						    <backend_model>adjordernum/backend_validation_increment</backend_model>
+                            <label>Default Shipment Increment</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </increment>
+                        <random translate="label">
+                            <backend_model>adjordernum/backend_validation_random</backend_model>
+                            <label>Random max limit value</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Set 0 not to use random increment, If random increment is not 0 then increment is randomly used from range starting from "Default Shipment Increment" and finishing at "Random Max Limit Value".</comment>
+                        </random>
+                        <suffixlength translate="label">
+                            <backend_model>adjordernum/backend_validation_increment</backend_model>
+                            <label>Length random suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Set 0 to not add suffix</comment>
+                        </suffixlength>
+                        <letter translate="label">
+                            <backend_model>adjordernum/backend_validation_letter</backend_model>
+                            <label>Letters suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </letter>
+                        <pad translate="label">
+						    <backend_model>adjordernum/backend_validation_pad</backend_model>
+                            <label>Default Shipment Number Length</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Desired number length without the prefix and the date. Set to 0 to not add leading zeros to doc number.]]></comment>
+                        </pad>
+                    </fields>
+                </shipment>
+                <creditmemo translate="label comment" module="adjordernum">
+                    <label>Creditmemo</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <prefix translate="label">
+						    <backend_model>adjordernum/backend_validation_prefix</backend_model>
+                            <label>Default Creditmemo Prefix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </prefix>
+                        <dateformat translate="label">
+                            <label>Default Creditmemo Date Format</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>AdjustWare_Ordernum_Model_Backend_Config_Date_Source</source_model>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </dateformat>
+                        <number translate="label">
+						    <backend_model>adjordernum/backend_validation_increment</backend_model>
+                            <label>Default Creditmemo Number</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </number>
+                        <increment translate="label">
+						    <backend_model>adjordernum/backend_validation_increment</backend_model>
+                            <label>Default Creditmemo Increment</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </increment>
+                        <random translate="label">
+                            <backend_model>adjordernum/backend_validation_random</backend_model>
+                            <label>Random max limit value</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Set 0 not to use random increment, If random increment is not 0 then increment is randomly used from range starting from "Default Creditmemo Increment" and finishing at "Random Max Limit Value".</comment>
+                        </random>
+                        <suffixlength translate="label">
+                            <backend_model>adjordernum/backend_validation_increment</backend_model>
+                            <label>Length random suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Set 0 to not add suffix</comment>
+                        </suffixlength>
+                        <letter translate="label">
+                            <backend_model>adjordernum/backend_validation_letter</backend_model>
+                            <label>Letters suffix</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </letter>
+                        <pad translate="label">
+						    <backend_model>adjordernum/backend_validation_pad</backend_model>
+                            <label>Default Creditmemo Number Length</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Desired number length without the prefix and the date. Set to 0 to not add leading zeros to doc number.]]></comment>
+                        </pad>
+                    </fields>
+                </creditmemo>
+            </groups>
+        </ordernum>
+    </sections>
+</config>
+<!--
+/**
+ * Custom Order Number Pro
+ *
+ * @category:    AdjustWare
+ * @package:     AdjustWare_Ordernum
+ * @version      5.1.5
+ * @license:     d0NyTkcYcW64yuyl9Cf2M6q3gBilLUVMAwQSumkwPP
+ * @copyright:   Copyright (c) 2015 AITOC, Inc. (http://www.aitoc.com)
+ */
+-->

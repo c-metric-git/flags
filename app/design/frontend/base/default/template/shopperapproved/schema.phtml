@@ -1,0 +1,19 @@
+<?php
+/**
+ * ShopperApproved Module for Magento 
+ * @package     ShprAprvd_ShopperApproved
+ * @author      ShprAprvd (http://www.shopperapproved.com/)
+ * @copyright   Copyright (c) 2014 ShprAprvd (http://www.shopperapproved.com/)
+ * @license     Open Software License
+ */
+?>
+<?php if($this->getSetting('enabled')) { ?>
+<p class="saSchema">
+<?php
+ini_set('default_socket_timeout', 3);
+$schemaURL = "https://www.shopperapproved.com/feeds/schema.php/?siteid=" . $this->getSetting('account') . "&token=" . $this->getSetting('token');
+//echo $schemaURL;
+echo file_get_contents($schemaURL);
+?>
+</p>
+<?php } ?>

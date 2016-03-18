@@ -1,0 +1,25 @@
+<div id="buttons-pinterest-pin" class="buttons-pinterest-pin">
+ <a href="https://www.pinterest.com/pin/create/button/?url=<?php echo $this->getEncodedPageUrl() ?>&media=<?php echo $this->getMediaUrl() ?>&description=<?php echo urlencode($this->getProduct()->getName()) ?>"
+    data-pin-do="buttonPin"
+    data-pin-config="none" target="_blank">
+    <img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" />
+</a>
+<script>
+$("buttons-pinterest-pin").on("click", 'a', function(event) {
+	new Ajax.Request('<?php echo $this->getPinUrl() ?>?url=<?php echo $this->getCurrentEncodedUrl()?>',
+	{
+	  onSuccess: function(response) {
+	    $('status-message').update(response.responseText);
+		$('pinterest-message').update('');
+	  }
+	});
+});
+</script>
+  <?php if ($this->getEstimatedEarnPoints() > 0): ?>
+    <?php if ($this->isAuthorized() && !$this->isLiked()): ?>
+    <div id='pinterest-message'>
+    <?php echo $this->__('Pin this page and earn %s',  Mage::helper('rewards')->formatPoints($this->getEstimatedEarnPoints())); ?>
+    </div>
+    <?php endif; ?>
+  <?php endif; ?>
+</div>

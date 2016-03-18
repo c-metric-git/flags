@@ -1,0 +1,72 @@
+<?php $helper = Mage::helper('core'); ?>
+<div class="popup-table" id="view_product_item_<?php echo $this->order_id; ?>">
+    <div class="table-title">
+        <div
+            class="table-title-wrapper blue"><?php echo $helper->__("Products. Order #" . $this->getOrderIncrementId()); ?></div>
+    </div>
+    <div class="close-popup-table"></div>
+    <table class="data order-tables" cellspacing="0">
+        <col width="1"/>
+        <col width="1"/>
+        <col width="1"/>
+        <col width="1"/>
+        <col width="1"/>
+        <col width="1"/>
+        <col width="1"/>
+        <col width="1"/>
+        <col width="1"/>
+        <col width="1"/>
+        <thead>
+        <tr class="headings" style="background:none repeat scroll 0 0 #6f8992;">
+            <th><?php echo $this->helper('sales')->__('ID') ?></th>
+            <th style="width:175px;"><?php echo $this->helper('sales')->__('Name') ?></th>
+            <th><?php echo $this->helper('sales')->__('Type') ?></th>
+            <th><?php echo $this->helper('sales')->__('Attrib. Set Name') ?></th>
+            <th><?php echo $this->helper('sales')->__('SKU') ?></th>
+            <th><?php echo $this->helper('sales')->__('Price') ?></th>
+            <th><?php echo $this->helper('sales')->__('Qty') ?></th>
+            <th><?php echo $this->helper('sales')->__('Visibility') ?></th>
+            <th><?php echo $this->helper('sales')->__('Status') ?></th>
+            <th class="last"><?php echo $this->helper('sales')->__('Websites') ?></th>
+        </tr>
+        </thead>
+        <?php $i = 0;
+        foreach ($this->products as $item): ?>
+            <tbody class="<?php echo ($i++) % 2 ? 'even' : 'odd' ?>">
+            <tr>
+                <?php $_id = $item->getId();
+                if (!empty($_id)): ?>
+                    <td><?php echo $item->getId(); ?></td>
+                    <td><b><?php echo $item->getName(); ?></b></td>
+                    <td><?php echo $item->getTypeId(); ?></td>
+                    <td><?php echo
+                        Mage::getModel("eav/entity_attribute_set")
+                            ->load($item->getAttributeSetId())
+                            ->getAttributeSetName(); ?>
+                    </td>
+                    <td><?php echo $item->getSku(); ?></td>
+                    <td><b><span
+                                class="price"><?php echo $helper->currency($item->getPrice(), true, false); ?></span></b>
+                    <td><?php echo number_format(Mage::getModel('cataloginventory/stock_item')->loadByProduct($item)->getQty(), 0); ?></td>
+                    <td><?php echo $item->getResource()->getAttribute('visibility')->getFrontend()->getValue($item); ?></td>
+                    <td><?php echo $item->getResource()->getAttribute('status')->getFrontend()->getValue($item); ?></td>
+                    <td>
+                        <?php $websiteIds = $item->getWebsiteIds();
+                        $websites = array();
+                        foreach ($websiteIds as $ws)
+                            $websites[] = Mage::app()->getWebsite($ws)->getName();
+                        echo implode(', ', $websites); ?>
+                    </td>
+                <?php else: ?>
+                    <td colspan="11"><div class="error"><i><?php echo $this->helper('sales')->__('Product was removed'); ?></i></div></td>
+                <?php endif; ?>
+            </tr>
+            </tbody>
+
+        <?php endforeach; ?>
+    </table>
+    <script>
+        if(typeof(jQueryIWD) == "undefined"){if(typeof(jQuery) != "undefined") {jQueryIWD = jQuery;}} $ji = jQueryIWD;
+        $ji(".popup-table").draggable();
+    </script>
+</div>

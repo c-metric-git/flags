@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<config>
+    <menu>
+        <import_menu translate="title" module="importmodule">
+            <title>Teamdesk</title>
+            <sort_order>9999</sort_order>
+        </import_menu>
+    </menu>
+    <menu>
+        <import_menu>
+            <children>
+                <import_menu translate="title" module="importmodule">
+                    <title>Import Data</title>
+                    <action>importmodule/index/index</action>
+                    <sort_order>20</sort_order>
+                </import_menu>
+            </children>
+        </import_menu>
+    </menu>
+</config>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="head">
+			<action method="addCss"><stylesheet>solrbridge/style.css</stylesheet></action>
+        </reference>
+	</default>
+	<solrsearch_admin>
+		<reference name="head">
+			<action method="addCss"><stylesheet>solrbridge/style.css</stylesheet></action>
+			<action method="addJs"><script>solrsearch/adminhtml/admin.js</script></action>
+			<action method="addItem">
+				<type>js_css</type>
+				<name>prototype/windows/themes/default.css</name>
+			</action>
+			<action method="addItem">
+				<type>js_css</type>
+				<name>prototype/windows/themes/alphacube.css</name>
+			</action>
+        </reference>
+	</solrsearch_admin>
+	<solrbridge_admin_adminhtml_index_index>
+		<update handle="solrsearch_admin"/>
+		<reference name="content">
+			<block type="solrsearch/adminhtml_index" name="solrsearch_adminhtml_index" template="solrsearch/index.phtml"/>
+		</reference>
+	</solrbridge_admin_adminhtml_index_index>
+	<solrbridge_admin_adminhtml_solrsearch_index>
+		<reference name="content">
+			<block type="solrsearch/adminhtml_solrsearch" name="adminhtml_solrsearch" />
+		</reference>
+	</solrbridge_admin_adminhtml_solrsearch_index>
+	<solrbridge_admin_adminhtml_solrsearch_logs>
+		<reference name="content">
+			<block type="solrsearch/adminhtml_logs" name="adminhtml_logs" />
+		</reference>
+	</solrbridge_admin_adminhtml_solrsearch_logs>
+</layout>

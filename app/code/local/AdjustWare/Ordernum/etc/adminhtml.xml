@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<config>
+        <menu>
+            <sales>
+                <children>
+                    <adjordernum translate="title" module="adjordernum">
+                        <title>Custom Orders Numbers</title>
+                        <sort_order>200</sort_order>
+                        <action>adjordernum/adminhtml_ordernum</action>
+                    </adjordernum>
+                </children>
+            </sales>
+        </menu>
+        
+        <acl>
+            <resources> 
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <ordernum translate="title" >
+                                            <title>Custom Numbers</title>
+                                            <sort_order>500</sort_order>
+                                        </ordernum>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl> 
+</config>
+
+<!--
+/**
+ * Custom Order Number Pro
+ *
+ * @category:    AdjustWare
+ * @package:     AdjustWare_Ordernum
+ * @version      5.1.5
+ * @license:     d0NyTkcYcW64yuyl9Cf2M6q3gBilLUVMAwQSumkwPP
+ * @copyright:   Copyright (c) 2015 AITOC, Inc. (http://www.aitoc.com)
+ */
+-->

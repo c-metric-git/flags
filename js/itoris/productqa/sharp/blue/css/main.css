@@ -1,0 +1,92 @@
+#itoris_qa_label{
+	color: #666666;
+}
+
+#itoris_qa .text_expand, #itoris_qa_sort_text{
+	color: #676767;
+}
+
+#itoris_qa_select, #itoris_qa_select ul{
+	border: 1px solid #99ccff;
+	color: #4d4d4d;
+}
+
+#itoris_qa_select ul{
+	background-color: #ffffff;
+}
+
+#itoris_qa .li_hover{
+	background-color: #99ccff;
+	color: #206b98;
+}
+
+#itoris_qa_body{
+	border-color: #95c8fd;
+	background-color: #ffffff;
+}
+
+#itoris_qa .form_box{
+	background-color: #95c8fd;
+}
+
+#itoris_qa .question{
+	border: 1px solid #216b98;
+	background-image: url('../images/background.png');
+	background-color: #98cafd;
+}
+
+#itoris_qa .q_border_r{
+	background-image: url('../images/right_border.png');
+}
+
+#itoris_qa .q_border_l{
+	background-image: url('../images/left_border.png');
+}
+
+#itoris_qa .text_red{
+	color: #f9490d;
+}
+
+#itoris_qa .q_answers{
+	border: 1px solid #668cb3;
+	border-bottom-color: #feffff;
+	border-right-color: #feffff;
+	background-color: #feffff;
+}
+
+#itoris_qa .q_info_block{
+	background-color: #d2e8ff;
+}
+
+#itoris_qa .info .red{
+	font-style: italic;
+	color: #fc3d10;
+}
+
+#itoris_qa .info .gray{
+	color: #999999;
+}
+
+#itoris_qa .text_blue{
+	color: #669acc;
+}
+
+#itoris_qa .a_info_block .red{
+	color: #6599cb;
+}
+
+#itoris_qa_pages{
+	color: #ffffff;
+}
+
+#itoris_qa .form .label{
+	color: #000000;
+}
+
+#itoris_qa .form .label span, #itoris_qa_pages .active{
+	color: #ed571a;
+}
+
+#itoris_qa .button_hide_form{
+	background-image: url('../images/hide_form.png');
+}

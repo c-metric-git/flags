@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
+ * @package Amasty_Flags
+ */
+-->
+<config>
+    <modules>
+        <Amasty_Flags>
+            <version>3.2.0</version>
+        </Amasty_Flags>
+    </modules>
+    
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Amasty_Flags after="Mage_Adminhtml">Amasty_Flags_Adminhtml</Amasty_Flags>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    
+    <frontend>
+        <translate>
+            <modules>
+                <Amasty_Flags>
+                    <files>
+                        <default>Amasty_Flags.csv</default>
+                    </files>
+                </Amasty_Flags>
+            </modules>
+        </translate>
+    </frontend>
+
+    <adminhtml>
+        <events>
+            <am_grid_massaction_actions>
+                <observers>
+                    <amflags>
+                        <type>singleton</type>
+                        <class>amflags/observer</class>
+                        <method>addNewActions</method>
+                    </amflags>
+                </observers>
+            </am_grid_massaction_actions>
+            
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <amflags>
+                        <type>singleton</type>
+                        <class>amflags/observer</class>
+                        <method>onCoreBlockAbstractToHtmlAfter</method>
+                    </amflags>
+                </observers>
+            </core_block_abstract_to_html_after>
+        </events> 
+        
+        <layout>
+            <updates>
+                <amflags>
+                    <file>amasty/amflags/amflags.xml</file>
+                </amflags>
+            </updates>
+        </layout>
+        
+        <menu>
+            <sales>
+                <children>
+                    <amflags translate="title" module="amflags">
+                        <title>Order Flags</title>
+                            <children>
+                                <columns translate="title" module="amflags">
+                                    <title>Columns</title>
+                                    <action>adminhtml/amflagscolumn</action>
+                                </columns>
+                                <flags translate="title" module="amflags">
+                                    <title>Flags</title>
+                                    <action>adminhtml/amflagsflag</action>
+                                </flags>
+                            </children>
+                        <sort_order>19</sort_order>
+                    </amflags>
+                </children>
+            </sales>
+        </menu>
+        
+        <translate>
+            <modules>
+                <Amasty_Flags>
+                    <files>
+                        <default>Amasty_Flags.csv</default>
+                    </files>
+                </Amasty_Flags>
+            </modules>
+        </translate>
+
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <sales>
+                            <children>
+                                <order>
+                                    <children>
+                                        <actions>
+                                            <children>
+                                                <assign_flags translate="title">
+                                                    <title>Assign Flags</title>
+                                                </assign_flags>
+                                            </children>
+                                        </actions>
+                                    </children>
+                                </order>
+                                <amflags translate="title">
+                                    <title>Order Flags</title>
+                                        <children>
+                                            <columns translate="title">
+                                                <title>Columns</title>
+                                            </columns>
+                                            <flags translate="title">
+                                                <title>Flags</title>
+                                            </flags>
+                                        </children>
+                                    <sort_order>19</sort_order>
+                                </amflags>
+                            </children>
+                        </sales>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+    
+    
+    
+    
+    <global>
+    
+        <models>
+            <amflags>
+                <class>Amasty_Flags_Model</class>
+                <resourceModel>amflags_mysql4</resourceModel>
+            </amflags>
+            
+            <amflags_mysql4>
+                <class>Amasty_Flags_Model_Mysql4</class>
+                <entities>
+                    <flag>
+                        <table>amasty_flag</table>
+                    </flag>
+                    <order_flag>
+                        <table>amasty_order_flag</table>
+                    </order_flag>
+                    <column>
+                        <table>amasty_flag_column</table>
+                    </column>
+                </entities>
+            </amflags_mysql4>
+
+        </models>
+        
+		<resources>
+             <amflags_setup>
+                <setup>
+                    <module>Amasty_Flags</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </amflags_setup>
+		    <amflags_write>
+		        <connection><use>core_write</use></connection>
+		    </amflags_write>
+		    <amflags_read>
+		        <connection><use>core_read</use></connection>
+		    </amflags_read>
+		</resources>
+		  
+        <blocks>
+            <amflags>
+                <class>Amasty_Flags_Block</class>
+            </amflags>
+            
+            <adminhtml>
+                <rewrite>
+                    <widget_grid_massaction>Amasty_Flags_Block_Adminhtml_Widget_Grid_Massaction</widget_grid_massaction>
+                </rewrite>
+            </adminhtml>
+
+            <enterprise_salesarchive>
+                <rewrite>
+                    <adminhtml_sales_order_grid_massaction>Amasty_Flags_Block_Adminhtml_Widget_Grid_Massaction</adminhtml_sales_order_grid_massaction>
+                </rewrite>
+            </enterprise_salesarchive> 
+            
+        </blocks>
+        
+        <helpers>
+            <amflags>
+                <class>Amasty_Flags_Helper</class>
+            </amflags>
+        </helpers>
+        
+        <events>
+            <sales_order_save_after>
+                <observers>
+                    <amflags>
+                        <type>singleton</type>
+                        <class>amflags/observer</class>
+                        <method>onSalesOrderSaveAfter</method>
+                    </amflags>
+                </observers>
+            </sales_order_save_after>
+            
+            <core_collection_abstract_load_before>
+                <observers>
+                    <amflags>
+                        <type>singleton</type>
+                        <class>amflags/observer</class>
+                        <method>onCoreCollectionAbstractLoadBefore</method>
+                    </amflags>
+                </observers>
+            </core_collection_abstract_load_before>
+            
+            <core_layout_block_create_after>
+                <observers>
+                    <amflags>
+                        <type>singleton</type>
+                        <class>amflags/observer</class>
+                        <method>onCoreLayoutBlockCreateAfter</method>
+                    </amflags>
+                </observers>
+            </core_layout_block_create_after>
+        </events>
+    </global>
+    
+    
+    
+</config>

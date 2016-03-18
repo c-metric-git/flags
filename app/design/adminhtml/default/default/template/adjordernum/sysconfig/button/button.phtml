@@ -1,0 +1,25 @@
+<?php
+/**
+ * Custom Order Number Pro
+ *
+ * @category:    AdjustWare
+ * @package:     AdjustWare_Ordernum
+ * @version      5.1.5
+ * @license:     d0NyTkcYcW64yuyl9Cf2M6q3gBilLUVMAwQSumkwPP
+ * @copyright:   Copyright (c) 2015 AITOC, Inc. (http://www.aitoc.com)
+ */
+?>
+<script type="text/javascript">
+
+    function loadOrdernumConfig(){
+        var fields = ['prefix', 'dateformat', 'number', 'increment', 'random', 'suffixlength', 'letter', 'pad'];
+
+        for (var i=0; i < fields.length; i++) {
+            $('ordernum_invoice_'+fields[i]).value = $('ordernum_order_'+fields[i]).value;
+            $('ordernum_shipment_'+fields[i]).value = $('ordernum_order_'+fields[i]).value;
+            $('ordernum_creditmemo_'+fields[i]).value = $('ordernum_order_'+fields[i]).value;
+        }
+    };
+
+</script>
+<?php echo $this->getButtonHtml() ?>

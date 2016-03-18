@@ -1,0 +1,280 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Address Validation
+ * USPS Address Validation
+ *
+ * @category   QS
+ * @package    QS_Addressvalidation
+ * @author     Quart-soft Magento Team <magento@quart-soft.com> 
+ * @copyright  Copyright (c) 2011 Quart-Soft Ltd http://quart-soft.com
+ */
+ */
+-->
+<config>
+    <modules>
+        <QS_Addressvalidation>
+            <version>2.1.1</version>
+        </QS_Addressvalidation>
+    </modules>
+	 <admin>
+        <routers>
+            <addressvalidation>
+                <use>standard</use>
+                <args>
+                    <module>QS_Addressvalidation</module>
+                    <frontName>addressvalidation</frontName>
+                </args>
+            </addressvalidation>
+
+            <addressvalidation>
+                <use>admin</use>
+                <args>
+                    <module>QS_Addressvalidation</module>
+                    <frontName>addressvalidation</frontName>
+                </args>
+            </addressvalidation>
+
+            <adminhtml>
+               <args>
+                <modules>
+                 <QS_Addressvalidation before="Mage_Adminhtml">QS_Addressvalidation</QS_Addressvalidation>
+                </modules>
+               </args>
+            </adminhtml>
+         </routers>
+    </admin>
+	<frontend>
+        <routers>
+            <addressvalidation>
+                <use>standard</use>
+                <args>
+                    <module>QS_Addressvalidation</module>
+                    <frontName>addressvalidation</frontName>
+                </args>
+            </addressvalidation>
+            <customer>
+                <args>
+                    <modules>
+                        <QS_Addressvalidation before="Mage_Customer">QS_Addressvalidation</QS_Addressvalidation>
+                    </modules>
+                </args>
+            </customer>
+        </routers>	
+		  <layout>
+            <updates>
+                <addressvalidation>
+                    <file>addressvalidation.xml</file>
+                </addressvalidation>
+            </updates>
+        </layout>    
+	</frontend>
+    <global>
+        <models>
+            <addressvalidation>
+                <class>QS_Addressvalidation_Model</class>
+            </addressvalidation>
+		</models>
+        <resources>
+            <addressvalidation_setup>
+                <setup>
+                    <module>QS_Addressvalidation</module>
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                </setup>
+            </addressvalidation_setup>
+        </resources>
+        <blocks>
+            <addressvalidation>
+                <class>QS_Addressvalidation_Block</class>
+            </addressvalidation> 
+			<customer>
+				<rewrite>
+					<address_edit>QS_Addressvalidation_Block_Rewrite_Customer_Address_Edit</address_edit>
+				</rewrite>
+			</customer>
+            <adminhtml>
+                <rewrite>
+                    <customer_edit>QS_Addressvalidation_Block_Rewrite_Adminhtml_Customer_Edit</customer_edit>
+                </rewrite>
+				<rewrite>
+						<sales_order_address>QS_Addressvalidation_Block_Rewrite_Adminhtml_Sales_Order_Address</sales_order_address>
+				</rewrite>
+			</adminhtml>  			
+		</blocks>
+        <helpers>
+            <addressvalidation>
+                <class>QS_Addressvalidation_Helper</class>
+            </addressvalidation>
+        </helpers>		
+        <events>
+            <adminhtml_block_html_before>
+                <observers>
+                    <addressvalidation_grid_add>
+                        <class>addressvalidation/observer</class>
+                        <method>addToGrid</method>
+                    </addressvalidation_grid_add>
+                </observers>
+            </adminhtml_block_html_before>
+
+            <eav_collection_abstract_load_before>
+                <observers>
+                    <addressvalidation_field_add>
+                        <class>addressvalidation/observer</class>
+                        <method>addFieldToGrid</method>
+                    </addressvalidation_field_add>
+                </observers>
+            </eav_collection_abstract_load_before>
+
+			<!--controller_action_predispatch_customer_address_formPost>
+				<observers>
+					<QS_Addressvalidation_Observer>
+						<type>singleton</type>
+						<class>addressvalidation/observer</class>
+						<method>catchCustomerAddressSave</method>
+					</QS_Addressvalidation_Observer>
+				</observers>
+			</controller_action_predispatch_customer_address_formPost-->
+            <!--customer_address_save_after>
+                <observers>
+                    <QS_Addressvalidation_Observer>
+                        <type>singleton</type>
+                        <class>addressvalidation/observer</class>
+                        <method>catchCustomerAddressSave_</method>
+                    </QS_Addressvalidation_Observer>
+                </observers>
+            </customer_address_save_after-->
+
+            <!--
+               <controller_action_predispatch_customer_account_createpost>
+                   <observers>
+                       <QS_Addressvalidation_Observer>
+                           <type>singleton</type>
+                           <class>addressvalidation/observer</class>
+                           <method>catchCustomerCreatePost</method>
+                       </QS_Addressvalidation_Observer>
+                   </observers>
+               </controller_action_predispatch_customer_account_createpost>-->
+			
+			<!--controller_action_predispatch_checkout_onepage_saveBilling>			
+				<observers>
+					<QS_Addressvalidation_Observer>
+						<type>singleton</type>
+						<class>addressvalidation/observer</class>
+						<method>catchSaveBilling</method>
+					</QS_Addressvalidation_Observer>
+				</observers>
+			</controller_action_predispatch_checkout_onepage_saveBilling-->			
+			<!--controller_action_predispatch_checkout_onepage_saveShipping>			
+				<observers>
+					<QS_Addressvalidation_Observer>
+						<type>singleton</type>
+						<class>addressvalidation/observer</class>
+						<method>catchSaveShipping</method>
+					</QS_Addressvalidation_Observer>
+				</observers>
+			</controller_action_predispatch_checkout_onepage_saveShipping-->				
+			
+<!-- OnestepCheckout in developing
+			<controller_action_predispatch_onestepcheckout_ajax_save_billing>
+                <observers>
+                    <QS_Addressvalidation_Observer>
+                        <type>singleton</type>
+                        <class>addressvalidation/observer</class>
+                        <method>catchOnestepCheckoutPaymentMethod</method>
+                    </QS_Addressvalidation_Observer>
+                </observers>
+            </controller_action_predispatch_onestepcheckout_ajax_save_billing>
+-->
+			<!-- Adminhtml -->
+			<!--
+			<controller_action_predispatch_adminhtml_customer_validate>			
+				<observers>
+					<QS_Addressvalidation_Observer>
+						<type>singleton</type>
+						<class>addressvalidation/observer</class>
+						<method>catchAdminAdressValidate</method>
+					</QS_Addressvalidation_Observer>
+				</observers>
+			</controller_action_predispatch_adminhtml_customer_validate>		
+			-->
+			<!--
+			<controller_action_predispatch_adminhtml_customer_save>
+				<observers>
+					<QS_Addressvalidation_Observer>
+						<type>singleton</type>
+						<class>addressvalidation/observer</class>
+						<method>catchAdminCustomerSave</method>
+					</QS_Addressvalidation_Observer>
+				</observers>
+			</controller_action_predispatch_adminhtml_customer_save>
+			-->
+			<!--
+			<controller_action_predispatch_adminhtml_sales_order_create_save>
+				<observers>
+					<QS_Addressvalidation_Observer>
+						<type>singleton</type>
+						<class>addressvalidation/observer</class>
+						<method>catchAdminOrderSave</method>
+					</QS_Addressvalidation_Observer>
+				</observers>
+			</controller_action_predispatch_adminhtml_sales_order_create_save>
+			-->
+		</events>
+	</global>
+    <adminhtml>
+        <layout>
+            <updates>
+                <addressvalidation>
+                    <file>addressvalidation.xml</file>
+                </addressvalidation>
+            </updates>
+        </layout>    
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <addressvalidation>
+                                            <title>Address Validation</title>
+                                        </addressvalidation>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+    <default>
+        <carriers>
+            <usps>
+                <active_address_validation>1</active_address_validation>
+				<address_validation_country>US,PR</address_validation_country>
+				<address_validation_testmode>0</address_validation_testmode>
+            </usps>
+        </carriers>
+        <addressvalidation>
+            <default>
+				<active>0</active>
+				<enabled_in_admin>1</enabled_in_admin>
+				<carrier>usps</carrier>
+				<!--normalize_addresses>1</normalize_addresses-->
+				<autocorrect>1</autocorrect>
+				<no_response_action>1</no_response_action>
+				<no_response_message>Sorry we currently can not check your address.</no_response_message>
+				<no_address_action>1</no_address_action>
+				<no_address_message>Sorry we can not find your address.</no_address_message>
+				<multi_address_action>1</multi_address_action>
+                <multi_address_message>Address validation is passed, but multiple addresses found. More information is needed.</multi_address_message>
+            </default>
+        </addressvalidation>
+    </default>
+	
+</config>

@@ -1,0 +1,95 @@
+scope:
+  website: # Initialize websites
+    - website_id: 2
+      code: usa_website
+      name: USA Website
+      default_group_id: 2
+  group: # Initializes store groups
+    - group_id: 2
+      website_id: 2
+      name: USA Store Group
+      default_store_id: 2
+      root_category_id: 2 # Default Category
+  store: # Initializes store views
+    - store_id: 2
+      website_id: 2
+      group_id: 2
+      code: usa
+      name: USA Store
+eav:
+  catalog_product:
+    - entity_id: 2
+      type_id: simple
+      sku: example_product
+      name: "Example Product"
+      short_description: "Short Description"
+      description: "Description"
+      url_key: example_url_key
+      stock:
+        qty: 100.00
+        is_in_stock: 1
+      website_ids:
+        - usa_website
+      category_ids:
+        - 2 # Default Category
+      price: 750.00
+      tax_class_id: 2 # Taxable Goods
+      status: 1             # Enabled
+      visibility: 4         # Visible in Catalog & Search
+  customer:
+   - entity_id: 2
+     entity_type_id: 1
+     email: bob_test@example.com
+     firstname: Bob
+     lastname: Marli
+     group_id: 1
+     created_at: 2013-10-01 00:00:00
+     attribute_set_id: 0 #don't remove this
+  order:
+   - entity_id: 2
+     entity_type_id: 11
+     state: complete
+     status: complete
+     store_id: 2
+     customer_id: 2
+     base_grand_total: 10
+     base_subtotal: 10
+     base_subtotal_invoiced: 10
+     base_to_global_rate: 1
+     base_to_order_rate: 1
+     base_total_invoiced: 10
+     base_total_paid: 10
+     grand_total: 10
+     store_to_base_rate: 1
+     store_to_order_rate: 1
+     subtotal: 10
+     subtotal_invoiced: 10
+     total_invoiced: 10
+     total_paid: 10
+     customer_is_guest: 0
+tables:
+  sales/order_item:
+   - entity_id: 2
+     item_id: 2
+     entity_type_id: 13
+     order_id: 2
+     store_id: 2
+     product_id: 2
+     product_type: simple
+  rewards/earning_rule:
+    - earning_rule_id: 2
+      name: Rule is TRUE for ALL products
+      description:  |
+        text, text, text
+        text, text, text
+        text, text, text.
+      is_active: 1
+      type: product
+      conditions_serialized: 'a:6:{s:4:"type";s:38:"rewards/earning_rule_condition_combine";s:9:"attribute";N;s:8:"operator";N;s:5:"value";s:1:"1";s:18:"is_value_processed";N;s:10:"aggregator";s:3:"all";}'
+      actions_serialized: 'a:4:{s:4:"type";s:38:"rewards/earning_rule_action_collection";s:9:"attribute";N;s:8:"operator";s:1:"=";s:5:"value";N;}'
+      points_amount: 20
+      points_expires_after:
+  rewards/earning_rule_customer_group:
+    - earning_rule_customer_group_id: 2
+      customer_group_id: 1
+      earning_rule_id: 2

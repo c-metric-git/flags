@@ -1,0 +1,35 @@
+#note_aw_coupon_native_hint, #note_aw_coupon_qcg_hint {
+    margin-top: -10px;
+}
+#coupon_generation_email {
+    width: 220px;
+}
+#awcoupon-findemail-autocomplete {
+    position: absolute;
+    width: 220px;
+    background-color: white;
+    border: 1px solid #888;
+    margin: 0;
+    padding: 0;
+    z-index: 999;
+}
+#awcoupon-findemail-autocomplete ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+#awcoupon-findemail-autocomplete ul li.selected {
+    background-color: #ffb;
+    font-weight: bold;
+}
+#awcoupon-findemail-autocomplete ul li {
+    list-style-type: none;
+    display: block;
+    margin: 0;
+    padding: 2px;
+    height: 27px;
+    cursor: pointer;
+    line-height: 14px;
+    font-size: 12px;
+    text-align: left;
+}

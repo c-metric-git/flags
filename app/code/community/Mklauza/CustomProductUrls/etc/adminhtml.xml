@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<config>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<config>
+								<children>
+									<mklauza_customproducturls translate="title" module="mklauza_customproducturls">
+										<title>Custom Product Urls</title>
+										<sort_order>130</sort_order>
+									</mklauza_customproducturls>
+								</children>
+							</config>
+						</children>
+					</system>
+                                        <system>
+                                            <children>
+                                                    <mklauza_customproducturls translate="title" module="mklauza_customproducturls">
+                                                            <title>Custom Product Urls</title>
+                                                            <sort_order>200</sort_order>
+                                                    </mklauza_customproducturls>
+                                            </children>                                          
+                                        </system>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+<!--    <menu>
+        <system>
+            <children>
+                <mklauza_customproducturls translate="title" module="mklauza_customproducturls">
+                    <title>Custom Product Urls</title>
+                    <sort_order>91</sort_order>
+                    <action>adminhtml/productUrls/</action>
+                </mklauza_customproducturls>
+            </children>
+        </system>
+    </menu>        -->
+</config>

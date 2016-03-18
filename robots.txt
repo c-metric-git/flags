@@ -1,0 +1,44 @@
+User-Agent: *
+Allow: /
+
+User-agent:  Googlebot
+Allow: /
+
+User-agent: bingbot
+Allow: /
+
+User-agent:  Slurp
+Allow: /
+
+User-agent:  MSNBot
+Allow: /
+
+User-agent:  ia_archiver
+Allow: /
+
+User-agent:  Scooter
+Allow: /
+
+User-agent:  Sidewinder
+Allow: /
+
+User-agent:  Gulliver
+Allow: /
+
+User-agent:  WebCrawler
+Allow: /
+
+User-agent:  ArchitextSpider
+Allow: /
+
+User-agent:  fast
+Allow: / 
+
+User-agent: Baiduspider
+Disallow: /
+
+Disallow: /checkout/cart/
+Disallow: /checkout/onepage/
+#Disallow: /blog/wp-content/plugins/post2pdf-converter/
+
+sitemap: https://www.stripedsocks.com//sitemap/sitemap.xml

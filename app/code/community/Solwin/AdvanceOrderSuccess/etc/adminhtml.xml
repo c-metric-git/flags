@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+	<config>
+		<acl>
+			<resources>
+				<admin>
+					<children>
+						<system>
+							<children>
+								<config>
+									<children>
+										<successpagesettings translate="title" module="advanceordersuccess">
+											<title>Success Page Settings Section</title>
+											<sort_order>320</sort_order>
+										</successpagesettings>
+									</children>
+								</config>
+							</children>
+						</system>
+					</children>
+				</admin>
+			</resources>
+		</acl>
+	</config>

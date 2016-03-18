@@ -1,0 +1,283 @@
+<?php
+
+/**
+ * The current option
+ */
+$_option = $this->getOption();
+
+/**
+ * All the selections of the current option
+ */
+$_selections = $_option->getSelections();
+
+/**
+ * The default selection of the current option
+ */
+$_default = $_option->getDefaultSelection();
+
+?>
+
+<script>var updateStatus = <?php echo Zend_Json::encode($this->getUpdateStatus()) ?>;</script>
+<div id="baseurl" data-baseurl="<?php echo rtrim(Mage::getBaseUrl(), '/') ?>"></div>
+
+<section class="bundle-option">
+    <div class="bundle-info">
+        <?php
+
+        $items = $this->getConfigurables();
+        $p = $this->getFirstConfigurable();
+
+        $productAttributeOptions = $p->getTypeInstance(true)->getConfigurableAttributesAsArray($p);
+        $firstAttribute = current($productAttributeOptions);
+
+        ?>
+
+        <div class="bundle-info-left">
+            <?php echo '<img src="'.$this->helper('catalog/image')->init($p, 'image')->resize(100).'" id="bundle-option-image-' . $_option->getId() .'" alt="" />'; ?>
+        </div>
+        <div class="bundle-info-right">
+            <div class="bundle-title">
+                <?php $required = ($_option->getRequired()) ? '<span class="option-required">*</span>' : '' ?>
+                <div id="bundle-option-name-<?php echo $_option->getId() ?>"><?php echo $_option->getTitle() ?><?php echo $required ?></div>
+
+                <div class="bundle-option-qty">
+                    <?php
+                    if ($_default):
+                        $_defaultQty = $_default->getSelectionQty()*1;
+                        $_canChangeQty = $_default->getSelectionCanChangeQty();
+                    else:
+                        $firstChildProduct = current($_selections);
+                        $_defaultQty = $firstChildProduct->getSelectionQty()*1;
+                        $_canChangeQty = $firstChildProduct->getSelectionCanChangeQty();
+                    endif;
+                    ?>
+                    <?php if (in_array($_option->getType(), array('multi','checkbox')) == false) : ?>
+                        <input type="text" id="bundle-option-<?php echo $_option->getId() ?>-qty-input" onkeyup="bundle.changeOptionQty(this, event)" onblur="bundle.changeOptionQty(this, event)" class="input-text qty<?php echo $_canChangeQty?'':' qty-disabled' ?>" <?php echo $_canChangeQty?'' : 'disabled="disabled"'?> name="bundle_option_qty[<?php echo $_option->getId() ?>]" value="<?php echo $_defaultQty ?>" />
+                    <?php endif; ?>
+                </div>
+
+                <?php if ($_option->getType() == 'select') : ?>
+                    <select onchange="bundle.changeSelection(this);" id="bundle-option-<?php echo $_option->getId() ?>-select" name="bundle_option[<?php echo $_option->getId() ?>]" class="bundle-option-<?php echo $_option->getId() ?><?php if ($_option->getRequired()) echo ' required-entry' ?> bundle-option-input bundle-option-select change-container-classname">
+                        <option value=""><?php echo $this->__('Choose a selection...') ?></option>
+                        <?php foreach ($_option->getSelections() as $_selection): ?>
+                            <option value="<?php echo $_selection->getSelectionId() ?>"<?php if ($this->_isSelected($_selection)) echo ' selected="selected"' ?><?php if (!$_selection->isSaleable()) echo ' disabled="disabled"' ?>><?php echo $this->getSelectionTitlePrice($_selection, false) ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                <?php elseif ($_option->getType() == 'radio') : ?>
+                    <?php foreach ($_option->getSelections() as $_selection): ?>
+                        <input type="radio" onchange="bundle.changeSelection(this);" id="bundle-option-<?php echo $_option->getId() ?>-radio-<?php echo $_selection->getSelectionId() ?>" name="bundle_option[<?php echo $_option->getId() ?>]" class="bundle-option-<?php echo $_option->getId() ?><?php if ($_option->getRequired()) echo ' required-entry' ?> bundle-option-input bundle-option-radio change-container-classname" value="<?php echo $_selection->getSelectionId() ?>"<?php if ($this->_isSelected($_selection)) echo ' selected="selected"' ?>><?php echo $this->getSelectionTitlePrice($_selection, false) ?><br />
+                    <?php endforeach; ?>
+                    </select>
+                <?php elseif ($_option->getType() == 'checkbox') : ?>
+                    <?php foreach ($_option->getSelections() as $_selection): ?>
+                        <?php if($_selection->getTypeId() == 'simple') : ?>
+                            <input type="checkbox" onchange="bundle.changeSelection(this);" id="bundle-option-<?php echo $_option->getId() ?>-checkbox-<?php echo $_selection->getSelectionId() ?>" name="bundle_option[<?php echo $_option->getId() ?>]" class="bundle-option-<?php echo $_option->getId() ?><?php if ($_option->getRequired()) echo ' required-entry' ?> bundle-option-input bundle-option-checkbox change-container-classname" value="<?php echo $_selection->getSelectionId() ?>"<?php if ($this->_isSelected($_selection)) echo ' selected="selected"' ?>><?php echo $this->getSelectionTitlePrice($_selection, false) ?><br />
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php elseif ($_option->getType() == 'multi') : ?>
+                    <select onchange="bundle.changeSelection(this);" id="bundle-option-<?php echo $_option->getId() ?>-multi" multiple name="bundle_option[<?php echo $_option->getId() ?>]" class="bundle-option-<?php echo $_option->getId() ?><?php if ($_option->getRequired()) echo ' required-entry' ?> bundle-option-input bundle-option-multi change-container-classname">
+                        <option value=""><?php echo $this->__('Choose a selection...') ?></option>
+                        <?php foreach ($_option->getSelections() as $_selection): ?>
+                            <?php if($_selection->getTypeId() == 'simple') : ?>
+                                <option value="<?php echo $_selection->getSelectionId() ?>"<?php if ($this->_isSelected($_selection)) echo ' selected="selected"' ?><?php if (!$_selection->isSaleable()) echo ' disabled="disabled"' ?>><?php echo $this->getSelectionTitlePrice($_selection, false) ?></option>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </select>
+                <?php endif; ?>
+
+            </div>
+            <div class="bundle-description">
+                <div id="bundle-option-description-<?php echo $_option->getId() ?>"><?php echo $p->getDescription(); ?></div>
+
+                <?php if (in_array($_option->getType(), array('multi','checkbox')) == false) : ?>
+                    <div id="bundle-option-stock-<?php echo $_option->getId() ?>">
+                        <?php if ($p->isAvailable()): ?>
+                            <p class="availability in-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('In stock') ?></span></p>
+                        <?php else: ?>
+                            <p class="availability out-of-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('Out of stock') ?></span></p>
+                        <?php endif; ?>
+                    </div>
+                    <div class="error-msg out-of-stock-warning hidden" id="oos-warning-<?php echo $_option->getId() ?>">
+                        This item is not in stock, you cannot put the bundle in the cart with this item.
+                    </div>
+                <?php endif; ?>
+            </div>
+
+            <div class="bundle-options" id="bundle-options-<?php echo $_option->getId() ?>">
+            </div>
+        </div>
+        <div class="clearer"></div>
+    </div>
+</section>
+<section class="clearfix"></section>
+<script type="text/javascript">
+    Product.Options = Class.create();
+    Product.Options.prototype = {              
+        initialize : function(config) {           
+            this.config      = config;            
+            this.current     = null;
+            this.attribute   = [];
+            this.priceReload = false;
+            this.importPrice = 0;
+            this.curConfig   = null;
+            this.reloadPrice();
+            document.observe("dom:loaded", this.reloadPrice.bind(this));            
+        },
+        setCurentConfig :function($element,$configOptions,$this){
+            $this.current = null;
+            if ('options' in $element) {                
+                $A($element.options).each(function(selectOption){
+                    if ('selected' in selectOption && selectOption.selected) {
+                        if (typeof($configOptions[selectOption.value]) != 'undefined') {                            
+                            $this.current =  $configOptions[selectOption.value];
+                        }
+                    }
+                });
+            }
+        },
+        setAttribute: function($optionPrice,$this){
+            var att = [];
+            for (attribute in $optionPrice){
+                att.push(attribute);
+            }
+            $this.attribute = att;
+        },
+        checkPriceReload: function($this){
+            var flag = true;
+            for( var j = 0;  j< $this.attribute.length; j++){              
+                if(!$($this.attribute[j]).value){
+                    flag = false;
+                    break;
+                }   
+            }
+            $this.priceReload = flag;
+        },
+        /**
+         * The price will change if all attributes are selected, 
+         * @return import price
+         */
+        setPriceImport: function($pricelist,$this){
+            for (var j = 0; j< $pricelist. length; j++){   
+                flag = true;
+                for( var k = 0;  k< $this.attribute.length; k++){              
+                    if($pricelist[j][$this.attribute[k]] != $($this.attribute[k]).value){
+                        flag = false;
+                        break;
+                    }
+                }
+                if(flag){
+                    $this.importPrice = $pricelist[j]['price'];
+                    break;
+                }                
+            }
+        },
+        /**
+         * Reload price
+         * @return Object curConfig
+         * @param array option price list, current option
+         */
+        setCurConfig: function($configOptions,$selectOption,$optionPrice,$pricelist,$this){
+            for (attribute in $optionPrice){                                                 
+                for(optid in $optionPrice[attribute]){
+                    if ($selectOption.value == optid){
+                        importflag = true;
+                        $(attribute).value = $selectOption.innerHTML.trim();  
+                        $this.checkPriceReload($this);
+                        if($this.priceReload){                                                            
+                            //reset price  
+                            if($(attribute).readAttribute('class') == 'first'){
+                                curConfig = {price: 0};
+                            }
+                            else{
+                                var currentOption = $configOptions[$selectOption.value]; 
+                                $this.setPriceImport($pricelist,$this);
+                                if($this.importPrice){ 
+                                    currentOption['price']      = $this.importPrice;
+                                    currentOption['priceValue'] = $this.importPrice; 
+                                    $this.curConfig = currentOption;
+                                }
+                            }
+                        } 
+                    }
+                }                                                
+            } 
+        },        
+        reloadPrice : function() {            
+            var $this   = this;
+            var config  = this.config;
+            var skipIds = [];   
+            var optionPrice = this.config['priceoption'];
+            var pricelist   = this.config['pricelist'];
+            $$('body .product-custom-option').each(function(element){               
+                var optionId = 0;
+                element.name.sub(/[0-9]+/, function(match){
+                    optionId = parseInt(match[0], 10);
+                });                
+                if (config[optionId]) {
+                    var configOptions = config[optionId];
+                    var curConfig = {price: 0};
+                    if (element.type == 'checkbox' || element.type == 'radio') {
+                        if (element.checked) {
+                            if (typeof configOptions[element.getValue()] != 'undefined') {
+                                curConfig = configOptions[element.getValue()];
+                            }
+                        }
+                    } else if(element.hasClassName('datetime-picker') && !skipIds.include(optionId)) {
+                        dateSelected = true;
+                        $$('.product-custom-option[id^="options_' + optionId + '"]').each(function(dt){
+                            if (dt.getValue() == '') {
+                                dateSelected = false;
+                            }
+                        });
+                        if (dateSelected) {
+                            curConfig = configOptions;
+                            skipIds[optionId] = optionId;
+                        }
+                    } else if(element.type == 'select-one' || element.type == 'select-multiple') {                        
+                        if ('options' in element) { 
+                            $A(element.options).each(function(selectOption){
+                                var importflag = dataflag = false;
+                                if ('selected' in selectOption && selectOption.selected) {                                    
+                                    if (typeof(configOptions[selectOption.value]) != 'undefined') {
+                                        if ((typeof(optionPrice) != 'undefined') && (typeof(pricelist) != 'undefined')) {   
+                                            var dataflag = true;            
+                                            $this.setAttribute(optionPrice,$this);
+                                            $this.setCurConfig(configOptions,selectOption,optionPrice,pricelist,$this)
+                                            curConfig = $this.curConfig;                                                                                       
+                                        }
+
+                                        if(!importflag || !dataflag){                                           
+                                            $this.setCurentConfig(element,configOptions,$this);
+                                            curConfig = $this.current;                                                                                                        
+                                        }
+                                    }
+                                }                               
+                            });
+                        }
+                    } else {
+                        if (element.getValue().strip() != '') {
+                            curConfig = configOptions;
+                        }
+                    }
+                    if(element.type == 'select-multiple' && ('options' in element)) {
+                        $A(element.options).each(function(selectOption) {
+                            if (('selected' in selectOption) && typeof(configOptions[selectOption.value]) != 'undefined') {
+                                if (selectOption.selected) {                                     
+                                    curConfig = configOptions[selectOption.value];
+                                } else {                                   
+                                    curConfig = {price: 0};
+                                }                              
+                                optionsPrice.addCustomPrices(optionId + '-' + selectOption.value, curConfig);
+                                optionsPrice.reload();
+                            }
+                        });
+                    } else { 
+                        optionsPrice.addCustomPrices(element.id || optionId, curConfig);
+                        optionsPrice.reload();
+                    }
+                }
+            });
+        }
+    }    
+    window.opConfig = new Product.Options([]);
+</script>

@@ -1,0 +1,14 @@
+<div class="reward-message <?php echo $this->getWrapperClass()?>">
+    <ul class="messages">
+    	<li class="success-msg">
+    		<ul>
+    			<li>
+ <span><?php echo $this->__('Checkout now and earn <b>%s</b> for this order.', Mage::helper('rewards')->formatPoints($this->getEarnPoints()))?></span>
+     <?php if ($this->hasGuestNote()):?>
+        <p class="limit"><?php echo $this->__('Applies only to registered customers, may vary when logged in.')?></p>
+    <?php endif;?>
+				</li>
+		</ul>
+		</li>
+	</ul>
+</div>

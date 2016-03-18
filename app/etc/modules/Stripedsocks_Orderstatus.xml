@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Stripedsocks_Orderstatus>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Stripedsocks_Orderstatus>
+    </modules>
+</config>

@@ -1,0 +1,102 @@
+<?php
+if (!$this->getMaxPointsNumberToSpent()) return;
+?>
+<li>
+<div class="page-title">
+<h1><?php echo $this->__('Use Reward Points') ?></h1>
+</div>
+<div class="onestepcheckout-rewards">
+    <div class="discount">
+        <div class="discount-form">
+            <label for="points_amount"><?php echo $this->__('You have <b>%s</b> available.', Mage::helper('rewards')->formatPoints($this->getBalancePoints())) ?><br>
+
+            <?php echo $this->__('Enter amount of points to spend:'); ?>
+            </label>
+            <div class="input-box">
+                <input class="input-text" id="points_amount" name="points_amount" value="<?php echo $this->getPointsAmount()? $this->htmlEscape($this->getPointsAmount()): '' ?>" />
+            </div>
+            <div class="input-box">
+                <input type='checkbox' id="points_all" name="points_all"
+                <?php echo $this->getPointsAmount() == $this->getMaxPointsNumberToSpent()?'checked':''?> />
+                <label for="points_all"><?php echo $this->__("Use maximum %s", Mage::helper('rewards')->formatPoints($this->getMaxPointsNumberToSpent()))?></label>
+            </div>
+                <button id="onestepcheckout-rewards-add" type="button" title="<?php echo $this->__('Apply Points') ?>" class="button" value="<?php echo $this->__('Apply Points') ?>"><span><span><?php echo $this->__('Apply Points') ?></span></span></button>
+                <span id="cancel_block" <?php echo $this->getPointsAmount()?'':'style="display:none"' ?>>
+                    &nbsp; <button id="onestepcheckout-rewards-cancel" type="button" title="<?php echo $this->__('Cancel Points') ?>" class="button" value="<?php echo $this->__('Cancel Points') ?>"><span><span><?php echo $this->__('Cancel Points') ?></span></span></button>
+                </span>
+        </div>
+    </div>
+<script type="text/javascript">
+//<![CDATA[
+var rewardsForm = new VarienForm('reward-points-form');
+
+Event.observe($('points_all'), 'click', function(){
+    if ($('points_amount').value == <?php echo $this->getMaxPointsNumberToSpent() ?>) {
+        $('points_amount').value = '';
+    } else {
+        $('points_amount').value = <?php echo $this->getMaxPointsNumberToSpent() ?>;
+    }
+});
+Event.observe($('points_amount'), 'keyup', function(){
+    var val = parseInt($('points_amount').value);
+    if (isNaN(val) || val < <?php echo $this->getMaxPointsNumberToSpent() ?>) {
+        $('points_all').checked = false;
+    } else {
+        $('points_all').checked = true;
+        $('points_amount').value = <?php echo $this->getMaxPointsNumberToSpent() ?>;
+    }
+});
+//]]>
+</script>
+
+            <script>
+            Event.observe(window, 'load', function() {
+                $('onestepcheckout-rewards-add').observe('click', function(e)    {
+                    $('points_amount').addClassName('required-entry');
+                    updatePoints();
+                });
+                $('onestepcheckout-rewards-cancel').observe('click', function(e)    {
+                    $('points_amount').removeClassName('required-entry');
+                    $('points_amount').setValue('');
+                    $('points_all').checked = false;
+                    updatePoints();
+                });
+            });
+
+            function updatePoints() {
+                var points_amount = $('points_amount').getValue();
+                if (points_amount > 0) {
+                    $('cancel_block').show();
+                } else {
+                    $('cancel_block').hide();
+                }
+
+                var url = '<?php echo $this->getUrl('rewards/checkout/applyPointsApptanaOnestepcheckout', array('_secure'=>true)) ?>';
+                var parameters = {points_amount: points_amount};
+
+                var summary = $('checkout-review-load');
+                summary.update('<div class="loading-ajax">&nbsp;</div>');
+
+                new Ajax.Request(url, {
+                    method: 'post',
+                    parameters: parameters,
+                    onSuccess: function(transport) {
+                        if(transport.status == 200) {
+
+                            var response = transport.responseText.evalJSON();
+
+                            if(response.success) {
+                               // summary.update(response.summary);
+                                checkout.reloadReviewBlock();
+                            }
+                            else    {
+                                // summary.update(response.summary);
+                                 checkout.reloadReviewBlock();
+                            }
+                        }
+                    }
+                });
+            }
+            </script>
+        </div>
+</li>

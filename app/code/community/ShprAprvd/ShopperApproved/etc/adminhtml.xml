@@ -1,0 +1,21 @@
+<config>	
+	<acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <shpraprvd translate="label" module="shopperapproved">
+                                        <title>ShprAprvd - All</title>
+                                    </shpraprvd>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

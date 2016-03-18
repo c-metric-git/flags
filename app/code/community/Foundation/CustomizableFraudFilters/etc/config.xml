@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Foundation_CustomizableFraudFilters>
+      <version>0.1.0</version>
+    </Foundation_CustomizableFraudFilters>
+  </modules>
+  <global>
+    <helpers>
+      <customizablefraudfilters>
+        <class>Foundation_CustomizableFraudFilters_Helper</class>
+      </customizablefraudfilters>
+    </helpers>
+
+    <template>
+      <email>
+        <fraud_filter_alert module="customizablefraudfilters">
+          <label>Potential Fraud Alert</label>
+          <file>fraud_filter_alert.html</file>
+          <type>html</type>
+        </fraud_filter_alert>
+      </email>
+    </template>    
+
+  <resources>
+    <customizablefraudfilters_setup>
+    <setup>
+      <module>Foundation_CustomizableFraudFilters</module>
+    </setup>
+    <connection>
+      <use>core_setup</use>
+    </connection>
+    </customizablefraudfilters_setup>
+    <customizablefraudfilters_write>
+    <connection>
+      <use>core_write</use>
+    </connection>
+    </customizablefraudfilters_write>
+    <customizablefraudfilters_read>
+    <connection>
+      <use>core_read</use>
+    </connection>
+    </customizablefraudfilters_read>
+  </resources>
+
+    <models>
+      <customizablefraudfilters_adminhtml>
+        <class>Foundation_CustomizableFraudFilters_Adminhtml_Model</class>
+      </customizablefraudfilters_adminhtml>
+      <customizablefraudfilters>
+        <class>Foundation_CustomizableFraudFilters_Model</class>
+        <resourceModel>customizablefraudfilters_mysql4</resourceModel>
+      </customizablefraudfilters>
+      <sales>
+        <rewrite>
+          <order>Foundation_CustomizableFraudFilters_Model_Sales_Order</order>
+        </rewrite>
+      </sales>
+    </models>    
+
+    <events>
+      <checkout_onepage_controller_success_action> <!-- identifier of the event we want to catch -->
+        <observers>
+          <checkout_onepage_controller_success_action_handler> <!-- identifier of the event handler -->
+            <type>model</type> <!-- class method call type; valid are model, object and singleton -->
+            <class>customizablefraudfilters/observer</class> <!-- observers class alias -->
+            <method>applyFilters</method>  <!-- observer's method to be called -->
+            <args></args> <!-- additional arguments passed to observer -->
+          </checkout_onepage_controller_success_action_handler>
+        </observers>
+      </checkout_onepage_controller_success_action>
+    </events>  
+
+  </global>
+
+  <adminhtml>
+    <acl>
+      <resources>
+        <admin>
+          <children>
+            <system>
+              <children>
+                <config>
+                  <children>
+                    <customizablefraudfilters>
+                      <title>Customizable Fraud Filters</title>
+                    </customizablefraudfilters>
+                  </children>
+                </config>
+              </children>
+            </system>
+          </children>
+        </admin>
+      </resources>
+    </acl>
+  </adminhtml>   
+</config> 

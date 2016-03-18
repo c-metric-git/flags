@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Address Validation
+ * USPS Address Validation
+ *
+ * @category   QS
+ * @package    QS_Addressvalidation
+ * @author     Quart-soft Magento Team <magento@quart-soft.com> 
+ * @copyright  Copyright (c) 2011 Quart-Soft Ltd http://quart-soft.com
+ */
+-->
+<config>
+    <tabs>
+        <qsmodul translate="label">
+            <label>QS Modules</label>
+            <sort_order>250</sort_order>
+        </qsmodul>
+    </tabs>
+    <sections>
+        <addressvalidation translate="label" module="addressvalidation">
+            <label>Address Validation</label>
+            <tab>qsmodul</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1001</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <default translate="label">
+                    <label>Address Validation Store Options</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label" module="addressvalidation">
+                            <label>Address Validation Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </active>
+                        <enabled_in_admin translate="label" module="addressvalidation">
+                            <label>Enable Validation in Admin Panel</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enabled_in_admin>						
+						<carrier translate="label" module="addressvalidation">
+                            <label>Address Validation Carrier</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>addressvalidation/config_source_shipping_allowedcarriers</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </carrier>
+						<!--normalize_addresses translate="label" module="addressvalidation">
+                            <label>Normalize Addresses</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>All addresses will be normalized according to the validator standard</comment>
+                        </normalize_addresses-->
+                        <autocorrect translate="label" module="addressvalidation">
+                            <label>Autocorrect</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Automatic correction addresses on forms</comment>
+                        </autocorrect>
+                        <zip4>
+                            <label>Using Zip4</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Using +Zip4 for normalized address</comment>
+                        </zip4>
+						<no_response_action translate="label" module="addressvalidation">
+                            <label>Save Address if Validation Service have no response</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>31</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If Yes address will be saved anyway</comment>
+                        </no_response_action>
+						<no_response_message translate="label" module="addressvalidation">
+                            <label>No response message</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>32</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This message will be shown to customer</comment>
+							<depends><no_response_action>0</no_response_action></depends>
+                        </no_response_message>
+						<no_address_action translate="label" module="addressvalidation">
+                            <label>Save Address if No Available addresses responsed</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>33</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If Yes address will be saved anyway</comment>
+                        </no_address_action>
+						<no_address_message translate="label" module="addressvalidation">
+                            <label>No address message</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>34</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>This message will be shown to customer</comment>
+							<depends><no_address_action>0</no_address_action></depends>
+                        </no_address_message>
+						<multi_address_action translate="label" module="addressvalidation">
+                            <label>Save Address if multiple addresses will be responsed</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>The entered address was found but more information is needed (such as an apartment, suite, or box number) to match to a specific address.</comment>
+                        </multi_address_action>
+                        <multi_address_message translate="label" module="addressvalidation">
+                            <label>Multi address message</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>36</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Validation passed/not passed with warning</comment>
+                        </multi_address_message>
+						<address_validation_country translate="label">
+                            <label>Enable Address Validation for countries</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>adminhtml/system_config_source_country</source_model>
+                            <sort_order>94</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </address_validation_country>
+						<!--address_validation_testmode translate="label">
+                            <label>Address Validation Test Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>95</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </address_validation_testmode-->
+                    </fields>
+                </default>
+            </groups>
+        </addressvalidation>
+    </sections>
+</config>

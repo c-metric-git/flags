@@ -1,0 +1,145 @@
+<?php
+$helper = Mage::helper('iwd_ordermanager');
+$order = $this->getOrder();
+$current_status = $order->getStatus();
+$current_state = $order->getState();
+$statuses = $this->getStatusList();
+$states = $this->getStateList();
+$website_store_view = Mage::getSingleton('adminhtml/system_store')->getStoreValuesForForm(false, false);
+$allow_change_state = Mage::getModel('iwd_ordermanager/order')->isAllowChangeOrderState();
+?>
+
+<form id="order_information_form" method="post">
+    <?php if ($allow_change_state): ?>
+        <div>
+            <ul class="messages">
+                <li class="notice-msg">
+                    <?php echo $helper->__('Do not change the "Order State", if you are unsure of this action.'); ?>
+                    <?php echo $helper->__("Taxes will not be recalculated."); ?>
+                </li>
+            </ul>
+        </div>
+    <?php endif; ?>
+
+    <table cellspacing="0" class="form-list form-edit-order">
+        <tbody>
+        <tr>
+            <td class="label">
+                <label for="created_at"><?php echo $helper->__("Order Date"); ?><span class="required">*</span></label>
+            </td>
+            <td class="value">
+                <input type="text" name="created_at" class="jquery-ui-datepicker"
+                       value="<?php echo Mage::helper('iwd_ordermanager')->getDateTime($order->getCreatedAt()); ?>"/>
+            </td>
+        </tr>
+
+        <?php if($this->isInvoicePage()): ?>
+            <tr>
+                <td class="label">
+                    <label for="invoice_created_at"><?php echo $helper->__("Invoice Date"); ?><span class="required">*</span></label>
+                </td>
+                <td class="value">
+                    <input type="text" name="invoice_created_at" class="jquery-ui-datepicker"
+                           value="<?php echo Mage::helper('iwd_ordermanager')->getDateTime($this->getInvoiceCreateAt()); ?>"/>
+                    <input type="hidden" name="invoice_id" value="<?php echo $this->getInvoiceId() ?>"/>
+                </td>
+            </tr>
+        <?php endif; ?>
+
+        <?php if($this->isShippingPage()): ?>
+            <tr>
+                <td class="label">
+                    <label for="shipping_created_at"><?php echo $helper->__("Shipment Date"); ?><span class="required">*</span></label>
+                </td>
+                <td class="value">
+                    <input type="text" name="shipping_created_at" class="jquery-ui-datepicker"
+                           value="<?php echo Mage::helper('iwd_ordermanager')->getDateTime($this->getShippingCreateAt()); ?>"/>
+                    <input type="hidden" name="shipping_id" value="<?php echo $this->getShippingId() ?>"/>
+                </td>
+            </tr>
+        <?php endif; ?>
+
+        <?php if($this->isCreditmemoPage()): ?>
+            <tr>
+                <td class="label">
+                    <label for="creditmemo_created_at"><?php echo $helper->__("Credit Memo Date"); ?><span class="required">*</span></label>
+                </td>
+                <td class="value">
+                    <input type="text" name="creditmemo_created_at" class="jquery-ui-datepicker"
+                           value="<?php echo Mage::helper('iwd_ordermanager')->getDateTime($this->getCreditmemoCreateAt()); ?>"/>
+                    <input type="hidden" name="creditmemo_id" value="<?php echo $this->getCreditmemoId() ?>"/>
+                </td>
+            </tr>
+        <?php endif; ?>
+
+        <tr>
+            <td class="label"><label for="status"><?php echo $helper->__("Order Status"); ?><span
+                        class="required">*</span></label></td>
+            <td class="value">
+                <select name="status" class="required-entry required-entry select validation-passed">
+                    <?php foreach ($statuses as $status): ?>
+                        <option
+                            value="<?php echo $status['status'] ?>"
+                            <?php if ($status['status'] == $current_status) echo 'selected = "selected"'; ?>>
+                            <?php echo $status['label']; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </td>
+        </tr>
+        <?php if ($allow_change_state): ?>
+            <tr>
+                <td class="label"><label for="state"><?php echo $helper->__("Order State"); ?><span
+                            class="required">*</span></label></td>
+                <td class="value">
+                    <select name="state" class="required-entry required-entry select validation-passed">
+                        <?php foreach ($states as $id => $label): ?>
+                            <option
+                                value="<?php echo $id ?>"
+                                <?php if ($id == $current_state) echo 'selected = "selected"'; ?>>
+                                <?php echo $label; ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </td>
+            </tr>
+        <?php endif; ?>
+        <tr>
+            <td class="label">
+                <label for="state"><?php echo $helper->__("Purchased From"); ?><span class="required">*</span></label>
+            </td>
+            <td class="value">
+                <select name="store_id">
+                    <?php foreach (Mage::app()->getWebsites() as $website): ?>
+                        <optgroup label="<?php echo $website->getName(); ?>"></optgroup>
+                        <?php foreach ($website->getGroups() as $group): ?>
+                            <optgroup label="&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $group->getName(); ?>"></optgroup>
+                            <?php foreach ($group->getStores() as $view): ?>
+                                <option value="<?php echo $view->getId(); ?>"
+                                        <?php if($view->getId() == $order->getStoreId()): ?>
+                                            selected="selected"
+                                        <?php endif; ?>
+                                >
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $view->getName(); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </select>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <input type="hidden" value="<?php echo $order->getEntityId(); ?>" name="order_id" id="order_id_<?php echo $order->getEntityId(); ?>">
+
+    <?php
+    echo Mage::app()->getLayout()->createBlock('adminhtml/template')
+        ->setTemplate("iwd/ordermanager/controls.phtml")
+        ->setData("button_onclick_update", "IWD.OrderManager.OrderInfo.editOrderInformationSubmit()")
+        ->setData("button_onclick_cancel", "IWD.OrderManager.OrderInfo.editOrderInformationCancel()")
+        ->setData('recalculate', false)
+        ->setData('block', 'info')
+        ->toHtml();
+    ?>
+</form>

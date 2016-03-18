@@ -1,0 +1,41 @@
+[24-Jan-2013 17:07:15] PHP Fatal error:  Uncaught exception 'Exception' with message 'exception 'Exception' with message 'No mail to' in /home/seanno/public_html/admin/amazon_orders_cron.php:611
+Stack trace:
+#0 /home/seanno/public_html/admin/amazon_orders_cron.php(597): AmazonOrders->_sendMail('amazon-mail@lif...', '', 'Your recent ord...', '<html xmlns:v="...', '')
+#1 /home/seanno/public_html/admin/amazon_orders_cron.php(270): AmazonOrders->_sendMails(Array, '/home/seanno/pu...')
+#2 /home/seanno/public_html/admin/amazon_orders_cron.php(725): AmazonOrders::sendMails()
+#3 {main}' in /home/seanno/public_html/admin/amazon_orders_cron.php:604
+Stack trace:
+#0 /home/seanno/public_html/admin/amazon_orders_cron.php(270): AmazonOrders->_sendMails(Array, '/home/seanno/pu...')
+#1 /home/seanno/public_html/admin/amazon_orders_cron.php(725): AmazonOrders::sendMails()
+#2 {main}
+  thrown in /home/seanno/public_html/admin/amazon_orders_cron.php on line 604
+[01-Feb-2013 17:07:22] PHP Fatal error:  Uncaught exception 'Exception' with message 'exception 'Exception' with message 'No mail to' in /home/seanno/public_html/admin/amazon_orders_cron.php:611
+Stack trace:
+#0 /home/seanno/public_html/admin/amazon_orders_cron.php(597): AmazonOrders->_sendMail('amazon-mail@lif...', '', 'Your recent ord...', '<html xmlns:v="...', '')
+#1 /home/seanno/public_html/admin/amazon_orders_cron.php(274): AmazonOrders->_sendMails(Array, '/home/seanno/pu...')
+#2 /home/seanno/public_html/admin/amazon_orders_cron.php(725): AmazonOrders::sendMails()
+#3 {main}' in /home/seanno/public_html/admin/amazon_orders_cron.php:604
+Stack trace:
+#0 /home/seanno/public_html/admin/amazon_orders_cron.php(274): AmazonOrders->_sendMails(Array, '/home/seanno/pu...')
+#1 /home/seanno/public_html/admin/amazon_orders_cron.php(725): AmazonOrders::sendMails()
+#2 {main}
+  thrown in /home/seanno/public_html/admin/amazon_orders_cron.php on line 604
+[02-Feb-2013 11:06:14] PHP Warning:  DOMDocument::loadXML() [<a href='domdocument.loadxml'>domdocument.loadxml</a>]: Blank needed here in Entity, line: 1 in /home/seanno/public_html/admin/amazon.mws/MarketplaceWebServiceOrders/Model/ErrorResponse.php on line 71
+[02-Feb-2013 11:06:14] PHP Warning:  DOMDocument::loadXML() [<a href='domdocument.loadxml'>domdocument.loadxml</a>]: parsing XML declaration: '?&gt;' expected in Entity, line: 1 in /home/seanno/public_html/admin/amazon.mws/MarketplaceWebServiceOrders/Model/ErrorResponse.php on line 71
+[07-Feb-2013 11:02:17] PHP Warning:  DOMDocument::loadXML() [<a href='domdocument.loadxml'>domdocument.loadxml</a>]: Blank needed here in Entity, line: 1 in /home/seanno/public_html/admin/amazon.mws/MarketplaceWebServiceOrders/Model/ErrorResponse.php on line 71
+[07-Feb-2013 11:02:17] PHP Warning:  DOMDocument::loadXML() [<a href='domdocument.loadxml'>domdocument.loadxml</a>]: parsing XML declaration: '?&gt;' expected in Entity, line: 1 in /home/seanno/public_html/admin/amazon.mws/MarketplaceWebServiceOrders/Model/ErrorResponse.php on line 71
+[08-Feb-2013 02:39:10] PHP Fatal error:  Cannot redeclare class AmazonMWSSec in /home/seanno/public_html/admin/hoping.amazon.mws/Amazon.php on line 9
+[08-Feb-2013 02:41:40] PHP Fatal error:  Cannot redeclare class AmazonMWSSec in /home/seanno/public_html/admin/hoping.amazon.mws/Amazon.php on line 9
+[08-Feb-2013 02:41:53] PHP Fatal error:  Cannot redeclare class AmazonMWSSec in /home/seanno/public_html/admin/hoping.amazon.mws/Amazon.php on line 9
+[08-Feb-2013 03:09:13] PHP Fatal error:  Class 'App' not found in /home/seanno/public_html/admin/hoping_amazon_orders_cron.php on line 729
+[09-Feb-2013 17:07:24] PHP Fatal error:  Uncaught exception 'Exception' with message 'exception 'Exception' with message 'No mail to' in /home/seanno/public_html/admin/amazon_orders_cron.php:611
+Stack trace:
+#0 /home/seanno/public_html/admin/amazon_orders_cron.php(597): AmazonOrders->_sendMail('amazon-mail@lif...', '', 'Your recent ord...', '<html xmlns:v="...', '')
+#1 /home/seanno/public_html/admin/amazon_orders_cron.php(278): AmazonOrders->_sendMails(Array, '/home/seanno/pu...')
+#2 /home/seanno/public_html/admin/amazon_orders_cron.php(725): AmazonOrders::sendMails()
+#3 {main}' in /home/seanno/public_html/admin/amazon_orders_cron.php:604
+Stack trace:
+#0 /home/seanno/public_html/admin/amazon_orders_cron.php(278): AmazonOrders->_sendMails(Array, '/home/seanno/pu...')
+#1 /home/seanno/public_html/admin/amazon_orders_cron.php(725): AmazonOrders::sendMails()
+#2 {main}
+  thrown in /home/seanno/public_html/admin/amazon_orders_cron.php on line 604

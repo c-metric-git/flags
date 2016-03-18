@@ -1,0 +1,64 @@
+<?php $helper = Mage::helper('iwd_ordermanager'); ?>
+<form id="iwd_payment_edit_form" method="post">
+    <div id="order-billing_method" class="payments">
+        <script type="text/javascript">
+            var order = new AdminOrder(<?php echo $this->getOrderDataJson() ?>);
+            order.setLoadBaseUrl('<?php echo $this->getLoadBlockUrl() ?>');
+            var payment = {};
+            payment.switchMethod = order.switchPaymentMethod.bind(order);
+
+            <?php /* IWD Stripe */ ?>
+            <?php if(Mage::getConfig()->getModuleConfig('IWD_Stripe')->is('active', 'true')): ?>
+                IWD.Stripe.init();
+            <?php endif; ?>
+            <?php /* IWD Stripe */ ?>
+        </script>
+
+        <fieldset>
+            <?php if ($this->hasMethods()): ?>
+                <div id="order-billing_method_form">
+                    <dl class="payment-methods">
+                        <?php
+                        $_methods = $this->getMethods();
+                        $_methodsCount = count($_methods);
+                        $_counter = 0;
+                        ?>
+                        <?php foreach ($_methods as $_method): $_code = $_method->getCode(); $_counter++; ?>
+                            <dt>
+                                <?php if ($_methodsCount > 1): ?>
+                                    <input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio"
+                                           name="payment[method]"
+                                           title="<?php echo $this->htmlEscape($_method->getTitle()) ?>"
+                                           onclick="payment.switchMethod('<?php echo $_code ?>')"<?php if ($this->getSelectedMethodCode() == $_code): ?> checked="checked"<?php endif; ?>
+                                           <?php if ($_counter == $_methodsCount) : ?>class="validate-one-required-by-name"<?php endif; ?>/>
+                                <?php else : ?>
+                                    <span class="no-display"><input id="p_method_<?php echo $_code ?>"
+                                                                    value="<?php echo $_code ?>" type="radio"
+                                                                    name="payment[method]" checked="checked"/></span>
+                                <?php endif; ?>
+
+                                <label for="p_method_<?php echo $_code ?>"><?php echo $_method->getTitle() ?></label>
+                            </dt>
+                            <dd>
+                                <?php echo $this->getChildHtml('payment.method.' . $_code) ?>
+                            </dd>
+                        <?php endforeach; ?>
+                    </dl>
+                </div>
+                <script
+                    type="text/javascript">order.setPaymentMethod('<?php echo $this->getSelectedMethodCode() ?>')</script>
+            <?php else: ?>
+                <div><?php echo $helper->__('No Payment Methods') ?></div>
+            <?php endif; ?>
+
+            <?php echo Mage::app()->getLayout()->createBlock('adminhtml/template')
+                ->setTemplate("iwd/ordermanager/controls.phtml")
+                ->setData("button_onclick_update", "IWD.OrderManager.Payment.editPaymentSubmit()")
+                ->setData("button_onclick_cancel", "IWD.OrderManager.Payment.editPaymentCancel()")
+                ->setData('recalculate', false)
+                ->setData('block', 'payment')
+                ->toHtml();
+            ?>
+        </fieldset>
+    </div>
+</form>

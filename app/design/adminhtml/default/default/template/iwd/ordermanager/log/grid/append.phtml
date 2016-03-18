@@ -1,0 +1,11 @@
+<script type="text/javascript">
+    if(typeof(jQueryIWD) == "undefined"){if(typeof(jQuery) != "undefined") {jQueryIWD = jQuery;}}
+    jQueryIWD(document).ready(function(){
+        if($ji("#orderManagerLogGrid_table").length) {
+            IWD.OrderManager.Grid.ColorGridRow();
+            if($ji.isFunction($ji.fn.stickyTableHeaders)){
+                $ji("#sales_order_grid_table").stickyTableHeaders();
+            }
+        }
+    });
+</script>

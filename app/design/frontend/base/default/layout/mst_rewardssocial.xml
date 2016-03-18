@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addCss"><stylesheet>css/mirasvit_rewards.css</stylesheet></action>
+            <!-- <action method="addJs"><script>mirasvit/core/jquery.min.js</script></action> -->
+            <action method="addJs"><script>mirasvit/code/rewards/rewards_social.js</script></action>
+        </reference>
+    </default>
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="rewardssocial" ><name>rewards_referral</name><path>rewards/referral</path><label>My Referrals</label></action>
+        </reference>
+    </customer_account>
+ 	<catalog_product_view>
+        <reference name="content">
+			<block type="rewardssocial/buttons" name="buttons" template="mst_rewardssocial/buttons.phtml" before="product.info">
+			</block>
+        </reference>
+        <reference name='before_body_end'>
+            <block type="rewardssocial/buttons_facebook_like" name="fbscript" template="mst_rewardssocial/buttons/facebook/script.phtml"/>
+        </reference>
+ 	</catalog_product_view>
+    <catalog_category_view>
+        <reference name="content">
+            <block type="rewardssocial/buttons" name="buttons" template="mst_rewardssocial/buttons.phtml" before="product.info">
+            </block>
+        </reference>
+        <reference name='before_body_end'>
+            <block type="rewardssocial/buttons_facebook_like" name="fbscript" template="mst_rewardssocial/buttons/facebook/script.phtml"/>
+        </reference>
+    </catalog_category_view>
+</layout>

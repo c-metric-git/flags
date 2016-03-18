@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><AmazonEnvelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amzn-envelope.xsd"><Header><DocumentVersion>1.01</DocumentVersion><MerchantIdentifier>M_TOPSTECHNO_1216044</MerchantIdentifier></Header><MessageType>Relationship</MessageType><PurgeAndReplace>false</PurgeAndReplace><Message><MessageID>1</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>C1098B-1</ParentSKU>
+
+                        <Relation><SKU>C1098Y</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>2</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>C1098B-1</ParentSKU>
+
+                        <Relation><SKU>C1098R</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>3</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>C1098B-1</ParentSKU>
+
+                        <Relation><SKU>C1098PK</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>4</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>C1098B-1</ParentSKU>
+
+                        <Relation><SKU>C1098O</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>5</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>C1098B-1</ParentSKU>
+
+                        <Relation><SKU>C1098B</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>6</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>C1098B-1</ParentSKU>
+
+                        <Relation><SKU>C1098G</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message></AmazonEnvelope>

@@ -1,0 +1,583 @@
+#itoris_qa{
+	/*width: 620px;*/
+	margin: auto;
+	margin-top: 20px;
+	font-family: Arial;
+	position: relative;
+}
+#itoris_qa .button, #itoris_qa .form .value .button span {
+	font-size: 12px;
+}
+#itoris_qa .qa_header {
+	clear: both;
+	margin: 0 0 5px;
+}
+#itoris_qa_ajax {
+	clear: both;
+	margin: 20px 0 15px;
+}
+#itoris_qa_label{
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 16px;
+	font-weight: bold;
+	margin-left: 3px;
+	background: url('images/logo.png') no-repeat center left;
+	padding-left: 46px;
+	cursor: pointer;
+	vertical-align: middle;
+	color: #000000;
+}
+#itoris_qa .input-text{
+	width: 325px;
+}
+
+#itoris_qa .text_expand, #itoris_qa_sort_text{
+	display: inline-block;
+	font-size: 12px;
+}
+
+#itoris_qa .text_expand{
+	margin-left: 65px;
+}
+
+#itoris_qa_sort_text{
+	margin-left: 8px;
+}
+
+#itoris_qa .expand_img{
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 3px;
+	width: 12px;
+	height: 12px;
+	cursor: pointer;
+	background-image: url('images/expand.png');
+}
+
+#itoris_qa .collapse_img{
+	background-image: url('images/collapse.png');
+}
+
+#itoris_qa_select{
+	display: inline-block;
+	vertical-align: middle;
+	width: 227px;
+	height: 20px;
+	font-size: 11px;
+	margin-left: 5px;
+	position: relative;
+	cursor: pointer;
+	background-color: #ffffff;
+	z-index: 6;
+	float: right;
+
+}
+
+#itoris_qa .space_5{
+	height: 5px;
+}
+
+*+html #itoris_qa_select{
+	top: -23px;
+}
+
+#itoris_qa_select_text{
+	width: 195px;
+	height: 15px;
+	margin-left: 5px;
+	margin-top: 1px;
+	float: left;
+	overflow: hidden;
+}
+
+#itoris_qa_select_img{
+	width: 11px;
+	height: 6px;
+	background-image: url('images/select.png');
+	float: right;
+	margin-top: 6px;
+	margin-right: 10px;
+}
+
+#itoris_qa .select_up{
+	background-image: url('images/select_up.png');
+}
+
+#itoris_qa_select ul{
+	width: 100%;
+	position: absolute;
+	background-color: #dfe7ea;
+	top: 20px;
+	left: -1px;
+	z-index: 5;
+}
+
+#itoris_qa_select ul li{
+	padding-left: 3px;
+}
+
+#itoris_qa .li_hover{
+	background-color: #a7c7dc;
+}
+
+#itoris_qa_body{
+	/*width: 616px;*/
+	position: relative;
+	border-width: 2px;
+	border-style: solid;
+	border-bottom-width: 38px;
+	border-color: #DEE5E8;
+	background-color: #ffffff;
+	clear: both;
+}
+
+#itoris_qa .body_empty{
+	border-bottom-width: 2px;
+	height: 50px;
+}
+
+#itoris_qa .space_20{
+	height: 20px;
+}
+
+#itoris_qa .space_15{
+	height: 15px;
+}
+
+#itoris_qa .question{
+	width: 95%;
+	margin: 0 auto 2px;
+	padding:2px 5px;
+	overflow: hidden;
+	cursor: pointer;
+	background-repeat: repeat-x;
+	position: relative;
+	border: 1px solid #608192;
+	background-color: #cfcfcf;
+}
+
+#itoris_qa .q_border_r{
+	top: 0px;
+	right: 0px;
+	width: 2px;
+	height: 100%;
+	position: absolute;
+	z-index: 5;
+}
+
+#itoris_qa .q_border_l{
+	top: 0px;
+	left: 0px;
+	width: 2px;
+	height: 100%;
+	background-repeat: no-repeat;
+	position: absolute;
+	z-index: 5;
+}
+
+#itoris_qa .q_text{
+	display: inline;
+	vertical-align: middle;
+	margin-left: 15px;
+	width: 95%;
+}
+
+#itoris_qa .q_text div, #itoris_qa .answer_text div{
+	height: 100%;
+	display: inline;
+	overflow: hidden;
+	vertical-align: top;
+}
+
+#itoris_qa .qa{
+	width: 20px;
+}
+
+#itoris_qa .qa_text{
+	line-height: 14px;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	display:inline;
+}
+
+#itoris_qa .answer_text .qa_text{
+	/*width: 540px;*/
+	display:inline;
+}
+
+#itoris_qa .text_red, #itoris_qa .text_black, #itoris_qa .text_blue{
+	font-size: 12px;
+	font-weight: bold;
+}
+
+#itoris_qa .q_answers{
+	display: inline-block;
+	vertical-align: middle;
+	width: 95px;
+	height: 20px;
+	margin: 2px 8px 2px 55px;
+	text-align: center;
+	border: 1px solid #a3a4a6;
+	border-bottom-color: #ecf0f3;
+	border-right-color: #ecf0f3;
+	background-color: #e6ebee;
+	color: #7a7a7a;
+	float:right;
+}
+
+#itoris_qa .answers{
+	width: 95%;
+	margin: -2px auto;
+	margin-bottom: 20px;
+}
+
+#itoris_qa .q_info_block{
+	height: 35px;
+	position:relative;
+	background-color: #F4F3F3;
+}
+
+#itoris_qa .button_answer_question{
+	margin: 3px 4px 5px;
+}
+
+#itoris_qa .float_right{
+	float: right;
+}
+
+#itoris_qa .q_info{
+	margin-left: 20px;
+	margin-top: 6px;
+	margin-top: 6px;
+	float: left;
+}
+
+#itoris_qa .info{
+	color: #666666;
+}
+
+#itoris_qa .icon_good, #itoris_qa .icon_bad, #itoris_qa .icon_inappr{
+	display: inline-block;
+	cursor: pointer;
+	margin-left: 2px;
+	margin-right: 2px;
+	width: 23px;
+	height: 20px;
+	vertical-align: middle;
+	background-position: 0 0;
+}
+
+#itoris_qa .icon_good{
+	background-image: url('images/good.png');
+}
+
+#itoris_qa .icon_bad{
+	background-image: url('images/bad.png');
+}
+
+#itoris_qa .icon_inappr{
+	background-image: url('images/inappr.png');
+}
+
+#itoris_qa .icon_good:hover, #itoris_qa .icon_bad:hover, #itoris_qa .icon_inappr:hover{
+	background-position: 0 -20px;
+}
+
+#itoris_qa .answer{
+	padding-top: 5px;
+	clear:both;
+}
+
+#itoris_qa .a_info_block{
+	height: 25px;
+}
+
+#itoris_qa .a_info{
+	float: right;
+}
+
+#itoris_qa .button_add_question {
+	margin-bottom: 5px;
+}
+
+#itoris_qa .form_box{
+	margin-bottom: 15px;
+	position: relative;
+	overflow: hidden;
+	background-color: #DEE5E8;
+}
+
+#itoris_qa .form .label{
+	display: inline-block;
+	width: 120px;
+	text-align: right;
+	vertical-align: top;
+}
+
+#itoris_qa .form .label span{
+	color: #ff4100;
+}
+
+#itoris_qa .form .value{
+	display: inline-block;
+	margin-right: 10px;
+	margin-left: 3px;
+	margin-top: 2px;
+}
+
+#itoris_qa .form .value span{
+	font-size: 10px;
+}
+
+#itoris_qa .form .value a{
+	color: #000000;
+	font-size: 12px;
+}
+
+#itoris_qa .hide_answer_form{
+	position: absolute;
+	background-color: #ffffff;
+	right: 0px;
+	bottom: 0px;
+}
+
+#itoris_qa .button_hide_answer_form{
+	margin: 3px 16px 0 4px;
+	float: left;
+}
+
+#itoris_qa .ask_questions{
+	float: right;
+}
+
+#itoris_qa .show_form {
+	margin: 3px 10px 0 0;
+}
+
+#itoris_qa .ask_questions_empty{
+	top: -20px;
+	position: relative;
+}
+
+#itoris_qa .ask_questions_hide{
+	margin-right: 5px;
+}
+
+#itoris_qa_loading{
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	top:0;
+	left: 0;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+	background-color: #f5f0ea;
+	z-index: 100;
+}
+
+#itoris_qa_loading div{
+	font-size: 16px;
+	font-weight: bold;
+	margin-left: -30px;
+	margin-top: 5px;
+	color: #7d7d7d;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+
+#itoris_qa_loading .loader{
+	margin: 0 auto;
+	margin-top: -45px;
+	margin-left: -16px;
+	z-index: 110;
+	height: 31px;
+	width: 31px;
+	background-image: url('../ajax-loader.gif');
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#itoris_qa_pages{
+	position:absolute;
+	bottom: -23px;
+	left: 13px;
+	font-weight: bold;
+}
+
+#itoris_qa_pages span{
+	cursor: pointer;
+}
+
+#itoris_qa_alert_back{
+	height: 100%;
+	width: 100%;
+	left:0;
+	top:0;
+	background-color: #c5c5c6;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+	position: fixed;
+	z-index: 1000;
+}
+
+#itoris_qa_alert{
+	width: 280px;
+	height: 120px;
+	background-color: #ffffff;
+	border: 2px solid #666666;
+	position: fixed;
+	margin-left: -140px;
+	left: 50%;
+	margin-top: -100px;
+	top: 50%;
+	z-index: 1001;
+}
+
+#itoris_qa_alert .message{
+	color: #000000;
+	font-size: 14px;
+	font-weight: bold;
+	margin: 25px 5px 10px 5px;
+	text-align: center;
+}
+
+#itoris_qa_alert .button_box{
+	position: absolute;
+	bottom: 4px;
+	left: 4px;
+	right: 4px;
+	background-color: #ebebeb;
+	height: 40px;
+}
+
+#itoris_qa_alert .button_ok{
+	display: block;
+	margin: 10px auto;
+}
+
+#itoris_qa .newsletter-email .value, #itoris_qa .notify-email .value  {
+	color: #9c9c9c;
+	font-style: italic;
+	margin: 0;
+	padding: 0;
+}
+#itoris_qa .newsletter-email .active, #itoris_qa .notify-email .active {
+	color: #000000;
+	font-style: normal;
+}
+
+#itoris_qa .info .red {
+	font-style: italic;
+	color: #ff4100;
+}
+
+#itoris_qa .text_expand, #itoris_qa_sort_text{
+	color: #797979;
+}
+
+#itoris_qa_select, #itoris_qa_select ul{
+	border: 1px solid #638493;
+}
+
+#itoris_qa_select ul{
+	border-top: none;
+}
+
+#itoris_qa .text_red{
+	color: #ff4100;
+}
+
+#itoris_qa .info .gray{
+	color: #333333;
+}
+
+#itoris_qa .text_blue{
+	color: #6d8e9d;
+}
+
+#itoris_qa .a_info_block .red{
+	color: #71a0ce;
+}
+
+#itoris_qa .a_info_block .gray{
+	color: #999999
+}
+
+#itoris_qa .form .label, #itoris_qa_pages{
+	color: #333333;
+}
+
+#itoris_qa_pages .active{
+	color: #ffffff;
+}
+#itoris_qa .hide_button_text {
+	display: none;
+}
+#itoris_qa .button_hide_form .hide_button_text {
+	display: inline;
+}
+#itoris_qa .button_hide_form .question_button_text {
+	display: none;
+}
+
+#itoris_qa_label, #itoris_qa .text_expand, #itoris_qa_sort_text, #itoris_qa .expand_img, #itoris_qa .form .value, #itoris_qa .form .label,
+#itoris_qa .icon_good, #itoris_qa .icon_bad, #itoris_qa .icon_inappr, #itoris_qa .q_answers, #itoris_qa .q_text div, #itoris_qa .answer_text div,
+#itoris_qa .q_text, #itoris_qa_select {
+	zoom: 1;
+	*display: inline;
+}
+.itoris_qa_add_first_q_link {
+	display: block;
+	position: absolute;
+	top: 5px;
+	left: 10px;
+	text-decoration: underline;
+	cursor: pointer;
+	color: #1E7EC8;
+}
+.itoris_qa_add_first_q_link:hover {
+	text-decoration: none;
+}
+#itoris_qa  .q_info_block_subscribe {
+	height: 85px;
+}
+#itoris_qa  .q_info_block_subscribecustomer {
+	height: 55px;
+}
+#itoris_qa .qa_subscribe_box {
+	clear:both;
+	margin: 5px 0 0 18px;
+}
+#itoris_qa .q_info_block .validation-advice {
+	margin: 0 15px;
+}
+#itoris_qa .itoris_qa_search_box {
+	float: right;
+}
+#itoris_qa .itoris_qa_search_label {
+	padding-right: 5px;
+	font-size: 12px;
+	color: #797979;
+}
+#itoris_qa .itoris_qa_search_box a {
+	font-size: 13px;
+	font-weight: bold;
+	color: #F30;
+	text-decoration: none;
+}
+#itoris_qa_search {
+	height: 20px;
+	width: 180px;
+	margin-bottom: 4px;
+}
+#itoris_qa_search.default-message {
+	color: #ababab;
+	font-style: italic;
+	font-size: 12px;
+}
+#itoris_qa .clear-float-right {float:right; clear: both;margin-bottom: 4px;}
+#itoris_qa .highlight {color: #ff0000 !important;}
+#itoris_qa .itoris_qa_search_message {margin: -10px 0 0 10px;display: block;color:#676767;}
+#itoris_qa_button_add_answer {margin-bottom:40px !important;}

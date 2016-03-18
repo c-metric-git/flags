@@ -1,0 +1,149 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/<?php echo $this->getLocaleCode()?>/sdk.js#xfbml=1&appId=<?php echo $this->getAppId()?>&version=v2.0";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+<?php
+$collection = $this->getReferralCollection();
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="box-account">
+    <div class="box-head">
+        <h2><?php echo $this->__("Referral Program") ?></h2>
+    </div>
+    <div class="fieldset">
+        <h2 class="legend"><?php echo $this->__("Share with Friends") ?></h2>
+        <p><?php echo $this->__('Share the referal link in the social media and get points!') ?></p>
+        <div class="rewards-social-buttons">
+            <div class="fb">
+                <div class="fb-share-button" data-href="<?php echo $this->getShareUrl() ?>" data-layout="button"></div>
+            </div>
+            <div class="tw">
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $this->getShareUrl() ?>" data-count="none" data-text="<?php echo $this->__('Check this out!') ?>"><?php echo $this->__('Tweet on Twitter')?></a>
+            </div>
+            <div class="gp">
+                <script src="https://apis.google.com/js/platform.js" async defer></script>
+                <div class="g-plus" data-action="share" data-annotation="none" data-height="24" data-href="<?php echo $this->getShareUrl() ?>"></div>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+        <br>
+        <p><?php echo $this->__('Your referral link') ?> <input type="text" value="<?php echo $this->getShareUrl()?>" style="width: 300px" disabled></p>
+
+    </div>
+
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+<form action="<?php echo Mage::getUrl('rewards/referral/post')?>" method="POST"  enctype="multipart/form-data" id="referralForm">
+
+
+<div class="fieldset">
+    <h2 class="legend"><?php echo $this->__("Send Invitations") ?></h2>
+
+    <p><?php echo $this->getChildHtml('rewards.notification') ?></p>
+
+    <p><span><?php echo Mage::helper('rewards')->__('Enter contacts of your friends to invite them.') ?></span></p>
+    <table class="data-table">
+        <thead>
+            <tr class="first last">
+                <th class="a-center">#</th>
+                <th><?php echo Mage::helper('rewards')->__('Name') ?></th>
+                <th class="last"><?php echo Mage::helper('rewards')->__('Email') ?></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="first odd">
+                <td class="a-center">1</td>
+                <td><input name="name[1]" id="name1" style="width: 98%;" class="input-text required-entry" type="text" /></td>
+                <td class="last"><input name="email[1]" style="width: 98%;"  id="email1" class="input-text validate-email required-entry" type="text" /></td>
+            </tr>
+            <tr class="even">
+                <td class="a-center">2</td>
+                <td><input name="name[2]" id="name2" style="width: 98%;"  class="input-text" type="text" /></td>
+                <td class="last"><input name="email[2]" style="width: 98%;"  id="email2" class="input-text" type="text" /></td>
+            </tr>
+            <tr class="odd">
+                <td class="a-center">3</td>
+                <td><input name="name[3]" id="name3" style="width: 98%;"  class="input-text" type="text" /></td>
+                <td class="last"><input name="email[3]" style="width: 98%;"  id="email3" class="input-text" type="text" /></td>
+            </tr>
+            <tr class="even">
+                <td class="a-center">4</td>
+                <td><input name="name[4]" id="name4" style="width: 98%;"  class="input-text" type="text" /></td>
+                <td class="last"><input name="email[4]" style="width: 98%;"  id="email4" class="input-text" type="text" /></td>
+            </tr>
+            <tr class="last odd">
+                <td class="a-center">5</td>
+                <td><input name="name[5]" id="name5" style="width: 98%;"  class="input-text" type="text" /></td>
+                <td class="last"><input name="email[5]" style="width: 98%;"  id="email5" class="input-text" type="text" /></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <ul class="form-list">
+        <li class="wide">
+            <label for="message" class="required"><?php echo $this->__("Message") ?></label>
+            <div class="input-box">
+                <textarea style="width: 100%" name="message" id='message' class="required-entry"></textarea>
+            </div>
+        </li>
+    </ul>
+<div class="buttons-set">
+    <button type="submit" title="<?php echo $this->__("Send Invitations") ?>" class="button" onclick="referralFormSubmit(this)" ><span><span><?php echo $this->__("Send Invitations") ?></span></span></button>
+</div>
+</div>
+
+
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    var referralForm = new VarienForm('referralForm', true);
+    function referralFormSubmit(button){
+        if(referralForm.validator &&  referralForm.validator.validate()){
+            Form.Element.disable(button);
+            referralForm.submit();
+        }
+    }
+//]]>
+</script>
+</div>
+<?php if ($collection->count()):?>
+<?php echo $this->getChildHtml('rewards.toolbar')?>
+    <table class="data-table" id="referral-table">
+        <thead>
+            <tr class="first last">
+                <th><?php echo $this->__("Name") ?></th>
+                <th><?php echo $this->__("Email") ?></th>
+                <th><?php echo $this->__("Status") ?></th>
+                <th class="last"><?php echo $this->__("Points") ?></th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach($collection as $referral): ?>
+			<tr>
+                <td><?php echo $referral->getName()?$referral->getName():$this->__("Referred by link") ?></td>
+                <td><?php echo $referral->getEmail()?$referral->getEmail():"-" ?></td>
+                <td><?php echo $referral->getStatusName() ?></td>
+			    <td class="last">
+                <?php if ($referral->getPointsAmount()): ?>
+                    <?php echo Mage::helper('rewards')->formatPoints($referral->getPointsAmount()) ?>
+                <?php else: ?>
+                    -
+                <?php endif ?>
+                </td>
+			</tr>
+        <?php endforeach ?>
+		</tbody>
+	</table>
+<?php echo $this->getChildHtml('rewards.toolbar')?>
+    <script type="text/javascript">decorateTable('referral-table')</script>
+<?php else: ?>
+    <p><?php echo $this->__("There are no Referrals") ?></p>
+<?php endif;?>

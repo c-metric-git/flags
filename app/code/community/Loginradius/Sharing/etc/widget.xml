@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<widgets>
+    <sharing_horizontalsharing type="sharing/horizontalsharing" translate="name description" module="sharing">
+        <name>Social Sharing - Horizontal</name>
+        <description type="desc">Adds Social Sharing interface (horizontal theme) to the page.</description>
+    </sharing_horizontalsharing>
+    <sharing_verticalsharing type="sharing/verticalsharing" translate="name description" module="sharing">
+        <name>Social Sharing - Vertical</name>
+        <description type="desc">Adds Social Sharing interface (vertical theme) to the page.</description>
+    </sharing_verticalsharing>
+</widgets>

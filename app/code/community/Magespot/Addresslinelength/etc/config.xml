@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!--
+ /**
+ * Magespot
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magespot License.
+ * It is available through the world-wide-web at this URL:
+ * http://magespot.com/license.html
+ * If you need receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contacts@magespot.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.magespot.com/ for more information.
+ *
+ * @category   Magespot
+ * @package    Magespot_Addresslinelength
+ * @copyright  Copyright (c) 2013 Magespot Crew (http://www.magespot.com/)
+ * @author     Magespot Crew <contacts@magespot.com>
+ * @license    http://magespot.com/license.html  Magespot License
+ */
+-->
+<config>
+    <modules>
+        <Magespot_Addresslinelength>
+            <version>1.0.0</version>
+        </Magespot_Addresslinelength>
+    </modules>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Magespot_Addresslinelength>
+                    <files>
+                        <default>Magespot_Addresslinelength.csv</default>
+                    </files>
+                </Magespot_Addresslinelength>
+            </modules>
+        </translate>
+    </adminhtml>
+    <global>
+        <models>
+            <msaddresslinelength>
+                <class>Magespot_Addresslinelength_Model</class>
+            </msaddresslinelength>
+        </models>
+        <helpers>
+            <msaddresslinelength>
+                <class>Magespot_Addresslinelength_Helper</class>
+            </msaddresslinelength>
+        </helpers>
+        <events>
+            <core_block_abstract_to_html_after>
+                <observers>
+                    <msaddresslinelength>
+                        <type>singleton</type>
+                        <class>msaddresslinelength/observer</class>
+                        <method>onCoreBlockAbstractToHtmlAfter</method>
+                    </msaddresslinelength>
+                </observers>
+            </core_block_abstract_to_html_after>
+        </events>
+    </global>
+    <default>
+        <customer>
+            <address>
+                <line_length>30</line_length>
+                <set_maxlength>0</set_maxlength>
+                <lines_amount>0</lines_amount>
+                <val_message>Please use the value with length less or equal than 30 characters</val_message>
+            </address>
+        </customer>
+    </default>
+</config>

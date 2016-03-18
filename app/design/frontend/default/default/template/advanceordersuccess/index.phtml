@@ -1,0 +1,312 @@
+<?php
+$order_id = $this->getOrderId(); //use your own order id 
+$order = Mage::getModel("sales/order")->loadByIncrementId($order_id); //load order by order id 
+
+$items = $order->getItemsCollection();
+
+$colspan = $rowspan = 2;
+
+$order_details = Mage::getModel('sales/order')->loadByIncrementId($order_id);
+// Get shipping method
+$shipping_method = $order_details->_data["shipping_description"];
+
+// Get ship-to address information
+$shipping_address_data = $order_details->getShippingAddress();
+$billingAddress = $order_details->getBillingAddress();
+
+//country codes
+$shippcode = $order_details->getShippingAddress()->getCountry();
+$billcode = $order_details->getBillingAddress()->getCountry();
+
+$paymentmethod = $order->getPayment()->getMethodInstance()->getTitle();
+//credit card information
+$payarry = $order->getPayment()->debug();
+//get credit card name
+foreach (Mage::getSingleton('payment/config')->getCcTypes() as $code => $name) {
+    if ($payarry['cc_type'] == $code) {
+        $options = $name;
+    }
+}
+
+//get static block admin side configurations
+$aboveenable = Mage::getStoreConfig('successpagesettings/cmsblock/aboveordercms');
+$aboveenableid = Mage::getStoreConfig('successpagesettings/cmsblock/aboveordercmsid');
+$belowenable = Mage::getStoreConfig('successpagesettings/cmsblock/belowordercms');
+$belowenableid = Mage::getStoreConfig('successpagesettings/cmsblock/belowordercmsid');
+$newsLetter = Mage::getStoreConfig('successpagesettings/newsletter/enablenewsletter');
+
+if ($aboveenable == 1 && $aboveenableid != "") {
+    echo $this->getLayout()->createBlock('cms/block')->setBlockId($aboveenableid)->toHtml();
+}
+?>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<h2 class="sub-title"><?php echo $this->__('Thank you for your purchase!') ?></h2>
+<div class="myorder-wrapper">
+    <div class="myorder">
+        <h3>Order Information</h3>
+        <?php if ($this->getCanViewOrder() && $this->getCanPrintOrder()) : ?>
+            <?php echo $this->__('<a class="print-icon" href="%s" onclick="this.target=\'_blank\'">here to print</a>', $this->getPrintUrl()) ?>
+            <?php // echo $this->getChildHtml() ?>
+        <?php endif; ?>
+        <div class="inner_content">
+            <label> Date<span>:</span></label>
+            <span> <?php echo $order->getCreatedAtStoreDate(); ?></span>
+        </div>
+        <div class="inner_content">
+            <label>Order ID<span>:</span></label> 
+            <span><?php echo $order_id; ?></span>
+        </div>
+        <div class="inner_content">
+            <label>Order Status<span>:</span></label>
+            <span> <?php echo $order->getStatusLabel(); ?></span>
+        </div>
+    </div>
+    <div class="payment_method">
+        <h3>Payment & Shipping Information</h3>
+        <div class="inner_content">
+            <label><b>Shipping Method</b><span>:</span></label>
+            <span> <?php echo $shipping_method; ?></span> 
+        </div>
+        <div class="inner_content">
+            <label><b>Payment Method</b><span>:</span> </label>
+            <span><?php echo $paymentmethod; ?></span>
+        </div>
+        <?php if ($paymentmethod == 'Credit Card (saved)') { ?>
+            <div class="inner_content">
+                <label>Credit Card Type<span>:</span></label>
+                <span><?php echo $options; ?></span>
+            </div>
+            <div class="inner_content">
+                <label>Credit Card Number<span>:</span></label>
+                <span><?php echo $payarry['cc_last4']; ?></span>
+            </div>
+            <div class="inner_content">
+                <label>Credit Card Owner<span>:</span></label>
+                <span><?php echo $payarry['cc_owner']; ?></span>
+            </div>
+        <?php } ?>
+    </div>
+</div>
+<div class="myorder-wrapper">
+    <div class="order_summery">
+        <h3>Shipping Address</h3>
+        <div class="inner_content">
+            <label>Name<span>:</span></label>
+            <span><?php echo $shipping_address_data['firstname'] . " " . $shipping_address_data['lastname']; ?></span>
+        </div>
+        <div class="inner_content">
+            <label>Delivery Address<span>:</span></label>
+            <span> <?php echo $shipping_address_data['street']; ?></span> 
+        </div>
+        <div class="inner_content">
+            <label>Delivery City<span>:</span> </label>
+            <span> <?php echo $shipping_address_data['city']; ?></span> 
+        </div>
+        <div class="inner_content">
+            <label>State<span>:</span></label>
+            <span>  <?php echo $shipping_address_data['region']; ?></span> 
+        </div>
+        <div class="inner_content">
+            <label>Country<span>:</span></label>
+            <span>  <?php echo Mage::app()->getLocale()->getCountryTranslation($shippcode); ?></span> 
+        </div>
+        <div class="inner_content">
+            <label>Postcode<span>:</span></label> 
+            <span> <?php echo $shipping_address_data['postcode']; ?></span> 
+        </div>
+        <div class="inner_content">
+            <label>Telephone<span>:</span></label>
+            <span> <?php echo $shipping_address_data['telephone']; ?></span> 
+        </div>
+    </div>
+    <div class="order_summery">
+        <h3>Billing Address</h3>
+        <div class="inner_content">
+            <label>Name<span>:</span></label> 
+            <span><?php echo $billingAddress['firstname'] . " " . $billingAddress['lastname']; ?></span>
+        </div>
+        <div class="inner_content">
+            <label>Delivery Address<span>:</span></label>
+            <span><?php echo $billingAddress['street']; ?></span>
+        </div>
+        <div class="inner_content">
+            <label>Delivery City<span>:</span></label>
+            <span><?php echo $billingAddress['city']; ?></span>
+        </div>
+        <div class="inner_content">
+            <label>State<span>:</span></label>
+            <span><?php echo $billingAddress['region']; ?></span>
+        </div>
+        <div class="inner_content">
+            <label>Country<span>:</span></label>
+            <span><?php echo Mage::app()->getLocale()->getCountryTranslation($billcode); ?></span>
+        </div>
+        <div class="inner_content">
+            <label>Postcode<span>:</span></label>
+            <span><?php echo $billingAddress['postcode']; ?></span>
+        </div>
+        <div class="inner_content">
+            <label>Telephone<span>:</span> </label>
+            <span><?php echo $billingAddress->getTelephone(); ?></span>
+        </div>
+    </div>
+</div>
+<div id="checkout-review-table-wrapper">
+    <table class="data-table" id="checkout-review-table">
+        <thead>
+            <tr>
+                <th rowspan="<?php echo $rowspan ?>"><?php echo $this->__('Product Name') ?></th>
+                <th class="a-center"><?php echo $this->__('Unit Price') ?></th>
+                <th class="a-center"><?php echo $this->__('Qty') ?></th>
+                <th class="a-center"><?php echo $this->__('SKU') ?></th>
+                <th class="a-center"><?php echo $this->__('Sub Total') ?></th>
+            </tr>
+        </thead>
+        <?php echo $this->getChildHtml('totals'); ?>
+        <tbody>
+            <?php
+            foreach ($items as $i):
+                $_product = Mage::getModel('catalog/product')->load($i->getProductId());
+                $productType = $_product->getTypeId();
+                $entityId = $_product->getEntityId();
+                
+                $options = $i->getProductOptions();
+
+                if ($productType == "bundle") {
+                    $bundled_product = new Mage_Catalog_Model_Product();
+                    $bundled_product->load($entityId);
+
+
+                    $selectionCollection = $bundled_product->getTypeInstance(true)->getSelectionsCollection(
+                            $bundled_product->getTypeInstance(true)->getOptionsIds($bundled_product), $bundled_product
+                    );
+
+                    $bundled_items = array();
+                    
+                    foreach ($selectionCollection as $option) {
+                        $bundled_items[] = $option->product_id;
+                    }
+                    ?>
+
+                    <tr>
+                        <td rowspan="1">
+                            <img class="product_img" src="<?php echo Mage::helper('catalog/image')->init($_product, 'thumbnail')->resize(75); ?>" alt="product-img" />
+                            <?php
+                            echo $i->getName();
+
+                            $customOptions = $options['options'];
+                            if (!empty($customOptions)) {
+                                foreach ($customOptions as $option) {
+                                    ?>
+                                    <span class="bottom-align">
+                                        <?php
+                                        echo '<b>' . $option['label'] . '</b> :';
+                                        echo $optionValue = $option['value'];
+                                        ?>
+                                    </span>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </td>
+                        <td><?php echo $this->helper('checkout')->formatPrice($i->getPrice()); ?></td>
+                        <td><?php echo $i->getQtyOrdered(); ?></td>
+                        <td><?php echo $i->getSku(); ?></td>
+                        <td><?php echo $this->helper('checkout')->formatPrice($i->getRowTotal()); ?></td>
+                    </tr>
+                    <?php
+                } else if (in_array($entityId, $bundled_items)) {
+                  
+                } else {
+                    ?>
+                    <tr>
+                        <td rowspan="1">
+                            <img class="product_img" src="<?php echo Mage::helper('catalog/image')->init($_product, 'thumbnail')->resize(75); ?>" alt="product-img" />
+                            <?php
+                            echo $i->getName();
+
+                            $customOptions = $options['options'];
+                            if (!empty($customOptions)) {
+                                foreach ($customOptions as $option) {
+                                    ?>
+                                    <span class="bottom-align">
+                                        <?php
+                                        echo '<b>' . $option['label'] . '</b> :';
+                                        echo $optionValue = $option['value'];
+                                        ?></span>                                
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </td>
+                        <td><?php echo $this->helper('checkout')->formatPrice($i->getPrice()); ?></td>
+                        <td><?php echo $i->getQtyOrdered(); ?></td>
+                        <td><?php echo $i->getSku(); ?></td>
+                        <td><?php echo $this->helper('checkout')->formatPrice($i->getRowTotal()); ?></td>
+                    </tr>
+                    <?php
+                }
+                ?>
+            <?php endforeach ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" class="a-right">
+                    <small>SubTotal:</small>
+                </td>
+                <td colspan="2" class="a-right">
+                    <small><?php echo $this->helper('checkout')->formatPrice($order->getSubtotal()); ?></small>
+                </td>
+            </tr>
+            <tr class="shipping">
+                <td class="a-right" colspan="4">
+                    <?php echo $this->__('Shipping & Handling(' . $order->getShippingDescription() . ')'); ?>
+                </td>
+                <td colspan="2" class="last a-right">
+                    <span class="subtotlal-value">
+                        <?php echo $this->helper('checkout')->formatPrice($order->getShippingInclTax()); ?>
+                    </span>
+                </td>
+            </tr>
+            <?php if ($order->getDiscountAmount() != 0): ?>
+                <tr class="discount">
+                    <td class="a-right" colspan="4">
+                        <?php
+                        echo $this->__('Discount');
+                        echo $order->getDiscountDescription() ? '(' . $order->getDiscountDescription() . ')' : "";
+                        ?>
+                    </td>
+                    <td class="last a-right">
+                        <span class="subtotlal-value">
+                            <?php echo $this->helper('checkout')->formatPrice($order->getDiscountAmount()); ?>
+                        </span>
+                    </td>
+                </tr><?php
+            endif;
+            ?>
+            <tr class="grand_total last">
+                <td class="a-right" colspan="4"><strong><?php echo $this->__('Total') ?></strong></td>
+                <td colspan="2" class="last a-right">
+                    <span class="subtotlal-value">
+                        <strong><?php echo $this->helper('checkout')->formatPrice($order->getGrandTotal()); ?></strong>
+                    </span>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<div class="buttons-set">
+    <button type="button" class="button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location = '<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+</div>
+<?php
+if ($belowenable == 1 && $belowenableid != "") {
+    echo $this->getLayout()->createBlock('cms/block')->setBlockId($belowenableid)->toHtml();
+}
+if ($newsLetter) {
+    ?>
+    <div class="order-newsletter">
+        <?php echo $this->getLayout()->createBlock('newsletter/subscribe')->setTemplate('newsletter/subscribe.phtml')->toHtml(); ?>
+    </div>
+    <?php
+}

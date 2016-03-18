@@ -1,0 +1,657 @@
+# Translation of Smartline in French (France)
+# This file is distributed under the same license as the Smartline package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2015-06-06 16:45+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Poedit 1.5.7\n"
+"Project-Id-Version: Smartline\n"
+"POT-Creation-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+
+#: inc/featured-content.php:351
+msgid ""
+"Easily feature all posts with the <a href=\"%1$s\">\"featured\" tag</a> or a "
+"tag of your choice. Your theme supports up to %2$s posts in its featured "
+"content area."
+msgstr ""
+"Promouvez facilement vos articles avec la balise <a href=\"%1$s\">\"featured"
+"\"</a> or une balise de votre choix. Votre thème accepte jusqu'à %2$s "
+"articles dans la zone de contenus promus."
+
+#: inc/featured-content.php:378
+msgid "Tag name"
+msgstr "Nom de la balise"
+
+#: inc/featured-content.php:383
+msgid "Hide tag from displaying in post meta and tag clouds."
+msgstr "Masquer la balise dans les nuages de balises."
+
+#: inc/featured-content.php:389
+msgid "Display featured posts in latest blog post listing."
+msgstr ""
+"Afficher les articles mis en avant dans la liste des derniers articles du "
+"blog."
+
+#: inc/template-tags.php:56
+msgid ""
+"<a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\"><time class=\"entry-date "
+"published updated\" datetime=\"%3$s\">%4$s</time></a>"
+msgstr ""
+"<a href=\"%1$s\" title=\"%2$s\" rel=\"bookmark\"><time class=\"entry-date "
+"published updated\" datetime=\"%3$s\">%4$s</time></a>"
+
+#: inc/template-tags.php:65
+msgid "<a class=\"fn\" href=\"%1$s\" title=\"%2$s\" rel=\"author\">%3$s</a>"
+msgstr "<a class=\"fn\" href=\"%1$s\" title=\"%2$s\" rel=\"author\">%3$s</a>"
+
+#: featured-content-slider.php:14
+msgid ""
+"There is no featured content to be displayed in the slider. To set up the "
+"slider, go to Appearance -> Customize, and add a tag under Tag Name in the "
+"Featured Content section. The slideshow will then display all posts which "
+"are tagged with that keyword."
+msgstr ""
+"Il n'y a pas de contenu mis en valeur à afficher dans le Slider. Pour mettre "
+"en place le Slider, allez à Apparence -> Personnaliser, et ajouter un mot-"
+"clé sous la rubrique Mots clés de la section \"Contenu mis en valeur\". Le "
+"slideshow affichera tous les articles qui ont ce mot-clé."
+
+#: template-frontpage.php:39
+msgid ""
+"There are no widgets to be displayed. Please go to Appearance -> Widgets and "
+"add at least one widget to the \"Magazine Front Page\" widget area. You can "
+"use the three Category Posts widgets to set up the theme like the demo "
+"website."
+msgstr ""
+"Il n'y a pas de widget à afficher. Allez à Apparence -> Widgets, et ajouter "
+"au moins un widget à la zone \"Magazine Front Page\". Vous pouvez utiliser "
+"trois widgets \"Category posts\" pour mettre en place un thème comme le site "
+"de démonstration."
+
+#: inc/theme-info.php:73
+msgid "Customize Theme"
+msgstr "Customiser le thème"
+
+#: inc/customizer/sections/customizer-general.php:14
+msgid "General Settings"
+msgstr "Réglages généraux"
+
+#: inc/customizer/sections/customizer-general.php:51
+msgid "Default Fonts"
+msgstr "Polices par défaut"
+
+#: inc/customizer/sections/customizer-general.php:68
+msgid "Deactivate Google Fonts in case your language is not compatible."
+msgstr ""
+"Désactiver les polices Google au cas où votre langue n'est pas compatible."
+
+#: inc/customizer/sections/customizer-post.php:14
+msgid "Post Settings"
+msgstr "Paramètres des articles"
+
+#: inc/customizer/sections/customizer-post.php:51
+msgid "Post Images"
+msgstr "Images d'articles"
+
+#: inc/customizer/sections/customizer-post.php:100
+msgid "Excerpt More Text"
+msgstr "Extrait de Lire la suite"
+
+#: inc/customizer/sections/customizer-post.php:115
+msgid "Display [...] after text excerpts."
+msgstr "Afficher [...] après les extraits"
+
+#: inc/customizer/sections/customizer-slider.php:14
+msgid "Post Slider"
+msgstr "Post Slider"
+
+#: inc/customizer/sections/customizer-slider.php:15
+msgid ""
+"The slideshow displays your featured posts, which you can configure on the "
+"\"Featured Content\" section above."
+msgstr ""
+"Le slideshow affiche vos articles mis en avant, que vous pouvez configurer "
+"dans la section \"Contenu mis en avant\" plus haut."
+
+#: inc/widgets/widget-category-posts-boxed.php:13
+msgid "Category Posts Boxed (Smartline)"
+msgstr "Articles de catégories en boîte (Smartline)"
+
+#: inc/widgets/widget-category-posts-boxed.php:219
+#: inc/widgets/widget-category-posts-columns.php:245
+#: inc/widgets/widget-category-posts-grid.php:239
+#: inc/widgets/widget-category-posts-single.php:167
+msgid "View all posts"
+msgstr "Voir tous les articles"
+
+#: inc/widgets/widget-category-posts-boxed.php:231
+#: inc/widgets/widget-category-posts-columns.php:259
+#: inc/widgets/widget-category-posts-grid.php:251
+#: inc/widgets/widget-category-posts-single.php:179
+msgid "View all posts from category %s"
+msgstr "Voir tous les articles de la catégorie %s"
+
+#: inc/widgets/widget-category-posts-boxed.php:281
+#: inc/widgets/widget-category-posts-columns.php:306
+#: inc/widgets/widget-category-posts-columns.php:321
+#: inc/widgets/widget-category-posts-grid.php:303
+#: inc/widgets/widget-category-posts-single.php:230
+msgid "All Categories"
+msgstr "Toutes les catégories"
+
+#: inc/widgets/widget-category-posts-boxed.php:295
+#: inc/widgets/widget-category-posts-grid.php:331
+#: inc/widgets/widget-category-posts-single.php:250
+msgid "Link Widget Title to Category Archive page"
+msgstr "Lier le titre du Widget à la page des archives de la catégorie"
+
+#: inc/widgets/widget-category-posts-columns.php:13
+msgid "Category Posts Columns (Smartline)"
+msgstr "Articles de catégories en colonnes (Smartline)"
+
+#: inc/widgets/widget-category-posts-columns.php:246
+msgid "Latest Posts"
+msgstr "Derniers articles"
+
+#: inc/widgets/widget-category-posts-columns.php:341
+msgid "Highlight First Post (Big Image + Excerpt)"
+msgstr "Mettre en valeur le premier article (Grande image + Extrait)"
+
+#: inc/widgets/widget-category-posts-columns.php:348
+msgid "Display Category Titles"
+msgstr "Afficher les titres de catégorie"
+
+#: inc/widgets/widget-category-posts-grid.php:13
+msgid "Category Posts Grid (Smartline)"
+msgstr "Articles de catégories quadrillage (Smartline)"
+
+#: inc/widgets/widget-category-posts-grid.php:324
+msgid "Display as small posts grid with thumbnails"
+msgstr "Afficher comme une grille de petits articles avec miniatures"
+
+#: inc/widgets/widget-category-posts-single.php:11
+msgid ""
+"Displays a single post from a selected category. Please use this widget ONLY "
+"in the Frontpage Magazine widget area."
+msgstr ""
+"Afficher un seul article de la catégorie séléctionnée. N'utilisez ce widget "
+"QUE dans la zone des widgets du Frontpage Magazine"
+
+#: inc/widgets/widget-category-posts-single.php:13
+msgid "Category Posts Single (Smartline)"
+msgstr "Articles de catégories seuls (Smartline)"
+
+#: 404.php:9
+msgid "404 Error: Not found"
+msgstr "Erreur 404: page non trouvée"
+
+#: 404.php:12
+msgid ""
+"The page you trying to reach does not exist, or has been moved. Please use "
+"the menus or the search box to find what you are looking for"
+msgstr ""
+"La page que vous essayez d'atteindre n'existe pas, ou a été déplacée. Merci "
+"d'utiliser les menus ou la fonction Recherche pour trouver ce que vous "
+"voulez."
+
+#: 404.php:14
+msgid "Search"
+msgstr "Recherche"
+
+#: 404.php:17
+msgid "Recent Posts"
+msgstr "Articles récents"
+
+#: 404.php:27
+msgid "Pages"
+msgstr "Pages"
+
+#: archive.php:14
+msgid "Monthly Archives: %s"
+msgstr "Archives mensuelles: %s"
+
+#: archive.php:14
+msgid "F Y"
+msgstr "F Y"
+
+#: archive.php:16
+msgid "Archives"
+msgstr "Archives"
+
+#: author.php:16
+msgid "Author Archives: %s"
+msgstr "Archives de l'auteur: %s"
+
+#: category.php:12
+msgid "Category Archives: %s"
+msgstr "Archives de la catégorie: %s"
+
+#: comments.php:10
+msgid "Enter password to view comments."
+msgstr "Entrez votre mot de passe pour voir les commentaires."
+
+#: comments.php:20 inc/template-tags.php:124
+#: inc/widgets/widget-category-posts-boxed.php:190
+#: inc/widgets/widget-category-posts-columns.php:221
+#: inc/widgets/widget-category-posts-grid.php:210
+msgid "One comment"
+msgstr "Un commentaire"
+
+#: comments.php:20 inc/template-tags.php:124
+#: inc/widgets/widget-category-posts-boxed.php:190
+#: inc/widgets/widget-category-posts-columns.php:221
+#: inc/widgets/widget-category-posts-grid.php:210
+msgid "% comments"
+msgstr "% commentaires"
+
+#: content-excerpt.php:11 content-search.php:8 content.php:10
+#: inc/widgets/widget-category-posts-single.php:130
+msgid "&raquo; Read more"
+msgstr "&raquo; Lire la suite"
+
+#: featured-content-slider.php:48
+msgid "Read more &raquo;"
+msgstr "Lire la suite &raquo; "
+
+#: functions.php:121
+msgid "Main Navigation"
+msgstr "Navigation principale"
+
+#: functions.php:122
+msgid "Top Navigation"
+msgstr "Navigation supérieure"
+
+#: functions.php:123
+msgid "Footer Navigation"
+msgstr "Navigation bas de page"
+
+#: functions.php:126
+msgid "Social Icons"
+msgstr "Icônes sociales"
+
+#: functions.php:167
+msgid "Sidebar"
+msgstr "Barre latérale"
+
+#: functions.php:169
+msgid "Appears on posts and pages except front page and fullwidth template."
+msgstr ""
+"S'affiche sur  les articles et les pages, sauf la page principale et le "
+"template en largeur pleine."
+
+#: functions.php:176
+msgid "Magazine Front Page"
+msgstr "Page principale du Magazine"
+
+#: functions.php:178
+msgid ""
+"Appears on Magazine Front Page page template only. You can use the Category "
+"Posts widgets here."
+msgstr ""
+"S'affiche uniquement sur le template de la page principale du magazine. Vous "
+"pouvez utiliser le widget des catégories des articles ici."
+
+#: inc/template-tags.php:180
+msgid "Powered by %1$s and %2$s."
+msgstr "Animé par %1$s et %2$s."
+
+#: inc/template-tags.php:181
+msgid "WordPress"
+msgstr "WordPress"
+
+#: inc/template-tags.php:182
+msgid "Smartline"
+msgstr "Smartline"
+
+#: functions.php:258
+msgid "Pingback:"
+msgstr "Pingback:"
+
+#: functions.php:259 functions.php:279
+msgid "(Edit)"
+msgstr "(Editer)"
+
+#: functions.php:270
+msgid "<span class=\"fn\">%s</span>"
+msgstr "<span class=\"fn\">%s</span>"
+
+#: functions.php:274
+msgid "Your comment is awaiting moderation."
+msgstr "Votre commentaire est en attente de modération."
+
+#: functions.php:278
+msgid "%1$s at %2$s"
+msgstr "%1$s à %2$s"
+
+#: image.php:19
+msgid "Previous"
+msgstr "Précédent"
+
+#: image.php:20
+msgid "Next"
+msgstr "Suivant"
+
+#: image.php:26
+msgid "Return to Gallery"
+msgstr "Retourner à la gallerie"
+
+#: image.php:27
+msgid "Return to"
+msgstr "Retourner à"
+
+#: search.php:13 search.php:35
+msgid "Search Results for: %s"
+msgstr "Résultats de la rechercher pour: %s"
+
+#: search.php:41
+msgid ""
+"No matches. Please try again, or use the navigation menus to find what you "
+"search for."
+msgstr ""
+"Pas de résultat. Merci de chercher encore, ou d&rsquo;essayer les menus de "
+"navigation pour trouver ce que vous cherchez."
+
+#: searchform.php:4
+msgid "Search for:"
+msgstr "Recherche:"
+
+#: sidebar.php:14
+msgid "Widget Area"
+msgstr "Zone des Widgets"
+
+#: sidebar.php:16
+msgid ""
+"There are no active widgets to be displayed. Please go to Appearance -> "
+"Widgets to setup your sidebar."
+msgstr ""
+"Il n'y a pas de widget actif à afficher. Merci d'aller à Apparence -> "
+"Widgets pour mettre en place votre barre latérale."
+
+#: tag.php:12
+msgid "Tag Archives: %s"
+msgstr "Archives de mot-clé: %s"
+
+#: inc/featured-content.php:350
+msgid "Featured Content"
+msgstr "Contenu mis en valeur"
+
+#: inc/template-tags.php:124 inc/widgets/widget-category-posts-boxed.php:190
+#: inc/widgets/widget-category-posts-columns.php:221
+#: inc/widgets/widget-category-posts-grid.php:210
+msgid "Leave a comment"
+msgstr "Laisser un commentaire"
+
+#: inc/template-tags.php:67
+msgid "View all posts by %s"
+msgstr "Voir tous les articles de %s"
+
+#: inc/template-tags.php:73
+msgid "%1$s"
+msgstr "%1$s"
+
+#: inc/template-tags.php:76
+msgid "Edit Post"
+msgstr "Éditer l'article"
+
+#: inc/template-tags.php:214
+msgid ""
+"Please go to WP-Admin-> Appearance-> Menus and create a new custom menu with "
+"custom links to all your social networks. Then click on \"Manage Locations\" "
+"tab and assign your created menu to the \"Social Icons\" theme location."
+msgstr ""
+"Merci d'aller à WP-Admin -> Apparence -> Menus et créer un nouveau menu "
+"personnalisé avec des liens vers vos réseaux sociaux. Cliquer alors sur "
+"\"Gérer les zones\" et assigner votre nouveau menu à la zone des \"icônes "
+"sociales\" du thème."
+
+#: inc/theme-info.php:15
+msgid "Welcome to Smartline"
+msgstr "Bienvenue à Smartline"
+
+#: inc/theme-info.php:16
+msgid "Theme Info"
+msgstr "Information du thème"
+
+#: inc/theme-info.php:35
+msgid "Welcome to %1s %2s"
+msgstr "Bienvenue à %1s %2s"
+
+#: inc/theme-info.php:41
+msgid "Important Links:"
+msgstr "Liens importants:"
+
+#: inc/theme-info.php:42
+msgid "Theme Info Page"
+msgstr "Page d'info du thème"
+
+#: inc/theme-info.php:43
+msgid "Changelog"
+msgstr "Changelog"
+
+#: inc/theme-info.php:44
+msgid "Theme Demo"
+msgstr "Démonstration du thème"
+
+#: inc/theme-info.php:45 inc/theme-info.php:60
+msgid "Theme Documentation"
+msgstr "Documentation du thème"
+
+#: inc/theme-info.php:46
+msgid "Rate this theme"
+msgstr "Noter ce thème"
+
+#: inc/theme-info.php:53
+msgid "Getting Started with %s"
+msgstr "Démarrer avec %s"
+
+#: inc/theme-info.php:62
+msgid ""
+"Need any help to setup and configure this theme? We got you covered with an "
+"extensive theme documentation on our website."
+msgstr ""
+"Vous avez besoin d'aide pour installer et configurer votre thème? Nous avons "
+"pour vous une documentation du thème extensive sur notre site web."
+
+#: inc/theme-info.php:64
+msgid "Visit Smartline Documentation"
+msgstr "Visitez la documentation de Smartline"
+
+#: inc/theme-info.php:69 inc/customizer/customizer.php:29
+msgid "Theme Options"
+msgstr "Options du thème"
+
+#: inc/theme-info.php:71
+msgid ""
+"Smartline supports the awesome Theme Customizer for all theme settings. "
+"Click \"Customize Theme\" to open the Customizer now."
+msgstr ""
+"Smartline accepte le fantastique Customisateur de thème pour toutes les "
+"paramètres du thème. Cliquez sur \"Customiser le thème\" pour ouvrir le "
+"Customisateur."
+
+#: inc/theme-info.php:78 inc/customizer/sections/customizer-upgrade.php:14
+msgid "PRO Version"
+msgstr "Version PRO"
+
+#: inc/theme-info.php:80
+msgid ""
+"Need more features? Check out the PRO version which comes with additional "
+"features and advanced customization options."
+msgstr ""
+"Vous avez besoin de plus d'options? Découvrez la version PRO qui contient "
+"d'autres options et plus de possibilités de customisation."
+
+#: inc/theme-info.php:82
+msgid "Learn more about the PRO Version of Smartline"
+msgstr "Découvrez la version PRO de Smartline"
+
+#: inc/theme-info.php:102
+msgid ""
+"Smartline is proudly brought to you by %1s. If you like this theme, %2s :) "
+msgstr "Smartline est produit par %1s. Si vous aimez ce thème, %2s :) "
+
+#: inc/theme-info.php:104
+msgid "rate it"
+msgstr "notez-le"
+
+#: inc/customizer/sections/customizer-general.php:29
+msgid "Theme Layout"
+msgstr "Disposition du thème"
+
+#: inc/customizer/sections/customizer-general.php:35
+msgid "Left Sidebar"
+msgstr "Barre latérale gauche"
+
+#: inc/customizer/sections/customizer-general.php:36
+msgid "Right Sidebar"
+msgstr "Barre latérale droite"
+
+#: inc/customizer/sections/customizer-header.php:14
+#: inc/customizer/sections/customizer-header.php:30
+msgid "Header Content"
+msgstr "Contenu de l'en-tête"
+
+#: inc/customizer/sections/customizer-header.php:46
+msgid ""
+"The Header Content configured below will be displayed on the right hand side "
+"of the header area."
+msgstr ""
+"Le contenu de l'en-tête, configuré ci-dessous, sera affiché sur la droite de "
+"la zone d'en-tête."
+
+#: inc/customizer/sections/customizer-header.php:63
+msgid "Display search field on header area"
+msgstr "Afficher le champ de recherche dans la zone d'en-tête"
+
+#: inc/customizer/sections/customizer-header.php:79
+msgid "Display Social Icons on header area"
+msgstr "Afficher les icônes sociales dans la zone d'en-tête"
+
+#: inc/customizer/sections/customizer-post.php:29
+msgid "Post Length on archives"
+msgstr "Longueur des articles dans les archives"
+
+#: inc/customizer/sections/customizer-post.php:35
+msgid "Show full posts"
+msgstr "Afficher les articles entiers"
+
+#: inc/customizer/sections/customizer-post.php:36
+msgid "Show post summaries (excerpt)"
+msgstr "Afficher les résumés des articles (extraits)"
+
+#: inc/customizer/sections/customizer-post.php:66
+msgid "Display featured images on archive pages"
+msgstr "Afficher les images mises en valeur sur les pages d'archive"
+
+#: inc/customizer/sections/customizer-post.php:82
+msgid "Display featured images on single posts"
+msgstr "Afficher les images mises en valeur sur les articles seuls"
+
+#: inc/customizer/sections/customizer-slider.php:31
+msgid "Activate Featured Post Slider"
+msgstr "Activer le Slider des articles mis en valeur"
+
+#: inc/customizer/sections/customizer-slider.php:46
+msgid "Display Slider on Magazine Front Page template."
+msgstr "Afficher le Slider sur la page principale du template Magazine"
+
+#: inc/customizer/sections/customizer-slider.php:61
+msgid "Display Slider on normal blog index."
+msgstr "Afficher le Slider sur l'index de blog normal"
+
+#: inc/customizer/sections/customizer-slider.php:77
+msgid "Slider Animation"
+msgstr "Animation du Slider"
+
+#: inc/customizer/sections/customizer-slider.php:83
+msgid "Horizontal Slider"
+msgstr "Slider horizontal"
+
+#: inc/customizer/sections/customizer-slider.php:84
+msgid "Fade Slider"
+msgstr "Slider avec fondu"
+
+#: inc/customizer/sections/customizer-upgrade.php:30
+msgid "Need more features?"
+msgstr "Vous avez besoin de plus d'options?"
+
+#: inc/customizer/sections/customizer-upgrade.php:46
+msgid ""
+"Check out the PRO version which comes with additional features and advanced "
+"customization options."
+msgstr ""
+"Découvrez la version PRO qui contient d'autres options et plus de "
+"possibilités de customisation avancées."
+
+#: inc/customizer/sections/customizer-upgrade.php:62
+msgid "Learn more about the PRO Version"
+msgstr "Apprenez d'avantage sur la version PRO"
+
+#: inc/customizer/customizer.php:50
+msgid "Display Tagline beside site title."
+msgstr "Afficher le slogan à côté du titre du site."
+
+#: footer.php:18 header.php:31 header.php:68
+msgid "Menu"
+msgstr "Menu"
+
+#: inc/widgets/widget-category-posts-boxed.php:11
+msgid ""
+"Display latest posts from category in boxed layout. Please use this widget "
+"ONLY on Frontpage Magazine widget area."
+msgstr ""
+"Afficher les derniers articles de la catégorie en boites. Merci de "
+"n'utiliser ce widget QUE dans la zone des widgets de la page principale "
+"magazine."
+
+#: inc/widgets/widget-category-posts-boxed.php:272
+#: inc/widgets/widget-category-posts-columns.php:297
+#: inc/widgets/widget-category-posts-grid.php:294
+#: inc/widgets/widget-category-posts-single.php:221
+msgid "Title:"
+msgstr "Titre:"
+
+#: inc/widgets/widget-category-posts-boxed.php:278
+#: inc/widgets/widget-category-posts-grid.php:300
+#: inc/widgets/widget-category-posts-single.php:227
+msgid "Category:"
+msgstr "Catégorie:"
+
+#: inc/widgets/widget-category-posts-columns.php:11
+msgid ""
+"Display latest posts from two specified categories. Please use this widget "
+"ONLY on Frontpage Magazine widget area."
+msgstr ""
+"Afficher les derniers articles de deux catégories spécifiées. Merci de "
+"n'utiliser ce widget que dans la zone des widgets de la page principale."
+
+#: inc/widgets/widget-category-posts-columns.php:303
+msgid "Left Category:"
+msgstr "Catégorie de gauche:"
+
+#: inc/widgets/widget-category-posts-columns.php:318
+msgid "Right Category:"
+msgstr "Catégorie de droite:"
+
+#: inc/widgets/widget-category-posts-grid.php:11
+msgid ""
+"Display latest posts from category in a grid layout. Please use this widget "
+"ONLY on Frontpage Magazine widget area."
+msgstr ""
+"Afficher les derniers articles de la catégorie en format quadrillé. Merci de "
+"n'utiliser ce widget QUE dans la zone des widgets de la page principale."
+
+#: inc/widgets/widget-category-posts-columns.php:333
+#: inc/widgets/widget-category-posts-grid.php:315
+#: inc/widgets/widget-category-posts-single.php:242
+msgid "Number of posts:"
+msgstr "Nombre d'articles:"
+
+#: inc/widgets/widget-category-posts-grid.php:317
+msgid "Please chose an even number (2, 4, 6, 8)."
+msgstr "Merci de choisir un nombre pair (2, 4, 6, 8)."

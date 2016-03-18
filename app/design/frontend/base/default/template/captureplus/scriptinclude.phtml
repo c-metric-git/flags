@@ -1,0 +1,120 @@
+<script type="text/javascript">
+//<![CDATA[
+  (function() {
+      var magento = pca.magento = pca.magento || {};
+     
+      magento.fields = [
+          {
+              Company: "billing:company",
+              Line1: "billing:street1",
+              Line2: "billing:street2",
+              City: "billing:city",
+              State: "billing:region",
+              StateSelect: "billing:region_id",
+              Postcode: "billing:postcode",
+              CountrySelect: "billing:country_id" 
+          },
+          {
+              Company: "shipping:company",
+              Line1: "shipping:street1",
+              Line2: "shipping:street2",
+              City: "shipping:city",
+              State: "shipping:region",
+              StateSelect: "shipping:region_id",
+              Postcode: "shipping:postcode",
+              CountrySelect: "shipping:country_id"
+          },
+          {
+              Company: "company",
+              Line1: "street_1",
+              Line2: "street_2",
+              City: "city",
+              State: "region",
+              StateSelect: "region_id",
+              Postcode: "zip",
+              CountrySelect: "country"
+          }
+      ];
+      
+      magento.key = '<?php echo Mage::getStoreConfig('captureplus/settings/website_key'); ?>';
+      magento.countryByIP = !!<?php echo Mage::getStoreConfig('captureplus/settings/ip_country'); ?>;
+      magento.controls = magento.controls || [];
+
+      //load address forms
+      magento.load = function() {
+          function createAddressControl(addressFields) {
+              var countryField = pca.getElement(addressFields.CountrySelect),
+                  magentoCountries = [];
+                
+              for (var c = 0; c < countryField.options.length; c++)
+                  magentoCountries.push(countryField.options[c].value);
+            
+              var fields = [
+                  { element: addressFields.Company, field: "Company", mode: pca.fieldMode.DEFAULT | pca.fieldMode.PRESERVE },
+                  { element: addressFields.Line1, field: "Line1" },
+                  { element: addressFields.Line2, field: "Line2", mode: pca.fieldMode.POPULATE },
+                  { element: addressFields.City, field: "City", mode: pca.fieldMode.POPULATE },
+                  { element: addressFields.State, field: "ProvinceName", mode: pca.fieldMode.POPULATE },
+                  { element: addressFields.StateSelect, field: "ProvinceName", mode: pca.fieldMode.POPULATE },
+                  { element: addressFields.Postcode, field: "PostalCode" },
+                  { element: addressFields.CountrySelect, field: "CountryIso2", mode: pca.fieldMode.COUNTRY }
+              ],
+              options = { 
+                  key: magento.key,
+                  suppressAutocomplete: true,
+                  countries: { 
+                      codesList: magentoCountries.join(","), 
+                      valueType: pca.countryNameType.ISO2 
+                  },
+                  source: "magento"
+              },
+              control = new pca.Address(fields, options);
+              
+              //fire the change event for One Step Checkout - they have a 1 second delay coded in
+              control.listen("populate", function() {
+                  pca.fire(pca.getElement(addressFields.Postcode), "change");
+                  window.setTimeout(function() { pca.fire(pca.getElement(addressFields.StateSelect), "change"); }, 1000);
+              });
+              
+              //Custom code from Settings
+              <?php echo Mage::getStoreConfig('captureplus/settings/custom_code'); ?>
+              //End custom code from Settings
+              
+              magento.controls.push(control);
+          }
+          
+          //do not load if there is no key
+          if (!magento.key) return;
+          
+          //check for address forms on the page
+          for (var i = 0; i < magento.fields.length; i++) {
+              if (pca.getElement(magento.fields[i].Line1))
+                  createAddressControl(magento.fields[i]);
+          }
+      }
+      
+      //set the country based on user location
+      magento.setCountryByIp = function() {
+          function success(response) {
+              if (response.length && response[0].Iso3) {
+                  for (var i = 0; i < magento.controls.length; i++)
+                      magento.controls[i].setCountry(response[0].Iso3);
+              }
+          }
+
+          if (magento.key) pca.fetch("Extras/Web/Ip2Country/v1.10", { Key: magento.key }, success);
+      }
+
+      //wait for the page to be ready
+      pca.ready(function() {
+          pca.fuzzyMatch = false;
+      
+          //load controls for address forms
+          magento.load();
+
+          //perform IP country lookup if required
+          if (magento.countryByIP) magento.setCountryByIp();
+      });
+    })();
+//]]>
+</script>

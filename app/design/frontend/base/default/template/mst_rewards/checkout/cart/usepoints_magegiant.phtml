@@ -1,0 +1,226 @@
+<?php
+if (!$this->getMaxPointsNumberToSpent()) {
+    return;
+}
+?>
+<script>
+    MagegiantOnestepcheckoutReviewPoints = Class.create();
+    MagegiantOnestepcheckoutReviewPoints.prototype = {
+        initialize: function (config) {
+            // init dom elements
+            this.msgContainer = $$(config.msgContainerSelector).first();
+            this.pointsCodeInput = $(config.pointsCodeInput);
+            // init urls
+            this.applyPointsUrl = config.applyPointsUrl;
+            // init messages
+            this.successMessageBoxCssClass = config.successMessageBoxCssClass;
+            this.errorMessageBoxCssClass = config.errorMessageBoxCssClass;
+            this.jsErrorMsg = config.jsErrorMsg;
+            this.jsSuccessMsg = config.jsSuccessMsg;
+            // init config
+            this.isPointsApplied = config.isPointsApplied;
+            // init "Apply Points Button"
+            this.isApplyPointsButton = config.isApplyPointsButton;
+            this.applyPointsButton = $$(config.applyPointsButtonSelector).first();
+//            this.cancelPointsButton = $$(config.cancelPointsButtonSelector).first();
+            // init behaviour
+            this.ajaxRequestId = 0;
+            this.init();
+        },
+        init: function () {
+            if (this.isApplyPointsButton) {
+                if (this.applyPointsButton) {
+                    this.applyPointsButton.observe('click', this.applyPoints.bind(this));
+//                    this.cancelPointsButton.observe('click', this.applyPoints.bind(this))
+                }
+            } else {
+                if (this.pointsCodeInput) {
+                    this.pointsCodeInput.observe('change', this.applyPoints.bind(this))
+                }
+            }
+        },
+        applyPoints: function (e) {
+            this.removeMsg();
+            if (this.isApplyPointsButton) {
+                if (!this.isPointsApplied) {
+                    this.pointsCodeInput.addClassName('required-entry');
+                    var validationResult = Validation.validate(this.pointsCodeInput)
+                    this.pointsCodeInput.removeClassName('required-entry');
+                    if (!validationResult) {
+                        return;
+                    }
+                } else {
+                    this.pointsCodeInput.setValue('');
+                }
+            } else {
+                if (!this.pointsCodeInput.getValue() && !this.isPointsApplied) {
+                    return;
+                }
+            }
+            var me = this;
+            this.ajaxRequestId++;
+            var currentAjaxRequestId = this.ajaxRequestId;
+            var requestOptions = {
+                method: 'post',
+                parameters: {
+                    points_amount: this.pointsCodeInput.getValue()
+                },
+                onComplete: function (transport) {
+                    if (currentAjaxRequestId !== me.ajaxRequestId) {
+                        return;
+                    }
+                    me._onAjaxPointsActionCompleteFn(transport);
+                }
+            };
+//            MagegiantOnestepcheckoutCore.updater.startRequest(this.applyPointsUrl, requestOptions);
+            MagegiantOnestepcheckoutCore.updater.addActionBlocksToQueue('applyCoupon');;
+            MagegiantOnestepcheckoutCore.updater.runRequest(this.applyPointsUrl, requestOptions);
+        },
+        _onAjaxPointsActionCompleteFn: function (transport) {
+            try {
+                eval("var json = " + transport.responseText + " || {}");
+            } catch (e) {
+                this.showError(this.jsErrorMsg);
+                return;
+            }
+            this.isPointsApplied = json.points_applied;
+            if (json.success) {
+                var successMsg = this.jsSuccessMsg;
+                if (("messages" in json) && ("length" in json.messages) && json.messages.length > 0) {
+                    successMsg = json.messages;
+                }
+                this.showSuccess(successMsg);
+                if (this.isPointsApplied) {
+//                    this.applyPointsButton.hide();
+//                    this.cancelPointsButton.show();
+                } else {
+                    this.applyPointsButton.show();
+//                    this.cancelPointsButton.hide();
+                }
+            } else {
+                var errorMsg = this.jsErrorMsg;
+                if (("messages" in json) && ("length" in json.messages) && json.messages.length > 0) {
+                    errorMsg = json.messages;
+                }
+                this.showError(errorMsg);
+            }
+            try {
+                eval("var response = " + transport.responseText);
+            } catch (e) {
+                //error
+                var response = {
+                    blocks: {}
+                };
+            }
+            MagegiantOnestepcheckoutCore.updater.removeActionBlocksFromQueue('applyCoupon', response);
+        },
+        showError: function (msg, afterShowFn) {
+            MagegiantOnestepcheckoutCore.showMsg(msg, this.errorMessageBoxCssClass, this.msgContainer);
+            //add effect for height change
+            var afterShowFn = afterShowFn || new Function();
+            new Effect.Morph(this.msgContainer, {
+                style: {
+                    height: this.msgContainer.down().getHeight() + 'px'
+                },
+                duration: 0.3,
+                afterFinish: function (e) {
+                    afterShowFn();
+                }
+            });
+        },
+        showSuccess: function (msg, afterShowFn) {
+            MagegiantOnestepcheckoutCore.showMsg(msg, this.successMessageBoxCssClass, this.msgContainer);
+            //add effect for height change
+            var afterShowFn = afterShowFn || new Function();
+            new Effect.Morph(this.msgContainer, {
+                style: {
+                    height: this.msgContainer.down().getHeight() + 'px'
+                },
+                duration: 0.3,
+                afterFinish: function (e) {
+                    afterShowFn();
+                }
+            });
+        },
+        removeMsg: function () {
+            if (this.msgContainer.down()) {
+                var me = this;
+                new Effect.Morph(this.msgContainer, {
+                    style: {
+                        height: 0 + 'px'
+                    },
+                    duration: 0.3,
+                    afterFinish: function (e) {
+                        MagegiantOnestepcheckoutCore.removeMsgFromBlock(me.msgContainer, me.errorMessageBoxCssClass);
+                        MagegiantOnestepcheckoutCore.removeMsgFromBlock(me.msgContainer, me.successMessageBoxCssClass);
+                    }
+                });
+            }
+        }
+    };
+
+</script>
+
+<div id="giant-onestepcheckout-order-review-points-wrapper">
+    <div id="giant-onestepcheckout-review-points">
+        <div class="points-message-container" style="overflow:hidden;height:0px;"></div>
+        <div class="points-code-form">
+            <label for="points_amount"><?php echo $this->__('You have <b>%s</b> available.', Mage::helper('rewards')->formatPoints($this->getBalancePoints())) ?><br>
+                <?php echo $this->__('Enter amount of points to spend:'); ?>
+            </label>
+            <input type="hidden" name="remove-points" id="remove-points" value="0" />
+            <div class="input-box field-row">
+                <input class="input-text with-buttons" id="points_amount" name="points_amount" value="<?php echo $this->getPointsAmount() ? $this->htmlEscape($this->getPointsAmount()) : '' ?>" style="width: 90%;"/>
+            </div>
+            <div class="input-box">
+                <input type='checkbox' id="points_all" name="points_all"
+                    <?php echo $this->getPointsAmount() == $this->getMaxPointsNumberToSpent() ? 'checked' : ''?> />
+                <label for="points_all"><?php echo $this->__('Use maximum %s', Mage::helper('rewards')->formatPoints($this->getMaxPointsNumberToSpent()))?></label>
+            </div>
+            <div class="ac-button">
+                <button type="button" class="button" id="giant-onestepcheckout-points-code-apply-btn" onclick="return false;">
+                    <span><span><?php echo $this->__('Apply Points') ?></span></span>
+                </button>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var giantOSCReviewPoints = new MagegiantOnestepcheckoutReviewPoints({
+                isPointsApplied: false,
+                isApplyPointsButton: true,
+                applyPointsButtonSelector: '#giant-onestepcheckout-points-code-apply-btn',
+//                cancelPointsButtonSelector: '#giant-onestepcheckout-points-code-cancel-btn',
+                msgContainerSelector: '.points-message-container',
+                applyPointsUrl: '<?php echo $this->getUrl('rewards/checkout/applyPointsMagegiantstepcheckout', array('_secure' => true)) ?>',
+                pointsCodeInput: 'points_amount',
+                successMessageBoxCssClass: 'giant-onestepcheckout-success-msg',
+                errorMessageBoxCssClass: 'giant-onestepcheckout-error-msg',
+                jsErrorMsg: "Oops something's wrong",
+                jsSuccessMsg: "Ok"				});
+        </script>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //<![CDATA[
+    var rewardsForm = new VarienForm('reward-points-form');
+
+    Event.observe($('points_all'), 'click', function(){
+        if ($('points_amount').value == <?php echo $this->getMaxPointsNumberToSpent() ?>) {
+            $('points_amount').value = '';
+        } else {
+            $('points_amount').value = <?php echo $this->getMaxPointsNumberToSpent() ?>;
+        }
+    });
+    Event.observe($('points_amount'), 'keyup', function(){
+        var val = parseInt($('points_amount').value);
+        if (isNaN(val) || val < <?php echo $this->getMaxPointsNumberToSpent() ?>) {
+            $('points_all').checked = false;
+        } else {
+            $('points_all').checked = true;
+            $('points_amount').value = <?php echo $this->getMaxPointsNumberToSpent() ?>;
+        }
+    });
+    //]]>
+</script>
+
+<div style="margin:10px;">&nbsp;</div>

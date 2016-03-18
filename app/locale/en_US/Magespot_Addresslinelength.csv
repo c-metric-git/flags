@@ -1,0 +1,8 @@
+"Max Length of Street Address Line","Max Length of Street Address Line"
+"In characters.","In characters."
+"Disallow Entering","Disallow Entering"
+"If set to `Yes`, then user can not enter more than `Max Length of Street Address Line` characters.","If set to `Yes`, then user can not enter more than `Max Length of Street Address Line` characters."
+"Use For Amount","Use For Amount"
+"If set to `Yes`, then amount of characters for all lines in a Street Address must be less or equal than `Max Length of Street Address Line` value.","If set to `Yes`, then amount of characters for all lines in a Street Address must be less or equal than `Max Length of Street Address Line` value."
+"Validation Message","Validation Message"
+"Message for validation, if user will enter more than `Max Length of Street Address Line` characters.","Message for validation, if user will enter more than `Max Length of Street Address Line` characters."

@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<!--
+ /**
+ * Magespot
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magespot License.
+ * It is available through the world-wide-web at this URL:
+ * http://magespot.com/license.html
+ * If you need receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contacts@magespot.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.magespot.com/ for more information.
+ *
+ * @category   Magespot
+ * @package    Magespot_Base
+ * @copyright  Copyright (c) 2013 Magespot Crew (http://www.magespot.com/)
+ * @author     Magespot Crew <contacts@magespot.com>
+ * @license    http://magespot.com/license.html  Magespot License
+ */
+-->
+<config>
+  <modules>
+    <Magespot_Base>
+      <version>1.0.0</version>
+    </Magespot_Base>
+  </modules>
+  
+	<global>
+		<blocks>
+		  <msbase>
+			<class>Magespot_Base_Block</class>
+		  </msbase>
+		</blocks>
+		<resources>
+		  <msbase_setup>
+			  <setup>
+				  <module>Magespot_Base</module>
+			  </setup>
+			  <connection>
+				  <use>core_setup</use>
+			  </connection>
+		  </msbase_setup>
+		  <msbase_write>
+			  <connection>
+				  <use>core_write</use>
+			  </connection>
+		  </msbase_write>
+		  <msbase_read>
+			  <connection>
+				  <use>core_read</use>
+			  </connection>
+		  </msbase_read>
+		</resources>
+		<models>
+			<msbase>
+				<class>Magespot_Base_Model</class>
+			</msbase>
+		</models>
+	  <helpers>
+		  <msbase>
+			  <class>Magespot_Base_Helper</class>
+		  </msbase>
+	  </helpers>
+	</global>
+	
+	<adminhtml>
+		<acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <msbase>
+                                        <title>Magespot - Extensions Information</title>
+                                    </msbase>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <events>
+        <controller_action_predispatch>
+            <observers>
+                <msbase_upds>
+                    <type>singleton</type>
+                    <class>msbase/feed</class>
+                    <method>check</method>
+                </msbase_upds>
+            </observers>
+        </controller_action_predispatch>
+    </events>
+	</adminhtml>
+	<default>
+		<msbase>
+			<feed>
+				<check_frequency>86400</check_frequency>
+				<interests>INFO,PROMO,UPDATE_RELEASE,NEW_RELEASE,INSTALLED_UPDATE</interests>
+			</feed>
+		</msbase>
+	</default>			
+</config>

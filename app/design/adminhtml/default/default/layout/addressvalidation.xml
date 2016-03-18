@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<layout>
+    <default>
+        <reference name="head">
+            <action method="addCss"><name>addressvalidation/style.css</name></action> 
+        </reference>
+    </default>
+	<adminhtml_sales_order_create_index>
+                    <reference name="data">
+                        <block type="adminhtml/sales_order_create_totals" template="addressvalidation/sales/order/create/totals.phtml" name="totals" />
+                    </reference>
+    </adminhtml_sales_order_create_index>
+
+    <adminhtml_sales_order_create_load_block_data>
+	  <reference name="data">
+	      <block type="adminhtml/sales_order_create_totals" template="addressvalidation/sales/order/create/totals.phtml" name="totals" />
+	  </reference>
+	</adminhtml_sales_order_create_load_block_data>
+
+	<adminhtml_sales_order_create_load_block_totals>
+        <reference name="content">
+          <block type="adminhtml/sales_order_create_totals" template="addressvalidation/sales/order/create/totals.phtml" name="totals" />
+        </reference>
+    </adminhtml_sales_order_create_load_block_totals>
+</layout>

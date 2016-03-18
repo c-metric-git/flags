@@ -1,0 +1,6 @@
+[21-Aug-2015 09:19:35 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Warning: Invalid argument supplied for foreach()  in /home/stripedsocks/public_html/cron/cron_update_orders.php on line 29' in /home/stripedsocks/public_html/app/code/core/Mage/Core/functions.php:245
+Stack trace:
+#0 /home/stripedsocks/public_html/cron/cron_update_orders.php(29): mageCoreErrorHandler(2, 'Invalid argumen...', '/home/stripedso...', 29, Array)
+#1 {main}
+  thrown in /home/stripedsocks/public_html/app/code/core/Mage/Core/functions.php on line 245
+[07-Sep-2015 11:31:27 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/stripedsocks/public_html/lib/Teamdesk/class.export_teamdesk_orders.php on line 453

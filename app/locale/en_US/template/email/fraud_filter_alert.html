@@ -1,0 +1,8 @@
+<!--@subject Order Approver: Potential Fraud Alert @-->
+This email is to alert you that order #{{var orderNumber}} which was placed on {{var storeName}} is being held for manual review. The reason it is being held is: 
+<br/><br/>
+{{var flagReason}}
+{{depend orderUrl}}
+<br/><br/>
+View this order: <a href="{{var orderUrl}}">{{var orderUrl}}</a>
+{{/depend}}

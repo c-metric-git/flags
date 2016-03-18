@@ -1,0 +1,128 @@
+<?php $stores = $this->getStores() ?>
+<?php $solrcores = $this->getSolrCores() ?>
+<?php $indexCollection = $this->getIndeCollection()?>
+<?php $helper = Mage::helper('solrsearch/index')?>
+<div class="content-header">
+    <table cellspacing="0">
+        <tbody>
+	        <tr>
+	            <td style="width:30%;">
+	            	<h3 class="icon-head head-cms-page"><?php echo $this->__('SolrBridge Index Management')?></h3><br>
+	            </td>
+	            <td style="width:70%;">
+	            	<div class="switcher">
+	            		<div>
+			            	<form id="new_index_form" method="post" action="<?php echo $this->getPostUrl() ?>">
+			            		<input type="hidden" name="form_key" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" />
+			            		<table>
+			            			<tr>
+			            				<td>
+			            					<label><?php echo $this->__('Select store view')?></label>
+						            		<select name="index[store_id]">
+						            			<?php foreach ($stores as $store):?>
+						            			<optgroup label="<?php echo $store['label']?>">
+						            				<?php foreach ($store['items'] as $id => $name):?>
+						            				<option value="<?php echo $id?>"><?php echo $name?></option>
+						            				<?php endforeach;?>
+						            			</optgroup>
+						            			<?php endforeach;?>
+						            		</select>
+			            				</td>
+			            				<td>
+			            					<label><?php echo $this->__('Select solr core')?></label>
+						            		<select name="index[solr_core]">
+						            			<?php foreach ($solrcores as $core):?>
+						            			<option value="<?php echo $core['value']?>"><?php echo $core['label']?></option>
+						            			<?php endforeach;?>
+						            		</select>
+			            				</td>
+			            				<td>
+			            					<label><?php echo $this->__('Index Title')?></label>
+			            					<input type="text" name="index[title]" class="input-text required-entry">
+			            				</td>
+			            				<td><button type="submit">Add mapping</button></td>
+			            			</tr>
+			            		</table>
+			            	</form>
+		            	</div>
+		            	<div>
+		            		<?php echo $this->__('ACTION: Select store view, choose solr core, put a title, and click Add mapping button.') ?>
+		            	</div>
+		            	<script type="text/javascript">
+						    //<![CDATA[
+						    	document.observe('dom:loaded', function(){
+						    		var indexForm = new varienForm('new_index_form');
+								});
+							//]]>
+						</script>
+	            	</div>
+	            </td>
+	        </tr>
+	        <tr>
+	        	<td colspan="2" class="a-right">
+	        		<button id="reindex-selected-items"><?php echo $this->__('Reindex selected')?></button>
+	        		<button id="update-selected-items"><?php echo $this->__('Update selected')?></button>
+	        		<button id="delete-selected-items"><?php echo $this->__('Delete selected')?></button>
+	        	</td>
+	        </tr>
+    	</tbody>
+    </table>
+</div>
+<div class="grid">
+	<table cellspacing="0" id="onlineGrid_table" class="data">
+		<thead>
+			<tr class="headings">
+				<th class="no-link a-center"><span class="nobr"><input type="checkbox" id="checkall" /></span></th>
+				<th class="no-link"><span class="nobr"><?php echo $this->__('ID')?></span></th>
+				<th class="no-link"><span class="nobr"><?php echo $this->__('Title')?></span></th>
+				<th class="no-link"><span class="nobr"><?php echo $this->__('Store')?></span></th>
+				<th class="no-link"><span class="nobr"><?php echo $this->__('Solr core')?></span></th>
+				<th class="no-link"><span class="nobr"><?php echo $this->__('Total Products')?></span></th>
+				<th class="no-link"><span class="nobr"><?php echo $this->__('Solr documents')?></span></th>
+				<th class="no-link" style="width: 20%"><span class="nobr"><?php echo $this->__('Status (%)')?></span></th>
+				<th class="no-link last" style="width: 280px"><span class="nobr"><?php echo $this->__('Action')?></span></th>
+			</tr>
+		</thead>
+        <tbody>
+        	<?php if ($indexCollection->getSize() < 1):?>
+        	<tr class="even">
+                <td class="empty-text a-center" colspan="9"><?php echo $this->__('There is no any INDEX active yet. In the form above, please select a store view, choose solr core, and click Add Mapping button.') ?></td>
+            </tr>
+            <?php else:?>
+            <?php foreach ($indexCollection as $index):?>
+            <?php $total = $this->getTotal($index) ?>
+            <?php $documents = $this->getDocuments($index) ?>
+            <?php $percent = $helper->getPercent($total, $documents) ?>
+            <tr class="" id="tr-index-<?php echo $index->getIndexId()?>">
+            	<td class="a-center"><input class="massaction-checkbox" type="checkbox" /></td>
+            	<td class=""><?php echo $index->getIndexId()?></td>
+            	<td class=""><?php echo $index->getTitle()?></td>
+                <td class=""><?php echo $this->getStoreName($index) ?></td>
+                <td class=""><?php echo $index->getSolrCore()?></td>
+                <td class=""><?php echo $total ?></td>
+                <td class="solr-documents"><?php echo $documents ?></td>
+                <td class="">
+                	<div class="progress">
+					    <div class="bar" style="width:<?php echo $percent ?>%"></div >
+					    <div class="percent"><?php echo $percent ?>%</div >
+					</div>
+                </td>
+                <td class="">
+                	<a class="action-button" title="re-index" href="<?php echo $this->getReindexUrl($index)?>"><?php echo $this->__('Re-index')?></a>
+                	&nbsp;|&nbsp;
+                	<a class="action-button" title="update-index" href="<?php echo $this->getUpdateUrl($index)?>"><?php echo $this->__('Update-index')?></a>
+                	&nbsp;|&nbsp;
+                	<a class="action-button" title="delete-index" href="<?php echo $this->getDeleteUrl($index)?>"><?php echo $this->__('Delete')?></a>
+                	<img style="float: right; display:none" class="icon-proccesing" src="/skin/adminhtml/default/default/solrbridge/ajax-loader.gif" />
+                </td>
+            </tr>
+            <?php endforeach;?>
+            <?php endif;?>
+		</tbody>
+    </table>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+	var index = new SolrBridgeIndex();
+//]]>
+</script>

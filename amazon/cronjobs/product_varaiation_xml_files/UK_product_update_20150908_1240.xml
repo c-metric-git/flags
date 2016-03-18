@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?><AmazonEnvelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amzn-envelope.xsd"><Header><DocumentVersion>1.01</DocumentVersion><MerchantIdentifier>M_TOPSTECHNO_1216044</MerchantIdentifier></Header><MessageType>Relationship</MessageType><PurgeAndReplace>false</PurgeAndReplace><Message><MessageID>1</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50491-1</ParentSKU>
+
+                        <Relation><SKU>A50491</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>2</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50491-1</ParentSKU>
+
+                        <Relation><SKU>A50492</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>3</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50491-1</ParentSKU>
+
+                        <Relation><SKU>A50493</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>4</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A5045-1</ParentSKU>
+
+                        <Relation><SKU>A5045</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>5</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A5045-1</ParentSKU>
+
+                        <Relation><SKU>A5046</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>6</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A5040-1</ParentSKU>
+
+                        <Relation><SKU>A5043</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>7</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A5040-1</ParentSKU>
+
+                        <Relation><SKU>A5041</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>8</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A5040-1</ParentSKU>
+
+                        <Relation><SKU>A5040</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>9</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A5040-1</ParentSKU>
+
+                        <Relation><SKU>A5042</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>10</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50610-1</ParentSKU>
+
+                        <Relation><SKU>A50619</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>11</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50610-1</ParentSKU>
+
+                        <Relation><SKU>A50618</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>12</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50610-1</ParentSKU>
+
+                        <Relation><SKU>A50616</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>13</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50610-1</ParentSKU>
+
+                        <Relation><SKU>A50613</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>14</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50610-1</ParentSKU>
+
+                        <Relation><SKU>A50612</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>15</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50610-1</ParentSKU>
+
+                        <Relation><SKU>A50610</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>16</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50610-1</ParentSKU>
+
+                        <Relation><SKU>A50615</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>17</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50610-1</ParentSKU>
+
+                        <Relation><SKU>A50624</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>18</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50610-1</ParentSKU>
+
+                        <Relation><SKU>A50620</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>19</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50610-1</ParentSKU>
+
+                        <Relation><SKU>A50621</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>20</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50610-1</ParentSKU>
+
+                        <Relation><SKU>A50623</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>21</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50610-1</ParentSKU>
+
+                        <Relation><SKU>A50617</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>22</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50501-1</ParentSKU>
+
+                        <Relation><SKU>A50501</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>23</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50501-1</ParentSKU>
+
+                        <Relation><SKU>A5050</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>24</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50501-1</ParentSKU>
+
+                        <Relation><SKU>A5059</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>25</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50501-1</ParentSKU>
+
+                        <Relation><SKU>A5058</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>26</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50501-1</ParentSKU>
+
+                        <Relation><SKU>A5056</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>27</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50501-1</ParentSKU>
+
+                        <Relation><SKU>A5054</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>28</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50501-1</ParentSKU>
+
+                        <Relation><SKU>A5052</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message><Message><MessageID>29</MessageID>
+
+                     <OperationType>Update</OperationType>
+
+                     <Relationship>
+
+                        <ParentSKU>A50501-1</ParentSKU>
+
+                        <Relation><SKU>A5051</SKU><Type>Variation</Type></Relation>
+
+                     </Relationship></Message></AmazonEnvelope>

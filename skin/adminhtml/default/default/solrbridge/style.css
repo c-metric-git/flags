@@ -1,0 +1,101 @@
+div.solrbridge .solrbridge_solrsearch_admin_progress_outer {
+	background: none repeat scroll 0 0 #EBEDEF;
+	border-radius: 4px;
+	height: 20px;
+	margin: 0;
+	width: 100%;
+}
+
+div.solrbridge .solrbridge_solrsearch_admin_progress_inner {
+	border-radius: 4px;
+	white-space: nowrap;
+	padding: 0;
+	box-sizing: border-box;
+	background: #2ECC71;
+	width: 0%;
+	height: 20px;
+	line-height: 20px;
+	font-weight: bold;
+}
+
+div.solrbridge .solrbridge_solrsearch_admin_progress_inner span {
+	padding: 0 20px;
+}
+
+div.solrbridge .tools{
+	padding-top: 10px;
+}
+
+div.solrbridge button, div.solrbridge.form-button
+{
+	background: #34495E;
+	color: #fff;
+	border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.471;
+    padding: 3px 10px;
+    border:none;
+}
+
+div.solrbridge button.add span{
+	background: none;
+	padding:0;
+}
+
+div.solrbridge button:hover{
+	background: #F1C40F;
+}
+
+div.solrbridge .wrap-log .container{
+	background: none repeat scroll 0 0 #000000;
+    color: #FFFFFF;
+    height: 200px;
+    margin-top: 5px;
+    overflow-y: scroll;
+    padding: 7px;
+    width: auto;
+    border-radius: 4px;
+}
+
+/*
+div.solrbridge .button:hover,
+div.solrbridge .button:focus,
+div.solrbridge .button:active,
+div.solrbridge .button.active,
+div.solrbridge .open .dropdown-toggle.button {
+  color: #ffffff;
+  background-color: #48c9b0;
+  border-color: #48c9b0;
+}
+div.solrbridge .button:active,
+div.solrbridge .button.active,
+.open .dropdown-toggle.btn-primary {
+  background: #16a085;
+  border-color: #16a085;
+}
+*/
+.grid th, .grid td {
+	font-size: 15px;
+	padding: 15px 10px;
+}
+
+.progress {
+	border: 1px solid #333;
+    border-radius: 3px;
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+
+.bar {
+	background-color: #00ff00;
+	width: 50%;
+	height: 4px;
+}
+
+.percent {
+	position: absolute;
+	display: inline-block;
+	top: 3px;
+	left: 48%;
+}

@@ -1,0 +1,146 @@
+<?php 
+/*$currentCat = Mage::registry('current_category');
+
+if($currentCat)
+{
+	$CurCatName = $currentCat->getName();
+	$ParentCatId = $currentCat->getId();
+	$urlkey = $currentCat->getUrlKey();
+} */
+?>
+<?php //if($CurCatName !="" && $CurCatName=="Top Sellers"){?>
+        <?php /*if($this->canShowBlock()):*/ ?>
+
+        <!--<div id="layered-nav-marker"></div>
+        <div class="block block-layered-nav block-layered-nav--no-filters">
+        <div class="block-content toggle-content">
+        <dl id="narrow-by-list">    -->
+        <?php 
+		/*$layer = Mage::getModel("catalog/layer");
+		$category = Mage::getModel("catalog/category")->load($ParentCatId);		
+		$currentUrl = $this->helper('core/url')->getCurrentUrl();
+		$layer->setCurrentCategory($category);
+		$attributes = $layer->getFilterableAttributes();		
+		
+		foreach ($attributes as $attribute)
+		{
+			if ($attribute->getAttributeCode() == 'price') {
+                $filterBlockName = 'catalog/layer_filter_price';
+        	} elseif ($attribute->getBackendType() == 'decimal') {
+                $filterBlockName = 'catalog/layer_filter_decimal';
+        	} else {
+                $filterBlockName = 'catalog/layer_filter_attribute';
+        	}
+			$result = $this->getLayout()->createBlock($filterBlockName)->setLayer($layer)->setAttributeModel($attribute)->init();
+			
+			$filter_heading = array();		
+			foreach($result->getItems() as $option) {
+				if ($option->getCount() > 0):
+				$getFilterName = $option->getFilter()->getName();								
+				$final_url="";
+				if(($getFilterName !="Filter Section" && $getFilterName!='Theme Subtheme' && $getFilterName!='Season Theme' && $getFilterName!='Occasion Theme' && $getFilterName!='Holiday Theme') || ($getFilterName=='Season Theme' && $_GET['multi_seasons']!='')|| ($getFilterName=='Theme Subtheme' && $_GET['multi_themes']!='')|| ($getFilterName=='Holiday Theme' && $_GET['holiday']!='')|| ($getFilterName=='Occasion Theme' && $_GET['occassion']!=''))
+				{
+				        $url = $option->getUrl();
+				        $url1 = explode("/",$url);				
+				        $ur1 = explode("?",$url1[4]);					
+				        $final_url = $url1[0].'/'.$url1[1].'/'.$url1[2].'/'.$url1[3].'.html?'.$ur1[1];
+				        
+			            if(!in_array($getFilterName,$filter_heading)) {	
+                                if($getFilterName== 'Feature'):
+                                     $add_class = "feature1";    
+                                elseif($getFilterName == 'New Products'):
+                                       $add_class = "new-showall";
+				                else:
+                                       $add_class = "";        
+                                endif;
+				                echo '<dt class="section-title '.$add_class.'">By '.$getFilterName.'</dt>';
+				                $filter_heading[] = $getFilterName;
+			            }
+			            if($getFilterName == 'New Products'):echo "<dd class='dd-new-showall'>"; else:echo "<dd class=''>";  endif;
+			            echo "<ol>";
+		                echo "<li>";				
+				        echo "<form>";
+                        echo "<span class='check-box'>";
+				        echo "<input type='radio' name='vehicle' onclick='window.location.assign(".'"'.$final_url.'"'.")'/>";								
+                        echo "</span>";
+                        echo "<a href='$final_url'>";
+				        echo $option->getLabel();
+                        echo "<span class='count'>";
+					    echo "(";
+					    echo $option->getCount();
+					    echo ")";
+                        echo  "</span>";
+                        echo "</a>";
+                        echo "</form>";
+                        echo "</li>";
+		                echo "</ol>";
+				        echo "</dd>";
+			        }
+			        endif;
+			 } // End of foreach
+	  }  // End of foreach        */
+?>
+    <!--</dl>
+    <script type="text/javascript">decorateDataList('narrow-by-list')</script>
+    </div>
+    </div>   -->
+    <?php  /*endif;*/ ?>
+<?php //}else {?>
+
+<?php if($this->canShowBlock()): ?>
+
+<div id="layered-nav-marker"></div>
+
+<div class="block block-layered-nav<?php if (!$this->getLayer()->getState()->getFilters()): ?> block-layered-nav--no-filters<?php endif; ?>">
+
+   <!-- <div class="block-title">
+
+        <strong><span><?php //echo $this->__('Shop By') ?></span></strong>
+
+    </div>
+
+    -->
+
+    <div class="block-content toggle-content">
+
+        <?php echo $this->getStateHtml() ?>
+
+        <?php if ($this->getLayer()->getState()->getFilters()): ?>
+
+            <div class="actions"><a href="<?php echo $this->getClearUrl() ?>"><?php echo $this->__('Clear All') ?></a></div>
+
+        <?php endif; ?>
+
+        <?php if($this->canShowOptions()): ?>
+
+            <p class="block-subtitle block-subtitle--filter"><?php echo $this->__('Filter') ?></p>
+
+            <dl id="narrow-by-list">
+
+                <?php $_filters = $this->getFilters() ?>
+
+                <?php foreach ($_filters as $_filter): $filter_name = $this->__($_filter->getName());?>
+
+                <?php if($_filter->getItemsCount() && $filter_name!='Filter Section'): ?>
+                        <? if(($filter_name!='Theme Subtheme' && $filter_name!='Season Theme' && $filter_name!='Occasion Theme' && $filter_name!='Holiday Theme') || (($filter_name=='Season Theme' && $_GET['multi_seasons']!='')|| ($filter_name=='Theme Subtheme' && $_GET['multi_themes']!='')|| ($filter_name=='Holiday Theme' && $_GET['holiday']!='')|| ($filter_name=='Occasion Theme' && $_GET['occassion']!=''))) : ?>
+                            <dt class="section-title <?php /*if($this->__($_filter->getName())== 'Feature'):  echo 'feature'; else*/if($this->__($_filter->getName())== 'New Products'): echo 'new-showall'; endif; ?>"><?php if($filter_name== 'Filter Section'): echo "By Type"; elseif($filter_name== 'Theme Subtheme'): echo " By Theme"; else: echo "By ".$filter_name; endif;$_SESSION['filter_name'] = $filter_name;  ?></dt>
+
+                            <dd class="<?php if($_SESSION['filter_name']=='Color'):echo "color-class"; elseif($filter_name== 'New Products'): echo 'dd-new-showall'; endif;?>"><?php echo $_filter->getHtml() ?></dd>
+                     <?php endif; ?>
+                <?php endif; ?>
+
+                <?php endforeach; ?>
+
+            </dl>
+
+            <script type="text/javascript">decorateDataList('narrow-by-list')</script>
+
+        <?php endif; ?>
+
+    </div>
+
+</div>
+
+<?php endif; ?>
+
+<?php //}?>

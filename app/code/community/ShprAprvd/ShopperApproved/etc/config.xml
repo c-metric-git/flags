@@ -1,0 +1,37 @@
+<!--
+/**
+ * ShopperApproved Module for Magento 
+ * @package     ShprAprvd_ShopperApproved
+ * @author      ShprAprvd (http://www.shopperapproved.com/)
+ * @copyright   Copyright (c) 2014 ShprAprvd (http://www.shopperapproved.com/)
+ * @license     Open Software License
+ */
+-->
+<config>
+    <modules>
+        <ShprAprvd_ShopperApproved>
+            <version>1.0.0</version>
+        </ShprAprvd_ShopperApproved>
+    </modules>
+    <global>
+        <blocks>
+            <shopperapproved>
+                <class>ShprAprvd_ShopperApproved_Block</class>
+            </shopperapproved>
+        </blocks>
+        <helpers>
+            <shopperapproved>
+                <class>ShprAprvd_ShopperApproved_Helper</class>
+            </shopperapproved>
+        </helpers>
+     </global>
+     <frontend>
+        <layout>
+            <updates>
+                <shopperapproved>
+                    <file>shopperapproved.xml</file>
+                </shopperapproved>
+            </updates>
+        </layout>
+    </frontend>
+</config>

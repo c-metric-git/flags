@@ -1,0 +1,577 @@
+<?php
+$helper = Mage::helper('iwd_ordermanager');
+$i = 0;
+$order = $this->getOrder();
+$validate_inventory = $helper->isValidateInventory();
+?>
+
+<?php foreach ($this->items as $item): ?>
+    <?php /* Item has error */ ?>
+    <?php if ($validate_inventory && $item->getHasError()): ?>
+        <?php if ($item->getParentItem()) continue; ?>
+        <tbody class="<?php echo ($i++) % 2 ? 'even' : 'odd' ?>"
+               onclick="$ji(this).remove();"
+               title="<?php echo $helper->__("Click to close this error notice."); ?>">
+        <tr class="border">
+            <td colspan="2">
+                <b><?php echo $item->getName(); ?><br>SKU:</b><?php echo $item->getSku(); ?>
+            </td>
+            <td class="last" colspan="11">
+                <?php $errorInfos = $item->getErrorInfos();
+                if (!empty($errorInfos)) : ?>
+                    <div class="error">
+                        <?php foreach ($errorInfos as $errorInfo): ?>
+                            <span><?php echo $errorInfo['message']; ?></span>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
+            </td>
+        </tr>
+        </tbody>
+        <?php continue; ?>
+    <?php endif; ?>
+
+    <tbody class="<?php echo ($i++) % 2 ? 'even' : 'odd' ?>">
+    <?php if ($item->getParentItem()) continue; ?>
+    <?php if ($item->getProductType() == Mage_Catalog_Model_Product_Type::TYPE_BUNDLE): ?>
+        <?php $_prevOptionId = false; ?>
+        <?php $canShowPriceInfo = $this->canShowPriceInfo($item); ?>
+        <?php /* BUNDLE PRODUCT */ ?>
+        <tr data-item-id="<?php echo $item->getId(); ?>"
+            class="border">
+            <?php /* bundle product: NAME */ ?>
+            <td colspan="2">
+                <h5 class="title">
+                    <span id="order_item_<?php echo $item->getId() ?>_title">
+                        <?php echo $this->htmlEscape($item->getName()) ?>
+                    </span>
+                </h5>
+
+                <div>
+                    <strong><?php echo $this->helper('sales')->__('SKU') ?>:</strong>
+                    <?php echo implode('<br />', Mage::helper('catalog')->splitSku($this->htmlEscape($item->getSku()))); ?>
+                </div>
+
+                <?php $errorInfos = $item->getErrorInfos(); ?>
+                <?php if($item->getHasError() && !empty($errorInfos)): ?>
+                <div class="notice notice_<?php echo $item->getId(); ?>">
+                    <div class="notice_qty" style="font-size:95%;">
+                        <?php foreach ($errorInfos as $errorInfo): ?>
+                            <span><?php echo $errorInfo['message']; ?></span>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <?php endif; ?>
+
+                <input type="text" value="<?php echo $item->getDescription(); ?>"
+                       placeholder="<?php echo $helper->__('Description') ?>"
+                       class="edit_order_item" style="width:98%;"
+                       name="items[<?php echo $item->getId(); ?>][description]"/>
+            </td>
+
+            <?php /* bundle product: STATUS */ ?>
+            <td class="a-center"><?php echo $helper->__("Added"); ?></td>
+
+            <?php /* bundle product: ORIGINAL PRICE */ ?>
+            <td>
+                <?php echo $order->formatBasePrice($item->getBaseOriginalPrice()); ?>
+                <input type="hidden" class="edit_order_item required-entry validate-number"
+                       value="<?php echo number_format($item->getBaseOriginalPrice(), 2, '.', ''); ?>"
+                       name="items[<?php echo $item->getId(); ?>][original_price]"/>
+            </td>
+
+            <?php /* bundle product: PRICE */ ?>
+            <td>Excl.Tax:&nbsp;<b><?php echo $order->formatBasePrice($item->getPrice()); ?></b><br>
+                <input
+                    type="text" <?php if ($canShowPriceInfo): ?>readonly="readonly"<?php endif; ?>
+                    class="edit_order_item required-entry validate-number"
+                    value="<?php echo number_format($item->getPrice(), 2, '.', ''); ?>"
+                    name="items[<?php echo $item->getId(); ?>][price]"/>
+
+                </br>Incl.Tax:&nbsp;<b><?php echo $order->formatBasePrice($item->getBasePriceInclTax()); ?></b><br>
+                <input type="text" <?php if ($canShowPriceInfo): ?>readonly="readonly"<?php endif; ?>
+                       class="edit_order_item required-entry validate-number"
+                       value="<?php echo number_format($item->getBasePriceInclTax(), 2, '.', ''); ?>"
+                       name="items[<?php echo $item->getId(); ?>][price_incl_tax]"/>
+            </td>
+
+            <?php /* bundle product: QTY */ ?>
+            <td><?php echo $helper->__("Added"); ?><br>
+                <?php
+                $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($item->getProduct());
+                $stock_qtyIncrements = $stock->getQtyIncrements();
+                $stock_qty = $stock->getQty();
+                $stock_minQty = $stock->getMinQty();
+                $stock_minSaleQty = $stock->getMinSaleQty();
+                $stock_maxSaleQty = $stock->getMaxSaleQty();
+                ?>
+                <input type="text" readonly="readonly"
+                       class="edit_order_item required-entry validate-number"
+                       id="bundle_ordered_qty_<?php echo $item->getId(); ?>"
+                       value="<?php echo $item->getQty() * 1; ?>"
+                       name="items[<?php echo $item->getId(); ?>][fact_qty]"
+                       data-stock-qty-increment="<?php echo $stock_qtyIncrements ? $stock_qtyIncrements : 1 ?>"
+                       data-stock-qty="<?php echo $stock_qty ? $stock_qty : 1 ?>"
+                       data-stock-qty-min="<?php echo $stock_minQty ? $stock_minQty : 1 ?>"
+                       data-stock-min-sales-qty="<?php echo $stock_minSaleQty ? $stock_minSaleQty : 1 ?>"
+                       data-stock-max-sales-qty="<?php echo $stock_maxSaleQty ? $stock_maxSaleQty : 1 ?>"
+                    <?php if($stock_qtyIncrements): ?>
+                        title="<?php echo $helper->__('Qty increments x%s', $stock_qtyIncrements); ?>"
+                    <?php endif; ?>
+                    />
+            </td>
+
+            <?php /* bundle product: SUBTOTAL */ ?>
+            <td>Excl.Tax:&nbsp;<b><?php echo $order->formatBasePrice($item->getBaseRowTotal()); ?></b>
+                <input type="text" readonly="readonly"
+                       class="edit_order_item required-entry validate-number"
+                       value="<?php echo number_format($item->getBaseRowTotal(), 2, '.', ''); ?>"
+                       name="items[<?php echo $item->getId(); ?>][subtotal]"/>
+                </br>Incl.Tax:&nbsp;<b><?php echo $order->formatBasePrice($item->getBaseRowTotalInclTax()); ?></b>
+                <input type="text" readonly="readonly"
+                       class="edit_order_item required-entry validate-number"
+                       value="<?php echo number_format($item->getBaseRowTotalInclTax(), 2, '.', ''); ?>"
+                       name="items[<?php echo $item->getId(); ?>][subtotal_incl_tax]"/>
+            </td>
+
+            <?php /* bundle product: TAX AMOUNT */ ?>
+            <td>
+                <?php echo $order->formatBasePrice($item->getBaseTaxAmount()); ?><br>
+                <input type="text" readonly="readonly"
+                       class="edit_order_item required-entry validate-number"
+                       value="<?php echo number_format($item->getBaseTaxAmount(), 2, '.', ''); ?>"
+                       name="items[<?php echo $item->getId(); ?>][tax_amount]"/>
+                <input type="hidden" class="edit_order_item required-entry validate-number"
+                       value="<?php echo number_format($item->getBaseHiddenTaxAmount(), 2, '.', ''); ?>"
+                       name="items[<?php echo $item->getId(); ?>][hidden_tax_amount]"/>
+                <input type="hidden" class="edit_order_item required-entry validate-number"
+                       value="<?php echo number_format($item->getBaseWeeeTaxAppliedRowAmount(), 2, '.', ''); ?>"
+                       name="items[<?php echo $item->getId(); ?>][weee_tax_applied_row_amount]"/>
+            </td>
+
+            <?php /* bundle product: TAX PERCENT */ ?>
+            <td>
+                <?php if ($canShowPriceInfo): ?>
+                    <input type="hidden" value="0" name="items[<?php echo $item->getId(); ?>][tax_percent]"/>
+                <?php else: ?>
+                    <?php echo number_format($item->getTaxPercent(), 2); ?>%<br>
+                    <input type="text" <?php if ($canShowPriceInfo): ?>readonly="readonly"<?php endif; ?>
+                           class="edit_order_item required-entry validate-number"
+                           value="<?php echo number_format($item->getTaxPercent(), 2, '.', ''); ?>"
+                           name="items[<?php echo $item->getId(); ?>][tax_percent]"/>
+                <?php endif; ?>
+            </td>
+
+            <?php /* bundle product: DISCOUNT AMOUNT */ ?>
+            <td>
+                <?php if ($canShowPriceInfo): ?>
+                    <input type="hidden" value="0" name="items[<?php echo $item->getId(); ?>][discount_amount]"/>
+                <?php else: ?>
+                    <?php echo $order->formatBasePrice($item->getBaseDiscountAmount()); ?><br>
+                    <input type="text" readonly="readonly"
+                           class="edit_order_item required-entry validate-number"
+                           value="<?php echo number_format($item->getBaseDiscountAmount(), 2, '.', ''); ?>"
+                           name="items[<?php echo $item->getId(); ?>][discount_amount]"/>
+                <?php endif; ?>
+            </td>
+
+            <?php /* bundle product: DISCOUNT PERCENT */ ?>
+            <td>
+                <?php if ($canShowPriceInfo): ?>
+                    <input type="hidden" value="0" name="items[<?php echo $item->getId(); ?>][discount_percent]"/>
+                <?php else: ?>
+                    <?php echo number_format($item->getDiscountPercent(), 2, '.', ''); ?>%<br>
+                    <input type="text" <?php if ($canShowPriceInfo): ?>readonly="readonly"<?php endif; ?>
+                           class="edit_order_item required-entry validate-number"
+                           value="<?php echo number_format($item->getDiscountPercent(), 2, '.', ''); ?>"
+                           name="items[<?php echo $item->getId(); ?>][discount_percent]"/>
+                <?php endif; ?>
+            </td>
+
+            <?php /* bundle product: ROW TOTAL */ ?>
+            <td class="a-right">
+                <?php if ($canShowPriceInfo): ?>
+                    <input type="hidden" value="0" name="items[<?php echo $item->getId(); ?>][row_total]"/>
+                <?php else: ?>
+                    <b><?php echo $this->getCurrencyRowTotal($item); ?></b><br>
+                    <input type="text" readonly="readonly"
+                           class="edit_order_item required-entry validate-number"
+                           value="<?php echo number_format($this->getBaseRowTotal($item), 2, '.', ''); ?>"
+                           name="items[<?php echo $item->getId(); ?>][row_total]"/>
+                <?php endif; ?>
+            </td>
+
+            <?php /* bundle product: REMOVE */ ?>
+            <td class="ordered_item_remove a-center last">
+                <input class="remove_ordered_item" type="checkbox"
+                       name="items[<?php echo $item->getId(); ?>][remove]"
+                       data-item-id="<?php echo $item->getId(); ?>"
+                       id="remove_<?php echo $item->getId(); ?>" value="1"/>
+
+                <input type="hidden" value="<?php echo $item->getProductId(); ?>"
+                       name="items[<?php echo $item->getId(); ?>][product_id]"/>
+                <input type="hidden" value="<?php echo $item->getId(); ?>"
+                       name="items[<?php echo $item->getId(); ?>][quote_item]"/>
+            </td>
+        </tr>
+
+        <?php /* BUNDLE PRODUCT ITEMS */ ?>
+        <?php foreach (array() as $_item): // don't show bundle items ?>
+            <?php //foreach ($this->items as $_item): ?>
+            <?php if ($_item->getParentItemId() != $item->getId()) continue; ?>
+            <?php /* BUNDLE OPTION */ ?>
+            <?php $attributes = $this->getSelectionAttributes($_item) ?>
+            <?php if ($_item->getParentItem() && $_prevOptionId != $attributes['option_id']): ?>
+                <tr data-item-id="<?php echo $item->getId(); ?>"
+                    class="border has_parent_<?php echo $item->getId(); ?>">
+                    <td class="last" colspan="12">
+                        <div class="option-label"><?php echo $attributes['option_label'] ?></div>
+                    </td>
+                </tr>
+                <?php $_prevOptionId = $attributes['option_id']; ?>
+            <?php endif; ?>
+
+            <?php /* BUNDLE ITEM */ ?>
+            <tr data-item-id="<?php echo $_item->getId(); ?>"
+                class="border has_parent has_parent_<?php echo $item->getId(); ?>">
+                <?php $canShowPriceInfo = $this->canShowPriceInfo($_item); ?>
+                <?php /*bundle item: NAME */ ?>
+                <td>
+                    <div class="option-value"><?php echo $_item->getName(); ?></div>
+                    <input type="text" value="<?php echo $_item->getDescription(); ?>"
+                           placeholder="<?php echo $helper->__('Description') ?>"
+                           class="edit_order_item" style="width:98%;"
+                           name="items[<?php echo $_item->getId(); ?>][description]"/>
+                </td>
+
+                <?php /*bundle item: STATUS */ ?>
+                <td class="a-center">
+                    <?php if ($canShowPriceInfo): ?>
+                        <?php echo $helper->__("Added"); ?>
+                    <?php else: ?>
+                        &nbsp;
+                    <?php endif; ?>
+                </td>
+
+                <?php /*bundle item: ORIGINAL PRICE */ ?>
+                <td>
+                    <?php if ($canShowPriceInfo): ?>
+                        <?php echo $order->formatBasePrice($_item->getBaseOriginalPrice()); ?>
+                        <input type="hidden" class="edit_order_item required-entry validate-number"
+                               value="<?php echo number_format($_item->getBaseOriginalPrice(), 2, '.', ''); ?>"
+                               name="items[<?php echo $_item->getId(); ?>][original_price]"/>
+                    <?php else: ?>
+                        &nbsp;
+                    <?php endif; ?>
+                </td>
+
+                <?php /*bundle item: PRICE */ ?>
+                <td>
+                    <?php if ($canShowPriceInfo): ?>
+                        Excl.Tax:&nbsp;<b><?php echo $order->formatBasePrice($_item->getBasePrice()); ?></b><br>
+                        <input type="text"
+                               class="edit_order_item required-entry validate-number"
+                               value="<?php echo number_format($_item->getBasePrice(), 2, '.', ''); ?>"
+                               name="items[<?php echo $_item->getId(); ?>][price]"/>
+
+                        <br>Incl.Tax:&nbsp;<b><?php echo $order->formatBasePrice($_item->getBasePriceInclTax()); ?></b><br>
+                        <input type="text"
+                               class="edit_order_item required-entry validate-number"
+                               value="<?php echo number_format($_item->getBasePriceInclTax(), 2, '.', ''); ?>"
+                               name="items[<?php echo $_item->getId(); ?>][price_incl_tax]"/>
+                    <?php else: ?>
+                        &nbsp;
+                    <?php endif; ?>
+                </td>
+
+                <?php /*bundle item: QTY */ ?>
+                <td><?php echo $helper->__("Added"); ?><br>
+                    <?php
+                    $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_item->getProduct());
+                    $stock_qtyIncrements = $stock->getQtyIncrements();
+                    $stock_qty = $stock->getQty();
+                    $stock_minQty = $stock->getMinQty();
+                    $stock_minSaleQty = $stock->getMinSaleQty();
+                    $stock_maxSaleQty = $stock->getMaxSaleQty();
+                    ?>
+                    <input type="text"
+                           class="edit_order_item qty_by_parent_<?php echo $item->getId(); ?> required-entry validate-number"
+                           value="<?php echo $_item->getQty() * 1; ?>"
+                           name="items[<?php echo $_item->getId(); ?>][fact_qty]"
+                           data-stock-qty-increment="<?php echo $stock_qtyIncrements ? $stock_qtyIncrements : 1 ?>"
+                           data-stock-qty="<?php echo $stock_qty ? $stock_qty : 1 ?>"
+                           data-stock-qty-min="<?php echo $stock_minQty ? $stock_minQty : 1 ?>"
+                           data-stock-min-sales-qty="<?php echo $stock_minSaleQty ? $stock_minSaleQty : 1 ?>"
+                           data-stock-max-sales-qty="<?php echo $stock_maxSaleQty ? $stock_maxSaleQty : 1 ?>"
+                        <?php if($stock_qtyIncrements): ?>
+                            title="<?php echo $helper->__('Qty increments x%s', $stock_qtyIncrements); ?>"
+                        <?php endif; ?>
+                        />
+                    <input type="hidden" value="<?php echo $_item->getQty() / $item->getQty() * 1; ?>"
+                           name="items[<?php echo $_item->getId(); ?>][qty_item_in_bundle]"/>
+                </td>
+
+                <?php /*bundle item: SUBTOTAL */ ?>
+                <td>
+                    <?php if ($canShowPriceInfo): ?>
+                        Excl.Tax:&nbsp;<b><?php echo $order->formatBasePrice($_item->getBaseRowTotal()); ?></b>
+                        <input type="text" readonly="readonly"
+                               class="edit_order_item required-entry validate-number"
+                               value="<?php echo number_format($_item->getBaseRowTotal(), 2, '.', ''); ?>"
+                               name="items[<?php echo $_item->getId(); ?>][subtotal]"/>
+                        </br>Incl.Tax:&nbsp;<b><?php echo $order->formatBasePrice($_item->getBaseRowTotalInclTax()); ?></b>
+                        <input type="text" readonly="readonly"
+                               class="edit_order_item required-entry validate-number"
+                               value="<?php echo number_format($_item->getBaseRowTotalInclTax(), 2, '.', ''); ?>"
+                               name="items[<?php echo $_item->getId(); ?>][subtotal_incl_tax]"/>
+                    <?php else: ?>
+                        &nbsp;
+                    <?php endif; ?>
+                </td>
+
+                <?php /*bundle item: TAX AMOUNT */ ?>
+                <td>
+                    <?php if ($canShowPriceInfo): ?>
+                        <?php echo $order->formatBasePrice($_item->getBaseTaxAmount()); ?><br>
+                        <input type="text" readonly="readonly"
+                               class="edit_order_item required-entry validate-number"
+                               value="<?php echo number_format($_item->getBaseTaxAmount(), 2, '.', ''); ?>"
+                               name="items[<?php echo $_item->getId(); ?>][tax_amount]"/>
+                        <input type="hidden" class="edit_order_item required-entry validate-number"
+                               value="<?php echo number_format($_item->getBaseHiddenTaxAmount(), 2, '.', ''); ?>"
+                               name="items[<?php echo $_item->getId(); ?>][hidden_tax_amount]"/>
+                        <input type="hidden" class="edit_order_item required-entry validate-number"
+                               value="<?php echo number_format($_item->getBaseWeeeTaxAppliedRowAmount(), 2, '.', ''); ?>"
+                               name="items[<?php echo $_item->getId(); ?>][weee_tax_applied_row_amount]"/>
+                    <?php else: ?>
+                        &nbsp;
+                    <?php endif; ?>
+                </td>
+
+                <?php /*bundle item: TAX PERCENT */ ?>
+                <td>
+                    <?php if ($canShowPriceInfo): ?>
+                        <?php echo number_format($_item->getTaxPercent(), 2); ?>%<br>
+                        <input type="text"
+                               class="edit_order_item required-entry validate-number"
+                               value="<?php echo number_format($_item->getTaxPercent(), 2, '.', ''); ?>"
+                               name="items[<?php echo $_item->getId(); ?>][tax_percent]"/>
+                    <?php else: ?>
+                        &nbsp;
+                    <?php endif; ?>
+                </td>
+
+                <?php /*bundle item: DISCOUNT AMOUNT */ ?>
+                <td>
+                    <?php if ($canShowPriceInfo): ?>
+                        <?php echo $order->formatBasePrice($_item->getBaseDiscountAmount()); ?><br>
+                        <input type="text" readonly="readonly"
+                               class="edit_order_item required-entry validate-number"
+                               value="<?php echo number_format($_item->getBaseDiscountAmount(), 2, '.', ''); ?>"
+                               name="items[<?php echo $_item->getId(); ?>][discount_amount]"/>
+                    <?php else: ?>
+                        &nbsp;
+                    <?php endif; ?>
+                </td>
+
+                <?php /*bundle item: DISCOUNT PERCENT */ ?>
+                <td>
+                    <?php if ($canShowPriceInfo): ?>
+                        <?php echo number_format($_item->getDiscountPercent(), 2); ?>%<br>
+                        <input type="text" class="edit_order_item required-entry validate-number"
+                               value="<?php echo number_format($_item->getDiscountPercent(), 2, '.', ''); ?>"
+                               name="items[<?php echo $_item->getId(); ?>][discount_percent]"/>
+                    <?php else: ?>
+                        &nbsp;
+                    <?php endif; ?>
+                </td>
+
+                <?php /*bundle item: ROW TOTAL */ ?>
+                <td class="a-right">
+                    <?php if ($canShowPriceInfo): ?>
+                        <b><?php echo $this->getCurrencyRowTotal($_item); ?></b><br>
+                        <input type="text" readonly="readonly"
+                               class="edit_order_item required-entry validate-number"
+                               value="<?php echo number_format($this->getBaseRowTotal($_item), 2, '.', ''); ?>"
+                               name="items[<?php echo $_item->getId(); ?>][row_total]"/>
+                    <?php else: ?>
+                        &nbsp;
+                    <?php endif; ?>
+                </td>
+
+                <?php /*bundle item: REMOVE */ ?>
+                <td class="ordered_item_remove a-center last">
+                    <input type="checkbox" name="items[<?php echo $_item->getId(); ?>][remove]"
+                           id="remove_<?php echo $_item->getId(); ?>" value="1"
+                           class="remove_ordered_item has_parent_<?php echo $item->getId(); ?>"
+                           data-parent-id="<?php echo $item->getId(); ?>"
+                           data-item-id="<?php echo $_item->getId(); ?>"
+                        />
+
+                    <input type="hidden" value="<?php echo $_item->getProductId(); ?>"
+                           name="items[<?php echo $_item->getId(); ?>][product_id]"/>
+                    <input type="hidden" value="<?php echo $item->getId(); ?>"
+                           name="items[<?php echo $_item->getId(); ?>][quote_item]"/>
+                </td>
+
+                <!-- helpers -->
+                <input
+                    value="<?php echo $_item->getQty() * $_item->getBasePrice(); ?>"
+                    class="subtotal_<?php echo $item->getId(); ?>" type="hidden"
+                    name="items[<?php echo $_item->getId(); ?>][subtotal]"/>
+                <input value="<?php echo $item->getId(); ?>"
+                       type="hidden"
+                       name="items[<?php echo $_item->getId(); ?>][parent]"/>
+                <!-- helpers -->
+            </tr>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <?php /* SIMPLE PRODUCT */ ?>
+        <tr class="border ordered_item"
+            data-item-id="<?php echo $item->getId(); ?>"
+            data-product-id="<?php echo $item->getProductId(); ?>">
+            <?php /* simple product: NAME */ ?>
+            <td colspan="2">
+                <b><?php echo $item->getName(); ?><br><?php echo $helper->__("SKU"); ?>:</b><?php echo $item->getSku(); ?>
+
+                <?php $errorInfos = $item->getErrorInfos(); ?>
+                <?php if($item->getHasError() && !empty($errorInfos)): ?>
+                    <div class="notice notice_<?php echo $item->getId(); ?>">
+                        <div class="notice_qty" style="font-size:95%;">
+                            <?php foreach ($errorInfos as $errorInfo): ?>
+                                <span><?php echo $errorInfo['message']; ?></span>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+
+                <input type="text" value="<?php echo $item->getDescription(); ?>"
+                       placeholder="<?php echo $helper->__('Description') ?>"
+                       class="edit_order_item" style="width:98%;"
+                       name="items[<?php echo $item->getId(); ?>][description]"/>
+            </td>
+
+            <?php /* simple product: STATUS */ ?>
+            <td class="a-center"><?php echo $helper->__("Added"); ?></td>
+
+            <?php /* simple product: ORIGINAL PRICE */ ?>
+            <td>
+                <?php echo $order->formatBasePrice($item->getBaseOriginalPrice()); ?>
+                <input type="hidden" class="edit_order_item required-entry validate-number"
+                       value="<?php echo number_format($item->getBaseOriginalPrice(), 2, '.', ''); ?>"
+                       name="items[<?php echo $item->getId(); ?>][original_price]"/>
+            </td>
+
+            <?php /* simple product: PRICE */ ?>
+            <td>Excl.Tax:&nbsp;<b><?php echo $order->formatBasePrice($item->getBasePrice()); ?></b><br>
+                <input type="text" class="edit_order_item required-entry validate-number"
+                       value="<?php echo number_format($item->getBasePrice(), 2, '.', ''); ?>"
+                       name="items[<?php echo $item->getId(); ?>][price]"/>
+
+                </br>Incl.Tax:&nbsp;<b><?php echo $order->formatBasePrice($item->getBasePriceInclTax()); ?></b><br>
+                <input type="text" class="edit_order_item required-entry validate-number"
+                       value="<?php echo number_format($item->getBasePriceInclTax(), 2, '.', ''); ?>"
+                       name="items[<?php echo $item->getId(); ?>][price_incl_tax]"/>
+            </td>
+
+            <?php /* simple product: QTY */ ?>
+            <td><?php echo $helper->__("Added"); ?><br>
+                <?php
+                $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($item->getProduct());
+                $stock_qtyIncrements = $stock->getQtyIncrements();
+                $stock_qty = $stock->getQty();
+                $stock_minQty = $stock->getMinQty();
+                $stock_minSaleQty = $stock->getMinSaleQty();
+                $stock_maxSaleQty = $stock->getMaxSaleQty();
+                ?>
+                <input type="text" class="edit_order_item required-entry validate-number"
+                       value="<?php echo $item->getQty() * 1; ?>"
+                       name="items[<?php echo $item->getId(); ?>][fact_qty]"
+                       data-stock-qty-increment="<?php echo $stock_qtyIncrements ? $stock_qtyIncrements : 1 ?>"
+                       data-stock-qty="<?php echo $stock_qty ? $stock_qty : 1 ?>"
+                       data-stock-qty-min="<?php echo $stock_minQty ? $stock_minQty : 1 ?>"
+                       data-stock-min-sales-qty="<?php echo $stock_minSaleQty ? $stock_minSaleQty : 1 ?>"
+                       data-stock-max-sales-qty="<?php echo $stock_maxSaleQty ? $stock_maxSaleQty : 1 ?>"
+                    <?php if($stock_qtyIncrements): ?>
+                        title="<?php echo $helper->__('Qty increments x%s', $stock_qtyIncrements); ?>"
+                    <?php endif; ?>
+                    />
+            </td>
+
+            <?php /* simple product: SUBTOTAL */ ?>
+            <td>Excl.Tax:&nbsp;<b><?php echo $order->formatBasePrice($item->getBaseRowTotal()); ?></b>
+                <input type="text" readonly="readonly"
+                       class="edit_order_item required-entry validate-number"
+                       value="<?php echo number_format($item->getBaseRowTotal(), 2, '.', ''); ?>"
+                       name="items[<?php echo $item->getId(); ?>][subtotal]"/>
+                </br>Incl.Tax:&nbsp;<b><?php echo $order->formatBasePrice($item->getBaseRowTotalInclTax()); ?></b>
+                <input type="text" readonly="readonly"
+                       class="edit_order_item required-entry validate-number"
+                       value="<?php echo number_format($item->getBaseRowTotalInclTax(), 2, '.', ''); ?>"
+                       name="items[<?php echo $item->getId(); ?>][subtotal_incl_tax]"/>
+            </td>
+
+            <?php /* simple product: TAX AMOUNT */ ?>
+            <td>
+                <?php echo $order->formatBasePrice($item->getBaseTaxAmount()); ?><br>
+                <input type="text" readonly="readonly"
+                       class="edit_order_item required-entry validate-number"
+                       value="<?php echo number_format($item->getBaseTaxAmount(), 2, '.', ''); ?>"
+                       name="items[<?php echo $item->getId(); ?>][tax_amount]"/>
+                <input type="hidden" class="edit_order_item required-entry validate-number"
+                       value="<?php echo number_format($item->getBaseHiddenTaxAmount(), 2, '.', ''); ?>"
+                       name="items[<?php echo $item->getId(); ?>][hidden_tax_amount]"/>
+                <input type="hidden" class="edit_order_item required-entry validate-number"
+                       value="<?php echo number_format($item->getBaseWeeeTaxAppliedRowAmount(), 2, '.', ''); ?>"
+                       name="items[<?php echo $item->getId(); ?>][weee_tax_applied_row_amount]"/>
+            </td>
+
+            <?php /* simple product: TAX PERCENT */ ?>
+            <td>
+                <?php echo number_format($item->getTaxPercent(), 2); ?>%<br>
+                <input type="text" class="edit_order_item required-entry validate-number"
+                       value="<?php echo number_format($item->getTaxPercent(), 2, '.', ''); ?>"
+                       name="items[<?php echo $item->getId(); ?>][tax_percent]"/>
+            </td>
+
+            <?php /* simple product: DISCOUNT AMOUNT */ ?>
+            <td>
+                <?php echo $order->formatBasePrice($item->getBaseDiscountAmount()); ?><br>
+                <input type="text" readonly="readonly"
+                       class="edit_order_item required-entry validate-number"
+                       value="<?php echo number_format($item->getBaseDiscountAmount(), 2, '.', ''); ?>"
+                       name="items[<?php echo $item->getId(); ?>][discount_amount]"/>
+            </td>
+
+            <?php /* simple product: DISCOUNT PERCENT */ ?>
+            <td><?php echo number_format($item->getDiscountPercent(), 2); ?>%<br>
+                <input type="text" class="edit_order_item required-entry validate-number"
+                       value="<?php echo number_format($item->getDiscountPercent(), 2, '.', ''); ?>"
+                       name="items[<?php echo $item->getId(); ?>][discount_percent]"/>
+            </td>
+
+            <?php /* simple product: ROW TOTAL */ ?>
+            <td class="a-right">
+                <b><?php echo $this->getCurrencyRowTotal($item); ?></b><br>
+                <input type="text" readonly="readonly"
+                       class="edit_order_item required-entry validate-number"
+                       value="<?php echo number_format($this->getBaseRowTotal($item), 2, '.', ''); ?>"
+                       name="items[<?php echo $item->getId(); ?>][row_total]"/>
+            </td>
+
+            <?php /* simple product: REMOVE */ ?>
+            <td class="ordered_item_remove a-center last">
+                <input type="checkbox" name="items[<?php echo $item->getId(); ?>][remove]"
+                       class="remove_ordered_item"
+                       data-item-id="<?php echo $item->getId(); ?>"
+                       id="remove_<?php echo $item->getId(); ?>" value="1"/>
+
+                <input type="hidden" value="<?php echo $item->getProductId(); ?>"
+                       name="items[<?php echo $item->getId(); ?>][product_id]"/>
+                <input type="hidden" value="<?php echo $item->getId(); ?>"
+                       name="items[<?php echo $item->getId(); ?>][quote_item]"/>
+            </td>
+        </tr>
+    <?php endif; ?>
+    </tbody>
+<?php endforeach; ?>

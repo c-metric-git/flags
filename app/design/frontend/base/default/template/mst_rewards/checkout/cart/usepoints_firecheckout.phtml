@@ -1,0 +1,66 @@
+<?php
+if (!$this->getMaxPointsNumberToSpent()) return;
+?>
+<div id="coupon-discount" class="firecheckout-section">
+    <div class="block-title"><span><?php echo $this->__('Use Reward Points') ?></span></div>
+    <div class="discount-form" id="discount-code">
+        <?php
+        echo $this->getMessagesBlock()->getGroupedHtml();
+        $this->getMessagesBlock()->getMessageCollection()->clear();
+        ?>
+        <label for="points_amount"><?php echo $this->__('You have <b>%s</b> available.', Mage::helper('rewards')->formatPoints($this->getBalancePoints())) ?><br>
+            <?php echo $this->__('Enter amount of points to spend:'); ?>
+        </label>
+        <input type="hidden" name="remove-points" id="remove-points" value="0" />
+        <div class="input-box">
+            <input class="input-text" id="points_amount" name="points_amount" value="<?php echo $this->getPointsAmount()? $this->htmlEscape($this->getPointsAmount()): '' ?>" style="width: 90%;"/>
+        </div>
+        <div class="input-box">
+            <input type='checkbox' id="points_all" name="points_all"
+                <?php echo $this->getPointsAmount() == $this->getMaxPointsNumberToSpent()?'checked':''?> />
+            <label for="points_all"><?php echo $this->__("Use maximum %s", Mage::helper('rewards')->formatPoints($this->getMaxPointsNumberToSpent()))?></label>
+        </div>
+        <div>
+            <button type="button" title="<?php echo $this->__('Apply Points') ?>"  id="apply_points" class="button" value="<?php echo $this->__('Apply Points') ?>"><span><span><?php echo $this->__('Apply Points') ?></span></span></button>
+
+            &nbsp; <button type="button" <?php if(!$this->getPointsAmount()): ?>style="display: none;"<?php endif?> title="<?php echo $this->__('Cancel Points') ?>"  id="cancel_points"  class="button" value="<?php echo $this->__('Cancel Points') ?>"><span><span><?php echo $this->__('Cancel Points') ?></span></span></button>
+
+        </div>
+    </div>
+    <script type="text/javascript">
+        //<![CDATA[
+
+        Event.observe($('points_all'), 'click', function(){
+            if ($('points_amount').value == <?php echo $this->getMaxPointsNumberToSpent() ?>) {
+                $('points_amount').value = '';
+            } else {
+                $('points_amount').value = <?php echo $this->getMaxPointsNumberToSpent() ?>;
+            }
+        });
+        Event.observe($('points_amount'), 'keyup', function(){
+            var val = parseInt($('points_amount').value);
+            if (isNaN(val) || val < <?php echo $this->getMaxPointsNumberToSpent() ?>) {
+                $('points_all').checked = false;
+            } else {
+                $('points_all').checked = true;
+                $('points_amount').value = <?php echo $this->getMaxPointsNumberToSpent() ?>;
+            }
+        });
+
+        $('apply_points') && $('apply_points').observe('click', function(e) {
+            checkout.update('<?php echo $this->getUrl('rewards/checkout_firecheckout/applyPoints') ?>', {
+                'review': 1
+            });
+            $('cancel_points').show();
+        });
+        $('cancel_points') && $('cancel_points').observe('click', function(e) {
+            $('points_amount').value = '';
+            $('points_all').checked = false;
+            checkout.update('<?php echo $this->getUrl('rewards/checkout_firecheckout/applyPoints') ?>', {
+                'review': 1
+            });
+            $('cancel_points').hide();
+        });
+        //]]>
+    </script>
+</div>

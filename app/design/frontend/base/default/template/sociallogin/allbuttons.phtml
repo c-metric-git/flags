@@ -1,0 +1,24 @@
+<?php $temp = $this->makeArrayButton(); ?>
+<div id="sociallogin_button" style="">	
+<div class="sociallogin-other">
+<div id="social_login_popup" style="display: none;">
+	<div id="magestore-popup_social" class="magestore-popup_social">
+	<div id="other_sociallogin_label" style="background-color: rgb(240, 240, 237);" ><strong><?php echo $this->__('Other Social Login'); ?><strong></div>
+	<div id="sociallogin-close" title="Close" style="font-weight:bold;font-size:11px;color:#f18200" onclick="this.up('#social_login_popup').style.display='none';"></div>		
+	<ul style="padding-top: 0.4em;padding-bottom: 0.3em;">
+		<?php foreach($temp as $button):?>				
+			<?php $check = $button['check']; ?>
+			<?php if($check): $count ++;?>				
+				<li class="button left other-button"> <?php echo $button['button'] ?> </li>	
+				<script type="text/javascript">
+					$('<?php echo $button['id'] ?>').addClassName('non-visible');
+				</script>					
+			<?php endif;?>			
+		<?php endforeach;?>  
+		</ul>
+	
+	</div>
+	<div style="opacity: 0.3; visibility: visible; background-color: #000000;height: 100%;left: 0;margin: 0;padding: 0;position: fixed;top: 0; z-index: 30020 !important;float: left;width: 100%;min-height: 3000px;" onclick="this.up('#social_login_popup').style.display='none';"></div>
+</div>
+</div>
+</div>

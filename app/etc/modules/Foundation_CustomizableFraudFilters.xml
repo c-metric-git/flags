@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Foundation_CustomizableFraudFilters>
+      <active>true</active>
+      <codePool>community</codePool>
+      <version>0.1.1</version>
+    </Foundation_CustomizableFraudFilters>
+  </modules>
+</config>

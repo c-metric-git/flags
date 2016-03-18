@@ -1,0 +1,170 @@
+<?php
+$iwdVersion = Mage::getConfig()->getModuleConfig("IWD_Opc")->version;
+$isVersion4 = $iwdVersion >= '4.0.0';
+?>
+<?php if ($isVersion4): ?>
+<style>
+    .rewards-block h3 {
+        margin-bottom: 0;
+        padding: 0;
+        display: inline-block;
+        border: none;
+        cursor: pointer;
+    }
+    .rewards-block h3.open-block + .collapse-block {
+        border-top: 1px solid #b6b6b6;
+        margin-top: 10px;
+    }
+    .rewards-block h3.open-block .expand_plus:before{content: '-';}
+
+    .discount-block table {
+        width: 100%;
+    }
+
+    #points_amount.input-text {
+        width: 100%;
+        padding-left: 5px;
+    }
+
+    input#points_all {
+        position: relative;
+        top: 2px;
+    }
+
+    .discount-form label {
+        margin-bottom: 4px;
+    }
+
+    .rewards-block h3 {
+        border-bottom: 1px solid #b6b6b6 !important;
+        padding-bottom: 8px !important;
+        width: 100%;
+    }
+
+    .opc-col-center div.shipping-block h3 {
+        margin-top: 10px;
+    }
+
+    .rewards-block span.expand_plus {
+        margin-right: 185px
+    }
+</style>
+<?php endif; ?>
+<div id = "opc-rewards-block" class="rewards-block">
+    <h3><?php echo $this->__('Use Reward Points') ?></h3>
+    <div>
+        <div class="discount-block ">
+        <table style="margin-top: 10px" name="rewards-balance-table">
+            <?php if ($points = $this->getPurchase()->getEarnPoints()): ?>
+                <tr>
+                    <td style="text-align: left" class="a-right cart-points-total_earned">
+                        <div class=""><b><?php echo $this->__('You Earn') ?></b></div>
+                    </td>
+                    <td style="text-align: right" class="a-right cart-points-total_earned" name="rwp-points-earned">
+                            &nbsp; <?php echo Mage::helper('rewards')->formatPoints($points) ?>
+                    </td>
+                </tr>
+            <?php endif; ?>
+            <?php if ($this->getBalancePoints()): ?>
+                <tr>
+                    <td style="text-align: left" class="a-right cart-points-total_earned"  name="rwp-points-spent">
+                        <div class=""><b><?php echo $this->__('You Spend') ?></b></div>
+                    </td>
+                    <td style="text-align: right" class="a-right cart-points-total_earned">
+                            &nbsp; <?php echo Mage::helper('rewards')->formatPoints($this->getPurchase()->getSpendPoints()) ?>
+                    </td>
+                </tr>
+            <?php endif; ?>
+            <?php if ($this->getPurchase()->getSpendAmount()): ?>
+                <tr>
+                    <td style="text-align: left" class="a-right cart-points-total_earned">
+                        <div class=""><b><?php echo $this->__('Discount amount') ?></b></div>
+                    </td>
+                    <td style="text-align: right" class="a-right cart-points-total_earned"  name="rwp-points-discount">
+                        &nbsp; <?php echo Mage::helper('core')->currency($this->getPurchase()->getSpendAmount(), true, false); ?>
+                    </td>
+                </tr>
+            <?php endif; ?>
+        </table>
+        <?php if ($this->getMaxPointsNumberToSpent()) : ?>
+        <?php echo Mage::app()->getLayout()->createBlock('rewards/checkout_cart_usepoints')
+                ->setTemplate('mst_rewards/checkout/cart/iwd/form.phtml')
+                ->toHtml();
+        ?>
+        <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    //<![CDATA[
+    $j = jQuery.noConflict();
+
+    MstRewardsCheckout = {
+        init: function () {
+
+            $j(document).on('click', '.apply-points', function () {
+                MstRewardsCheckout.applyPoints(false);
+            });
+
+
+            $j(document).on('click', '.remove-points', function () {
+                MstRewardsCheckout.applyPoints(true);
+            });
+
+
+            $j(document).on('click', '.rewards-block h3', function () {
+                if ($j(this).hasClass('open-block')) {
+                    $j(this).removeClass('open-block');
+                    $j(this).next().addClass('hidden');
+                } else {
+                    $j(this).addClass('open-block');
+                    $j(this).next().removeClass('hidden');
+                }
+            });
+
+        },
+
+        applyPoints: function (remove) {
+
+            var form = $j('#opc-rewards-form').serializeArray();
+            if (remove === false) {
+                form.push({"name": "remove-points", "value": "0"});
+            } else {
+                form.push({"name": "remove-points", "value": "1"});
+            }
+            IWD.OPC.Checkout.showLoader();
+            IWD.OPC.Checkout.xhr = $j.post(IWD.OPC.Checkout.config.baseUrl + 'rewards/checkout/applyPointsIwdOnestepcheckout', form, MstRewardsCheckout.prepareResponse, 'json');
+        },
+
+        prepareResponse: function (response) {
+            IWD.OPC.Checkout.xhr = null;
+            IWD.OPC.Checkout.hideLoader();
+            if (typeof(response.message) != "undefined") {
+                if (response.message != "") {
+                    $j('.opc-message-container').html(response.message);
+                    $j('.opc-message-wrapper').show();
+                }
+
+                IWD.OPC.Checkout.pullReview();
+            }
+            if (typeof(response.rewards) != "undefined") {
+                $j('#opc-rewards-block').replaceWith(response.rewards).show();
+                //$j('#opc-rewards-block').show();
+            }
+            if (typeof(response.payments) != "undefined") {
+                $j('#checkout-payment-method-load').html(response.payments);
+
+                IWD.OPC.removeNotAllowedPaymentMethods();
+
+                payment.initWhatIsCvvListeners();
+                IWD.OPC.bindChangePaymentFields();
+            }
+            ;
+        }
+    };
+    $j(document).ready(function () {
+        MstRewardsCheckout.init();
+    });
+    //]]>
+</script>

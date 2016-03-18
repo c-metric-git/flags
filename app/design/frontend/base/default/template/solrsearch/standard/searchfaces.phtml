@@ -1,0 +1,118 @@
+<?php if ($this->isLayerNavigationActive()):?>
+<?php $filterQuery = $this->getFilterQuery(); ?>
+<?php $limit = $this->getLimit(); ?>
+<div class="block block-layered-nav" id="solr_search_facets">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Shop By') ?></span></strong>
+    </div>
+    <div class="block-content">
+    	<form name="searchFacets" method="get" action="<?php echo $this->helper('solrsearch')->getResultUrl() ?>">
+			<input type="hidden" name="q" value="<?php echo $this->getData('querytext') ?>" />
+    		<?php if($this->isSelectedFacetActive()) : ?>
+			<div class="currently">
+				<p class="block-subtitle"><?php echo $this->__('Currently Shopping by') ?></p>
+				<ol>
+
+    				<?php foreach($filterQuery as $key=>$values): ?>
+						<?php foreach($values as $v): ?>
+							<?php if ($key != 'category_id'):?>
+								<li>
+									<?php $face_key = substr($key, 0, strrpos($key, '_'))?>
+									<?php
+									$selectedFacetValue = $v;
+									if ($face_key == 'price'){
+										$selectedFacetValue = $this->formatFacetPrice($v);
+									}
+									?>
+									<span class="label"><?php echo $this->getFacetLabel($key); ?>:</span>
+									<span class="value"><?php echo $this->facetFormat($selectedFacetValue) ?></span>
+									<a title="<?php echo $this->__('Remove This Item') ?>" href="<?php echo $this->getRemoveFacesUrl($face_key, $v)?>" class="btn-remove"><?php echo $this->__('Remove This Item') ?></a>
+
+									<?php if ($face_key != 'price'):?>
+									<input type="hidden" name="fq[<?php echo $face_key ?>]" value="<?php echo $this->htmlEscape($v)?>" />
+									<?php endif;?>
+								</li>
+							<?php endif;?>
+						<?php endforeach; ?>
+					<?php endforeach; ?>
+				</ol>
+			</div>
+			<div class="actions">
+			<a title="<?php echo $this->__('Clear all') ?>" href="<?php echo $this->getRemoveAllUrl()?>"><?php echo $this->__('Clear All') ?></a>
+			</div>
+			<?php endif; ?>
+			<?php if($this->isShoppingOptionsActive()): ?>
+	            <p class="block-subtitle"><?php echo $this->__('Shopping Options') ?></p>
+	            <dl id="narrow-by-list">
+					<?php foreach ($this->getFacetFields() as $key=>$face): ?>
+						<?php if ($this->isFieldRange($key)): ?>
+							<?php echo $this->getRangeFacets($key); ?>
+						<?php else: ?>
+		                    <?php if (count($face) > 0):?>
+			                    <dt id="solr_search_<?php echo $key ?>_expander" onclick="Effect.toggle('content_holder_<?php echo $key ?>', 'slide', { duration: 0.3 }); $('solr_search_<?php echo $key ?>_expander').toggleClassName('collapsed'); return false;"><?php echo $this->getFacetLabel($key); ?></dt>
+			                    <dd id="content_holder_<?php echo $key ?>">
+			                    	<?php if ($key == 'category_path' || $key == 'category_facet'):?>
+			                    		<?php echo $this->parseCategoryPathFacet($face); ?>
+			                    	<?php else:?>
+			                    	<ol>
+			                    		<?php $index = 1;?>
+			                    		<?php foreach ($face as $item=>$count): ?>
+				                    		<?php if ($count > 0):?>
+							                   	<li class="<?php if($index > $limit) echo 'toggle-hide'?>">
+													<?php $face_key = substr($key, 0, strrpos($key, '_'))?>
+													<?php
+													$activeClass = '';
+													$facetUrl = $this->getFacesUrl(array('fq'=>array($face_key=>$item)));
+													if (isset($filterQuery[$key]) && in_array($item, $filterQuery[$key])){
+														$activeClass = 'active';
+														$facetUrl = $this->getRemoveFacesUrl($face_key, $item);
+													}?>
+													<a href="<?php echo $facetUrl?>" class="facet-item <?php echo $activeClass;?>"><?php echo $this->htmlEscape($item)?>&nbsp;<span>(<?php echo $count?>)</span></a>
+												</li>
+												<?php $index++?>
+											<?php endif;?>
+					                	<?php endforeach; ?>
+					                	<?php if($index > ($limit + 1)): ?>
+											<li class="more-less plus"><a class="sb-more-less-button" href="#more" onclick="sbtogglemoreless(this)" rel="<?php echo $this->__('Show Less')?>"><?php echo $this->__('Show More')?></a></li>
+										<?php endif;?>
+			                    	</ol>
+			                    	<?php endif; ?>
+			                    </dd>
+			                    <div style="clear: both;"></div>
+		                    <?php endif;?>
+	                    <?php endif;?>
+	                <?php endforeach; ?>
+	                <?php echo $this->getPriceFacets() ?>
+	            </dl>
+            <?php endif;?>
+         </form>
+    </div>
+</div>
+<script type="text/javascript">
+//<![CDATA[
+function sbtogglemoreless(element) {
+	var action = $(element).readAttribute('href');
+	var text = $(element).innerHTML;
+	if(action=='#more'){
+		$(element).up(1).getElementsBySelector('li[class="toggle-hide"]').each(function(el){
+			$(el).removeClassName('toggle-hide');
+			$(el).addClassName('toggle-show');
+		});
+		element.href = '#less';
+		$(element).up().removeClassName('plus');
+	}else{
+		$(element).up(1).getElementsBySelector('li[class="toggle-show"]').each(function(el){
+			$(el).removeClassName('toggle-show');
+			$(el).addClassName('toggle-hide');
+		});
+		element.href = '#more';
+		$(element).up().addClassName('plus');
+	}
+	$(element).update(element.rel);
+	$(element).writeAttribute('rel', text);
+	var scrollToElement = element.up(2).readAttribute('id')+'_header';
+	$(scrollToElement).scrollTo();
+}
+//]]>
+</script>
+<?php endif;?>

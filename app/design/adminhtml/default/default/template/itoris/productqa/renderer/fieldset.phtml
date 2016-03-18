@@ -1,0 +1,85 @@
+<?php 
+/**
+ * ITORIS
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the ITORIS's Magento Extensions License Agreement
+ * which is available through the world-wide-web at this URL:
+ * http://www.itoris.com/magento-extensions-license.html
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to sales@itoris.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extensions to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to the license agreement or contact sales@itoris.com for more information.
+ *
+ * @category   ITORIS
+ * @package    ITORIS_PRODUCTQA
+ * @copyright  Copyright (c) 2012 ITORIS INC. (http://www.itoris.com)
+ * @license    http://www.itoris.com/magento-extensions-license.html  Commercial License
+ */
+?>
+<?php $_element = $this->getElement() ?>
+<?php if ($_element->getFieldsetContainerId()): ?>
+<div id="<?php echo $_element->getFieldsetContainerId(); ?>">
+<?php endif; ?>
+<?php if ($_element->getLegend()): ?>
+<div class="entry-edit-head">
+    <h4 class="icon-head head-edit-form fieldset-legend"><?php echo $_element->getLegend() ?></h4>
+    <div class="form-buttons"><?php echo $_element->getHeaderBar() ?></div>
+</div>
+<?php endif; ?>
+<?php if (!$_element->getNoContainer()): ?>
+    <div class="fieldset <?php echo $_element->getClass() ?>" id="<?php echo $_element->getHtmlId() ?>">
+<?php endif; ?>
+    <div class="hor-scroll">
+        <?php if ($_element->getComment()): ?>
+            <p class="comment"><?php echo $this->escapeHtml($_element->getComment()) ?></p>
+        <?php endif; ?>
+        <?php if ($_element->hasHtmlContent()): ?>
+            <?php echo $_element->getHtmlContent(); ?>
+        <?php else: ?>
+        <table cellspacing="0" class="<?php echo $_element->hasTableClass() ? $_element->getTableClass() : 'form-list'?>">
+            <tbody>
+                <?php echo $_element->getChildrenHtml(); ?>
+				<?php if($_element->getId() == 'answers_fieldset'):
+					echo Mage::registry('answersGrid')->toHtml();
+				?>
+					<h6><?php echo Mage::helper('itoris_productqa')->__('Add New Answer') ?>:</h6>
+					<table>
+						<tr>
+							<td><?php echo Mage::helper('itoris_productqa')->__('Status') ?></td>
+							<td><?php echo Mage::helper('itoris_productqa')->__('Nickname') ?></td>
+							<td><?php echo Mage::helper('itoris_productqa')->__('Answer') . ' (' . Mage::helper('itoris_productqa')->__('HTML Tags allowed') . ')' ?></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td style="width: 130px;">
+								<select name="answer_status" id="answer_status">
+									<option value="<?php echo Itoris_ProductQa_Model_Answers::STATUS_PENDING ?>"><?php echo Mage::helper('itoris_productqa')->__('Pending') ?></option>
+									<option value="<?php echo Itoris_ProductQa_Model_Answers::STATUS_APPROVED ?>"><?php echo Mage::helper('itoris_productqa')->__('Approved') ?></option>
+									<option value="<?php echo Itoris_ProductQa_Model_Answers::STATUS_NOT_APPROVED ?>"><?php echo Mage::helper('itoris_productqa')->__('Not Approved') ?></option>
+								</select>
+							</td>
+							<td style="width: 160px;"><input type="text" name="answer_nickname" id="answer_nickname"/></td>
+							<td style="width: 850px;"><textarea rows="4" name="answer_content" id="answer_content" style="width: 98%;"></textarea></td>
+							<td><button type="button" onclick="addAnswer('<?php echo addslashes($this->__('Both Nickname and Answer are required'))  ?>', '<?php echo Mage::getModel('adminhtml/url')->getUrl('itoris_productqa/admin_answers/add'); ?>', '<?php echo Mage::getSingleton('core/session')->getFormKey() ?>');"><span><?php echo Mage::helper('itoris_productqa')->__('Add') ?></span></button></td>
+						</tr>
+					</table>
+				<?php
+				 endif; ?>
+            </tbody>
+        </table>
+        <?php endif; ?>
+    </div>
+    <?php echo $_element->getSubFieldsetHtml() ?>
+<?php if (!$_element->getNoContainer()): ?>
+    </div>
+<?php endif; ?>
+<?php if ($_element->getFieldsetContainerId()): ?>
+</div>
+<?php endif; ?>

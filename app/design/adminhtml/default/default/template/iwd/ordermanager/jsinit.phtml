@@ -1,0 +1,183 @@
+<?php
+try{
+    $order_id = $this->getOrderId() ? $this->getOrderId() : Mage::app()->getRequest()->getParam('order_id');
+    $email = Mage::getModel('sales/order')->load($order_id)->getCustomerEmail();
+
+    $is_archive = Mage::getModel('iwd_ordermanager/order')->isArchived($order_id);
+} catch (Exception $e){
+    $email = "";
+    $is_archive = false;
+}
+
+$tax_config = Mage::getModel("tax/config");
+$tax_calculation = Mage::getModel("tax/calculation");
+$helper = Mage::helper('adminhtml');
+
+$lang = substr(Mage::app()->getLocale()->getLocaleCode(), 0, 2);
+$date_format = Mage::helper('iwd_ordermanager')->getDataTimeFormat();
+$is_order_page = Mage::app()->getRequest()->getControllerName() == "sales_order";
+?>
+
+<div id="iwd-om-popup-box">
+    <div class="om-iwd-modal fade" id="iwd_om_popup" tabindex="-1" role="dialog" aria-labelledby="iwd_om" aria-hidden="true">
+        <div class="om-iwd-modal-dialog">
+            <div class="om-iwd-modal-content">
+                <div class="om-iwd-modal-header">
+                    <a class="close" data-dismiss="modal" aria-label="<?php echo $helper->__("Close"); ?>"><span aria-hidden="true">&times;</span></a>
+                    <h4 class="om-iwd-modal-title"></h4>
+                </div>
+                <div class="om-iwd-modal-body">
+                    <div id="iwd_om_popup_form">
+                        <form>
+                            <div class="iwd-om-notification">
+                                <div>
+                                    <label><?php echo $helper->__('Notify by email(s)'); ?> <span class="required">*</span></label>
+                                    <input type="text" name="comment_email" value="<?php echo $email; ?>" required="required"/>
+                                    <span class="note"><?php echo $helper->__('Comma separated'); ?></span>
+                                </div>
+                                <div>
+                                    <label><?php echo $helper->__('Comment'); ?></label>
+                                    <textarea name="comment_text"></textarea>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="iwd-om-modal-controls">
+                        <button class="scalable" type="button"
+                                onclick="IWD.OrderManager.Popup.cancelModal()"
+                                title="<?php echo $helper->__("Cancel"); ?>">
+                            <?php echo $helper->__("Cancel"); ?>
+                        </button>
+                        <button class="scalable right" type="button"
+                                onclick="IWD.OrderManager.Popup.updateModal()"
+                                title="<?php echo $helper->__("Update"); ?>">
+                            <?php echo $helper->__("Update"); ?>
+                        </button>
+                    </div>
+                </div>
+                <div class="iwd-om-preloader-wrapper">
+                    <div class="iwd-om-preloader"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="iwd_om_popup-window-mask" class="popup-window-mask" style="display:none;"></div>
+<div id="iwd_om_product_composite_configure" class="product-configure-popup" style="display:none;">
+    <iframe name="product_composite_configure_iframe" id="iwd_om_product_composite_configure_iframe" src="#" style="width:0; height:0; border:0px solid #fff; position:absolute; top:-1000px; left:-1000px" onload="window.productConfigureIWDOMEdit && productConfigureIWDOMEdit.onLoadIFrame()"></iframe>
+    <form action="" method="post" id="iwd_om_product_composite_configure_form" enctype="multipart/form-data" onsubmit="productConfigureIWDOMEdit.onConfirmBtn(); return false;" target="product_composite_configure_iframe">
+        <div class="entry-edit">
+            <div class="entry-edit-head">
+                <h4 class="icon-head fieldset-legend"><?php echo Mage::helper('catalog')->__('Configure Product') ?></h4>
+            </div>
+            <div id="iwd_om_product_composite_configure_messages" style="display: none;" >
+                <ul class="messages"><li class="error-msg"></li></ul>
+            </div>
+            <div id="iwd_om_product_composite_configure_form_fields" class="content"></div>
+            <div id="iwd_om_product_composite_configure_form_additional" style="display:none;"></div>
+            <div id="iwd_om_product_composite_configure_form_confirmed" style="display:none;"></div>
+            <div class="buttons-set a-right">
+                <button type="button" class="scalable" onclick="productConfigureIWDOMEdit.onCancelBtn()" id="iwd_om_product_composite_configure_form_cancel"><span><span><span><?php echo Mage::helper('catalog')->__('Cancel') ?></span></span></span></button>
+                <button type="submit" class="scalable"><span><span><span><?php echo Mage::helper('catalog')->__('OK') ?></span></span></span></button>
+            </div>
+        </div>
+        <input type="hidden" name="as_js_varname" value="iFrameResponse" />
+        <input type="hidden" name="form_key" value="<?php echo $this->getFormKey() ?>" />
+    </form>
+    <div id="iwd_om_product_composite_configure_confirmed" style="display:none;"></div>
+
+    <script type="text/javascript">
+        var productCompositeConfigureForm = new varienForm('iwd_om_product_composite_configure_form');
+    </script>
+</div>
+
+
+<script type="text/javascript">
+    if(typeof(jQueryIWD) == "undefined"){if(typeof(jQuery) != "undefined") {jQueryIWD = jQuery;}} $ji = jQueryIWD;
+    $ji(document).ready(function () {
+        IWD.OrderManager.Popup.popupTitles = {
+            "account":"<?php echo $helper->__("Notify About Account Information Changes"); ?>",
+            "shipping":"<?php echo $helper->__("Notify About Shipping Information Changes"); ?>",
+            "payment":"<?php echo $helper->__("Notify About Payment Information Changes"); ?>",
+            "address_ship":"<?php echo $helper->__("Notify About Shipping Address Changes"); ?>",
+            "address_bill":"<?php echo $helper->__("Notify About Billing Address Changes"); ?>",
+            "info":"<?php echo $helper->__("Notify About General Order Information Changes"); ?>",
+            "items":"<?php echo $helper->__("Notify About Ordered Items Changes"); ?>"
+        };
+
+        IWD.OrderManager.lang = "<?php echo $lang; ?>";
+        IWD.OrderManager.is_archive = "<?php echo (int)$is_archive; ?>";
+        IWD.OrderManager.date_format = "<?php echo $date_format; ?>";
+        IWD.OrderManager.init(ORDER_ID);
+
+        <?php if($is_order_page): ?>
+        IWD.OrderManager.OrderedItems.urlEditOrderedItemsForm = "<?php echo $helper->getUrl('*/sales_orderr/editOrderedItemsForm') ?>?isAjax=true";
+        IWD.OrderManager.OrderedItems.urlEditOrderedItems = "<?php echo $helper->getUrl('*/sales_orderr/editOrderedItems') ?>?isAjax=true";
+        IWD.OrderManager.OrderedItems.urlAddOrderedItemsForm = "<?php echo $helper->getUrl('*/sales_orderr/addOrderedItemsForm') ?>?isAjax=true";
+        IWD.OrderManager.OrderedItems.urlAddOrderedItems = "<?php echo $helper->getUrl('*/sales_orderr/addOrderedItems') ?>?isAjax=true";
+        IWD.OrderManager.OrderedItems.urlConfigureProduct = "<?php echo $helper->getUrl('*/sales_orderr/configureProduct') ?>?isAjax=true";
+        IWD.OrderManager.OrderedItems.urlEditOrderedItemsOptions = "<?php echo $helper->getUrl('*/sales_orderr/editOrderedItemsOptions') ?>?isAjax=true";
+        IWD.OrderManager.OrderedItems.initProductConfigure = function () {
+            productConfigure = new ProductConfigure();
+            if (window.productConfigure) {
+                productConfigure.addListType('product_to_add', {
+                    urlFetch: '<?php echo $this->getUrl('*/sales_order_create/configureProductToAdd') ?>'
+                });
+                productConfigure.addListType('quote_items', {
+                    urlFetch: '<?php echo $this->getUrl('*/sales_order_create/configureQuoteItems') ?>'
+                });
+            }
+        };
+
+        IWD.OrderManager.OrderedItems.init();
+        productConfigureIWDOMEdit = new ProductConfigureIWDOM();
+        if (window.productConfigureIWDOMEdit) {
+            productConfigureIWDOMEdit.addListType('iwd_quote_items', {
+                urlFetch: '<?php echo $this->getUrl('*/sales_orderr/configureProduct') ?>'
+            });
+            productConfigureIWDOMEdit.addListType('iwd_quote_items', {
+                urlConfirm: '<?php echo $this->getUrl('*/sales_orderr/configureProduct') ?>'
+            });
+        }
+
+        IWD.OrderManager.TaxCalculation.taxCalculationMethodBasedOn = "<?php echo $tax_config->getAlgorithm(); ?>";
+        IWD.OrderManager.TaxCalculation.taxCalculationBasedOn = <?php echo Mage::helper("tax")->getTaxBasedOn() ? 1 : 0; ?>;
+        IWD.OrderManager.TaxCalculation.catalogPrices = <?php echo $tax_config->priceIncludesTax() ? 1 : 0; ?>;
+        IWD.OrderManager.TaxCalculation.shippingPrices = <?php echo $tax_config->shippingPriceIncludesTax() ? 1 : 0; ?>;
+        IWD.OrderManager.TaxCalculation.applyTaxAfterDiscount = <?php echo $tax_config->applyTaxAfterDiscount() ? 1 : 0; ?>;
+        IWD.OrderManager.TaxCalculation.discountTax = <?php echo $tax_config->discountTax() ? 1 : 0; ?>;
+        IWD.OrderManager.TaxCalculation.applyTaxOnCustomPrice = <?php echo Mage::helper("tax")->applyTaxOnCustomPrice() ? 1 : 0; ?>;
+        IWD.OrderManager.TaxCalculation.applyTaxOnOriginalPrice = <?php echo Mage::helper("tax")->applyTaxOnOriginalPrice() ? 1 : 0; ?>;
+        IWD.OrderManager.TaxCalculation.validateStockQty = <?php echo Mage::helper("iwd_ordermanager")->isValidateInventory(); ?>;
+        IWD.OrderManager.TaxCalculation.init();
+        <?php endif; ?>
+
+
+        IWD.OrderManager.Address.urlEditAddressForm = "<?php echo $helper->getUrl('*/sales_address/getForm') ?>?isAjax=true";
+        IWD.OrderManager.Address.urlEditAddressSubmit = "<?php echo $helper->getUrl('*/sales_address/updateInfo')?>?isAjax=true";
+        IWD.OrderManager.Address.init();
+
+        IWD.OrderManager.Shipping.urlEditShippingForm = "<?php echo $helper->getUrl('*/sales_shipping/getForm') ?>?isAjax=true";
+        IWD.OrderManager.Shipping.urlEditShippingSubmit = "<?php echo $helper->getUrl('*/sales_shipping/updateInfo')?>?isAjax=true";
+        IWD.OrderManager.Shipping.init();
+
+        IWD.OrderManager.Payment.urlEditPaymentForm = "<?php echo $helper->getUrl('*/sales_payment/getForm') ?>?isAjax=true";
+        IWD.OrderManager.Payment.urlEditPaymentSubmit = "<?php echo $helper->getUrl('*/sales_payment/updateInfo')?>?isAjax=true";
+        IWD.OrderManager.Payment.init();
+
+        IWD.OrderManager.AccountInfo.urlEditAccountForm = "<?php echo $helper->getUrl('*/sales_customer/getForm') ?>?isAjax=true";
+        IWD.OrderManager.AccountInfo.urlEditAccountSubmit = "<?php echo $helper->getUrl('*/sales_customer/updateInfo') ?>?isAjax=true";
+        IWD.OrderManager.AccountInfo.init();
+
+        IWD.OrderManager.OrderInfo.urlEditOrderInfoForm = "<?php echo $helper->getUrl('*/sales_orderinfo/getForm') ?>?isAjax=true";
+        IWD.OrderManager.OrderInfo.urlEditOrderInfoSubmit = "<?php echo $helper->getUrl('*/sales_orderinfo/updateInfo') ?>?isAjax=true";
+        IWD.OrderManager.OrderInfo.init();
+
+        IWD.OrderManager.Comments.urlDeleteCommentSubmit = "<?php echo $helper->getUrl('*/sales_comment/delete');?>?isAjax=true";
+        IWD.OrderManager.Comments.urlEditCommentSubmit = "<?php echo $helper->getUrl('*/sales_comment/update');?>?isAjax=true";
+        IWD.OrderManager.Comments.urlEditCommentForm = "<?php echo $helper->getUrl('*/sales_comment/getComment');?>?isAjax=true";
+        IWD.OrderManager.Comments.confirmText = "<?php echo $helper->__('Are you sure?'); ?>";
+    });
+</script>

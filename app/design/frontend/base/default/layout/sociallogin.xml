@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<default>
+		<reference name="head">
+			<action method="addJs"><script>magestore/sociallogin/lightbox.js</script></action>
+			<action method="addJs"><script>magestore/sociallogin/sociallogin.js</script></action>
+			<action method="addCss"><stylesheet>css/magestore/sociallogin.css</stylesheet></action>
+			<action method="addCss"><stylesheet>css/magestore/mobilesociallogin.css</stylesheet></action>
+		</reference>
+		<reference name="before_body_end">			
+			<block type="sociallogin/toplinks" after="-" name="toplinks.sociallogin" template="sociallogin/toplinks/toplinks.phtml"/>
+			<block type="sociallogin/buttons" after="-" name="allbuttons.sociallogin" template="sociallogin/allbuttons.phtml"/>
+		</reference>
+		<reference name="top.container">
+			<block type="sociallogin/autosociallogin" before="-" name="header.sociallogin">
+				<action method="setBlockPosition"><position>header</position></action>
+			</block>
+		</reference>		
+	</default>
+	
+	<customer_account_login>
+		<reference name="content">
+			<block type="sociallogin/autosociallogin" before="-" name="before.customer.login.sociallogin" >
+				<action method="setBlockPosition"><position>before-customer-login</position></action>
+			</block>
+			<block type="sociallogin/autosociallogin" after="-" name="after.customer.login.sociallogin" >
+				<action method="setBlockPosition"><position>after-customer-login</position></action>
+			</block>			
+		</reference>		
+	</customer_account_login>
+	
+	<customer_account_create>
+		<reference name="content">
+			<block type="sociallogin/autosociallogin" before="-" name="before.customer.registration.sociallogin" >
+				<action method="setBlockPosition"><position>before-customer-registration</position></action>
+			</block>
+			<block type="sociallogin/autosociallogin" after="-" name="after.customer.registration.sociallogin" >
+				<action method="setBlockPosition"><position>after-customer-registration</position></action>
+			</block>			
+		</reference>		
+	</customer_account_create>		
+	<sociallogin_openlogin_setblock>
+		<update handle="page_empty" />
+		<reference name="content">
+			<block type="sociallogin/openlogin" after="-" name="after.customer.login.sociallogin" template="sociallogin/au_op.phtml"/>
+		</reference>
+	</sociallogin_openlogin_setblock>
+	<sociallogin_ljlogin_setblock>
+		<update handle="page_empty"/>
+		<reference name="content">
+			<block type="sociallogin/ljlogin" after="-" name="after.customer.login.sociallogin" template="sociallogin/au_lj.phtml"/>
+		</reference>
+	</sociallogin_ljlogin_setblock>
+	<sociallogin_allogin_setblock>
+		<update handle="page_empty"/>
+		<reference name="content">
+			<block type="sociallogin/aollogin" after="-" name="after.customer.login.sociallogin" template="sociallogin/au_al.phtml"/>
+		</reference>
+	</sociallogin_allogin_setblock>
+	<sociallogin_callogin_setblock>
+		<update handle="page_empty"/>
+		<reference name="content">
+			<block type="sociallogin/callogin" after="-" name="after.customer.login.sociallogin" template="sociallogin/au_cal.phtml"/>
+		</reference>
+	</sociallogin_callogin_setblock>
+	<sociallogin_wplogin_setblock>
+		<update handle="page_empty"/>
+		<reference name="content">
+			<block type="sociallogin/wplogin" after="-" name="after.customer.login.sociallogin" template="sociallogin/au_wp.phtml"/>
+		</reference>
+	</sociallogin_wplogin_setblock>
+</layout>

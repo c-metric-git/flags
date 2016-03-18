@@ -1,0 +1,36 @@
+<!--@subject Your points at {{var store.getFrontendName()}} are about to expire@-->
+<!--@styles
+body,td { color:#2f2f2f; font:13px/1.45em Verdana, Arial, Helvetica, sans-serif; }
+@-->
+
+<div style="font:13px/1.45em Verdana, Arial, Helvetica, sans-serif;">
+    <table cellspacing="0" cellpadding="0" border="0" width="98%" style="margin-top:10px; font:13px/1.45em Verdana, Arial, Helvetica, sans-serif; margin-bottom:10px;">
+        <tr>
+            <td align="center" valign="top">
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top"><a href="{{store url=""}}">
+                                            <img src="{{var logo_url}}" alt="{{var logo_alt}}"
+                                 style="margin-bottom:10px;" border="0"/>
+                            </a></td>
+                    </tr>
+                </table>
+                <table cellspacing="0" cellpadding="0" border="0" width="650">
+                    <tr>
+                        <td valign="top">
+                            <p>Dear {{htmlescape var=$customer.name}},</p>
+                            <p>Please, note that your {{var transaction_amount}}
+                                at <a href="{{store url=""}}">{{var store.getFrontendName()}}</a>
+                                will expire in <b>{{var transaction_days_left}} days</b>. </p>
+                            <p>To use points <a href="{{store url="customer/account/login"}}">login to your account</a> and spend points for new purchases.
+                            </p>
+                            Thank you,<br>
+                            <strong>{{var store.getFrontendName()}}</strong>
+                        </td>
+                    </tr>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!--
+ /**
+ * Magespot
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magespot License.
+ * It is available through the world-wide-web at this URL:
+ * http://magespot.com/license.html
+ * If you need receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contacts@magespot.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extension to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to http://www.magespot.com/ for more information.
+ *
+ * @category   Magespot
+ * @package    Magespot_Addresslinelength
+ * @copyright  Copyright (c) 2013 Magespot Crew (http://www.magespot.com/)
+ * @author     Magespot Crew <contacts@magespot.com>
+ * @license    http://magespot.com/license.html  Magespot License
+ */
+-->
+<config>
+   <sections>
+        <customer>
+            <groups>
+                <address>
+                    <fields>
+                        <line_length translate="label comment">
+                            <label>Max Length of Street Address Line</label>
+                            <comment><![CDATA[In characters.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </line_length>
+                        <set_maxlength translate="label comment">
+                            <label>Disallow Entering</label>
+                            <comment><![CDATA[If set to `Yes`, then user can not enter more than `Max Length of Street Address Line` characters.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </set_maxlength>
+                        <lines_amount translate="label comment">
+                            <label>Use For Amount</label>
+                            <comment><![CDATA[If set to `Yes`, then amount of characters for all lines in a Street Address must be less or equal than `Max Length of Street Address Line` value.]]></comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <set_maxlength>0</set_maxlength>
+                            </depends>
+                        </lines_amount>
+                        <val_message translate="label comment">
+                            <label>Validation Message</label>
+                            <comment><![CDATA[Message for validation, if user will enter more than `Max Length of Street Address Line` characters.]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>18</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends>
+                                <set_maxlength>0</set_maxlength>
+                            </depends>
+                        </val_message>
+                    </fields>
+                </address>
+            </groups>
+        </customer>
+    </sections>
+</config>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Stripedsocks_Core>
+            <version>1.0.0</version>
+        </Stripedsocks_Core>
+    </modules>
+    <frontend>
+        <routers>
+            <core>
+                <args>
+                    <modules>
+                        <Stripedsocks_Core before="Mage_Core">Stripedsocks_Core</Stripedsocks_Core>
+                    </modules>
+                </args>
+            </core>
+        </routers>
+    </frontend> 
+</config>

@@ -1,0 +1,84 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+
+/**
+ * Template to add Google provided JavaScript code on order created successfully page in admin panel
+ */
+?>
+<!-- BEGIN: Google Trusted Store -->
+<script type="text/javascript">
+  var gts = gts || [];
+
+  gts.push(["id", "<?php echo $this->getAccountId(); // there is only digits, validation in config ?>"]);
+<?php if ($this->getGoogleShoppingAccountId()): ?>
+  gts.push(["google_base_subaccount_id", "<?php echo $this->getGoogleShoppingAccountId() // could be only digits ?>"]);
+<?php endif; ?>
+  (function() {
+    var scheme = (("https:" == document.location.protocol) ? "https://" : "http://");
+    var gts = document.createElement("script");
+    gts.type = "text/javascript";
+    gts.async = true;
+    gts.src = scheme + "www.googlecommerce.com/trustedstores/gtmp_compiled.js";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(gts, s);
+  })();
+</script>
+<!-- END: Google Trusted Store -->
+<!-- START Trusted Stores Order -->
+<div id="gts-order" style="display:none;">
+
+    <!-- start order and merchant information -->
+    <span id="gts-o-id"><?php echo $this->getOrderIncrementId() ?></span>
+    <span id="gts-o-domain"><?php echo $this->getOrderDomain() ?></span>
+    <span id="gts-o-email"><?php echo $this->getCustomerEmail() ?></span>
+    <span id="gts-o-country"><?php echo $this->getCustomerCountry() ?></span>
+    <span id="gts-o-currency"><?php echo $this->getCurrencyCode() ?></span>
+    <span id="gts-o-total"><?php echo $this->getOrderTotal() ?></span>
+    <span id="gts-o-discounts"><?php echo $this->getOrderDiscount() ?></span>
+    <span id="gts-o-shipping-total"><?php echo $this->getOrderShipping() ?></span>
+    <span id="gts-o-tax-total"><?php echo $this->getOrderTax() ?></span>
+    <span id="gts-o-est-ship-date"><?php echo $this->getOrderShipDate() ?></span>
+    <span id="gts-o-has-preorder"><?php echo $this->hasBackorderPreorder() ?></span>
+    <span id="gts-o-has-digital"><?php echo $this->hasDigitalGoods() ?></span>
+    <!-- end order and merchant information -->
+
+    <?php foreach ($this->getItemsInformation() as $ii => $item) : ?>
+    <!-- start repeated item specific information -->
+    <span class="gts-item">
+        <span class="gts-i-name"><?php echo $item['name']; ?></span>
+        <span class="gts-i-price"><?php echo $item['price']; ?></span>
+        <span class="gts-i-quantity"><?php echo $item['qty']; ?></span>
+    <?php if (isset($item['gs'])) : ?>
+        <span class="gts-i-prodsearch-id"><?php echo $item['gs']['id'] ?></span>
+        <span class="gts-i-prodsearch-store-id"><?php echo $item['gs']['account_id'] ?></span>
+        <span class="gts-i-prodsearch-country"><?php echo $item['gs']['country'] ?></span>
+        <span class="gts-i-prodsearch-language"><?php echo $item['gs']['language'] ?></span>
+    <?php endif; ?>
+    </span>
+    <!-- end repeated item specific information -->
+    <?php endforeach; ?>
+</div>
+<!-- END Trusted Stores -->

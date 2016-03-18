@@ -1,0 +1,48 @@
+<?php
+$collection = $this->getTransactionCollection();
+?>
+<div class='dashboard'>
+    <div class="page-title">
+        <h1><?php echo $this->__("My Reward Points") ?></h1>
+    </div>
+
+<div class="box-account box-info">
+    <div class="box-head">
+        <h2><?php echo $this->__('Points Summary') ?></h2>
+    </div>
+
+<p><?php echo $this->__('You have <b>%s</b> in your account.', Mage::helper('rewards')->formatPoints($this->getBalancePoints())); ?></p>
+<p><?php echo $this->getChildHtml('rewards.notification') ?></p>
+</div>
+
+<?php if ($collection->count()):?>
+<h3><?php echo $this->__("Transactions History") ?></h3>
+<?php echo $this->getChildHtml('rewards.toolbar')?>
+    <table class="data-table" id="transaction-table">
+        <thead>
+            <tr class="first last">
+                <th><?php echo $this->__("ID") ?></th>
+                <th><?php echo $this->__("Comment") ?></th>
+                <th><?php echo $this->__("Points") ?></th>
+                <th><?php echo $this->__("Created") ?></th>
+                <th><?php echo $this->__("Expires") ?></th>
+            </tr>
+        </thead>
+        <tbody>
+<?php foreach($collection as $transaction):?>
+			<tr>
+				<td><?php echo $transaction->getId() ?></td>
+                <td><?php echo $transaction->getComment() ?></td>
+                <td><?php echo $transaction->getAmount() > 0? '+': '' ?><?php echo $transaction->getAmount() ?></td>
+                <td><?php echo Mage::helper('core')->formatDate($transaction->getCreatedAt(), 'medium') ?></td>
+			    <td><?php echo $transaction->getExpiresAtFormatted() ?></td>
+			</tr>
+<?php endforeach?>
+		</tbody>
+	</table>
+<?php echo $this->getChildHtml('rewards.toolbar')?>
+    <script type="text/javascript">decorateTable('transaction-table')</script>
+<?php else: ?>
+    <p><?php echo $this->__("There are no Transactions") ?></p>
+<?php endif;?>
+</div>

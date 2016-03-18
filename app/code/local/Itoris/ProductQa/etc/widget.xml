@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widgets>
+	<itoris_productqa type="itoris_productqa/productQaWidget">
+		<name>IToris ProductQa</name>
+		<description>Adds IToris ProductQa instance.</description>
+	</itoris_productqa>
+</widgets>

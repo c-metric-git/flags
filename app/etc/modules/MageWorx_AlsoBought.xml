@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!-- 
+/**
+ * MageWorx
+ * Others Also Bought Extension
+ *
+ * @category   MageWorx
+ * @package    MageWorx_AlsoBought
+ * @copyright  Copyright (c) 2016 MageWorx (http://www.mageworx.com/)
+ */
+-->
+<config>
+    <modules>
+        <MageWorx_AlsoBought>
+            <active>true</active>
+            <codePool>community</codePool>
+            <extension_name>Others Also Bought</extension_name>
+            <!--depends>
+                <MageWorx_All />
+            </depends-->
+        </MageWorx_AlsoBought>
+    </modules>
+</config>

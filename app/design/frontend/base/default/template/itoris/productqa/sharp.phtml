@@ -1,0 +1,221 @@
+<?php
+/**
+ * ITORIS
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the ITORIS's Magento Extensions License Agreement
+ * which is available through the world-wide-web at this URL:
+ * http://www.itoris.com/magento-extensions-license.html
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to sales@itoris.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extensions to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to the license agreement or contact sales@itoris.com for more information.
+ *
+ * @category   ITORIS
+ * @package    ITORIS_PRODUCTQA
+ * @copyright  Copyright (c) 2012 ITORIS INC. (http://www.itoris.com)
+ * @license    http://www.itoris.com/magento-extensions-license.html  Commercial License
+ */
+?>
+<?php
+$settings = $this->getSettings();
+?>
+
+<script type="text/javascript">
+	var hasQuestions = false;
+	var baseSiteUrl = '<?php echo Mage::getBaseUrl();?>';
+	var baseUrl = baseSiteUrl + 'itoris_productqa/';
+	var postQ = <?php echo Itoris_ProductQa_Model_Settings::VISITOR_POST_Q ?>;
+	var postA = <?php echo Itoris_ProductQa_Model_Settings::VISITOR_POST_A ?>;
+	var visitorPost = <?php echo ($settings->getVisitorPost()) ? $settings->getVisitorPost() : 0 ?>;
+	var customerId = <?php echo ($this->getCustomerId()) ? $this->getCustomerId() : 0 ?>;
+	var productId = <?php echo $this->getProductId() ?>;
+	var storeId = <?php echo $this->getStoreId() ?>;
+	var mode = <?php echo Itoris_ProductQa_Model_Questions::SORT_RECENT ?>;
+	var per_page = <?php echo $settings->getQuestionsPerPage() ?>;
+	var pages = <?php echo (Mage::registry('pages')) ? Mage::registry('pages') : 1 ?>;
+	var captcha = <?php echo $settings->getCaptcha() ?>;
+	var question_length = <?php echo $settings->getQuestionLength() ?>;
+	var answer_length = <?php echo $settings->getAnswerLength() ?>;
+	var captchaType = 0;
+	var itoris_message_question_added = '<?php echo $this->__('Your question has been added')?>';
+	var itoris_message_question_moderation = '<?php echo $this->__('Your question has been sent for moderation')?>';
+	var itoris_message_answer_added = '<?php echo $this->__('Your answer has been added')?>';
+	var itoris_message_answer_moderation = '<?php echo $this->__('Your answer has been sent for moderation')?>';
+	var itoris_message_question_length = '<?php echo $this->__('Maximum question length is ') . $settings->getQuestionLength()?>';
+	var itoris_message_answer_length = '<?php echo $this->__('Maximum answer length is ') . $settings->getAnswerLength()?>';
+	var itoris_message_enter_email = '<?php echo $this->__('Please, enter email...') ?>';
+	ItorisProductQa.config = <?php echo $this->getConfigJson() ?>;
+</script>
+<div id="itoris_qa">
+	<div id="itoris_qa_logo"></div>
+	<div id="itoris_qa_label"><?php echo $this->__('Questions & Answers') ?></div>
+	<div class="itoris_qa_search_box">
+		<span class="itoris_qa_search_label"><?php echo $this->__('Search Q/A') ?></span><input type="text" id="itoris_qa_search" />
+		<a href="#" id="itoris_qa_search_go" onclick="return false;"><?php echo $this->__('GO') ?></a> | <a href="#" id="itoris_qa_search_reset" onclick="return false;"><?php echo $this->__('Reset') ?></a>
+	</div>
+	<div class="clear-float-right">
+		<div id="itoris_qa_expand" class="text_expand"><?php echo $this->__('Expand all')?></div>
+		<div id="itoris_qa_collapse" style="display: none;" class="text_expand"><?php echo $this->__('Collapse all')?></div>
+		<div class="expand_img"></div>
+		<div id="itoris_qa_sort_text"><?php echo $this->__('Sort by')?></div>
+		<div id="itoris_qa_select"><div><div id="itoris_qa_select_img"></div>
+				<div id="itoris_qa_select_text"><?php echo $this->getCurrentSortModeLabel() ?></div></div>
+			<ul id="itoris_qa_select_menu" style="display:none;">
+				<li style="display:none;"></li>
+				<?php foreach ($this->getModeValues() as $mode): ?>
+					<li value="<?php echo $mode['value'] ?>"><?php echo $mode['label'] ?></li>
+				<?php endforeach; ?>
+			</ul>
+		</div>
+	</div>
+	<div class="space_5"></div>
+	<div id="itoris_qa_body">
+		<div class="space_20"></div>
+		<div id="itoris_qa_ajax">
+			<?php echo $this->getQuestionsHtml($this->getQuestions())?>
+		</div>
+		<div class="form_box" id="itoris_qa_add_answer" style="display:
+		<?php echo $this->getShowAnswerForm() ? 'block' : 'none' ?>
+			">
+			<form class="form" id="itoris_qa_form_add_answer">
+				<input type="hidden" id="itoris_answer_status" name="status" value="<?php echo $this->getAnswerStatus() ?>"/>
+				<div class="label">
+					<span>*</span>
+					<?php echo $this->__('Nickname') ?>:
+				</div>
+				<div class="value">
+					<input type="text" name="nickname_answer" class="input-text required-entry"/>
+				</div><br/>
+				<div class="label">
+					<span>*</span>
+					<?php echo $this->__('Your Answer');?>:
+				</div>
+				<div class="value">
+					<textarea rows="5" name="answer" class="input-text required-entry" id="answer_text"></textarea><br/>
+					<span id="answer_text_length" style="color: red;display:none;"><?php echo $this->__('Maximum answer length is ') . $settings->getAnswerLength()?></span>
+				</div><br/>
+				<?php if (!$this->getIsSubscribed()): ?>
+					<div class="label">
+					</div>
+					<div class="value">
+						<input type="checkbox" name="newsletter" class="newsletter"/>
+						<?php echo $this->__('Sign Up for Newsletter')?>
+						<?php if (!$this->getCustomerId()): ?>
+							<div style="display:none;" class="newsletter-email">
+								<input type="text" name="newsletter_email" class="value" value="<?php echo $this->__('Please, enter email...') ?>" />
+							</div>
+						<?php endif; ?>
+					</div><br/>
+				<?php endif; ?>
+				<?php
+				if(!$this->getCustomerId() && $settings->getCaptcha() != Itoris_ProductQa_Model_Settings::NO_CAPTCHA){
+					echo $this->getCaptchaHtml('answer');
+				}
+				?>
+				<div class="label"></div>
+				<div class="value">
+					<div id="itoris_qa_button_add_answer" class="button_answer_question"></div>
+				</div>
+			</form>
+			<div class="hide_answer_form">
+				<div class="button_hide_answer_form">
+					<div class="button_hide_form"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="space_15"></div>
+
+		<div class="ask_questions<?php echo $this->getShowQuestionForm() ? ' ask_questions_hide' : '' ?>">
+			<div class="show_form<?php echo $this->getShowQuestionForm() ? ' button_hide_form' : ' button_ask_questions' ?>"></div>
+		</div>
+	</div>
+
+	<div class="form_box" id="itoris_qa_add_question" style="display:
+	<?php echo $this->getShowQuestionForm() ? 'block' : 'none' ?>
+		">
+		<form class="form" id="itoris_qa_form_add_question">
+			<input type="hidden" id="itoris_question_status" name="status" value="<?php echo $this->getQuestionStatus() ?>"/>
+			<input type="hidden" name="product_id" value="<?php echo $this->getProductId() ?>"/>
+			<input type="hidden" name="store_id" value="<?php echo $this->getStoreId() ?>"/>
+			<div class="label">
+				<span>*</span>
+				<?php echo $this->__('Nickname')?>:
+			</div>
+			<div class="value">
+				<input type="text" name="nickname_question" class="input-text required-entry" />
+			</div><br/>
+			<div class="label">
+				<span>*</span>
+				<?php echo $this->__('Your Question')?>:
+			</div>
+			<div class="value">
+				<textarea rows="5" name="question" class="input-text required-entry" id="question_text"></textarea><br/>
+				<span id="question_text_length" style="color: red;display:none;"><?php echo $this->__('Maximum question length is ') . $settings->getQuestionLength()?></span>
+			</div><br/>
+			<div class="label">
+			</div>
+			<div class="value">
+				<input type="checkbox" name="notify" class="notify" id="itoris_qa_notify"/>
+				<?php echo $this->__('Notify me by email when answer received')?>
+				<?php if (!$this->getCustomerId()): ?>
+					<div style="display:none;" class="notify-email">
+						<input type="text" name="notify_email" class="value" value="<?php echo $this->__('Please, enter email...') ?>" />
+					</div>
+				<?php endif; ?>
+			</div><br/>
+			<?php if (!$this->getIsSubscribed()): ?>
+				<div class="label">
+				</div>
+				<div class="value">
+					<input type="checkbox" name="newsletter" class="newsletter"/>
+					<?php echo $this->__('Sign Up for Newsletter')?>
+					<?php if (!$this->getCustomerId()): ?>
+						<div style="display:none;" class="newsletter-email">
+							<input type="text" name="newsletter_email" class="value" value="<?php echo $this->__('Please, enter email...') ?>" />
+						</div>
+					<?php endif; ?>
+				</div><br/>
+			<?php endif; ?>
+			<?php
+			if(!$this->getCustomerId() && $settings->getCaptcha() != Itoris_ProductQa_Model_Settings::NO_CAPTCHA){
+				echo $this->getCaptchaHtml('question');
+			}
+			?>
+			<div class="label"></div>
+			<div class="value">
+				<div class="button_add_question"></div>
+			</div>
+		</form>
+	</div>
+	<div id="itoris_qa_loading" style="display: none;">
+		<div><div class="loader"></div><?php echo $this->__('Loading')?>...</div>
+	</div>
+</div>
+
+<div id="itoris_qa_alert_back" style="display:none;"></div>
+<div id="itoris_qa_alert" style="display:none;">
+	<div class="message"></div>
+	<div class="button_box">
+		<div class="button_ok"></div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	if(!hasQuestions){
+		$('itoris_qa_body').addClassName('body_empty');
+		$$('.ask_questions')[0].addClassName('ask_questions_empty');
+	}
+	itoris_productqa_init_ajax_fields();
+	<?php if($this->getShowAnswerForm()): ?>
+	itoris_showAnswerForm(<?php echo $this->getShowAnswer() ?>);
+	<?php endif; ?>
+</script>

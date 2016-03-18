@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+
+<!--
+
+/**
+
+ * ShopperApproved Module for Magento 
+
+ * @package     ShprAprvd_ShopperApproved
+
+ * @author      ShprAprvd (http://www.shopperapproved.com/)
+
+ * @copyright   Copyright (c) 2014 ShprAprvd (http://www.shopperapproved.com/)
+
+ * @license     Open Software License
+
+ */
+
+-->
+
+<!--<layout>
+
+    <default>
+
+        <reference name="before_body_end">
+
+            <block type="shopperapproved/schema" name="shopperapproved" template="shopperapproved/schema.phtml"/>
+
+        </reference>
+
+    </default>
+
+</layout>-->
+
+<layout>
+
+	<default>
+
+        <reference name="footer">
+
+            <block type="shopperapproved/schema" name="shopperapproved" after="_" as="shopperapproved" template="shopperapproved/schema.phtml"/>
+
+        </reference>
+
+		<reference name="head">
+
+		   <block type="core/text" name="custom_css">
+
+			  <action method="setText">
+
+				  <text><![CDATA[
+
+					 <style  type="text/css">
+
+						.saSchema  {
+
+							display: block;
+
+							font-size: 9px;
+
+							text-align: center;
+
+							width: 100%;
+
+							position: relative;
+
+							z-index: 999;
+
+							margin: -40px 0px 0px 0px;
+
+						}
+
+						body.cms-home .saSchema, body.cms-index-index .saSchema{
+
+							display: none;
+
+						}
+
+					 </style> ]]>
+
+				</text>
+
+			</action>
+
+		   </block>
+
+		</reference>
+
+    </default>
+
+    <checkout_multishipping_success>
+
+        <reference name="before_body_end">
+
+            <block type="shopperapproved/script" name="shopperapproved" as="shopperapproved" template="shopperapproved/script.phtml"/>  
+
+        </reference>
+
+    </checkout_multishipping_success>   
+
+    <checkout_onepage_success>
+
+        <reference name="before_body_end">
+
+            <block type="shopperapproved/script" name="shopperapproved" as="shopperapproved" template="shopperapproved/script.phtml"/>
+
+        </reference>
+
+    </checkout_onepage_success>
+
+</layout>

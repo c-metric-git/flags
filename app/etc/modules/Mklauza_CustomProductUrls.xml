@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<config>
+
+    <modules>
+
+        <Mklauza_CustomProductUrls>
+
+            <active>false</active>
+
+            <codePool>community</codePool>
+
+            <depends>
+
+                <Mage_Core />
+
+                <Mage_Catalog />
+
+            </depends>
+
+	</Mklauza_CustomProductUrls>
+
+    </modules>
+
+</config>
+
+
+
+
+

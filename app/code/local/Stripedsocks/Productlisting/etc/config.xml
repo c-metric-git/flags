@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Stripedsocks_Productlisting>
+            <version>1.0.0</version>
+        </Stripedsocks_Productlisting>
+    </modules>
+    <global>
+        <blocks>
+            <catalog>
+                <rewrite>
+                    <product_list_toolbar>Stripedsocks_Productlisting_Block_Product_List_Toolbar</product_list_toolbar>
+                    <product_list>Stripedsocks_Productlisting_Block_Product_List</product_list>
+                </rewrite>
+            </catalog>
+        </blocks>
+        <models>
+            <catalog>
+                <rewrite>
+                    <product_url>Stripedsocks_Productlisting_Model_Product_Url</product_url>
+                </rewrite>
+            </catalog>
+        </models>
+    </global>
+</config>

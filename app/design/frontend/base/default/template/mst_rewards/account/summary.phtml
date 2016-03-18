@@ -1,0 +1,15 @@
+<div class="box-account box-info">
+    <div class="box-head">
+        <h2><?php echo $this->__('Points Summary'); ?></h2>
+    </div>
+
+    <div>
+        <?php echo $this->__('You have <b>%s</b> in your account.', Mage::helper('rewards')->formatPoints($this->getBalancePoints())); ?>
+        <?php if($this->getDaysUntilExpiry()): ?>
+           <div class="expiry-points"><?php echo $this->__('Your points balance will expire in %s days.', $this->getDaysUntilExpiry()); ?></div>
+        <?php endif; ?>
+    </div>
+    <a href="<?php echo $this->getUrl('rewards/account'); ?>">
+        <?php echo $this->__('Visit My Reward Points Section') ?>
+    </a>
+</div>

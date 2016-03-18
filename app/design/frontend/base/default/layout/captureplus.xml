@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+
+<layout>
+  <checkout_cart_index>
+    <reference name="content">
+      <block type="captureplus/scriptinclude" name="captureplus_scriptinclude"  template="captureplus/scriptinclude.phtml" />
+    </reference>
+  </checkout_cart_index>
+
+  <checkout_onepage_index>
+    <reference name="content">
+      <block type="captureplus/scriptinclude" name="captureplus_scriptinclude"  template="captureplus/scriptinclude.phtml" />
+    </reference>
+  </checkout_onepage_index>
+
+  <checkout_multishipping_register>
+    <reference name="content">
+      <block type="captureplus/scriptinclude" name="captureplus_scriptinclude"  template="captureplus/scriptinclude.phtml" />
+    </reference>
+  </checkout_multishipping_register>
+
+  <checkout_multishipping_addresses>
+    <reference name="content">
+      <block type="captureplus/scriptinclude" name="captureplus_scriptinclude"  template="captureplus/scriptinclude.phtml" />
+    </reference>
+  </checkout_multishipping_addresses>
+
+  <customer_address_form>
+    <reference name="content">
+      <block type="captureplus/scriptinclude" name="captureplus_scriptinclude"  template="captureplus/scriptinclude.phtml" />
+    </reference>
+  </customer_address_form>
+
+  <!-- Support for OneStepCheckout -->
+  <onestepcheckout_index_index>
+    <reference name="head">
+      <block type="captureplus/scriptinclude" name="captureplus_scriptinclude"  template="captureplus/scriptinclude.phtml" />
+    </reference>
+  </onestepcheckout_index_index>
+
+  <!-- Support for Three-Step Checkout -->
+  <ecommerceteam_tcheckout_index_index>
+    <reference name="content">
+      <block type="captureplus/scriptinclude" name="captureplus_scriptinclude"  template="captureplus/scriptinclude.phtml" />
+    </reference>
+  </ecommerceteam_tcheckout_index_index>
+
+  <!-- Support for One Page Checkout -->
+  <opc_index_index>
+    <reference name="head">
+      <block type="captureplus/scriptinclude" name="captureplus_scriptinclude"  template="captureplus/scriptinclude.phtml" />
+    </reference>
+  </opc_index_index>
+
+  <onepagecheckout_index_index>
+    <reference name="head">
+      <block type="captureplus/scriptinclude" name="captureplus_scriptinclude"  template="captureplus/scriptinclude.phtml" />
+    </reference>
+  </onepagecheckout_index_index>
+
+  <!-- Support for Fire Checkout -->
+  <firecheckout_index_index>
+    <reference name="head">
+      <block type="captureplus/scriptinclude" name="captureplus_scriptinclude"  template="captureplus/scriptinclude.phtml" />
+    </reference>
+  </firecheckout_index_index>
+
+  <!-- Support for AW One Step Checkout -->
+  <aw_onestepcheckout_index_index>
+    <reference name="head">
+      <block type="captureplus/scriptinclude" name="captureplus_scriptinclude"  template="captureplus/scriptinclude.phtml" />
+    </reference>
+  </aw_onestepcheckout_index_index>
+
+  <!-- Support for Amasty Single Step Checkout -->
+  <amscheckout_index_index>
+    <reference name="head">
+      <block type="captureplus/scriptinclude" name="captureplus_scriptinclude"  template="captureplus/scriptinclude.phtml" />
+    </reference>
+  </amscheckout_index_index>
+
+  <!-- Support for Lotus Breath -->
+  <lotusbreath_onestepcheckout_index_index>
+    <reference name="head">
+      <block type="captureplus/scriptinclude" name="captureplus_scriptinclude"  template="captureplus/scriptinclude.phtml" />
+    </reference>
+  </lotusbreath_onestepcheckout_index_index>
+
+  <!-- Support for GoMage LightCheckout -->
+  <gomage_checkout_onepage_index>
+    <reference name="head">
+      <block type="captureplus/scriptinclude" name="captureplus_scriptinclude"  template="captureplus/scriptinclude.phtml" />
+    </reference>
+  </gomage_checkout_onepage_index>
+
+  <!-- Support for Good Checkout -->
+  <goodcheckout_index_index>
+    <reference name="head">
+      <block type="captureplus/scriptinclude" name="captureplus_scriptinclude"  template="captureplus/scriptinclude.phtml" />
+    </reference>
+  </goodcheckout_index_index>
+  
+  
+</layout>

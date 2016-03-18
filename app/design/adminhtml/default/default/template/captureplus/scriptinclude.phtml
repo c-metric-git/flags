@@ -1,0 +1,162 @@
+<script type="text/javascript">
+//<![CDATA[
+  (function() {
+      var magento = pca.magento = pca.magento || {};
+     
+      magento.fields = [
+          {
+              Company: "order-billing_address_company",
+              Line1: "order-billing_address_street0",
+              Line2: "order-billing_address_street1",
+              City: "order-billing_address_city",
+              State: "order-billing_address_region",
+              StateSelect: "order-billing_address_region_id",
+              Postcode: "order-billing_address_postcode",
+              CountrySelect: "order-billing_address_country_id"
+          },
+          {
+              Company: "order-shipping_address_company",
+              Line1: "order-shipping_address_street0",
+              Line2: "order-shipping_address_street1",
+              City: "order-shipping_address_city",
+              State: "order-shipping_address_region",
+              StateSelect: "order-shipping_address_region_id",
+              Postcode: "order-shipping_address_postcode",
+              CountrySelect: "order-shipping_address_country_id"
+          },
+          {
+              Company: "company",
+              Line1: "street0",
+              Line2: "street1",
+              City: "city",
+              State: "region",
+              StateSelect: "region_id",
+              Postcode: "postcode",
+              CountrySelect: "country_id"
+          }
+      ];
+      
+      magento.key = '<?php echo Mage::getStoreConfig('captureplus/settings/admin_key'); ?>';
+      magento.countryByIP = !!<?php echo Mage::getStoreConfig('captureplus/settings/ip_country'); ?>;
+      magento.controls = magento.controls || [];
+
+      //load address forms
+      magento.load = function() {
+          function createAddressControl(addressFields) {
+              var countryField = pca.getElement(addressFields.CountrySelect),
+                  magentoCountries = [];
+                
+              for (var c = 0; c < countryField.options.length; c++)
+                  magentoCountries.push(countryField.options[c].value);
+            
+              var fields = [
+                  { element: addressFields.Company, field: "Company", mode: pca.fieldMode.DEFAULT | pca.fieldMode.PRESERVE },
+                  { element: addressFields.Line1, field: "Line1" },
+                  { element: addressFields.Line2, field: "Line2", mode: pca.fieldMode.POPULATE },
+                  { element: addressFields.City, field: "City", mode: pca.fieldMode.POPULATE },
+                  { element: addressFields.State, field: "ProvinceName", mode: pca.fieldMode.POPULATE },
+                  { element: addressFields.StateSelect, field: "ProvinceName", mode: pca.fieldMode.POPULATE },
+                  { element: addressFields.Postcode, field: "PostalCode" },
+                  { element: addressFields.CountrySelect, field: "CountryIso2", mode: pca.fieldMode.COUNTRY }
+              ],
+              options = { 
+                  key: magento.key,
+                  suppressAutocomplete: true,
+                  countries: { 
+                      codesList: magentoCountries.join(","), 
+                      valueType: pca.countryNameType.ISO2 
+                  },
+                  source: "magento-admin"
+              },
+              control = new pca.Address(fields, options);
+              
+              //fire the change event for all address fields. This helps with some AJAX functionality
+              control.listen("populate", function() {
+                  for (var i in addressFields) {
+                      if (addressFields[i] == addressFields.CountrySelect) continue; //no not fire event for country, it will cause postback
+                      
+                      pca.fire(pca.getElement(addressFields[i]), "change");
+                  }
+              });
+              
+              //Custom code from Settings
+              <?php echo Mage::getStoreConfig('captureplus/settings/custom_code'); ?>
+              //End custom code from Settings
+              
+              magento.controls.push(control);
+          }
+          
+          //do not load if there is no key
+          if (!magento.key) return;
+          
+          //check for address forms on the page
+          for (var i = 0; i < magento.fields.length; i++) {
+              if (pca.getElement(magento.fields[i].Line1))
+                  createAddressControl(magento.fields[i]);
+          }
+          
+          //check for customer edit dynamic addresses
+          if (typeof customerAddresses != 'undefined') {
+              var addNewAddressFunction = customerAddresses.addNewAddress.bind(customerAddresses);
+
+              customerAddresses.addNewAddress = function () {
+                  addNewAddressFunction();
+                    
+                  var newAddressIndex = customerAddresses.itemCount;
+
+                  if (pca.getElement("_item" + newAddressIndex + "street0")) {
+                      createAddressControl({
+                          Company: "_item" + newAddressIndex + "company",
+                          Line1: "_item" + newAddressIndex + "street0",
+                          Line2: "_item" + newAddressIndex + "street1",
+                          City: "_item" + newAddressIndex + "city",
+                          State: "_item" + newAddressIndex + "region",
+                          StateSelect: "_item" + newAddressIndex + "region_id",
+                          Postcode: "_item" + newAddressIndex + "postcode",
+                          CountrySelect: "_item" + newAddressIndex + "country_id"
+                      });
+                  }
+              }
+              
+              //load up existing customer addresses
+              for (var i = 0; i < customerAddresses.formContainer.children.length; i++) {
+                  var addressIndex = parseInt(/\d+$/.exec(customerAddresses.formContainer.children[i].id));
+                  
+                  if (pca.getElement("_item" + addressIndex + "street0")) {
+                      createAddressControl({
+                          Company: "_item" + addressIndex + "company",
+                          Line1: "_item" + addressIndex + "street0",
+                          Line2: "_item" + addressIndex + "street1",
+                          City: "_item" + addressIndex + "city",
+                          State: "_item" + addressIndex + "region",
+                          StateSelect: "_item" + addressIndex + "region_id",
+                          Postcode: "_item" + addressIndex + "postcode",
+                          CountrySelect: "_item" + addressIndex + "country_id"
+                      });
+                  }
+              }
+          }
+      }
+      
+      //set the country based on user location
+      magento.setCountryByIp = function() {
+          function success(response) {
+              if (response.length && response[0].Iso3) {
+                  for (var i = 0; i < magento.controls.length; i++)
+                      magento.controls[i].setCountry(response[0].Iso3);
+              }
+          }
+
+          if (magento.key) pca.fetch("Extras/Web/Ip2Country/v1.10", { Key: magento.key }, success);
+      }
+
+      //wait for the page to be ready
+      pca.ready(function() {
+          pca.fuzzyMatch = false;
+      
+          //load controls for address forms
+          magento.load();
+      });
+    })();
+//]]>
+</script>

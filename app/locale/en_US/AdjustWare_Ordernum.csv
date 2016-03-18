@@ -1,0 +1,28 @@
+Order,Order
+Prefix,Prefix
+Last Number,Last Number
+Increment Rate,Increment Rate
+Invoice,Invoice
+Shipment,Shipment
+Credit Memo,Credit Memo
+Custom Number Settings,Custom Number Settings
+ID,ID
+Store,Store
+Order Data,Order Data
+Invoice Data,Invoice Data
+Shipment Data,Shipment Data
+Credit Memo Data,Credit Memo Data
+Load Configuration,Load Configuration
+Prefix: %s <br/>Starting Number: %s <br/>Increment: %s,Prefix: %s <br/>Starting Number: %s <br/>Increment: %s
+Custom Orders Numbers,Custom Doc Numbers
+Item does not exist,Item does not exist
+Settings have been successfully saved,Settings have been successfully saved
+Settings have been successfully loaded,Settings have been successfully loaded
+Custom numbers,Custom numbers
+Order Prefix,Order Prefix
+Invoice Prefix,Invoice Prefix
+Shipment Prefix,Shipment Prefix
+CreditMemo Prefix,CreditMemo Prefix
+Start From,Start From
+Increment,Increment
+Leave this field empty to use default magento algorithms,Leave this field empty to use default magento algorithms

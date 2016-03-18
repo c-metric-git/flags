@@ -1,0 +1,18 @@
+<?php echo $this->address['firstname']?> <?php echo $this->address['lastname']?><br />
+<?php if($this->address['company']) echo $this->address['company'].'<br />'; ?>
+<?php echo implode('<br/>',$this->address['street']); ?>
+<?php echo $this->address['city']?>, 
+<?php if (!is_null($this->address['region'])): ?>
+    <?php echo $this->getRegion()?>,
+<?php endif; ?>
+<?php echo $this->address['postcode']?><br>
+<?php echo $this->getCountry(); ?><br>
+<?php if ($this->address['telephone']): ?> 
+    T: <?php echo $this->address['telephone']?><br />
+<?php endif; ?>
+<?php if ($this->address['fax']): ?> 
+    F: <?php echo $this->address['fax']?><br />
+<?php endif; ?>
+<?php if ($this->address['vat_id']): ?>
+    VAT: <?php echo $this->address['vat_id']?>
+<?php endif; ?>

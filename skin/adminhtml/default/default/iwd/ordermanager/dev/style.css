@@ -1,0 +1,23 @@
+.form-edit-order.form-list,
+.form-edit-order.form-list td.label label,
+.form-edit-order.form-list td.value textarea,
+.form-edit-order.form-list td.value input.input-text {width: 98%;}
+.form-edit-order.form-list td.label { width:40%; }
+.form-edit-order.form-list td.value { width:60%; }
+.delete_history_icon {width:16px; height:16px; display:none; background:url("img/delete.png") no-repeat; cursor:pointer; position:absolute; top:1px; right:1px;}
+.note-list li {position:relative;}
+.note-list li:hover .delete_history_icon {display:block;}
+.note-list li:hover .update_history_icon {display:block;}
+
+.update_history_icon {width:16px; height:16px; display:none; background:url("img/edit.png") no-repeat; cursor:pointer; position:absolute; top:1px; right:20px;}
+.updated_comment_text {width:98%; height:30px;}
+.update_comment_submit {float:right;}
+.update_comment_cancel {float:left;}
+
+#ordered_items_edit_form {margin-bottom: 15px;}
+
+.removed_item {color:#BBBBBB;}
+.removed_item input {color:#BBBBBB;}
+
+#add_ordered_items_form {border:1px solid #cbd3d4; padding:5px; margin-bottom:15px;}
+#add_ordered_items_form .grid {max-height:500px;  overflow:auto;}

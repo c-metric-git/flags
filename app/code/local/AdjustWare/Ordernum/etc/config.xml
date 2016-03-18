@@ -1,0 +1,246 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <AdjustWare_Ordernum>
+            <version>5.1.5</version>
+        </AdjustWare_Ordernum>
+    </modules>
+    
+    <admin>
+        <routers>
+            <adjordernum>
+            <use>admin</use>
+                <args>
+                    <module>AdjustWare_Ordernum</module>
+                    <frontName>adjordernum</frontName>
+                </args>
+            </adjordernum>
+        </routers>
+    </admin>
+    
+    <adminhtml>
+        <menu>
+            <sales>
+                <children>
+                    <adjordernum translate="title" module="adjordernum">
+                        <title>Custom Orders Numbers</title>
+                        <sort_order>200</sort_order>
+                        <action>adjordernum/adminhtml_ordernum</action>
+                    </adjordernum>
+                </children>
+            </sales>
+        </menu>
+
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <sales>
+                            <children>
+                                <adjordernum translate="title" module="adjordernum">
+                                    <title>Custom Orders Numbers</title>
+                                    <sort_order>200</sort_order>
+                                </adjordernum>
+                            </children>
+                        </sales>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        <events>
+            <controller_action_predispatch_adminhtml>
+                <observers>
+                    <adjustware_ordernum_observer>
+                        <type>singleton</type>
+                        <class>AdjustWare_Ordernum_Model_Observer</class>
+                        <method>predispatchAdminhtml</method>
+                    </adjustware_ordernum_observer>
+                </observers>
+            </controller_action_predispatch_adminhtml>
+            
+        </events>
+        <translate>
+            <modules>
+                <AdjustWare_Ordernum>
+                    <files>
+                        <default>AdjustWare_Ordernum.csv</default>
+                    </files>
+                </AdjustWare_Ordernum>
+            </modules>
+        </translate>
+        <menu>
+            <sales>
+                <children>
+                    <adjordernum translate="title" module="adjordernum">
+                        <title>Custom Orders Numbers</title>
+                        <sort_order>200</sort_order>
+                        <action>adjordernum/adminhtml_ordernum</action>
+                    </adjordernum>
+                </children>
+            </sales>
+        </menu>
+        
+        <acl>
+            <resources> 
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <ordernum translate="title" >
+                                            <title>Custom Numbers</title>
+                                            <sort_order>500</sort_order>
+                                        </ordernum>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl> 
+    </adminhtml> 
+       
+    <global> 
+        <models>
+            <eav>
+                <rewrite>
+                    <entity_type>AdjustWare_Ordernum_Model_Rewrite_EavEntityType</entity_type>
+                </rewrite>
+            </eav>
+            <sales>
+                <rewrite>
+                    <order>AdjustWare_Ordernum_Model_Rewrite_SalesOrder</order>
+                </rewrite>
+            </sales>
+            <adjordernum>
+                <class>AdjustWare_Ordernum_Model</class>
+                <resourceModel>adjordernum_mysql4</resourceModel>
+            </adjordernum>
+            <adjordernum_mysql4>
+                <class>AdjustWare_Ordernum_Model_Mysql4</class>
+                <entities>
+                    <ordernum>
+                        <table>adjordernum</table>
+                    </ordernum>
+                </entities>
+            </adjordernum_mysql4>
+            <adjordernum_increment>
+                <class>AdjustWare_Ordernum_Model_Increment</class>
+            </adjordernum_increment>
+        </models>     
+       
+        <blocks>
+            <adminhtml>
+                <rewrite>
+                    <sales_invoice_grid>AdjustWare_Ordernum_Block_Rewrite_AdminhtmlSalesInvoiceGrid</sales_invoice_grid>
+                    <sales_shipment_grid>AdjustWare_Ordernum_Block_Rewrite_AdminhtmlSalesShipmentGrid</sales_shipment_grid>
+                    <sales_creditmemo_grid>AdjustWare_Ordernum_Block_Rewrite_AdminhtmlSalesCreditmemoGrid</sales_creditmemo_grid>
+                </rewrite>
+            </adminhtml>
+            <adjordernum>
+                <class>AdjustWare_Ordernum_Block</class>
+            </adjordernum>
+        </blocks>
+        
+        <helpers>
+            <adjordernum>
+                <class>AdjustWare_Ordernum_Helper</class>
+            </adjordernum>
+        </helpers>
+        <resources>
+            <adjordernum_setup>
+                <setup>
+                    <module>AdjustWare_Ordernum</module>
+                    <class>AdjustWare_Ordernum_Model_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </adjordernum_setup>
+            <adjordernum_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </adjordernum_write>
+            <adjordernum_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </adjordernum_read>
+        </resources>
+        <events>
+            <adjordernum_sales_order_save_before>
+                <observers>
+                    <adjustware_ordernum_observer>
+                        <type>singleton</type>
+                        <class>AdjustWare_Ordernum_Model_Observer</class>
+                        <method>orderSaveBefore</method>
+                    </adjustware_ordernum_observer>
+                </observers>
+            </adjordernum_sales_order_save_before>
+        </events>
+    </global> 
+
+    <default>
+        <ordernum>
+            <general>
+                <settings_level>custom</settings_level>
+            </general>
+            <order>
+                <prefix>ORD</prefix>
+                <dateformat></dateformat>
+                <number>1</number>
+                <increment>5</increment>
+                <random>0</random>
+                <suffixlength>0</suffixlength>
+                <letter>abcXYZ</letter>
+                <pad>6</pad>
+            </order>
+            <invoice>
+                <prefix>INV</prefix>
+                <dateformat></dateformat>
+                <number>1</number>
+                <increment>5</increment>
+                <random>0</random>
+                <suffixlength>0</suffixlength>
+                <letter>abcXYZ</letter>
+                <pad>6</pad>
+            </invoice>
+            <shipment>
+                <prefix>SHI</prefix>
+                <dateformat></dateformat>
+                <number>1</number>
+                <increment>5</increment>
+                <random>0</random>
+                <suffixlength>0</suffixlength>
+                <letter>abcXYZ</letter>
+                <pad>6</pad>
+            </shipment>
+            <creditmemo>
+               <prefix>MEM</prefix>
+                <dateformat></dateformat>
+                <number>1</number>
+                <increment>5</increment>
+                <random>0</random>
+                <suffixlength>0</suffixlength>
+                <letter>abcXYZ</letter>
+                <pad>6</pad>
+            </creditmemo>
+        </ordernum>
+    </default> 
+
+</config>
+<!--
+/**
+ * Custom Order Number Pro
+ *
+ * @category:    AdjustWare
+ * @package:     AdjustWare_Ordernum
+ * @version      5.1.5
+ * @license:     d0NyTkcYcW64yuyl9Cf2M6q3gBilLUVMAwQSumkwPP
+ * @copyright:   Copyright (c) 2015 AITOC, Inc. (http://www.aitoc.com)
+ */
+-->

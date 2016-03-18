@@ -1,0 +1,146 @@
+<?php
+$_solrDataArray = $this->getSolrData ();
+
+$q = "";
+$params = $this->getRequest ()->getParams ();
+if (! empty ( $params ['q'] )) {
+	$q = $params ['q'];
+}
+
+?>
+<div class="page-title">
+    <?php if(strtolower($q) == $_solrDataArray['responseHeader']['params']['q']):?>
+        <h1 style="float: left">
+                <?php echo $this->__("Search results for %s", '<em id=\"text_keyword\">'.$q.'</em>');?>
+                <?php if( isset($_solrDataArray['response']['numFound']) ) :?>
+                <small>(<?php echo $_solrDataArray['response']['numFound'].'&nbsp;'.$this->__('products')?>)</small>
+                <?php endif;?>
+        </h1>
+    <?php else: ?>
+        <?php if(count($suggests = $this->getSuggestions()) > 0):?>
+                <div class="did-you-mean">
+                    <i><?php echo $this->__('Did you mean:')?></i>
+                    <?php foreach ($suggests as $item):?>
+                        <?php $item = Mage::helper('solrsearch')->getEscapedQueryText($item)?>
+                        <span><a href="<?php echo $this->helper('solrsearch')->getDidYouMeanUrl($item) ?>"><?php echo $item?></a></span>&nbsp;
+                    <?php endforeach;?>
+                </div>
+        <?php endif;?>
+        <h1 style="float: left">
+                <?php echo $this->__("Display search results for %s instead", '<em id=\"text_keyword\">'.$_solrDataArray['responseHeader']['params']['q'].'</em>'); ?>
+                <?php if( isset($_solrDataArray['response']['numFound']) ) :?>
+                <small>(<?php echo $_solrDataArray['response']['numFound'].'&nbsp;'.$this->__('products') ?>)</small>
+                <?php endif;?>
+        </h1>
+    <?php endif;?>
+		<div id="trigger-feedback" style="margin-top: 10px; float: right; position: relative; z-index: 99999">
+    		<span>
+    		  <?php echo $this->__('Found what you want?')?>
+    		  <a href="javascript:void(0);"><?php echo $this->__('Yes') ?></a> / <a href="javascript:void(0);"><?php echo $this->__('No') ?></a>
+    		</span>
+    		<div id="se-feedback" class="solrbridge-feedback-wrapper">
+    			<form class="bootstrap-frm" id="form-request" action="" type="POST">
+    				<h3>
+    				    <?php echo $this->__('Please provide us feedback') ?>
+    					<span class="popup-exit"></span>
+    					<em class="se-tooltip-arrow"></em>
+    				</h3>
+    				<ul>
+    				    <li>
+                            <label class="required" for="mobile_number"><em>*</em><?php echo $this->__('Mobile number')?></label>
+                            <div class="input-box">
+                                <input type="text" class="input-text required-entry" title="Mobile number" value="" id="mobile_number" name="mobile_number">
+                            </div>
+                        </li>
+                        <li>
+                            <label class="required" for="email_address"><em>*</em><?php echo $this->__('Email Address')?></label>
+                            <div class="input-box">
+                                <input type="text" class="input-text validate-email required-entry" title="Email Address" value="" id="email_address" name="email_id">
+                            </div>
+                        </li>
+                        <li>
+                            <label class="required" for="email_address"><em>*</em><?php echo $this->__('Email Address')?></label>
+                            <div class="input-box">
+                                <select name="selection">
+        							<option value=""><?php echo $this->__('Select a Category')?></option>
+        							<option value="1"><?php echo $this->__("Can't find what I want")?></option>
+        							<option value="2"><?php echo $this->__("Technical issue with website")?></option>
+        							<option value="3"><?php echo $this->__("Product description is incorrect")?></option>
+        							<option value="4"><?php echo $this->__("Feature request")?></option>
+        							<option value="5"><?php echo $this->__("Others")?></option>
+        					   </select>
+                            </div>
+                        </li>
+                        <li>
+                            <label class="required" for="email_address"><em>*</em><?php echo $this->__('Message')?></label>
+                            <div class="input-box">
+                                <textarea placeholder="<?php echo $this->__("Your Message to Us")?>" name="message" id="message"></textarea>
+                            </div>
+                        </li>
+                        <li>
+                            <button id="submit-request-button" class="button"><?php echo $this->__("Send request")?></button>
+                        </li>
+    				</ul>
+    			</form>
+    		</div>
+        </div>
+</div>
+<script type="text/javascript">
+var myform = new VarienForm ('form-request', true);
+document.observe('click',function(e){
+	if($('se-feedback').visible() && e.target.innerHTML !== 'No') {
+	    var elementId = e.target;
+    	if(!elementId.descendantOf('form-request')) {
+    		   $('se-feedback').hide();
+    	}
+	}
+});
+
+Validation.add('validate-phoneStrict-elect','Please enter a valid phone number, number must be 10 . For example (123) 456-7890 or 123-456-7890.',function(v){
+	var phone = v.length;
+	return Validation.get('IsEmpty').test(v) || /^((\d[-. ]?)?((\(\d{3}\))|\d{3}))?[-. ]?\d{3}[-. ]?\d{4}$/.test(v)&& pass < 11;
+	});
+
+ document.observe('dom:loaded', function() {  
+              
+       function sendForm(event){
+                Event.stop(event);
+                if(myform.validator.validate()){
+	                var oOptions = {  
+	                    method: "POST",  
+	                    parameters: Form.serialize("form-request"),  
+	                    asynchronous: true,  
+	                    onFailure: function (oXHR) {  
+	                        $('se-feedback').update(oXHR.statusText);  
+	                    },  
+	                    onLoading: function (oXHR) {  
+							$('span-last-ajax').update('<img src="<?php echo Mage::getBaseUrl ( Mage_Core_Model_Store::URL_TYPE_WEB ) . 'skin/frontend/base/default/solrsearch/css/loading_indicator.gif' ?>"/>');
+	                    },                            
+	                    onSuccess: function(oXHR) {  
+							$('se-feedback').hide();	
+	                      	$('trigger-feedback').update("Thank you for your feedback!"); 
+	                    }                 
+	                };  
+	                var oRequest = new Ajax.Updater({success: oOptions.onSuccess.bindAsEventListener(oOptions)}, "<?php echo $this->getUrl('srequest/request/save'); ?>", oOptions);             
+            }
+       }
+       Event.observe('submit-request-button', 'click', sendForm, false);  
+              
+        }); 
+$$("span>a").invoke('observe','click',(function(){
+var text = this.text;
+if(text === 'No')
+{
+$('se-feedback').show();
+}else
+{
+  var span = $(this).up();
+  span.empty();
+  span.update('Thank you for your feedback!');
+  $('se-feedback').hide();
+}
+}));
+$$('.popup-exit').invoke('observe','click',function(event){
+ $('se-feedback').hide();
+});
+</script>

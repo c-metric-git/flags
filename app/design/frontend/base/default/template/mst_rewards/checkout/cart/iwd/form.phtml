@@ -1,0 +1,56 @@
+<form id="opc-rewards-form"
+      action="<?php echo $this->getUrl('checkout/cart/couponPost', array('_secure' => $this->getRequest()->isSecure())) ?>"
+      method="post">
+    <div class="discount">
+        <div class="discount-form">
+            <label
+                for="points_amount"><?php echo $this->__('You have <b>%s</b> available.', Mage::helper('rewards')->formatPoints($this->getBalancePoints() - $this->getPurchase()->getSpendPoints())) ?>
+                <br>
+
+                <?php echo $this->__('Enter amount of points to spend:'); ?>
+            </label>
+
+            <div class="input-box">
+                <input class="input-text" id="points_amount" name="points_amount"
+                       value="<?php echo $this->getPointsAmount() ? $this->htmlEscape($this->getPointsAmount()) : '' ?>"/>
+            </div>
+            <div class="input-box">
+                <input type='checkbox' id="points_all" name="points_all"
+                    <?php echo $this->getPointsAmount() == $this->getMaxPointsNumberToSpent() ? 'checked' : '' ?> />
+                <label
+                    for="points_all"><?php echo $this->__("Use maximum %s", Mage::helper('rewards')->formatPoints($this->getMaxPointsNumberToSpent())) ?></label>
+            </div>
+            <div class="buttons-set">
+                <button type="button" title="<?php echo $this->__('Apply Points') ?>"
+                        class="button apply-points" value="<?php echo $this->__('Apply Points') ?>">
+                    <span><span><?php echo $this->__('Apply') ?></span></span></button>
+                <?php if ($this->getPointsAmount()): ?>
+                    <button type="button" title="<?php echo $this->__('Cancel Points') ?>"
+                                   class="button remove-points right" value="<?php echo $this->__('Cancel Points') ?>">
+                        <span><span><?php echo $this->__('Cancel') ?></span></span></button>
+                <?php endif ?>
+                </span>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    var rewardsForm = new VarienForm('reward-points-form');
+
+    Event.observe($('points_all'), 'click', function () {
+        if ($('points_amount').value == <?php echo $this->getMaxPointsNumberToSpent() ?>) {
+            $('points_amount').value = '';
+        } else {
+            $('points_amount').value = <?php echo $this->getMaxPointsNumberToSpent() ?>;
+        }
+    });
+    Event.observe($('points_amount'), 'keyup', function () {
+        var val = parseInt($('points_amount').value);
+        if (isNaN(val) || val < <?php echo $this->getMaxPointsNumberToSpent() ?>) {
+            $('points_all').checked = false;
+        } else {
+            $('points_all').checked = true;
+            $('points_amount').value = <?php echo $this->getMaxPointsNumberToSpent() ?>;
+        }
+    });
+</script>

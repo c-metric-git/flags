@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <QS_Addressvalidation>
+            <active>true</active>
+            <codePool>community</codePool>
+        </QS_Addressvalidation>
+    </modules>
+</config>

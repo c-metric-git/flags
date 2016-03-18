@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+<layout>
+  <adminhtml_sales_order_create_index>
+    <reference name="js">
+      <block type="captureplus/scriptinclude" name="captureplus_scriptinclude"  template="captureplus/scriptinclude.phtml" />
+    </reference>
+  </adminhtml_sales_order_create_index>
+
+  <adminhtml_sales_order_address>
+    <reference name="js">
+      <block type="captureplus/scriptinclude" name="captureplus_scriptinclude"  template="captureplus/scriptinclude.phtml" />
+    </reference>
+  </adminhtml_sales_order_address>
+
+  <adminhtml_customer_edit>
+    <reference name="js">
+      <block type="captureplus/scriptinclude" name="captureplus_scriptinclude"  template="captureplus/scriptinclude.phtml" />
+    </reference>
+  </adminhtml_customer_edit>
+
+  <!-- Reload address capture on postback -->
+  <adminhtml_sales_order_create_load_block_data>
+    <reference name="content">
+      <block type="core/template" name="captureplus_scriptreload" template="captureplus/scriptreload.phtml" as="data">
+        <action method="setChild">
+          <name>data</name>
+          <block>data</block>
+        </action>
+        <action method="setData">
+          <key>include_block</key>
+          <value>data</value>
+        </action>
+      </block>
+      <action method="setChild">
+        <name>data</name>
+        <block>captureplus_scriptreload</block>
+      </action>
+    </reference>
+  </adminhtml_sales_order_create_load_block_data>
+
+  <adminhtml_sales_order_create_load_block_shipping_address>
+    <reference name="content">
+      <block type="core/template" name="captureplus_scriptreload" template="captureplus/scriptreload.phtml" as="shipping_address">
+        <action method="setChild">
+          <name>shipping_address</name>
+          <block>shipping_address</block>
+        </action>
+        <action method="setData">
+          <key>include_block</key>
+          <value>shipping_address</value>
+        </action>
+      </block>
+      <action method="setChild">
+        <name>shipping_address</name>
+        <block>captureplus_scriptreload</block>
+      </action>
+    </reference>
+  </adminhtml_sales_order_create_load_block_shipping_address>
+
+  <!-- Include script to show sign up modal for new customers -->
+  <adminhtml_system_config_edit>
+    <reference name="content">
+      <block type="captureplus/scriptaccount" name="captureplus_scriptaccount"  template="captureplus/scriptaccount.phtml" />
+    </reference>
+  </adminhtml_system_config_edit>
+</layout>

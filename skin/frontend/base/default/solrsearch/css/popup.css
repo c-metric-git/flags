@@ -1,0 +1,147 @@
+.page-title {
+	overflow: visible;
+}
+.page-title > div > span > a {
+	font-weight: bold;
+}
+
+.solrbridge-feedback-wrapper {
+	margin-top: 5px;
+	position: absolute;
+	right: 0px;
+	width: 200px;
+	display: none"
+	z-index: 99999;
+}
+
+.bootstrap-frm {
+	margin-left: auto;
+	margin-right: auto;
+	/*max-width: 500px;*/
+	max-width: 290px;
+	background: #FFF;
+	padding: 0 10px 10px;
+	font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #888;
+	text-shadow: 1px 1px 1px #FFF;
+	border: 1px solid #DDD;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	position: absolute;
+}
+
+.bootstrap-frm h3 {
+    border-bottom: 1px solid #dadada;
+    display: block;
+    font-weight: 500;
+    margin: 8px 0 10px;
+    padding: 0 0 10px;
+    position: relative;
+}
+
+.bootstrap-frm h3>em {
+	display: block;
+	cursor: pointer;
+	height: 9px;
+	width: 15px;
+	position: absolute;
+	font-size: 11px;
+	background: url("tool-tip-sprt-61fbb3ae.png");
+	right: -10px;
+	top: -17px;
+}
+
+.bootstrap-frm h3>span {
+	display: block;
+	cursor: pointer;
+	height: 24px;
+	width: 24px;
+	position: absolute;
+	font-size: 11px;
+	background: url("quit.png");
+	right: 0;
+	top: 0;
+}
+
+.bootstrap-frm label {
+	display: block;
+	margin: 0px 0px 0px;
+}
+
+.bootstrap-frm label>span {
+	float: left;
+	width: 21%;
+	text-align: right;
+	padding-right: 11px;
+	margin-top: 10px;
+	color: #333;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: bold;
+}
+
+.bootstrap-frm input[type="text"], .bootstrap-frm input[type="email"], .bootstrap-frm textarea, .bootstrap-frm select {
+    color: #888;
+    margin-bottom: 10px;
+    margin-top: 2px;
+    outline: 0 none;
+    padding: 2px;
+    width: 96%;
+}
+
+.bootstrap-frm select {
+	width: 99%;
+}
+
+.bootstrap-frm textarea {
+    height: 60px;
+    padding: 5px 0 0 5px;
+    width: 96%;
+}
+
+.ge-title>div>span>a { .page-title >div>span>a { font-weight:bold;
+	
+}
+
+.bootstrap-frm {
+	margin-left: auto;
+	margin-right: auto;
+	/*max-width: 500px;*/
+	max-width: 290px;
+	background: #FFF;
+	padding: 0px 10px 0px 10px;
+	font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #888;
+	text-shadow: 1px 1px 1px #FFF;
+	border: 1px solid #DDD;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	position: absolute;
+}
+
+.bootstrap-frm h3 {
+	font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	padding: 0px 0px 10px 30px;
+	display: block;
+	border-bottom: 1px solid #DADADA;
+	margin: -10px -10px 30px -10px;
+	color: #888;
+	position: relative;
+}
+
+.bootstrap-frm h3>span {
+	display: block;
+	cursor: pointer;
+	height: 24px;
+	width: 24px;
+	position: absolute;
+	font-size: 11px;
+	background: url("quit.png");
+	right: 10px;
+	top: -1px;
+}
+
+.bootstrap-frm label {
+	display: block;
+	margin: 0px 0px 0px;
+}

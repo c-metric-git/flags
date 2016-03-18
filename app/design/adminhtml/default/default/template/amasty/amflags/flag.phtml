@@ -1,0 +1,69 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
+ * @package Amasty_Flags
+ */
+$_order         = $this->getOrder();
+$_currentFlag   = $this->getCurrentFlag();
+$_currentColumn = $this->getCurrentColumn();
+$_columnFlags   = $this->getApplyFlags();
+?>
+
+<div id="orderflag-<?php echo $_order->getId(); ?>-column-<?php echo str_replace('priority', '', $_currentColumn->getId()); ?>" onclick="javascript: openFlagDialog(<?php echo $_order->getId(); ?>, '<?php echo $_order->getIncrementId(); ?>', '<?php echo str_replace('priority', '', $_currentColumn->getId()); ?>', '<?php echo $_currentColumn->getHeader(); ?>');">
+    <div>
+        <?php if (($_currentFlag) && (in_array($_currentFlag->getId(), $_columnFlags))): ?>
+            <img src="<?php echo $_currentFlag->getUrl(); ?>" id="flagimg-<?php echo $_order->getId(); ?>-column-<?php echo str_replace('priority', '', $_currentColumn->getId()); ?>" title="<?php echo $_currentFlag->getComment(); ?>" alt="<?php echo $_currentFlag->getAlias(); ?>" border="0" />
+        <?php else: ?>
+            <img src="<?php echo $this->getEmptyFlagUrl(); ?>" id="flagimg-<?php echo $_order->getId(); ?>-column-<?php echo str_replace('priority', '', $_currentColumn->getId()); ?>" title="No Flag" alt="No Flag" border="0" />
+        <?php endif; ?>
+    </div>
+    <input type="hidden" id="orderflag-<?php echo $_order->getId(); ?>-column-<?php echo str_replace('priority', '', $_currentColumn->getId()); ?>" name="orderflag-<?php echo $_order->getId(); ?>-column-<?php echo str_replace('priority', '', $_currentColumn->getId()); ?>" value="<?php if ($_currentFlag): echo $_currentFlag->getId(); endif; ?>" />
+    <input type="hidden" id="flag_entity_id" name="flag_entity_id" value="<?php if ($_currentFlag): echo $_currentFlag->getId(); endif; ?>" />
+    <input type="hidden" id="column_entity_id" name="column_entity_id" value="<?php echo str_replace('priority', '', $_currentColumn->getId()); ?>" />
+</div>
+
+<div id="flaglist-<?php echo $_order->getId(); ?>-column-<?php echo str_replace('priority', '', $_currentColumn->getId()); ?>" style="display: none;">
+    <?php if (Mage::getSingleton('admin/session')->isAllowed('sales/order/actions/assign_flags')): ?>
+        <div style="margin-top: 8px; margin-bottom: 8px;">
+            <?php echo $this->__('Enter/modify comment for the flag you want to assign, and click "Set" button.'); ?>
+        </div>
+        <table>
+            <tr class="amflags-tr">
+                <td></td>
+                <td><strong><?php echo $this->__('NO FLAG'); ?></strong></td>
+                <td>
+                    <button onclick="setOrderFlag('<?php echo $this->getSetFlagUrl(); ?>', <?php echo $_order->getId(); ?>, 0, <?php echo str_replace('priority', '', $_currentColumn->getId()); ?>, '<?php echo $this->getEmptyFlagUrl(); ?>');" class="scalable go" type="button"><span><?php echo $this->__('Set'); ?></span></button>
+                </td>
+            </tr>
+            <?php foreach ($this->getFlagCollection() as $flag): ?>
+                <?php if (in_array($flag->getId(), $_columnFlags)):?>
+                <tr class="amflags-tr"><td colspan="3" height="5"></td></tr>
+                <tr class="amflags-tr">
+                    <td>
+                        <img src="<?php echo $flag->getUrl(); ?>" alt="" border="0" id="flagselect-img-<?php echo $_order->getId(); ?>-column-<?php echo str_replace('priority', '', $_currentColumn->getId()); ?>-<?php echo $flag->getId(); ?>" />
+                    </td>
+                    <td>
+                        <input type="text" value="<?php if ($_currentFlag && $flag->getId() == $_currentFlag->getId()): ?><?php echo $_currentFlag->getComment(); ?><?php else: ?><?php echo $flag->getComment(); ?><?php endif; ?>" id="flagselect-comment-<?php echo $_order->getId(); ?>-column-<?php echo str_replace('priority', '', $_currentColumn->getId()); ?>-<?php echo $flag->getId(); ?>" class="input-text" style="width: 230px;" />
+                    </td>
+                    <td>
+                        <button onclick="setOrderFlag('<?php echo $this->getSetFlagUrl(); ?>', <?php echo $_order->getId(); ?>, <?php echo $flag->getId(); ?>, <?php echo str_replace('priority', '', $_currentColumn->getId()); ?>, '<?php echo $flag->getAlias(); ?>');" class="scalable go" type="button"><span><?php echo $this->__('Set'); ?></span></button>
+                    </td>
+                </tr>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </table>
+    <?php else: ?>
+        <div id="popup-messages" style="margin-top: 16px;">
+            <ul class="messages">
+                <li class="error-msg">
+                    <ul>
+                        <li>
+                            <span><?php echo $this->__('Access denied.'); ?></span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    <?php endif; ?>
+</div>

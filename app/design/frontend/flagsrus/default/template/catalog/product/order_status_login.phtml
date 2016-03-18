@@ -1,0 +1,5 @@
+<?php if(Mage::getSingleton('customer/session')->isLoggedIn()): ?>
+ <a title="Contact Us" href="<?php Mage::getBaseUrl()?>sales/order/history/">Order Status</a>
+<?php else: ?>
+<a title="Contact Us" href="<?php Mage::getBaseUrl()?>sales/guest/form/">Order Status</a>
+<?php endif; ?>

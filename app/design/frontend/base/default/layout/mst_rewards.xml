@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="rewards" ><name>rewards_account</name><path>rewards/account</path><label>My Reward Points</label></action>
+        </reference>
+    </customer_account>
+
+    <rewards_account_index translate="label"  module="rewards">
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block type="rewards/account_list" name="rewards.account.list" template="mst_rewards/account/list.phtml">
+                <block type="rewards/notification_message" name="rewards.notification" template="mst_rewards/notification/block.phtml"></block>
+            </block>
+        </reference>
+    </rewards_account_index>
+
+    <rewards_account_view>
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block type="rewards/account_view" name="rewards.account.view" as="rewards.account.view" template="mst_rewards/account/view.phtml">
+            </block>
+        </reference>
+    </rewards_account_view>
+
+
+    <catalog_product_view>
+        <reference name="product.info.extrahint">
+            <block type="rewards/product_view_points" name="rewards.product.view.points" as="points"
+                   template="mst_rewards/product/view/points.phtml" >
+            </block>
+        </reference>
+    </catalog_product_view>
+
+    <checkout_cart_index>
+        <reference name="checkout.cart.form.before">
+            <block type="rewards/checkout_cart_tooltip" name="reward.tooltip.checkout" template="mst_rewards/checkout/cart/tooltip.phtml">
+            </block>
+            <block type="rewards/notification_message" name="rewards.notification" template="mst_rewards/notification/message.phtml"></block>
+        </reference>
+    </checkout_cart_index>
+
+    <checkout_onepage_index>
+        <reference name="content">
+            <block type="rewards/notification_message" name="rewards.notification" template="mst_rewards/notification/message.phtml" before='-'></block>
+        </reference>
+    </checkout_onepage_index>
+
+    <onestepcheckout_index_index>
+        <reference name="content">
+            <block type="rewards/notification_message" name="rewards.notification" template="mst_rewards/notification/message.phtml" before='-'></block>
+        </reference>
+    </onestepcheckout_index_index>
+
+    <customer_account_index >
+        <reference name="customer_account_dashboard_top">
+            <block type="rewards/account_summary" name="rewards_customer_account_dashboard_top"
+                   as="rewards_account_top" template='mst_rewards/account/summary.phtml' />
+        </reference>
+    </customer_account_index>
+
+
+    <rewards_referral_index translate="label"  module="rewards">
+        <reference name="head">
+            <action method="addJs"><script>mirasvit/core/jquery.min.js</script></action>
+            <action method="addJs"><script>mirasvit/code/rewards/frontend.js</script></action>
+        </reference>
+
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block type="rewards/referral_list" name="rewards.referral.list" template="mst_rewards/referral/list.phtml">
+                <block type="rewards/notification_message" name="rewards.notification" template="mst_rewards/notification/block.phtml"></block>
+            </block>
+        </reference>
+    </rewards_referral_index>
+
+    <rewards_referral_view>
+        <update handle="customer_account"/>
+        <reference name="content">
+            <block type="rewards/referral_view" name="rewards.referral.view" as="rewards.referral.view" template="mst_rewards/referral/view.phtml">
+            </block>
+        </reference>
+    </rewards_referral_view>
+
+</layout>

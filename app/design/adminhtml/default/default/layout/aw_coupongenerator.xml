@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+
+<layout>
+    <adminhtml_customer_edit>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>aw_coupongenerator/js/generation.js</name></action>
+        </reference>
+        <reference name="customer_edit_tabs">
+            <block type="coupongenerator/adminhtml_customer_edit_tabs_coupongenerator" name="coupongenerator_tab"
+                   template="aw_coupongenerator/customer/tab/coupongenerator.phtml">
+                <block type="coupongenerator/adminhtml_customer_edit_tabs_coupongenerator_generation" name="aw_coupongeneration"
+                       template="aw_coupongenerator/customer/tab/coupongenerator/generation.phtml"/>
+            </block>
+            <action method="addTab">
+                <name>Quick coupon generator</name>
+                <block>coupongenerator_tab</block>
+            </action>
+        </reference>
+    </adminhtml_customer_edit>
+    <adminhtml_promo_quote_edit>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>aw_coupongenerator/css/styles.css</name></action>
+        </reference>
+    </adminhtml_promo_quote_edit>
+    <adminhtml_awqcg_rules_index>
+        <reference name="content">
+            <block type="coupongenerator/adminhtml_rule" name="coupongenerator.rule"></block>
+        </reference>
+    </adminhtml_awqcg_rules_index>
+    <adminhtml_awqcg_rules_edit>
+        <reference name="head">
+            <action method="setCanLoadExtJs"><flag>1</flag></action>
+            <action method="setCanLoadRulesJs"><flag>1</flag></action>
+            <action method="addItem"><type>skin_css</type><name>aw_coupongenerator/css/styles.css</name></action>
+        </reference>
+        <reference name="left">
+            <block type="adminhtml/promo_quote_edit_tabs" name="promo_quote_edit_tabs">
+                <block type="adminhtml/promo_quote_edit_tab_main" name="promo_quote_edit_tab_main" />
+                <block type="coupongenerator/adminhtml_rule_edit_tab_conditions" name="promo_quote_edit_tab_conditions"/>
+                <block type="coupongenerator/adminhtml_rule_edit_tab_actions" name="promo_quote_edit_tab_actions"/>
+                <block type="adminhtml/promo_quote_edit_tab_labels" name="promo_quote_edit_tab_labels"/>
+                <!--<block type="adminhtml/promo_quote_edit_tab_coupons" name="promo_quote_edit_tab_coupons">
+                    <block type="adminhtml/promo_quote_edit_tab_coupons_form" name="promo_quote_edit_tab_coupons_form"/>
+                    <block type="adminhtml/promo_quote_edit_tab_coupons_grid" name="promo_quote_edit_tab_coupons_grid"/>
+                </block>-->
+                <action method="addTab"><name>main_section</name><block>promo_quote_edit_tab_main</block></action>
+                <action method="addTab"><name>conditions_section</name><block>promo_quote_edit_tab_conditions</block></action>
+                <action method="addTab"><name>actions_section</name><block>promo_quote_edit_tab_actions</block></action>
+                <action method="addTab"><name>labels_section</name><block>promo_quote_edit_tab_labels</block></action>
+                <!--<action method="addTab"><name>coupons_section</name><block>promo_quote_edit_tab_coupons</block></action>-->
+            </block>
+            <block type="coupongenerator/adminhtml_rule_edit_jsinit" name="promo_quote_edit_jsinit"/>
+        </reference>
+        <reference name="content">
+            <block type="coupongenerator/adminhtml_rule_edit" name="promo_quote_edit"></block>
+        </reference>
+    </adminhtml_awqcg_rules_edit>
+    <adminhtml_awqcg_rules_edit_ee_banners>
+        <reference name="promo_quote_edit_tabs">
+            <block type="enterprise_banner/adminhtml_promo_salesrule_edit_tab_banners" name="salesrule.related.banners">
+                <block type="coupongenerator/adminhtml_rule_edit_tab_banners_grid" name="related_salesrule_banners_grid"/>
+                <block type="adminhtml/widget_grid_serializer" name="banners_grid_serializer">
+                    <reference name="banners_grid_serializer">
+                        <action method="initSerializerBlock">
+                            <grid_block_name>related_salesrule_banners_grid</grid_block_name>
+                            <data_callback>getRelatedBannersByRule</data_callback>
+                            <hidden_input_name>related_banners</hidden_input_name>
+                            <reload_param_name>selected_salesrule_banners</reload_param_name>
+                        </action>
+                    </reference>
+                </block>
+            </block>
+            <action method="addTab"><name>banners_section</name><block>salesrule.related.banners</block></action>
+            <block type="enterprise_banner/adminhtml_permission_monitor" name="bannner.permission.monitor"/>
+        </reference>
+    </adminhtml_awqcg_rules_edit_ee_banners>
+    <adminhtml_awqcg_rules_grid>
+        <update handle="adminhtml_promo_quote_grid" />
+    </adminhtml_awqcg_rules_grid>
+    <adminhtml_awqcg_rules_couponsgrid>
+        <update handle="adminhtml_promo_quote_couponsgrid" />
+    </adminhtml_awqcg_rules_couponsgrid>
+    <adminhtml_awqcg_coupons_index>
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><name>aw_coupongenerator/css/styles.css</name></action>
+            <action method="addItem"><type>skin_js</type><name>aw_coupongenerator/js/generation.js</name></action>
+        </reference>
+        <reference name="content">
+            <block type="coupongenerator/adminhtml_coupons" name="coupongenerator.coupons"/>
+        </reference>
+    </adminhtml_awqcg_coupons_index>
+    <aw_hdu3_admin_adminhtml_ticket_edit>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>aw_coupongenerator/js/generation.js</name></action>
+        </reference>
+    </aw_hdu3_admin_adminhtml_ticket_edit>
+</layout>

@@ -1,0 +1,356 @@
+<?php
+/**
+ * Marcin Klauza - Magento developer
+ * http://www.marcinklauza.com
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to marcinklauza@gmail.com so we can send you a copy immediately.
+ *
+ * @category    Mklauza
+ * @package     Mklauza_CustomProductUrls
+ * @author      Marcin Klauza <marcinklauza@gmail.com>
+ * @copyright   Copyright (c) 2015 (Marcin Klauza)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+?>
+<!--<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/themes/smoothness/jquery-ui.css">-->
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+<script>jQuery.noConflict();</script>
+<style>
+/*@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Condensed);*/
+* {
+  box-sizing: border-box;
+}
+.color {
+  color: #19bc9c !important;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  font-family: 'Ubuntu Condensed', sans-serif;
+  background-color: #dddddd;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 32px;
+}
+div.container {
+  display: block;
+  width: 50%;
+  margin: 32px auto;
+  padding: 16px 32px;
+  background-color: #ffffff;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+div.inputTags-list {
+  display: inline-block;
+  width: 100%;
+  padding: 6px;
+  margin: 0 0 20px 0;
+  border: 1px solid rgba(25, 188, 156, 0.35);
+  background-color: #f9f9f9;
+  box-shadow: 1px 2px 2px rgba(221, 221, 221, 0.2);
+  border-radius: 4px;
+}
+div.inputTags-list span.inputTags-item {
+  position: relative;
+  display: inline-block;
+  margin: 2px;
+  padding: 3px 22px 4px 8px;
+  border-radius: 3px;
+  background-color: #19bc9c;
+  text-align: center;
+  color: #ffffff;
+  opacity: 1;
+  white-space: nowrap;
+}
+
+div.inputTags-list.tag-cloud span.inputTags-item {
+    background-color: #ed6502;
+}
+div.inputTags-list span.inputTags-item.blocked {
+    background-color: #ed6502;
+}
+
+div.inputTags-list span.inputTags-item.is-edit {
+  display: none;
+}
+div.inputTags-list span.inputTags-item.is-hidden {
+  display: none !important;
+}
+div.inputTags-list span.inputTags-item.is-exists {
+  background-color: rgba(231, 76, 60, 0.7);
+}
+div.inputTags-list span.inputTags-item span.value {
+  cursor: default;
+}
+div.inputTags-list span.inputTags-item i {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10;
+  font-weight: 400;
+  transition: color 0.2s;
+  font-family: sans-serif;
+  transform: translateY(-50%);
+}
+div.inputTags-list span.inputTags-item i:hover {
+  color: #e74c3c;
+}
+div.inputTags-list input.inputTags-field {
+  border: none;
+  width:  auto;
+  white-space: nowrap;
+  margin-left: 4px;
+  background-color: transparent;
+}
+div.inputTags-list input.inputTags-field:focus,
+div.inputTags-list input.inputTags-field:active {
+  outline: none;
+}
+div.inputTags-list input.inputTags-field.is-edit {
+  margin: 0 2px;
+  padding: 4px 8px 3px 8px;
+  border: 1px dashed #c4c4c4;
+  border-radius: 4px;
+}
+div.inputTags-list ul.inputTags-autocomplete-list {
+  position: absolute;
+  max-height: 192px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  transform: scaleY(0);
+  transform-origin: 50% 0;
+  transition-duration: 0.2s;
+  overflow-y: auto;
+  z-index: 100;
+  opacity: 0;
+}
+div.inputTags-list ul.inputTags-autocomplete-list.is-active {
+  opacity: 1;
+  transform: scaleY(1);
+}
+div.inputTags-list ul.inputTags-autocomplete-list li {
+  height: 32px;
+  line-height: 32px;
+  padding: 0 16px;
+  transition-duration: 0.3s;
+  cursor: pointer;
+  border-bottom: 1px solid #dddddd;
+  transition-duration: 0.2s;
+}
+div.inputTags-list ul.inputTags-autocomplete-list li:last-child {
+  border: none;
+}
+div.inputTags-list ul.inputTags-autocomplete-list li:hover {
+  background-color: #19bc9c;
+  color: #ffffff;
+}
+div.inputTags-list ul.inputTags-autocomplete-list li.is-disabled {
+  cursor: default;
+  background-color: #f7f7f7;
+  color: initial;
+}
+p.inputTags-error {
+  position: relative;
+  margin: 0;
+  padding: 0.5em 1em;
+  color: #ffffff;
+  background-color: rgba(231, 76, 60, 0.7);
+  border-radius: 4px;
+  cursor: pointer;
+}
+p.inputTags-error:first-of-type {
+  margin-top: 8px;
+}
+p.inputTags-error:after {
+  position: absolute;
+  content: "\000D7";
+  top: 50%;
+  right: 0.5em;
+  transform: translateY(-50%);
+  font-size: 28px;
+}    
+</style>
+
+<script lang="Javascript">
+(function($) {
+    $.fn.closestToOffset = function(offset) {
+        var el = null, elOffset, x = offset.left, y = offset.top, distance, dx, dy, minDistance;
+        this.each(function() {
+            elOffset = $(this).offset();
+
+            if (
+            (x >= elOffset.left)  && (x <= elOffset.right) &&
+            (y >= elOffset.top)   && (y <= elOffset.bottom)
+            ) {
+                el = $(this);
+                return false;
+            }
+
+            var offsets = [[elOffset.left, elOffset.top], [elOffset.right, elOffset.top], [elOffset.left, elOffset.bottom], [elOffset.right, elOffset.bottom]];
+            for (off in offsets) {
+                dx = offsets[off][0] - x;
+                dy = offsets[off][1] - y;
+                distance = Math.sqrt((dx*dx) + (dy*dy));
+                if (minDistance === undefined || distance < minDistance) {
+                    minDistance = distance;
+                    el = $(this);
+                }
+            }
+        });
+        return el;
+    }
+})(jQuery);   
+</script>
+
+<script lang="Javascript">
+
+    serializePattern = function() {
+        var patternParam = '';
+        jQuery('.js-pattern').children().each(function(){
+            if(jQuery(this).hasClass('inputTags-item')) {
+                patternParam += '{'+jQuery(this).data('value')+'}';
+            } else if(jQuery(this).hasClass('inputTags-field')) {
+                patternParam += jQuery(this).val();
+            }
+        });
+        return patternParam;
+    };
+    
+    submitChanges = function() {
+        jQuery('#<?php echo $this->getElement()->getHtmlId() ?>').val(serializePattern());
+    };
+
+</script>
+
+        <div class="js-tag-cloud inputTags-list">
+            <?php echo $this->getAttributesCloudHtml() ?>
+        </div>
+        <br/>
+        <div class="js-pattern inputTags-list">
+            <?php echo $this->getPatternHtml() ?>
+        </div>
+
+        <?php echo $this->getElement()->getElementHtml() ?>
+
+        <button onclick="return showExample()">Example</button>
+        <span id="js-example"></span>
+        
+<script lang="Javascript">
+    
+    function showExample() {
+        var pattern = serializePattern();
+        jQuery.ajax({
+            method: 'get',
+            url: '<?php echo $this->getExampleUrl() ?>',
+            data: {
+                pattern: pattern
+            }
+        }).success(function(data){
+            if(typeof data !== 'undefined' && data.isSuccess) {
+                jQuery('#js-example').text(data.exampleUrl);
+            }
+        });
+        return false;
+    }
+    
+    jQuery.fn.textWidth = function(){
+      var html_org = jQuery(this).val();
+      var html_calc = '<span id="temp-span">' + html_org + '</span>';
+      jQuery('body').append(html_calc);
+      var width = jQuery('span#temp-span').width();
+      jQuery('span#temp-span').remove();
+      return width + (jQuery(this).val().length)*1.33;
+    };
+    
+    jQuery.fn.adjustSize = function() {
+        return jQuery(this).each(function(){
+            jQuery(this).css('width', jQuery(this).textWidth()+5 + 'px' );
+        });
+    };
+    
+    jQuery.fn.validatePattern = function() {
+        jQuery(this).children().each(function(){
+            if(jQuery(this).hasClass('inputTags-field') && jQuery(this).next().hasClass('inputTags-field')) {
+                if( jQuery(this).next().val() !== '') {
+                    jQuery(this).val( jQuery(this).val() + '-' + jQuery(this).next().val()).adjustSize();
+                }
+                jQuery(this).next().remove();
+            }
+        });
+    };
+    
+    jQuery('body').on('keydown', '.inputTags-list input.inputTags-field', function(){
+        jQuery(this).adjustSize();
+    });  
+
+    jQuery('.js-pattern').sortable({
+        connectWith: '.js-tag-cloud',
+        update: function(event, ui) {
+            jQuery(this).validatePattern();
+            submitChanges();
+        }
+    });
+    jQuery('body').on('change', '.js-pattern', function(){
+        submitChanges();
+    });
+    
+    jQuery('.js-tag-cloud').sortable({
+        connectWith: '.js-pattern'
+    });
+    
+    jQuery('.js-pattern').click(function(e){
+        var clickedX = e.clientX;
+        var element = jQuery(this).children().closestToOffset({left: clickedX, top: e.clientY});
+
+        var elPositionX = element[0].offsetLeft;
+        if(clickedX < elPositionX) {
+            if(!jQuery(element).hasClass('inputTags-field') && !jQuery(element).prev().hasClass('inputTags-field')) {
+                jQuery('<input type=text value="" class="inputTags-field ui-sortable-handle"/>').insertBefore(element).adjustSize().focus();
+            } else {
+                if(jQuery(element).hasClass('inputTags-field')) {
+                    jQuery(element).focus();
+                } else {
+                    jQuery(element).prev().focus();
+                }
+            }
+        } else {
+            if(!jQuery(element).hasClass('inputTags-field') && !jQuery(element).next().hasClass('inputTags-field')) {
+                jQuery('<input type=text value="" class="inputTags-field ui-sortable-handle"/>').insertAfter(element).adjustSize().focus();
+            } else {
+                if(jQuery(element).hasClass('inputTags-field')) {
+                    jQuery(element).focus();
+                } else {
+                    jQuery(element).next().focus();
+                }
+            }   
+            
+        }
+    });
+    
+    jQuery(document).ready(function(){
+        jQuery('.inputTags-field').adjustSize();
+    });
+    
+</script>
+
+
+

@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+
+<config>
+	<menu>
+		<system>
+			<children>
+				<itoris_extensions>
+					<children>
+						<itoris_productqa>
+							<title>Product Questions/Answers</title>
+							<action>itoris_productqa/admin_settings</action>
+						</itoris_productqa>
+					</children>
+				</itoris_extensions>
+			</children>
+		</system>
+		<catalog>
+			<children>
+				<itoris_productqa>
+					<title>Product Q/A</title>
+					<action>itoris_productqa/admin_questions/index</action>
+					<children>
+						<questions>
+							<title>Questions</title>
+							<action>itoris_productqa/admin_questions/index</action>
+							<children>
+								<pending>
+									<title>Pending Questions</title>
+									<action>itoris_productqa/admin_questions/pending</action>
+								</pending>
+								<inappropriate>
+									<title>Inappropriate Questions</title>
+									<action>itoris_productqa/admin_questions/inappr</action>
+								</inappropriate>
+								<not_answered>
+									<title>Not Answered Questions</title>
+									<action>itoris_productqa/admin_questions/notAnswered</action>
+								</not_answered>
+								<all>
+									<title>All Questions</title>
+									<action>itoris_productqa/admin_questions/index</action>
+								</all>
+							</children>
+						</questions>
+					</children>
+					<children>
+						<answers>
+							<title>Answers</title>
+							<action>itoris_productqa/admin_answers/index</action>
+							<children>
+								<pending>
+									<title>Pending Answers</title>
+									<action>itoris_productqa/admin_answers/pending</action>
+								</pending>
+								<inappropriate>
+									<title>Inappropriate Answers</title>
+									<action>itoris_productqa/admin_answers/inappr</action>
+								</inappropriate>
+								<all>
+									<title>All Answers</title>
+									<action>itoris_productqa/admin_answers/index</action>
+								</all>
+							</children>
+						</answers>
+					</children>
+				</itoris_productqa>
+			</children>
+		</catalog>
+	</menu>
+	<acl>
+		<resources>
+			<admin>
+				<children>
+					<system>
+						<children>
+							<itoris_extensions>
+								<children>
+									<itoris_productqa>
+										<title>Product Questions/Answers</title>
+									</itoris_productqa>
+								</children>
+							</itoris_extensions>
+						</children>
+					</system>
+					<catalog>
+						<children>
+							<itoris_productqa>
+								<title>Product Questions/Answers</title>
+								<children>
+									<questions>
+										<title>Questions</title>
+										<children>
+											<pending>
+												<title>Pending Questions</title>
+											</pending>
+											<inappropriate>
+												<title>Inappropriate Questions</title>
+											</inappropriate>
+											<not_answered>
+												<title>Not Answered Questions</title>
+											</not_answered>
+											<all>
+												<title>All Questions</title>
+											</all>
+										</children>
+									</questions>
+								</children>
+								<children>
+									<answers>
+										<title>Answers</title>
+										<children>
+											<pending>
+												<title>Pending Answers</title>
+											</pending>
+											<inappropriate>
+												<title>Inappropriate Answers</title>
+											</inappropriate>
+											<all>
+												<title>All Answers</title>
+											</all>
+										</children>
+									</answers>
+								</children>
+							</itoris_productqa>
+						</children>
+					</catalog>
+				</children>
+			</admin>
+		</resources>
+	</acl>
+</config>

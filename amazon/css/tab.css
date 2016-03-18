@@ -1,0 +1,29 @@
+#dolphincontainer{position:relative; float:left;color:#E0E0E0;}
+#dolphinnav{position:relative;height:33px;padding:0px;}
+#dolphinnav ul{margin:0;padding:0;list-style-type:none;width:auto;float:left;}
+#dolphinnav ul li{display:block;float:left;margin:0 1px;}
+#dolphinnav ul li a{display:block;float:left;color:#EAF3F8;text-decoration:none;padding:0 0 0 20px;height:33px;}
+#dolphinnav ul li a span{padding:12px 20px 0 0;height:21px;float:left;}
+#dolphinnav ul li a:hover{color:#fff;background:transparent url(../../images/dolphin_bg-OVER.gif) repeat-x bottom left;}
+#dolphinnav ul li a:hover span{display:block;width:auto;cursor:pointer;}
+#dolphinnav ul li a.current,#dolphinnav ul li a.current:hover{color:#fff;background:#1D6893 url(../../images/dolphin_left-ON.gif) no-repeat top left;line-height:275%;}
+#dolphinnav ul li a.current span{display:block;padding:0 20px 0 0;width:auto;background:#1D6893 url(../../images/dolphin_right-ON.gif) no-repeat top right;height:33px;}
+
+#dolphin_inner{color: white; padding: 5px; font-size: 80%; height: 1em}
+
+#dolphin_inner a:link, #dolphin_inner a:visited, #dolphin_inner a:active{color: white}
+#dolphin_inner a:hover{color: yellow}
+
+.innercontent{display: none;}
+
+.ui-accordion { width: 100%; }
+.ui-accordion h4{ width: 96%; margin:0 2% 5px 2%; padding:5px 0 3px 0px; border:0px!important; border-bottom:1px solid #CCC!important;}
+.ui-accordion ul li{ margin:0px 0 0 15px !important}
+.ui-accordion .ui-accordion-header { cursor: pointer; position: relative; margin-top: 1px; zoom: 1; color:#000;}
+.ui-accordion .ui-accordion-li-fix { display: inline; }
+.ui-accordion .ui-accordion-header-active { border-bottom: 0 !important; }
+/*.ui-accordion .ui-accordion-header a { display: block; font-size: 1em; padding: .5em .5em .5em .7em; }
+.ui-accordion-icons .ui-accordion-header a { padding-left: 2.2em; }*/
+.ui-accordion .ui-accordion-header .ui-icon { position: absolute; left:0; top: 0; margin-top:0px; }
+.ui-accordion .ui-accordion-content { padding:0px !important; border-top: 0; margin-top: -2px; position: relative; top: 1px; margin-bottom: 2px; overflow: auto; display: none; zoom: 1; }
+.ui-accordion .ui-accordion-content-active { display: block;}

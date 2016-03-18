@@ -1,0 +1,16 @@
+<?php if (!($this->isActive())) return ?>
+<div class="rewardssocial-buttons">
+    <?php if ($this->isLikeActive()) echo $this->getChildHtml('facebook.like') ?>
+    <?php if ($this->isTweetActive()) echo $this->getChildHtml('twitter.tweet') ?>
+    <?php if ($this->isPinActive()) echo $this->getChildHtml('pinterest.pin') ?>
+    <?php if ($this->isOneActive()) echo $this->getChildHtml('googleplus.one') ?>
+    <?php if ($this->isReferralActive()) echo $this->getChildHtml('referral') ?>
+
+    <?php if ($this->getEstimatedEarnPoints() > 0) :?>
+	    <?php if (!$this->isAuthorized()): ?>
+	    <div class="status-message" id="status-message"><?php echo $this->__('Login to earn %s for sharing!',  Mage::helper('rewards')->getPointsName()); ?></div>
+	    <?php else: ?>
+	    <div class="status-message" id="status-message"><?php echo $this->__('Earn %s for sharing!', Mage::helper('rewards')->getPointsName()); ?></div>
+	    <?php endif ?>
+    <?php endif ?>
+</div>

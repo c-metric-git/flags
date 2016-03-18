@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+	<customer_account>
+    	    <reference name="customer_account_navigation">
+        		 <block type="itoris_productqa/customer_navigation" name="itorisctqa">
+					 <action method="addLink"></action>
+        		 </block>
+			</reference>
+	</customer_account>
+	<itoris_productqa_customer_index translate="label">
+			<update handle="customer_account"/>
+			<reference name="content">
+				<block type="itoris_productqa/customer_productQa" name="productqa.grids"></block>
+				<block type="customer/account_dashboard" name="customer.account.link.back" template="customer/account/link/back.phtml"/>
+			</reference>
+	</itoris_productqa_customer_index>
+</layout>

@@ -1,0 +1,51 @@
+<?php
+    $helper = Mage::helper("iwd_ordermanager");
+    $order = $this->getOrder();
+?>
+
+<form id="address_edit_form_<?php echo $this->getAddressId(); ?>" method="post" class="address_edit_form">
+    <div>
+        <ul class="messages">
+            <li class="notice-msg">
+                <?php echo $helper->__("These changes will apply only to this order address (not customer)."); ?><br/>
+                <?php echo $helper->__("Taxes will not be recalculated."); ?>
+            </li>
+        </ul>
+    </div>
+
+    <?php echo $this->getForm()->toHtml(); ?>
+
+    <?php
+        $onclick_update = "IWD.OrderManager.Address.editAddressSubmit({$this->getAddressId()})";
+        $onclick_cancel = "IWD.OrderManager.Address.editAddressCancel({$this->getAddressId()})";
+        $recalculate = $this->isShippingAddress() ? true : false;
+        $block = $this->isShippingAddress() ? "address_ship" : "address_bill";
+
+        echo Mage::app()->getLayout()->createBlock('adminhtml/template')
+            ->setTemplate("iwd/ordermanager/controls.phtml")
+            ->setData("button_onclick_update", $onclick_update)
+            ->setData("button_onclick_cancel", $onclick_cancel)
+            ->setData('recalculate', $recalculate)
+            ->setData('block', $block)
+            ->setData('order_id', $this->getOrder()->getEntityId())
+            ->toHtml();
+    ?>
+
+    <input type="hidden" id="group_id" name="group_id" value="<?php echo $this->getCustomerGroupId()?>"/>
+    <input type="hidden" id="address_id" name="address_id" value="<?php echo $this->getAddressId()?>"/>
+    <input type="hidden" value="<?php echo $order->getEntityId(); ?>" name="order_id">
+
+    <style>
+        .address_edit_form .form-list td.value input, .address_edit_form .form-list td.value select {width:99% !important;}
+        .address_edit_form .validate-vat {text-align:right; padding:10px 0 0; width:99%;}
+        .address_edit_form table td.value {width:100% !important;}
+        @media only screen and (max-width: 1200px){.address_edit_form .form-list td.label label{width:100px !important;}}
+    </style>
+    <script type="text/javascript">
+        //<![CDATA[
+        var order = new AdminOrder(<?php echo $this->getOrderDataJson($this->order_id) ?>);
+        order.setLoadBaseUrl('<?php echo $this->getLoadBlockUrl() ?>');
+        var addressFormValidation_<?php echo $this->getAddressId();?> = new varienForm('address_edit_form_<?php echo $this->getAddressId();?>');
+        //]]>
+    </script>
+</form>

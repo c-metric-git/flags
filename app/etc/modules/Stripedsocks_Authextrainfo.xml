@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Stripedsocks_Authextrainfo>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Stripedsocks_Authextrainfo>
+    </modules>
+</config>

@@ -1,0 +1,17 @@
+.itorisqa_inappr{
+	width: 24px;
+	height: 21px;
+	background-image: url('inappr.png');
+}
+
+.itorisqa_red, .itorisqa_blue{
+	font-size: 12px;
+}
+
+.itorisqa_red{
+	color: red;
+}
+
+.itorisqa_blue{
+	color: blue;
+}

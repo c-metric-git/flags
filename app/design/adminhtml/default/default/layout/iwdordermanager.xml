@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout>
+    <ordermanager_handle>
+        <reference name="head">
+            <action method="addJs"><script>iwd/ordermanager/order.js</script></action>
+            <action method="addJs"><file>mage/adminhtml/sales.js</file></action>
+            <action method="addCss"><name>iwd/ordermanager/style.css</name></action>
+
+            <action method="addJs"><script>iwd/ordermanager/jquery.datetimepicker.min.js</script></action>
+            <action method="addCss"><name>iwd/ordermanager/jquery.datetimepicker.css</name></action>
+            <action method="addJs"><script>iwd/all/modal.js</script></action>
+        </reference>
+        <reference name="js">
+            <block type="adminhtml/template" template="iwd/ordermanager/jsinit.phtml" name="create-js"/>
+        </reference>
+        <reference name="order_info">
+            <action method="setTemplate"><template>iwd/ordermanager/order/view/info.phtml</template></action>
+        </reference>
+    </ordermanager_handle>
+
+    <ordermanager_order_grid_handle>
+        <reference name="head">
+            <action method="addJs"><file>iwd/ordermanager/jquery-ui-1.10.3.min.js</file></action>
+            <action method="addJs"><file>iwd/ordermanager/stickytableheaders.js</file></action>
+            <action method="addJs"><file>iwd/ordermanager/grid.js</file></action>
+            <action method="addCss"><name>iwd/ordermanager/order_grid.css</name></action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="init" template="iwd/ordermanager/grid/init.phtml" output="toHtml"/>
+        </reference>
+    </ordermanager_order_grid_handle>
+
+    <ordermanager_log_grid_handle>
+        <reference name="head">
+            <action method="addCss"><name>iwd/ordermanager/log_grid.css</name></action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="init" template="iwd/ordermanager/grid/init.phtml" output="toHtml"/>
+        </reference>
+    </ordermanager_log_grid_handle>
+
+    <!-- system -->
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addCss"><name>iwd/ordermanager/jquery-ui.css</name></action>
+            <action method="addCss"><name>iwd/ordermanager/ui.multiselect.css</name></action>
+            <action method="addCss"><name>iwd/ordermanager/colpick.css</name></action>
+            <action method="addJs"><script>iwd/ordermanager/jquery-ui-1.10.3.min.js</script></action>
+            <action method="addJs"><script>iwd/ordermanager/ui.multiselect.js</script></action>
+            <action method="addJs"><script>iwd/ordermanager/colpick.js</script></action>
+            <action method="addJs"><script>iwd/ordermanager/system.js</script></action>
+        </reference>
+    </adminhtml_system_config_edit>
+
+    <!-- order -->
+    <adminhtml_sales_order_index>
+        <update handle="ordermanager_order_grid_handle" />
+    </adminhtml_sales_order_index>
+
+    <adminhtml_sales_order_view>
+        <update handle="ordermanager_handle"/>
+        <reference name="head">
+            <action method="addJs"><file>mage/adminhtml/giftmessage.js</file></action>
+            <action method="addJs"><file>varien/configurable.js</file></action>
+            <action method="addJs"><file>mage/adminhtml/giftoptions/tooltip.js</file></action>
+
+            <action method="addJs"><file>iwd/ordermanager/configure.js</file></action>
+            <block type="adminhtml/template" name="optional_zip_countries" as="optional_zip_countries" template="directory/js/optional_zip_countries.phtml"/>
+        </reference>
+        <reference name="order_history">
+           <action method="setTemplate"><template>iwd/ordermanager/history/order.phtml</template></action>
+        </reference>
+        <reference name="order_tab_info">
+           <action method="setTemplate"><template>iwd/ordermanager/order/view/tab/info.phtml</template></action>
+           <block type="adminhtml/sales_order_view_items" name="order_items" template="iwd/ordermanager/items/items.phtml">
+               <action method="addItemRender"><type>default</type><block>adminhtml/sales_order_view_items_renderer_default</block><template>iwd/ordermanager/items/renderer/default.phtml</template></action>
+               <action method="addColumnRender"><column>name</column><block>adminhtml/sales_items_column_name</block><template>iwd/ordermanager/items/renderer/name.phtml</template></action>
+               <action method="addColumnRender"><column>name</column><block>adminhtml/sales_items_column_name_grouped</block><template>iwd/ordermanager/items/renderer/name.phtml</template><type>grouped</type></action>
+           </block>
+        </reference>
+        <reference name="order_items">
+           <action method="addItemRender"><type>bundle</type><block>bundle/adminhtml_sales_order_view_items_renderer</block><template>iwd/ordermanager/items/renderer/bundle.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_view>
+    <adminhtml_sales_order_addcomment>
+        <block type="adminhtml/sales_order_view_history" name="order_history" template="iwd/ordermanager/history/order.phtml" output="toHtml"/>
+    </adminhtml_sales_order_addcomment>
+
+    <!-- invoice -->
+    <adminhtml_sales_order_invoice_view>
+        <update handle="ordermanager_handle"/>
+        <reference name="order_comments">
+            <action method="setTemplate"><template>iwd/ordermanager/history/comments.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_invoice_view>
+    <adminhtml_sales_order_invoice_new>
+        <update handle="ordermanager_handle"/>
+    </adminhtml_sales_order_invoice_new>
+    <adminhtml_sales_order_invoice_addcomment>
+        <block type="adminhtml/sales_order_invoice_view_comments" name="invoice_comments">
+            <block type="adminhtml/sales_order_comments_view" name="order_comments" template="iwd/ordermanager/history/comments.phtml"/>
+        </block>
+    </adminhtml_sales_order_invoice_addcomment>
+
+    <!-- shipment -->
+    <adminhtml_sales_order_shipment_view>
+        <update handle="ordermanager_handle"/>
+        <reference name="order_comments">
+            <action method="setTemplate"><template>iwd/ordermanager/history/comments.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_shipment_view>
+    <adminhtml_sales_order_shipment_new>
+        <update handle="ordermanager_handle"/>
+    </adminhtml_sales_order_shipment_new>
+    <adminhtml_sales_order_shipment_addcomment>
+        <block type="adminhtml/sales_order_shipment_view_comments" name="shipment_comments">
+            <block type="adminhtml/sales_order_comments_view" name="order_comments" template="iwd/ordermanager/history/comments.phtml"/>
+        </block>
+    </adminhtml_sales_order_shipment_addcomment>
+
+    <!-- credit memo -->
+    <adminhtml_sales_order_creditmemo_view>
+        <update handle="ordermanager_handle"/>
+        <reference name="order_comments">
+            <action method="setTemplate"><template>iwd/ordermanager/history/comments.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_creditmemo_view>
+    <adminhtml_sales_order_creditmemo_new>
+        <update handle="ordermanager_handle"/>
+    </adminhtml_sales_order_creditmemo_new>
+    <adminhtml_sales_order_creditmemo_addcomment>
+        <block type="adminhtml/sales_order_creditmemo_view_comments" name="creditmemo_comments">
+            <block type="adminhtml/sales_order_comments_view" name="order_comments" template="iwd/ordermanager/history/comments.phtml"/>
+        </block>
+    </adminhtml_sales_order_creditmemo_addcomment>
+
+
+    <!-- customer orders -->
+    <adminhtml_customer_edit>
+        <update handle="ordermanager_order_grid_handle"/>
+    </adminhtml_customer_edit>
+
+    <!-- archive orders -->
+    <adminhtml_sales_archive_order_index>
+        <update handle="ordermanager_order_grid_handle"/>
+    </adminhtml_sales_archive_order_index>
+
+    <IWD_OM_ADMINHTML_CATALOG_PRODUCT_COMPOSITE_CONFIGURE>
+        <block type="adminhtml/catalog_product_composite_fieldset" name="product.composite.fieldset" output="toHtml">
+            <block name="product.composite.fieldset.options" type="adminhtml/catalog_product_composite_fieldset_options" template="catalog/product/composite/fieldset/options.phtml">
+                <action method="addOptionRenderer"><type>text</type><block>catalog/product_view_options_type_text</block><template>catalog/product/composite/fieldset/options/type/text.phtml</template></action>
+                <action method="addOptionRenderer"><type>file</type><block>catalog/product_view_options_type_file</block><template>catalog/product/composite/fieldset/options/type/file.phtml</template></action>
+                <action method="addOptionRenderer"><type>select</type><block>catalog/product_view_options_type_select</block><template>catalog/product/composite/fieldset/options/type/select.phtml</template></action>
+                <action method="addOptionRenderer"><type>date</type><block>catalog/product_view_options_type_date</block><template>iwd/ordermanager/catalog/product/composite/fieldset/options/type/date.phtml</template></action>
+                <block type="core/template" name="product.composite.fieldset.options.js" as="options_js" template="iwd/ordermanager/catalog/product/composite/fieldset/options/js.phtml"/>
+            </block>
+            <block type="adminhtml/catalog_product_composite_fieldset_qty" name="product.composite.fieldset.qty" template="catalog/product/composite/fieldset/qty.phtml"/>
+        </block>
+    </IWD_OM_ADMINHTML_CATALOG_PRODUCT_COMPOSITE_CONFIGURE>
+
+    <IWD_OM_PRODUCT_TYPE_configurable>
+        <reference name="product.composite.fieldset">
+            <block type="adminhtml/catalog_product_composite_fieldset_configurable" name="product.composite.fieldset.configurable" before="product.composite.fieldset.options" template="iwd/ordermanager/catalog/product/composite/fieldset/configurable.phtml" />
+        </reference>
+    </IWD_OM_PRODUCT_TYPE_configurable>
+</layout>

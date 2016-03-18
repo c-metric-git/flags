@@ -1,0 +1,125 @@
+<?php 
+/**
+ * ITORIS
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the ITORIS's Magento Extensions License Agreement
+ * which is available through the world-wide-web at this URL:
+ * http://www.itoris.com/magento-extensions-license.html
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to sales@itoris.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extensions to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to the license agreement or contact sales@itoris.com for more information.
+ *
+ * @category   ITORIS
+ * @package    ITORIS_PRODUCTQA
+ * @copyright  Copyright (c) 2012 ITORIS INC. (http://www.itoris.com)
+ * @license    http://www.itoris.com/magento-extensions-license.html  Commercial License
+ */
+?>
+<?php
+$_element = $this->getElement();
+$_note    = $_element->getNote();
+$_trId    = $_element->getHtmlContainerId();
+$_class   = $_element->getFieldsetHtmlClass();
+?>
+<?php if (!$_element->getNoDisplay()): ?>
+<tr<?php if($_trId): ?> id="<?php echo $_trId ?>"<?php endif; ?>>
+    <?php if ($_element->getType()=='hidden'): ?>
+    <td colspan="2" class="hidden"><?php echo trim($_element->getElementHtml()) ?></td>
+    <?php else: ?>
+    <td class="label<?php echo $_class ? " {$_class}-label" : ''?>">
+		<?php
+			if (!is_null($_element->getLabel())) {
+            	echo '<label for="'.$_element->getHtmlId() .'" style="width:200px; padding-right:0;">'.$_element->getLabel()
+                . ( $_element->getRequired() ? ' <span class="required">*</span>' : '' ).'</label>'."\n";
+        	}
+		?>
+	</td>
+    <td class="<?php echo $_element->hasValueClass() ? $_element->getValueClass() : 'value' ?><?php echo $_class ? " {$_class}-value" : ''?>">
+        <?php echo trim($_element->getElementHtml()) ?>
+        <?php if ($_note): ?>
+            <p class="note<?php echo $_class ? " {$_class}-note" : ''?>" id="note_<?php echo $_element->getId()?>"><span><?php echo $_note ?></span></p>
+        <?php endif ?>
+		<?php
+			if($_element->getUseWebsite()){
+				$whatUse = Mage::helper('itoris_productqa')->__('Use Website');
+			}elseif($_element->getUseDefault()){
+				$whatUse = Mage::helper('itoris_productqa')->__('Use Default');
+			}
+			if($_element->getId() == 'template_admin_notification' ||
+				$_element->getId() == 'template_user_notification' ||
+				$_element->getId() == 'template_guest_notification'): ?>
+				<br/>
+				<script type="text/javascript">
+					oldMagento = true;
+				<?php if(!Mage::helper('itoris_productqa')->isOldVersion()): ?>
+						oldMagento = false;
+								<?php echo $_element->getId()?> = false;
+						<?php if(isset($whatUse) && $_element->getUseParentValue()):?>
+								<?php echo $_element->getId()?> = true;
+						<?php endif;?>
+
+				<?php endif; ?>
+				</script>
+		<?php endif;
+		if($_element->getId() == 'template_admin_notification'):?>
+			<div>
+				{{question_or_answer}}<br/>
+				{{store_view_name}}<br/>
+				{{user_type}}<br/>
+				{{nickname}}<br/>
+				{{product_name}}<br/>
+				{{question_or_answer_details}}<br/>
+				{{question_details_backend_url}}
+			</div>
+		<?php endif;
+		if($_element->getId() == 'template_user_notification'):?>
+				<div>
+					{{customer_first_name}}<br/>
+					{{store_view_name}}<br/>
+					{{product_name}}<br/>
+					{{question}}<br/>
+					{{answer}}<br/>
+				</div>
+		<?php endif; ?>
+		<?php
+		if($_element->getId() == 'template_guest_notification'):?>
+				<div>
+					{{store_view_name}}<br/>
+					{{product_name}}<br/>
+					{{username}}<br/>
+					{{question}}<br/>
+					{{nickname}}<br/>
+					{{reply}}<br/>
+					{{product_page}}<br/>
+				</div>
+		<?php endif; ?>
+    </td>
+	<td>
+		<?php if(isset($whatUse) && $_element->getUseParentValue()):?>
+			<script> disableFieldEditMode('<?php echo $_element->getId() ?>') </script>
+		<?php
+			endif;
+			if(isset($whatUse) && $_element->getId() != 'admin_email'):
+		?>
+				<input type="checkbox" id="check_<?php echo $_element->getId() ?>" name="settings[<?php echo $_element->getId() ?>][use_parent]"
+				    onclick="itoris_toogleFieldEditMode(this, '<?php echo $_element->getId() ?>')"
+					<?php if($_element->getUseParentValue()):?>
+					   checked="checked"
+					<?php endif; ?>
+				/>
+		<?php
+			echo $whatUse;
+			endif;
+		?>
+	</td>
+    <?php endif; ?>
+</tr>
+<?php endif; ?>

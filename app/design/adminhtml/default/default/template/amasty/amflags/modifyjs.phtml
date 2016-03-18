@@ -1,0 +1,23 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2015 Amasty (https://www.amasty.com)
+ * @package Amasty_Flags
+ */
+?>
+<script type="text/javascript">
+<!--
+    var rows = $$('.grid table tbody tr:not([class~=amflags-tr])');
+    for (var row=0; row<rows.length; row++)
+    {
+        if(row%2==0)
+        {
+            Element.addClassName(rows[row], 'even');
+        }
+        else
+        {
+            Element.removeClassName(rows[row], 'even');
+        }
+    }
+//-->
+</script>

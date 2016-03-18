@@ -1,0 +1,29 @@
+<div class="buttons-twitter-like">
+<a href="https://twitter.com/share" class="twitter-share-button mst-rewardssocial-tweet" data-url="<?php echo $this->getCurrentEncodedUrl() ?>" data-count="none" data-text="<?php echo $this->__('Check this out!') ?> <?php echo $this->getCurrentUrl() ?>"><?php echo $this->__('Tweet')?></a>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+<?php if ($this->getEstimatedEarnPoints() > 0): ?>
+  <?php if ($this->isAuthorized() && !$this->isLiked()): ?>
+  <div id='twitter-message'>
+  <?php echo $this->__('Tweet this page and earn %s',  Mage::helper('rewards')->formatPoints($this->getEstimatedEarnPoints())); ?>
+  </div>
+  <?php endif; ?>
+<?php endif; ?>
+
+<script type="text/javascript">
+window.onload = function ()
+{
+twttr.events.bind('tweet',function(a){
+if(a.target.hasClassName('mst-rewardssocial-tweet')) {
+	new Ajax.Request('<?php echo $this->getTweetUrl() ?>?url=<?php echo $this->getCurrentEncodedUrl()?>', {
+	  onSuccess: function(response) {
+	    $('status-message').update(response.responseText);
+	    $('twitter-message').update('');
+	  }
+	});
+}
+})
+}
+</script>
+</div>

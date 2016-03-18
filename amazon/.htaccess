@@ -1,0 +1,11 @@
+RewriteEngine on
+RewriteCond $1 !^(index\.php|resources|robots\.txt)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+
+
+# Set Expires Headers
+<FilesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf|html|htm)$">
+Header set Expires "Thu, 15 Jan 2015 20:00:00 GMT"
+</FilesMatch>

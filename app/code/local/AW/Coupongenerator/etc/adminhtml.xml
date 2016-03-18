@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<config>
+    <translate>
+        <modules>
+            <AW_Coupongenerator>
+                <files>
+                    <default>AW_Coupongenerator.csv</default>
+                </files>
+            </AW_Coupongenerator>
+        </modules>
+    </translate>
+    <menu>
+        <promo>
+            <children>
+                <coupongenerator>
+                    <title>Coupon Code Generator</title>
+                    <sort_order>150</sort_order>
+                    <children>
+                        <coupongenerator_rules>
+                            <title>Rules</title>
+                            <sort_order>30</sort_order>
+                            <action>adminhtml/awqcg_rules</action>
+                        </coupongenerator_rules>
+                        <generated_coupons>
+                            <title>Generated Coupons</title>
+                            <sort_order>50</sort_order>
+                            <action>adminhtml/awqcg_coupons</action>
+                        </generated_coupons>
+                        <coupongenerator_configuration>
+                            <title>Settings</title>
+                            <sort_order>100</sort_order>
+                            <action>adminhtml/system_config/edit/section/coupongenerator</action>
+                        </coupongenerator_configuration>
+                    </children>
+                </coupongenerator>
+            </children>
+        </promo>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <promo>
+                        <children>
+                            <coupongenerator>
+                                <title>Coupon Code Generator</title>
+                                <sort_order>150</sort_order>
+                                <children>
+                                    <coupongenerator_rules>
+                                        <title>Rules</title>
+                                        <sort_order>30</sort_order>
+                                        <action>adminhtml/awqcg_rules</action>
+                                    </coupongenerator_rules>
+                                    <generated_coupons>
+                                        <title>Generated Coupons</title>
+                                        <sort_order>50</sort_order>
+                                        <action>adminhtml/awqcg_coupons</action>
+                                    </generated_coupons>
+                                    <coupongenerator_configuration>
+                                        <title>Settings</title>
+                                        <sort_order>100</sort_order>
+                                        <action>adminhtml/system_config/edit/section/coupongenerator</action>
+                                    </coupongenerator_configuration>
+                                </children>
+                            </coupongenerator>
+                        </children>
+                    </promo>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <coupongenerator>
+                                        <title>aheadWorks - Coupon Code Generator Section</title>
+                                    </coupongenerator>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <layout>
+        <updates>
+            <coupongenerator>
+                <file>aw_coupongenerator.xml</file>
+            </coupongenerator>
+        </updates>
+    </layout>
+</config>

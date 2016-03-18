@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <postcodeanywhere translate="label" module="captureplus">
+            <label>Postcode Anywhere</label>
+            <sort_order>1000</sort_order>
+        </postcodeanywhere>
+    </tabs>
+    <sections>
+        <captureplus translate="label" module="captureplus">
+            <label>Settings</label>
+            <tab>postcodeanywhere</tab>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <settings translate="label">
+                    <label>Capture Plus Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <comment><![CDATA[<div style="margin-bottom:10px;">To set up a Postcode Anywhere account or these keys, please visit our <a href="http://www.postcodeanywhere.co.uk/integrations/magento/get-started-capture-plus/" target="_blank" style="margin-left:0;">Getting Started</a> page</div>]]></comment>
+                    <fields>
+                        <website_key translate="label">
+                            <label>Website key: </label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </website_key>
+                        <admin_key translate="label">
+                            <label>Admin panel key: </label>
+                            <comment><![CDATA[This must be a key suitable for internal office use]]></comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </admin_key>                        
+                        <ip_country translate="label">
+                            <label>IP country lookup: </label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[The default country will be set based on the location of the customer]]></comment>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </ip_country>
+                        <minify_script translate="label">
+                            <label>Minify Scripts: </label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[Use compressed script and style sheet files]]></comment>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </minify_script>
+                        <custom_code translate="label">
+                          <label>Custom code: </label>
+                          <frontend_type>textarea</frontend_type>
+                          <comment><![CDATA[Paste any custom JavaScript code that you have in here]]></comment>
+                          <sort_order>5</sort_order>
+                          <show_in_default>1</show_in_default>
+                          <show_in_website>1</show_in_website>
+                          <show_in_store>1</show_in_store>
+                        </custom_code>
+                    </fields>
+                </settings>
+            </groups>
+        </captureplus>
+    </sections>
+
+</config>

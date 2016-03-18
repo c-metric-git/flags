@@ -1,0 +1,1096 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <magestore translate="label">
+            <label>Magestore Extension</label>
+            <sort_order>400</sort_order>
+        </magestore>
+    </tabs>
+	<sections>
+        <sociallogin translate="label" module="sociallogin">
+            <class>separator-top</class>
+            <label>Social Login</label>
+            <tab>magestore</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>300</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+				<general translate="label">
+                    <label>General Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>	
+						<position translate="label">
+                            <label>Shown Position</label>
+                            <frontend_type>multiselect</frontend_type>              
+                            <source_model>sociallogin/config_position</source_model>              
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Position of Social Login buttons in front-end</comment>
+                        </position>							
+						<direction translate="label">
+                            <label>Shown Direction</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>sociallogin/config_direction</source_model>              
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment>Direction of Social Login buttons to be shown in front-end</comment>
+                        </direction>	
+						<number_show>
+							<label>Number of visible buttons</label>
+                            <frontend_type>text</frontend_type>                                          
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment><![CDATA[This is the number of buttons shown in frontend, others will be shown only when customer clicks on "Other login"]]></comment>
+						</number_show>
+					</fields>	
+				</general>							
+				<twlogin translate="label">
+                    <label>Twitter Login Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>					
+                            <consumer_key translate="label">
+                            <label>API Key</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[<a href="http://twitter.com/apps/new" target="_bank">Register</a>]]></comment>
+                        </consumer_key>
+                        <consumer_secret translate="label">
+                            <label>API Secret</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment></comment>
+                        </consumer_secret>
+                        <redirect_url translate="label">
+                            <label>Callback URL</label>
+                            <frontend_type>text</frontend_type>  
+                            <frontend_model>sociallogin/config_twitterredirecturl</frontend_model>							
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Please use this link for Callback URL field when registering with Twitter API]]></comment>
+                        </redirect_url>
+					
+                        <sort_order translate="label">
+                            <label>Sort Order</label>
+                            <frontend_type>text</frontend_type>                      
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            </sort_order>
+                    </fields>	
+                </twlogin>
+     
+                                <instalogin translate="label">
+                    <label>Instagram Login Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>					
+						<consumer_key translate="label">
+                            <label>Client ID</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment><![CDATA[<a href="http://instagram.com/developer/" target="_bank">Register</a>]]></comment>
+                        </consumer_key>
+			<consumer_secret translate="label">
+                            <label>Client Secret</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </consumer_secret>
+                        <redirect_url translate="label">
+                            <label>Redirect URI</label>
+                            <frontend_type>text</frontend_type>  
+                            <frontend_model>sociallogin/config_instagramredirecturl</frontend_model>							
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Please use this link for Redirect URI field when registering with Instagram API]]></comment>
+                        </redirect_url>
+						
+						<sort_order translate="label">
+							<label>Sort Order</label>
+                            <frontend_type>text</frontend_type>                      
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_order>
+					</fields>	
+				</instalogin>			
+                <amazonlogin translate="label">
+                    <label>Amazon Login Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>		
+						<consumer_key translate="label">
+                            <label>Client ID</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment><![CDATA[<a href="https://login.amazon.com/website" target="_bank">Register</a>]]></comment>
+                        </consumer_key>
+			<consumer_secret translate="label">
+                            <label>Client Secret</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </consumer_secret>
+                            <redirect_url translate="label">
+                            <label>Allowed Return URLs</label>
+                            <frontend_type>text</frontend_type>  
+                            <frontend_model>sociallogin/config_amazonredirecturl</frontend_model>							
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Please use this link for Allowed Return URLs field when registering with Amazon API]]></comment>
+                        </redirect_url>
+						<is_send_password_to_customer translate="label">
+                            <label>Send Password To Customer</label>
+						  	<frontend_type>select</frontend_type>
+						  	<source_model>adminhtml/system_config_source_yesno</source_model>
+						  	<sort_order>20</sort_order>
+						  	<show_in_default>1</show_in_default>
+						  	<show_in_website>1</show_in_website>
+						  	<show_in_store>1</show_in_store>
+                        </is_send_password_to_customer>
+						<sort_order translate="label">
+							<label>Sort Order</label>
+                            <frontend_type>text</frontend_type>                      
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_order>
+					</fields>
+				</amazonlogin>					
+				<gologin translate="label">
+                    <label>Google Login Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>		
+						<consumer_key translate="label">
+                            <label>Client ID</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment><![CDATA[<a href="https://cloud.google.com/console" target="_bank">Register</a>]]></comment>
+                        </consumer_key>
+						<consumer_secret translate="label">
+                            <label>Client Secret</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment></comment>
+                        </consumer_secret>
+			<redirect_url translate="label">
+                            <label>Redirect URIs </label>
+                            <frontend_type>text</frontend_type>  
+                            <frontend_model>sociallogin/config_redirecturl</frontend_model>							
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Please use this link for Redirect URIs field when registering with Google API]]></comment>
+                        </redirect_url>
+						<is_send_password_to_customer translate="label">
+                            <label>Send Password To Customer</label>
+						  	<frontend_type>select</frontend_type>
+						  	<source_model>adminhtml/system_config_source_yesno</source_model>
+						  	<sort_order>20</sort_order>
+						  	<show_in_default>1</show_in_default>
+						  	<show_in_website>1</show_in_website>
+						  	<show_in_store>1</show_in_store>
+                        </is_send_password_to_customer>
+						<sort_order translate="label">
+							<label>Sort Order</label>
+                            <frontend_type>text</frontend_type>                      
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_order>
+					</fields>
+				</gologin>			
+				<fblogin translate="label">
+                    <label>Facebook Login Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>							
+						<app_id translate="label">
+                            <label>App ID</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment><![CDATA[<a href="http://developers.facebook.com/setup/" target="_bank">Register</a>]]></comment>
+                        </app_id>
+						<app_secret translate="label">
+                            <label>App Secret</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment></comment>
+                        </app_secret>
+						<is_send_password_to_customer translate="label">
+                            <label>Send Password To Customer</label>
+						  	<frontend_type>select</frontend_type>
+						  	<source_model>adminhtml/system_config_source_yesno</source_model>
+						  	<sort_order>20</sort_order>
+						  	<show_in_default>1</show_in_default>
+						  	<show_in_website>1</show_in_website>
+						  	<show_in_store>1</show_in_store>
+                        </is_send_password_to_customer>
+						<sort_order translate="label">
+							<label>Sort Order</label>
+                            <frontend_type>text</frontend_type>                      
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_order>
+					</fields>
+				</fblogin>			
+				<yalogin translate="label">
+                    <label>Yahoo Login Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>							
+						<app_id translate="label">
+                            <label>Application ID</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment><![CDATA[<a href="https://developer.apps.yahoo.com/dashboard/createKey.html" target="_bank">Register</a><span id="yahoo_create_abcxyz" style="margin-left:20px">Please check permission "Read/Write Public and Private" in "Social Directory (Profiles)" in your app</span>]]></comment>
+                        </app_id>
+						<consumer_key translate="label">
+                            <label>Consumer Key</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment></comment>
+                        </consumer_key>					
+						<consumer_secret translate="label">
+                            <label>Consumer Secret</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment></comment>
+                        </consumer_secret>
+                        <redirect_url translate="label">
+                            <label>Application URL</label>
+                            <frontend_type>text</frontend_type>  
+                            <frontend_model>sociallogin/config_yahooredirecturl</frontend_model>							
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Please use this link for Application URL field when registering with Yahoo API]]></comment>
+                        </redirect_url>						
+						<is_send_password_to_customer translate="label">
+                            <label>Send Password To Customer</label>
+						  	<frontend_type>select</frontend_type>
+						  	<source_model>adminhtml/system_config_source_yesno</source_model>
+						  	<sort_order>5</sort_order>
+						  	<show_in_default>1</show_in_default>
+						  	<show_in_website>1</show_in_website>
+						  	<show_in_store>1</show_in_store>
+                        </is_send_password_to_customer>
+						<sort_order translate="label">
+							<label>Sort Order</label>
+                            <frontend_type>text</frontend_type>                      
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_order>
+					</fields>
+				</yalogin>
+				<!-- by Hai.Ta -->
+                <aollogin translate="label">
+                    <label>AOL Login Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>50</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>														
+						<is_send_password_to_customer translate="label">
+                            <label>Send Password To Customer</label>
+						  	<frontend_type>select</frontend_type>
+						  	<source_model>adminhtml/system_config_source_yesno</source_model>
+						  	<sort_order>5</sort_order>
+						  	<show_in_default>1</show_in_default>
+						  	<show_in_website>1</show_in_website>
+						  	<show_in_store>1</show_in_store>
+                        </is_send_password_to_customer>
+						<sort_order translate="label">
+							<label>Sort Order</label>
+                            <frontend_type>text</frontend_type>                      
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_order>
+					</fields>
+				</aollogin>
+                <wplogin translate="label">
+                    <label>WordPress Login Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>60</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>														
+						<is_send_password_to_customer translate="label">
+                            <label>Send Password To Customer</label>
+						  	<frontend_type>select</frontend_type>
+						  	<source_model>adminhtml/system_config_source_yesno</source_model>
+						  	<sort_order>5</sort_order>
+						  	<show_in_default>1</show_in_default>
+						  	<show_in_website>1</show_in_website>
+						  	<show_in_store>1</show_in_store>
+                        </is_send_password_to_customer>
+						<sort_order translate="label">
+							<label>Sort Order</label>
+                            <frontend_type>text</frontend_type>                      
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_order>
+					</fields>
+				</wplogin>
+				<callogin translate="label">
+                    <label>Clavid Login Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>70</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>														
+						<is_send_password_to_customer translate="label">
+                            <label>Send Password To Customer</label>
+						  	<frontend_type>select</frontend_type>
+						  	<source_model>adminhtml/system_config_source_yesno</source_model>
+						  	<sort_order>5</sort_order>
+						  	<show_in_default>1</show_in_default>
+						  	<show_in_website>1</show_in_website>
+						  	<show_in_store>1</show_in_store>
+                        </is_send_password_to_customer>
+						<sort_order translate="label">
+							<label>Sort Order</label>
+                            <frontend_type>text</frontend_type>                      
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_order>
+					</fields>
+				</callogin>
+				<orglogin translate="label">
+                    <label>Orange Login Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>80</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>														
+						<is_send_password_to_customer translate="label">
+                            <label>Send Password To Customer</label>
+						  	<frontend_type>select</frontend_type>
+						  	<source_model>adminhtml/system_config_source_yesno</source_model>
+						  	<sort_order>5</sort_order>
+						  	<show_in_default>1</show_in_default>
+						  	<show_in_website>1</show_in_website>
+						  	<show_in_store>1</show_in_store>
+                        </is_send_password_to_customer>
+						<sort_order translate="label">
+							<label>Sort Order</label>
+                            <frontend_type>text</frontend_type>                      
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_order>
+					</fields>
+				</orglogin>
+				<fqlogin translate="label">
+                    <label>FoursQuare Login Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>90</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>													
+						<consumer_key translate="label">
+                            <label>Client ID</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment><![CDATA[<a href="https://foursquare.com/login?continue=%2Fdevelopers%2Fapps" target="_bank">Register</a>]]></comment>
+                        </consumer_key>					
+						<consumer_secret translate="label">
+                            <label>Client Secret</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment></comment>
+                        </consumer_secret>
+                        <redirect_url translate="label">
+                            <label>Redirect URI(s)</label>
+                            <frontend_type>text</frontend_type>  
+                            <frontend_model>sociallogin/config_foursQuareredirecturl</frontend_model>							
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Please use this link for Redirect URI(s) field when registering with FoursQuare API]]></comment>
+                        </redirect_url>						
+						<is_send_password_to_customer translate="label">
+                            <label>Send Password To Customer</label>
+						  	<frontend_type>select</frontend_type>
+						  	<source_model>adminhtml/system_config_source_yesno</source_model>
+						  	<sort_order>20</sort_order>
+						  	<show_in_default>1</show_in_default>
+						  	<show_in_website>1</show_in_website>
+						  	<show_in_store>1</show_in_store>
+                        </is_send_password_to_customer>
+						<is_customer_confirm_password translate="label">
+                            <label>Confirm password</label>
+						  	<frontend_type>select</frontend_type>
+						  	<source_model>adminhtml/system_config_source_yesno</source_model>
+						  	<sort_order>21</sort_order>
+						  	<show_in_default>1</show_in_default>
+						  	<show_in_website>1</show_in_website>
+						  	<show_in_store>1</show_in_store>
+                        </is_customer_confirm_password>
+						<sort_order translate="label">
+							<label>Sort Order</label>
+                            <frontend_type>text</frontend_type>                      
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_order>
+					</fields>
+				</fqlogin>
+				<livelogin translate="label">
+                    <label>Windows Live Login Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>													
+						<consumer_key translate="label">
+                            <label>Client ID</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+<!--							<comment><![CDATA[<a href="http://msdn.microsoft.com/en-us/live//default.aspx" target="_bank">Register</a>]]></comment>,fix by nhagg-->
+                            <comment><![CDATA[<a href="https://account.live.com/developers/applications/create" target="_bank">Register</a>]]></comment>	
+                        </consumer_key>				
+						<consumer_secret translate="label">
+                            <label>Client Secret</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment></comment>
+                        </consumer_secret>
+                        <redirect_url translate="label">
+                            <label>Redirect URL(s)</label>
+                            <frontend_type>text</frontend_type>  
+                            <frontend_model>sociallogin/config_liveredirecturl</frontend_model>							
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Please use this link for Redirect URL(s) field when registering with Windows Live API]]></comment>
+                        </redirect_url>						
+						<is_send_password_to_customer translate="label">
+                            <label>Send Password To Customer</label>
+						  	<frontend_type>select</frontend_type>
+						  	<source_model>adminhtml/system_config_source_yesno</source_model>
+						  	<sort_order>20</sort_order>
+						  	<show_in_default>1</show_in_default>
+						  	<show_in_website>1</show_in_website>
+						  	<show_in_store>1</show_in_store>
+                        </is_send_password_to_customer>
+						<sort_order translate="label">
+							<label>Sort Order</label>
+                            <frontend_type>text</frontend_type>                      
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_order>
+					</fields>
+				</livelogin>	
+				<!-- <mplogin translate="label">
+                    <label>MySpace Login Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>110</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>													
+						<consumer_key translate="label">
+                            <label>Consumer Key</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment><![CDATA[<a href="http://developer.myspace.com/" target="_bank">Register</a>]]></comment>
+                        </consumer_key>					
+						<consumer_secret translate="label">
+                            <label>Consumer Secret</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment></comment>
+                        </consumer_secret>
+                       <redirect_url translate="label">
+                            <label>Redirect Url</label>
+                            <frontend_type>text</frontend_type>  
+                            <frontend_model>sociallogin/config_mpredirecturl</frontend_model>							
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Please use this link for redirect url field when registering with Instagram API]]></comment>
+                        </redirect_url>		
+						<is_send_password_to_customer translate="label">
+                            <label>Send Password To Customer</label>
+						  	<frontend_type>select</frontend_type>
+						  	<source_model>adminhtml/system_config_source_yesno</source_model>
+						  	<sort_order>20</sort_order>
+						  	<show_in_default>1</show_in_default>
+						  	<show_in_website>1</show_in_website>
+						  	<show_in_store>1</show_in_store>
+                        </is_send_password_to_customer>
+						<sort_order translate="label">
+							<label>Sort Order</label>
+                            <frontend_type>text</frontend_type>                      
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_order>
+					</fields>
+				</mplogin>	 -->			
+				<!-- end Hai.Ta -->
+				<linklogin translate="label">
+                    <label>LinkedIn Login Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>40</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>							
+						<app_id translate="label">
+                            <label>API Key</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment><![CDATA[<a href="https://www.linkedin.com/secure/developer" target="_bank">Register</a>]]></comment>
+                        </app_id>
+						<secret_key translate="label">
+                            <label>Secret Key</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment></comment>
+                        </secret_key>
+<!--                        <redirect_url translate="label">
+                            <label>Redirect Url</label>
+                            <frontend_type>text</frontend_type>  
+                            <frontend_model>sociallogin/config_linkedinredirecturl</frontend_model>							
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Please use this link for redirect url field when registering with Instagram API]]></comment>
+                        </redirect_url>					-->
+						<!--<user_token translate="label">
+                            <label>Autho User Token</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment></comment>
+                        </user_token>
+						<user_secret translate="label">
+                            <label>Autho User Secret</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+							<comment></comment>
+                        </user_secret>-->							
+						<is_send_password_to_customer translate="label">
+                            <label>Send Password To Customer</label>
+						  	<frontend_type>select</frontend_type>
+						  	<source_model>adminhtml/system_config_source_yesno</source_model>
+						  	<sort_order>20</sort_order>
+						  	<show_in_default>1</show_in_default>
+						  	<show_in_website>1</show_in_website>
+						  	<show_in_store>1</show_in_store>
+                        </is_send_password_to_customer>
+						<is_customer_confirm_password translate="label">
+                            <label>Confirm Password</label>
+						  	<frontend_type>select</frontend_type>
+						  	<source_model>adminhtml/system_config_source_yesno</source_model>
+						  	<sort_order>21</sort_order>
+						  	<show_in_default>1</show_in_default>
+						  	<show_in_website>1</show_in_website>
+						  	<show_in_store>1</show_in_store>
+                        </is_customer_confirm_password>
+						<sort_order translate="label">
+							<label>Sort Order</label>
+                            <frontend_type>text</frontend_type>                      
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_order>
+					</fields>
+				</linklogin>
+				<openlogin translate="label">
+                    <label>MyOpenId Login Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>70</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>														
+						<is_send_password_to_customer translate="label">
+                            <label>Send Password To Customer</label>
+						  	<frontend_type>select</frontend_type>
+						  	<source_model>adminhtml/system_config_source_yesno</source_model>
+						  	<sort_order>20</sort_order>
+						  	<show_in_default>1</show_in_default>
+						  	<show_in_website>1</show_in_website>
+						  	<show_in_store>1</show_in_store>
+                        </is_send_password_to_customer>
+						<sort_order translate="label">
+							<label>Sort Order</label>
+                            <frontend_type>text</frontend_type>                      
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_order>
+					</fields>
+				</openlogin>
+				<ljlogin translate="label">
+                    <label>LiveJournal Login Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>70</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>														
+						<is_send_password_to_customer translate="label">
+                            <label>Send Password To Customer</label>
+						  	<frontend_type>select</frontend_type>
+						  	<source_model>adminhtml/system_config_source_yesno</source_model>
+						  	<sort_order>20</sort_order>
+						  	<show_in_default>1</show_in_default>
+						  	<show_in_website>1</show_in_website>
+						  	<show_in_store>1</show_in_store>
+                        </is_send_password_to_customer>
+						<sort_order translate="label">
+							<label>Sort Order</label>
+                            <frontend_type>text</frontend_type>                      
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_order>
+					</fields>
+				</ljlogin>
+				<perlogin translate="label">
+                    <label>Persona Login Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>180</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>
+						<is_send_password_to_customer translate="label">
+                            <label>Send Password To Customer</label>
+						  	<frontend_type>select</frontend_type>
+						  	<source_model>adminhtml/system_config_source_yesno</source_model>
+						  	<sort_order>20</sort_order>
+						  	<show_in_default>1</show_in_default>
+						  	<show_in_website>1</show_in_website>
+						  	<show_in_store>1</show_in_store>
+                        </is_send_password_to_customer>
+						<sort_order translate="label">
+							<label>Sort Order</label>
+                            <frontend_type>text</frontend_type>                      
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_order>
+					</fields>
+				</perlogin>
+				<selogin translate="label">
+                    <label>Stack Enchange Login Configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>190</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>
+						<is_send_password_to_customer translate="label">
+                            <label>Send Password To Customer</label>
+						  	<frontend_type>select</frontend_type>
+						  	<source_model>adminhtml/system_config_source_yesno</source_model>
+						  	<sort_order>20</sort_order>
+						  	<show_in_default>1</show_in_default>
+						  	<show_in_website>1</show_in_website>
+						  	<show_in_store>1</show_in_store>
+                        </is_send_password_to_customer>
+						<sort_order translate="label">
+							<label>Sort Order</label>
+                            <frontend_type>text</frontend_type>                      
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_order>
+					</fields>
+				</selogin>
+				<vklogin translate="label">
+                    <label>VK Login Configruation</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>200</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+						<is_active translate="label">
+                            <label>Active</label>
+                            <frontend_type>select</frontend_type>              
+                            <source_model>adminhtml/system_config_source_yesno</source_model>              
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>					
+                            <app_id translate="label">
+                            <label>Application ID</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[<a href="http://vk.com/editapp?act=create" target="_bank">Register</a>]]></comment>
+                        </app_id>
+			<secure_key translate="label">
+                            <label>Secure Key</label>
+                            <frontend_type>text</frontend_type>              
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment></comment>
+                        </secure_key>
+                        <redirect_url translate="label">
+                            <label>Base Domain</label>
+                            <frontend_type>text</frontend_type>  
+                            <frontend_model>sociallogin/config_vkredirecturl</frontend_model>							
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment><![CDATA[Please use this link for Base Domain field when registering with VK API]]></comment>
+                        </redirect_url>						
+						<is_send_password_to_customer translate="label">
+                            <label>Send Password To Customer</label>
+						  	<frontend_type>select</frontend_type>
+						  	<source_model>adminhtml/system_config_source_yesno</source_model>
+						  	<sort_order>5</sort_order>
+						  	<show_in_default>1</show_in_default>
+						  	<show_in_website>1</show_in_website>
+						  	<show_in_store>1</show_in_store>
+                        </is_send_password_to_customer>
+						<sort_order translate="label">
+							<label>Sort Order</label>
+                            <frontend_type>text</frontend_type>                      
+                            <sort_order>7</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+						</sort_order>
+					</fields>	
+				</vklogin>
+                <!--add by cuong-->                                       
+                <implement translate="label">
+                    <label>Code Implementation</label>
+                    <frontend_model>sociallogin/adminhtml_system_configuration_implementcode</frontend_model>
+                    <sort_order>9999</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </implement>
+                <!--end add by cuong-->
+            </groups>
+        </sociallogin>  
+    </sections>
+</config>

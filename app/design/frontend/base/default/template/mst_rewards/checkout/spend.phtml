@@ -1,0 +1,15 @@
+<?php
+$shouldWarnGuest = $this->getShowWarningTextMessage();
+?>
+<?php if ($points = $this->getSpendPoints()): ?>
+    <tr>
+        <td class="a-right cart-points-total_earned" colspan="<?php echo $this->getColspan(); ?>">
+            <div class=""><b><?php echo $this->__('You Spend') ?></b></div>
+        </td>
+        <td style="" class="a-right cart-points-total_spent">
+            <span class="price">
+                <?php echo Mage::helper('rewards')->formatPoints($points) ?>
+            </span>
+        </td>
+    </tr>
+<?php endif; ?>

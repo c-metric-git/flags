@@ -1,0 +1,3 @@
+<?php if ($points = $this->getProductPoints()):?>
+<b><?php echo $this->__("Earning %s",Mage::helper('rewards')->formatPoints($points))?></b>
+<?php endif;?>

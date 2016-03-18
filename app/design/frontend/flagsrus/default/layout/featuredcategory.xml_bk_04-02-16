@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">   
+    <featuredcategory_index_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="featuredcategory/featuredcategory" name="featuredcategory" template="featuredcategory/featuredcategory.phtml" />
+			<block type="featuredcategory/featuredcategory" name="homefeaturedcategory" template="featuredcategory/home_featuredcategory.phtml" />
+        </reference>
+    </featuredcategory_index_index>
+</layout> 

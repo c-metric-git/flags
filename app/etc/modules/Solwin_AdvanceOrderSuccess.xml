@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <Solwin_AdvanceOrderSuccess>
+      <active>true</active>
+      <codePool>community</codePool>
+    </Solwin_AdvanceOrderSuccess>
+  </modules>
+</config>

@@ -1,0 +1,215 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    Mage
+ * @package     Mage_GoogleTrustedStore
+ * @copyright   Copyright (c) 2012 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+-->
+<config>
+    <modules>
+        <Mage_GoogleTrustedStore>
+            <version>1.6.1.0</version>
+        </Mage_GoogleTrustedStore>
+    </modules>
+    <global>
+        <helpers>
+            <googletrustedstore>
+                <class>Mage_GoogleTrustedStore_Helper</class>
+            </googletrustedstore>
+        </helpers>
+        <models>
+            <googletrustedstore>
+                <class>Mage_GoogleTrustedStore_Model</class>
+            </googletrustedstore>
+        </models>
+        <resources>
+            <googletrustedstore_setup>
+                <setup>
+                    <module>Mage_GoogleTrustedStore</module>
+                </setup>
+            </googletrustedstore_setup>
+        </resources>
+        <blocks>
+            <googletrustedstore>
+                <class>Mage_GoogleTrustedStore_Block</class>
+            </googletrustedstore>
+        </blocks>
+        <googletrustedstore>
+            <google_group_email>mage-google-trusted-store-news@googlegroups.com</google_group_email>
+            <order_cancellation_reasons>
+                <BuyerCanceled>Buyer Canceled</BuyerCanceled>
+                <MerchantCanceled>Merchant Canceled</MerchantCanceled>
+                <DuplicateInvalid>Duplicate Invalid</DuplicateInvalid>
+                <FraudFake>Fraud Fake</FraudFake>
+            </order_cancellation_reasons>
+            <ftp_host>uploads.google.com</ftp_host>
+            <carriers>
+                <main>
+                    <ups>UPS</ups>
+                    <fedex>FedEx</fedex>
+                    <usps>USPS</usps>
+                </main>
+                <other>
+                    <dhl>DHL</dhl>
+                    <dhlint>DHL</dhlint>
+                </other>
+            </carriers>
+        </googletrustedstore>
+    </global>
+    <default>
+        <google>
+            <trustedstore>
+                <enabled>1</enabled>
+                <default_order_cancellation_reason>BuyerCanceled</default_order_cancellation_reason>
+                <estimated_ship_date>3</estimated_ship_date>
+                <ftp_mode>1</ftp_mode>
+                <notification_enabled>0</notification_enabled>
+            </trustedstore>
+        </google>
+    </default>
+    <frontend>
+        <layout>
+            <updates>
+                <googletrustedstore>
+                    <file>googletrustedstore.xml</file>
+                </googletrustedstore>
+            </updates>
+        </layout>
+        <events>
+            <checkout_multishipping_controller_success_action>
+                <observers>
+                    <googletrustedstore>
+                        <type>model</type>
+                        <class>googletrustedstore/observer</class>
+                        <method>collectMultishippingOrderIds</method>
+                    </googletrustedstore>
+                </observers>
+            </checkout_multishipping_controller_success_action>
+        </events>
+    </frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Mage_GoogleTrustedStore>
+                    <files>
+                        <default>Mage_GoogleTrustedStore.csv</default>
+                    </files>
+                </Mage_GoogleTrustedStore>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <googletrustedstore>
+                    <file>googletrustedstore.xml</file>
+                </googletrustedstore>
+            </updates>
+        </layout>
+        <events>
+            <sales_order_save_before>
+                <observers>
+                    <googletrustedstore>
+                        <type>model</type>
+                        <class>googletrustedstore/observer</class>
+                        <method>addCancellationReasonToOrder</method>
+                    </googletrustedstore>
+                </observers>
+            </sales_order_save_before>
+            <sales_convert_order_to_quote>
+                <observers>
+                    <googletrustedstore>
+                        <type>model</type>
+                        <class>googletrustedstore/observer</class>
+                        <method>addCancellationReasonToSession</method>
+                    </googletrustedstore>
+                </observers>
+            </sales_convert_order_to_quote>
+            <checkout_submit_all_after>
+                <observers>
+                    <googletrustedstore>
+                        <type>model</type>
+                        <class>googletrustedstore/observer</class>
+                        <method>collectAdminOrderId</method>
+                    </googletrustedstore>
+                </observers>
+            </checkout_submit_all_after>
+            <controller_action_predispatch_adminhtml_sales_order_index>
+                <observers>
+                    <googletrustedstore>
+                        <type>model</type>
+                        <class>googletrustedstore/observer</class>
+                        <method>addOrderGridBlocksRenderingObserver</method>
+                    </googletrustedstore>
+                </observers>
+            </controller_action_predispatch_adminhtml_sales_order_index>
+            <controller_action_predispatch_adminhtml_system_config_save>
+                <observers>
+                    <googletrustedstore>
+                        <type>model</type>
+                        <class>googletrustedstore/observer</class>
+                        <method>saveOldSettings</method>
+                    </googletrustedstore>
+                </observers>
+            </controller_action_predispatch_adminhtml_system_config_save>
+            <admin_system_config_changed_section_google>
+                <observers>
+                    <googletrustedstore>
+                        <type>model</type>
+                        <class>googletrustedstore/observer</class>
+                        <method>verifySettings</method>
+                    </googletrustedstore>
+                </observers>
+            </admin_system_config_changed_section_google>
+        </events>
+    </adminhtml>
+    <crontab>
+        <jobs>
+            <googletrustedstore_generate_feeds>
+                <schedule>
+                    <cron_expr>0 2 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>googletrustedstore/feeder::generateFeedsAll</model>
+                </run>
+            </googletrustedstore_generate_feeds>
+            <googletrustedstore_upload_feeds>
+                <schedule>
+                    <cron_expr>0 5 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>googletrustedstore/feeder::uploadFeedsAll</model>
+                </run>
+            </googletrustedstore_upload_feeds>
+        </jobs>
+    </crontab>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <Mage_GoogleTrustedStore before="Mage_Adminhtml">Mage_GoogleTrustedStore_Adminhtml</Mage_GoogleTrustedStore>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>

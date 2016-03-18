@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <mklauza translate="label" module="mklauza_customproducturls">
+            <label>Marcin Klauza Extensions</label>
+            <sort_order>201</sort_order>            
+        </mklauza>
+    </tabs>
+    <sections>
+        <mklauza_customproducturls translate="label" module="mklauza_customproducturls">
+            <label>Custom Product Urls</label>
+            <tab>mklauza</tab>
+            <sort_order>120</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label" module="mklauza_customproducturls">
+                    <label>General</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <is_active translate="label" module="mklauza_customproducturls">
+                            <label>Enable Module</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_enabledisable</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </is_active>    
+                        <apply_to_new translate="label" module="mklauza_customproducturls">
+                            <label>Apply pattern if empty Url Key attribute</label>
+                            <comment>Creates custom url once Url Key is left empty on product save</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </apply_to_new>                          
+                        <pattern>
+                            <label>Pattern</label>
+                            <frontend_type>text</frontend_type>
+                            <frontend_model>mklauza_customproducturls/adminhtml_form_pattern</frontend_model>
+                            <!--<source_model>mklauza/system_config_source_enabledisable</source_model>-->
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>                            
+                        </pattern>                        
+                    </fields>
+                </general>
+            </groups>       
+        </mklauza_customproducturls>
+    </sections>
+</config>

@@ -1,0 +1,145 @@
+<?php
+$solrData = $this->getSolrData ();
+
+$priceFieldName = Mage::helper ( 'solrsearch' )->getPriceFieldName ();
+
+$prefix = 'solrbridge-price';
+
+$fromValue = 0;
+$toValue = 0;
+
+$min = 0;
+if (isset ( $solrData ['stats'] ['stats_fields'] [$priceFieldName] ['min'] )) {
+	$min = $solrData ['stats'] ['stats_fields'] [$priceFieldName] ['min'];
+	$min = number_format ( floor($min), 0, '', '');
+	$fromValue = $min;
+
+	if (isset ( $_GET ['min'] ) && is_numeric ( $_GET ['min'] )) {
+		$min = $_GET ['min'];
+	}
+}
+
+$max = 0;
+if (isset ( $solrData ['stats'] ['stats_fields'] [$priceFieldName] ['max'] )) {
+	$max = $solrData ['stats'] ['stats_fields'] [$priceFieldName] ['max'];
+	$max = number_format ( ceil($max), 0, '', '');
+	$toValue = $max;
+	if (isset ( $_GET ['max'] ) && is_numeric ( $_GET ['max'] )) {
+		$max = $_GET ['max'];
+	}
+}
+
+$min = intval(floor($min));
+$max = intval(ceil($max));
+
+if (isset($_GET['fq']['price'])) {
+	if(!empty($_GET['fq']['price']) && !is_array($_GET['fq']['price']) )
+	{
+		$priceValue = explode('TO', $_GET['fq']['price']);
+		if (isset($priceValue[0]) && isset($priceValue[1]) && is_numeric(trim($priceValue[0])) && is_numeric(trim($priceValue[1]))) {
+			$fromValue = trim($priceValue[0]);
+			$toValue = trim($priceValue[1]);
+		}
+	}
+}
+$fromValue = intval($fromValue);
+$toValue = intval($toValue);
+
+
+/*
+ * Holds state of initial price position
+ */
+$initialState = false;
+
+if (!is_numeric ( $fromValue )) {
+	$fromValue = $min;
+	$initialState = true;
+}
+
+/*
+ * User changed price in text boxes
+ */
+if ($fromValue <= $min) {
+	$initialState = true;
+}
+
+if (!is_numeric ( $toValue )) {
+	$toValue = $max;
+}
+
+$from = min ( $fromValue, $min );
+$to = max ( $toValue, $max );
+
+if ($from < 0.01 && $to < 0.01) {
+	$to = sprintf ( '%.00f', $to );
+}
+
+$width = 170;
+
+$ratePP = ($to - $from) / $width;
+
+$firstOffset = ($max > 0.01 && ! $initialState) ? ($fromValue - $min) / $ratePP : 0;
+$secondOffset = ($to && $max > 0.01 && $toValue < $max) ? ($toValue - $min) / $ratePP : $width;
+
+$params = implode ( ':', array (
+		$width,
+		$firstOffset,
+		$secondOffset,
+		$to,
+		$prefix,
+		$from,
+		$ratePP
+) );
+
+$priceFilter = array (
+				'fq' => array (
+						'price' => $from.'TO'.$to
+				),
+				'min' => 'MINPRICE',
+				'max' => 'MAXPRICE',
+				);
+
+?>
+<?php if ($max > 0):?>
+<dt id="solr_search_price_decimal_expander"
+	onclick="Effect.toggle('content_holder_price_decimal', 'slide', { duration: 0.3 }); $('solr_search_price_decimal_expander').toggleClassName('collapsed'); return false;">
+	<?php echo $this->__('Price');?>
+</dt>
+<dd id="content_holder_price_decimal">
+	<ol>
+
+		<li>
+			<div class="solrbridge-slider" id="solrbridge-price">
+
+				<div style="left: <?php echo $firstOffset ?>px" class="handle selected"></div>
+				<div style="left: <?php echo $secondOffset ?>px;" class="handle"></div>
+			</div>
+
+
+			<div class="solrbridge-slider-price solrbridge-slider-price-from"><?php echo $this->getPriceFormat($min) ?></div>
+			<div class="solrbridge-slider-price solrbridge-slider-price-to"><?php echo $this->getPriceFormat($max) ?></div>
+			<div class="solrbridge-slider-price-range">
+				<span id="solrbridge-price-from-slider"><?php echo $fromValue?></span>&nbsp;-&nbsp;
+				<span id="solrbridge-price-to-slider"><?php echo $toValue?></span>
+			</div> <input type="hidden" value="<?php echo $params ?>"
+			class="solrbridge-slider-param">
+		</li>
+
+		<li>&nbsp;</li>
+		<li>
+			<input type="text" id="solrbridge-price-from" class="input-text" name="solrbridge-price" value="<?php echo $fromValue?>" size="2"> - <input type="text" id="solrbridge-price-to" class="input-text" name="solrbridge-price" value="<?php echo $toValue?>" size="2">
+			<button id="solrbridge-price-btn" name="solrbridge-price"
+				class="form-button button solrbridge-price-find btn" title="Find"
+				type="button">
+				<span><span><b class="icon-double-angle-right">GO&nbsp;&raquo;</b></span></span>
+			</button>
+		</li>
+		<li style="display: none">
+			<input type="hidden" value="<?php echo $this->getFacesUrl($priceFilter);?>" id="solrbridge-price-url">
+			<input type="hidden" value="<?php echo $min;?>" id="solrbridge-price-min">
+			<input type="hidden" value="<?php echo $max;?>" id="solrbridge-price-max">
+		</li>
+	</ol>
+</dd>
+<?php endif;?>
+

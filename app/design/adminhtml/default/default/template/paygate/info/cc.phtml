@@ -1,0 +1,97 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magento.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magento.com for more information.
+ *
+ * @category    design
+ * @package     default_default
+ * @copyright   Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<div class="cards-list">
+
+<?php if (!$this->getHideTitle()): ?>
+    <div class="bold"><?php echo $this->escapeHtml($this->getMethod()->getTitle()) ?></div>
+<?php endif;?>
+
+<?php
+    $cards = $this->getCards();
+    $showCount = count($cards) > 1;
+?>
+
+    <?php foreach ($cards as $key => $card): ?>
+        <?php if ($showCount): ?>
+            <span><?php echo sprintf($this->__('Credit Card %s'), $key + 1); ?></span>
+        <?php endif;?>
+
+        <table class="info-table<?php if ($showCount):?> offset<?php endif;?>">
+            <tbody>
+            <?php foreach ($card as $_label => $_value):?>
+            <tr>
+                <td><?php echo $this->escapeHtml($_label)?>:</td>
+                <td><?php echo nl2br(implode($this->getValueAsArray($_value, true), "\n"))?></td>
+            </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php endforeach; ?>
+	<?php 
+	$otherinfo = $this->getInfo()->getAdditionalInformation();
+	$transinfo = new Varien_Object();
+	$transinfo->setData($otherinfo['otherinfo']);
+	if($transinfo->getTransId()): ?>
+	<table class="info-table<?php if ($showCount):?> offset<?php endif;?>">
+		<tbody>
+		<tr>
+			<td><?php echo $this->escapeHtml('Transacrion ID')?>:</td>
+			<td><?php echo $transinfo->getTransId(); ?></td>
+		</tr>
+		<tr>
+			<td><?php echo $this->escapeHtml('First Name')?>:</td>
+			<td><?php echo $transinfo->getFirstName(); ?></td>
+		</tr>		
+		<tr>
+			<td><?php echo $this->escapeHtml('Last Name')?>:</td>
+			<td><?php echo $transinfo->getLastName(); ?></td>
+		</tr>
+		<tr>
+			<td><?php echo $this->escapeHtml('Auth Code')?>:</td>
+			<td><?php echo $transinfo->getAuthCode(); ?></td>
+		</tr>		
+		<tr>
+			<td><?php echo $this->escapeHtml('AVSAddressMatch')?>:</td>
+			<td><?php echo $transinfo->getAvsAddmatch(); ?></td>
+		</tr>
+		<tr>
+			<td><?php echo $this->escapeHtml('AVSZipMatch')?>:</td>
+			<td><?php echo $transinfo->getAvsZipmatch(); ?></td>
+		</tr>		
+		<tr>
+			<td><?php echo $this->escapeHtml('CVV Match')?>:</td>
+			<td><?php echo $transinfo->getCvvMatch(); ?></td>
+		</tr>		
+		<tr>
+			<td><?php echo $this->escapeHtml('AVS Match')?>:</td>
+			<td><?php echo $transinfo->getAvsMatch(); ?></td>
+		</tr>
+		</tbody>
+	</table>
+	<?php endif; ?>
+</div>

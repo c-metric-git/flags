@@ -1,0 +1,10 @@
+<div class="buttons-facebook-like">
+    <fb:like href="<?php echo $this->getEncodedPageUrl()?>" send="false" layout="button_count" show_faces="false" width="450" action="like" font="arial" colorscheme="light" ></fb:like>
+    <?php if ($this->getEstimatedEarnPoints() > 0): ?>
+        <?php if ($this->isAuthorized() && !$this->isLiked()): ?>
+            <div id='facebook-message'>
+            <?php echo $this->__('Like this page and earn %s',  Mage::helper('rewards')->formatPoints($this->getEstimatedEarnPoints())); ?>
+            </div>
+        <?php endif; ?>
+    <?php endif; ?>
+</div>

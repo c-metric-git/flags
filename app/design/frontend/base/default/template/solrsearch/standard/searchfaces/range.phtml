@@ -1,0 +1,25 @@
+<?php 
+	$ranges = $this->getFacetFieldRanges();
+	$rangeFieldName = $this->getRangeField();
+	$face_key = substr($rangeFieldName, 0, strrpos($rangeFieldName, '_'));
+?>
+<?php if (count($ranges) > 0):?>
+<dt id="solr_search_<?php echo $rangeFieldName;?>_expander"
+	onclick="Effect.toggle('content_holder_<?php echo $rangeFieldName;?>', 'slide', { duration: 0.3 }); $('solr_search_<?php echo $rangeFieldName;?>_expander').toggleClassName('collapsed'); return false;">
+	<?php echo $this->getFacetLabel($rangeFieldName);?>
+</dt>
+<dd id="content_holder_<?php echo $rangeFieldName;?>">
+	<ol>
+		<?php foreach ($ranges as $values):?>
+		
+		<?php 
+		$facetUrl = $this->getFacesUrl(array('fq'=>array($face_key=>$values['value'])));
+		?>
+		
+		<li><a href="<?php echo $facetUrl?>" class="facet-item"><?php echo $values['formatted']?>&nbsp;<span>(<?php echo $values['count']?>)</span></a></li>
+		
+		<?php endforeach;?>
+	</ol>
+</dd>
+<?php endif;?>
+

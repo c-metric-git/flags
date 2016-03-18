@@ -1,0 +1,28 @@
+<div class="buttons-googleplus-one">
+<script type="text/javascript">
+var gp = new RewardsGoogleplusOne('<?php echo $this->getOneUrl() ?>?url=<?php echo $this->getCurrentEncodedUrl()?>');
+rewardsGoogleplusEvent = function(event) {
+    if (event.state == 'on') {
+        gp.onPlus()
+    } else if (event.state == 'off') {
+        gp.onUnPlus()
+    }
+};
+</script>
+
+<script type="text/javascript">
+document.write('<div class="g-plusone" data-size="medium" data-callback="rewardsGoogleplusEvent" data-annotation="none"></div>');
+(function() {
+var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+po.src = 'https://apis.google.com/js/plusone.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+</script>
+  <?php if ($this->getEstimatedEarnPoints() > 0): ?>
+    <?php if ($this->isAuthorized() && !$this->isLiked()): ?>
+    <div id='googleplus-message'>
+    <?php echo $this->__('Plus this page and earn %s',  Mage::helper('rewards')->formatPoints($this->getEstimatedEarnPoints())); ?>
+    </div>
+    <?php endif; ?>
+  <?php endif; ?>
+</div>

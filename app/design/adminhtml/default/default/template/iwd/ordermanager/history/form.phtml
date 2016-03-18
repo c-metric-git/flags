@@ -1,0 +1,16 @@
+<div id="updated_comment_form_<?php echo $this->getCommentId(); ?>">
+    <textarea class="updated_comment_text"
+              id="updated_comment_text_<?php echo $this->getCommentId(); ?>"><?php echo $this->getComment(); ?></textarea>
+    <button type="button" class="update_comment_cancel"
+            id="update_comment_cancel_<?php echo $this->getCommentId(); ?>"
+            onclick="IWD.OrderManager.Comments.editCommentCancel(<?php echo $this->getCommentId(); ?>)"
+            title="<?php echo Mage::helper('iwd_ordermanager')->__("Cancel"); ?>">
+        <?php echo Mage::helper('iwd_ordermanager')->__("Cancel"); ?>
+    </button>
+    <button type="button" class="update_comment_submit"
+            id="update_comment_submit_<?php echo $this->getCommentId(); ?>"
+            onclick="IWD.OrderManager.Comments.editCommentSubmit(<?php echo $this->getCommentId(); ?>)"
+            title="<?php echo Mage::helper('iwd_ordermanager')->__("Update"); ?>">
+        <?php echo Mage::helper('iwd_ordermanager')->__("Update"); ?>
+    </button>
+</div>

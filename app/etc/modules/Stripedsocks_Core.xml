@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Stripedsocks_Core>
+            <active>false</active>
+            <codePool>local</codePool>
+        </Stripedsocks_Core>
+    </modules>
+</config>

@@ -1,0 +1,98 @@
+<?php
+/**
+ * aheadWorks Co.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the EULA
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ *
+ * =================================================================
+ *                 MAGENTO EDITION USAGE NOTICE
+ * =================================================================
+ * This software is designed to work with Magento community edition and
+ * its use on an edition other than specified is prohibited. aheadWorks does not
+ * provide extension support in case of incorrect edition use.
+ * =================================================================
+ *
+ * @category   AW
+ * @package    AW_Helpdesk3
+ * @version    3.3.7
+ * @copyright  Copyright (c) 2010-2012 aheadWorks Co. (http://www.aheadworks.com)
+ * @license    http://ecommerce.aheadworks.com/AW-LICENSE.txt
+ */
+?><?php
+    /** @var AW_Helpdesk3_Block_Customer_Ticket_View_Action $this */
+    $escalatePanelName = 'awhdu3-customer-escalate-ticket-form';
+?>
+<?php if ($this->isCanShow()):?>
+<form id="awhdu3-customer-reply-form" action="<?php echo $this->getPostAction();?>" method="post" enctype="multipart/form-data">
+    <p class="form__field form__field--required">
+        <label class="form__label form__label--required"><?php echo $this->__('Post a Reply') ?></label>
+        <textarea name="content" id="awhdu3-replyform-message" class="form__textfield textfield required-entry" cols="5" rows="3"></textarea>
+    </p>
+    <div class="awhdu3-ticket-view-action-bottomgroup">
+        <?php if ($this->isAttachmentAllowed()):?>
+        <p class="form__field">
+            <label for="awhdu3-replyform-attachment" class="form__label">
+                <?php echo $this->getAttachmentLimitInMb()?$this->__('Attachment (%s Mb Limit)', $this->getAttachmentLimitInMb()):$this->__('Attachment');?>
+            </label>
+            <?php if ($this->getAttachmentLimitInMb()):?>
+                <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $this->getAttachmentLimitInMb() * 1024 * 1024;?>" />
+            <?php endif;?>
+            <input name="attachments[]" class="form__textfield textfield" id="awhdu3-replyform-attachment" title="<?php echo $this->__('Attachment') ?>" value="" class="input-text" type="file" multiple/>
+        </p>
+        <script type="text/javascript">
+            new AWLIB.FileUploader($('awhdu3-replyform-attachment'), {
+                fileListClassName: 'awhdu3-ticketform-file-list',
+                errorMsgClassName: 'awhdu3-ticketform-file-list-error-el',
+                fileListElName: 'attachment_needed',
+                availableFileExtensionList: <?php echo Zend_Json::encode($this->getAvailableFileExtensionList());?>,
+                maxFileSizeInBytes: <?php echo Zend_Json::encode($this->getAttachmentLimitInMb() * 1024 * 1024);?>,
+                unexpectedFileExtensionMessage: function(fileName) {
+                    return '<?php echo $this->__('Unexpected extension for file: %s. Extension must be one of: %s', "' + fileName + '", join(', ', $this->getAvailableFileExtensionList()));?>';
+                },
+                unexpectedFileSizeMessage: function(fileName) {
+                    return '<?php echo $this->__('File "%s" is too large. File size must be less than %s Mb', "' + fileName + '", $this->getAttachmentLimitInMb());?>';
+                }
+            });
+        </script>
+        <?php endif;?>
+        <p class="form__submit-wrapper">
+            <p class="form__required-hint">
+                <?php echo $this->__('Required Fields') ?>
+            </p>
+            <button id="awhdu3-ticket-view-reply-btn" title="<?php echo $this->__('Post Reply') ?>" class="button"><?php echo $this->__('Post Reply') ?></button>
+            <button id="awhdu3-ticket-view-close-btn" title="<?php echo $this->__('Close Ticket') ?>" class="button"><?php echo $this->__('Close Ticket') ?></button>
+            <?php if (Mage::helper('aw_hdu3/config')->isAllowTicketEscalation()) :?>
+                <button id="awhdu3-ticket-view-escalate-btn" title="<?php echo $this->__('Escalate') ?>" class="button js-open-panel" data-open-panel="<?php echo $escalatePanelName ?>" type="submit"><?php echo $this->__('Escalate') ?></button>
+            <?php endif ?>
+        </p><!-- .form__submit-wrapper -->
+    </div>
+</form>
+<script type="text/javascript">
+    new VarienForm('awhdu3-customer-reply-form');
+</script>
+<script type="text/javascript">
+    document.observe('dom:loaded', function () {
+        if ($$('.<?php echo $escalatePanelName ?>')) {
+            var rafInvite = new awMobile3.panel('<?php echo $escalatePanelName ?>');
+        }
+    });
+
+    (function(){
+        var closeBtn = $('awhdu3-ticket-view-close-btn');
+        if (!closeBtn) {
+            return;
+        }
+        closeBtn.observe('click', function(e){
+            e.stop();
+            if (confirm(<?php echo Zend_Json::encode("You are near to close the ticket. Are you sure?");?>)) {
+                setLocation(<?php echo Zend_Json::encode($this->getCloseTicketUrl());?>);
+            }
+        });
+    })();
+</script>
+<?php endif;?>

@@ -1,0 +1,160 @@
+<?php
+if (!$this->getMaxPointsNumberToSpent()) return;
+?>
+<br><br>
+<div class="onestepcheckout-rewards">
+    <div class="discount">
+        <p class="onestepcheckout-numbers" style="padding-left: 0px !important;"><?php echo $this->__('Use Reward Points') ?></p>
+        <div class="discount-form">
+            <label for="points_amount"><?php echo $this->__('You have <b>%s</b> available.', Mage::helper('rewards')->formatPoints($this->getBalancePoints())) ?><br>
+
+            <?php echo $this->__('Enter amount of points to spend:'); ?>
+            </label>
+            <div class="input-box">
+                <input class="input-text" id="points_amount" name="points_amount" value="<?php echo $this->getPointsAmount()? $this->htmlEscape($this->getPointsAmount()): '' ?>" />
+            </div>
+            <div class="input-box">
+                <input type='checkbox' id="points_all" name="points_all"
+                <?php echo $this->getPointsAmount() == $this->getMaxPointsNumberToSpent()?'checked':''?> />
+                <label for="points_all"><?php echo $this->__("Use maximum %s", Mage::helper('rewards')->formatPoints($this->getMaxPointsNumberToSpent()))?></label>
+            </div>
+                <button id="onestepcheckout-rewards-add" type="button" title="<?php echo $this->__('Apply Points') ?>" class="button" value="<?php echo $this->__('Apply Points') ?>"><span><span><?php echo $this->__('Apply Points') ?></span></span></button>
+                <span id="cancel_block" <?php echo $this->getPointsAmount()?'':'style="display:none"' ?>>
+                    &nbsp; <button id="onestepcheckout-rewards-cancel" type="button" title="<?php echo $this->__('Cancel Points') ?>" class="button" value="<?php echo $this->__('Cancel Points') ?>"><span><span><?php echo $this->__('Cancel Points') ?></span></span></button>
+                </span>
+        </div>
+    </div>
+<script type="text/javascript">
+//<![CDATA[
+var rewardsForm = new VarienForm('reward-points-form');
+
+Event.observe($('points_all'), 'click', function(){
+    if ($('points_amount').value == <?php echo $this->getMaxPointsNumberToSpent() ?>) {
+        $('points_amount').value = '';
+    } else {
+        $('points_amount').value = <?php echo $this->getMaxPointsNumberToSpent() ?>;
+    }
+});
+Event.observe($('points_amount'), 'keyup', function(){
+    var val = parseInt($('points_amount').value);
+    if (isNaN(val) || val < <?php echo $this->getMaxPointsNumberToSpent() ?>) {
+        $('points_all').checked = false;
+    } else {
+        $('points_all').checked = true;
+        $('points_amount').value = <?php echo $this->getMaxPointsNumberToSpent() ?>;
+    }
+});
+//]]>
+</script>
+
+            <script>
+            Event.observe(window, 'load', function() {
+                $('onestepcheckout-rewards-add').observe('click', function(e)    {
+                    $('points_amount').addClassName('required-entry');
+                    updatePoints();
+                });
+                $('onestepcheckout-rewards-cancel').observe('click', function(e)    {
+                    $('points_amount').removeClassName('required-entry');
+                    $('points_amount').setValue('');
+                    $('points_all').checked = false;
+                    updatePoints();
+                });
+            });
+
+            function updatePoints() {
+                    var points_amount = $('points_amount').getValue();
+                    if (points_amount > 0) {
+                        $('cancel_block').show();
+                    } else {
+                        $('cancel_block').hide();
+                    }
+
+                    var url = '<?php echo $this->getUrl('rewards/checkout/applyPointsIdevOnestepcheckout', array('_secure'=>true)) ?>';
+                    var parameters = {points_amount: points_amount};
+                    var shipping_methods = $$('dl.shipment-methods').first();
+                    var payment_methods = $$('div.payment-methods').first();
+                    var summary = $$('div.onestepcheckout-summary').first();
+
+                    if(shipping_methods){
+                        shipping_methods.update('<div class="loading-ajax">&nbsp;</div>');
+                    }
+
+                    if(payment_methods){
+                        payment_methods.update('<div class="loading-ajax">&nbsp;</div>');
+                    }
+
+                    summary.update('<div class="loading-ajax">&nbsp;</div>');
+
+                    new Ajax.Request(url, {
+                        method: 'post',
+                        parameters: parameters,
+                        onSuccess: function(transport) {
+                            if(transport.status == 200) {
+
+                                var response = transport.responseText.evalJSON();
+
+                                var url = '<?php echo $this->getUrl('onestepcheckout/ajax/set_methods_separate', array('_secure'=>true)) ?>';
+                                var update_payments = true;
+
+                                if(shipping_methods){
+                                    shipping_methods.hide();
+                                    shipping_methods.update(response.shipping_method);
+                                    shipping_methods.show();
+                                    $$('dl.shipment-methods input').invoke('observe', 'click', get_separate_save_methods_function(url, update_payments));
+                                    $$('dl.shipment-methods input').invoke('observe', 'click', function() {
+                                        $$('div.onestepcheckout-shipment-method-error').each(function(item) {
+                                            new Effect.Fade(item);
+                                        });
+                                    });
+                                }
+
+                                if(payment_methods){
+                                    payment_methods.hide();
+                                    payment_methods.replace(response.payment_method);
+                                    payment_methods.show();
+
+                                    paymentContainer = $('container_payment_method_' + payment.currentMethod)
+                                    paymentForm = $('payment_form_' + payment.currentMethod)
+
+                                    if(paymentContainer != null){
+                                        paymentContainer.show();
+                                    }
+                                    if(paymentForm != null){
+                                        paymentForm.show();
+                                    }
+                                    $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', get_separate_save_methods_function(url));
+                                    $$('div.payment-methods input[name="payment\[method\]"]').invoke('observe', 'click', function() {
+                                        $$('div.onestepcheckout-payment-method-error').each(function(item) {
+                                            new Effect.Fade(item);
+                                        });
+                                    });
+                                }
+
+                                summary.hide();
+                                summary.update(response.summary);
+                                summary.show();
+
+                                if(response.success) {
+
+                                    couponNotice.update(response.message);
+                                    couponNotice.removeClassName('error-msg');
+                                    couponNotice.addClassName('success-msg');
+                                    couponNotice.show();
+                                    /* Show remove button */
+                                    // $('onestepcheckout-coupon-remove').show();
+                                }
+                                else    {
+
+                                    couponNotice.update(response.message);
+                                    couponNotice.removeClassName('success-msg');
+                                    couponNotice.addClassName('error-msg');
+                                    couponNotice.show();
+                                    /* Hide remove button */
+                                    // $('onestepcheckout-coupon-remove').hide();
+                                }
+                            }
+                        }
+                    });
+            }
+            </script>
+        </div>

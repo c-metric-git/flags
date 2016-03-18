@@ -1,0 +1,115 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please 
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_Shipping_Tracking
+ * @copyright   Copyright (c) 2014 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+?>
+
+<div class="page-title">
+    <h1>
+    	<?php echo $this->__('USPS Tracking Number %s', ( $this->getNumber() ? '('.$this->htmlEscape($this->getNumber()).')' : '' )) ?>
+    </h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<?php $order = $this->getOrder(); ?>
+<?php if ($order->getId()) {  ?>
+	<br/>
+	<?php  
+		$info = $this->getInfo();
+		$_dateFormat = $this->__('m/d/Y');
+		$_timeFormat = $this->__('g:i a');
+	?>
+	<?php if (!$info || !$info->TrackInfo) { ?>
+		<strong><?php echo $this->__('Tracking information is not available at this time. Please check back later or double-check the tracking number entered and try again.'); ?></strong>
+	<?php } else { 
+
+		$trackInfo = $info->TrackInfo;
+
+		?>
+
+		<?php if ($trackInfo->TrackSummary) { ?>
+			<h2 class="legend"><?php echo $this->__('General Information') ?></h2>
+			<ul class="form-list">
+				<li class="fields">
+					<strong><?php echo $this->__('Order') ?>:</strong> #<?php echo $order->getIncrementId() ?>
+				</li>
+				<li class="fields">
+					<strong><?php echo $this->__('Order Status') ?>:</strong> <?php echo $order->getStatusLabel() ?>
+				</li>
+			</ul>
+			<?php foreach($trackInfo->TrackSummary as $info) { ?>
+				<div class="fieldset">
+					<div>
+						<strong><?php echo $this->escapeHtml($info) ?></strong>
+					</div>
+				</div>
+			<?php } ?>
+			<br/>
+		<?php } ?>
+
+		<?php if ($trackInfo->GuaranteedDeliveryDate) { ?>
+			<h2 class="legend"><?php echo $this->__('Guaranteed Delivery Date') ?></h2>
+			<div class="fieldset">
+				<div>
+					<?php echo $this->escapeHtml($trackInfo->GuaranteedDeliveryDate) ?>
+				</div>
+			</div>
+			<br/>
+		<?php } ?>
+
+		<?php if ($trackInfo->TrackDetail) { ?>
+			<div class="fieldset">
+				<h2 class="legend"><?php echo $this->__('Shipment Progress') ?></h2>
+				<table class="data-table" >
+					<thead>
+						<tr>
+							<th><?php echo $this->__('Location') ?></th>
+							<th><?php echo $this->__('Date') ?></th>
+							<th><?php echo $this->__('Time') ?></th>
+							<th><?php echo $this->__('Status') ?></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php foreach($trackInfo->TrackDetail as $info) { ?>
+							<?php
+								$data 		= explode(',', $info);
+								
+								$activity 	= $data[0];
+								$date 		= date($_dateFormat, strtotime($data[1] . ', ' . $data[2]));
+
+								if (count($data) > 3) {
+									$time 		= $data[3];
+									$address 	= $data[4] . ' ' . $data[5];
+								} else {
+									$time 		= null;
+									$address 	= null;
+								}
+							?>
+						<tr>
+							<td><?php echo $address ? $this->escapeHtml($address) : '' ?></td>
+							<td><?php echo $date; ?></td>
+							<td><?php echo $time ? $time : '' ?></td>
+							<td><?php echo $this->escapeHtml($this->__($activity)) ?></td>
+						</tr>
+						<?php } ?>
+					</tbody>
+				</table>
+			</div>
+		<?php } ?>
+	<?php } ?>
+	<br/><br/>
+<?php } else { ?>
+	<strong><?php echo $this->__('Tracking number is not associated with any order on our store.'); ?></strong>
+<?php } ?>

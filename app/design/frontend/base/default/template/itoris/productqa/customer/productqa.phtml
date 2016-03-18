@@ -1,0 +1,107 @@
+<?php 
+/**
+ * ITORIS
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the ITORIS's Magento Extensions License Agreement
+ * which is available through the world-wide-web at this URL:
+ * http://www.itoris.com/magento-extensions-license.html
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to sales@itoris.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extensions to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to the license agreement or contact sales@itoris.com for more information.
+ *
+ * @category   ITORIS
+ * @package    ITORIS_PRODUCTQA
+ * @copyright  Copyright (c) 2012 ITORIS INC. (http://www.itoris.com)
+ * @license    http://www.itoris.com/magento-extensions-license.html  Commercial License
+ */
+?>
+<?php $_questions = $this->getQuestions(); ?>
+<div class="page-title">
+    <h3><?php echo $this->__('My Questions') ?></h3>
+</div>
+<?php echo $this->getChildHtml('questions_pager'); ?>
+<?php if($_questions->getSize()): ?>
+<table class="data-table" id="my-orders-table">
+    <col width="1" />
+    <col width="1"/>
+    <col />
+    <col width="85px" />
+    <thead>
+        <tr>
+            <th><?php echo $this->__('Posted On') ?></th>
+            <th><?php echo $this->__('Product Name') ?></th>
+            <th><span class="nobr"><?php echo $this->__('Question') ?></span></th>
+            <th><span class="nobr"><?php echo $this->__('Status') ?></span></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $_odd = ''; ?>
+        <?php foreach ($_questions as $_question):
+			$this->prepareProductUrl($_question->getProductId(), $_question->getStoreId());
+		?>
+        <tr>
+            <td><span class="nobr"><?php echo $this->formatDate($_question->getCreatedDatetime()) ?></span></td>
+            <td><?php echo '<a href="'. $this->getProductUrl() .'">'. $_question->getProductName() .'</a>'?></td>
+            <td><?php echo $_question->getContent() ?></td>
+            <td><em><?php echo $this->getHtmlStatusQ($_question) ?></em></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<script type="text/javascript">decorateTable('my-orders-table');</script>
+<?php echo $this->getChildHtml('questions_pager'); ?>
+<?php else: ?>
+    <p><?php echo $this->__('You have placed no questions.'); ?></p>
+<?php endif ?>
+
+<div style="height: 30px;"></div>
+
+<?php $_answers = $this->getAnswers(); ?>
+<div class="page-title">
+    <h3><?php echo $this->__('My Answers') ?></h3>
+</div>
+<?php echo $this->getChildHtml('answers_pager'); ?>
+<?php if($_answers->getSize()): ?>
+<table class="data-table" id="my-orders-table">
+    <col width="1" />
+    <col width="1"/>
+    <col width="200px"/>
+    <col width="200px"/>
+    <col width="85px" />
+    <thead>
+        <tr>
+            <th><?php echo $this->__('Posted On') ?></th>
+            <th><?php echo $this->__('Product Name') ?></th>
+            <th><span class="nobr"><?php echo $this->__('Question') ?></span></th>
+            <th><span class="nobr"><?php echo $this->__('Answer') ?></span></th>
+            <th><span class="nobr"><?php echo $this->__('Status') ?></span></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $_odd = ''; ?>
+        <?php foreach ($_answers as $_answer):
+			$this->prepareProductUrl($_answer->getProductId(), $_answer->getStoreId());
+		?>
+        <tr>
+            <td><span class="nobr"><?php echo $this->formatDate($_answer->getCreatedDatetime()) ?></span></td>
+            <td><?php echo '<a href="'. $this->getProductUrl() .'">'. $_answer->getProductName() .'</a>' ?></td>
+            <td><?php echo $_answer->getQuestion() ?></td>
+            <td><?php echo $_answer->getContent() ?></td>
+            <td><em><?php echo $this->getHtmlStatusA($_answer) ?></em></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<script type="text/javascript">decorateTable('my-orders-table');</script>
+<?php echo $this->getChildHtml('answers_pager'); ?>
+<?php else: ?>
+    <p><?php echo $this->__('You have placed no answers.'); ?></p>
+<?php endif ?>

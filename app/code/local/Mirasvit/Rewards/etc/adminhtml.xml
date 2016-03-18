@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+    <menu>
+        <rewards module="rewards">
+            <title>Reward Points</title>
+            <sort_order>70</sort_order>
+            <children>
+            <earning_rule module="rewards">
+                <title>Earning Rules</title>
+                <sort_order>10</sort_order>
+                <action>rewardsadmin/adminhtml_earning_rule</action>
+            </earning_rule>
+            <spending_rule module="rewards">
+                <title>Spending Rules</title>
+                <sort_order>20</sort_order>
+                <action>rewardsadmin/adminhtml_spending_rule</action>
+            </spending_rule>
+            <notification_rule module="rewards">
+                <title>Notification Rules</title>
+                <sort_order>30</sort_order>
+                <action>rewardsadmin/adminhtml_notification_rule</action>
+            </notification_rule>
+            <transaction module="rewards">
+                <title>Transactions</title>
+                <sort_order>40</sort_order>
+                <action>rewardsadmin/adminhtml_transaction</action>
+            </transaction>
+            <referral module="rewards">
+                <title>Referrals</title>
+                <sort_order>50</sort_order>
+                <action>rewardsadmin/adminhtml_referral</action>
+            </referral>
+            <settings module="rewards">
+                <title>Settings</title>
+                <sort_order>60</sort_order>
+                <action>adminhtml/system_config/edit/section/rewards</action>
+            </settings>
+            </children>
+        </rewards>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                <rewards module="rewards">
+                    <title>Reward Points</title>
+                    <sort_order>70</sort_order>
+                    <action>rewardsadmin/adminhtml_rewards</action>
+                    <children>
+                    <earning_rule module="rewards">
+                        <title>Earning Rules</title>
+                        <sort_order>10</sort_order>
+                        <action>rewardsadmin/adminhtml_earning_rule</action>
+                    </earning_rule>
+                    <spending_rule module="rewards">
+                        <title>Spending Rules</title>
+                        <sort_order>20</sort_order>
+                        <action>rewardsadmin/adminhtml_spending_rule</action>
+                    </spending_rule>
+                    <notification_rule module="rewards">
+                        <title>Notification Rules</title>
+                        <sort_order>30</sort_order>
+                        <action>rewardsadmin/adminhtml_notification_rule</action>
+                    </notification_rule>
+                    <transaction module="rewards">
+                        <title>Transactions</title>
+                        <sort_order>40</sort_order>
+                        <action>rewardsadmin/adminhtml_transaction</action>
+                    </transaction>
+                    <referral module="rewards">
+                        <title>Referrals</title>
+                        <sort_order>50</sort_order>
+                        <action>rewardsadmin/adminhtml_referral</action>
+                    </referral>
+                    <settings module="rewards">
+                        <title>Settings</title>
+                        <sort_order>60</sort_order>
+                        <action>adminhtml/system_config/edit/section/rewards</action>
+                    </settings>
+                    </children>
+                </rewards>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <rewards translate="title" module="rewards">
+                                        <title>Mirasvit Rewards</title>
+                                    </rewards>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

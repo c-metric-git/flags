@@ -1,0 +1,7 @@
+[08-Feb-2016 06:49:47 UTC] PHP Fatal error:  Call to a member function setStoreId() on a non-object in /home/stripedsocks/beta/customer/readwritecsv.php on line 82
+[08-Feb-2016 06:50:34 UTC] PHP Fatal error:  Call to a member function setStoreId() on a non-object in /home/stripedsocks/beta/customer/readwritecsv.php on line 82
+[08-Feb-2016 06:51:09 UTC] PHP Fatal error:  Call to a member function addStoreFilter() on a non-object in /home/stripedsocks/beta/customer/readwritecsv.php on line 83
+[08-Feb-2016 06:51:12 UTC] PHP Fatal error:  Call to a member function addStoreFilter() on a non-object in /home/stripedsocks/beta/customer/readwritecsv.php on line 83
+[08-Feb-2016 07:02:35 UTC] PHP Fatal error:  Call to undefined method Varien_Db_Statement_Pdo_Mysql::getData() in /home/stripedsocks/beta/customer/readwritecsv.php on line 90
+[08-Feb-2016 07:02:47 UTC] PHP Fatal error:  Call to undefined method Varien_Db_Statement_Pdo_Mysql::getData() in /home/stripedsocks/beta/customer/readwritecsv.php on line 90
+[08-Feb-2016 07:12:08 UTC] PHP Fatal error:  Call to a member function getData() on a non-object in /home/stripedsocks/beta/customer/readwritecsv.php on line 97

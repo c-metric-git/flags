@@ -1,0 +1,238 @@
+<?xml version="1.0"?>
+<config>
+   <tabs>
+      <foundation translate="label" module="customizablefraudfilters">
+        <label>Foundation Extensions</label>
+          <sort_order>900</sort_order>
+      </foundation>
+    </tabs>
+    <sections>
+      <customizablefraudfilters  translate="label" module="customizablefraudfilters">                    
+      <label>Customizable Fraud Filters</label>
+      <tab>foundation</tab>
+      <frontend_type>text</frontend_type>
+      <sort_order>100</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>1</show_in_store>            
+        <groups>
+          <general_settings translate="label"> 
+            <label>General Settings</label>
+            <frontend_type>text</frontend_type>
+            <sort_order>1</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+               <fields>
+                 <frontend_status translate="label">
+                   <label>Status of flagged order shown on front end: </label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>5</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>The order status your customer will see when the order has been flagged for review. Some themes may not show status. If left blank, the default status of "Held For Manual Review" will be shown. Applies retroactively.</comment>
+                </frontend_status> 
+                 <alert_email translate="label">
+                   <label>Send email alert when order is flagged to: </label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>10</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>Enter one or more email addreess (comma seperated) and they will be notified when an order is being held for review.</comment>
+                </alert_email>    
+                 <alert_email_subject translate="label">
+                   <label>Alert email subject: </label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>15</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>The order number will be automatically appended to the end of your subject. Leave blank to use default subject line.</comment>
+                </alert_email_subject>   
+                <alert_email_from translate="label">
+                   <label>Alert email from name: </label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>17</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>This is the name that you alert emails will appear to come from. If left blank, your store name will be used as the default.</comment>
+                </alert_email_from>  
+                <alert_email_reply translate="label">
+                   <label>Alert email reply-to address: </label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>18</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>This is the email address that will recieve replies to alert emails. If left blank, it will default to your general store contact email address.</comment>
+                </alert_email_reply> 
+                <include_order_link translate="label">
+                   <label>Include link to order in alert emails:</label>
+                     <frontend_type>radios</frontend_type>
+                     <source_model>adminhtml/system_config_source_yesno</source_model>
+                     <sort_order>19</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>If set to yes, a link directly to the order (in the Magento back end) will be included in each alert email. Users will still have to log in to view order.</comment>
+                </include_order_link> 
+                <filter_logging translate="label">
+                   <label>Enable logging:</label>
+                     <frontend_type>radios</frontend_type>
+                     <source_model>adminhtml/system_config_source_yesno</source_model>
+                     <sort_order>20</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>If enabled, a log of every active filter pass/fail will be written to /var/log/customizablefraudfilters.log. Useful when testing new filter configurations, but shouldn't be left on indefinately.</comment>
+                </filter_logging>                                       
+             </fields>
+          </general_settings>
+          <filters translate="label"> 
+            <label>Filters</label>
+            <frontend_type>text</frontend_type>
+            <sort_order>5</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+               <fields>
+                 <city_match_flag translate="label">
+                   <label>Flag order when shipping city does not match billing city.</label>
+                     <frontend_type>radios</frontend_type>
+                     <source_model>adminhtml/system_config_source_yesno</source_model>
+                     <sort_order>10</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>Select 'yes' to hold orders when the cities do not match.</comment>
+                </city_match_flag>
+                 <state_match_flag translate="label">
+                   <label>Flag order when shipping state does not match billing state.</label>
+                     <frontend_type>radios</frontend_type>
+                     <source_model>adminhtml/system_config_source_yesno</source_model>
+                     <sort_order>13</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>Select 'yes' to hold orders when the states do not match.</comment>
+                </state_match_flag>
+                <zip_code_match_flag translate="label">
+                   <label>Flag order when shipping zip code does not match billing zip code.</label>
+                     <frontend_type>radios</frontend_type>
+                     <source_model>adminhtml/system_config_source_yesno</source_model>
+                     <sort_order>15</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>Select 'yes' to hold orders when the zip codes do not match.</comment>
+                </zip_code_match_flag>
+                <country_match_flag translate="label">
+                   <label>Flag order when shipping country does not match billing country.</label>
+                     <frontend_type>radios</frontend_type>
+                     <source_model>adminhtml/system_config_source_yesno</source_model>
+                     <sort_order>16</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>Select 'yes' to hold orders when the countries do not match.</comment>
+                </country_match_flag>
+                <shipping_street_contains_flag translate="label">
+                   <label>Flag order when the shipping street address (line one or two) contains:</label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>17</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>Enter each value enclosed in double quotes, comma seperated. ie: "PO Box", "P.O. Box". Case does not matter.</comment>
+                </shipping_street_contains_flag> 
+                <billing_street_contains_flag translate="label">
+                   <label>Flag order when the billing street address (line one or two) contains:</label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>18</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>Enter each value enclosed in double quotes, comma seperated. ie: "PO Box", "P.O. Box". Case does not matter.</comment>
+                </billing_street_contains_flag>  
+                <guest_flag translate="label">
+                   <label>Flag order when placed by a guest.</label>
+                     <frontend_type>radios</frontend_type>
+                     <source_model>adminhtml/system_config_source_yesno</source_model>
+                     <sort_order>17</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>Select 'yes' to hold orders when the customer is not logged into an account when the order was placed.</comment>
+                </guest_flag>
+                 <grand_total_max_flag translate="label">
+                   <label>Flag order when grand total is GREATER than: </label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>20</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>Enter only numbers and decimals (ie: 99.99). Leave blank to deactivate this filter.</comment>
+                </grand_total_max_flag>     
+                <grand_total_min_flag translate="label">
+                   <label>Flag order when grand total is LESS than: </label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>25</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>Enter only numbers and decimals (ie: 1.99). Leave blank to deactivate this filter.</comment>
+                </grand_total_min_flag> 
+                <order_contains_products_flag translate="label">
+                   <label>Flag if order contains product IDs: </label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>30</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>Enter comma-seperated list of product IDs (not product SKUs).</comment>
+                </order_contains_products_flag> 
+                <shipping_country_flag translate="label">
+                    <label>Flag order when shipping country is:</label>
+                    <frontend_type>multiselect</frontend_type>
+                    <sort_order>35</sort_order>
+                    <source_model>adminhtml/system_config_source_country</source_model>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </shipping_country_flag>  
+                <billing_country_flag translate="label">
+                    <label>Flag order when billing country is:</label>
+                    <frontend_type>multiselect</frontend_type>
+                    <sort_order>40</sort_order>
+                    <source_model>adminhtml/system_config_source_country</source_model>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </billing_country_flag>
+                <shipping_method_flag translate="label">
+                    <label>Flag if shipping method is:</label>
+                    <frontend_type>multiselect</frontend_type>
+                    <sort_order>43</sort_order>
+                    <source_model>customizablefraudfilters_adminhtml/system_config_source_shipping</source_model>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </shipping_method_flag>
+                <restricted_email_flag translate="label">
+                   <label>Flag order if customer email is: </label>
+                     <frontend_type>text</frontend_type>
+                     <sort_order>45</sort_order>
+                     <show_in_default>1</show_in_default>
+                     <show_in_website>1</show_in_website>
+                     <show_in_store>1</show_in_store>
+                     <comment>Enter comma-seperated list of email addresses.</comment>
+                </restricted_email_flag>                                                          
+             </fields>
+          </filters>
+         </groups>
+      </customizablefraudfilters>
+    </sections>
+</config>

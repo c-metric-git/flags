@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <Evince_Ajaxaddtocart>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Evince_Ajaxaddtocart>
+    </modules>
+</config>

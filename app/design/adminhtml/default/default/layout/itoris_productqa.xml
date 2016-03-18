@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+	<itoris_productqa_admin_settings_index>
+		<reference name="head">
+			<action method="addJs"><script>tiny_mce/tiny_mce.js</script></action>
+			<action method="addJs"><script>itoris/productqa/admin/settings.js</script></action>
+			<action method="setCanLoadTinyMce">
+				<param>true</param>
+			</action>
+		</reference>
+		<reference name="js">
+			<block type="adminhtml/catalog_product_edit_js" template="catalog/product/js.phtml" name="catalog_product_js"></block>
+		</reference>
+		<reference name="left">
+            <block type="itoris_productqa/admin_config_switcher" name="switcher" before="-"/>
+        </reference>
+	</itoris_productqa_admin_settings_index>
+	<itoris_productqa_admin_questions_index>
+		<reference name="head">
+			<action method="addItem">
+				<type>js_css</type>
+				<name>itoris/productqa/admin/main.css</name>
+			</action>
+		</reference>
+	</itoris_productqa_admin_questions_index>
+	<itoris_productqa_admin_questions_edit>
+		<reference name="head">
+			<action method="addItem">
+				<type>js_css</type>
+				<name>itoris/productqa/admin/main.css</name>
+			</action>
+			<action method="addJs">
+				<name>itoris/productqa/admin/edit.js</name>
+			</action>
+		</reference>
+	</itoris_productqa_admin_questions_edit>
+
+	<itoris_productqa_admin_answers_index>
+		<reference name="head">
+			<action method="addItem">
+				<type>js_css</type>
+				<name>itoris/productqa/admin/main.css</name>
+			</action>
+		</reference>
+	</itoris_productqa_admin_answers_index>
+</layout>

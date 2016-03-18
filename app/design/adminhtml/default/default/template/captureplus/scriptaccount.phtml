@@ -1,0 +1,64 @@
+<script type="text/javascript">
+//<![CDATA[
+pca.ready(function () {
+    var adminKeyField = pca.getElement("captureplus_settings_admin_key"),
+        websiteKeyField = pca.getElement("captureplus_settings_website_key");
+
+        function showRegister() {
+            var modal = new pca.Modal({ title: "Register for a free Postcode Anywhere account" });
+
+            function register(details) {
+                function success(response) {
+                    pca.setValue(adminKeyField, response[0].InternalKey);
+                    pca.setValue(websiteKeyField, response[0].ExternalKey);
+                    modal.hide();
+
+                    if (configForm)
+                        configForm.submit();
+                }
+
+                function fail(error) {
+                    if (error == "Existing Account") {
+                        modal.clear();
+                        modal.setTitle("Existing account found");
+                        modal.setContent("<p>It looks like you have an existing account with us. Please <a href='http://account.postcodeanywhere.co.uk' target='_blank'>login to your account</a> to access your keys.</p>");
+                        modal.addButton("Close", modal.hide);
+                    }
+                    else
+                        alert(error);
+                }
+
+                if (!details["Email"]) { alert("You must enter an email address."); return; }
+                if (!details["First Password"]) { alert("You must choose a password."); return; }
+                if (!details["Second Password"]) { alert("You must confirm your password by typing it again."); return; }
+                if (details["First Password"] != details["Second Password"]) { alert("The passwords do not match."); return; }
+
+                pca.fetch("CapturePlus/Demos/AddAccountAndTrial/v1.10", {
+                    key: "KT79-MT84-XR94-DK35",
+                    Source: "Magento",
+                    InternalKeyName: "Magento Admin",
+                    ExternalKeyName: "Magento Website",
+                    Forename: details["First Name"],
+                    Surname: details["Second Name"],
+                    Email: details["Email"],
+                    Phone: details["Phone"],
+                    CompanyName: details["Company"],
+                    Password: details["First Password"]
+                }, success, fail);
+            }
+
+            modal.addHalfFields("Name", { value: "", placeholder: "First" }, { value: "", placeholder: "Last" });
+            modal.addField("Company", { value: "" });
+            modal.addField("Phone", { value: "", type: "tel" });
+            modal.addField("Email", { value: "", type: "email", required: true });
+            modal.addHalfFields("Password", { type: "password", required: true }, { type: "password", required: true, placeholder: "Repeat password" });
+            modal.addButton("Register", register);
+            modal.addButton("Skip", modal.hide, true);
+            modal.show();
+        }
+
+    if (pca.getValue(adminKeyField) == "" && pca.getValue(websiteKeyField) == "")
+        showRegister();
+});
+//]]>
+</script>

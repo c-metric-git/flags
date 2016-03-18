@@ -1,0 +1,173 @@
+<script type="text/javascript">
+    var ORDER_ID = <?php echo $this->getOrder()->getId(); ?>;
+</script>
+<?php $_order = $this->getOrder() ?>
+<div>
+    <div id="order-messages">
+        <?php echo $this->getChildHtml('order_messages') ?>
+    </div>
+    <?php echo $this->getChildHtml('order_info') ?>
+    <input type="hidden" name="order_id" value="<?php echo $_order->getId() ?>"/>
+    <?php if ($_order->getIsVirtual()): ?>
+    <div class="box-right">
+        <?php else: ?>
+        <div class="box-left">
+            <?php endif; ?>
+            <!--Payment Method-->
+            <div class="entry-edit">
+                <div class="entry-edit-head">
+                    <h4 class="icon-head head-payment-method"><?php echo Mage::helper('sales')->__('Payment Information') ?></h4>
+                    <?php /*** BEGIN: add link "EDIT" ***/?>
+                    <?php $is_allow = Mage::getSingleton('admin/session')->isAllowed('iwd_ordermanager/order/actions/edit_payment'); ?>
+                    <?php if($is_allow): ?>
+                        <div class="tools" style="float:right">
+                            <?php if (Mage::getModel('iwd_ordermanager/payment_payment')->canUpdatePaymentMethod($_order->getId())): ?>
+                                <a id="order_payment_edit_<?php echo $_order->getEntityId(); ?>"
+                                   class="order_payment_edit" href="#"
+                                   title="<?php echo Mage::helper('iwd_ordermanager')->__("Edit payment method"); ?>">
+                                    <?php echo Mage::helper('sales')->__("Edit"); ?>
+                                </a>
+                            <?php else : ?>
+                                <a href="#"
+                                   onclick="alert('<?php echo Mage::helper('iwd_ordermanager')->__("Sorry, but order has invoice(s). You can not edit payment method.") ?>'); return false;"
+                                   title="<?php echo Mage::helper('iwd_ordermanager')->__("You can not edit payment method!"); ?>">
+                                    <?php echo Mage::helper('sales')->__("Edit"); ?>
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
+                    <?php /*** END: add link "EDIT" ***/?>
+                </div>
+                <div class="hor-scroll">
+                    <fieldset id="order_payment">
+                        <?php echo $this->getPaymentHtml() ?>
+                        <div><?php echo Mage::helper('sales')->__('Order was placed using %s', $_order->getOrderCurrencyCode()) ?></div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <?php if (!$_order->getIsVirtual()): ?>
+            <div class="box-right">
+                <!--Shipping Method-->
+                <div class="entry-edit">
+                    <div class="entry-edit-head">
+                        <h4 class="icon-head head-shipping-method"><?php echo Mage::helper('sales')->__('Shipping &amp; Handling Information') ?></h4>
+                        <?php /*** BEGIN: add link "EDIT" ***/?>
+                        <?php $is_allow = Mage::getSingleton('admin/session')->isAllowed('iwd_ordermanager/order/actions/edit_shipping'); ?>
+                        <?php if($is_allow): ?>
+                            <div class="tools" style="float:right">
+                                <a id="order_shipping_edit_<?php echo $_order->getEntityId(); ?>"
+                                   class="order_shipping_edit" href="#"
+                                   title="<?php echo Mage::helper('sales')->__('Edit shipping information'); ?>">
+                                    <?php echo Mage::helper('sales')->__('Edit'); ?></a>
+                            </div>
+                        <?php endif; ?>
+                        <?php /*** END: add link "EDIT" ***/?>
+                    </div>
+                    <div class="hor-scroll">
+                        <fieldset id="order_shipping">
+                            <?php if ($_order->getTracksCollection()->count()) : ?>
+                                <a href="#" id="linkId"
+                                   onclick="popWin('<?php echo $this->helper('shipping')->getTrackingPopupUrlBySalesModel($_order) ?>','trackorder','width=800,height=600,resizable=yes,scrollbars=yes')"
+                                   title="<?php echo $this->__('Track Order') ?>"><?php echo $this->__('Track Order') ?></a>
+                                <br/>
+                            <?php endif; ?>
+                            <?php if ($_order->getShippingDescription()): ?>
+                                <strong><?php echo $this->escapeHtml($_order->getShippingDescription()) ?></strong>
+
+                                <?php if ($this->helper('tax')->displayShippingPriceIncludingTax()): ?>
+                                    <?php $_excl = $this->displayShippingPriceInclTax($_order); ?>
+                                <?php else: ?>
+                                    <?php $_excl = $this->displayPriceAttribute('shipping_amount', false, ' '); ?>
+                                <?php endif; ?>
+                                <?php $_incl = $this->displayShippingPriceInclTax($_order); ?>
+
+                                <?php echo $_excl; ?>
+                                <?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
+                                    (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
+                                <?php endif; ?>
+                            <?php else: ?>
+                                <?php echo $this->helper('sales')->__('No shipping information available'); ?>
+                            <?php endif; ?>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
+        <div class="clear"></div>
+
+        <?php echo $this->getGiftOptionsHtml() ?>
+        <div class="clear"></div>
+        <div class="entry-edit">
+            <div class="entry-edit-head item-ordered">
+                <h4 class="icon-head head-products"><?php echo Mage::helper('sales')->__('Items Ordered') ?></h4>
+
+                <?php /*** BEGIN: add link "EDIT" ***/?>
+                <?php $is_allow = Mage::getSingleton('admin/session')->isAllowed('iwd_ordermanager/order/actions/edit_order_items'); ?>
+                <?php if($is_allow): ?>
+                    <div class="tools">
+                        <?php if (Mage::getModel('iwd_ordermanager/order_edit')->checkOrderStatusForUpdate($_order)): ?>
+                            <a href="#"id="ordered_items_edit" class="ordered_items_edit"
+                               title="<?php echo Mage::helper('iwd_ordermanager')->__("Edit ordered items"); ?>">
+                                <?php echo Mage::helper('sales')->__("Edit"); ?>
+                            </a>
+                        <?php else: ?>
+                            <a href="#"
+                               onclick="alert('<?php echo Mage::helper('iwd_ordermanager')->__("Sorry, You can not update ordered items for order with this status. Check configuration by module IWD_OrderManager.") ?>'); return false;"
+                               title="<?php echo Mage::helper('iwd_ordermanager')->__("You can't edit ordered items!"); ?>">
+                                <?php echo Mage::helper('sales')->__("Edit"); ?>
+                            </a>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+                <?php /*** END: add link "EDIT" ***/?>
+            </div>
+        </div>
+        <div id="ordered_items_box">
+            <div id="ordered_items_table">
+                <?php echo $this->getItemsHtml() ?>
+            </div>
+        </div>
+        <div class="clear"></div>
+
+        <div class="box-left">
+            <div class="entry-edit comment-edit">
+                <div class="entry-edit-head">
+                    <h4><?php echo Mage::helper('sales')->__('Comments History') ?></h4>
+                </div>
+                <fieldset><?php echo $this->getChildHtml('order_history') ?></fieldset>
+            </div>
+        </div>
+        <div class="box-right entry-edit">
+            <div class="entry-edit-head"><h4><?php echo Mage::helper('sales')->__('Order Totals') ?></h4></div>
+            <div class="order-totals"><?php echo $this->getChildHtml('order_totals') ?></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <?php echo $this->getChildHtml('popup_window'); ?>
+    <script type="text/javascript">
+        //<![CDATA[
+        /**
+         * Retrieve gift options tooltip content
+         */
+        function getGiftOptionsTooltipContent(itemId) {
+            var contentLines = [];
+            var headerLine = null;
+            var contentLine = null;
+
+            $$('#gift_options_data_' + itemId + ' .gift-options-tooltip-content').each(function (element) {
+                if (element.down(0)) {
+                    headerLine = element.down(0).innerHTML;
+                    contentLine = element.down(0).next().innerHTML;
+                    if (contentLine.length > 30) {
+                        contentLine = contentLine.slice(0, 30) + '...';
+                    }
+                    contentLines.push(headerLine + ' ' + contentLine);
+                }
+            });
+            return contentLines.join('<br/>');
+        }
+        giftOptionsTooltip.setTooltipContentLoaderFunction(getGiftOptionsTooltipContent);
+        //]]>
+    </script>
