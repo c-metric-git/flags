@@ -380,6 +380,9 @@
 	<!-- PRODUCT VIEW %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 	<catalog_product_view>
 		<!-- Change default template for product view. IMPORTANT: the same as in 'review_product_list'. -->
+		<reference name="head">
+			<action method="addJs"><script>list/skuswap_detail.js</script></action>
+		</reference>
 		<reference name="root">
 			<action method="setTemplate"><template>page/1column.phtml</template></action>
 		</reference> 

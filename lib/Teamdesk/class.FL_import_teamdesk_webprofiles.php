@@ -865,7 +865,8 @@ class FLTeamDeskWebprofiles {
                                             $csv_row[] = $arrTDProductsAttributes[$lowerpinnacleSKU][$i]['Web Option Label']=="Finish"?$arrTDProductsAttributes[$lowerpinnacleSKU][$i]["Attribute"]:""; //Finish 
                                             $csv_row[] = $arrTDProductsAttributes[$lowerpinnacleSKU][$i]['Web Option Label']=="Letter"?$arrTDProductsAttributes[$lowerpinnacleSKU][$i]["Attribute"]:""; //Letter  
                                             
-                                            $csv_row[] = $tdProduct['Product - Next Date Due To Arrive']; //date_of_arrival
+                                            $csv_row[] = $tdProduct['iconLabel']; //iconlabel 
+                                            $csv_row[] = $tdProduct['Product - Next Date Due To Arrive']>date("Y-m-d")?$tdProduct['Product - Next Date Due To Arrive']:""; //date_of_arrival
                                             $csv_row[] = $tdProduct['Product - QTY On Current POs']; //qy_on_current_po 
                                             $csv_row[] = ""; //custom_layout_update
                                             $csv_row[] = ""; //custom_design   ultimo/default
@@ -1029,6 +1030,7 @@ class FLTeamDeskWebprofiles {
                                                 $csv_row[] = ""; //finish 
                                                 $csv_row[] = ""; //letter 
                                             
+                                                $csv_row[] = ""; //iconlabel
                                                 $csv_row[] = ""; //date_of_arrival
                                                 $csv_row[] = ""; //qy_on_current_po  
                                                 $csv_row[] = ""; //custom_layout_update
@@ -1178,7 +1180,7 @@ class FLTeamDeskWebprofiles {
         /**
         * @desc  create string of columns to be retreived from the query  
         */       
-        $strColumns = "[isNewProduct?], [Product - VENDOR - DisplayLabelEnteredFL],[Product - Type - DisplayLabelEnteredFL],[Product - Filter - Size - DisplayLabelEnteredFL],[Product - Seasons], [Product - Themes], [Product - SubThemes],[Product - Themes Full Name],[PinnacleSKU],[Description],[Display Name],[PriceCalced],[DiscountPriceCalced],[overview],[is_visible],[Product - Weight],[Quantity Available],[imgLocationCustom],[Related Product],[meta_description],[meta_keywords],[meta_title],[kitType],[Related Design Family],[Related Product Family],[Priority_Cached],[FLFilterSectionCalced],[url],[flagFeaturesSearchLabel],[Image Alt Text 1],[Product - Next Date Due To Arrive],[Product - QTY On Current POs]";   
+        $strColumns = "[isNewProduct?], [Product - VENDOR - DisplayLabelEnteredFL],[Product - Type - DisplayLabelEnteredFL],[Product - Filter - Size - DisplayLabelEnteredFL],[Product - Seasons], [Product - Themes], [Product - SubThemes],[Product - Themes Full Name],[PinnacleSKU],[Description],[Display Name],[PriceCalced],[DiscountPriceCalced],[overview],[is_visible],[Product - Weight],[Quantity Available],[imgLocationCustom],[Related Product],[meta_description],[meta_keywords],[meta_title],[kitType],[Related Design Family],[Related Product Family],[Priority_Cached],[FLFilterSectionCalced],[url],[flagFeaturesSearchLabel],[Image Alt Text 1],[Product - Next Date Due To Arrive],[Product - QTY On Current POs],[iconLabel]";   
         try
         {        
             $arrResults = $this->api->Query("SELECT TOP 1500 ".$strColumns." FROM [FL Web Profile] ".$arrQueries." ORDER BY [PinnacleSKU]");     
@@ -1344,6 +1346,7 @@ class FLTeamDeskWebprofiles {
                   $product_header_row[] = "finish";
                   $product_header_row[] = "letter";
                   
+                  $product_header_row[] = "iconlabel";   
                   $product_header_row[] = "date_of_arrival"; 
                   $product_header_row[] = "qty_on_current_po";
                   $product_header_row[] = "custom_layout_update";
