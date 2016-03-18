@@ -20,9 +20,9 @@
                 <name>css/solwinadvanceorder.css</name>
                 <params/>
             </action>
-            <action method="setTitle" translate="title">
+            <!--action method="setTitle" translate="title">
                 <title>Advance Order Success</title>
-            </action>
+            </action-->
         </reference>
     </checkout_onepage_success>
 </layout>   

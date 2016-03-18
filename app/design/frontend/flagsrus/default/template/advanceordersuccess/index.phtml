@@ -6,17 +6,14 @@ $items = $order->getAllVisibleItems();
 
 $colspan = $rowspan = 2;
 
-$order_details = Mage::getModel('sales/order')->loadByIncrementId($order_id);
 // Get shipping method
-$shipping_method = $order_details->_data["shipping_description"];
+$shipping_method = $order->_data["shipping_description"];
 
 // Get ship-to address information
-$shipping_address_data = $order_details->getShippingAddress();
-$billingAddress = $order_details->getBillingAddress();
+$billingAddress = $order->getBillingAddress();
 
 //country codes
-$shippcode = $order_details->getShippingAddress()->getCountry();
-$billcode = $order_details->getBillingAddress()->getCountry();
+$billcode = $order->getBillingAddress()->getCountry();
 
 $paymentmethod = $order->getPayment()->getMethodInstance()->getTitle();
 $paymentmethodcode = $order->getPayment()->getMethod();
@@ -71,16 +68,19 @@ if ($aboveenable == 1 && $aboveenableid != "") {
     echo $this->getLayout()->createBlock('cms/block')->setBlockId($aboveenableid)->toHtml();
 } 
 ?>
-<p>Thanks for shopping at FlagsRus.org. To check on the status of your order Please login in to your account or click on the Order Status page at FlagsRus.org.</p>
 <?php if($paymentmethodcode != 'checkmo'): ?>
+	<p>Thanks for shopping at FlagsRus.org. To check on the status of your order, Please login in to your account or click on the Order Status page at FlagsRus.org.</p>
 	<?php echo $this->getLayout()->createBlock('meanbee_estimateddelivery/checkout_onepage_success_estimateddelivery')->setTemplate('meanbee/estimated_delivery/checkout/onepage/success/estimated_delivery.phtml')->tohtml(); ?>
+	<p>Your Order details are listed below. If you need a receipt, please print out this page.</p>
+	<p>We will send you a confirmation email of this order and an additional email with the tracking number when the order ships.</p>
+	<p>Thanks,<br/>Customer Service<br/>Flagsrus.org</p>
+	<p>Email: <?php echo Mage::getStoreConfig('trans_email/ident_general/email'); ?><br/>Phone: <?php  echo Mage::getStoreConfig('general/store_information/phone'); ?><br/>Hours: <?php  echo Mage::getStoreConfig('general/store_information/hours'); ?></p>
 <?php endif; ?>
-<p>Your Order details are listed below. If you need a receipt, please print out this page</p>
-<p>We will send you a confirmation email of this order and an additional email with the tracking number when the order ships.
 <?php if($paymentmethodcode == 'checkmo'): ?>
-	<br />In order to complete your order,<b>Please remember to contact us with Credit Card: call Us at <?php echo Mage::getStoreConfig('general/store_information/phone'); ?>.</b></p>
+	<p>To complete your order,Please call us at <?php echo Mage::getStoreConfig('general/store_information/phone'); ?> during our customer service hours: <?php  echo Mage::getStoreConfig('general/store_information/hours'); ?><br/>Or mail us a check to:<br/>Flagsrus<br/><?php  echo Mage::getStoreConfig('general/store_information/address'); ?></p>
+	<p>Thanks,<br/>Customer Service<br/>Flagsrus.org</p>
 <?php endif; ?>
-<p>Check: Mail to :<br />FlagsRus<br />16 Dalfonso Rd<br />newburgh, NY 12550</p>
+<!--p>Check: Mail to :<br />FlagsRus<br />16 Dalfonso Rd<br />newburgh, NY 12550</p-->
 </div>
 <div class="myorder-wrapper col-md-12" style="padding-left: 0 !important;line-height:20px;">
 	
@@ -108,7 +108,11 @@ if ($aboveenable == 1 && $aboveenableid != "") {
         </div>
         
     </div>
-    
+    <?php if($order->getShippingAddress()): ?>
+	<?php 
+		$shipping_address_data = $order->getShippingAddress();
+		$shippcode = $order->getShippingAddress()->getCountry();
+	?>
     <div class="order_summery col-md-6" style="padding-right: 0 ">
         <h3 class="bg-info">Shipping Address</h3>
         <div class="inner_content" style="padding-left: 10px;">
@@ -130,6 +134,7 @@ if ($aboveenable == 1 && $aboveenableid != "") {
         </div>
        
     </div>
+	<?php endif; ?>
    
 </div>
 
