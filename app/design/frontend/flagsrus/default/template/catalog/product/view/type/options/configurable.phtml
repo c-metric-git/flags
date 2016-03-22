@@ -30,6 +30,7 @@ $_product    = $this->getProduct();
 $_attributes = Mage::helper('core')->decorateArray($this->getAllowAttributes());
 $_jsonConfig = $this->getJsonConfig();
 $_jsonConfigsp = $this->getJsonConfigsp();
+$_jsonConfigdata = json_decode($_jsonConfig, true);	
 $_renderers = $this->getChild('attr_renderers')->getSortedChildren();
 ?>
 <?php if ($_product->isSaleable() && count($_attributes)):?>
@@ -53,9 +54,25 @@ $_renderers = $this->getChild('attr_renderers')->getSortedChildren();
         <dt><label class="required"><em>*</em><?php echo $_attribute->getLabel() ?></label></dt>
         <dd<?php if ($_attribute->decoratedIsLast){?> class="last"<?php }?>>
             <div class="input-box">
-                <select otherinfo="<?php echo $_jsonConfigsp; ?>" name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
-                    <option><?php echo $this->__('Choose an Option...') ?></option>
-                  </select>
+
+                <?php foreach($_jsonConfigdata['attributes'] as $key => $optionValue){ 
+								//echo "<pre>";echo count($optionValue['options']);print_r($optionValue['options']);
+									if(count($optionValue['options'])>2){
+									?>
+										<select otherinfo='<?php echo $_jsonConfigsp; ?>' name="super_attribute[<?php echo $_attribute->getAttributeId() ?>]" id="attribute<?php echo $_attribute->getAttributeId() ?>" class="required-entry super-attribute-select">
+											<option><?php echo $this->__('Choose an Option...') ?></option>
+										  </select>									
+									<?php }	
+									else{
+										foreach($optionValue['options'] as $key1=>$opt){
+									?>
+										<input id="super_attribute[<?php echo $optionValue['id'].$opt['id'].$_product->getId(); ?>]" name="super_attribute[<?php echo $optionValue['id']; ?>]" <?php if($key1==0){echo"checked='checked'";}?> type="radio" value="<?php echo $opt['id'];?>" class="super_attribute" otherinfo='<?php echo $_jsonConfigsp; ?>' price="<?php echo $opt['price'];?>" data-label="<?php echo $opt['label'];?>">&nbsp;<label for="super_attribute[<?php echo $optionValue['id'].$opt['id'].$_product->getId(); ?>]" style="line-height: 24px; vertical-align: middle;height: 24px;font-weight:normal"><?php echo $opt['label'];?></label><br>
+										<?php 
+										}
+									}
+								}
+									//exit;
+					?>
               </div>
         </dd>
         <?php endif; ?>

@@ -1143,7 +1143,7 @@ class FLTeamDeskWebprofiles {
                                         fputcsv($this->fp,$csv_row);
                                     } // End of for largest counter loop
                             } // End of if not in product added array  
-                            if($this->product_counter % 1200 == 0) {
+                            if($this->product_counter % 900 == 0) {
                                  $this->csv_counter++;  
                                  fclose($this->fp);
                                  $this->fp = fopen("var/import/products/FL_Products".$this->csv_counter.".csv","w+");

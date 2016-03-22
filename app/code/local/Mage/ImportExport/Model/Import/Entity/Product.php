@@ -833,7 +833,7 @@ class Mage_ImportExport_Model_Import_Entity_Product extends Mage_ImportExport_Mo
                 $typeValueTable => array()
             );
                    
-            foreach ($bunch as $rowNum => $rowData) {
+            foreach ($bunch as $rowNum => $rowData) {     
                 $this->_filterRowData($rowData);
                 if (!$this->isRowAllowedToImport($rowData, $rowNum)) {
                     continue;
@@ -960,8 +960,9 @@ class Mage_ImportExport_Model_Import_Entity_Product extends Mage_ImportExport_Mo
                     }
                     $customOptions[$titleTable][$prevOptionId][$storeId] = $rowData['_custom_option_title'];
                 }
-            }                    
-            if ($this->getBehavior() != Mage_ImportExport_Model_Import::BEHAVIOR_APPEND) { // remove old data?
+            }   
+            if ("replace" != Mage_ImportExport_Model_Import::BEHAVIOR_APPEND) { // remove old data?                  
+            //if ($this->getBehavior() != Mage_ImportExport_Model_Import::BEHAVIOR_APPEND) { // remove old data?
                 $this->_connection->delete(
                     $optionTable,
                     $this->_connection->quoteInto('product_id IN (?)', array_keys($customOptions['product_id']))
@@ -1223,7 +1224,8 @@ class Mage_ImportExport_Model_Import_Entity_Product extends Mage_ImportExport_Mo
                     $categoriesIn[] = array('product_id' => $productId, 'category_id' => $categoryId, 'position' => 1);
                 }
             }
-            if (Mage_ImportExport_Model_Import::BEHAVIOR_APPEND != $this->getBehavior()) {
+            //if (Mage_ImportExport_Model_Import::BEHAVIOR_APPEND != $this->getBehavior()) {
+            if (Mage_ImportExport_Model_Import::BEHAVIOR_APPEND != "replace") {
                 $this->_connection->delete(
                     $tableName,
                     $this->_connection->quoteInto('product_id IN (?)', $delProductId)
@@ -1296,12 +1298,12 @@ class Mage_ImportExport_Model_Import_Entity_Product extends Mage_ImportExport_Mo
             $previousAttributeSet = null;
 
             foreach ($bunch as $rowNum => $rowData) {       
-                $this->_filterRowData($rowData);
+                //$this->_filterRowData($rowData);
                 if (!$this->validateRow($rowData, $rowNum)) {
                     continue;
                 }
                 $rowScope = $this->getRowScope($rowData);
-
+                  
                 if (self::SCOPE_DEFAULT == $rowScope) {
                     $rowSku = $rowData[self::COL_SKU];
 
@@ -1518,7 +1520,7 @@ class Mage_ImportExport_Model_Import_Entity_Product extends Mage_ImportExport_Mo
                 }
             }
             $attribute->setBackendModel($backModel); // restore 'backend_model' to avoid 'default' setting
-        }      
+        }        
         return $attributes;
     }
 
@@ -1549,7 +1551,8 @@ class Mage_ImportExport_Model_Import_Entity_Product extends Mage_ImportExport_Mo
                     $tierPriceIn[]  = $row;
                 }
             }
-            if (Mage_ImportExport_Model_Import::BEHAVIOR_APPEND != $this->getBehavior()) {
+            //if (Mage_ImportExport_Model_Import::BEHAVIOR_APPEND != $this->getBehavior()) {
+            if (Mage_ImportExport_Model_Import::BEHAVIOR_APPEND != "replace") {
                 $this->_connection->delete(
                     $tableName,
                     $this->_connection->quoteInto('entity_id IN (?)', $delProductId)
@@ -1589,7 +1592,8 @@ class Mage_ImportExport_Model_Import_Entity_Product extends Mage_ImportExport_Mo
                     $groupPriceIn[]  = $row;
                 }
             }
-            if (Mage_ImportExport_Model_Import::BEHAVIOR_APPEND != $this->getBehavior()) {
+            //if (Mage_ImportExport_Model_Import::BEHAVIOR_APPEND != $this->getBehavior()) {
+            if (Mage_ImportExport_Model_Import::BEHAVIOR_APPEND != "replace") {
                 $this->_connection->delete(
                     $tableName,
                     $this->_connection->quoteInto('entity_id IN (?)', $delProductId)
@@ -1757,7 +1761,8 @@ class Mage_ImportExport_Model_Import_Entity_Product extends Mage_ImportExport_Mo
                     );
                 }
             }
-            if (Mage_ImportExport_Model_Import::BEHAVIOR_APPEND != $this->getBehavior()) {
+            //if (Mage_ImportExport_Model_Import::BEHAVIOR_APPEND != $this->getBehavior()) {
+            if (Mage_ImportExport_Model_Import::BEHAVIOR_APPEND != "replace") {
                 $this->_connection->delete(
                     $tableName,
                     $this->_connection->quoteInto('product_id IN (?)', $delProductId)

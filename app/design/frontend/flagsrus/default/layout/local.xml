@@ -19,6 +19,7 @@
 			<action method="addJs"><script>infortis/jquery/plugins/jquery.owlcarousel.min.js</script></action>
 			<action method="addJs"><script>infortis/jquery/plugins/imagesloaded.js</script></action>
 			<action method="addItem"><type>skin_js</type><name>js/app.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/amasty/plugins/jquery-1.9.1.min.js</name><params/></action>
 		<!-- CSS: -->
             <!-- Added by dinesh -->                                                                     
 			<action method="addItem"><type>skin_css</type><name>css/productqa.css</name><params/></action>  

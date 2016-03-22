@@ -75,7 +75,7 @@
 
 <!--                <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />-->
 
-                <select class="input-text qty" name="qty" id="qty">
+                <select class="input-text qty qty-select-<?php echo $_product->getId(); ?>" name="qty" id="qty">
                 <?php $i = 1 ?>
                 <?php do { ?>
                 <option value="<?php echo $i?>">

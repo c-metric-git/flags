@@ -160,16 +160,16 @@
              <div class="sku" style="font-family:Lato; font-weight:bold;">               
 			<?php 
 			echo $this->__("Product Id: ");?>
-            <span>
-			<?php echo Mage::getModel('catalog/product')->load($_product->getId())->getSku();?>
+            <span class="sku-val">
+			<?php echo $_product->getSku();?>
             </span>
             </div>	
            <div style="display:inline-block">
 			<?php 
 			   $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
-               echo $this->__("Quantity in Stock: ").intval($stock->getQty());
             ?>
-           &nbsp;(12 expected in stock on 11/12)
+			<span class="instock-qty"><?php if($stock->getQty()>0): ?><?php echo $this->__("Quantity in Stock: ");echo intval($stock->getQty()); ?><?php else: ?>&nbsp;<?php endif; ?></span>
+           &nbsp;<span class="expected-qty">&nbsp;</span>
             </div>
             <div style="clear:both;margin-top: 5px;"></div>
             <!--Want more than we have? <a>Click Here</a>-->

@@ -14,9 +14,9 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
             ini_set("display_errors",1);   
             switch($import_type) {
                 case 'SS_categories' : 
-				//require_once('lib/Teamdesk/class.import_teamdesk_category.php'); 
-                //$objTDCategory = new TeamDeskCategory();  
-                //$strReturn = $objTDCategory->importTeamDeskCategories(); 
+				require_once('lib/Teamdesk/class.import_teamdesk_category.php'); 
+                $objTDCategory = new TeamDeskCategory();  
+                $strReturn = $objTDCategory->importTeamDeskCategories(); 
 				    $strMessage .= $strReturn;     
                     try {
                         $this->openToImport("var/import/category/", "categories.csv");  
@@ -245,7 +245,7 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                     ini_set("display_errors",1);
                     require_once('lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php'); 
                     $objTDProducts = new FLTeamDeskWebprofiles(); 
-                    $strReturn = $objTDProducts->importTeamdeskProduct(); 
+                    $strReturn = $objTDProducts->importTeamdeskProduct();  
                     $strMessage = "Product Import Status"; 
                     if($strReturn !='') {
                         $strMessage .= $strReturn; 
@@ -253,7 +253,7 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                     $succ_message ='';       
                     $product_csv_counter = $_SESSION['product_csv_counter']!=''?$_SESSION['product_csv_counter']:0;   
                     $counter_loop = 0;
-                    for($i=0;$i<=$product_csv_counter;$i++) {
+                    for($i=0;$i<=$product_csv_counter;$i++) {                   
                         $succ_message['error'] .= "<br /><br />Processing File => FL_Products$i.csv<br />";   
                         $succ_message['success'] .= "<br /><br />Processing File => FL_Products$i.csv<br />";    
                         $tmp_succ_message = $this->AddProduct("var/import/products/FL_Products$i.csv");

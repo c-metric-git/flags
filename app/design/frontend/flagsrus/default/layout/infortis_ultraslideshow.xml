@@ -10,7 +10,7 @@
 			<action method="addItem"><type>skin_css</type><name>css/infortis/ultra-slideshow/ultra-slideshow.css</name></action>
 			
 			<!-- js -->
-			<action method="addJs"><script>infortis/jquery/jquery-1.7.2.min.js</script></action>
+			<action method="addJs"><script>infortis/jquery/jquery-1.7.2.min.js</script></action>z
 			<action method="addJs"><script>infortis/jquery/jquery-noconflict.js</script></action>
 			<action method="addJs"><script>infortis/jquery/plugins/jquery.owlcarousel.min.js</script></action>
 			
