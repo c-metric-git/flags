@@ -164,6 +164,16 @@ body {
 	padding: 0
 }
 
+/*added by chandni 23-3-16*/
+.catalog-product-view .product-options dl{margin-top: 10px;}
+.catalog-product-view .product-options dl dt{ display:inline-block; vertical-align:top;margin-right: 10px;}
+.catalog-product-view .product-options dl dd{ display:inline-block;}
+@media  (min-width:1200px) {
+.product-view .paypal-wrapper .paypal-logo .paypal-or{display: inline-block;margin: 0 22px 0 0 !important;vertical-align: middle; float:none !important; width:auto !important;}
+.product-view .paypal-wrapper .paypal-logo a{display: inline-block;vertical-align: middle;width: 234px;}
+.product-view .paypal-wrapper .paypal-logo a img{ width:100%;}
+}
+
 @media only screen and (min-width:769px) {
 .header-regular .logo-wrapper .logo img, .header-regular .logo-wrapper .logo img {
 	top: -50px;
@@ -477,7 +487,7 @@ border-top:none
 	left: 16px
 }
 .catalog-product-view .product-options {
-	width: 164px
+	
 }
 .catalog-product-view .required {
 	display: none

@@ -1,3 +1,5 @@
+index.php
+/var/www/html/app/etc/local.xml
 var/*
 media/*
 dbs/*
