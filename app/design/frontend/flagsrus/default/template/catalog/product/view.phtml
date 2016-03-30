@@ -163,14 +163,16 @@
             <span class="sku-val">
 			<?php echo $_product->getSku();?>
             </span>
-            </div>	
-           <div style="display:inline-block">
-			<?php 
-			   $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
-            ?>
-			<span class="instock-qty"><?php if($stock->getQty()>0): ?><?php echo $this->__("Quantity in Stock: ");echo intval($stock->getQty()); ?><?php else: ?>&nbsp;<?php endif; ?></span>
-           &nbsp;<span class="expected-qty">&nbsp;</span>
             </div>
+		<?php if($_product->isSaleable()): ?>			
+			<div style="display:inline-block">
+				<?php 
+				   $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+				?>
+				<span class="instock-qty"><?php if($stock->getQty()>0): ?><?php echo $this->__("Quantity in Stock: ");echo intval($stock->getQty()); ?><?php else: ?>&nbsp;<?php endif; ?></span>
+				&nbsp;<span class="expected-qty">&nbsp;</span>
+            </div>
+		<?php endif; ?>
             <div style="clear:both;margin-top: 5px;"></div>
             <!--Want more than we have? <a>Click Here</a>-->
 			<?php echo $this->getChildHtml('container_product_primary_1'); ?>
@@ -211,7 +213,7 @@
                             </td>
                         </tr>                        
                         <tr>
-                            <td style="padding-bottom:5px;"><?php echo $this->__('Email') ?></td>
+            				<td style="padding-bottom: 5px; width: 60px;"><?php echo $this->__('Email') ?></td>
                             <td>
                                 <input type="text" id="subscription_email" name="subscription_email" value="" style="width:200px;" class="input-text required-entry validate-email" />
                             </td>
@@ -225,7 +227,7 @@
                         <tr>
                             <td style="">&nbsp;</td>
                             <td>
-                                <button onclick="productAddToCartForm.submit();" class="button btn-cart" type="button"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
+                                <button onclick="productAddToCartForm.submit();" class="button btn-cart pull-left" type="button"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
                             </td>
                         </tr>
                     </table>

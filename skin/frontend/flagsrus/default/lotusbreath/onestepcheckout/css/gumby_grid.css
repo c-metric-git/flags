@@ -546,3 +546,17 @@ img { -ms-interpolation-mode: bicubic; }
 .ie8 .ttip:hover:before, .ie8 .ttip:hover:after { display: block; }
 
 .ie9 .radio.checked i, .ie9 .checkbox.checked i { top: 0; }
+
+
+.header-top-container .row
+{
+	width: auto;
+    max-width: none;
+    min-width: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: -15px;
+    margin-left: -15px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}

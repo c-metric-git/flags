@@ -5,11 +5,10 @@ $options = $attribute->getSource()->getAllOptions(false);
 $sel_filter = Mage::app()->getRequest()->getParam('searchBarOrder');
 ?>
 <!--by brt ends-->
-<form id="search_mini_form" action="<?php echo $this->helper('solrsearch')->getResultUrl() ?>" method="get">
+<form id="search_mini_form" action="<?php echo $this->helper('solrsearch')->getResultUrl() ?>" method="get" class="topsearch">
     <!-- by brt-->
-    <div class="searchBarnav" style="display:inline-block !important;width:21%;float:left;"> <!-- Style sheet added on 08032016 -->
-        <select name="searchBarOrder" style="display:block !important;border:none;  width:68px;
-height: 43px;margin-left: 3px;">  <!-- Style sheet added on 08032016 -->
+    <div class="searchBarnav"> <!-- Style sheet added on 08032016 -->
+        <select id="resizing_select" name="searchBarOrder" style="border:none;height: 43px;margin-left: 3px;">  <!-- Style sheet added on 08032016 -->
             <option value="">All</option>
 
             <?php    foreach($options as $key => $filtertype){ ?>
@@ -17,9 +16,12 @@ height: 43px;margin-left: 3px;">  <!-- Style sheet added on 08032016 -->
            <?php }  ?>
 
         </select>
+		<select id="width_tmp_select" style="display:none;">
+		  <option id="width_tmp_option"></option>
+		</select>
     </div>
     <!--by brt ends-->
-    <div class="form-search" style="display:inline-block !important;width:79%;float:left;border:none">
+    <div class="form-search">
         <label for="search"><?php echo $this->__('Search') ?>:</label>
 
         <input id="search" style="border:none" type="text" name="<?php echo $this->helper('catalogsearch')->getQueryParamName() ?>" value="<?php echo trim(trim($this->helper('catalogsearch')->getEscapedQueryText(),'"')) ?>" class="input-text" />
@@ -33,3 +35,11 @@ height: 43px;margin-left: 3px;">  <!-- Style sheet added on 08032016 -->
         </script>
     </div>
 </form>
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+	  jQuery('#resizing_select').change(function(){
+		jQuery("#width_tmp_option").html(jQuery('#resizing_select option:selected').text()); 
+		jQuery(this).width(jQuery("#width_tmp_select").width());  
+	  });
+	});
+</script>

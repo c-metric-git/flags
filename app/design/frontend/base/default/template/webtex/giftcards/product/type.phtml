@@ -49,7 +49,7 @@ $_preValues = $_product->getPreconfiguredValues();
         </div>
         <?php if ($this->getCardType() == 'email'): ?>
             <div class="field" style="margin-top:5px;">
-                <label for="mail-to-email" class="required" style="line-height:30px;width:100px;display:block"><?php echo $this->__('To E-mail') ?><em>*</em>:</label>
+                <label for="mail-to-email" class="required" style="line-height:30px;width:100px;display:inline-block"><?php echo $this->__('To E-mail') ?><em>*</em>:</label>
                 <input style="width:200px;margin-left;5px" type="text" id="mail-to-email" name="mail_to_email" class="input-text required-entry validate-email" value="<?php echo $_preValues->getMailToEmail();?>"/>
             </div>
         <?php endif; ?>

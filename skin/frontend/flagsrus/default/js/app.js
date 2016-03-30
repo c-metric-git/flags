@@ -18,11 +18,11 @@
  *
  * - The mouse-detected event is triggered on the window object when the user
  *   is using a mouse pointer input, or has switched from touch to mouse input.
- *   It can be observed in this manner: $j(window).on('mouse-detected', function(event) { // custom code });
+ *   It can be observed in this manner: jQuery(window).on('mouse-detected', function(event) { // custom code });
  *
  * - The touch-detected event is triggered on the window object when the user
  *   is using touch pointer input, or has switched from mouse to touch input.
- *   It can be observed in this manner: $j(window).on('touch-detected', function(event) { // custom code });
+ *   It can be observed in this manner: jQuery(window).on('touch-detected', function(event) { // custom code });
  */
 var PointerManager = {
     MOUSE_POINTER_TYPE: 'mouse',
@@ -100,7 +100,7 @@ var PointerManager = {
         }
 
         this.lastTouchType = this.MOUSE_POINTER_TYPE;
-        $j(window).trigger('mouse-detected', originalEvent);
+        jQuery(window).trigger('mouse-detected', originalEvent);
     },
     triggerTouchEvent: function(originalEvent) {
         if(this.lastTouchType == this.TOUCH_POINTER_TYPE) {
@@ -108,7 +108,7 @@ var PointerManager = {
         }
 
         this.lastTouchType = this.TOUCH_POINTER_TYPE;
-        $j(window).trigger('touch-detected', originalEvent);
+        jQuery(window).trigger('touch-detected', originalEvent);
     },
 
     initEnv: function() {
@@ -128,7 +128,7 @@ var PointerManager = {
 
         if(this.standardTouch) { //standard-based touch events. Wire only one event.
             //detect pointer event
-            $j(window).on(this.touchDetectionEvent, function(e) {
+            jQuery(window).on(this.touchDetectionEvent, function(e) {
                 switch(e.originalEvent.pointerType) {
                     case that.getPointerEventsInputTypes().MOUSE:
                         that.triggerMouseEvent(e);
@@ -142,7 +142,7 @@ var PointerManager = {
             });
         } else { //non-standard touch events. Wire touch and mouse competing events.
             //detect first touch
-            $j(window).on(this.touchDetectionEvent, function(e) {
+            jQuery(window).on(this.touchDetectionEvent, function(e) {
                 if(that.pointerEventLock) {
                     return;
                 }
@@ -152,7 +152,7 @@ var PointerManager = {
             });
 
             //detect mouse usage
-            $j(document).on('mouseover', function(e) {
+            jQuery(document).on('mouseover', function(e) {
                 if(that.pointerEventLock) {
                     return;
                 }
@@ -173,15 +173,15 @@ var PointerManager = {
 // jQuery Init
 // ==============================================
 
-// Use $j(document).ready() because Magento executes Prototype inline
-$j(document).ready(function () {
+// Use jQuery(document).ready() because Magento executes Prototype inline
+jQuery(document).ready(function () {
 
     // ==============================================
     // Basic variables
     // ==============================================
 
     var breakpointMedium = 768;
-    var isResponsive = $j('body').hasClass('responsive');
+    var isResponsive = jQuery('body').hasClass('responsive');
 
     // ==============================================
     // UI Pattern - ToggleSingle
@@ -209,30 +209,30 @@ $j(document).ready(function () {
     jQuery.fn.toggleSingle = function (options) {
 
         // passing destruct: true allows
-        var settings = $j.extend({
+        var settings = jQuery.extend({
             destruct: false
         }, options);
 
         return this.each(function () {
             if (!settings.destruct) {
-                $j(this).on('click', function () {
-                    $j(this)
+                jQuery(this).on('click', function () {
+                    jQuery(this)
                         .toggleClass('active')
                         .next()
                         .toggleClass('no-display');
                 });
                 // Hide the content
-                $this = $j(this);
+                $this = jQuery(this);
                 if (!$this.hasClass('active'))
                 {
                     $this.next().addClass('no-display');
                 }
-                //$j(this).next().addClass('no-display');
+                //jQuery(this).next().addClass('no-display');
             } else {
                 // Remove event handler so that the toggle link can no longer be used
-                $j(this).off('click');
+                jQuery(this).off('click');
                 // Remove all classes that were added by this plugin
-                $j(this)
+                jQuery(this)
                     .removeClass('active')
                     .next()
                     .removeClass('no-display');
@@ -245,7 +245,7 @@ $j(document).ready(function () {
     // UI Pattern - Toggle Content (tabs and accordions in one setup)
     // ==============================================
     
-    $j('.toggle-content').each(function () {
+    jQuery('.toggle-content').each(function () {
         var wrapper = jQuery(this);
 
         var hasTabs = wrapper.hasClass('tabs');
@@ -321,15 +321,15 @@ $j(document).ready(function () {
     // On product list pages, we want to show the layered nav/category menu immediately above the product list
     if (isResponsive)
     {
-        if ($j('.block-layered-nav').length && $j('.category-products').length)
+        if (jQuery('.block-layered-nav').length && jQuery('.category-products').length)
         {
             enquire.register('screen and (max-width: ' + (breakpointMedium - 1) + 'px)', {
                 match: function () {
-                    $j('.block-layered-nav').insertBefore($j('.category-products'))
+                    jQuery('.block-layered-nav').insertBefore(jQuery('.category-products'))
                 },
                 unmatch: function () {
                     // Move layered nav back to left column
-                    $j('.block-layered-nav').insertAfter($j('#layered-nav-marker'))
+                    jQuery('.block-layered-nav').insertAfter(jQuery('#layered-nav-marker'))
                 }
             });
         }
@@ -343,7 +343,7 @@ $j(document).ready(function () {
     {
         enquire.register('(max-width: ' + (breakpointMedium - 1) + 'px)', {
             setup: function () {
-                this.toggleElements = $j(
+                this.toggleElements = jQuery(
                     '.sidebar .block:not(.block-layered-nav) .block-title, ' +
                     '.block-layered-nav .block-subtitle--filter, ' +
                     //'.block-layered-nav .block-title, ' + //Currently this element is hidden in mobile view
@@ -364,7 +364,7 @@ $j(document).ready(function () {
     // ==============================================
 
     //Exclude elements with ".mobile-collapsible" for backward compatibility
-    $j('.collapsible:not(.mobile-collapsible) .block-title').toggleSingle();
+    jQuery('.collapsible:not(.mobile-collapsible) .block-title').toggleSingle();
 
 
 }); //end: on document ready
@@ -379,8 +379,8 @@ var ProductMediaManager = {
 
     destroyZoom: function() {
         //Custom modification. Code not needed if elevateZoom plugin not being used.
-        //$j('.zoomContainer').remove();
-        //$j('.product-image-gallery .gallery-image').removeData('elevateZoom');
+        //jQuery('.zoomContainer').remove();
+        //jQuery('.product-image-gallery .gallery-image').removeData('elevateZoom');
     },
 
     createZoom: function(image) {
@@ -424,13 +424,13 @@ var ProductMediaManager = {
     },
 
     swapImage: function(targetImage) {
-        targetImage = $j(targetImage);
+        targetImage = jQuery(targetImage);
         targetImage.addClass('gallery-image');
 
         //Custom modification. Code not needed if elevateZoom plugin not being used.
         //ProductMediaManager.destroyZoom();
 
-        var imageGallery = $j('.product-image-gallery');
+        var imageGallery = jQuery('.product-image-gallery');
 
         if(targetImage[0].complete) { //image already loaded -- swap immediately
 
@@ -448,7 +448,7 @@ var ProductMediaManager = {
 
             //Custom modification
             //Trigger event to know when image was changed
-            $j(document).trigger('product-media-manager-image-updated', {img: targetImage} );
+            jQuery(document).trigger('product-media-manager-image-updated', {img: targetImage} );
 
         } else { //need to wait for image to load
 
@@ -475,7 +475,7 @@ var ProductMediaManager = {
 
                 //Custom modification
                 //Trigger event to know when image was changed
-                $j(document).trigger('product-media-manager-image-updated', {img: targetImage} );
+                jQuery(document).trigger('product-media-manager-image-updated', {img: targetImage} );
             });
 
         }
@@ -485,10 +485,10 @@ var ProductMediaManager = {
         //Custom modification. Code not needed if elevateZoom plugin not being used.
         /*
         //trigger image change event on thumbnail click
-        $j('.product-image-thumbs .thumb-link').click(function(e) {
+        jQuery('.product-image-thumbs .thumb-link').click(function(e) {
             e.preventDefault();
-            var jlink = $j(this);
-            var target = $j('#image-' + jlink.data('image-index'));
+            var jlink = jQuery(this);
+            var target = jQuery('#image-' + jlink.data('image-index'));
 
             ProductMediaManager.swapImage(target);
         });
@@ -497,18 +497,18 @@ var ProductMediaManager = {
 
     initZoom: function() {
         //Custom modification. Code not needed if elevateZoom plugin not being used.
-        //ProductMediaManager.createZoom($j(".gallery-image.visible")); //set zoom on first image
+        //ProductMediaManager.createZoom(jQuery(".gallery-image.visible")); //set zoom on first image
     },
 
     init: function() {
 
         //Custom modification. Code not needed if elevateZoom plugin not being used.
         /*
-        ProductMediaManager.imageWrapper = $j('.product-img-box');
+        ProductMediaManager.imageWrapper = jQuery('.product-img-box');
 
         // Re-initialize zoom on viewport size change since resizing causes problems with zoom and since smaller
         // viewport sizes shouldn't have zoom
-        $j(window).on('delayed-resize', function(e, resizeEvent) {
+        jQuery(window).on('delayed-resize', function(e, resizeEvent) {
             ProductMediaManager.initZoom();
         });
 
@@ -517,10 +517,10 @@ var ProductMediaManager = {
         ProductMediaManager.wireThumbnails();
         */
 
-        $j(document).trigger('product-media-loaded', ProductMediaManager);
+        jQuery(document).trigger('product-media-loaded', ProductMediaManager);
     }
 };
 
-$j(document).ready(function() {
+jQuery(document).ready(function() {
     ProductMediaManager.init();
 });

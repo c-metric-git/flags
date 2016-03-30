@@ -21,7 +21,7 @@ body {
 	color: #fff
 }
 .btn-checkout, .product-view .btn-cart {
-	background-color: #0086d4;
+	/*background-color: #0086d4;*/
 	color: #fff
 }
 .btn-checkout:hover, .product-view .btn-cart:hover {
@@ -50,7 +50,8 @@ body {
 	background-color: #f5f5f5
 }
 #opc-login h3, #subscribe-form label, .accordion .heading, .block .block-title, .block-layered-nav .block-subtitle--filter, .box-account .box-head h2, .caption .heading, .feature .heading, .footer .heading, .gen-tabs .tabs a, .main-font, .mobnav-trigger, .nav-mobile .nav-item.level0>a, .nav-mobile .nav-item.level1>a, .nav-mobile .nav-item.level2>a, .nav-regular .nav-item.level0>a, .nav-regular .nav-submenu--mega>li>a, .order-items .order-comments h2, .order-items h2.sub-title, .order-items h2.table-caption, .product-view .box-reviews dt .heading, .products-grid .product-name, .products-list .product-name, .section-title, h1, h2, h3, h3.product-name, h4, h5 {
-	font-family: Lato, georgia, serif
+	font-family: Lato, georgia, serif;
+	font-weight:600;
 }
 #cboxClose, #cboxNext, #cboxPrevious, #scroll-to-top, .accordion-style1 .opener, .add-to-links .ic, .collapsible .opener, .pager .pages .current, .pager .pages a, .slider-arrows1 .owl-controls .owl-buttons div, .slider-arrows1 .owl-controls.clickable .owl-buttons div.disabled:hover, .slider-arrows2 .owl-controls .owl-buttons div, .slider-arrows3 .owl-controls .owl-buttons div, .slider-arrows3 .owl-controls.clickable .owl-buttons div.disabled:hover, .slider-pagination1 .owl-controls .owl-page span, .slider-pagination2 .owl-controls .owl-page span, .sorter .sort-by .category-asc, .sorter .sort-by .category-desc, .sorter .view-mode a {
 	background-color: #f5f5f5;
@@ -505,4 +506,17 @@ li.level0>a>span>.cat-label-label2.pin-bottom:before {
 }
 .nav-regular .nav-item.level0.parent.active>a .caret, .nav-regular .nav-item.level0.parent:hover>a .caret {
 	border-top-color: #0086d4;
+}
+.nav-mobile .nav-item.level0>a:hover, .nav-regular .nav-item.level0:hover>a {
+	background-color: #eaeaea;
+	color: #0086d4
+}
+.nav-mobile .nav-item..item-active>a, .nav-regular .nav-item.item-active>a {
+	background-color: #eaeaea;
+	color: #0086d4
+}
+
+.nav-mobile .nav-item.level0.current>a, .nav-regular .nav-item.level0.active>a {
+	background-color: #eaeaea;
+	color: #0086d4
 }

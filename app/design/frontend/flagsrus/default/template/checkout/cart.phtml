@@ -190,10 +190,10 @@
             <?php if ($tmpHtml = $this->getChildHtml('block_cart_below_table')): ?>
             	<div class="block_cart_below_table grid-full alpha omega"><?php echo $tmpHtml; ?></div>
             <?php endif; ?>
-            
+            			<?php if (!$this->getIsVirtual()): ?>
 			<div class="grid12-6 mobile-grid-half">
-            	<?php if (!$this->getIsVirtual()): echo $this->getChildHtml('shipping'); endif; ?>
-			</div>
+            	<?php echo $this->getChildHtml('shipping'); ?>
+			</div>			<?php endif; ?>
 			<div class="grid12-6 mobile-grid-half">
             	<?php echo $this->getChildHtml('coupon') ?>
             </div>

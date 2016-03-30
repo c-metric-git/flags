@@ -169,7 +169,11 @@ $_collectionSize = $_productCollection->count ();
                                 <?php if ($theme->getCfg ('category/alt_image')): ?>
                                     <?php echo $theme->getAltImgHtml ($_product, $imgWidth, $imgHeight); ?>
                                 <?php endif; ?>
-                                <?php echo $helpLabels->getLabels ($_product); //Product labels ?>
+                                <?php //echo $helpLabels->getLabels ($_product); //Product labels ?>
+								<?php if($_product->getIconlabel()!=''): ?>
+									<span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span>
+								<?php endif; ?>
+								<?php //echo $helpLabels->getLabels ($_product); //Product labels ?>
                             </a>
                         </div>
                         <!-- end: product-image-wrapper -->
@@ -312,7 +316,10 @@ $_collectionSize = $_productCollection->count ();
                                 <?php if ($theme->getCfg ('category/alt_image')): ?>
                                     <?php echo $theme->getAltImgHtml ($_product, $imgWidth, $imgHeight); ?>
                                 <?php endif; ?>
-                                <?php echo $helpLabels->getLabels ($_product); //Product labels ?>
+                                <?php //echo $helpLabels->getLabels ($_product); //Product labels ?>
+								<?php if($_product->getIconlabel()!=''): ?>
+									<span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span>
+								<?php endif; ?>
                             </a>
                             <?php //Add-to links
                             if ($gc['display_addtolinks'] != 0 && $gc['addtolinks_simple']) {

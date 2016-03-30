@@ -305,3 +305,7 @@ div.mobnav-trigger-wrapper {
 		 }
 	 }
 	 
+	 
+	 #nav {
+	z-index: 100;
+}

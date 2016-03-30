@@ -316,7 +316,8 @@ input.input-text:focus, input.input-text:hover, select:focus, select:hover, text
 }
 .btn-checkout, .product-view .btn-cart {
 	line-height: 55px;
-	font-size: 1.1666em
+	font-size: 1.1666em;
+	    font-size: 12px;
 }
 p.control input.checkbox, p.control input.radio {
 	margin-right: 6px
@@ -4148,4 +4149,18 @@ body.cms-index-index .breadcrumbs, label.required em, span.required em {
     display: inline-block;
     margin: 47px 0 0 15px;
     max-width: 98%;
+}
+
+input[type=”checkbox”]{
+	-webkit-appearance: checkbox;
+
+-webkit-appearance: checkbox !important;
+ border-radius: 0;
+ padding:0;
+ -moz-border-radius: 0;
+-webkit-border-radius: 0;
+}
+
+.checkout-cart-index .cart .totals .checkout-types {
+    text-align: center;
 }
