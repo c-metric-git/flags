@@ -2498,14 +2498,13 @@ ul.checkout-types li  p.paypal-logo {float: right;
     position: relative;
     padding-left: 5px;
 }
-#search_mini_form select
+#search_mini_form select#resizing_select
 {
     position: relative;
     float: left;
-    width: auto;
-   min-width: 64px;
-border: none;
-width: 64px;
-height: 43px;
-	
+    min-width: 64px;
+	border: none;
+	height: 43px;
 }
+
+	

@@ -36,10 +36,16 @@ $sel_filter = Mage::app()->getRequest()->getParam('searchBarOrder');
     </div>
 </form>
 <script type="text/javascript">
-	jQuery(document).ready(function() {
-	  jQuery('#resizing_select').change(function(){
-		jQuery("#width_tmp_option").html(jQuery('#resizing_select option:selected').text()); 
-		jQuery(this).width(jQuery("#width_tmp_select").width());  
-	  });
+jQuery(document).ready(function() {  
+	jQuery('#resizing_select').change(function(){
+	 jQuery("#width_tmp_option").html(jQuery('#resizing_select option:selected').text());
+	 var wid1 = jQuery("#width_tmp_select").width();
+	 var wid2 =  eval("wid1 + 20");
+	 jQuery(this).width(wid2);  
 	});
+	jQuery("#width_tmp_option").html("All");
+	var wid1 = jQuery("#width_tmp_select").width();
+	var wid2 =  eval("wid1 + 20");
+	jQuery('#resizing_select').width(wid2);  
+});
 </script>

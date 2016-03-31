@@ -96,6 +96,7 @@ switch($_SERVER['HTTP_HOST']) {
     case 'flagsrus.stripedsocks.com':
     case 'www.flagsrus.stripedsocks.com':
     case 'dev.flagsrus.org': 
+    case 'amazon.flagsrus.org':
     case 'www.dev.flagsrus.org':
         $mageRunCode = 'flagsrus';
         $mageRunType = 'website';
