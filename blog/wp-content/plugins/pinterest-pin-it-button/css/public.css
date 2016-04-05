@@ -1,0 +1,58 @@
+/* This stylesheet is used to style the public view of the plugin. */
+
+/* Pinterest "Pin It" Button Public CSS */
+
+/* Styles for the Pin It Button wrapper DIV */
+div.pin-it-btn-wrapper,
+div.pin-it-btn-wrapper-shortcode,
+div.pin-it-btn-wrapper-widget {
+}
+
+div.pin-it-btn-wrapper {
+    padding-bottom: 10px;
+	position: relative;
+	clear: both;
+}
+
+div.pin-it-btn-wrapper a,
+div.pin-it-btn-wrapper a:hover,
+div.pin-it-btn-wrapper-shortcode a,
+div.pin-it-btn-wrapper-shortcode a:hover,
+div.pin-it-btn-wrapper-widget a,
+div.pin-it-btn-wrapper-widget a:hover {
+	background: none;
+	border: 0;
+	text-decoration: none;
+	width: auto;
+	margin: 0;
+	max-width: none;
+	padding: 0;
+	-webkit-box-shadow: 0 0 0;
+	box-shadow: 0 0 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+}
+
+/* Latest "clearfix" utility class from Bootstrap 3 */
+.pib-clearfix:before,
+.pib-clearfix:after {
+	display: table;
+	content: " ";
+}
+
+.pib-clearfix:after {
+	clear: both;
+}
+
+/* Align left/right/center options */
+.pib-align-left {
+	text-align: left;
+}
+
+.pib-align-right {
+	text-align: right;
+}
+
+.pib-align-center {
+	text-align: center;
+}

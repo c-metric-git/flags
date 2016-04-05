@@ -1,0 +1,946 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: TinyMCE Backslash Button\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-02-29 13:46+0900\n"
+"PO-Revision-Date: 2012-02-29 13:46+0900\n"
+"Last-Translator: redcocker\n"
+"Language-Team: redcocker\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: Japanese\n"
+"X-Poedit-Country: JAPAN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Bookmarks: -1,160,-1,-1,-1,-1,-1,-1,-1,-1\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+# description
+msgid "This plugin converts your post/page to PDF for visitors and visitors can download it easily."
+msgstr "このプラグインは、投稿や固定ページをPDF形式で簡単にダウンロード出来るようにします。"
+
+#: ../post2pdf-converter-admin.php:11
+msgid "Cheatin&#8217; uh?"
+msgstr "間違いましたか？"
+
+#: ../post2pdf-converter-admin.php:61
+#: ../post2pdf-converter-font-maker.php:41
+#: ../post2pdf-converter-pdf-delete.php:21
+#: ../post2pdf-converter-pdf-delete.php:58
+#: ../post2pdf-converter-pdf-maker.php:154
+msgid "<strong>Error: Directory not found.</strong><br /><br />Path: "
+msgstr "<strong>エラー：ディレクトリが見つかりません。</strong><br /><br />パス： "
+
+#: ../post2pdf-converter-admin.php:75
+msgid "All cached PDF files were deleted."
+msgstr "キャッシュされたPDFファイルを全て削除しました。"
+
+#: ../post2pdf-converter-admin.php:222
+msgid "Invalid value. Settings could not be saved.<br />Your \"Exclusion\" contains some character strings that are not allowed to use."
+msgstr "不正な値です。設定を保存できませんでした。<br />「除外するページ」の設定値に使用が許可されていない文字列が含まれています。"
+
+#: ../post2pdf-converter-admin.php:225
+msgid "Invalid value. Settings could not be saved.<br />Your \"Signature\" contains some character strings that are not allowed to use."
+msgstr "不正な値です。設定を保存できませんでした。<br />「署名」の設定値に使用が許可されていない文字列が含まれています。"
+
+#: ../post2pdf-converter-admin.php:235
+msgid "Settings saved."
+msgstr "設定を保存しました。"
+
+#: ../post2pdf-converter-admin.php:243
+msgid "All settings were reset. Please <a href=\"options-general.php?page=post2pdf-converter-options\">reload the page</a>."
+msgstr "設定はリセットされました。 <a href=\"options-general.php?page=post2pdf-converter-options\">ページの再読込み</a>を実行して下さい。"
+
+#: ../post2pdf-converter-admin.php:248
+msgid "Afrikaans"
+msgstr "アフリカーンス語"
+
+#: ../post2pdf-converter-admin.php:249
+msgid "Albanian"
+msgstr "アルバニア語"
+
+#: ../post2pdf-converter-admin.php:250
+msgid "Arabic"
+msgstr "アラビア語"
+
+#: ../post2pdf-converter-admin.php:251
+msgid "Azerbaijanian"
+msgstr "アゼルバイジャン語"
+
+#: ../post2pdf-converter-admin.php:252
+msgid "Basque"
+msgstr "バスク語"
+
+#: ../post2pdf-converter-admin.php:253
+msgid "Belarusian"
+msgstr "ベラルーシ語"
+
+#: ../post2pdf-converter-admin.php:254
+msgid "Portuguese(Brazil)"
+msgstr "ポルトガル語(ブラジル)"
+
+#: ../post2pdf-converter-admin.php:255
+msgid "Catalan"
+msgstr "カタロニア語"
+
+#: ../post2pdf-converter-admin.php:256
+msgid "Chinese(Simplified)"
+msgstr "簡体中国語"
+
+#: ../post2pdf-converter-admin.php:257
+msgid "Chinese(Traditional)"
+msgstr "繁体中国語"
+
+#: ../post2pdf-converter-admin.php:258
+msgid "Croatian"
+msgstr "クロアチア語"
+
+#: ../post2pdf-converter-admin.php:259
+msgid "Czech"
+msgstr "チェコ語"
+
+#: ../post2pdf-converter-admin.php:260
+msgid "Danish"
+msgstr "デンマーク語"
+
+#: ../post2pdf-converter-admin.php:261
+msgid "Dutch"
+msgstr "オランダ語"
+
+#: ../post2pdf-converter-admin.php:262
+msgid "English"
+msgstr "英語"
+
+#: ../post2pdf-converter-admin.php:263
+msgid "Estonian"
+msgstr "エストニア語"
+
+#: ../post2pdf-converter-admin.php:264
+msgid "Farsi"
+msgstr "ペルシャ語"
+
+#: ../post2pdf-converter-admin.php:265
+msgid "French"
+msgstr "フランス語"
+
+#: ../post2pdf-converter-admin.php:266
+msgid "German"
+msgstr "ドイツ語"
+
+#: ../post2pdf-converter-admin.php:267
+msgid "Irish"
+msgstr "アイルランド語"
+
+#: ../post2pdf-converter-admin.php:268
+msgid "Galician"
+msgstr "ガリシア語"
+
+#: ../post2pdf-converter-admin.php:269
+msgid "Georgian"
+msgstr "グルジア語"
+
+#: ../post2pdf-converter-admin.php:270
+msgid "Haitian Creole"
+msgstr "ハイチ語"
+
+#: ../post2pdf-converter-admin.php:271
+msgid "Hebrew"
+msgstr "ヘブライ語"
+
+#: ../post2pdf-converter-admin.php:272
+msgid "Hungarian"
+msgstr "ハンガリー語"
+
+#: ../post2pdf-converter-admin.php:273
+msgid "Armenian"
+msgstr "アルメニア語"
+
+#: ../post2pdf-converter-admin.php:274
+msgid "Indonesian"
+msgstr "インドネシア語"
+
+#: ../post2pdf-converter-admin.php:275
+msgid "Italian"
+msgstr "イタリア語"
+
+#: ../post2pdf-converter-admin.php:276
+msgid "Japanese"
+msgstr "日本語"
+
+#: ../post2pdf-converter-admin.php:277
+msgid "Korean"
+msgstr "ハングル"
+
+#: ../post2pdf-converter-admin.php:278
+msgid "Macedonian"
+msgstr "マケドニア語"
+
+#: ../post2pdf-converter-admin.php:279
+msgid "Malay"
+msgstr "マレー語"
+
+#: ../post2pdf-converter-admin.php:280
+msgid "Maltese"
+msgstr "マルタ語"
+
+#: ../post2pdf-converter-admin.php:281
+msgid "Moldavian"
+msgstr "モルダビア語"
+
+#: ../post2pdf-converter-admin.php:282
+msgid "Moldovan"
+msgstr "モルドバ語"
+
+#: ../post2pdf-converter-admin.php:283
+msgid "Norwegian Bokmål"
+msgstr "ノルウェー語"
+
+#: ../post2pdf-converter-admin.php:284
+msgid "Polish"
+msgstr "ポーランド語"
+
+#: ../post2pdf-converter-admin.php:285
+msgid "Portuguese"
+msgstr "ポルトガル語"
+
+#: ../post2pdf-converter-admin.php:286
+msgid "Romanian"
+msgstr "ルーマニア語"
+
+#: ../post2pdf-converter-admin.php:287
+msgid "Russian"
+msgstr "ロシア語"
+
+#: ../post2pdf-converter-admin.php:288
+msgid "Serbian"
+msgstr "セルビア語"
+
+#: ../post2pdf-converter-admin.php:289
+msgid "Slovenian"
+msgstr "スロベニア語"
+
+#: ../post2pdf-converter-admin.php:290
+msgid "Spanish"
+msgstr "スペイン語"
+
+#: ../post2pdf-converter-admin.php:291
+msgid "Swahili"
+msgstr "スワヒリ語"
+
+#: ../post2pdf-converter-admin.php:292
+msgid "Swedish"
+msgstr "スウェーデン語"
+
+#: ../post2pdf-converter-admin.php:293
+msgid "Urdu"
+msgstr "ウルドゥー語"
+
+#: ../post2pdf-converter-admin.php:294
+msgid "Welsh"
+msgstr "ウェールズ語"
+
+#: ../post2pdf-converter-admin.php:295
+msgid "Yiddish"
+msgstr "イディッシュ語"
+
+#: ../post2pdf-converter-admin.php:296
+msgid "Other(Text direction: LTR)"
+msgstr "その他の言語（記述方向：左から右）"
+
+#: ../post2pdf-converter-admin.php:297
+msgid "Other(Text direction: RTL)"
+msgstr "その他の言語（記述方向：右から左）"
+
+#: ../post2pdf-converter-admin.php:307
+msgid "1. Download Link Settings"
+msgstr "１．ダウンロードリンクの設定"
+
+#: ../post2pdf-converter-admin.php:310
+msgid "Add download link to"
+msgstr "ダウンロードリンクを追加"
+
+#: ../post2pdf-converter-admin.php:312
+msgid "Posts"
+msgstr "投稿"
+
+#: ../post2pdf-converter-admin.php:312
+msgid "Pages"
+msgstr "固定ページ"
+
+#: ../post2pdf-converter-admin.php:313
+msgid "Put a download link on the posts/pages."
+msgstr "ダウンロードリンクを投稿や固定ページに設置します。"
+
+#: ../post2pdf-converter-admin.php:317
+msgid "Exclusion"
+msgstr "除外するページ"
+
+#: ../post2pdf-converter-admin.php:320
+msgid "Enter comma-separated Post_id(s).<br />The download link will not be shown on Posts/Pages with enterd Post_id."
+msgstr "カンマ区切りで投稿IDを入力します。<br />入力した投稿IDを持つ投稿、固定ページでは、ダウンロードリンクが表示されません。"
+
+#: ../post2pdf-converter-admin.php:324
+msgid "Icon size"
+msgstr "アイコンサイズ"
+
+#: ../post2pdf-converter-admin.php:333
+msgid "None"
+msgstr "なし"
+
+#: ../post2pdf-converter-admin.php:334
+msgid "Custom icon"
+msgstr "独自アイコン"
+
+#: ../post2pdf-converter-admin.php:335
+msgid "Custom icon file name"
+msgstr "アイコンのファイル名"
+
+#: ../post2pdf-converter-admin.php:336
+msgid "Choose PDF icon size.<br />If you want to use your cutom icon, upload your image to /wp-content/tcpdf-iamges/ directory(If not exist, create it).<br />After uploading, choose 'Custom icon' and enter iamge file name."
+msgstr "アイコンのサイズを選択して下さい。<br />独自のアイコンを使いたいなら、画像ファイルを「wp-content/tcpdf-ｉｍａｇｅｓ」ディレクトリにアップロードします。<br />ディレクトリが無ければ作成して下さい。<br />アップロード終了後に、「独自アイコン」を選択し、画像ファイル名を入力します。"
+
+#: ../post2pdf-converter-admin.php:340
+msgid "Link text"
+msgstr "リンクテキスト"
+
+#: ../post2pdf-converter-admin.php:343
+msgid "Enter text for the download link."
+msgstr "ダウンロードリンクとして表示するテキストを入力します。"
+
+#: ../post2pdf-converter-admin.php:347
+#: ../post2pdf-converter-admin.php:497
+msgid "Font size"
+msgstr "フォントサイズ"
+
+#: ../post2pdf-converter-admin.php:364
+msgid "Choose font size for the link text."
+msgstr "リンクテキストのフォントサイズを選択します。"
+
+#: ../post2pdf-converter-admin.php:368
+msgid "Position"
+msgstr "位置"
+
+#: ../post2pdf-converter-admin.php:371
+msgid "Before the post/page content block"
+msgstr "投稿、固定ページの先頭"
+
+#: ../post2pdf-converter-admin.php:372
+msgid "After the post/page content block"
+msgstr "投稿、固定ページの後ろ"
+
+#: ../post2pdf-converter-admin.php:373
+msgid "Before and After the post/page content block"
+msgstr "投稿、固定ページの先頭と後ろ"
+
+#: ../post2pdf-converter-admin.php:375
+msgid "Choose display position of the download link."
+msgstr "ダウンロードリンクの表示位置を選択します。"
+
+#: ../post2pdf-converter-admin.php:379
+msgid "Margin"
+msgstr "マージン"
+
+#: ../post2pdf-converter-admin.php:381
+msgid "Top margin"
+msgstr "上マージン"
+
+#: ../post2pdf-converter-admin.php:381
+msgid "px"
+msgstr "px"
+
+#: ../post2pdf-converter-admin.php:381
+msgid "Bottom margin"
+msgstr "下マージン"
+
+#: ../post2pdf-converter-admin.php:382
+msgid "Set margin for the download link block."
+msgstr "ダウンロードリンクのマージンを設定します。"
+
+#: ../post2pdf-converter-admin.php:386
+msgid "Right justification"
+msgstr "右寄せ"
+
+#: ../post2pdf-converter-admin.php:389
+msgid "Justify the download link block to the right."
+msgstr "ダウンロードリンクを右寄せ表示する。"
+
+#: ../post2pdf-converter-admin.php:393
+msgid "CSS for download link"
+msgstr "ダウンロードリンクのためのCSS"
+
+#: ../post2pdf-converter-admin.php:396
+msgid "If you want to apply your own css to the download link, disable this option."
+msgstr "ダウンロードリンクに独自のCSSを適用したいなら、無効化して下さい。"
+
+#: ../post2pdf-converter-admin.php:400
+msgid "Link action"
+msgstr "リンクの動作"
+
+#: ../post2pdf-converter-admin.php:403
+msgid "Download"
+msgstr "ダウンロード"
+
+#: ../post2pdf-converter-admin.php:404
+msgid "Open with the browser"
+msgstr "ブラウザーで開く"
+
+#: ../post2pdf-converter-admin.php:406
+msgid "When 'Open with the browser' is chosen, This plugin will output PDF to the browser."
+msgstr "「ブラウザーで開く」を選択した場合、プラウザにPDFを出力しようとします。"
+
+#: ../post2pdf-converter-admin.php:410
+msgid "Access"
+msgstr "アクセス"
+
+#: ../post2pdf-converter-admin.php:413
+msgid "Unrestraint"
+msgstr "無制限"
+
+#: ../post2pdf-converter-admin.php:414
+msgid "Deny any access with the download URL directly"
+msgstr "ダウンロードURLへの直接アクセスを禁止"
+
+#: ../post2pdf-converter-admin.php:415
+msgid "Allow only registered users"
+msgstr "ログインユーザーのみ許可"
+
+#: ../post2pdf-converter-admin.php:417
+msgid "You can restrict access to the download link.<br/>When 'Deny any access with the download URL directly' is chosen, HTTP referrer must contain your WordPress URL.<br />When 'Allow only registered users' is chosen, Only registered users can download a PDF."
+msgstr "ダウンロードリンクへのアクセスを制限できます。<br/>「ダウンロードURLへの直接アクセスを禁止」は、リファラにWordPressのURLが含まれないアクセスを禁止します。<br />「ログインユーザーのみ許可」を選択した場合は、ログイン済みのユーザーのみがPDFをダウンロード出来ます。"
+
+#: ../post2pdf-converter-admin.php:421
+msgid "Shortcode"
+msgstr "ショートコード"
+
+#: ../post2pdf-converter-admin.php:424
+msgid "You can insert the download link into your posts/pages using 'Shortcode'.<br />e.g.: <code>[pdf]Click here to get a PDF[/pdf]</code>"
+msgstr "ショートコードを使って、記事や固定ページにダウンロードリンクを挿入出来ます。<br />書式：<code>[pdf]Click here to get a PDF[/pdf]</code>"
+
+#: ../post2pdf-converter-admin.php:428
+msgid "Nofollow"
+msgstr "クロールをブロック"
+
+#: ../post2pdf-converter-admin.php:431
+msgid "This plugin will add rel=\"nofollow\" into the download link to prevent search engines from crawling and indexing PDF files."
+msgstr "検索エンジンのクロールをブロックし、PDFファイルを登録させないために、ダウンロードリンクにrel=\"nofollow\"属性を追加します。"
+
+#: ../post2pdf-converter-admin.php:435
+msgid "2. Cache Settings"
+msgstr "２．キャッシュの設定"
+
+#: ../post2pdf-converter-admin.php:438
+msgid "Cache"
+msgstr "キャッシュ"
+
+#: ../post2pdf-converter-admin.php:441
+msgid "Created PDFs will be cached locally.<br />It will improve performance and reduce the server load."
+msgstr "作成されたPDFファイルをキャッシュします。<br />キャッシュは、パーフォーマンスの向上とサーバー負荷の軽減に役立ちます。"
+
+#: ../post2pdf-converter-admin.php:445
+msgid "Temporary cache"
+msgstr "一時キャッシュ"
+
+#: ../post2pdf-converter-admin.php:448
+msgid "When this plugin is creating a PDF, temporary data is cached on serevr disk.<br />It will reduce server memory usage. However it may also cause slow performance or fatal error.<br />Temporary cached files will be cleared automatically."
+msgstr "有効化すると、一時的なデータをサーバーのディスクに保存します。<br />サーバーメモリの節約に効果がありますが、パフォーマンスの低下や致命的なエラーを引き起こすかもしれません。<br />一時キャッシュは、自動的に削除されます。"
+
+#: ../post2pdf-converter-admin.php:452
+msgid "3. PDF Settings"
+msgstr "３．PDFの設定"
+
+#: ../post2pdf-converter-admin.php:455
+msgid "Language"
+msgstr "言語"
+
+#: ../post2pdf-converter-admin.php:462
+msgid "Choose content language."
+msgstr "コンテンツの言語を選択します。"
+
+#: ../post2pdf-converter-admin.php:466
+msgid "File name"
+msgstr "ファイル名"
+
+#: ../post2pdf-converter-admin.php:469
+#: ../post2pdf-converter-admin.php:566
+msgid "Title"
+msgstr "タイトル"
+
+#: ../post2pdf-converter-admin.php:470
+#: ../post2pdf-converter-admin.php:652
+msgid "Post id"
+msgstr "投稿ID"
+
+#: ../post2pdf-converter-admin.php:472
+msgid "Define PDF file name.<br />You can choose title-based filename or post id-based filename."
+msgstr "PDFのファイル名の定義。<br />タイトルベースのファイル名と投稿IDベースのファイル名から選択できます。"
+
+#: ../post2pdf-converter-admin.php:476
+msgid "Font"
+msgstr "フォント"
+
+#: ../post2pdf-converter-admin.php:479
+msgid "This plugin choose the best suited font and set it as the default font automatically.<br />You can also enter another font name to change font."
+msgstr "このプラグインは、自動的に最適なフォント選択し、デフォルトのフォントとして設定します。<br />また、フォント名を入力して、フォントを変更することも出来ます。"
+
+#: ../post2pdf-converter-admin.php:483
+msgid "Monospaced font"
+msgstr "等幅フォント"
+
+#: ../post2pdf-converter-admin.php:486
+msgid "Set default monospaced font."
+msgstr "デフォルトの等幅フォントを設定します。"
+
+#: ../post2pdf-converter-admin.php:490
+msgid "Safe fonts directory"
+msgstr "安全なフォントディレクトリ"
+
+#: ../post2pdf-converter-admin.php:492
+msgid "Place font files in /wp-content/tcpdf-fonts"
+msgstr "フォントを「/wp-content/tcpdf-fonts」に置く"
+
+#: ../post2pdf-converter-admin.php:493
+msgid "This plugin allow you to place font files in /wp-content/tcpdf-fonts.<br />Once you enable this option, after automatic updating, your fonts will never be removed.<br />If you adds your own fonts, you should enable this option.<br />Note: Before this option is enabled, you must create /wp-content/tcpdf-fonts/ directory manually.<br />Next, upload/move fonts to new directory and enable this option.<br />Orignal fonts: Unzip a plugin zip file and you can find orignal fonts in /post2pdf-converter/tcpdf/fonts.<br />Original fonts directory: /YOUR PLUGIN DIRECTORY/post2pdf-converter/tcpdf/fonts<br />Now you can remove original fonts directory."
+msgstr "フォントファイルを「wp-content/tcpdf-fonts」に置くことが許されます。<br />有効にすれば、自動更新の際もフォントが削除されません。<br />もし、フォントを追加しているなら、このオプションを有効にすべきです。<br />注意：このオプションを有効にする前に、手作業で「/wp-content/tcpdf-fonts/」ディレクトリを作成して下さい。<br />それから、フォントをこのディレクトリにアップロード（移動）し、このオプションを有効化します。<br />フォントファイル：プラグインのzipファイルを解凍すると、「/post2pdf-converter/tcpdf/fonts」にあります。<br />元のフォントディレクトリ： /プラグインディレクトリ/post2pdf-converter/tcpdf/fonts<br />以上で、元のフォントディレクトリを削除して構いません。"
+
+#: ../post2pdf-converter-admin.php:514
+msgid "Choose font size."
+msgstr "フォントサイズを選択します。"
+
+#: ../post2pdf-converter-admin.php:518
+msgid "Font subsetting"
+msgstr "Font subsetting"
+
+#: ../post2pdf-converter-admin.php:520
+msgid "enable"
+msgstr "有効"
+
+#: ../post2pdf-converter-admin.php:521
+msgid "Enable/Disable 'Font subsetting' to reduce the size of documents using large unicode font files.<br />If this option is diseabled, the whole font will be embeded in the PDF file and file size will become enlarged.<br />Note: there are some fonts that can not be embedded.(e.g. Courier, Helvetica, Times New Roman etc.)"
+msgstr "サイズの大きなフォントを使用した場合でも、ファイルサイズの肥大化を抑えられる「Font subsetting」オプションの有効化／無効化。<br />もし、このオプションが無効化された場合は、フォントが丸ごと、PDFファイルに組み込まれるようになり、ファイルサイズも大きくなります。<br />注意：フォントによっては、PDFに組み込めません。（例：Courier、Helvetica、Times New Roman等。）"
+
+#: ../post2pdf-converter-admin.php:525
+msgid "Image ratio"
+msgstr "イメージサイズ（比）"
+
+#: ../post2pdf-converter-admin.php:548
+msgid "Set image ratio.<br />Note: With increasing numerical value, you will get smaller images."
+msgstr "イメージサイズ（比）を設定します。<br />注意：数値が大きほど、画像は小さくなります。"
+
+#: ../post2pdf-converter-admin.php:552
+msgid "Header"
+msgstr "ヘッダー"
+
+#: ../post2pdf-converter-admin.php:555
+msgid "Show/Hide header."
+msgstr "ヘッダーの表示／非表示。"
+
+#: ../post2pdf-converter-admin.php:559
+msgid "Header logo"
+msgstr "ヘッダーロゴ"
+
+#: ../post2pdf-converter-admin.php:561
+msgid "Show a logo on the header"
+msgstr "ヘッダーでロゴを表示"
+
+#: ../post2pdf-converter-admin.php:561
+msgid "Image file"
+msgstr "画像ファイル"
+
+#: ../post2pdf-converter-admin.php:561
+msgid "Logo width"
+msgstr "ロゴの幅"
+
+#: ../post2pdf-converter-admin.php:562
+msgid "You can set your own logo on the header.<br />First, create /wp-content/tcpdf-images/ directory manually.<br />Next, upload iamge file(jpeg, jpg, png or gif) there and enter your image file name.<br />You can also upload your image to /YOUR PLUGIN DIRECTORY/post2pdf-converter/tcpdf/images directory."
+msgstr "ヘッダーに表示されるロゴを変更することが出来ます。<br />まず、手作業で「/wp-content/tcpdf-images/」ディレクトリを作成して下さい。<br />それから、画像ファイル（jpeg、jpg、png、gif）を、そこへアップロードし、ファイル名を入力します。<br />「/あなたのプラグインディレクトリ/post2pdf-converter/tcpdf/images」へアップロードしても構いません。"
+
+#: ../post2pdf-converter-admin.php:569
+msgid "Show/Hide title."
+msgstr "タイトルの表示／非表示。"
+
+#: ../post2pdf-converter-admin.php:573
+msgid "Wrap title"
+msgstr "タイトルを折り返す"
+
+#: ../post2pdf-converter-admin.php:576
+msgid "If title is too long, wrap the title on a new line."
+msgstr "タイトルが長すぎる場合、タイトルを次の行へ折り返します。"
+
+#: ../post2pdf-converter-admin.php:580
+msgid "Signature"
+msgstr "署名"
+
+#: ../post2pdf-converter-admin.php:582
+msgid "Add signature"
+msgstr "署名を追加"
+
+#: ../post2pdf-converter-admin.php:584
+msgid "Border"
+msgstr "ボーダー"
+
+#: ../post2pdf-converter-admin.php:584
+msgid "Fill"
+msgstr "塗りつぶし"
+
+#: ../post2pdf-converter-admin.php:585
+msgid "Enter TEXT or HTML. It will be inserted below your content.<br />For showing your signature, license agreement, message."
+msgstr "テキストまたはHTMLを入力します。それらは、コンテンツの下に表示されます。<br />署名、ライセンス、メッセージの表示などに使えます。"
+
+#: ../post2pdf-converter-admin.php:589
+msgid "Footer"
+msgstr "フッター"
+
+#: ../post2pdf-converter-admin.php:592
+msgid "Show/Hide footer."
+msgstr "フッターの表示／非表示。"
+
+#: ../post2pdf-converter-admin.php:596
+msgid "Filters"
+msgstr "フィルター"
+
+#: ../post2pdf-converter-admin.php:599
+msgid "Apply WordPress default filters to the title and content."
+msgstr "タイトルとコンテンツにWordPressのデフォルトフィルターに適用する。"
+
+#: ../post2pdf-converter-admin.php:603
+msgid "Shortcode handling"
+msgstr "ショートコードの処理"
+
+#: ../post2pdf-converter-admin.php:606
+msgid "Parse"
+msgstr "処理する"
+
+#: ../post2pdf-converter-admin.php:607
+msgid "Remove"
+msgstr "削除する"
+
+#: ../post2pdf-converter-admin.php:609
+msgid "Choose shortcode handling."
+msgstr "ショートコードの処理方法を選択します。"
+
+#: ../post2pdf-converter-admin.php:613
+msgid "Add default font to font-family"
+msgstr "フォントをfont-familyに追加"
+
+#: ../post2pdf-converter-admin.php:616
+msgid "If a PDF file has garbled characters, try to enable this option.<br />When enabled, if your post has 'font-family' properties in 'style' attributes,<br />this plugin will add the default font for PDF to them."
+msgstr "もし、PDFファイルが文字化けするならば、このオプションを有効にしてみて下さい。<br />有効にすると、投稿の中でstyle属性にfont-familyプロパティが設定されている場合、<br />PDF用のデフォルトフォントをfont-familyプロパティに追加します。"
+
+#: ../post2pdf-converter-admin.php:621
+msgid "Save Changes"
+msgstr "設定を保存"
+
+#: ../post2pdf-converter-admin.php:624
+msgid "4. Restore all settings to default and Clear Cache"
+msgstr "４．設定のリセットとキャッシュのクリア"
+
+#: ../post2pdf-converter-admin.php:629
+msgid "Reset All Settings"
+msgstr "設定をリセット"
+
+#: ../post2pdf-converter-admin.php:636
+msgid "Clear Cache"
+msgstr "キャッシュをクリア"
+
+#: ../post2pdf-converter-admin.php:639
+msgid "5. PDF Converter"
+msgstr "５．PDFファイルの作成"
+
+#: ../post2pdf-converter-admin.php:648
+msgid "This plugin also provides the PDF Converting feature only for administrators here.<br />You can convert a specified post/page to a PDF manually and download it."
+msgstr "このプラグインは、管理者専用のPDF変換ツールも提供します。<br />ここで、投稿や固定ページをPDFに変換し、ダウンロード出来ます。"
+
+#: ../post2pdf-converter-admin.php:655
+msgid "Enter Post id."
+msgstr "投稿IDを入力します。"
+
+#: ../post2pdf-converter-admin.php:660
+msgid "Generate "
+msgstr "作成"
+
+#: ../post2pdf-converter-admin.php:663
+msgid "Your created PDF files"
+msgstr "作成済みPDF"
+
+#: ../post2pdf-converter-admin.php:687
+msgid "Last update: "
+msgstr "最終更新日："
+
+#: ../post2pdf-converter-admin.php:688
+msgid "Size: "
+msgstr "サイズ："
+
+#: ../post2pdf-converter-admin.php:700
+#: ../post2pdf-converter-admin.php:708
+msgid "Empty"
+msgstr "作成されたPDFファイルはありません。"
+
+#: ../post2pdf-converter-admin.php:716
+msgid "Delete"
+msgstr "削除"
+
+#: ../post2pdf-converter-admin.php:716
+msgid "Delete All"
+msgstr "全て削除"
+
+#: ../post2pdf-converter-admin.php:720
+msgid "6. Font converter"
+msgstr "６．フォントの変換"
+
+#: ../post2pdf-converter-admin.php:729
+msgid "You can convert your TrueType font to a font for TCPDF(This plugin) here.<br />Before converting, rename font file name in lower-case.<br />If not exist, create /wp-content/tcpdf-fonts/ directory manually.<br />And upload your font file to /wp-content/tcpdf-fonts/ directory.<br />Note: Make sure you can modify and use the font in public PDF file under your font's license."
+msgstr "TrueTypeフォントをTCPDF用（このプラグイン用）のフォントに変換出来ます。<br />変換前に、変換するフォントのファイル名を全て小文字に変更します。<br />もし、なければ、「/wp-content/tcpdf-fonts/」ディレクトリを作成して下さい。<br />最後に「/wp-content/tcpdf-fonts/」ディレクトリに変換するフォントをアップロードして下さい。<br />注意：フォントに変更を加える事、PDFファイル内での利用し、それを公開する事が、ライセンス上、許されているか確認して下さい。"
+
+#: ../post2pdf-converter-admin.php:733
+msgid "Font file name"
+msgstr "フォントファイル名"
+
+#: ../post2pdf-converter-admin.php:736
+msgid "Enter font file name."
+msgstr "フォントファイル名を入力します。"
+
+#: ../post2pdf-converter-admin.php:740
+msgid "Output path"
+msgstr "出力先"
+
+#: ../post2pdf-converter-admin.php:742
+msgid "/wp-content/tcpdf-fonts/"
+msgstr "/wp-content/tcpdf-fonts/"
+
+#: ../post2pdf-converter-admin.php:742
+msgid "/PLUGIN DIRECTORY/post2pdf-converter/tcpdf/fonts"
+msgstr "/PLUGIN DIRECTORY/post2pdf-converter/tcpdf/fonts"
+
+#: ../post2pdf-converter-admin.php:743
+msgid "Choose output path for generated font files."
+msgstr "変換後のフォントファイルの出力先ディレクトリを選択します。"
+
+#: ../post2pdf-converter-admin.php:748
+msgid "Convert"
+msgstr "変換"
+
+#: ../post2pdf-converter-admin.php:752
+msgid "7. Your System Info"
+msgstr "７．システム情報"
+
+#: ../post2pdf-converter-admin.php:755
+msgid "Server OS:"
+msgstr "サーバーのOS:"
+
+#: ../post2pdf-converter-admin.php:756
+msgid "PHP version:"
+msgstr "PHPのバージョン:"
+
+#: ../post2pdf-converter-admin.php:757
+msgid "MySQL version:"
+msgstr "MySQLのバージョン:"
+
+#: ../post2pdf-converter-admin.php:758
+msgid "Safemode:"
+msgstr "セーフモード:"
+
+#: ../post2pdf-converter-admin.php:758
+#: ../post2pdf-converter-admin.php:760
+msgid "On"
+msgstr "オン"
+
+#: ../post2pdf-converter-admin.php:758
+#: ../post2pdf-converter-admin.php:760
+msgid "Off"
+msgstr "オフ"
+
+#: ../post2pdf-converter-admin.php:759
+msgid "memory_limit:"
+msgstr "memory_limit:"
+
+#: ../post2pdf-converter-admin.php:760
+msgid "allow_url_fopen:"
+msgstr "allow_url_fopen:"
+
+#: ../post2pdf-converter-admin.php:761
+msgid "cURL:"
+msgstr "cURL:"
+
+#: ../post2pdf-converter-admin.php:761
+msgid "Installed"
+msgstr "インストール済み"
+
+#: ../post2pdf-converter-admin.php:761
+msgid "No"
+msgstr "未インストール"
+
+#: ../post2pdf-converter-admin.php:762
+msgid "WordPress version:"
+msgstr "WordPressのバージョン:"
+
+#: ../post2pdf-converter-admin.php:763
+msgid "Site URL:"
+msgstr "サイトのURL:"
+
+#: ../post2pdf-converter-admin.php:764
+msgid "WordPress URL:"
+msgstr "WordPressのURL:"
+
+#: ../post2pdf-converter-admin.php:765
+msgid "WordPress language:"
+msgstr "WordPressのロケール:"
+
+#: ../post2pdf-converter-admin.php:766
+msgid "WordPress character set:"
+msgstr "WordPressの文字コード:"
+
+#: ../post2pdf-converter-admin.php:767
+msgid "WordPress theme:"
+msgstr "WordPressのテーマ:"
+
+#: ../post2pdf-converter-admin.php:768
+msgid "POST2PDF Converter version:"
+msgstr "POST2PDF Converterのバージョン:"
+
+#: ../post2pdf-converter-admin.php:769
+msgid "POST2PDF Converter DB version:"
+msgstr "POST2PDF ConverterのDBバージョン:"
+
+#: ../post2pdf-converter-admin.php:770
+msgid "POST2PDF Converter URL:"
+msgstr "POST2PDF ConverterのURL:"
+
+#: ../post2pdf-converter-admin.php:771
+msgid "Cache directory:"
+msgstr "キャッシュディレクトリ:"
+
+#: ../post2pdf-converter-admin.php:771
+#: ../post2pdf-converter-admin.php:772
+msgid "Writable"
+msgstr "書き込み可"
+
+#: ../post2pdf-converter-admin.php:771
+#: ../post2pdf-converter-admin.php:772
+msgid "Unwritable"
+msgstr "書き込み不可"
+
+#: ../post2pdf-converter-admin.php:772
+msgid "PDF cache directory:"
+msgstr "PDFキャッシュディレクトリ:"
+
+#: ../post2pdf-converter-admin.php:773
+msgid "Your browser:"
+msgstr "ブラウザ:"
+
+#: ../post2pdf-converter-admin.php:777
+msgid "To report a bug ,submit requests and feedback, "
+msgstr "バグの報告、ご要望、ご感想は、"
+
+#: ../post2pdf-converter-admin.php:777
+msgid "Use <a href=\"http://wordpress.org/tags/post2pdf-converter?forum_id=10\">Forum</a> or <a href=\"http://www.near-mint.com/blog/contact\">Mail From</a>"
+msgstr "<a href=\"http://wordpress.org/tags/post2pdf-converter?forum_id=10\">フォーラム</a> または、<a href=\"http://www.near-mint.com/blog/contact\">メールフォーム</a>まで"
+
+#: ../post2pdf-converter-bootstrap.php:30
+msgid "Could not find wp-load.php"
+msgstr "wp-load.phpが見つかりません。"
+
+#: ../post2pdf-converter-font-maker.php:13
+#: ../post2pdf-converter-pdf-delete.php:13
+#: ../post2pdf-converter-pdf-delete.php:27
+#: ../post2pdf-converter-pdf-maker.php:13
+#: ../post2pdf-converter-pdf-maker.php:57
+#: ../post2pdf-converter-pdf-maker.php:65
+#: ../post2pdf-converter-pdf-maker.php:566
+#: ../post2pdf-converter-pdf-maker.php:636
+msgid "You are not allowed to access this file."
+msgstr "このファイルへのアクセスは許可されていません。"
+
+#: ../post2pdf-converter-font-maker.php:53
+msgid "<strong>Error: Font not found.</strong><br /><br />Path: "
+msgstr "<strong>エラー：フォントが見つかりません。</strong><br /><br />パス： "
+
+#: ../post2pdf-converter-font-maker.php:63
+msgid "<strong>Converting completed successfully.</strong><br /><br />Font name: "
+msgstr "<strong>フォントの変換が完了しました。</strong><br /><br />フォント名： "
+
+#: ../post2pdf-converter-font-maker.php:63
+msgid "<br /><br />Output path:<br />"
+msgstr "<br /><br />出力先：<br />"
+
+#: ../post2pdf-converter-font-maker.php:63
+msgid ".php<br />"
+msgstr ".php<br />"
+
+#: ../post2pdf-converter-font-maker.php:63
+msgid ".z<br />"
+msgstr ".z<br />"
+
+#: ../post2pdf-converter-font-maker.php:63
+msgid ".ctg.z<br /><br />Make a note of this message!<br />Go to "
+msgstr ".ctg.z<br /><br />このメッセージを書き留めて下さい！<br />"
+
+#: ../post2pdf-converter-font-maker.php:63
+msgid "the settig panel</a> and set this Font."
+msgstr "設定画面</a>へ戻り、このフォントを登録して下さい。"
+
+#: ../post2pdf-converter-font-maker.php:63
+#: ../post2pdf-converter-pdf-delete.php:56
+#: ../post2pdf-converter-pdf-maker.php:556
+msgid "POST2PDF Converter"
+msgstr "POST2PDF Converter"
+
+#: ../post2pdf-converter-font-maker.php:65
+msgid "<strong>Error: Can't convert.</strong><br /><br />Font: "
+msgstr "<strong>エラー：フォントを変換出来ません。</strong><br /><br />フォント： "
+
+#: ../post2pdf-converter-pdf-delete.php:54
+msgid "<strong>Error: Can't delete PDFs.</strong>"
+msgstr "<strong>エラー：PDFファイルを削除出来ません。</strong>"
+
+#: ../post2pdf-converter-pdf-delete.php:56
+msgid "<strong>Deleting completed successfully.</strong><br /><br />Go back to "
+msgstr "<strong>PDFの削除が完了しました。</strong><br /><br />"
+
+#: ../post2pdf-converter-pdf-delete.php:56
+#: ../post2pdf-converter-pdf-maker.php:556
+msgid "the settig panel</a>."
+msgstr "設定画面</a>へ戻る。"
+
+#: ../post2pdf-converter-pdf-maker.php:41
+msgid "Invalid ISO Language Code."
+msgstr "不正なISO言語コードです。"
+
+#: ../post2pdf-converter-pdf-maker.php:89
+#: ../post2pdf-converter-pdf-maker.php:572
+msgid "Post does not exists."
+msgstr "投稿は存在しません。"
+
+#: ../post2pdf-converter-pdf-maker.php:556
+msgid "<strong>Generating completed successfully.</strong><br /><br />Post/Page title: "
+msgstr "<strong>PDFファイルの生成が完了しました。</strong><br /><br />タイトル： "
+
+#: ../post2pdf-converter-pdf-maker.php:556
+msgid "<br />Output path: "
+msgstr "<br />出力先： "
+
+#: ../post2pdf-converter-pdf-maker.php:556
+msgid "<br /><br />Go back to "
+msgstr "<br /><br />"
+
+#: ../post2pdf-converter-pdf-maker.php:605
+msgid "<strong>Error: File not found.</strong><br /><br />Path: "
+msgstr "<strong>エラー：ファイルが見つかりません。</strong><br /><br />パス： "
+
+#: ../post2pdf-converter-pdf-maker.php:627
+msgid "<strong>Error: Failed to open the file.</strong><br /><br />Path: "
+msgstr "<strong>エラー：ファイルをオープンできません。</strong><br /><br />パス： "
+
+#: ../post2pdf-converter.php:78
+msgid "Download this page in PDF format"
+msgstr "PDF形式で記事をダウンロードする"
+
+#: ../post2pdf-converter.php:548
+msgid "POST2PDF Converter has successfully created new DB table.<br />If you upgraded to this version, some setting options may be added or reset to the default values.<br />Go to the <a href=\"options-general.php?page=post2pdf-converter-options\">setting panel</a> and configure POST2PDF Converter now. Once you save your settings, this message will be cleared."
+msgstr "POST2PDF Converterは、新しいデータベーステーブルの作成に成功しました。<br />以前のバージョンからアップデートした場合は、新しい設定オプションが追加されているかもしれません、<br /><a href=\"options-general.php?page=post2pdf-converter-options\">設定画面</a>で、POST2PDF Converterの設定を行って下さい。一度、設定を保存すれば、このメッセージは消えます。"
+
+#: ../post2pdf-converter.php:562
+msgid "Settings"
+msgstr "設定"
+

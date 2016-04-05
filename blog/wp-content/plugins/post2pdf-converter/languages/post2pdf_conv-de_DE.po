@@ -1,0 +1,512 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: post2pdf-converter\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-12-27 17:00+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: redcocker <masa153@gmail.com>\n"
+"Language-Team: uli sobers <ulrich@sobers.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../post2pdf-converter-bootstrap.php:30
+msgid "Could not find wp-load.php"
+msgstr "Die Datei \"wp-load.php\" wurde nicht gefunden"
+
+#: ../post2pdf-converter-pdf-maker.php:13
+#: ../post2pdf-converter-pdf-maker.php:26
+msgid "You are not allowed to access this file."
+msgstr "Sie haben keine Zugriffsberechtigung für diese Datei"
+
+#: ../post2pdf-converter-pdf-maker.php:38
+msgid "Post does not exists."
+msgstr "Dieser Beitrag existiert nicht"
+
+#: ../post2pdf-converter.php:62
+msgid "Download this page in PDF format"
+msgstr "Download als PDF File"
+
+#: ../post2pdf-converter.php:393
+msgid "POST2PDF Converter has successfully created new DB table.<br />If you upgraded to this version, some setting options may be added or reset to the default values.<br />Go to the <a href=\"options-general.php?page=post2pdf-converter-options\">setting panel</a> and configure POST2PDF Converter now. Once you save your settings, this message will be cleared."
+msgstr "Die erforderlichen Datenbank Tabellen wurden erfolgreich erzeugt.<br />Falls Sie ein Upgrade durchgeführt haben, wurden einige Einstellungen möglicherweise auf Standardwerte zurückgesetzt.<br />Gehen Sie auf <a href=\"options-general.php?page=post2pdf-converter-options\">Einstellungen</a> und konfigurieren Sie POST2PDF Converter gegebenenfalls neu. Diese Meldung wird danach nicht mehr angezeigt. "
+
+#: ../post2pdf-converter.php:407
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: ../post2pdf-converter.php:466
+msgid "Cheatin&#8217; uh?"
+msgstr "Nice Try"
+
+#: ../post2pdf-converter.php:520
+msgid "Settings saved."
+msgstr "Einstellungen gespeichert"
+
+#: ../post2pdf-converter.php:528
+msgid "All settings were reset. Please <a href=\"options-general.php?page=post2pdf-converter-options\">reload the page</a>."
+msgstr "RESET. Alle Einstellungen wurden zurückgesetzt. <a href=\"options-general.php?page=post2pdf-converter-options\">Hier klicken</a>, um die Seite neu zu laden."
+
+#: ../post2pdf-converter.php:533
+msgid "Afrikaans"
+msgstr "Afrikaans"
+
+#: ../post2pdf-converter.php:534
+msgid "Albanian"
+msgstr "Albanisch"
+
+#: ../post2pdf-converter.php:535
+msgid "Arabic"
+msgstr "Arabisch"
+
+#: ../post2pdf-converter.php:536
+msgid "Azerbaijanian"
+msgstr "Aserbaidschan"
+
+#: ../post2pdf-converter.php:537
+msgid "Basque"
+msgstr "Baskisch"
+
+#: ../post2pdf-converter.php:538
+msgid "Belarusian"
+msgstr "Belarus"
+
+#: ../post2pdf-converter.php:539
+msgid "Portuguese(Brazil)"
+msgstr "Portugiesisch (br)"
+
+#: ../post2pdf-converter.php:540
+msgid "Catalan"
+msgstr "Katalanisch"
+
+#: ../post2pdf-converter.php:541
+msgid "Chinese(Simplified)"
+msgstr "Chinesisch (vereinfacht)"
+
+#: ../post2pdf-converter.php:542
+msgid "Chinese(Traditional)"
+msgstr "Chinesisch (traditionell)"
+
+#: ../post2pdf-converter.php:543
+msgid "Croatian"
+msgstr "Serbokroatisch"
+
+#: ../post2pdf-converter.php:544
+msgid "Czech"
+msgstr "Tschechisch"
+
+#: ../post2pdf-converter.php:545
+msgid "Danish"
+msgstr "Dänisch"
+
+#: ../post2pdf-converter.php:546
+msgid "Dutch"
+msgstr "Niederländisch"
+
+#: ../post2pdf-converter.php:547
+msgid "English"
+msgstr "Englisch"
+
+#: ../post2pdf-converter.php:548
+msgid "Estonian"
+msgstr "Estländisch"
+
+#: ../post2pdf-converter.php:549
+msgid "Farsi"
+msgstr "Farsi"
+
+#: ../post2pdf-converter.php:550
+msgid "French"
+msgstr "Französisch"
+
+#: ../post2pdf-converter.php:551
+msgid "German"
+msgstr "Deutsch"
+
+#: ../post2pdf-converter.php:552
+msgid "Irish"
+msgstr "Irisch"
+
+#: ../post2pdf-converter.php:553
+msgid "Galician"
+msgstr "Galizisch"
+
+#: ../post2pdf-converter.php:554
+msgid "Georgian"
+msgstr "Georgisch"
+
+#: ../post2pdf-converter.php:555
+msgid "Haitian Creole"
+msgstr "Haiti (kreolisch)"
+
+#: ../post2pdf-converter.php:556
+msgid "Hebrew"
+msgstr "Hebräisch"
+
+#: ../post2pdf-converter.php:557
+msgid "Hungarian"
+msgstr "Ungarisch"
+
+#: ../post2pdf-converter.php:558
+msgid "Armenian"
+msgstr "Armenisch"
+
+#: ../post2pdf-converter.php:559
+msgid "Indonesian"
+msgstr "Indonesisch"
+
+#: ../post2pdf-converter.php:560
+msgid "Italian"
+msgstr "Italienisch"
+
+#: ../post2pdf-converter.php:561
+msgid "Japanese"
+msgstr "Japanisch"
+
+#: ../post2pdf-converter.php:562
+msgid "Korean"
+msgstr "Koreanisch"
+
+#: ../post2pdf-converter.php:563
+msgid "Macedonian"
+msgstr "Mazedonisch"
+
+#: ../post2pdf-converter.php:564
+msgid "Malay"
+msgstr "Malaysisch"
+
+#: ../post2pdf-converter.php:565
+msgid "Maltese"
+msgstr "Maltesisch"
+
+#: ../post2pdf-converter.php:566
+msgid "Moldavian"
+msgstr "Moldawisch"
+
+#: ../post2pdf-converter.php:567
+msgid "Moldovan"
+msgstr "Moldawisch"
+
+#: ../post2pdf-converter.php:568
+msgid "Norwegian Bokmål"
+msgstr "Norwegisch"
+
+#: ../post2pdf-converter.php:569
+msgid "Polish"
+msgstr "Polnisch"
+
+#: ../post2pdf-converter.php:570
+msgid "Portuguese"
+msgstr "Portugiesisch"
+
+#: ../post2pdf-converter.php:571
+msgid "Romanian"
+msgstr "Rumänisch"
+
+#: ../post2pdf-converter.php:572
+msgid "Russian"
+msgstr "Russisch"
+
+#: ../post2pdf-converter.php:573
+msgid "Serbian"
+msgstr "Serbisch"
+
+#: ../post2pdf-converter.php:574
+msgid "Slovenian"
+msgstr "Slowenisch"
+
+#: ../post2pdf-converter.php:575
+msgid "Spanish"
+msgstr "Spanisch"
+
+#: ../post2pdf-converter.php:576
+msgid "Swahili"
+msgstr "Kisuaheli"
+
+#: ../post2pdf-converter.php:577
+msgid "Swedish"
+msgstr "Schwedisch"
+
+#: ../post2pdf-converter.php:578
+msgid "Urdu"
+msgstr "Arabisch"
+
+#: ../post2pdf-converter.php:579
+msgid "Welsh"
+msgstr "Walisisch"
+
+#: ../post2pdf-converter.php:580
+msgid "Yiddish"
+msgstr "Jüdisch"
+
+#: ../post2pdf-converter.php:581
+msgid "Other(Text direction: LTR)"
+msgstr "Text: links nach rechts"
+
+#: ../post2pdf-converter.php:582
+msgid "Other(Text direction: RTL)"
+msgstr "Text: rechts nach links"
+
+#: ../post2pdf-converter.php:592
+msgid "1. Download Link Settings"
+msgstr "1. Download Link Einstellungen"
+
+#: ../post2pdf-converter.php:595
+msgid "Add download link to"
+msgstr "Download Link anhängen an "
+
+#: ../post2pdf-converter.php:597
+msgid "Posts"
+msgstr "Beiträge"
+
+#: ../post2pdf-converter.php:597
+msgid "Pages"
+msgstr "Seiten"
+
+#: ../post2pdf-converter.php:598
+msgid "Put a download link on the posts/pages."
+msgstr "Download Link in Beiträgen/Seiten zeigen. "
+
+#: ../post2pdf-converter.php:602
+msgid "Icon size"
+msgstr "Icon Größe"
+
+#: ../post2pdf-converter.php:613
+msgid "Choose PDF icon size."
+msgstr "PDF Icon Größe"
+
+#: ../post2pdf-converter.php:617
+msgid "Link text"
+msgstr "Link Text"
+
+#: ../post2pdf-converter.php:620
+msgid "Enter text for the download link."
+msgstr "Text für den Download Link "
+
+#: ../post2pdf-converter.php:624
+#: ../post2pdf-converter.php:710
+msgid "Font size"
+msgstr "Font Größe"
+
+#: ../post2pdf-converter.php:639
+msgid "Choose font size for the link text."
+msgstr "Font Größe des verlinkten Texts "
+
+#: ../post2pdf-converter.php:643
+msgid "Position"
+msgstr "Position"
+
+#: ../post2pdf-converter.php:646
+msgid "Before the post/page content block"
+msgstr "Vor dem Inhalt "
+
+#: ../post2pdf-converter.php:647
+msgid "After the post/page content block"
+msgstr "Nach dem Inhalt "
+
+#: ../post2pdf-converter.php:649
+msgid "Choose display position of the download link."
+msgstr "Anordnung des Download Links"
+
+#: ../post2pdf-converter.php:653
+msgid "Margin"
+msgstr "Rand"
+
+#: ../post2pdf-converter.php:655
+msgid "Top margin"
+msgstr "Oberer Rand"
+
+#: ../post2pdf-converter.php:655
+msgid "px"
+msgstr "px"
+
+#: ../post2pdf-converter.php:655
+msgid "Bottom margin"
+msgstr "Unterer Rand"
+
+#: ../post2pdf-converter.php:656
+msgid "Set margin for the download link block."
+msgstr "Rand Größe des Download Link Containers"
+
+#: ../post2pdf-converter.php:660
+msgid "Right justification"
+msgstr "Ausrichtung rechts"
+
+#: ../post2pdf-converter.php:663
+msgid "Justify the download link block to the right."
+msgstr "Den Download Link Container rechts ausrichten"
+
+#: ../post2pdf-converter.php:667
+msgid "Link action"
+msgstr "Link Funktion"
+
+#: ../post2pdf-converter.php:670
+msgid "Download"
+msgstr "Download"
+
+#: ../post2pdf-converter.php:671
+msgid "Open with the browser"
+msgstr "Im Browser öffnen"
+
+#: ../post2pdf-converter.php:673
+msgid "When 'Open with the browser' is chosen, This plugin will output PDF to the browser."
+msgstr "Falls \"Im Browser öffnen\" gewählt ist, wird die PDF Datei dort ausgegeben. "
+
+#: ../post2pdf-converter.php:677
+msgid "Access"
+msgstr "Zugriff"
+
+#: ../post2pdf-converter.php:680
+msgid "Unrestraint"
+msgstr "Uneingeschränkt"
+
+#: ../post2pdf-converter.php:681
+msgid "Deny any access with the download URL directly"
+msgstr "Kein direkter Zugriff über Download URL's"
+
+#: ../post2pdf-converter.php:682
+msgid "Allow only registered users"
+msgstr "Zugriff nur für registrierte Nutzer "
+
+#: ../post2pdf-converter.php:684
+msgid "You can restrict access to the download link.<br/>When 'Deny any access with the download URL directly' is chosen, HTTP referrer must contain your WordPress URL.<br />When 'Allow only registered users' is chosen, Only registered users can download a PDF."
+msgstr "Zugriffe auf Download Links können eingeschränkt werden.<br/>Wenn der Button \"Kein direkter Zugriff über Download URL's\" aktiviert ist, muss der HTTP Referrer Ihre WordPress URL enthalten.<br />Wenn der \"Zugriff nur für registrierte Nutzer \" konfiguriert ist, können nur eingeloggte Nutzer ein PDF File downloaden."
+
+#: ../post2pdf-converter.php:688
+msgid "2. PDF Settings"
+msgstr "2. PDF Einstellungen "
+
+#: ../post2pdf-converter.php:691
+msgid "Language"
+msgstr "Sprache"
+
+#: ../post2pdf-converter.php:698
+msgid "Choose content language."
+msgstr "Sprachwahl"
+
+#: ../post2pdf-converter.php:703
+msgid "Font"
+msgstr "Font"
+
+#: ../post2pdf-converter.php:705
+msgid "Use specified font"
+msgstr "Benutze eigenen Font"
+
+#: ../post2pdf-converter.php:706
+msgid "When this option is disabled, the default font is determined by setting of 'Language' option.<br />If you want to use another font, enable this option and enter font name."
+msgstr "Falls diese Option nicht genutzt wird, wird ein Font gemäß den Einstellungen in den Sprach Optionen angezeigt.<br />Zum Ändern aktivieren sie diese Option und geben Sie einen Font Namen ein."
+
+#: ../post2pdf-converter.php:725
+msgid "Choose font size."
+msgstr "Wählen Sie eine Font Größe"
+
+#: ../post2pdf-converter.php:729
+msgid "Font subsetting"
+msgstr "Weitere Einstellmöglichkeiten"
+
+#: ../post2pdf-converter.php:731
+msgid "enable"
+msgstr "ermögliche"
+
+#: ../post2pdf-converter.php:732
+msgid "Enable/Disable 'Font subsetting' to reduce the size of documents using large unicode font files.<br />If this option is diseabled, the whole font will be embeded in the PDF file and file size will become enlarged.<br />Note: there are some fonts that can not be embedded.(e.g. Courier, Helvetica, Times New Roman etc.)"
+msgstr "\"Weitere Font Einstellungen\"  Ein/Aus. Reduziert die Dokument Größe durch Verwendung großer Unicode Font Sätze.<br />Der Schalter \"AUS\" erzeugt große PDF Files durch Einbettung von Fonts in das Dokument.<br />Einige Standard Fonts können nicht eingebettet werden (bspw.: Courier, Helvetica, Times New Roman)"
+
+#: ../post2pdf-converter.php:736
+msgid "Shortcode handling"
+msgstr "Kurzbefehle"
+
+#: ../post2pdf-converter.php:739
+msgid "Parse"
+msgstr "Parsen"
+
+#: ../post2pdf-converter.php:740
+msgid "Remove"
+msgstr "Entfernen"
+
+#: ../post2pdf-converter.php:742
+msgid "Choose shortcode handling."
+msgstr "Kurzbefehl Bearbeitung wählen "
+
+#: ../post2pdf-converter.php:748
+msgid "Save Changes"
+msgstr "Änderungen speichern"
+
+#: ../post2pdf-converter.php:751
+msgid "3. Restore all settings to default"
+msgstr "3. Alle Standard Einstellungen wiederherstellen"
+
+#: ../post2pdf-converter.php:756
+msgid "Reset All Settings"
+msgstr "Alle Einstellungen zurück setzen"
+
+#: ../post2pdf-converter.php:759
+msgid "4. Your System Info"
+msgstr "4. System Informationen"
+
+#: ../post2pdf-converter.php:762
+msgid "Server OS:"
+msgstr "Server Betriebssystem: "
+
+#: ../post2pdf-converter.php:763
+msgid "PHP version:"
+msgstr "PHP Version: "
+
+#: ../post2pdf-converter.php:764
+msgid "MySQL version:"
+msgstr "MySQL Version: "
+
+#: ../post2pdf-converter.php:765
+msgid "WordPress version:"
+msgstr "WordPress Version: "
+
+#: ../post2pdf-converter.php:766
+msgid "Site URL:"
+msgstr "Site URL: "
+
+#: ../post2pdf-converter.php:767
+msgid "WordPress URL:"
+msgstr "WordPress URL: "
+
+#: ../post2pdf-converter.php:768
+msgid "WordPress language:"
+msgstr "WordPress Sprache: "
+
+#: ../post2pdf-converter.php:769
+msgid "WordPress character set:"
+msgstr "WordPress Zeichenkodierung: "
+
+#: ../post2pdf-converter.php:770
+msgid "WordPress theme:"
+msgstr "Aktives WordPress Theme: "
+
+#: ../post2pdf-converter.php:771
+msgid "POST2PDF Converter version:"
+msgstr "POST2PDF Converter Version: "
+
+#: ../post2pdf-converter.php:772
+msgid "POST2PDF Converter DB version:"
+msgstr "POST2PDF Converter DataBase Version: "
+
+#: ../post2pdf-converter.php:773
+msgid "POST2PDF Converter URL:"
+msgstr "POST2PDF Converter URL: "
+
+#: ../post2pdf-converter.php:774
+msgid "Your browser:"
+msgstr "Aktiver Browser: "
+
+#: ../post2pdf-converter.php:778
+msgid "To report a bug ,submit requests and feedback, "
+msgstr "Für Rückfragen, Bug Reports, Support, Kontakt: "
+
+#: ../post2pdf-converter.php:778
+msgid "Use <a href=\"http://wordpress.org/tags/post2pdf-converter?forum_id=10\">Forum</a> or <a href=\"http://www.near-mint.com/blog/contact\">Mail From</a>"
+msgstr "<a href=\"http://wordpress.org/tags/post2pdf-converter?forum_id=10\">besucht mein Forum</a> oder <a href=\"http://www.near-mint.com/blog/contact\">schickt mir eine Mail in Englisch</a>"
+

@@ -1,0 +1,490 @@
+はじめに
+
+「POST2PDF Converter」は、訪問者が投稿や固定ページをPDFファイルとして簡単にダウンロード出来るようにします。
+
+また、管理者は、投稿や固定ベージの先頭または後ろにダウンロード用リンクを簡単に追加出来ます。
+
+特徴
+・PDFの作成のためにTCPDF（http://www.tcpdf.org/）を使用。
+・投稿や固定ページを動的、あるいは静的にPDFファイルに変換。
+・全て、または特定の投稿、固定ページにPDFのダウンロードリンクを簡単に追加。
+・作成されたPDFのキャッシュ機能を搭載。
+・簡単な操作でTrueTypeフォントを追加できる。
+・簡単な設定。
+・管理画面やメッセージは、英語、日本語、ドイツ語(訳：Uli Sobers)に対応。
+
+
+= サポートするプラグイン =
+
+次のプラグインを使用しており、投稿、固定ページがソースコードを含む場合もPDFに変換できます。
+
+・WP SyntaxHighlighter：http://wordpress.org/extend/plugins/wp-syntaxhighlighter/
+・SyntaxHighlighter Evolved：http://wordpress.org/extend/plugins/syntaxhighlighter/
+・WP-Syntax：http://wordpress.org/extend/plugins/wp-syntax/
+・CodeColorer：http://wordpress.org/extend/plugins/codecolorer/
+・WP-CodeBox：http://wordpress.org/extend/plugins/wp-codebox/
+・WP-SynHighlight：http://wordpress.org/extend/plugins/wp-synhighlight/
+・Syntax Highlighter Compress：http://wordpress.org/extend/plugins/syntax-highlighter-compress/
+・Auto SyntaxHighlighter：http://wordpress.org/extend/plugins/auto-syntaxhighlighter/
+・Syntax Highlighter and Code Colorizer for WordPress：http://wordpress.org/extend/plugins/syntax-highlighter-and-code-prettifier/
+・Syntax Highlighter MT：http://wordpress.org/extend/plugins/syntax-highlighter-mt/
+・SyntaxHighlighterPro：http://wordpress.org/extend/plugins/syntaxhighlighterpro/
+・Easy Google Syntax Highlighter：http://wordpress.org/extend/plugins/easy-google-syntax-highlighter/
+・WP-GeSHi-Highlight：http://wordpress.org/extend/plugins/wp-geshi-highlight/
+・WP Code Highlight：http://wordpress.org/extend/plugins/wp-code-highlight/　他
+
+
+次のプラグインを使用しており、投稿、固定ページがLaTexで記述された数式、化学式、グラフを含む場合もPDFに変換できます。
+
+・WP QuickLaTeX：http://wordpress.org/extend/plugins/wp-quicklatex/
+
+次のプラグインを使用して場合、翻訳されたPDFファイルを生成します。
+
+・qTranslate：http://wordpress.org/extend/plugins/qtranslate/
+
+※このサポートプラグインリストは、一例です。
+
+
+1.動作環境
+
+・WordPress バージョン2.8 以上
+・PHP 5
+
+
+2.インストール
+
+・ダウンロードしたファイルを解凍し、「post2pdf-converter」フォルダごと、WordPressのプラグインディレクトリ（wp-content/plugins/）にアップロードします。
+・WordPressの管理画面の「プラグイン」で、このプラグインを有効化します。
+・WordPressの管理画面の「設定」の中の「POST2PDF Converter」という項目で設定を行います。
+
+
+3.アップデート
+
+WordPressの管理画面で、「POST2PDF Converter」を停止し、インストールの要領でファイルをサーバーにアップロード、上書きした後、再度、有効化する。
+
+
+4.アンインストール
+
+WordPressの管理画面で、まずプラグインを停止し、削除を実行する。
+
+
+5.フォントの変更
+
+・「/wp-content/plugins/post2pdf-converter/tcpdf/fonts」ディレクトリに、*.php、*.z、*.ctg.zという名前のファイルを全てアップロードします。
+・WordPressの管理画面の「設定」の中の「POST2PDF Converter」に移動します。
+・「PDFの設定」の「フォント」と「等幅フォント」オプションにフォント名を入力します。
+・PDFを受け取った相手が同じフォントを持っていなくともPDFを編集出来るようにするなら、「Font subsetting」を無効にします。
+
+※フォントファイルが「xxxx.z」なら、フォント名は、「xxxx」です。
+※「等幅フォント」にプロポーショナルフォントを割り当てないで下さい。
+
+
+6.フォント
+
+6-1.日本語フォント
+
+このプラグインは、次の日本語フォントを搭載しています。
+
+フォント名：cid0jp、kozgopromedium、kozminproregular
+
+TCPDFにバンドルされた日本語フォントでは、完全な日本語PDFを作成出来ません。
+しかし、この問題は、より良いTCPDF用の日本語フォントをインストールすることで解決されます。
+
+TCPDF用日本語フォント：http://www.near-mint.com/blog/software/rcjfont-for-tcpdf
+
+・「/wp-content/plugins/post2pdf-converter/tcpdf/fonts」ディレクトリに、*.php、*.z、*.ctg.zという名前のファイルを全てアップロードします。
+・WordPressの管理画面の「設定」の中の「POST2PDF Converter」に移動します。
+・「PDFの設定」の「フォント」と「等幅フォント」オプションにフォント名を入力します。
+・PDFを受け取った相手が同じフォントを持っていなくともPDFを編集出来るようにするなら、「Font subsetting」を無効にします。
+
+※フォントファイルが「xxxx.z」なら、フォント名は、「xxxx」です。
+※「等幅フォント」にプロポーショナルフォントを割り当てないで下さい。
+
+下記のサイトでも、TCPDF用の日本語フォントをダウンロードできます。
+
+http://www.monzen.org/Refdoc/tcpdf_freefontj/
+
+手持ちのTrueTypeフォントを使いたい場合は、設定画面の「フォントの変換」を実行し、TrueTypeフォントをTCPDF用のフォントに変換することが出来ます。
+
+
+6-2.ラテン文字、ギリシャ文字、キリル文字のためのフォント
+
+このプラグインは、次のラテン文字のフォントを搭載しています。
+
+フォント名：courier、helvetica、times
+
+次のフォントを使用することも出来ますが、PDFを受け取った相手が同じフォントを持っていなくともPDFを編集出来るようにするなら、「Font subsetting」を無効にする必要があります。
+
+フォント名: pdfacourier、pdfahelvetica、pdfatimes
+
+"FreeFont"や"DejaVu fonts"を使用することも出来ますが、PDFを受け取った相手が同じフォントを持っていなくともPDFを編集出来るようにするなら、「Font subsetting」を無効にする必要があります。
+
+
+6-3.簡体中国語のためのフォント
+
+このプラグインは、次の簡体中国語フォントを搭載しています。
+
+フォント名：cid0cs、stsongstdlight
+
+
+6-4.繁体中国語のためのフォント
+
+このプラグインは、次の繁体中国語フォントを搭載しています。
+
+フォント名：cid0ct、msungstdlight
+
+
+6-5.ハングルのためのフォント
+
+このプラグインは、次のハングルフォントを搭載しています。
+
+フォント名：cid0kr、hysmyeongjostdmedium
+
+
+6-6.キリル文字のためのフォント
+
+"FreeFont"、または"DejaVu fonts"を使用することが出来ますが、PDFを受け取った相手が同じフォントを持っていなくともPDFを編集出来るようにするなら、「Font subsetting」を無効にする必要があります。
+
+
+6-7.アラビア語のためのフォント
+
+このプラグインは、次のアラビア語フォントを搭載しています。
+
+フォント名：aealarabiya、aefurat
+
+"FreeFont"を使用することも出来ますが、PDFを受け取った相手が同じフォントを持っていなくともPDFを編集出来るようにするなら、「Font subsetting」を無効にする必要があります。
+
+
+6-8.ヘブライ語、アルメニア語、グルジア語、エチオピア語、タイ語のためのフォント
+
+"FreeFont"を使用することが出来ますが、PDFを受け取った相手が同じフォントを持っていなくともPDFを編集出来るようにするなら、「Font subsetting」を無効にする必要があります。
+
+
+6-9.DejaVu fonts
+
+このプラグインは、次の「DejaVu fonts」を搭載していますが、これらを使用し、PDFを受け取った相手が同じフォントを持っていなくともPDFを編集出来るようにするなら、「Font subsetting」を無効にする必要があります。
+
+フォント名：dejavusans、dejavusanscondensed、dejavusansextralight、dejavusansmono、dejavuserif、dejavuserifcondensed
+
+「DejaVu fonts」は、ラテン文字、ギリシャ文字、キリル文字をサポートしています。
+
+
+6-10.FreeFont
+
+このプラグインは、次の「FreeFont」を搭載していますが、これらを使用し、PDFを受け取った相手が同じフォントを持っていなくともPDFを編集出来るようにするなら、「Font subsetting」を無効にする必要があります。
+
+フォント名：freemono、freesans、freeserif
+
+「FreeFont」は、ラテン文字、ギリシャ文字、キリル文字、アラビア語、ヘブライ語、アルメニア語、グルジア語、エチオピア語、タイ語をサポートしています。
+
+
+7.フォントの追加
+
+新しいフォントを追加することが出来ます。ただし、インストールするフォントは、TCPDF用に変換されたフォントである必要があります。
+
+7-1.フォントの変換
+
+TrueTypeフォント（*.ttf）を、TCPDF用フォントにコンバートします。
+
+下記のサイトにフォントの変換方法が書かれていますので、それに従って下さい。
+
+http://www.tcpdf.org/fonts.php
+
+変換ツール：http://tcpdf.git.sourceforge.net/git/gitweb.cgi?p=tcpdf/tcpdf;a=tree;f=fonts/utils;h=bb226721af699d7ce3b5fff6f612c115a9a3a1a3;hb=30b07848b44dd53e2519617542f67e4e83f53134
+
+または、
+
+設定画面の「フォントの変換」を実行して、TCPDF用のフォントに変換します。
+
+
+7-2.フォントのアップロード
+
+1.「/wp-content/plugins/post2pdf-converter/tcpdf/fonts」ディレクトリに、*.php、*.z、*.ctg.zという名前のファイルを全てアップロードします。
+
+
+7-3.フォントを使う
+
+・WordPressの管理画面の「設定」の中の「POST2PDF Converter」に移動します。
+・「PDFの設定」の「フォント」と「等幅フォント」オプションにフォント名を入力します。
+・PDFを受け取った相手が同じフォントを持っていなくともPDFを編集出来るようにするなら、「Font subsetting」を無効にします。
+
+※フォントファイルが「xxxx.z」なら、フォント名は、「xxxx」です。
+※「等幅フォント」にプロポーショナルフォントを割り当てないで下さい。
+
+
+8.安全なフォントディレクトリ
+
+プラグインを自動更新すると、追加したフォントは削除されます。
+
+これを防止したいなら、設定画面で「安全なフォントディレクトリ」を有効にして下さい。
+
+「安全なフォントディレクトリ」を有効にする前に、手作業でサーバー上に「/wp-content/tcpdf-fonts/」ディレクトリを作成して下さい。それから、同梱のフォントと追加でインストールするフォントをこのディレクトリにアップロード（移動）し、「安全なフォントディレクトリ」を有効化します。
+
+以上で、元のフォントディレクトリは削除して構いません。
+
+・同梱のフォント：プラグインのzipファイルを解凍すると、「/post2pdf-converter/tcpdf/fonts」にあります。
+・元のフォントディレクトリ： /プラグインディレクトリ/post2pdf-converter/tcpdf/fonts
+・同梱のフォント全てを新しいフォントディレクトリにアップロードする必要はありませんが、同梱のフォントのうち、少なくとも「helvetica.php」、「helveticab.php」、「helveticabi.php」、「helveticai.php」はアップロードして下さい。
+
+以上の作業を完了すると、自動更新時に新しいフォンディレクトリに格納されたフォントは更新されなくなりますので、自身でメンテナンスする必要があります。
+
+
+9.ショートコード
+
+ショートコードを使えば、任意の投稿や固定ページにダウンロードリンクを挿入することが出来ます。
+
+注意：ショートコードを使う前に、設定画面で「ショートコード」オプションを有効化して下さい。
+
+書式：[pdf]PDF形式でダウンロード[/pdf]
+
+次のように属性を追加することも出来ます。
+
+書式：[pdf id="1643" lang="jpn" file="id" font="cid0jp" monospaced="cid0jp" fontsize="11" subsetting="1" ratio="1.35" header="1" logo="1" logo_file="my_logo.png" logo_width="45" wrap_title="1" footer="1" filters="1" shortcode="1" ffamily="0"]Click here to get a PDF[/pdf]
+
+属性値により、ページ毎に、異なるフォント、画像サイズ、ヘッダーロゴを割り当てることが出来ます。
+
+また、id属性を使って、別のページのダウンロードリンクを作成することも可能です。
+
+
+・使用可能な属性一覧
+
+id：数字で投稿IDを指定。 例 1245
+lang：言語コードでコンテンツの言語を指定。「言語コード一覧」を参照のこと。 例 eng
+file：ファイル名をタイトルベース、または投稿IDベースにする。値は「title」または「id」。
+* font：デフォルトのフォントを指定。 例 helvetica
+* monospaced：デフォルトの等幅フォントを指定。 例 courier
+* fontsize：フォントサイズを数字で指定。 例 12
+* subsetting：Font subsettingの有効化/無効化を「1」または「0」で指定。
+* ratio：画像のサイズを指定。 例 1.25
+* header：ヘッダーの表示/非表示を「1」または「0」で指定。
+* logo：ヘッダーロゴの表示/非表示を「1」または「0」で指定。
+* logo_file：ロゴ画像のファイル名を指定。 例 tcpdf_logo.jpg
+* logo_width：ロゴの横幅をmm単位で指定。 例 30
+* title：タイトルの表示/非表示を「1」または「0」で指定。
+* wrap_title：「1」または「0」で指定。「1」の場合、長いタイトルを折り返す。
+* filters：「1」または「0」で指定。「1」の場合、タイトルとコンテンツにWordPressのデフォルトフィルターが適用される。
+* footer：フッターの表示/非表示を「1」または「0」で指定。
+* shortcode：ショートコードを処理するか、削除するかをを「parse」または「remove」で指定。
+* ffamily：PDFファイルが文字化けする場合に「1」を指定する。
+
+注意：id属性を省略した場合は、現在のページの投稿IDが割り当てられます。その他の属性を省略した場合は、現在の設定値が割り当てられます。
+
+・言語コード一覧
+
+afr：アフリカーンス語
+sqi：アルバニア語
+ara：アラビア語
+aze：アゼルバイジャン語
+eus：バスク語
+bel：ベラルーシ語
+bra：ポルトガル語(ブラジル)
+cat：カタロニア語
+chi：簡体中国語
+zho：繁体中国語
+hrv：クロアチア語
+ces：チェコ語
+dan：デンマーク語
+nld：オランダ語
+eng：英語
+est：エストニア語
+far：ペルシャ語
+fra：フランス語
+ger：ドイツ語
+gle：アイルランド語
+glg：ガリシア語
+kat：グルジア語
+hat：ハイチ語
+heb：ヘブライ語
+hun：ハンガリー語
+hye：アルメニア語
+ind：インドネシア語
+ita：イタリア語
+jpn：日本語
+kor：韓国語
+mkd：マケドニア語
+msa： マレー語
+mlt：マルタ語
+ron2：モルダビア語
+ron3：モルドバ語
+nob：ノルウェー語
+pol：ポーランド語
+por：ポルトガル語
+ron1：ルーマニア語
+rus：ロシア語
+srp：セルビア語
+slv：スロベニア語
+spa：スペイン語
+swa：スワヒリ語
+swe：スウェーデン語
+urd：ウルドゥー語
+cym：ウェールズ語
+yid：イディッシュ語
+ltr: その他の言語(記述方向：左から右)
+rtl: その他の言語(記述方向：右から左)
+
+
+10.よくある質問
+
+Q.生成したPDFファイルが文字化けします。
+
+A.設定画面の「フォント」および「等幅フォント」に次の組み合わせの値を入力して下さい。
+
+フォント：freesans、等幅フォント：freemono　（ラテン、ギリシャ、キリル、ヘブライ、アルメニア、グルジア、エチオピア、タイ文字　等）
+フォント：dejavusans、等幅フォント：dejavusansmono　（ラテン、ギリシャ、キリル文字　等）
+フォント：aefurat、等幅フォント：aefurat`　（アラビア文字）
+フォント：stsongstdlight、等幅フォント：stsongstdlight　（簡体中国語）
+フォント：msungstdlight、等幅フォント：msungstdlight　（繁体中国語）
+フォント：hysmyeongjostdmedium、等幅フォント：hysmyeongjostdmedium　（朝鮮語）
+
+もし、これで解決した場合は、詳細（言語、フォント、等幅フォント）をご連絡下さい。次のリリースで、デフォルトのフォントを変更します。
+
+新しいフォントを追加することも出来ます。詳細は、このドキュメントの「7.フォントの追加」をお読み下さい。
+
+まだ、問題が解決しない場合は、「フォントをfont-familyに追加」オプションを有効にします。
+
+日本語フォントについては、このドキュメントの「6-1.日本語フォント」をお読み下さい。
+
+Q.PDFのファイル名が文字化けする。
+
+A.設定画面の「フォント名」オプションを「投稿ID」に変更して下さい。
+
+Q.画像のサイズがPDFに反映されない。
+
+A.<img>タグのwidthおよびheight属性、または<img>タグや別の要素のstyle属性のwidthおよびheightプロパティを調整して下さい。
+
+Q.PDFに画像が追加されない。
+
+A.大きなサイズの画像が一列に並んでいる場合、この問題が発生する場合があります。
+
+<img>タグのwidthおよびheight属性、または<img>タグや別の要素のstyle属性のwidthおよびheightプロパティを調整して下さい。
+
+または、画像の後に<br />を追加します。
+
+Q.PDFをダウンロードしようとすると「TCPDF ERROR: Could not include font definition file: helvetica」と言うエラーが発生する。
+
+A.「安全なフォントディレクトリ」オプションを有効にしている場合は、新しいフォントディレクトリに予め次のフォントファイルをアップロードしておく必要があります。
+
+フォントファイル：helvetica.php、helveticab.php、helveticabi.php、helveticai.php
+以上のフォントファイルは、「/プラグインディレクトリ/post2pdf-converter/tcpdf/fonts」に格納されています。
+
+
+11.ライセンス
+
+GPL v2
+
+
+12.このプラグインが気に入ったら
+
+プラグインの開発のサポートをお願いしております。
+
+http://www.near-mint.com/blog/donate
+
+
+13.履歴
+
+2012/3/5　バージョン 0.4.2 リリース
+ ※TCPDFをバージョン5.9.149にアップデート。
+ ※「qTranslate」プラグインをサポート。
+ ※一時ファイルをサーバー上でキャッシュさせるためのオプションを追加。
+ ※一部の画像に「aligin: right;」を追加するためのフィルターを追加。
+ ※隠し設定オプションとして$get_by_http_request変数を追加。
+ ※設定画面の「６．システム情報」で「POST2PDF Converterのバージョン」が表示されない不具合を修正。
+
+2012/2/16　バージョン 0.4.0.1 リリース
+ ※「キャッシュ」が有効の場合に、最初のダウンロードで空のPDFがダウンロードされることがある不具合を修正。
+
+2012/2/16　バージョン 0.4 リリース
+ ※TCPDFをバージョン5.9.147にアップデート。
+ ※作成されたPDFファイルのキャッシュ機能を搭載。
+ ※PDF内のタイトルを表示/非表示するためのオプションを追加。
+ ※自身のショートコード（[pdf]xxx[/pdf]）をPDFから削除するためのフィルターを追加。
+ ※ショートコードの書式を拡張。
+ ※設定画面の「６．システム情報」に項目を追加。
+ ※一部のファイルのファイル名を変更。
+ ※WP SyntaxHighlighter用のショートコード処理の誤りを修正。
+
+2012/2/6　バージョン 0.3.3 リリース
+ ※TCPDFをバージョン5.9.145にアップデート。
+ ※ダウンロードリンクにオリジナルアイコンを登録するためのオプションを追加。
+ ※「WP SyntaxHighlighter」、「SyntaxHighlighter Evolved」、「WP-Syntax」、「CodeColor」、「WP-CodeBox」、「WP-SynHighlight」他のソースコードの強調プラグインをサポート。
+ ※「WP QuickLaTeX」をサポート。
+ ※「K_PATH_IMAGES」定数の定義方法を変更。
+ ※誤ったCSSを出力する問題を修正。
+
+2012/1/26　バージョン 0.3 リリース
+ ※TCPDFをバージョン5.9.144にアップデート。
+ ※管理画面で静的に投稿、固定ページをPDFに変換出来るようになった。
+ ※管理画面でTrueTypeフォントをTCPDF用に変換出きるようになった。
+ ※トルコ語用のデフォルトのフォントを変更。
+
+2012/1/18　バージョン 0.2.4.1 リリース
+ ※サイトアドレスとWordPress アドレスが異なり、かつ、「アクセス」オプションが「ダウンロードURLへの直接アクセスを禁止」に設定されている場合にPDFをダウンロード出来ない問題を修正。
+
+2012/1/16　バージョン 0.2.4 リリース
+ ※検索エンジンのクロールをブロックするためのオプションを追加。
+ ※データベース更新の際の問題を修正。
+
+2012/1/15　バージョン 0.2.3.1 リリース
+ ※相対パスのよるイメージソースの記述をサポート。
+
+2012/1/13　バージョン 0.2.3 リリース
+ ※特定の投稿、固定ページにダウンロードリンクを表示させないようにするためのオプションを追加。
+ ※<blockquote>タグのためのフィルターを変更。
+
+2012/1/10　バージョン 0.2.2 リリース
+ ※TCPDFをバージョン5.9.143にアップデート。
+ ※一部の言語においてのデフォルトのファイル名を変更。
+ ※エラー「TCPDF ERROR: Some data has already been output, can't send PDF file」が発生する問題を修正。
+
+2012/1/5　バージョン 0.2.1 リリース
+ ※ソースコードの整形のためのフィルターを変更。
+ ※セーフモード環境で発生する問題を修正。Michael Starkeに感謝する。
+
+2012/1/2　バージョン 0.2 リリース
+ ※TCPDFをバージョン5.9.142にアップデート。
+ ※ショートコードでのダウンロードリンクの挿入をサポート。
+ ※ソースコードの整形のためのフィルターを追加。
+ ※ヘッダーの表示/非表示を設定するためのオプションを追加。
+ ※フッターの表示/非表示を設定するためのオプションを追加。
+ ※長いタイトルを折り返すためのオプションを追加。
+ ※署名の表示/非表示を設定するためのオプションを追加。
+ ※WordPress標準フィルターを適用するためのオプションを追加。
+ ※投稿タイトル、本文用のフィルターを追加。
+ ※各言語用のデフォルトフォントを変更。
+ ※tcpdf.phpに２つの文字コードが混在していた問題を修正。
+
+2011/12/30　バージョン 0.1.6 リリース
+ ※イメージサイズを変更するためのオプションを追加。
+ ※ダウンロードリンクの表示位置の選択肢に「投稿、固定ページの先頭と後ろ」を追加。
+ ※キーワードの区切り文字を変更。
+ ※サブジェクトが、テキストではなく、タグ付きのHTMLになっている問題を修正。
+
+2011/12/29　バージョン 0.1.5 リリース
+ ※ヘッダーロゴを変更するためのオプションを追加。
+ ※管理画面、メッセージのドイツ語表示をサポート。（Uli Sobers氏に感謝。）
+ ※デフォルトのフォントサイズを変更。
+ ※ポーランド語用のデフォルトのフォントを変更。
+ ※「フォントをfont-familyに追加」オプションのための正規表現を改善。
+
+2011/12/28　バージョン 0.1.3 リリース
+ ※PDFのファイル名を定義するオプションを追加。
+ ※デフォルトの等幅フォントを設定するオプションを追加。
+ ※フォントを格納するディレクトリを変更するオプションを追加。
+ ※CSSを投稿または固定ページのみで読み込むようにpost2pdf_conv_add_style()を更新。
+ ※一部の言語において、生成したPDFで文字化けが発生する問題を修正。
+ ※コンテンツ内でスタイルが定義され、font-family属性を含む場合に、生成したPDFで文字化けが発生する問題を修正。
+ ※ログインユーザーにのみアクセスを許可している場合でも、ゲストに対してダウンロードリンクが表示される不具合を修正。
+ ※投稿のタイトルが長い場合に、右端からはみ出す不具合を修正。
+ ※システム制限を超える長さのファイル名を付加する可能性がある不具合を修正。
+
+2011/12/27　バージョン 0.1 リリース
+
+
+14.貢献者のサイト
+
+Uli Sobers（ドイツ語訳）：http://www.free-templates-sobers.de/、http://www.iq137.de/
+
+
+Redcocker
+URL: http://www.near-mint.com/blog/
+POST2PDF Converter: http://www.near-mint.com/blog/software/post2pdf-converter

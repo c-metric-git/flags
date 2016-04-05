@@ -1,0 +1,1 @@
+[22-Jun-2015 23:12:26 UTC] PHP Fatal error:  Call to undefined function add_action() in /home/flagsrus/public_html/blog/wp-content/plugins/hello.php on line 60

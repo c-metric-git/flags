@@ -1,0 +1,48 @@
+/* This stylesheet is used to style the admin option form of the plugin. */
+
+#icon-pinterest-32 {
+	background: transparent url('../assets/pinterest-icon-32.png') no-repeat;
+}
+
+/* Layout the page similar to the built-in post edit screen. */
+#pib-settings {
+	margin-right: 310px;
+}
+
+#pib-settings-content {
+	width: 100%;
+	float: left;
+}
+
+#pib-settings-sidebar {
+	float: right;
+	margin-right: -310px;
+	width: 290px;
+}
+
+#pib-settings-sidebar .centered {
+	text-align: center;
+}
+
+#pib-settings-sidebar .button-large {
+	font-size: 17px;
+	line-height: 30px;
+	height: 32px;
+}
+
+#pib-settings-sidebar .last-blurb {
+	font-size: 17px;
+}
+
+/* postbox overrides */
+#pib-settings-sidebar .sidebar-container .postbox .inside,
+#pib-settings-sidebar .sidebar-container .postbox .inside ul {
+	margin-bottom: 0;
+}
+
+/* Admin pages styles */
+.pib-checkbox-label,
+.pib-radio-label {
+	margin: .25em 0 .5em !important;
+	display: block;
+}

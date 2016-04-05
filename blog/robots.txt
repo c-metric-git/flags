@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Disallow: /post2pdf-converter/
+sitemap: http://www.halloweenmakeup.com/blog/sitemap.xml

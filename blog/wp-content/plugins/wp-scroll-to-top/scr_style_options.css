@@ -1,0 +1,45 @@
+<style>
+#scr_plus{
+   height: 100px;
+   width: 350px;
+   background-color:#fa4133;
+   box-shadow: 0 10px 0px #c43329; 
+   text-align: center;
+   position: relative;
+   margin: 100px;
+   margin-left:300px; 
+   border-radius: 14px;
+   top:-300px;
+}
+#scr_plus:hover{
+  box-shadow:0 10px 0 #FA4133;
+  
+}
+#scr_plus a{
+
+  font-family:oswald,verdana; 
+  color:white; 
+    font-size: 34px;
+    top: 20px;
+    position: relative;
+    line-height: 25px;
+    text-decoration: none;
+    font-family: verdana; 
+}
+.h_plus{
+  margin: 10px;
+   margin-left:250px;
+ }
+   #settings-screen > img {
+    padding: 10px;
+    border: 5px dashed #000;
+   position: relative;
+   top: -250px;
+    width: 550px;
+    height: 700px;
+
+   }
+
+
+
+</style>
