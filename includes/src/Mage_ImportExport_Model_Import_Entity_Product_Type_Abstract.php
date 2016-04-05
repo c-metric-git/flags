@@ -308,6 +308,9 @@ abstract class Mage_ImportExport_Model_Import_Entity_Product_Type_Abstract
                 } elseif ($withDefaultValue && null !== $attrParams['default_value']) {
                     $resultAttrs[$attrCode] = $attrParams['default_value'];
                 }
+                else {     /** desc code added by dhiraj for blank values in attributes **********/
+                    $resultAttrs[$attrCode] = $attrParams['default_value'];  
+                }   
             }
         }
         return $resultAttrs;

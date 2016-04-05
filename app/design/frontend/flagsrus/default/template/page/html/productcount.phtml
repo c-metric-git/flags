@@ -7,6 +7,8 @@
     array('eq' => Mage_Catalog_Model_Product_Status::STATUS_ENABLED))
 	->addAttributeToSelect('*');
  	Mage::getSingleton('cataloginventory/stock')
-    ->addInStockFilterToCollection($products); 
+    ->addInStockFilterToCollection($products);
+	Mage::register('intstockcount',1);	
 	echo $products->getSize();
+	Mage::unregister('intstockcount');
 	?>

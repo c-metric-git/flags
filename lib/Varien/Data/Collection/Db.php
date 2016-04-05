@@ -222,25 +222,9 @@ class Varien_Data_Collection_Db extends Varien_Data_Collection
     {
         if (is_null($this->_totalRecords)) {
             $sql = $this->getSelectCountSql();
-			
             $this->_totalRecords = $this->getConnection()->fetchOne($sql, $this->_bindParams);
         }
-		/* Edited by ps*/
-		$currentCategory = Mage::registry('current_category');
-		if($currentCategory!="")
-		{
-			$currentCatName =$currentCategory->getName();
-		}
-		
-		if($currentCatName =="Top Sellers")
-		{
-	        return intval(24);
-		}
-		else
-		{
-			return intval($this->_totalRecords);
-		}
-		/* Edited end by ps*/
+        return intval($this->_totalRecords);
     }
 
     /**

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Stripedsocks_Adminhtml>
+            <version>1.0.0</version>
+        </Stripedsocks_Adminhtml>
+    </modules>
+    <global>
+        <models>
+            <adminhtml>
+                <rewrite>
+                    <system_config_source_shipping_allmethods>Stripedsocks_Adminhtml_Model_System_Config_Source_Shipping_Allmethods</system_config_source_shipping_allmethods>
+                </rewrite>
+            </adminhtml>
+        </models>
+    </global>
+</config>

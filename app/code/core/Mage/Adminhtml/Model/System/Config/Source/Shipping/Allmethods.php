@@ -34,7 +34,7 @@ class Mage_Adminhtml_Model_System_Config_Source_Shipping_Allmethods
      * @return array
      */
     public function toOptionArray($isActiveOnlyFlag=false)
-    {
+    {     
         $methods = array(array('value'=>'', 'label'=>''));
         $carriers = Mage::getSingleton('shipping/config')->getAllCarriers();
         foreach ($carriers as $carrierCode=>$carrierModel) {

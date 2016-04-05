@@ -100,3 +100,8 @@
 	line-height: 1.3;
 }
 /*responsiv 3D gallery end*/
+/* CSS added by HS on 4th April 2016 */
+.responsiveGallery-wrapper {
+    padding-top: 20%;
+    width: 100%;
+}

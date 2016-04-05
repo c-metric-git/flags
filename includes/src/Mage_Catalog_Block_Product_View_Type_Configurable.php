@@ -342,7 +342,9 @@ class Mage_Catalog_Block_Product_View_Type_Configurable extends Mage_Catalog_Blo
                 $options[$attributeValue]['parentid'] = $product->getParentId();
                 $options[$attributeValue]['qty'] = (int)Mage::getModel('cataloginventory/stock_item')
                 ->loadByProduct($product)->getQty();
-            }
+                $options[$attributeValue]['expected_qty'] = $product->getQtyOnCurrentPo();			
+                $options[$attributeValue]['expected_doa'] = Mage::getModel('core/date')->date('m/d', strtotime($product->getDateOfArrival()));;			
+			}
         }
 		return Mage::helper('core')->jsonEncode($options); 
 	}

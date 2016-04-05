@@ -1,0 +1,45 @@
+<?php
+/**
+ * @category    Fishpig
+ * @package     Fishpig_Wordpress
+ * @license     http://fishpig.co.uk/license.txt
+ * @author      Ben Tideswell <help@fishpig.co.uk>
+ */
+?>
+<?php //$posts = $this->getPostCollection();
+$posts = Mage::getResourceModel('wordpress/post_collection');
+/* print_r($posts->getData());
+exit; */
+?>
+<?php if (count($posts) > 0): ?>
+<script type="text/javascript">// <![CDATA[
+//&lt;![CDATA[
+		jQuery(function ($) {
+$('.responsiveGallery-wrapper').responsiveGallery({
+	animatDuration: 400,
+	$btn_prev: $('.responsiveGallery-btn_prev'),
+	$btn_next: $('.responsiveGallery-btn_next')
+});
+		});
+//]]&gt;
+// ]]></script>
+<div class="">
+  <section id="responsiveGallery-container" class="responsiveGallery-container">
+   <a class="responsiveGallery-btn responsiveGallery-btn_prev" href="javascript:void(0);"></a> 
+   <a class="responsiveGallery-btn responsiveGallery-btn_next" href="javascript:void(0);"></a>
+    <ul class="responsiveGallery-wrapper">
+		<?php foreach($posts as $post): ?>
+			<?php $featuredImage = $post->getFeaturedImage(); ?>
+			<?php $featuredImageobj = $post->getImages()->getFirstItem()->getData(); 
+			//if(!empty($featuredImageobj)){			$featuredImageobj->getGuid();}
+			?>
+			<?php if(!empty($featuredImageobj)): ?>
+				<li class="responsiveGallery-item">
+					<a href="<?php echo $post->getPermalink() ?>" class="responsivGallery-link"><img src="<?php echo $featuredImageobj['guid'] ?>" height="320" width="320" alt="" class="responsivGallery-pic"></a>
+				</li>
+			<?php endif; ?>
+		<?php endforeach; ?>
+    </ul>
+  </section>
+</div>
+<?php endif; ?>

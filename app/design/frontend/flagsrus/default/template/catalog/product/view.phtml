@@ -126,7 +126,10 @@
 		</div>
 		<div class="product-img-column <?php echo $grid['imgCol']; ?>">
 			<?php echo $this->getChildHtml('media') ?>
-			<?php echo $this->helper('ultimo/labels')->getLabels($_product); //Product labels ?>
+			<?php if($_product->getIconlabel()!=''): ?>
+				<span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span>
+			<?php endif; ?>
+			<?php //echo $this->helper('ultimo/labels')->getLabels($_product); //Product labels ?>
 			<?php echo $this->getChildHtml('container_product_image_1'); ?>
 		</div>
 		<div class="product-primary-column product-shop <?php echo $grid['primCol']; ?>">

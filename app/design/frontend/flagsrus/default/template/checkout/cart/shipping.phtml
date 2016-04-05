@@ -86,6 +86,19 @@
                     <dd>
                         <ul>
                         <?php foreach ($_rates as $_rate): ?>
+                        <?php
+						$titlestirng  = $_rate->getData('method_title');
+						$lower_string = strtolower($titlestirng);			
+						$finaltitlestring = preg_replace("/[\s]/", "_", $lower_string); 
+						
+						$codestirng  = $_rate->getData('code');
+						$codestirng_explode = explode("_",$codestirng);
+						if($codestirng_explode[0]=="matrixrate")
+						{
+							$final_codestirng =$codestirng_explode[0].'_'.$codestirng_explode[1].'_'.$finaltitlestring; 
+						}
+						
+						//echo "<pre>";print_r($final_codestirng);exit;?>
                             <li<?php if ($_rate->getErrorMessage()) echo ' class="error-msg"';?>>
                                <?php if ($_rate->getErrorMessage()): ?>
                                     <?php echo $this->escapeHtml($_rate->getErrorMessage()) ?>
@@ -100,7 +113,13 @@
                                     <?php endif; ?>
                                     </label>
                                     <!-- START MEANBEE ESTIMATED DELIVERY -->
-                                <br/><?php echo Mage::helper('meanbee_estimateddelivery')->getEstimatedDeliveryText($_rate->getCode()); ?>
+                                <br/>
+								<?php //echo "<pre>";print_r($_rate->getData());?>
+                                <?php if($codestirng_explode[0]=="matrixrate"):?>
+								<?php echo Mage::helper('meanbee_estimateddelivery')->getEstimatedDeliveryText($final_codestirng); ?>
+                                <?php else:?>
+                                <?php echo Mage::helper('meanbee_estimateddelivery')->getEstimatedDeliveryText($_rate->getCode()); ?>
+                                <?php endif;?>
                                 <!-- END MEANBEE ESTIMATED DELIVERY --> 
                                <?php endif ?>
                             </li>

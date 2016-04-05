@@ -79,10 +79,9 @@ class Meanbee_EstimatedDelivery_Helper_Data extends Mage_Core_Helper_Abstract {
             return $cached;
         }
 
-        $dispatchDate = $this->getDispatchDate($shippingMethod, $date);
-        $estimatedDelivery = $this->_getEstimatedDeliveryData($shippingMethod);
+        $dispatchDate = $this->getDispatchDate($shippingMethod, $date);              
+        $estimatedDelivery = $this->_getEstimatedDeliveryData($shippingMethod);     
         $deliveryFromDate = $this->_computeEstimatedDelivery($shippingMethod, $dispatchDate, $estimatedDelivery->getEstimatedDeliveryFrom());
-
         $this->_estimatedDeliveryFrom[$cacheKey] = $deliveryFromDate;
 
         return $deliveryFromDate;
@@ -112,7 +111,7 @@ class Meanbee_EstimatedDelivery_Helper_Data extends Mage_Core_Helper_Abstract {
         $date = $this->_handleLatestDispatch($estimatedDelivery, $date);
         $date = $this->_handleDispatchPreparation($estimatedDelivery, $date);
         $date = $this->_computeClosestValidDate($estimatedDelivery->getDispatchableDays(), $date);
-
+             
         $this->_dispatchDate[$cacheKey] = $date;
 
         return $date;
@@ -276,11 +275,13 @@ class Meanbee_EstimatedDelivery_Helper_Data extends Mage_Core_Helper_Abstract {
      */
     protected function _computeEstimatedDelivery($shippingMethod, $date, $offset) {
         $localDate = clone $date;
+        //print_R($date);
         $estimatedDelivery = $this->_getEstimatedDeliveryData($shippingMethod);
-
-        $localDate->addDay($offset);
+        
+        $localDate = $this->_computeCustomValidDate($estimatedDelivery->getDeliverableDays(), $localDate,$offset);       
+        //$localDate->addDay($offset);
         $localDate = $this->_computeClosestValidDate($estimatedDelivery->getDeliverableDays(), $localDate);
-
+        
         return $localDate;
     }
 
@@ -308,12 +309,35 @@ class Meanbee_EstimatedDelivery_Helper_Data extends Mage_Core_Helper_Abstract {
 
         return $localDate;
     }
+    /**
+    * @desc function added by dhiraj for calculating estimtaed delivery date excluding weekends
+    */
+    protected function _computeCustomValidDate($validDays, $date,$offset) {
+        $localDate = clone $date;
+        $no_of_days=1;
+        $counter=0;
+        while($no_of_days < $offset) {   
+            $day = $localDate->toString(Zend_Date::WEEKDAY_DIGIT);
+            if (in_array($day, $validDays)) {
+                $localDate->addDay(1);  
+                $no_of_days++;
+            }
+            else {
+                $localDate->addDay(1);  
+            }    
+            /*$counter++;
+            if($counter==10) {
+                break;
+            }  */
+        }
+        return $localDate;
+    }
 
     protected function _getEstimatedDeliveryData($shippingMethod) {
         if (isset($this->_estimatedDeliveryData[$shippingMethod]) && $data = $this->_estimatedDeliveryData[$shippingMethod]) {
             return $data;
         }
-        $data = Mage::getModel('meanbee_estimateddelivery/estimateddelivery')->loadByShippingMethod($shippingMethod);
+        $data = Mage::getModel('meanbee_estimateddelivery/estimateddelivery')->loadByShippingMethod($shippingMethod);        
         $this->_estimatedDeliveryData[$shippingMethod] = $data;
         return $data;
     }

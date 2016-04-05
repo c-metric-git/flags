@@ -13,11 +13,11 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
             ini_set("memory_limit","1024M");
             ini_set("display_errors",1);   
             switch($import_type) {
-                case 'SS_categories' :      
-                    require_once('lib/Teamdesk/class.import_teamdesk_category.php'); 
-                    $objTDCategory = new TeamDeskCategory();  
-                    $strReturn = $objTDCategory->importTeamDeskCategories();     
-                    $strMessage .= $strReturn;     
+                case 'SS_categories' : 
+				require_once('lib/Teamdesk/class.import_teamdesk_category.php'); 
+                $objTDCategory = new TeamDeskCategory();  
+                $strReturn = $objTDCategory->importTeamDeskCategories(); 
+				    $strMessage .= $strReturn;     
                     try {
                         $this->openToImport("var/import/category/", "categories.csv");  
                         $i = 0;
@@ -27,13 +27,24 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                             } else {
                                 $cat_success[] = $this->addContentData($csvData, 'add');
                             }
-                           $i++;
+							$i++;
                         }
                         $this->closeFile('send');
                     } catch (Exception $e) {
                         $this->showError($e->getMessage());
-                    }               
-                    $errormessage ='';
+                    }  
+					if($_SESSION['team_cats'] == '') {
+						$_SESSION['team_cats'] = $this->team_cats;
+					}										
+					$temdesk_ss_cats= array();					
+					foreach($_SESSION['team_cats'] as $team_cats_result)
+					{						
+						$temdesk_ss_cats [] = $team_cats_result['path'].'/'.$team_cats_result['name'].'/';					
+					}
+					//echo 'teamdesk result....<pre>';
+					//print_r($temdesk_ss_cats);
+					//exit;
+					$errormessage ='';
                     $errorcount=0;
                     $successmessage='';
                     $successcount=0;
@@ -56,6 +67,99 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                     $message .= $this->__('<br />Total categories successfully imported: '.$successcount);
                     $message .= $this->__('<br />Total categories errors: '.$errorcount."<br />");
                     Mage::getSingleton('core/session')->addSuccess($message);
+					
+					$ss_cats= array();
+					$rootCategoryId = 2;
+					$storeId = 1;
+					
+					$categories = Mage::getModel('catalog/category')
+						->getCollection()
+						->setStoreId($storeId)						
+						->addAttributeToFilter('path', array('like' => "1/{$rootCategoryId}/%"))
+						->addAttributeToSelect('*');
+						
+				foreach($categories as $categorie)
+                {
+						$result = '';
+						$pathIds = $categorie->getPathIds();												
+						foreach ($pathIds as $cat)
+						{
+							 $category = Mage::getModel('catalog/category')->load($cat);
+    						 $result .= $category->getName().'/';
+						}
+						$res = explode("Root Catalog/",$result);
+						$ss_cats[]	= $res[1];
+						$catid = $categorie->getId();
+						$ss_cat_detail[$res[1]] = $catid;
+					
+                }
+				$res_compare_teamdesk_with_ss= array();					
+				foreach($ss_cats as $ss_cats_result)
+				{						
+					if(!in_array($ss_cats_result, $temdesk_ss_cats))
+					{						
+						if($ss_cats_result=="Default Category/Gift Card/")
+						{
+							
+						}
+						else
+						{
+							$res_compare_teamdesk_with_ss[] = $ss_cats_result;
+						}
+					}
+					
+					
+				}
+				
+				if($res_compare_teamdesk_with_ss)
+				{
+					///echo "Below categories are not available in teamdesk but available in Stripedsocks so need to be delete..<pre>";
+					//print_r($res_compare_teamdesk_with_ss);
+					foreach($ss_cat_detail as $key=>$val)
+							{
+								if(in_array($key,$res_compare_teamdesk_with_ss))
+								{	
+									//echo $key." ".$val."<br>";
+								   try{
+											Mage::getModel("catalog/category")->load($val)->delete();
+											$message_compare_teamdesk_with_ss .= "Category id $val delted successfully..";
+											
+									}catch(Exception $e)
+									{ __error($e);
+									
+									}	
+								}
+								
+							}											
+				}
+				else
+				{
+					$message_compare_teamdesk_with_ss = "Matching not found for result of compare teamdesk with ss categories..";										
+				}
+				Mage::getSingleton('core/session')->addSuccess($message_compare_teamdesk_with_ss);
+				$res_compare_ss_with_teamdesk= array();					
+				foreach($temdesk_ss_cats as $temdesk_ss_cats_result)
+				{						
+					if(!in_array($temdesk_ss_cats_result,$ss_cats))
+					{						
+						$res_compare_ss_with_teamdesk[] = $temdesk_ss_cats_result;
+					}
+					
+				}
+				
+				if($res_compare_ss_with_teamdesk)
+				{
+					$message_compare_ss_category_teamdesk = "Below categories are not available in Stripedsocks but available in teamdesk..<br>";
+					$message_compare_ss_category_teamdesk .= $res_compare_ss_with_teamdesk;
+					//print_r($res_compare_ss_with_teamdesk);				
+				}
+				else
+				{
+					$message_compare_ss_category_teamdesk ="Matching not found for result of compare ss with teamdesk categories..";					
+				}
+				Mage::getSingleton('core/session')->addSuccess($message_compare_ss_category_teamdesk);
+                
+				
                     break;
                  case 'FL_categories' :      
                     require_once('lib/Teamdesk/class.FL_import_teamdesk_category.php'); 
@@ -141,7 +245,7 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                     ini_set("display_errors",1);
                     require_once('lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php'); 
                     $objTDProducts = new FLTeamDeskWebprofiles(); 
-                    $strReturn = $objTDProducts->importTeamdeskProduct(); 
+                    $strReturn = $objTDProducts->importTeamdeskProduct();  
                     $strMessage = "Product Import Status"; 
                     if($strReturn !='') {
                         $strMessage .= $strReturn; 
@@ -149,7 +253,7 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                     $succ_message ='';       
                     $product_csv_counter = $_SESSION['product_csv_counter']!=''?$_SESSION['product_csv_counter']:0;   
                     $counter_loop = 0;
-                    for($i=0;$i<=$product_csv_counter;$i++) {
+                    for($i=0;$i<=$product_csv_counter;$i++) {                   
                         $succ_message['error'] .= "<br /><br />Processing File => FL_Products$i.csv<br />";   
                         $succ_message['success'] .= "<br /><br />Processing File => FL_Products$i.csv<br />";    
                         $tmp_succ_message = $this->AddProduct("var/import/products/FL_Products$i.csv");
@@ -266,13 +370,16 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
     }
 
     protected $_count = 0;
+	public $team_cats= array();
     public function addContentData($data, $opt = 'send') {
         $this->_count++;
 
         $contentData = array('count' => $this->_count);
+		
         foreach($data as $key => $val) {
             if (isset($this->_csvHeader[$key])) $contentData[$this->_csvHeader[$key]] = $val;
         }
+		$this->team_cats[] = $contentData;
         $category_success = $this->AddCategory($contentData);
         return $category_success;
     }

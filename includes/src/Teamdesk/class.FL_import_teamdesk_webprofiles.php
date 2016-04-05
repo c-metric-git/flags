@@ -117,10 +117,6 @@ class FLTeamDeskWebprofiles {
         $this->connectToTeamDesk();
         if($this->api !='' )      
         {       
-            unset($_SESSION['arrThemeSubtheme']);
-            /*unset($_SESSION['arrSeasonSubtheme']);
-            unset($_SESSION['arrHolidaySubtheme']);
-            unset($_SESSION['arrOccassionSubtheme']);*/ 
             /**
             * @desc code to unset the session variables.
             */
@@ -128,10 +124,10 @@ class FLTeamDeskWebprofiles {
             unset($_SESSION['arrTDDesignFamilyContents']); 
             unset($_SESSION['arrTDProductFamilyContents']); 
             unset($_SESSION['arrSoloProducts']); 
+            unset($_SESSION['arrParentTDProducts']); 
             unset($_SESSION['arrTDProductCategories']); 
             unset($_SESSION['arrTDProductsAttributes']);  
             unset($_SESSION['arrProductConfigurableAttributes']);  
-            unset($_SESSION['arrParentTDProducts']); 
             unset($_SESSION['arrThemeSubtheme']);
             unset($_SESSION['arrSeasonSubtheme']);
             unset($_SESSION['arrHolidaySubtheme']);
@@ -145,7 +141,7 @@ class FLTeamDeskWebprofiles {
             else {
                 $this->arrThemeSubtheme = $this->getTDThemeSubTheme(); 
                 $_SESSION['arrThemeSubtheme'] = $this->arrThemeSubtheme; 
-            }
+            }  
             /**
             * @desc code to get the filter season sub themes.  
             */
@@ -557,7 +553,7 @@ class FLTeamDeskWebprofiles {
             fclose($this->fp); 
             echo "<br />total products count =".$this->product_counter;
             echo "<br />total csv counter =".$this->csv_counter;
-            //echo $_SESSION['product_csv_counter'] = $this->csv_counter; 
+            $_SESSION['product_csv_counter'] = $this->csv_counter; 
              /**
              * @desc code to check the new products added in the csv file or not.  
              */
@@ -644,7 +640,8 @@ class FLTeamDeskWebprofiles {
         $counter=0;
         foreach ($arrSoloTDProducts as $tdProduct) { 
                        $theme_arr ='';  
-                       $subtheme_arr='';        
+                       $subtheme_arr='';  
+                       $nonsubtheme_arr='';        
                        $type='';
                        $size = '';
                        $brand='';
@@ -656,6 +653,7 @@ class FLTeamDeskWebprofiles {
                        $attributes_counter = 0;
                        $theme_counter = 0;
                        $subtheme_counter = 0; 
+                       $nonsubtheme_counter = 0;  
                        $holiday_counter = 0; 
                        $occassion_counter = 0; 
                        $season_counter = 0; 
@@ -692,6 +690,9 @@ class FLTeamDeskWebprofiles {
                             if ($tdProduct['Product - SubThemes']!=''){    
                                 $subtheme_arr = explode(",",$tdProduct['Product - SubThemes']);  
                             }
+                            if ($tdProduct['Product - Themes Full Name']!=''){    
+                                $nonsubtheme_arr = explode(",",$tdProduct['Product - Themes Full Name']);  
+                            }
                             if ($tdProduct['FLFilterSectionCalced']!=''){    
                                 $filter_section = $tdProduct['FLFilterSectionCalced'];  
                             }
@@ -712,7 +713,7 @@ class FLTeamDeskWebprofiles {
                             if($pr_type == 'Parent') {
                                  if($tdProduct['kitType'] == 'Fixed') {
                                      $attribute_set='Filter New Products/Filter Section/Filter Type/Feature/Filter Size/Multi Seasons/Season Subthemes/Holiday/Holiday Subthemes/Occassion/Occassion Subthemes/Multi Themes/Theme Subthemes/Multi Brand';  
-                                     $product_type = "grouped";  
+                                     $product_type = "bundled";  
                                  }
                                  else {   
                                     $product_type = "configurable";
@@ -747,23 +748,32 @@ class FLTeamDeskWebprofiles {
                             $related_product_family = '';
                             $design_counter = 0;
                             $related_counter =0;
+                            $related_products='';
                             if ($tdProduct['Related Design Family']!=''){    
                                   $related_design_family = $tdProduct['Related Design Family'];
                                   if(count($this->arrTDDesignFamilyContents[$related_design_family]) > 0) {
-                                        $design_counter = count($this->arrTDDesignFamilyContents[$related_design_family]);
+                                        //$design_counter = count($this->arrTDDesignFamilyContents[$related_design_family]);
+                                        foreach($this->arrTDDesignFamilyContents[$related_design_family] as $key => $rel_products) {  
+                                            $related_products[] =  $rel_products['related_web_profile'];
+                                        }    
                                   }    
                             }
                             if ($tdProduct['Related Product Family']!=''){    
                                 $related_product_family = $tdProduct['Related Product Family']; 
                                 if(count($this->arrTDProductFamilyContents[$related_product_family]) > 0) {
-                                    $related_counter = count($this->arrTDProductFamilyContents[$related_product_family]);
+                                    //$related_counter = count($this->arrTDProductFamilyContents[$related_product_family]);
+                                    foreach($this->arrTDProductFamilyContents[$related_product_family] as $key => $rel_products) {
+                                        $related_products[] =  $rel_products['related_web_profile'];
+                                    }
                                 }  
-                            }
+                            }                             
+                            $related_counter = count($related_counter);
                             $root_category = "Flagsrus"; 
                             $categories_counter = count($this->arrTDProductCategories[$lowerpinnacleSKU]);
                             $attributes_counter = count($this->arrProductConfigurableAttributes[$lowerpinnacleSKU]);
                             $theme_counter = count($theme_arr);
                             $subtheme_counter = count($subtheme_arr); 
+                            $nonsubtheme_counter = count($nonsubtheme_arr);
                             $holiday_counter = count($pr_holiday_list); 
                             $occassion_counter = count($pr_occassion_list); 
                             $season_counter = count($pr_season_list); 
@@ -780,6 +790,9 @@ class FLTeamDeskWebprofiles {
                             }
                             if($subtheme_counter > $largest_counter){
                                 $largest_counter = $subtheme_counter;
+                            }
+                            if($nonsubtheme_counter > $largest_counter){
+                                $largest_counter = $nonsubtheme_counter;
                             }
                             if($holiday_counter > $largest_counter){
                                 $largest_counter = $holiday_counter;
@@ -805,8 +818,19 @@ class FLTeamDeskWebprofiles {
                             if($largest_counter==0) {
                                 $largest_counter=1;
                             }
+                            $subtheme_added = array();
                             for($i=0;$i<$largest_counter;$i++) {
-                                    $csv_row = array();
+                                    $csv_row = array(); 
+                                        $nonsubtheme='';
+                                        $nonsubtheme_split='';
+                                        $nonsubtheme_split = explode(": ",$nonsubtheme_arr[$i]);
+                                        $nonsubtheme = $nonsubtheme_split[0]!=''&&$nonsubtheme_split[1]!=''?trim($nonsubtheme_split[0]).": ".trim($nonsubtheme_split[1]):"";
+                                        if(!in_array($nonsubtheme,$subtheme_added)) {
+                                            $subtheme_added[] = $nonsubtheme;
+                                        }
+                                        else {
+                                           $nonsubtheme='';
+                                        } 
                                         if($i == 0) {
                                             $filename='';
                                             $csv_row[] = $tdProduct['PinnacleSKU']; //sku
@@ -831,7 +855,7 @@ class FLTeamDeskWebprofiles {
                                             $csv_row[] = trim($pr_occassion_list[$i]); //occassion  
                                             $csv_row[] = in_array(trim($subtheme_arr[$i]),$this->arrOccassionSubtheme)?trim($subtheme_arr[$i]):""; //occassion_subthemes   
                                             $csv_row[] = trim($theme_arr[$i]); //multi themes 
-                                            $csv_row[] = in_array(trim($subtheme_arr[$i]),$this->arrThemeSubtheme)?trim($subtheme_arr[$i]):""; //themes_subthemes  
+                                            $csv_row[] = in_array(trim($nonsubtheme),$this->arrThemeSubtheme)?trim($nonsubtheme):""; //themes_subthemes  
                                             $csv_row[] = $brand; //multi brand  
                                             
                                             $csv_row[] = $arrTDProductsAttributes[$lowerpinnacleSKU][$i]['Web Option Label']=="Accessory"?$arrTDProductsAttributes[$lowerpinnacleSKU][$i]["Attribute"]:""; //Accessory 
@@ -841,6 +865,9 @@ class FLTeamDeskWebprofiles {
                                             $csv_row[] = $arrTDProductsAttributes[$lowerpinnacleSKU][$i]['Web Option Label']=="Finish"?$arrTDProductsAttributes[$lowerpinnacleSKU][$i]["Attribute"]:""; //Finish 
                                             $csv_row[] = $arrTDProductsAttributes[$lowerpinnacleSKU][$i]['Web Option Label']=="Letter"?$arrTDProductsAttributes[$lowerpinnacleSKU][$i]["Attribute"]:""; //Letter  
                                             
+                                            $csv_row[] = $tdProduct['iconLabel']; //iconlabel 
+                                            $csv_row[] = $tdProduct['Product - Next Date Due To Arrive']>date("Y-m-d")?$tdProduct['Product - Next Date Due To Arrive']:""; //date_of_arrival
+                                            $csv_row[] = $tdProduct['Product - QTY On Current POs']; //qy_on_current_po 
                                             $csv_row[] = ""; //custom_layout_update
                                             $csv_row[] = ""; //custom_design   ultimo/default
                                             $csv_row[] = "1 column";  //page_layout
@@ -911,11 +938,11 @@ class FLTeamDeskWebprofiles {
                                             $csv_row[] = "1";  //use_config_enable_qty_inc
                                             $csv_row[] = "0";  //enable_qty_increments
                                             $csv_row[] = "0"; //is_decimal_divided
-                                            $csv_row[] = $this->arrTDProductFamilyContents[$related_product_family][$i]['related_web_profile']; //_links_related_sku
+                                            $csv_row[] = $related_products[$i];//$this->arrTDProductFamilyContents[$related_product_family][$i]['related_web_profile']; //_links_related_sku
                                             $csv_row[] = ""; //_links_related_position
                                             $csv_row[] = ""; //_links_crosssell_sku
                                             $csv_row[] = ""; //_links_crosssell_position
-                                            $csv_row[] = $this->arrTDDesignFamilyContents[$related_design_family][$i]['related_web_profile']; //_links_upsell_sku
+                                            $csv_row[] = "";//$this->arrTDDesignFamilyContents[$related_design_family][$i]['related_web_profile']; //_links_upsell_sku
                                             $csv_row[] = "";  //_links_upsell_position
                                             $csv_row[] = $tdProduct['kitType']=='Fixed'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Product - FL Solo PinnacleSKU']:"";  //_associated_sku
                                             $csv_row[] = $tdProduct['kitType']=='Fixed'?1:""; //_associated_default_qty
@@ -990,9 +1017,10 @@ class FLTeamDeskWebprofiles {
                                                 $csv_row[] = trim($pr_holiday_list[$i]); //holiday        
                                                 $csv_row[] = in_array(trim($subtheme_arr[$i]),$this->arrHolidaySubtheme)?trim($subtheme_arr[$i]):""; //holiday_subthemes  
                                                 $csv_row[] = trim($pr_occassion_list[$i]); //occassion 
-                                                $csv_row[] = in_array(trim($subtheme_arr[$i]),$this->arrOccassionSubtheme)?trim($subtheme_arr[$i]):""; //occassion_subthemes   
+                                                $csv_row[] = in_array(trim($subtheme_arr[$i]),$this->arrOccassionSubtheme)?trim($subtheme_arr[$i]):""; //occassion_subthemes 
                                                 $csv_row[] = trim($theme_arr[$i]); //multi themes 
-                                                $csv_row[] = in_array(trim($subtheme_arr[$i]),$this->arrThemeSubtheme)?trim($subtheme_arr[$i]):""; //themes_subthemes  
+                                                $csv_row[] = in_array(trim($nonsubtheme),$this->arrThemeSubtheme)?trim($nonsubtheme):""; //themes_subthemes  
+                                            
                                                 $csv_row[] = ""; //multi brand  
                                                 
                                                 $csv_row[] = ""; //accessory
@@ -1002,6 +1030,9 @@ class FLTeamDeskWebprofiles {
                                                 $csv_row[] = ""; //finish 
                                                 $csv_row[] = ""; //letter 
                                             
+                                                $csv_row[] = ""; //iconlabel
+                                                $csv_row[] = ""; //date_of_arrival
+                                                $csv_row[] = ""; //qy_on_current_po  
                                                 $csv_row[] = ""; //custom_layout_update
                                                 $csv_row[] = ""; //custom design
                                                 $csv_row[] = ""; //page layout
@@ -1051,11 +1082,11 @@ class FLTeamDeskWebprofiles {
                                                 $csv_row[] = "";  //use_config_enable_qty_inc
                                                 $csv_row[] = "";  //enable_qty_increments
                                                 $csv_row[] = ""; //is_decimal_divided
-                                                $csv_row[] = $this->arrTDProductFamilyContents[$related_product_family][$i]['related_web_profile']; //_links_related_sku  
+                                                $csv_row[] = $related_products[$i];//$this->arrTDProductFamilyContents[$related_product_family][$i]['related_web_profile']; //_links_related_sku  
                                                 $csv_row[] = ""; //_links_related_position
                                                 $csv_row[] = ""; //_links_crosssell_sku
                                                 $csv_row[] = ""; //_links_crosssell_position
-                                                $csv_row[] = $this->arrTDDesignFamilyContents[$related_design_family][$i]['related_web_profile']; //_links_upsell_sku
+                                                $csv_row[] = "";//$this->arrTDDesignFamilyContents[$related_design_family][$i]['related_web_profile']; //_links_upsell_sku
                                                 $csv_row[] = "";  //_links_upsell_position
                                                 $csv_row[] = $tdProduct['kitType']=='Fixed'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Product - FL Solo PinnacleSKU']:"";  //_associated_sku
                                                 $csv_row[] = $tdProduct['kitType']=='Fixed'?1:""; //_associated_default_qty
@@ -1112,7 +1143,7 @@ class FLTeamDeskWebprofiles {
                                         fputcsv($this->fp,$csv_row);
                                     } // End of for largest counter loop
                             } // End of if not in product added array  
-                            if($this->product_counter % 1200 == 0) {
+                            if($this->product_counter % 900 == 0) {
                                  $this->csv_counter++;  
                                  fclose($this->fp);
                                  $this->fp = fopen("var/import/products/FL_Products".$this->csv_counter.".csv","w+");
@@ -1149,7 +1180,7 @@ class FLTeamDeskWebprofiles {
         /**
         * @desc  create string of columns to be retreived from the query  
         */       
-        $strColumns = "[isNewProduct?], [Product - VENDOR - DisplayLabelEnteredFL],[Product - Type - DisplayLabelEnteredFL],[Product - Filter - Size - DisplayLabelEnteredFL],[Product - Seasons], [Product - Themes], [Product - SubThemes],[PinnacleSKU],[Description],[Display Name],[PriceCalced],[DiscountPriceCalced],[overview],[is_visible],[Product - Weight],[Quantity Available],[imgLocationCustom],[Related Product],[meta_description],[meta_keywords],[meta_title],[kitType],[Related Design Family],[Related Product Family],[Priority_Cached],[FLFilterSectionCalced],[url],[flagFeaturesSearchLabel],[Image Alt Text 1]";   
+        $strColumns = "[isNewProduct?], [Product - VENDOR - DisplayLabelEnteredFL],[Product - Type - DisplayLabelEnteredFL],[Product - Filter - Size - DisplayLabelEnteredFL],[Product - Seasons], [Product - Themes], [Product - SubThemes],[Product - Themes Full Name],[PinnacleSKU],[Description],[Display Name],[PriceCalced],[DiscountPriceCalced],[overview],[is_visible],[Product - Weight],[Quantity Available],[imgLocationCustom],[Related Product],[meta_description],[meta_keywords],[meta_title],[kitType],[Related Design Family],[Related Product Family],[Priority_Cached],[FLFilterSectionCalced],[url],[flagFeaturesSearchLabel],[Image Alt Text 1],[Product - Next Date Due To Arrive],[Product - QTY On Current POs],[iconLabel]";   
         try
         {        
             $arrResults = $this->api->Query("SELECT TOP 1500 ".$strColumns." FROM [FL Web Profile] ".$arrQueries." ORDER BY [PinnacleSKU]");     
@@ -1315,6 +1346,9 @@ class FLTeamDeskWebprofiles {
                   $product_header_row[] = "finish";
                   $product_header_row[] = "letter";
                   
+                  $product_header_row[] = "iconlabel";   
+                  $product_header_row[] = "date_of_arrival"; 
+                  $product_header_row[] = "qty_on_current_po";
                   $product_header_row[] = "custom_layout_update";
                   $product_header_row[] = "custom_design"; 
                   $product_header_row[] = "page_layout";   
@@ -1835,7 +1869,7 @@ class FLTeamDeskWebprofiles {
         * @desc  create the teamdesk query, to fetch all the promo codes
         */
         $arrQueries = "WHERE [is_active]=true and [Level]=2 and [isSeasonal?]=false";  
-        $strColumns = "[Name],[Sub Theme]";
+        $strColumns = "[ThemeSubTheme]";
         $sqlQuery = "SELECT ".$strColumns." FROM [FL Theme] ".$arrQueries; 
         try{
             /** 
@@ -1844,7 +1878,7 @@ class FLTeamDeskWebprofiles {
             $arrResults = $this->api->Query($sqlQuery);     
              if (isset($arrResults)) {   
                 foreach ($arrResults->Rows as $tdFilter) { 
-                    $subTheme = trim($tdFilter['Sub Theme']);
+                    $subTheme = trim($tdFilter['ThemeSubTheme']);
                     if(!in_array($subTheme,$arrThemeSubTheme)) {   
                          $arrThemeSubTheme[] = $subTheme;
                     }    

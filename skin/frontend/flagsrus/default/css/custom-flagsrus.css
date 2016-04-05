@@ -2507,4 +2507,12 @@ ul.checkout-types li  p.paypal-logo {float: right;
 	height: 43px;
 }
 
-	
+.catalogsearch-result-index input[type="radio"], input[type="checkbox"] {
+    -webkit-appearance: checkbox;
+}
+/* CSS added by HS on 4th April 2016 */
+.sticker.new, .sticker.sale {
+	font-size:16px;
+	left: -5px;
+    position: relative;
+}	

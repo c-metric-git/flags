@@ -487,7 +487,7 @@ $_collectionSize = $_productCollection->count ();
                 <?php }?>
 						<script type="text/javascript">
                                 //<![CDATA[
-                                var productAddToCartForm<?php echo $_product->getId(); ?> = new VarienForm('product_addtocart_form<?php echo $_product->getId(); ?>',true);
+                                var productAddToCartForm<?php echo $_product->getId(); ?> = new VarienForm('product_addtocart_form<?php echo $_product->getId(); ?>');
                                 //]]>
 						</script>
                         <?php elseif($_product->getStockItem() && $_product->getStockItem()->getIsInStock()): ?>

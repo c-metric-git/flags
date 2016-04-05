@@ -47,7 +47,20 @@ class Stripedsocks_Productlisting_Block_Product_List extends Mage_Catalog_Block_
                 }
             }
 			$filters = $this->getLayer()->getState()->getFilters();
-			$this->_productCollection = $layer->getProductCollection();
+			/**
+            * @desc code added by dhiraj for sorting the OOS products in last on filters page only 
+            */
+            //$pageTitle = Mage::getSingleton('cms/page')->getTitle();			
+			//if($pageTitle=="Filter Results" || (is_array($filters) && count($filters)>0))
+			//{
+					$this->_productCollection = $layer->getProductCollection()                        
+                    ->setOrder('inventory_in_stock','desc')
+                     ->setOrder('priority','desc');
+	        /*}
+			else
+			{    
+				$this->_productCollection = $layer->getProductCollection();	
+			}   */
 			if(!empty($filters))
 			{
 				$this->_productCollection->setVisibility(array(
