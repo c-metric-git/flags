@@ -1,6 +1,106 @@
-[21-Aug-2015 09:19:35 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Warning: Invalid argument supplied for foreach()  in /home/stripedsocks/public_html/cron/cron_update_orders.php on line 29' in /home/stripedsocks/public_html/app/code/core/Mage/Core/functions.php:245
+[11-Apr-2016 13:55:39 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1592
+[11-Apr-2016 13:58:36 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1592
+[11-Apr-2016 14:01:38 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1592
+[11-Apr-2016 14:06:58 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1592
+[11-Apr-2016 14:09:20 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1592
+[11-Apr-2016 14:10:12 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1592
+[11-Apr-2016 14:11:36 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1592
+[11-Apr-2016 14:23:41 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1596
+[11-Apr-2016 14:24:39 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1596
+[11-Apr-2016 14:27:11 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1598
+[11-Apr-2016 14:32:28 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1592
+[11-Apr-2016 14:33:04 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1592
+[11-Apr-2016 14:33:11 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1592
+[11-Apr-2016 14:35:44 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1594
+[11-Apr-2016 14:35:44 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Warning: array_merge(): Argument #2 is not an array  in /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php on line 851' in /home/stripedsocks/beta/app/code/core/Mage/Core/functions.php:245
 Stack trace:
-#0 /home/stripedsocks/public_html/cron/cron_update_orders.php(29): mageCoreErrorHandler(2, 'Invalid argumen...', '/home/stripedso...', 29, Array)
-#1 {main}
-  thrown in /home/stripedsocks/public_html/app/code/core/Mage/Core/functions.php on line 245
-[07-Sep-2015 11:31:27 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/stripedsocks/public_html/lib/Teamdesk/class.export_teamdesk_orders.php on line 453
+#0 [internal function]: mageCoreErrorHandler(2, 'array_merge(): ...', '/home/stripedso...', 851, Array)
+#1 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(851): array_merge(Array, NULL)
+#2 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(812): Mage_Core_Model_Config->_sortModuleDepends(Array)
+#3 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(315): Mage_Core_Model_Config->_loadDeclaredModules()
+#4 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(259): Mage_Core_Model_Config->loadModules()
+#5 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/App.php(270): Mage_Core_Model_Config->init(Array)
+#6 /home/stripedsocks/beta/app/Mage.php(616): Mage_Core_Model_App->init('admin', 'store', Array) in /home/stripedsocks/beta/app/code/core/Mage/Core/functions.php on line 245
+[11-Apr-2016 14:39:53 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1594
+[11-Apr-2016 14:39:53 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Warning: array_merge(): Argument #2 is not an array  in /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php on line 851' in /home/stripedsocks/beta/app/code/core/Mage/Core/functions.php:245
+Stack trace:
+#0 [internal function]: mageCoreErrorHandler(2, 'array_merge(): ...', '/home/stripedso...', 851, Array)
+#1 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(851): array_merge(Array, NULL)
+#2 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(812): Mage_Core_Model_Config->_sortModuleDepends(Array)
+#3 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(315): Mage_Core_Model_Config->_loadDeclaredModules()
+#4 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(259): Mage_Core_Model_Config->loadModules()
+#5 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/App.php(270): Mage_Core_Model_Config->init(Array)
+#6 /home/stripedsocks/beta/app/Mage.php(616): Mage_Core_Model_App->init('admin', 'store', Array) in /home/stripedsocks/beta/app/code/core/Mage/Core/functions.php on line 245
+[11-Apr-2016 14:41:22 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1594
+[11-Apr-2016 14:41:22 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Warning: array_merge(): Argument #2 is not an array  in /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php on line 851' in /home/stripedsocks/beta/app/code/core/Mage/Core/functions.php:245
+Stack trace:
+#0 [internal function]: mageCoreErrorHandler(2, 'array_merge(): ...', '/home/stripedso...', 851, Array)
+#1 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(851): array_merge(Array, NULL)
+#2 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(812): Mage_Core_Model_Config->_sortModuleDepends(Array)
+#3 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(315): Mage_Core_Model_Config->_loadDeclaredModules()
+#4 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(259): Mage_Core_Model_Config->loadModules()
+#5 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/App.php(270): Mage_Core_Model_Config->init(Array)
+#6 /home/stripedsocks/beta/app/Mage.php(616): Mage_Core_Model_App->init('admin', 'store', Array) in /home/stripedsocks/beta/app/code/core/Mage/Core/functions.php on line 245
+[11-Apr-2016 14:41:54 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Warning: array_merge(): Argument #2 is not an array  in /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php on line 851' in /home/stripedsocks/beta/app/code/core/Mage/Core/functions.php:245
+Stack trace:
+#0 [internal function]: mageCoreErrorHandler(2, 'array_merge(): ...', '/home/stripedso...', 851, Array)
+#1 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(851): array_merge(Array, NULL)
+#2 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(812): Mage_Core_Model_Config->_sortModuleDepends(Array)
+#3 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(315): Mage_Core_Model_Config->_loadDeclaredModules()
+#4 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(259): Mage_Core_Model_Config->loadModules()
+#5 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/App.php(270): Mage_Core_Model_Config->init(Array)
+#6 /home/stripedsocks/beta/app/Mage.php(616): Mage_Core_Model_App->init('admin', 'store', Array) in /home/stripedsocks/beta/app/code/core/Mage/Core/functions.php on line 245
+[11-Apr-2016 14:42:28 UTC] PHP Parse error:  syntax error, unexpected '=', expecting ',' or ';' in /home/stripedsocks/beta/cron/cron_update_fl_products_inventory.php on line 18
+[11-Apr-2016 14:43:28 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Warning: array_merge(): Argument #2 is not an array  in /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php on line 851' in /home/stripedsocks/beta/app/code/core/Mage/Core/functions.php:245
+Stack trace:
+#0 [internal function]: mageCoreErrorHandler(2, 'array_merge(): ...', '/home/stripedso...', 851, Array)
+#1 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(851): array_merge(Array, NULL)
+#2 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(812): Mage_Core_Model_Config->_sortModuleDepends(Array)
+#3 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(315): Mage_Core_Model_Config->_loadDeclaredModules()
+#4 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(259): Mage_Core_Model_Config->loadModules()
+#5 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/App.php(270): Mage_Core_Model_Config->init(Array)
+#6 /home/stripedsocks/beta/app/Mage.php(616): Mage_Core_Model_App->init('admin', 'store', Array) in /home/stripedsocks/beta/app/code/core/Mage/Core/functions.php on line 245
+[11-Apr-2016 14:43:48 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Warning: array_merge(): Argument #2 is not an array  in /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php on line 851' in /home/stripedsocks/beta/app/code/core/Mage/Core/functions.php:245
+Stack trace:
+#0 [internal function]: mageCoreErrorHandler(2, 'array_merge(): ...', '/home/stripedso...', 851, Array)
+#1 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(851): array_merge(Array, NULL)
+#2 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(812): Mage_Core_Model_Config->_sortModuleDepends(Array)
+#3 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(315): Mage_Core_Model_Config->_loadDeclaredModules()
+#4 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(259): Mage_Core_Model_Config->loadModules()
+#5 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/App.php(270): Mage_Core_Model_Config->init(Array)
+#6 /home/stripedsocks/beta/app/Mage.php(616): Mage_Core_Model_App->init('', 'store', Array)
+#7 / in /home/stripedsocks/beta/app/code/core/Mage/Core/functions.php on line 245
+[11-Apr-2016 14:43:57 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Warning: array_merge(): Argument #2 is not an array  in /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php on line 851' in /home/stripedsocks/beta/app/code/core/Mage/Core/functions.php:245
+Stack trace:
+#0 [internal function]: mageCoreErrorHandler(2, 'array_merge(): ...', '/home/stripedso...', 851, Array)
+#1 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(851): array_merge(Array, NULL)
+#2 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(812): Mage_Core_Model_Config->_sortModuleDepends(Array)
+#3 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(315): Mage_Core_Model_Config->_loadDeclaredModules()
+#4 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(259): Mage_Core_Model_Config->loadModules()
+#5 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/App.php(270): Mage_Core_Model_Config->init(Array)
+#6 /home/stripedsocks/beta/app/Mage.php(616): Mage_Core_Model_App->init('', 'store', Array)
+#7 / in /home/stripedsocks/beta/app/code/core/Mage/Core/functions.php on line 245
+[11-Apr-2016 14:44:46 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Warning: array_merge(): Argument #2 is not an array  in /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php on line 851' in /home/stripedsocks/beta/app/code/core/Mage/Core/functions.php:245
+Stack trace:
+#0 [internal function]: mageCoreErrorHandler(2, 'array_merge(): ...', '/home/stripedso...', 851, Array)
+#1 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(851): array_merge(Array, NULL)
+#2 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(812): Mage_Core_Model_Config->_sortModuleDepends(Array)
+#3 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(315): Mage_Core_Model_Config->_loadDeclaredModules()
+#4 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(259): Mage_Core_Model_Config->loadModules()
+#5 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/App.php(270): Mage_Core_Model_Config->init(Array)
+#6 /home/stripedsocks/beta/app/Mage.php(616): Mage_Core_Model_App->init('admin', 'store', Array) in /home/stripedsocks/beta/app/code/core/Mage/Core/functions.php on line 245
+[11-Apr-2016 14:47:46 UTC] PHP Fatal error:  Uncaught exception 'Exception' with message 'Warning: array_merge(): Argument #2 is not an array  in /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php on line 851' in /home/stripedsocks/beta/app/code/core/Mage/Core/functions.php:245
+Stack trace:
+#0 [internal function]: mageCoreErrorHandler(2, 'array_merge(): ...', '/home/stripedso...', 851, Array)
+#1 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(851): array_merge(Array, NULL)
+#2 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(812): Mage_Core_Model_Config->_sortModuleDepends(Array)
+#3 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(315): Mage_Core_Model_Config->_loadDeclaredModules()
+#4 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Config.php(259): Mage_Core_Model_Config->loadModules()
+#5 /home/stripedsocks/beta/app/code/core/Mage/Core/Model/App.php(270): Mage_Core_Model_Config->init(Array)
+#6 /home/stripedsocks/beta/app/Mage.php(616): Mage_Core_Model_App->init('admin', 'store', Array) in /home/stripedsocks/beta/app/code/core/Mage/Core/functions.php on line 245
+[11-Apr-2016 14:49:02 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1594
+[11-Apr-2016 14:50:00 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1594
+[11-Apr-2016 14:53:26 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1594
+[11-Apr-2016 15:04:09 UTC] PHP Fatal error:  Class 'FLTeamDeskWebprofiles' not found in /home/stripedsocks/beta/cron/cron_update_fl_products_inventory.php on line 12
+[11-Apr-2016 15:04:14 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1128
+[11-Apr-2016 15:07:38 UTC] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/stripedsocks/beta/lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php on line 1622

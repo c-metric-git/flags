@@ -1,0 +1,19 @@
+body {color: #666; font: 400 13px/21px 'Open Sans',Arial,Helvetica,sans-serif; background-color: #f5f5f5;}
+A { color: blue; text-decoration: none; font-weight: normal; }
+A:hover { text-decoration: underline; font-weight: normal; }
+td.back { background: #FFFFFF; }
+td.over { background: #DFE6F7; }
+.main_container{width:960px;margin:0 auto;padding:10px;}
+.row{margin-bottom:20px;width:100%;overflow:hidden;}
+.fleft{float:left;}
+.fright{float:right;}
+.row-half{width:49%;}
+.table_invoice{border-top:1px solid #dedede;border-left:1px solid #dedede; }
+.table_invoice th, .table_invoice td{border-bottom:1px solid #dedede;border-right:1px solid #dedede;padding:4px 8px;text-align:left;background-color:#FFF; }
+.table_invoice th {background-color:#eeeeee;color:#333;font-weight:600;font-size:14px;}
+.table_invoice td.grey {background-color:#eeeeee;font-weight:600;}
+.administator h4{color:#333;font-size:14px;font-weight:600;line-height:32px;margin:0;}
+.administator p{margin:0;}
+.commission {width:auto;padding:10px 25px;background-color:#FFF;border:1px solid #dedede;text-align:center;}
+.commission h4{color:#666;font-size:14px;font-weight:400;line-height:21px;margin:0;text-transform:uppercase;}
+.commission h1{color:#333;font-size:28px;font-weight:600;line-height:32px;margin:0;text-transform:uppercase;}

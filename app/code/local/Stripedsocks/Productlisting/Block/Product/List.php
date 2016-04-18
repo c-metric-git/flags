@@ -53,9 +53,9 @@ class Stripedsocks_Productlisting_Block_Product_List extends Mage_Catalog_Block_
             //$pageTitle = Mage::getSingleton('cms/page')->getTitle();			
 			//if($pageTitle=="Filter Results" || (is_array($filters) && count($filters)>0))
 			//{
-					$this->_productCollection = $layer->getProductCollection()                        
-                    ->setOrder('inventory_in_stock','desc')
-                     ->setOrder('priority','desc');
+					$this->_productCollection = $layer->getProductCollection();                        
+                    /*->setOrder('inventory_in_stock','desc')
+                     ->setOrder('priority','desc');   */
 	        /*}
 			else
 			{    

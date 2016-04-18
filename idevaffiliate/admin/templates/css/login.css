@@ -1,0 +1,190 @@
+
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+.login {
+  *background-color: #f9f9f9;
+  *background-color: #1d5080;
+  *background-color: #090909;
+  *background: url('../../images/login_back.jpg') bottom left no-repeat fixed;
+  background-color: #FFFFFF;
+  padding-top: 140px;
+}
+.login .logo,
+.login .single-sign-on,
+.login .footer {
+  margin: 0 auto;
+  text-align: center;
+}
+.login .logo {
+  padding: 15px;
+  font-size: 23px;
+}
+.login .box {
+  background-color: #fff;
+  width: 600px;
+  margin: 0 auto;
+  border: 1px solid #d9d9d9;
+  border-top: 4px solid #4d7496;
+}
+.login .box .content {
+  padding: 30px;
+  padding-top: 10px;
+  padding-bottom: 15px;
+}
+.login .box form {
+  padding: 0;
+  margin: 0;
+}
+.login .box .form-title {
+  *text-align: center;
+  font-weight: 300;
+  margin-bottom: 25px;
+}
+.login .box .form-group {
+  margin: 0;
+  padding: 0;
+  margin-bottom: 15px;
+}
+.login .box .form-actions {
+  background-color: #fff;
+  border-top: none;
+  padding: 10px 0;
+  margin: 0;
+}
+.login .box .input-icon input {
+  border-left: 2px solid #4d7496;
+}
+.login .box .checkbox {
+  margin-top: 7px;
+}
+.login .box .inner-box {
+  background-color: #f9f9f9;
+  border-top: 1px solid #c0c0c0;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
+}
+.login .box .inner-box .content {
+  padding: 12px 30px;
+  *text-align: center;
+}
+.login .box .inner-box a {
+  color: #555555;
+  font-size: 12px;
+  font-weight: 600;
+}
+.login .box .inner-box a:hover {
+  text-decoration: none;
+  color: #4d7496;
+}
+.login .box .inner-box .close {
+  font-size: 12px;
+  margin-top: -3px;
+ 
+}
+.login .box .inner-box .close.hide-default {
+  display: none;
+}
+.login .box .inner-box form {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.login .box .inner-box a + form {
+  margin-top: 20px;
+}
+.login .box .inner-box .form-group {
+  margin-bottom: 10px;
+}
+.login .box .inner-box .forgot-password-done {
+  padding: 10px 0;
+}
+.login .box .inner-box .forgot-password-done .success-icon,
+.login .box .inner-box .forgot-password-done .danger-icon {
+  display: block;
+  font-size: 30px;
+  padding: 15px;
+  padding-top: 0;
+}
+.login .box .inner-box .forgot-password-done .success-icon {
+  color: #94b86e;
+}
+.login .box .inner-box .forgot-password-done .danger-icon {
+  color: #e25856;
+}
+.login .box .inner-box .forgot-password-done span {
+  font-weight: 600;
+}
+.login .single-sign-on {
+  width: 350px;
+  padding: 15px 0;
+  opacity: 0.5;
+  -webkit-transition: opacity 200ms ease-out;
+  -moz-transition: opacity 200ms ease-out;
+  -o-transition: opacity 200ms ease-out;
+  transition: opacity 200ms ease-out;
+}
+.login .single-sign-on:hover {
+  opacity: 1;
+}
+.login .single-sign-on span {
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 15px;
+  display: block;
+  color: #888888;
+}
+.login .single-sign-on .btn i {
+  padding-right: 5px;
+}
+.login .footer {
+  width: 350px;
+  padding-top: 30px;
+}
+.login .footer a {
+  font-size: 13px;
+  color: #6f6f6f;
+}
+.login .footer a:hover {
+  text-decoration: none;
+  color: #4d7496;
+}
+.login .spacing-top {
+  padding-top: 7px !important;
+}
+.login .box .inner-box a.forgot-password-link {
+    display: block;
+    font-size: 18px ;
+    font-weight: 300 ;
+    text-align: center;
+}
+
+
+.login-navbar {
+  position: relative;
+  z-index: 1000;
+  min-height: 150px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+}
+
+.login-navbar-fixed-top {
+  position: fixed;
+  right: 0;
+  left: 0;
+  border-width: 0 0 1px;
+}
+
+.login-navbar-fixed-top {
+  top: 0;
+  z-index: 1030;
+}

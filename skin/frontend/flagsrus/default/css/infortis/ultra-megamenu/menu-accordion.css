@@ -106,4 +106,4 @@
 /* Active */
 .acco li.item-active > .opener {
 	background-image:url(../../../images/infortis/_shared/accordion/opener-active.png);
-}
+}.nav-regular li.level0 > a > span {    font-weight: 500;}

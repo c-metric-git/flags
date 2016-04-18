@@ -11,19 +11,21 @@ require_once(BASE_PATH."lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php");
 ini_set("display_errors",1);           
 $objTDProduct = new FLTeamDeskWebprofiles(); 
 $strReturn = $objTDProduct->updateProductInventory($db);  
-$strMessage = "<br /><br />Total product inventory updated :- <b>".$strReturn["totalProductsUpdated"]."</b><br>
-               Total product attributes updated :- <b>".$strReturn["totalAttributesUpdate"]."</b><br>"; 
+$strMessage = "<br /><br />Total product inventory updated :- <b>".$strReturn["totalProductsUpdated"]."</b><br>"; 
 echo $strMessage;
-$db->done();
-
-$mageFilename = BASE_PATH.'app/Mage.php';
+$db->done();       
+      exit;
+$mageFilename = BASE_PATH.'app/Mage.php';    
 require_once $mageFilename;
 Mage::setIsDeveloperMode(true);
 ini_set('display_errors', 1);
 umask(0);
+
 Mage::app('admin');
+echo "here";
+exit;
 Mage::register('isSecureArea', 1);
-Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
+Mage::app()->setCurrentStore(2);
  
 set_time_limit(0);
 /***************** UTILITY FUNCTIONS ********************/
@@ -34,6 +36,7 @@ function _getConnection($type = 'core_read'){
 function _getTableName($tableName){
     return Mage::getSingleton('core/resource')->getTableName($tableName);
 }
+echo "got";exit;
 $process = Mage::getModel('index/indexer')->getProcessByCode('cataloginventory_stock');
 $process->reindexAll();
 

@@ -35,7 +35,18 @@
             <dt><?php echo $this->escapeHtml($this->getCarrierName($code)) ?></dt>
             <dd>
                 <ul>
-                    <?php $_sole = $_sole && count($_rates) == 1; foreach ($_rates as $_rate): ?>
+                    <?php $_sole = $_sole && count($_rates) == 1; foreach ($_rates as $_rate): 
+                    $titlestirng  = $_rate->getData('method_title');
+                        $lower_string = strtolower($titlestirng);            
+                        $finaltitlestring = preg_replace("/[\s]/", "_", $lower_string); 
+                        
+                        $codestirng  = $_rate->getData('code');
+                        $codestirng_explode = explode("_",$codestirng);
+                        if($codestirng_explode[0]=="matrixrate")
+                        {
+                            $final_codestirng =$codestirng_explode[0].'_'.$codestirng_explode[1].'_'.$finaltitlestring; 
+                        }
+                    ?>
                         <?php $shippingCodePrice[] = "'".$_rate->getCode()."':".(float)$_rate->getPrice(); ?>
                         <li>
                             <?php if ($_rate->getErrorMessage()): ?>
@@ -54,7 +65,7 @@
                                     </script>
                                 <?php endif; ?>
 
-                                <?php endif; ?>
+                                <?php endif; ?>  
                                 <label for="s_method_<?php echo $_rate->getCode() ?>"><?php echo $this->escapeHtml($_rate->getMethodTitle()) ?>
                                     <?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
                                     <?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
@@ -63,8 +74,13 @@
                                         (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
                                     <?php endif; ?>
                                 </label>
-                                <!-- START MEANBEE ESTIMATED DELIVERY -->
-                                <br/><?php echo Mage::helper('meanbee_estimateddelivery')->getEstimatedDeliveryText($_rate->getCode()); ?>
+                                <!-- START MEANBEE ESTIMATED DELIVERY -->      
+                                <br/><?php 
+                                    if($codestirng_explode[0]=="matrixrate"):?>
+                                        <?php  echo Mage::helper('meanbee_estimateddelivery')->getEstimatedDeliveryText($final_codestirng); ?>
+                                    <?php else:?>
+                                        <?php echo Mage::helper('meanbee_estimateddelivery')->getEstimatedDeliveryText($_rate->getCode()); ?>
+                                    <?php endif;?>
                                 <!-- END MEANBEE ESTIMATED DELIVERY -->
                             <?php endif ?>
                         </li>

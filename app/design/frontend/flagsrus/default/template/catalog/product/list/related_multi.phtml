@@ -758,7 +758,10 @@ $_productCollection = $this->getItems();
 
 
 
-                    <?php echo $helpLabels->getLabels($_product); //Product labels ?>
+					<?php //echo $helpLabels->getLabels ($_product); //Product labels ?>
+					<?php if($_product->getIconlabel()!=''): ?>
+						<span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span>
+					<?php endif; ?>
 
 
 
@@ -890,40 +893,41 @@ $_productCollection = $this->getItems();
 
                 ?>
 
-<!--                    <input type="text" class="input-text qty" title="Qty" value="0" maxlength="12" id="qty" name="qty">-->
-
-                        <?php if($productCount>0){ ?>
-
-                         <!--=================== by brt =================-->
-
-
-
-                                        <select class="input-text qty" name="qty" id="qty">
-
-                                            <?php $i = 1 ?>
-
-                                            <?php do { ?>
-
-                                                <option value="<?php echo $i?>">
-
-                                                    <?php echo $i?>
-
-                                                    <?php $i++ ?>
-
-                                                </option>
-
-                                            <?php } while ($i <= $productCount) ?>
-
-                                        </select>
-
-                                        <!--=================== by brt ends =================-->
-
-                            <?php }?>
-
-                        <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
-
-
-
+				<?php $cartUrl = Mage::helper('checkout/cart')->getAddUrl($_product); ?>
+				 <form action="<?php echo $cartUrl; ?>" method="post" class="product_addtocart_form product_addtocart_form_<?php echo $_product->getSku(); ?>" name="product_addtocart_form<?php echo $_product->getId(); ?>" id="product_addtocart_form<?php echo $_product->getId(); ?>"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+				<?php echo $this->getBlockHtml('formkey'); ?>
+				 <!--input type="hidden" name="qty" value="1"-->
+				<input type="hidden" id="<?php echo $_product->getSku()."-addtourl"; ?>" name="addtourl" value="<?php echo $cartUrl;?>">
+				<input type="hidden" name="product" value="<?php echo $_product->getId();?>">
+				<input type="hidden" name="related_product" value="">
+				<input type="hidden" name="return_url" value="">
+					<div class="<?php echo $_product->getSku()."-addto"; ?>">
+						<select class="input-text qty" name="qty" id="qty">
+							<?php $i = 1 ?>
+							<?php do { ?>
+								<option value="<?php echo $i?>">
+									<?php echo $i?>
+									<?php $i++ ?>
+								</option>
+							<?php } while ($i <= $productCount) ?>
+						</select>
+						<!--=================== by brt ends =================-->
+						
+						   <!--button type="button" title="<?php echo $this->__ ('Add to Cart') ?>"
+								class="button btn-cart"
+								onclick="setLocation('<?php echo $this->getAddToCartUrl ($_product) ?>')"><span><span><?php echo $this->__ ('Add to Cart') ?></span></span>
+							</button-->
+						<button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart <?php echo $_product->getSku()."-del"; ?>" id="" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><span><i class="icon ic ic-bag"></i><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+					</div>
+					<div class="<?php echo $_product->getSku()."-addremove"; ?>" style="display:none;">
+						<button type="button" title="<?php echo $this->__('Add/Remove') ?>" class="button btn-cart add-remove" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><span><span><?php echo $this->__('Add/Remove') ?></span></span></button>
+					</div>
+					</form>
+					<script type="text/javascript">
+                                //<![CDATA[
+                                var productAddToCartForm<?php echo $_product->getId(); ?> = new VarienForm('product_addtocart_form<?php echo $_product->getId(); ?>');
+                                //]]>
+					</script>
                     <?php elseif($_product->getStockItem() && $_product->getStockItem()->getIsInStock()): ?>
 
 

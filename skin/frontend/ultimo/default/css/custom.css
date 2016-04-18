@@ -736,3 +736,6 @@ div.sbs_autocomplete_inner .sbs_autocomplete_close_button {left: 581px !importan
 	div.sbs_autocomplete_inner .sbs_autocomplete_close_button {left: 681px !important;}
 
 }
+.contacts-index-index .contact_table{margin: 10px 0;padding-top: 15px;}
+.contacts-index-index .contentLargeText{font-size: 20px; font-weight:bold;}
+.contacts-index-index #attachments{background: rgba(0, 0, 0, 0) none repeat scroll 0 0;border: 0 none;margin: 0;padding: 0;}

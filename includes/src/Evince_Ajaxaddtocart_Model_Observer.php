@@ -12,8 +12,8 @@ class Evince_Ajaxaddtocart_Model_Observer {
 
             $_response = Mage::getModel('ajaxaddtocart/response')
                     ->setProductName($observer->getProduct()->getName())
-                    ->setMessage(Mage::helper('checkout')->__('%s was added to cart.', $observer->getProduct()->getName()));
-
+                    ->setMessage(Mage::helper('checkout')->__('%s added to cart.', $observer->getProduct()->getName()));
+			$_response->setSku($observer->getProduct()->getSku());
             $_response->addUpdatedBlocks($_response);
 
             $_response->send();
@@ -24,7 +24,7 @@ class Evince_Ajaxaddtocart_Model_Observer {
 
             $_response = Mage::getModel('ajaxaddtocart/response')
                     ->setProductName($observer->getProduct()->getName())
-                    ->setMessage(Mage::helper('checkout')->__('%s was added to cart.', $observer->getProduct()->getName()));
+                    ->setMessage(Mage::helper('checkout')->__('%s  added to cart.', $observer->getProduct()->getName()));
             $_response->send();
         }
     }

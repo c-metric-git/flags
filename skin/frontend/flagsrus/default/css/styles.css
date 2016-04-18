@@ -630,7 +630,7 @@ p.required {
 	margin-bottom: 0
 }
 .page-title {
-	margin-bottom: 20px
+	margin-bottom: 10px
 }
 .page-title .separator {
 	margin: 0 3px
@@ -1556,7 +1556,7 @@ ul.bullet ul li, ul.disc ul li {
 .compare-table .price-box {
 	display: inline-block;
 	line-height: 15px;
-	margin: 10px 0;
+	margin: 5px 0;
 	width: 100%;
 }
 .compare-table .product-image img {
@@ -1564,7 +1564,8 @@ ul.bullet ul li, ul.disc ul li {
 	margin: 0 auto
 }
 .compare-table .add-to-links {
-	margin-top: 5px
+	margin-top: 5px;
+	float:left;
 }
 .compare-table .add-to-links li {
 	float: none
@@ -2121,9 +2122,7 @@ a.availability-only {
 	display: block;
 	margin: 5px 60px 5px 0
 }
-.add-to-cart.left-side {
-	float: none!important
-}
+
 .add-to-cart.left-side .button {
 	float: left
 }
@@ -4153,7 +4152,6 @@ body.cms-index-index .breadcrumbs, label.required em, span.required em {
 
 input[type=”checkbox”]{
 	-webkit-appearance: checkbox;
-
 -webkit-appearance: checkbox !important;
  border-radius: 0;
  padding:0;
@@ -4163,4 +4161,20 @@ input[type=”checkbox”]{
 
 .checkout-cart-index .cart .totals .checkout-types {
     text-align: center;
+}
+.catalog-product-compare-index .page-title .link-print, .catalog-product-compare-index .page-title .link-reorder, .page-title .link-rss, .catalog-product-compare-index .page-title .separator {
+	margin-top: 0px
+}
+.compare-table a.link-wishlist {
+  	background-color: #d74c43;
+    color: #fff;
+    padding: 0 7px;
+    line-height: 32px;
+    border-radius: 5px;
+    letter-spacing: .5px;
+	text-transform: uppercase;
+font-weight: 700;
+font-size: 12px;
+float: left;
+margin: 0;
 }

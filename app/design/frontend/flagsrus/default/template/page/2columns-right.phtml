@@ -55,8 +55,10 @@
                     <div class="col-right sidebar grid12-3 grid-col2-sidebar no-gutter"><?php echo $this->getChildHtml('right') ?></div>
                     <div class="postscript"><?php echo $this->getChildHtml('postscript') ?></div>
                 	<div style="clear:both; margin-bottom:10px;">
-                    	<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-promotion')->toHtml();?>
-                	</div>
+						<?php if((Mage::app()->getRequest()->getModuleName() != 'onestepcheckout' || Mage::app()->getRequest()->getControllerName()!='index') && (Mage::app()->getRequest()->getModuleName() != 'ajaxaddtocart' && Mage::app()->getRequest()->getControllerName()!='checkout_cart') && (Mage::app()->getRequest()->getModuleName() != 'checkout' && Mage::app()->getRequest()->getControllerName()!='onepage')): ?>
+							<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-promotion')->toHtml();?>
+						<?php endif; ?>
+                	</div>						<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('shopper-approved-reviews')->toHtml();?>
                 </div>
             </div>
         </div>

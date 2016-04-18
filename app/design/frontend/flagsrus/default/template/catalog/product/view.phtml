@@ -118,7 +118,7 @@
     <?php else: ?>
         <?php $_url = $this->getSubmitUrl($_product); ?>
     <?php endif; ?>
-	<form action="<?php echo $_url; ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+	<form data-subscribeurl="<?php echo $_url; ?>" action="<?php echo $_url; ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
 		<?php echo $this->getBlockHtml('formkey'); ?>
 		<div class="no-display">
 			<input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />

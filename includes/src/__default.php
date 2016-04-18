@@ -5955,9 +5955,26 @@ class Varien_Data_Collection_Db extends Varien_Data_Collection
     {
         if (is_null($this->_totalRecords)) {
             $sql = $this->getSelectCountSql();
+			
             $this->_totalRecords = $this->getConnection()->fetchOne($sql, $this->_bindParams);
         }
-        return intval($this->_totalRecords);
+		/* Edited by dhiraj*/
+		$currentCategory = Mage::registry('current_category');
+		$instock = Mage::registry('intstockcount');
+		if($currentCategory!="")
+		{
+			$currentCatName =$currentCategory->getName();
+		}
+		
+		if($currentCatName =="Top Sellers" && !$instock)
+		{
+	        return intval(24);
+		}
+		else
+		{
+			return intval($this->_totalRecords);
+		}
+		/* Edited end by dhiraj*/
     }
 
     /**
@@ -5975,7 +5992,16 @@ class Varien_Data_Collection_Db extends Varien_Data_Collection
         $countSelect->reset(Zend_Db_Select::LIMIT_OFFSET);
         $countSelect->reset(Zend_Db_Select::COLUMNS);
 
-        $countSelect->columns('COUNT(*)');
+        if(count($this->getSelect()->getPart(Zend_Db_Select::GROUP)) > 0) {
+            $countSelect->reset(Zend_Db_Select::GROUP);
+            $countSelect->distinct(true);
+            $group = $this->getSelect()->getPart(Zend_Db_Select::GROUP);
+            $countSelect->columns("COUNT(DISTINCT ".implode(", ", $group).")");
+        } else {
+            $countSelect->columns('COUNT(*)');
+        }
+		
+		//$countSelect->columns('COUNT(*)');
 
         return $countSelect;
     }

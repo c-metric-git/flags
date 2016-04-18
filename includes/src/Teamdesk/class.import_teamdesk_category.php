@@ -75,17 +75,17 @@ class TeamDeskCategory {
              /**
              * @desc  get all the categories
              */
-             if($_SESSION['arrTDCategories'] !='' && isset($_SESSION['arrTDCategories'])) {
+             /*if($_SESSION['arrTDCategories'] !='' && isset($_SESSION['arrTDCategories']) && count($_SESSION['arrTDCategories'])>0) {    
                 $arrTDCategories = $_SESSION['arrTDCategories'];
             }
-            else {
-			   $arrTDCategories = $this->getTDCategories();
-                $_SESSION['arrTDCategories'] = $arrTDCategories; 
-            }
+            else {   */
+                $arrTDCategories = $this->getTDCategories();
+               // $_SESSION['arrTDCategories'] = $arrTDCategories; 
+            //}
              /**
              * @desc  echo "Categories == "; print_arr($arrCategories);          
              */
-            if (isset($arrTDCategories) && $_SESSION['arrTDCategories']=='') {
+            if (isset($arrTDCategories)) {
                   $fp = fopen("var/import/category/categories.csv","w+");
                   if($fp) {
                       $csv_seperator = "";

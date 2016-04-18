@@ -1,4 +1,22 @@
-<?php
+<?PHP 
+//-------------------------------------------
+// START IDEVAFFILIATE CODE
+//-------------------------------------------
+$order_details = Mage::getModel('sales/order')->loadByIncrementId(Mage::getSingleton('checkout/session')->getLastRealOrderId());
+$idev_subtotal = $order_details->base_subtotal; 
+$idev_discount = $order_details->base_discount_amount;
+$idev_saleamt = $idev_subtotal + $idev_discount;
+$coupon_code = $order_details->coupon_code;
+?>
+
+<img border="0" src="http://flagsrus.stripedsocks.com/idevaffiliate/sale.php?profile=54&idev_saleamt=<?PHP echo $idev_saleamt; ?>&idev_ordernum=<?PHP echo $this->getOrderId(); ?>&coupon_code=<?PHP echo $coupon_code; ?>" width="1" height="1">
+
+<?PHP 
+//-------------------------------------------
+// END IDEVAFFILIATE CODE
+//-------------------------------------------
+?>
+<?php               
 $order_id = $this->getOrderId(); //use your own order id 
 $order = Mage::getModel("sales/order")->loadByIncrementId($order_id); //load order by order id 
 
@@ -82,6 +100,19 @@ if ($aboveenable == 1 && $aboveenableid != "") {
 <?php endif; ?>
 <!--p>Check: Mail to :<br />FlagsRus<br />16 Dalfonso Rd<br />newburgh, NY 12550</p-->
 </div>
+<?php 
+$excludeKeys = array('entity_id', 'customer_address_id', 'quote_address_id', 'region_id', 'customer_id', 'address_type');
+$oBillingAddress = $order->getBillingAddress()->getData();
+$oShippingAddress = array();
+if($order->getShippingAddress())
+{
+	$oShippingAddress = $order->getShippingAddress()->getData();
+}
+$oBillingAddressFiltered = array_diff_key($oBillingAddress, array_flip($excludeKeys));
+$oShippingAddressFiltered = array_diff_key($oShippingAddress, array_flip($excludeKeys));
+
+$addressDiff = array_diff($oBillingAddressFiltered, $oShippingAddressFiltered);
+?>
 <div class="myorder-wrapper col-md-12" style="padding-left: 0 !important;line-height:20px;">
 	
     <div class="order_summery col-md-6" style="padding-left: 0 !important;">
@@ -108,7 +139,7 @@ if ($aboveenable == 1 && $aboveenableid != "") {
         </div>
         
     </div>
-    <?php if($order->getShippingAddress()): ?>
+    <?php if($order->getShippingAddress() && $addressDiff): ?>
 	<?php 
 		$shipping_address_data = $order->getShippingAddress();
 		$shippcode = $order->getShippingAddress()->getCountry();
@@ -278,6 +309,14 @@ if ($aboveenable == 1 && $aboveenableid != "") {
                     </span>
                 </td>
             </tr>
+             <tr>
+                <td colspan="3" class="a-right">
+                    <small>Tax:</small>
+                </td>
+                <td colspan="2">
+                    <small><?php echo $this->helper('checkout')->formatPrice($order->getBaseTaxAmount()); ?></small>
+                </td>
+            </tr>
             <?php if ($order->getDiscountAmount() != 0): ?>
                 <tr class="discount">
                     <td class="a-right" colspan="3">
@@ -306,9 +345,24 @@ if ($aboveenable == 1 && $aboveenableid != "") {
     </table>
 </div>
 
+<?php  $CustomerNote=$order_details->getCustomerNote(); 
+      if(isset($CustomerNote)) { ?>
+<div class="col-md-12" style="padding-left: 0 !important;line-height:20px;margin-bottom:25px;margin-top:25px;">    
+    <div class="col-md-12" style="padding-left: 0 !important;">
+        <h3 class="bg-info">Comment</h3>
+        <div class="inner_content" style="padding-left: 10px;">
+            <span><?php echo $CustomerNote; ?></span>
+        </div>      
+    </div>  
+   
+</div>
+<?php } ?>
+
 <div class="buttons-set">
     <button type="button" class="button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location = '<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
-	<button type="button" class="button" title="<?php echo $this->__('Print') ?>" onclick="window.open('<?php echo $this->getPrintUrl() ?>','_blank');"><span><span><?php echo $this->__('Print') ?></span></span></button>
+	<?php if(Mage::getSingleton('customer/session')->getCustomerId()!=''): ?>
+		<button type="button" class="button" title="<?php echo $this->__('Print') ?>" onclick="window.open('<?php echo $this->getPrintUrl() ?>','_blank');"><span><span><?php echo $this->__('Print') ?></span></span></button>
+	<?php endif; ?>
 </div>
 <?php
 if ($belowenable == 1 && $belowenableid != "") {

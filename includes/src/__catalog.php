@@ -11690,7 +11690,7 @@ class Mage_Catalog_Model_Resource_Product_Collection extends Mage_Catalog_Model_
     {
         if ($attribute == 'price') {
             $this->addAttributeToSort($attribute, $dir);
-        } else {
+        } else { 
             parent::setOrder($attribute, $dir);
         }
         return $this;

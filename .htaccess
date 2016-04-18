@@ -378,6 +378,7 @@ RewriteRule     ^ice-skate-socks/adults-striped-knee-socks-green-lemon-yellow-23
 RewriteRule     ^other/adults-striped-knee-socks-green-red-237-122-p.html    https://www.stripedsocks.com/adults-striped-knee-socks-green-red.html      [R=301,L]
 RewriteRule     ^i-need/cheerleader-socks-tights-10-1-c.html    https://www.stripedsocks.com/tights.html      [R=301,L]
 RewriteRule     ^security.html    https://www.stripedsocks.com/privacy-policy      [R=301,L]
+RewriteRule     ^contact-us    https://www.beta.stripedsocks.com/contacts     [R=301,L]
 RewriteRule     ^shipping.html    https://www.stripedsocks.com/shipping      [R=301,L]
 RewriteRule     ^i-need/baseball-socks-7-1-c.html    https://www.stripedsocks.com/search/?q=baseball+socks      [R=301,L]
 RewriteRule     ^womens-thigh-high-socks/retro-tube-socks-white-w-turquoise-thigh-high-335-65-p.html    https://www.stripedsocks.com/retro-tube-socks-white-w-turquoise-thigh-high.html      [R=301,L]

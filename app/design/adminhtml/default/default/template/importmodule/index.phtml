@@ -35,8 +35,37 @@
                     </td>
                 </tr>
                 <tr>
+                    <td colspan="2" class="label"><b><?php echo $this->__('Clear Session')?></b>
+		<select name="fl_product_session[]" multiple="multiple">
+			<option value="none">None</option>
+            <option value="arrFilterSeason">Filter Season</option>
+			<option value="arrTDDesignFamilyContents">Design Family Contents</option>
+			<option value="arrTDProductFamilyContents">Product Family Contents</option>
+            <option value="arrSoloProducts">Solo Products</option>
+			<option value="arrParentTDProducts">Products</option>
+			<option value="arrTDProductCategories">Categories</option>
+            <option value="arrTDProductsAttributes">Products Attributes</option>
+            <option value="arrProductConfigurableAttributes">Product Configurable Attributes</option>
+            <option value="arrThemeSubtheme">Theme Subtheme</option>
+            <option value="arrSeasonSubtheme">Season Subtheme</option>
+            <option value="arrHolidaySubtheme">Holiday Subtheme</option>
+            <option value="arrOccassionSubtheme">Occassion Subtheme</option>            
+		</select>	               
+                    </td>
+                </tr>
+                <tr>
                     <td colspan="2" class="label">
                        <input type="radio" name="import_type" value="FL_products">&nbsp;&nbsp;<b><?php echo $this->__('Import FL Products')?></b>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="label">
+                       <input type="radio" name="import_type" value="FP_categories">&nbsp;&nbsp;<b><?php echo $this->__('Import FP Categories')?></b>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="label">
+                       <input type="radio" name="import_type" value="FP_products">&nbsp;&nbsp;<b><?php echo $this->__('Import FP Products')?></b>
                     </td>
                 </tr>
                 <tr align="center">

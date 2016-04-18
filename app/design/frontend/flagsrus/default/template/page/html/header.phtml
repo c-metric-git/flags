@@ -223,67 +223,7 @@
 ?>
 <div id="top" class="header-container header-regular<?php if ($classes['root']) echo $classes['root']; ?>">
 <div class="header-container2">
-  <div class="header-container3">
-    <div class="header-top-container">
-      <div class="header-top header container clearer<?php if ($classes['top']) echo $classes['top']; ?>" style="border:none;">
-        <div class="inner-container">
-             <div class="row">
-              <div class="col-xs-12 col-md-4 col-sm-4 col-lg-4">
-                <?php if (isset($p['topLeft_1'])): ?>
-                <?php foreach ($p['topLeft_1'] as $element): ?>
-                <div class="item item-left"><?php echo $element; ?></div>
-                <?php endforeach; ?>
-                <?php endif; ?>
-                <?php echo $this->getChildHtml('container_header_top_left_1'); ?>
-                <?php if ($tmpHtml = $this->getChildHtml('block_header_top_left')): ?>
-                <div class="item item-left block_header_top_left"><?php echo $tmpHtml; ?></div>
-                <?php endif; ?>
-                <?php if ($tmpHtml = $this->getChildHtml('block_header_top_left2')): ?>
-                <div class="item item-left block_header_top_left2"><?php echo $tmpHtml; ?></div>
-                <?php endif; ?>
-              </div>
-              <div class="col-xs-12 col-md-4 col-sm-4 col-lg-4">
-                <!--- Place for quantity -->
-                <a href="<?php echo Mage::getBaseUrl().'shopping#inventory'; ?>">
-					<div class="banner-sub-div"><?php echo $this->getChildHtml('productcount') ?></div>
-					<div class="banner-sub-second-div">Designs In Stock Today!<br>MOST ON THE WEB!</div>
-				</a>
-              </div>
-              <div class="col-xs-12 col-md-2 col-sm-2 col-lg-2" style="padding:0;">
-                <?php if (isset($p['topRight_1'])): ?>
-                <?php foreach ($p['topRight_1'] as $element): ?>
-                <div class="item item-right"><?php echo $element; ?></div>
-                <?php endforeach; ?>
-                <?php endif; ?>
-                <?php echo $this->getChildHtml('container_header_top_right_1'); ?>
-                <?php if ($tmpHtml = $this->getChildHtml('block_header_top_right')): ?>
-                <div class="item item-right block_header_top_right"><?php echo $tmpHtml; ?></div>
-              </div>
-              <div class="col-xs-12 col-md-2 col-sm-2 col-lg-2">
-				<?php if ($tmpHtml = $this->getChildHtml('block_header_top_right1')): ?>
-					<div class="item item-right block_header_top_right"><?php echo $tmpHtml; ?></div>
-				<?php endif; ?>
-				<p class="welcome-msg"><?php /*echo $this->getChildHtml('welcome');*/ ?> <?php echo $this->getAdditionalHtml(); ?></p>
-                <?php endif; ?>
-                <div id="currency-switcher-wrapper-regular" class="item item-right"><?php echo $currencySwitcher; ?></div>
-                <div id="lang-switcher-wrapper-regular" class="item item-right"><?php echo $languageSwitcher; ?></div>
-                <?php if ($tmpHtml = $this->getChildHtml('block_header_top_right2')): ?>
-                <div class="item item-right block_header_top_right2"><?php echo $tmpHtml; ?></div>
-                <?php endif; ?>
-              </div>
-            </div>
-          </div>
-          <!-- end: right column --> 
-          
-        </div>
-        <!-- end: inner-container --> 
-        
-      </div>
-      <!-- end: header-top --> 
-      
-    </div>
-    <!-- end: header-top-container -->
-    
+
     <div class="container" style="background-color:#fff; border-bottom: none; border-top: none;"> <?php echo $userHtmltext; ?> </div>
     <div class="header-primary-container">
       <div class="header-primary header container<?php if ($classes['primary']) echo $classes['primary']; ?>">
@@ -429,6 +369,74 @@
 </div>
 <!-- end: header-container -->
 <div class="clearer"></div>
+<div class="container">
+  <div class="header-container3">
+    <div class="header-top-container">
+		<div id="addtooverlay" style="display:none;">
+			<div id="acp-overlay" class=""></div>
+			<div id="ajaxcartpro-progress" class="" style="height: auto; width: auto; left: 533.5px; top: 266px;"> <img src="<?php echo $this->getSkinUrl('images/processing.gif');?>" alt="Loading"> <p>Please wait...</p> </div>
+		</div>
+      <div class="header-top header container clearer<?php if ($classes['top']) echo $classes['top']; ?>" style="border:none;">
+        <div class="inner-container" style="padding-left:0;padding-right:0;">
+             <div class="row">
+              <div class="col-xs-12 col-md-4 col-sm-4 col-lg-4">
+                <?php if (isset($p['topLeft_1'])): ?>
+                <?php foreach ($p['topLeft_1'] as $element): ?>
+                <div class="item item-left"><?php echo $element; ?></div>
+                <?php endforeach; ?>
+                <?php endif; ?>
+                <?php echo $this->getChildHtml('container_header_top_left_1'); ?>
+                <?php if ($tmpHtml = $this->getChildHtml('block_header_top_left')): ?>
+                <div class="item item-left block_header_top_left"><?php echo $tmpHtml; ?></div>
+                <?php endif; ?>
+                <?php if ($tmpHtml = $this->getChildHtml('block_header_top_left2')): ?>
+                <div class="item item-left block_header_top_left2"><?php echo $tmpHtml; ?></div>
+                <?php endif; ?>
+              </div>
+              <div class="col-xs-12 col-md-4 col-sm-4 col-lg-4">
+                <!--- Place for quantity -->
+                <a href="<?php echo Mage::getBaseUrl().'shopping#inventory'; ?>">
+					<div class="banner-sub-div"><?php echo $this->getChildHtml('productcount') ?></div>
+					<div class="banner-sub-second-div">Designs In Stock Today!<br>MOST ON THE WEB!</div>
+				</a>
+              </div>
+              <div class="col-xs-12 col-md-2 col-sm-2 col-lg-2" style="padding:0;">
+                <?php if (isset($p['topRight_1'])): ?>
+                <?php foreach ($p['topRight_1'] as $element): ?>
+                <div class="item item-right"><?php echo $element; ?></div>
+                <?php endforeach; ?>
+                <?php endif; ?>
+                <?php echo $this->getChildHtml('container_header_top_right_1'); ?>
+                <?php if ($tmpHtml = $this->getChildHtml('block_header_top_right')): ?>
+                <div class="item item-right block_header_top_right"><?php echo $tmpHtml; ?></div>
+              </div>
+              <div class="col-xs-12 col-md-2 col-sm-2 col-lg-2">
+				<?php if ($tmpHtml = $this->getChildHtml('block_header_top_right1')): ?>
+					<div class="item item-right block_header_top_right"><?php echo $tmpHtml; ?></div>
+				<?php endif; ?>
+				<p class="welcome-msg"><?php /*echo $this->getChildHtml('welcome');*/ ?> <?php echo $this->getAdditionalHtml(); ?></p>
+                <?php endif; ?>
+                <div id="currency-switcher-wrapper-regular" class="item item-right"><?php echo $currencySwitcher; ?></div>
+                <div id="lang-switcher-wrapper-regular" class="item item-right"><?php echo $languageSwitcher; ?></div>
+                <?php if ($tmpHtml = $this->getChildHtml('block_header_top_right2')): ?>
+                <div class="item item-right block_header_top_right2"><?php echo $tmpHtml; ?></div>
+                <?php endif; ?>
+              </div>
+            </div>
+          </div>
+          <!-- end: right column --> 
+          
+        </div>
+        <!-- end: inner-container --> 
+        
+      </div>
+      <!-- end: header-top --> 
+      
+    </div>
+     </div>
+    <!-- end: header-top-container -->
+    
+<div class="clearer"></div>
 <?php if($this->getIsHomePage()) { ?>
 <div class="container" style="padding-top:15px;">
   <!--link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/jquery-ui.css');?>" media="all" />
@@ -437,6 +445,7 @@
   <?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('attributeset ')->toHtml();?></div>
 <?php } ?>
 <div class="clearer"></div>
+
 <?php //Scripts %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ?>
 <script type="text/javascript">
 //<![CDATA[

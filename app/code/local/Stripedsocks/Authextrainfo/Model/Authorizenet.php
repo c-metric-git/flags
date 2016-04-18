@@ -179,6 +179,7 @@ class Stripedsocks_Authextrainfo_Model_Authorizenet extends Mage_Paygate_Model_A
 			}
 			$result['cvv_match'] = (string)$responseXmlDocument->transaction->cardCodeResponse;
 			$result['avs_match'] = (string)$responseXmlDocument->transaction->AVSResponse;
+			$result['trans_status'] = (string)$responseXmlDocument->transaction->transactionStatus;			
 			return $result;
 			
         } catch (Exception $e) {

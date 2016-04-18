@@ -84,7 +84,7 @@ class FLTeamDeskWebprofiles {
             $this->api = $td_api;
         }
         catch (Exception $e) {
-            echo $this->tdErrorLog = '<br/>Caught exception: ' .$e->getMessage(). "<br/>";
+            echo $this->tdErrorLog = '<br/>Error connecting to TD. Caught exception: ' .$e->getMessage(). "<br/>";
             return $this->tdErrorLog;           
         }    
     }
@@ -244,7 +244,7 @@ class FLTeamDeskWebprofiles {
             else {
                 $arrParentTDProducts = $this->getTDProducts('Parent');
                 $_SESSION['arrParentTDProducts'] = $arrParentTDProducts; 
-            }    
+            }   
             echo "<br />count of design family contents = ".count($_SESSION['arrTDDesignFamilyContents']);
             echo "<br />count of prodct family content = ".count($_SESSION['arrTDProductFamilyContents']);
             echo "<br />count of season = ".count($_SESSION['arrFilterSeason']);
@@ -712,7 +712,7 @@ class FLTeamDeskWebprofiles {
                             $concat_web=''; 
                             if($pr_type == 'Parent') {
                                  if($tdProduct['kitType'] == 'Fixed') {
-                                     $attribute_set='Filter New Products/Filter Section/Filter Type/Feature/Filter Size/Multi Seasons/Season Subthemes/Holiday/Holiday Subthemes/Occassion/Occassion Subthemes/Multi Themes/Theme Subthemes/Multi Brand';  
+                                     //$attribute_set='Filter New Products/Filter Section/Filter Type/Feature/Filter Size/Multi Seasons/Season Subthemes/Holiday/Holiday Subthemes/Occassion/Occassion Subthemes/Multi Themes/Theme Subthemes/Multi Brand';  
                                      $product_type = "bundled";  
                                  }
                                  else {   
@@ -723,8 +723,8 @@ class FLTeamDeskWebprofiles {
                                     else {
                                         $web_option_label = $this->arrProductConfigurableAttributes[$lowerpinnacleSKU][0]['Web Option Label']; 
                                     }    
-                                    $concat_web = $web_option_label!=''?"/".$web_option_label:"";
-                                    $attribute_set = "Filter New Products/Filter Section/Filter Type/Feature/Filter Size/Multi Seasons/Season Subthemes/Holiday/Holiday Subthemes/Occassion/Occassion Subthemes/Multi Themes/Theme Subthemes/Multi Brand".$concat_web; 
+                                    //$concat_web = $web_option_label!=''?"/".$web_option_label:"";
+                                    //$attribute_set = "Filter New Products/Filter Section/Filter Type/Feature/Filter Size/Multi Seasons/Season Subthemes/Holiday/Holiday Subthemes/Occassion/Occassion Subthemes/Multi Themes/Theme Subthemes/Multi Brand".$concat_web; 
                                  }    
                             }
                             else {
@@ -734,12 +734,12 @@ class FLTeamDeskWebprofiles {
                                 else {
                                     $web_option_label = $arrTDProductsAttributes[$lowerpinnacleSKU][0]['Web Option Label']; 
                                 } 
-                                $concat_web = $web_option_label!=''?"/".$web_option_label:"";
-                                $attribute_set='Filter New Products/Filter Section/Filter Type/Feature/Filter Size/Multi Seasons/Season Subthemes/Holiday/Holiday Subthemes/Occassion/Occassion Subthemes/Multi Themes/Theme Subthemes/Multi Brand'.$concat_web;
+                                //$concat_web = $web_option_label!=''?"/".$web_option_label:"";
+                                //$attribute_set='Filter New Products/Filter Section/Filter Type/Feature/Filter Size/Multi Seasons/Season Subthemes/Holiday/Holiday Subthemes/Occassion/Occassion Subthemes/Multi Themes/Theme Subthemes/Multi Brand'.$concat_web;
                                 $product_type = "simple";
                             }
                             if($attribute_set=='') {    
-                                $attribute_set='Default';
+                                $attribute_set='Filter New Products/Filter Section/Filter Type/Feature/Filter Size/Multi Seasons/Season Subthemes/Holiday/Holiday Subthemes/Occassion/Occassion Subthemes/Multi Themes/Theme Subthemes/Multi Brand/Accessory/Design/Finish/FL Size/Letter/Option';
                             }
                             if($product_type=='') {    
                                 $product_type = "simple"; 
@@ -857,13 +857,40 @@ class FLTeamDeskWebprofiles {
                                             $csv_row[] = trim($theme_arr[$i]); //multi themes 
                                             $csv_row[] = in_array(trim($nonsubtheme),$this->arrThemeSubtheme)?trim($nonsubtheme):""; //themes_subthemes  
                                             $csv_row[] = $brand; //multi brand  
-                                            
-                                            $csv_row[] = $arrTDProductsAttributes[$lowerpinnacleSKU][$i]['Web Option Label']=="Accessory"?$arrTDProductsAttributes[$lowerpinnacleSKU][$i]["Attribute"]:""; //Accessory 
-                                            $csv_row[] = $arrTDProductsAttributes[$lowerpinnacleSKU][$i]['Web Option Label']=="Design"?$arrTDProductsAttributes[$lowerpinnacleSKU][$i]["Attribute"]:""; //Design  
-                                            $csv_row[] = $arrTDProductsAttributes[$lowerpinnacleSKU][$i]['Web Option Label']=="Size"?$arrTDProductsAttributes[$lowerpinnacleSKU][$i]["Attribute"]:"";  //FL size
-                                            $csv_row[] = $arrTDProductsAttributes[$lowerpinnacleSKU][$i]['Web Option Label']=="Option"?$arrTDProductsAttributes[$lowerpinnacleSKU][$i]["Attribute"]:""; //Option 
-                                            $csv_row[] = $arrTDProductsAttributes[$lowerpinnacleSKU][$i]['Web Option Label']=="Finish"?$arrTDProductsAttributes[$lowerpinnacleSKU][$i]["Attribute"]:""; //Finish 
-                                            $csv_row[] = $arrTDProductsAttributes[$lowerpinnacleSKU][$i]['Web Option Label']=="Letter"?$arrTDProductsAttributes[$lowerpinnacleSKU][$i]["Attribute"]:""; //Letter  
+                                            $accessory_value='';
+                                            $design_value='';
+                                            $size_value='';
+                                            $option_value='';
+                                            $finish_value='';
+                                            $letter_value='';
+                                            if(count($arrTDProductsAttributes[$lowerpinnacleSKU])>0) {
+                                                foreach($arrTDProductsAttributes[$lowerpinnacleSKU] as $key => $attribute_details) {
+                                                     if($attribute_details['Web Option Label']=="Accessory") {
+                                                         $accessory_value = $attribute_details["Attribute"];  
+                                                      }
+                                                      elseif($attribute_details['Web Option Label']=="Design") {
+                                                         $design_value = $attribute_details["Attribute"];  
+                                                      }
+                                                      elseif($attribute_details['Web Option Label']=="Size") {
+                                                         $size_value = $attribute_details["Attribute"];  
+                                                      }
+                                                      elseif($attribute_details['Web Option Label']=="Option") {
+                                                         $option_value = $attribute_details["Attribute"];  
+                                                      }
+                                                      elseif($attribute_details['Web Option Label']=="Finish") {
+                                                         $finish_value = $attribute_details["Attribute"];  
+                                                      }
+                                                      elseif($attribute_details['Web Option Label']=="Letter") {
+                                                          $letter_value = $attribute_details["Attribute"];  
+                                                      }  
+                                                }
+                                            }               
+                                            $csv_row[] = $accessory_value; //Accessory 
+                                            $csv_row[] = $design_value; //Design  
+                                            $csv_row[] = $size_value;  //FL size
+                                            $csv_row[] = $option_value; //Option 
+                                            $csv_row[] = $finish_value; //Finish 
+                                            $csv_row[] = $letter_value; //Letter  
                                             
                                             $csv_row[] = $tdProduct['iconLabel']; //iconlabel 
                                             $csv_row[] = $tdProduct['Product - Next Date Due To Arrive']>date("Y-m-d")?$tdProduct['Product - Next Date Due To Arrive']:""; //date_of_arrival
@@ -1183,7 +1210,7 @@ class FLTeamDeskWebprofiles {
         $strColumns = "[isNewProduct?], [Product - VENDOR - DisplayLabelEnteredFL],[Product - Type - DisplayLabelEnteredFL],[Product - Filter - Size - DisplayLabelEnteredFL],[Product - Seasons], [Product - Themes], [Product - SubThemes],[Product - Themes Full Name],[PinnacleSKU],[Description],[Display Name],[PriceCalced],[DiscountPriceCalced],[overview],[is_visible],[Product - Weight],[Quantity Available],[imgLocationCustom],[Related Product],[meta_description],[meta_keywords],[meta_title],[kitType],[Related Design Family],[Related Product Family],[Priority_Cached],[FLFilterSectionCalced],[url],[flagFeaturesSearchLabel],[Image Alt Text 1],[Product - Next Date Due To Arrive],[Product - QTY On Current POs],[iconLabel]";   
         try
         {        
-            $arrResults = $this->api->Query("SELECT TOP 1500 ".$strColumns." FROM [FL Web Profile] ".$arrQueries." ORDER BY [PinnacleSKU]");     
+            $arrResults = $this->api->Query("SELECT TOP 1000 ".$strColumns." FROM [FL Web Profile] ".$arrQueries." ORDER BY [PinnacleSKU]");     
             if (isset($arrResults->Rows)) { 
                  foreach ($arrResults->Rows as $productDetails) {
                     $last_record = $productDetails['PinnacleSKU'];
@@ -1199,7 +1226,7 @@ class FLTeamDeskWebprofiles {
                         $arrResults = $this->api->Query("SELECT TOP 1500 ".$strColumns." FROM [FL Web Profile] ".$arrQueries." ORDER BY [PinnacleSKU]");
                     }
                     catch (Exception $e) {
-                         echo $this->tdErrorLog = '<br/>Caught exception: ' .$e->getMessage(). "<br/>";
+                         echo $this->tdErrorLog = '<br/>Error Fetching Profiles from TD for type $type. Caught exception: ' .$e->getMessage(). "<br/>";
                          $strReturn .= $this->tdErrorLog;
                          die;    
                     }    
@@ -1225,7 +1252,7 @@ class FLTeamDeskWebprofiles {
             return  $arrProducts;
        }
        catch (Exception $e) {
-             echo $this->tdErrorLog = '<br/>Caught exception: ' .$e->getMessage(). "<br/>";
+             echo $this->tdErrorLog = '<br/>Error Fetching Profiles from TD for type $type. Caught exception: ' .$e->getMessage(). "<br/>";
              die;
              $strReturn .= $this->tdErrorLog; 
              return  $strReturn;           
@@ -1271,7 +1298,7 @@ class FLTeamDeskWebprofiles {
                         $arrResults = $this->api->Query("SELECT TOP 3000 ".$strColumns." FROM [FL Attribute] ".$arrQueries." ORDER BY [PinnacleAttributeSKU] ASC ");
                     }
                     catch (Exception $e) {
-                         echo $this->tdErrorLog = '<br/>Caught exception: ' .$e->getMessage(). "<br/>";
+                         echo $this->tdErrorLog = '<br/>Error Fetching Attributes from TD. Caught exception: ' .$e->getMessage(). "<br/>";
                          $strReturn .= $this->tdErrorLog;  
                          die;  
                     }
@@ -1284,7 +1311,7 @@ class FLTeamDeskWebprofiles {
                         */
                         foreach ($arrResults->Rows as $tdProductAtt) {    
                               $last_record = $tdProductAtt['PinnacleAttributeSKU'];
-                              $productSKU = (string) $tdProductAtt['Related Product'];
+                              $productSKU = (string) $tdProductAtt['Product - FL Solo PinnacleSKU'];
                               $productSKU = strtolower($productSKU);
                               $arrProductAttributes[$productSKU][] = $tdProductAtt;  
                               
@@ -1303,7 +1330,7 @@ class FLTeamDeskWebprofiles {
             return  $arrProductAttributes;
        }
        catch (Exception $e) {
-             echo $this->tdErrorLog = '<br/>Caught exception: ' .$e->getMessage(). "<br/>";
+             echo $this->tdErrorLog = '<br/>Error Fetching Attributes from TD. Caught exception: ' .$e->getMessage(). "<br/>";
              die;
              $strReturn .= $this->tdErrorLog;    
              return  $strReturn;         
@@ -1459,7 +1486,7 @@ class FLTeamDeskWebprofiles {
             }
         } 
         catch (Exception $e) {
-             echo $this->tdErrorLog = '<br/>Caught exception: ' .$e->getMessage(). "<br/>";
+             echo $this->tdErrorLog = '<br/>Error Fetching Filter Season from TD.Caught exception: ' .$e->getMessage(). "<br/>";
              $strReturn .= $this->tdErrorLog;  
              die;  
              return  $strReturn;         
@@ -1486,7 +1513,7 @@ class FLTeamDeskWebprofiles {
             $total_result_rows = $total_result_rows + count($arrResults->Rows);
         } 
         catch (Exception $e) {
-             echo $this->tdErrorLog = '<br/>Caught exception: ' .$e->getMessage(). "<br/>";
+             echo $this->tdErrorLog = '<br/>Error Fetching Web entries from TD. Caught exception: ' .$e->getMessage(). "<br/>";
              $strReturn .= $this->tdErrorLog;    
              return  $strReturn;         
         }
@@ -1514,7 +1541,7 @@ class FLTeamDeskWebprofiles {
                 $total_result_rows = $total_result_rows + count($arrResults->Rows);  
             }
             catch (Exception $e) {
-                 echo $this->tdErrorLog = '<br/>Caught exception: ' .$e->getMessage(). "<br/>";
+                 echo $this->tdErrorLog = '<br/>Error Fetching Web entries from TD.Caught exception: ' .$e->getMessage(). "<br/>";
                  $strReturn .= $this->tdErrorLog;    
                  return  $strReturn;  
                  die;       
@@ -1561,56 +1588,64 @@ class FLTeamDeskWebprofiles {
         */
         $this->connectToteamdesk();
         if ($this->api !='') {  
-            // Update attributes
              /**
             * @desc  create the teamdesk query, to fetch all the categories
             */  
-            $arrQueries = "WHERE [Product - Weight]>0 and [sendToPinnacle]";  
-            $product_added = array();
-            /**
-            * @desc  create string of columns to be retreived from the query  
-            */       
-            $strColumns = "[PinnacleAttributeSKU],[Product - Quantity Available]"; 
-            $arrTDProductsAttributes = $this->api->Query("SELECT ".$strColumns." FROM [FL Attribute] ".$arrQueries);
-            $i = 0;
-            if (isset($arrTDProductsAttributes->Rows)) {  
-                foreach ($arrTDProductsAttributes->Rows as $TDProductAttribute) {
-                    $productSKU = $TDProductAttribute['PinnacleAttributeSKU'];  
-                    if(!in_array($productSKU,$product_added)) {
-                       $db->query("SELECT entity_id from catalog_product_entity where sku='".$productSKU."'");
-                       if($db->moveNext()) {
-                           $product_id = $db->col['entity_id'];
-                       } 
-                       $db->reset();
-                       $db->assignStr("qty", $TDProduct['Product - Quantity Available']);  
-                       if ($TDProductAttribute['Product - Quantity Available'] <= 0){  
-                             $is_in_stock ="0";
-                       }    
-                       else {
-                             $is_in_stock="1"; 
-                       } 
-                       $db->assignStr("is_in_stock", $is_in_stock);  
-                       if($product_id > 0) {
-                            $db->update("cataloginventory_stock_item", "WHERE product_id = '".addslashes($productSKU)."'"); 
-                            $totalAttributesUpdate++;
-                       }
-                       $product_added[] = $productSKU;
-                    }   
-                } 
-            }
             // Get all products inventory for which send to pinnacle flag is true
             $arrQueries = "WHERE [sendToPinnacle] AND [Product - Weight]>0 AND [is_visible]";  
             /**
             * @desc  create string of columns to be retreived from the query  
             */       
-            $strColumns = "[PinnacleSKU],[Quantity Available],[is_visible]"; 
-            $arrTDProducts = $this->api->Query("SELECT ".$strColumns." FROM [FL Web Profile] ".$arrQueries);  
-            if (isset($arrTDProducts->Rows) ) {                    
+            $strColumns = "[PinnacleSKU],[Quantity Available],[is_visible],[Product - Next Date Due To Arrive],[Product - QTY On Current POs],[Priority_Cached]"; 
+            $arrTDProducts = $this->api->Query("SELECT TOP 1500 ".$strColumns." FROM [FL Web Profile] ".$arrQueries." ORDER BY [PinnacleSKU]");  
+            if (isset($arrTDProducts->Rows)) {
+                foreach ($arrTDProducts->Rows as $productDetails) {
+                          $arrProducts[] = $productDetails;
+                          $last_record = $productDetails['PinnacleSKU'];
+                }        
+                $resultcount = 0;
+                while($resultcount == 0) {
+                      $arrQueries = "WHERE [sendToPinnacle] AND [Product - Weight]>0 AND [is_visible] AND [PinnacleSKU] > '".$last_record."'";
+                      try {  
+                            $arrTDProducts = $this->api->Query("SELECT TOP 1500 ".$strColumns." FROM [FL Web Profile] ".$arrQueries." ORDER BY [PinnacleSKU]");
+                            if (isset($arrTDProducts->Rows)) {
+                                foreach ($arrTDProducts->Rows as $productDetails) {
+                                          $arrProducts[] = $productDetails;
+                                          $last_record = $productDetails['PinnacleSKU']; 
+                                }
+                            }
+                        }
+                        catch (Exception $e) {
+                             echo $this->tdErrorLog = '<br/>Error Fetching Profiles from TD.Caught exception: ' .$e->getMessage(). "<br/>";
+                             $strReturn .= $this->tdErrorLog;
+                             die;   
+                             $resultcount = 1;   
+                       }
+                       if(count($arrTDProducts->Rows) > 0)
+                            $resultcount = 0;
+                       else
+                            $resultcount = 1; 
+                                
+                }  
+            }   
+            if (count($arrProducts) > 0) {                    
                 /**
                 * @desc loop through each record to add new product and update existing products
                 */
-                foreach ($arrTDProducts->Rows as $TDProduct) {  
-                    $productSKU = $TDProduct['PinnacleSKU'];  
+                $db->query("SELECT attribute_id from eav_attribute where attribute_code='qty_on_current_po'");   
+                if($db->moveNext()) {
+                    $qty_on_current_po_id = $db->col['attribute_id'];
+                }
+                $db->query("SELECT attribute_id from eav_attribute where attribute_code='priority'");   
+                if($db->moveNext()) {
+                    $priority_id = $db->col['attribute_id'];
+                }
+                $db->query("SELECT attribute_id from eav_attribute where attribute_code='date_of_arrival'");   
+                if($db->moveNext()) {
+                    $date_of_arrival_id = $db->col['attribute_id'];
+                }       
+                foreach ($arrProducts as $TDProduct) {  
+                    $productSKU = $TDProduct['PinnacleSKU'];     
                     if(!in_array($productSKU,$product_added)) {   
                         $db->query("SELECT entity_id from catalog_product_entity where sku='".$productSKU."'");
                         if($db->moveNext()) {
@@ -1627,15 +1662,25 @@ class FLTeamDeskWebprofiles {
                         $db->assignStr("is_in_stock", $is_in_stock);    
                         if($product_id > 0) {
                             $db->update("cataloginventory_stock_item", "WHERE product_id='".addslashes($product_id)."'"); 
+                            
+                            $db->reset();  
+                            $db->assignStr("value", $TDProduct['Product - QTY On Current POs']!=''?$TDProduct['Product - QTY On Current POs']:0);  
+                            $db->update("catalog_product_entity_varchar", "WHERE entity_id='".addslashes($product_id)."' and attribute_id='".addslashes($qty_on_current_po_id)."'");
+                            $db->reset();  
+                            $db->assignStr("value", $TDProduct['Priority_Cached']!=''?$TDProduct['Priority_Cached']:0);  
+                            $db->update("catalog_product_entity_varchar", "WHERE entity_id='".addslashes($product_id)."' and attribute_id='".addslashes($priority_id)."'"); 
+                            
+                            $db->reset();  
+                            $db->assignStr("value", $TDProduct['Product - Next Date Due To Arrive']!=''?$TDProduct['Product - Next Date Due To Arrive']:'0000-00-00');  
+                            $db->update("catalog_product_entity_datetime", "WHERE entity_id='".addslashes($product_id)."' and attribute_id='".addslashes($date_of_arrival_id)."'"); 
                             $totalProductsUpdate++;
-                        }    
+                        }        
                         $product_added[] = $productSKU;
                     }    
                 }
             }
         }     
        $arrReturn["totalProductsUpdated"]  = $totalProductsUpdate;
-       $arrReturn["totalAttributesUpdate"] = $totalAttributesUpdate;
        return $arrReturn;
     } 
     
@@ -1664,7 +1709,7 @@ class FLTeamDeskWebprofiles {
                         $counter = 0;
                     }
                     catch (Exception $e) {
-                        $this->tdErrorLog = '<br/>Caught exception: ' .$e->getMessage(). "<br/>";
+                        $this->tdErrorLog = '<br/>Error Inserting data into TD.Caught exception: ' .$e->getMessage(). "<br/>";
                         echo $this->tdErrorLog;
                         return $this->tdErrorLog;           
                     }

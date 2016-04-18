@@ -35,7 +35,7 @@
 <?php echo $this->getChildHtml('head') ?>
 </head>
 <?php $bodyClasses = $this->getBodyClass() .' '. $this->helper('ultimo')->getThemeBodyClasses(); ?>
-<body class="<?php echo $bodyClasses; ?>">
+<body class="<?php echo $bodyClasses; ?><?php if(Mage::getSingleton('cms/page')->getIdentifier()=='filter.html'): ?> catalog-category-view<?php endif; ?>">
 <?php echo $this->getChildHtml('after_body_start') ?>
 <div id="root-wrapper">
 <div class="wrapper">
@@ -59,7 +59,7 @@
                    <div style="clear:both;">
                     	<?php if(Mage::getBlockSingleton('page/html_header')->getIsHomePage()) {echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-content')->toHtml();}?>
 						<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-promotion')->toHtml();?>
-                    </div>
+                    </div>					<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('shopper-approved-reviews')->toHtml();?>
                     <?php //}?>
                 </div>
 				

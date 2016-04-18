@@ -148,7 +148,7 @@
                                         <?php if (Mage::getStoreConfig('general/region/display_all') == false):?>disabled="disabled"<?php endif; ?>
                                     >
                                     <option
-                                        value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                                        value=""><?php echo $this->__('Select State') ?></option>
                                 </select>
                                 <script type="text/javascript">
                                     //<![CDATA[
@@ -222,7 +222,7 @@
                                 <input type="text" name="billing[telephone]"
                                        value="<?php echo $this->escapeHtml($this->getAddress()->getTelephone()) ?>"
                                        title="<?php echo $this->__('Telephone') ?>"
-                                       class="input-text <?php echo $this->helper('lotusbreath_onestepcheckout')->getAttributeValidationClass('telephone') ?>"
+                                       class="input-text validate-digits <?php echo $this->helper('lotusbreath_onestepcheckout')->getAttributeValidationClass('telephone') ?>"
                                        id="billing:telephone"/>
                             </div>
                         </div>

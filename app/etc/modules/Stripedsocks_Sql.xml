@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Stripedsocks_Sql>
+            <active>false</active>
+            <codePool>local</codePool>
+        </Stripedsocks_Sql>
+    </modules>
+</config>

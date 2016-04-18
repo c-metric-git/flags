@@ -18,6 +18,22 @@ class Magestore_Sociallogin_PopupController extends Mage_Core_Controller_Front_A
         if ($username && $password) {
             try {
                 $session->login($username, $password);
+                $wishlist_productId=$this->getRequest()->getParam('wishlist_productId');
+                if(isset($wishlist_productId) && $wishlist_productId > 0 )
+                {
+                    $customerId =$session->getCustomer()->getId();
+                    $wishlist = Mage::getModel('wishlist/wishlist')->loadByCustomer($customerId, true);
+                    $product = Mage::getModel('catalog/product')->load($wishlist_productId);
+                    // $buyRequest = new Varien_Object(array()); // any possible options that are configurable and you want to save with the product
+                    //$result = $wishlist->addNewItem($product, $buyRequest);
+                    $result = $wishlist->addNewItem($product);
+                    $wishlist->save();
+                    $result['redirectToWishlist']=true;
+                    $result['redirectToWishlisturl']=Mage::getUrl('wishlist');
+                    $session->addSuccess(Mage::helper('wishlist')->__("%s has been moved to wishlist", $product->getName()));
+                 }   
+                
+
             } catch (Exception $e) {
                 $result['error'] = $e->getMessage();
             }
@@ -51,7 +67,7 @@ class Magestore_Sociallogin_PopupController extends Mage_Core_Controller_Front_A
                 }
             }
             else {
-                $result = array('success'=>false, 'error'=>'Not found!');
+                $result = array('success'=>false, 'error'=>'User Not found!');
             }
         
         $this->getResponse()->setBody(Zend_Json::encode($result));
@@ -82,7 +98,7 @@ class Magestore_Sociallogin_PopupController extends Mage_Core_Controller_Front_A
                     );
 				$result = array('success'=>true);
 				$session->setCustomerAsLoggedIn($customer);
-				//$url = $this->_welcomeCustomer($customer);
+				$url = $this->_welcomeCustomer($customer);
                // $this->_redirectSuccess($url);
 			}catch(Exception $e){
 				 $result = array('success'=>false, 'error'=>$e->getMessage());

@@ -570,7 +570,13 @@
                     return;
 
             } else {
-
+                     
+                   $("#checkout_form :input").each(function(){
+                        if($(this).hasClass('mage-error') == true) {
+                         $(this).focus();
+                         return false;
+                        }
+                    });
             }
 
         },
@@ -1026,7 +1032,7 @@
                     $("#billing\\:email").trigger('change');
                 }
             });
-            $("#billing\\:email").bind('change', function(){
+            $("#billing\\:email").bind('blur', function(){
                 var isCheckExistEmail = $("input[name='billing[create_new_account]']").is(":checked") || $("#billing\\:email").hasClass('check-email-exists') ;
                 if (!isCheckExistEmail)
                     return;

@@ -152,6 +152,8 @@ class Evince_Ajaxaddtocart_Checkout_CartController extends Mage_Checkout_CartCon
         $id = (int) $this->getRequest()->getParam('id');
         if ($id) {
             try {
+				$delitem = $this->_getCart()->getQuote()->getItemById($id);
+				$productsku = $delitem->getSku();
                 $this->_getCart()->removeItem($id)
                         ->save();
             } catch (Exception $e) {
@@ -164,13 +166,24 @@ class Evince_Ajaxaddtocart_Checkout_CartController extends Mage_Checkout_CartCon
             }
         }
 
+       
         $_response = Mage::getModel('ajaxaddtocart/response');
-
+    
         $_response->setMessage($this->__('Item was Successfully removed.'));
-
-       $this->getLayout()->getUpdate()->addHandle('ajaxaddtocart');
+        $_response->setSku($productsku);
+        
+        $this->getLayout()->getUpdate()->addHandle('ajaxaddtocart');
         $this->loadLayout();
 
+        $url = Mage::getSingleton('core/url')->parseUrl(Mage::app()->getRequest()->getServer('HTTP_REFERER'));
+        $path = $url->getPath();
+        if( ($this->_getCart()->getItemsCount() == 0 ) &&  ( strpos($path, 'checkout') !== false  ||  strpos($path, 'onestepcheckout') !== false ) )
+        {
+           $_response->setRedirectUrl(Mage::helper('checkout/cart')->getCartUrl());
+        }
+       
+
+       
         $_response->addUpdatedBlocks($_response);
 
         $_response->send();

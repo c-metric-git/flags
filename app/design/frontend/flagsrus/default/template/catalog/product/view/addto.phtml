@@ -32,7 +32,7 @@
 	<li>
         <a class="link-wishlist feature feature-icon-hover first" href="<?php echo $_wishlistSubmitUrl ?>" onclick="productAddToCartForm.submitLight(this, this.href); return false;" title="<?php echo $this->__('Add to Wishlist') ?>">
 			<span class="ic ic-heart ib icon-color-productview"></span>
-			<span class="label"><?php echo $this->__('Add to Wishlist') ?></span>
+			<span class="label view_wishlist_link" data-id="<?php echo $_product->getId(); ?>"><?php echo $this->__('Add to Wishlist') ?></span>
 		</a>
 	</li>
 

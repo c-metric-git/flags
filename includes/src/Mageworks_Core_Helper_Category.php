@@ -29,7 +29,13 @@ class Mageworks_Core_Helper_Category extends Mage_Core_Helper_Abstract
 		$data[] = array ('field' => 'default_sort_by', 'label' => 'Default Sort By', 'function' => 'getProductSortBy');
 		$data[] = array ('field' => 'page_layout', 'label' => 'Page Layout', 'function' => 'getPageLayout');
 		$data[] = array ('field' => 'custom_layout_update', 'label' => 'Custom Layout Update');
-        $data[] = array ('field' => 'featured_category', 'label' => 'Featured Category'); 
+        $data[] = array ('field' => 'featured_category', 'label' => 'Featured Category');
+		$data[] = array ('field' => 'category_header', 'label' => 'Category Header');
+		$data[] = array ('field' => 'description_bottom', 'label' => 'Description Bottom'); 
+		$data[] = array ('field' => 'is_occasion', 'label' => 'Is Occasion');
+		$data[] = array ('field' => 'is_manufacturer', 'label' => 'Is Manufacturer');
+		//$data[] = array ('field' => 'google_category', 'label' => 'Google Category');
+		$data[] = array ('field' => 'short_name', 'label' => 'Short Name For Menu'); 
         $data[] = array ('field' => 'umm_cat_target', 'label' => 'Custom URL'); 
         $data[] = array ('field' => 'umm_dd_type', 'label' => 'Submenu Type');  
         return $data;

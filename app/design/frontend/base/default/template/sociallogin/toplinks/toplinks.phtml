@@ -21,7 +21,8 @@
 			<form id="magestore-sociallogin-form" class="magestore-login-form-popup">
 				<!-- email -->
 				<div class="magestore-login-input-box">
-					<label class="required login-label" for="email">
+					<!--<label class="required login-label" for="email"> -->
+					<label class="login-label" for="email">
 						<?php echo $this->__('Email Address ');?><em>*</em> 
 					</label>
 					<div class="sociallogin-input-box">
@@ -30,7 +31,8 @@
 				</div>
 				<!-- password -->
 				<div id="magestore-sociallogin-password" class="magestore-login-input-box">
-					<label class="required login-label" for="pass">
+					<!--<label class="required login-label" for="pass"> -->
+					<label class="login-label" for="pass">
 						<?php echo $this->__('Password ');?><em>*</em> 
 					</label>
 					<div class="sociallogin-input-box">
@@ -61,7 +63,7 @@
 						<?php echo $this->__('Email Address ');?><em>*</em> 
 					</label>
 					<div class="sociallogin-input-box">
-						<input id="magestore-sociallogin-popup-email-forgot" class="input-text required-entry validate-email" type="text" title="Email Address" value="" name="socialogin_email_forgot">						
+						<input id="magestore-sociallogin-popup-email-forgot"  onkeypress="if (event.keyCode == 13) { return false;}" class="input-text required-entry validate-email" type="text" title="Email Address" value="" name="socialogin_email_forgot">						
 					</div>
 				</div>
 				<!-- image ajax -->

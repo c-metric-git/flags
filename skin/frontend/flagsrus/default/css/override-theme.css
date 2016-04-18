@@ -511,8 +511,9 @@
 	margin: 0px 0 0;
 	padding: 0px 0;
 }
-
-
+#wishlist-table tbody tr td{
+vertical-align: top !important;
+}
 /* CSS added by JS on 20 March 2016, 17:32 */
 @media (max-width: 767px)
 {

@@ -21,7 +21,14 @@ var ajaxaddtocart = {
         try {
             if(typeof obj == 'string') {
                 var url = obj;
+                if(url.search('checkout/cart/delete') != -1 )
+                   {
+                     if(!confirm("Are you sure you would like to remove this item from the shopping cart?"))
+                     {
+                         return false;
+                     }
 
+                 }
                 new Ajax.Request(url, {
                     onCreate	: function() {
                         _this.g.warn("Processing...", {
@@ -47,8 +54,13 @@ var ajaxaddtocart = {
                                     }
                                 } else {
                                     if(res.r == 'success') {
+                                        if(res.redirect_url) 
+                                         {
+                                              window.location.href = res.redirect_url;
+                                         }
                                         if(res.message) {
                                             _this.showSuccess(res.message);
+                                           
                                         } else {
                                             _this.showSuccess('Item was successfully added to cart.');
                                         }
@@ -84,7 +96,7 @@ var ajaxaddtocart = {
                         // Handle the response content...
                         try{
                             var doc = iframe.contentDocument ? iframe.contentDocument : (iframe.contentWindow.document || iframe.document);
-                            console.log(doc);
+                            //console.log(doc);
                             var res = doc.body.innerText ? doc.body.innerText : doc.body.textContent;
                             res = res.evalJSON();
 
@@ -128,16 +140,24 @@ var ajaxaddtocart = {
                 } else {
                     //use ajax
 
-                    var url	 = 	obj.form.action,
+                    var url	 = 	obj.form.action;
+                  //  var subcribeurl  =  jQuery(obj.form).attr('data-subscribeurl');
                     data =	obj.form.serialize();
 
                     new Ajax.Request(url, {
                         method		: 'post',
                         postBody	: data,
                         onCreate	: function() {
-                            _this.g.warn("Processing...", {
-                                life: 5
-                            });
+							if( url.search('checkout/cart/add') != -1 || url.search('checkout/cart/delete') != -1) {
+								var $j = jQuery.noConflict();
+								$j('#addtooverlay').show();
+							}
+							else
+							{
+								_this.g.warn("Processing...", {
+									life: 5
+								});
+							}	
                         },
                         onSuccess	: function(response) {
                             // Handle the response content...
@@ -157,6 +177,29 @@ var ajaxaddtocart = {
 										
 										// By Hardik
 										var $j = jQuery.noConflict();
+										//$j('.'+res.sku+'-del').
+										if( url.search('checkout/cart/add') != -1 ) {
+											if ($j('.'+res.sku+'-del')[0]){
+											// Do something if class exists
+												obj.form.action = $j('#'+res.sku+'-del').attr('href');
+												$j('.'+res.sku+'-addto').hide();
+												$j('.'+res.sku+'-addremove').show();
+												$j('#addtooverlay').hide();
+											}
+										}else if(url.search('checkout/cart/delete') != -1)
+										{
+											obj.form.action = $j('#'+res.sku+'-addtourl').attr('value');
+											$j('.'+res.sku+'-addremove').hide();
+											$j('.'+res.sku+'-addto').show();
+											$j('#addtooverlay').hide();
+										}
+                                        else if(url.search('outofstocksubscription/') != -1)
+                                        {
+                                            
+                                            $j('#subscription_email').attr('value','');
+                                        }
+										$j('#addtooverlay').hide();
+                                        
 										if($j('#is_paypal').attr('value') == 1)
 										{
 											window.location.href = $j('#pp_checkout_url').attr('value');

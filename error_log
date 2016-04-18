@@ -20,3 +20,76 @@
 [04-Apr-2016 14:37:16 UTC] PHP Fatal error:  Call to a member function getGuid() on a non-object in /home/stripedsocks/beta/app/design/frontend/flagsrus/default/template/wordpress/post/list-homepage.phtml on line 34
 [04-Apr-2016 14:40:06 UTC] PHP Fatal error:  Call to a member function getAvailableImage() on a non-object in /home/stripedsocks/beta/app/design/frontend/flagsrus/default/template/wordpress/post/list-homepage.phtml on line 39
 [04-Apr-2016 14:40:11 UTC] PHP Fatal error:  Call to a member function getAvailableImage() on a non-object in /home/stripedsocks/beta/app/design/frontend/flagsrus/default/template/wordpress/post/list-homepage.phtml on line 39
+[07-Apr-2016 12:11:03 UTC] PHP Parse error:  syntax error, unexpected '$_productCollection' (T_VARIABLE) in /home/stripedsocks/beta/app/design/frontend/flagsrus/default/template/catalog/product/list_featured_slider.phtml on line 1
+[07-Apr-2016 13:22:12 UTC] PHP Fatal error:  Call to a member function setVisibility() on a non-object in /home/stripedsocks/beta/app/code/local/Stripedsocks/Productlisting/Block/Product/List.php on line 73
+[11-Apr-2016 00:40:09 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY000]: General error: 2006 MySQL server has gone away' in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /home/stripedsocks/beta/lib/Varien/Db/Statement/Pdo/Mysql.php(110): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /home/stripedsocks/beta/app/code/core/Zend/Db/Statement.php(291): Varien_Db_Statement_Pdo_Mysql->_execute(Array)
+#3 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Abstract.php(480): Zend_Db_Statement->execute(Array)
+#4 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query('SELECT `m2epro_...', Array)
+#5 /home/stripedsocks/beta/lib/Varien/Db/Adapter/Pdo/Mysql.php(504): Zend_Db_Adapter_Pdo_Abstract->query('SELECT `m2epro_...', Array)
+#6 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Abstract.php(756): Varien_Db_Adapter_Pdo_Mysql->query(Object(Varien_Db_Select), Array)
+#7 /home/stripedsock in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php on line 235
+[11-Apr-2016 13:19:43 UTC] PHP Parse error:  syntax error, unexpected 'catch' (T_CATCH) in /home/stripedsocks/beta/app/code/core/Mage/Checkout/controllers/CartController.php on line 472
+[11-Apr-2016 13:22:09 UTC] PHP Parse error:  syntax error, unexpected 'catch' (T_CATCH) in /home/stripedsocks/beta/app/code/core/Mage/Checkout/controllers/CartController.php on line 473
+[11-Apr-2016 13:29:14 UTC] PHP Fatal error:  Class 'Mage_Checkout_CartController' not found in /home/stripedsocks/beta/app/code/local/Evince/Ajaxaddtocart/controllers/Checkout/CartController.php on line 5
+[11-Apr-2016 13:29:18 UTC] PHP Fatal error:  Class 'Mage_Checkout_CartController' not found in /home/stripedsocks/beta/app/code/local/Evince/Ajaxaddtocart/controllers/Checkout/CartController.php on line 5
+[11-Apr-2016 13:30:17 UTC] PHP Fatal error:  Class 'Mage_Checkout_CartController' not found in /home/stripedsocks/beta/app/code/local/Evince/Ajaxaddtocart/controllers/Checkout/CartController.php on line 5
+[11-Apr-2016 13:30:31 UTC] PHP Fatal error:  Class 'Mage_Checkout_CartController' not found in /home/stripedsocks/beta/app/code/local/Evince/Ajaxaddtocart/controllers/Checkout/CartController.php on line 5
+[11-Apr-2016 13:49:23 UTC] PHP Parse error:  syntax error, unexpected '$_productCollection' (T_VARIABLE) in /home/stripedsocks/beta/app/design/frontend/flagsrus/default/template/checkout/cart/crosssell.phtml on line 1
+[11-Apr-2016 13:50:55 UTC] PHP Parse error:  syntax error, unexpected '$_productCollection' (T_VARIABLE) in /home/stripedsocks/beta/app/design/frontend/flagsrus/default/template/checkout/cart/crosssell.phtml on line 1
+[11-Apr-2016 13:52:28 UTC] PHP Fatal error:  Call to a member function getSize() on a non-object in /home/stripedsocks/beta/app/design/frontend/flagsrus/default/template/checkout/cart/crosssell.phtml on line 1
+[11-Apr-2016 13:58:17 UTC] PHP Parse error:  syntax error, unexpected '$_productCollection' (T_VARIABLE) in /home/stripedsocks/beta/app/design/frontend/flagsrus/default/template/checkout/cart/crosssell.phtml on line 15
+[12-Apr-2016 11:57:55 UTC] PHP Parse error:  syntax error, unexpected ';' in /home/stripedsocks/beta/app/code/local/Evince/Ajaxaddtocart/controllers/Checkout/CartController.php on line 178
+[14-Apr-2016 04:50:55 UTC] PHP Parse error:  syntax error, unexpected ')' in /home/stripedsocks/beta/app/code/local/Evince/Ajaxaddtocart/controllers/Checkout/CartController.php on line 40
+[14-Apr-2016 04:52:19 UTC] PHP Parse error:  syntax error, unexpected ')' in /home/stripedsocks/beta/app/code/local/Evince/Ajaxaddtocart/controllers/Checkout/CartController.php on line 40
+[14-Apr-2016 04:56:21 UTC] PHP Parse error:  syntax error, unexpected ''request'' (T_CONSTANT_ENCAPSED_STRING), expecting ')' in /home/stripedsocks/beta/app/code/local/Evince/Ajaxaddtocart/controllers/Checkout/CartController.php on line 39
+[14-Apr-2016 04:56:45 UTC] PHP Fatal error:  Call to a member function getParam() on a non-object in /home/stripedsocks/beta/app/code/core/Mage/Wishlist/Model/Observer.php on line 128
+[14-Apr-2016 04:57:52 UTC] PHP Fatal error:  Call to a member function getParam() on a non-object in /home/stripedsocks/beta/app/code/core/Mage/Wishlist/Model/Observer.php on line 128
+[14-Apr-2016 04:58:50 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/stripedsocks/beta/app/code/local/Evince/Ajaxaddtocart/Model/Observer.php on line 14
+[14-Apr-2016 04:59:03 UTC] PHP Fatal error:  Call to a member function getName() on a non-object in /home/stripedsocks/beta/app/code/local/Evince/Ajaxaddtocart/Model/Observer.php on line 14
+[14-Apr-2016 08:16:26 UTC] CSRF state token does not match one provided.
+[14-Apr-2016 09:27:19 UTC] CSRF state token does not match one provided.
+[14-Apr-2016 09:46:41 UTC] PHP Parse error:  syntax error, unexpected '=', expecting ')' in /home/stripedsocks/beta/app/code/local/Magestore/Sociallogin/controllers/PopupController.php on line 21
+[14-Apr-2016 09:50:21 UTC] PHP Parse error:  syntax error, unexpected '=', expecting ')' in /home/stripedsocks/beta/app/code/local/Magestore/Sociallogin/controllers/PopupController.php on line 21
+[14-Apr-2016 09:53:15 UTC] PHP Parse error:  syntax error, unexpected '=', expecting ')' in /home/stripedsocks/beta/app/code/local/Magestore/Sociallogin/controllers/PopupController.php on line 21
+[14-Apr-2016 10:47:23 UTC] PHP Fatal error:  Call to a member function getSku() on a non-object in /home/stripedsocks/beta/app/design/frontend/flagsrus/default/template/checkout/cart/sidebar/default.phtml on line 39
+[14-Apr-2016 10:47:26 UTC] PHP Fatal error:  Call to a member function getSku() on a non-object in /home/stripedsocks/beta/app/design/frontend/flagsrus/default/template/checkout/cart/sidebar/default.phtml on line 39
+[14-Apr-2016 12:51:00 UTC] PHP Fatal error:  Call to a member function getStoreId() on a non-object in /home/stripedsocks/beta/app/code/core/Mage/Sales/Model/Quote/Item/Abstract.php on line 81
+[14-Apr-2016 12:52:53 UTC] PHP Fatal error:  Call to a member function getStoreId() on a non-object in /home/stripedsocks/beta/app/code/core/Mage/Sales/Model/Quote/Item/Abstract.php on line 81
+[14-Apr-2016 13:00:39 UTC] PHP Fatal error:  Call to undefined method Magestore_Sociallogin_PopupController::getUrl() in /home/stripedsocks/beta/app/code/local/Magestore/Sociallogin/controllers/PopupController.php on line 32
+[14-Apr-2016 13:03:00 UTC] PHP Fatal error:  Call to a member function getSku() on a non-object in /home/stripedsocks/beta/app/code/local/Evince/Ajaxaddtocart/controllers/Checkout/CartController.php on line 156
+[14-Apr-2016 13:03:07 UTC] PHP Fatal error:  Call to undefined method Magestore_Sociallogin_PopupController::getUrl() in /home/stripedsocks/beta/app/code/local/Magestore/Sociallogin/controllers/PopupController.php on line 32
+[14-Apr-2016 13:04:28 UTC] PHP Fatal error:  Call to undefined method Magestore_Sociallogin_PopupController::getUrl() in /home/stripedsocks/beta/app/code/local/Magestore/Sociallogin/controllers/PopupController.php on line 32
+[15-Apr-2016 07:30:00 UTC] PHP Fatal error:  Call to undefined function print_arr() in /home/stripedsocks/beta/lib/Teamdesk/class.import_teamdesk_category.php on line 86
+[15-Apr-2016 12:02:36 UTC] PHP Fatal error:  Call to a member function getSku() on a non-object in /home/stripedsocks/beta/app/code/local/Evince/Ajaxaddtocart/controllers/Checkout/CartController.php on line 156
+[15-Apr-2016 12:02:36 UTC] PHP Fatal error:  Call to a member function getSku() on a non-object in /home/stripedsocks/beta/app/code/local/Evince/Ajaxaddtocart/controllers/Checkout/CartController.php on line 156
+[15-Apr-2016 12:03:53 UTC] PHP Fatal error:  Can't use method return value in write context in /home/stripedsocks/beta/app/design/frontend/flagsrus/default/template/advanceordersuccess/index.phtml on line 340
+[15-Apr-2016 13:00:59 UTC] PHP Fatal error:  Class 'Infortis_UltraMegamenu_Block_Navigation' not found in /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Layout.php on line 491
+[15-Apr-2016 13:01:13 UTC] PHP Fatal error:  Class 'Infortis_UltraMegamenu_Block_Navigation' not found in /home/stripedsocks/beta/app/code/core/Mage/Core/Model/Layout.php on line 491
+[15-Apr-2016 13:38:47 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 4
+[15-Apr-2016 13:38:50 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 4
+[15-Apr-2016 13:38:51 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 4
+[15-Apr-2016 13:42:51 UTC] PHP Parse error:  syntax error, unexpected '$x1c' (T_VARIABLE), expecting function (T_FUNCTION) in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 12
+[15-Apr-2016 13:42:58 UTC] PHP Parse error:  syntax error, unexpected '$x1c' (T_VARIABLE), expecting function (T_FUNCTION) in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 12
+[15-Apr-2016 13:43:48 UTC] PHP Parse error:  syntax error, unexpected ''>'' (T_CONSTANT_ENCAPSED_STRING) in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 9
+[15-Apr-2016 13:43:51 UTC] PHP Parse error:  syntax error, unexpected ''>'' (T_CONSTANT_ENCAPSED_STRING) in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 9
+[15-Apr-2016 13:44:44 UTC] PHP Parse error:  syntax error, unexpected ''>'' (T_CONSTANT_ENCAPSED_STRING) in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 9
+[15-Apr-2016 13:44:54 UTC] PHP Parse error:  syntax error, unexpected ''">'' (T_CONSTANT_ENCAPSED_STRING) in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 9
+[15-Apr-2016 13:44:57 UTC] PHP Parse error:  syntax error, unexpected ''">'' (T_CONSTANT_ENCAPSED_STRING) in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 9
+[15-Apr-2016 13:44:58 UTC] PHP Parse error:  syntax error, unexpected ''">'' (T_CONSTANT_ENCAPSED_STRING) in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 9
+[15-Apr-2016 13:46:06 UTC] PHP Parse error:  syntax error, unexpected ''">'' (T_CONSTANT_ENCAPSED_STRING) in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 9
+[15-Apr-2016 13:46:28 UTC] PHP Parse error:  syntax error, unexpected ''">'' (T_CONSTANT_ENCAPSED_STRING) in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 9
+[15-Apr-2016 13:46:30 UTC] PHP Parse error:  syntax error, unexpected ''">'' (T_CONSTANT_ENCAPSED_STRING) in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 9
+[15-Apr-2016 13:46:45 UTC] PHP Parse error:  syntax error, unexpected ''>'' (T_CONSTANT_ENCAPSED_STRING) in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 9
+[15-Apr-2016 13:46:46 UTC] PHP Parse error:  syntax error, unexpected ''>'' (T_CONSTANT_ENCAPSED_STRING) in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 9
+[15-Apr-2016 13:47:24 UTC] PHP Parse error:  syntax error, unexpected '50' (T_LNUMBER) in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 9
+[15-Apr-2016 13:48:06 UTC] PHP Parse error:  syntax error, unexpected '">"' (T_CONSTANT_ENCAPSED_STRING) in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 9
+[15-Apr-2016 13:48:07 UTC] PHP Parse error:  syntax error, unexpected '">"' (T_CONSTANT_ENCAPSED_STRING) in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 9
+[15-Apr-2016 13:48:55 UTC] PHP Parse error:  syntax error, unexpected '50' (T_LNUMBER) in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 9
+[15-Apr-2016 13:48:56 UTC] PHP Parse error:  syntax error, unexpected '50' (T_LNUMBER) in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 9
+[15-Apr-2016 13:49:25 UTC] PHP Parse error:  syntax error, unexpected '$x1c' (T_VARIABLE), expecting function (T_FUNCTION) in /home/stripedsocks/beta/app/code/local/Infortis/UltraMegamenu/Block/Navigation.php on line 12
+[15-Apr-2016 14:28:32 UTC] PHP Fatal error:  Cannot use [] for reading in /home/stripedsocks/beta/app/code/local/Teamdesk/Importmodule/controllers/IndexController.php on line 176
+[15-Apr-2016 14:31:39 UTC] PHP Fatal error:  Cannot use [] for reading in /home/stripedsocks/beta/app/code/local/Teamdesk/Importmodule/controllers/IndexController.php on line 176

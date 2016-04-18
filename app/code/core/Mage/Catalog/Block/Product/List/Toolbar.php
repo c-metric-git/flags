@@ -342,7 +342,7 @@ class Mage_Catalog_Block_Product_List_Toolbar extends Mage_Core_Block_Template
         if (!$order || !isset($orders[$order])) {
             $order = $defaultOrder;
         }
-        $this->setData('_current_grid_order', $order);
+        $this->setData('_current_grid_order', $order);       
         return $order;
     }
 

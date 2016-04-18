@@ -11,7 +11,7 @@
         <?php echo $this->getChildHtml('methods') ?>
     </fieldset>
 
-<div class="tool-tip" id="payment-tool-tip" style="display:none;">
+<!--div class="tool-tip" id="payment-tool-tip" style="display:none;">
     <div class="btn-close"><a href="#" id="payment-tool-tip-close" title="<?php echo $this->__('Close') ?>"><?php echo $this->__('Close') ?></a></div>
     <div class="tool-tip-content"><img src="<?php echo $this->getSkinUrl('images/cvv.gif') ?>" alt="<?php echo $this->__('Card Verification Number Visual Reference') ?>" title="<?php echo $this->__('Card Verification Number Visual Reference') ?>" /></div>
 </div>
@@ -35,7 +35,7 @@
         Event.observe($('payment-tool-tip-close'), 'click', toggleToolTip);
     }
     //]]>
-</script>
+</script -->
 <script type="text/javascript">
     //<![CDATA[
     payment.currentMethod = "<?php echo $this->getChild('methods')->getSelectedMethodCode() ?>";

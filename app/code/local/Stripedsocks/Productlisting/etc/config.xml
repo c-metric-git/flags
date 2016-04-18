@@ -13,11 +13,17 @@
                     <product_list>Stripedsocks_Productlisting_Block_Product_List</product_list>
                 </rewrite>
             </catalog>
+			<checkout>
+				<rewrite>
+					<cart_crosssell>Stripedsocks_Productlisting_Block_Checkout_Cart_Crosssell</cart_crosssell>
+				</rewrite>
+			</checkout>
         </blocks>
         <models>
             <catalog>
                 <rewrite>
                     <product_url>Stripedsocks_Productlisting_Model_Product_Url</product_url>
+                    <category>Stripedsocks_Productlisting_Model_Category</category>  
                 </rewrite>
             </catalog>
         </models>

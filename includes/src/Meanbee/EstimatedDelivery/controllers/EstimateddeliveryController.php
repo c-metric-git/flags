@@ -19,6 +19,24 @@ class Meanbee_EstimatedDelivery_EstimateddeliveryController extends Mage_Adminht
     public function newAction() {
         $this->_forward('edit');
     }
+	
+	public function deleteAction()
+    {
+        if ($id = $this->getRequest()->getParam('id')) {
+			$model = Mage::getModel('meanbee_estimateddelivery/estimateddelivery');
+        
+        if ($id) {
+		$resource = Mage::getSingleton('core/resource');
+		$writeConnection = $resource->getConnection('core_write');
+		$r = $writeConnection->delete("meanbee_estimateddelivery","entity_id='".$id."'");
+		if($r){
+			$this->_getSession()->addSuccess($this->__('Total of %d record(s) have been deleted.', count($id)));}		
+			}
+		
+        }
+        $this->getResponse()
+            ->setRedirect($this->getUrl('*/*/', array('store'=>$this->getRequest()->getParam('store'))));			
+    }
 
     public function saveAction() {
         if ($postData = $this->getRequest()->getPost()) {
