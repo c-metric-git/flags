@@ -665,6 +665,7 @@ class FLTeamDeskWebprofiles {
                        {
                           $blank_weights[$lowerpinnacleSKU] = $tdProduct["Product - Weight"];
                        }
+                       $pr_season_arr='';
                        if(!in_array($tdProduct['PinnacleSKU'],$this->product_added_sku)  && ($tdProduct["Product - Weight"]>0)) { 
                             $this->product_added_sku[] = $tdProduct['PinnacleSKU']; 
                             if ($tdProduct['Product - Seasons']!=''){    
@@ -683,7 +684,7 @@ class FLTeamDeskWebprofiles {
                                  else {
                                      $pr_season_list[] = trim($pr_season);  
                                  }  
-                            }    
+                            }  
                             if ($tdProduct['Product - Themes']!=''){    
                                 $theme_arr = explode(",",$tdProduct['Product - Themes']);  
                             }
@@ -713,7 +714,7 @@ class FLTeamDeskWebprofiles {
                             if($pr_type == 'Parent') {
                                  if($tdProduct['kitType'] == 'Fixed') {
                                      //$attribute_set='Filter New Products/Filter Section/Filter Type/Feature/Filter Size/Multi Seasons/Season Subthemes/Holiday/Holiday Subthemes/Occassion/Occassion Subthemes/Multi Themes/Theme Subthemes/Multi Brand';  
-                                     $product_type = "bundled";  
+                                     $product_type = "grouped";  
                                  }
                                  else {   
                                     $product_type = "configurable";
@@ -739,8 +740,9 @@ class FLTeamDeskWebprofiles {
                                 $product_type = "simple";
                             }
                             if($attribute_set=='') {    
-                                $attribute_set='Filter New Products/Filter Section/Filter Type/Feature/Filter Size/Multi Seasons/Season Subthemes/Holiday/Holiday Subthemes/Occassion/Occassion Subthemes/Multi Themes/Theme Subthemes/Multi Brand/Accessory/Design/Finish/FL Size/Letter/Option';
-                            }
+                                //$attribute_set='Filter New Products/Filter Section/Filter Type/Feature/Filter Size/Multi Seasons/Season Subthemes/Holiday/Holiday Subthemes/Occassion/Occassion Subthemes/Multi Themes/Theme Subthemes/Multi Brand/Accessory/Design/Finish/FL Size/Letter/Option';
+                                $attribute_set = 'Accessory/Design/Finish/FL Size/Letter/Option';
+                            }                                                                                                 
                             if($product_type=='') {    
                                 $product_type = "simple"; 
                             }  
@@ -818,6 +820,37 @@ class FLTeamDeskWebprofiles {
                             if($largest_counter==0) {
                                 $largest_counter=1;
                             }
+                            $season_subtheme_arr='';
+                            $holiday_subtheme_arr='';
+                            $occassion_subtheme_arr='';
+                            if(count($subtheme_arr) > 0) {
+                                foreach($subtheme_arr as $subtheme_value) {
+                                    if(in_array(trim($subtheme_value),$this->arrSeasonSubtheme)) {
+                                         $season_subtheme_arr[] = trim($subtheme_value);  
+                                    }
+                                    if(in_array(trim($subtheme_value),$this->arrHolidaySubtheme)) {
+                                         $holiday_subtheme_arr[] = trim($subtheme_value);  
+                                    }
+                                    if(in_array(trim($subtheme_value),$this->arrOccassionSubtheme)) {
+                                         $occassion_subtheme_arr[] = trim($subtheme_value);  
+                                    }    
+                                }    
+                            }    
+                            /*if($tdProduct['PinnacleSKU'] == 'CA46125') {
+                               echo '<pre>';
+                               print_R($tdProduct);
+                               echo "<br />holiday";
+                               print_R($pr_holiday_list);
+                               echo "<br />occassion";
+                               print_R($pr_occassion_list);
+                               echo "<br />season";
+                               print_R($pr_season_list);
+                               echo "<pre>";
+                               print_R($season_subtheme_arr);
+                               print_R($holiday_subtheme_arr);
+                               print_R($occassion_subtheme_arr);
+                               exit;
+                            }*/  
                             $subtheme_added = array();
                             for($i=0;$i<$largest_counter;$i++) {
                                     $csv_row = array(); 
@@ -849,11 +882,11 @@ class FLTeamDeskWebprofiles {
                                             $csv_row[] = $feature_arr[$i]; //feature                                
                                             $csv_row[] = $size; //fl_filter_size 
                                             $csv_row[] = trim($pr_season_list[$i]); //multi seasons 
-                                            $csv_row[] = in_array(trim($subtheme_arr[$i]),$this->arrSeasonSubtheme)?trim($subtheme_arr[$i]):""; //season_subthemes  
+                                            $csv_row[] = $season_subtheme_arr[$i]!=''?$season_subtheme_arr[$i]:""; //season_subthemes  
                                             $csv_row[] = trim($pr_holiday_list[$i]); //holiday   
-                                            $csv_row[] = in_array(trim($subtheme_arr[$i]),$this->arrHolidaySubtheme)?trim($subtheme_arr[$i]):""; //holiday_subthemes  
+                                            $csv_row[] = $holiday_subtheme_arr[$i]!=''?$holiday_subtheme_arr[$i]:""; //holiday_subthemes  
                                             $csv_row[] = trim($pr_occassion_list[$i]); //occassion  
-                                            $csv_row[] = in_array(trim($subtheme_arr[$i]),$this->arrOccassionSubtheme)?trim($subtheme_arr[$i]):""; //occassion_subthemes   
+                                            $csv_row[] = $occassion_subtheme_arr[$i]!=''?$occassion_subtheme_arr[$i]:""; //occassion_subthemes   
                                             $csv_row[] = trim($theme_arr[$i]); //multi themes 
                                             $csv_row[] = in_array(trim($nonsubtheme),$this->arrThemeSubtheme)?trim($nonsubtheme):""; //themes_subthemes  
                                             $csv_row[] = $brand; //multi brand  
@@ -1040,11 +1073,11 @@ class FLTeamDeskWebprofiles {
                                                 $csv_row[] = trim($feature_arr[$i]); //feature 
                                                 $csv_row[] = ""; //fl_filter_size 
                                                 $csv_row[] = trim($pr_season_list[$i]); //multi seasons 
-                                                $csv_row[] = in_array(trim($subtheme_arr[$i]),$this->arrSeasonSubtheme)?trim($subtheme_arr[$i]):""; //season_subthemes  
-                                                $csv_row[] = trim($pr_holiday_list[$i]); //holiday        
-                                                $csv_row[] = in_array(trim($subtheme_arr[$i]),$this->arrHolidaySubtheme)?trim($subtheme_arr[$i]):""; //holiday_subthemes  
-                                                $csv_row[] = trim($pr_occassion_list[$i]); //occassion 
-                                                $csv_row[] = in_array(trim($subtheme_arr[$i]),$this->arrOccassionSubtheme)?trim($subtheme_arr[$i]):""; //occassion_subthemes 
+                                                $csv_row[] = $season_subtheme_arr[$i]!=''?$season_subtheme_arr[$i]:""; //season_subthemes  
+                                                $csv_row[] = trim($pr_holiday_list[$i]); //holiday   
+                                                $csv_row[] = $holiday_subtheme_arr[$i]!=''?$holiday_subtheme_arr[$i]:""; //holiday_subthemes  
+                                                $csv_row[] = trim($pr_occassion_list[$i]); //occassion  
+                                                $csv_row[] = $occassion_subtheme_arr[$i]!=''?$occassion_subtheme_arr[$i]:""; //occassion_subthemes   
                                                 $csv_row[] = trim($theme_arr[$i]); //multi themes 
                                                 $csv_row[] = in_array(trim($nonsubtheme),$this->arrThemeSubtheme)?trim($nonsubtheme):""; //themes_subthemes  
                                             
@@ -1170,7 +1203,7 @@ class FLTeamDeskWebprofiles {
                                         fputcsv($this->fp,$csv_row);
                                     } // End of for largest counter loop
                             } // End of if not in product added array  
-                            if($this->product_counter % 900 == 0) {
+                            if($this->product_counter % 800 == 0) {
                                  $this->csv_counter++;  
                                  fclose($this->fp);
                                  $this->fp = fopen("var/import/products/FL_Products".$this->csv_counter.".csv","w+");
@@ -1203,7 +1236,7 @@ class FLTeamDeskWebprofiles {
                 $type = " AND [Type Attribute]='".$type."'";
             }    
         }
-        $arrQueries = "WHERE [is_visible] AND [SendToPinnacle] $type";
+        $arrQueries = "WHERE [SendToPinnacle] $type";
         /**
         * @desc  create string of columns to be retreived from the query  
         */       
@@ -1226,7 +1259,7 @@ class FLTeamDeskWebprofiles {
                         $arrResults = $this->api->Query("SELECT TOP 1500 ".$strColumns." FROM [FL Web Profile] ".$arrQueries." ORDER BY [PinnacleSKU]");
                     }
                     catch (Exception $e) {
-                         echo $this->tdErrorLog = '<br/>Error Fetching Profiles from TD for type $type. Caught exception: ' .$e->getMessage(). "<br/>";
+                         echo $this->tdErrorLog = "<br/>Error Fetching Profiles from TD for type $type. Caught exception: " .$e->getMessage(). "<br/>";
                          $strReturn .= $this->tdErrorLog;
                          die;    
                     }    
@@ -1252,7 +1285,7 @@ class FLTeamDeskWebprofiles {
             return  $arrProducts;
        }
        catch (Exception $e) {
-             echo $this->tdErrorLog = '<br/>Error Fetching Profiles from TD for type $type. Caught exception: ' .$e->getMessage(). "<br/>";
+             echo $this->tdErrorLog = "<br/>Error Fetching Profiles from TD for type $type. Caught exception: " .$e->getMessage(). "<br/>";
              die;
              $strReturn .= $this->tdErrorLog; 
              return  $strReturn;           

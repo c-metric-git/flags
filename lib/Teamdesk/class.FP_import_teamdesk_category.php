@@ -131,15 +131,15 @@ class FPTeamDeskCategory {
                             $category_path = str_replace(": ","/",$category_path);
                             $category_path = $tdCategory["Level"]!=1 ? substr($category_path, 0, -1):$category_path;
                             $csv_row[] = ($tdCategory["Level"]==1?"Facepaint":"Facepaint/".$category_path).$csv_seperator; 
-                            $csv_row[] = $tdCategory['Sort Order'].$csv_seperator; 
+                            $csv_row[] = $tdCategory['Magento_Sort Order'].$csv_seperator; 
                             $csv_row[] = ($tdCategory['is_visible']=="Yes"?"Yes":"No").$csv_seperator; 
-                            $csv_row[] = $csv_seperator; 
+                            $csv_row[] = str_replace("http://www.facepaint.com/","",$tdCategory['url'].$csv_seperator); 
                             $csv_row[] = $tdCategory['description'].$csv_seperator; 
                             $csv_row[] = $filename.$csv_seperator; 
                             $csv_row[] = $csv_seperator; 
                             $csv_row[] = $tdCategory['meta_keywords'].$csv_seperator; 
                             $csv_row[] = $tdCategory['meta_description'].$csv_seperator; 
-                            $csv_row[] = $tdCategory["labelCalc"]=='I Need'?"No":"Yes".$csv_seperator; 
+                            $csv_row[] = $tdCategory["labelCalc"]=='I Need' || $tdCategory["labelCalc"]=='Vendors' || $tdCategory["labelCalc"]=='Face Paint Designs' || $tdCategory["labelCalc"]=='Face Painting For Beginners' || $tdCategory["labelCalc"]=='New Products' || $tdCategory["labelCalc"]=='On Sale'?"No":"Yes".$csv_seperator; 
                             $csv_row[] = "Products only".$csv_seperator; 
                             $csv_row[] = $csv_seperator; 
                             $csv_row[] = "Yes".$csv_seperator; 
@@ -153,7 +153,7 @@ class FPTeamDeskCategory {
 							$csv_row[] = $tdCategory['isOccasion'].$csv_seperator;
 							$csv_row[] = $tdCategory['isManufacturer'].$csv_seperator;
 							//$csv_row[] = $tdCategory['Google Category'].$csv_seperator;
-							$csv_row[] = $tdCategory['ShortNameforMenu'].$csv_seperator;							
+							$csv_row[] = $tdCategory['ShortNameForMenu'].$csv_seperator;							
                             $csv_row[] = str_replace("http://www.facepaint.com/","",$tdCategory['url'].$csv_seperator);
                             $csv_row[] = "1".$csv_seperator;
                             fputcsv($fp,$csv_row);
@@ -180,13 +180,13 @@ class FPTeamDeskCategory {
         /**
         * @desc  create the Teamdesk query, to fetch all the categories that are marked as sendToPinnacle
         */     
-        $arrQueries = "WHERE ([CategoryID] > 0 AND [SendToPinnacle] AND [is_visible])"; 
-        $orderBy = " ORDER BY [Level],[CategoryID]";          
+        $arrQueries = "WHERE ([SendToPinnacle] AND [is_visible] AND [CategoryID] > 0)"; 
+        $orderBy = " ORDER BY [CategoryID],[Level]";          
         /**
         * @desc  create string of columns to be retrieved from the query
         */
 		//,[Magento_Sort_Order]
-        $strColumns = "[CategoryID],[Sort Order],[Level],[labelCalc],[Label],[is_home],[category_header],[description_bottom],[isOccasion],[isManufacturer],[ShortNameforMenu],[is_visible],[url],[description],[imgLocationCalced],[meta_keywords],[meta_title],[meta_description],[ShortNameForMenu]";
+        $strColumns = "[CategoryID],[Magento_Sort Order],[Level],[labelCalc],[Label],[is_home],[category_header],[description_bottom],[isOccasion],[isManufacturer],[is_visible],[url],[description],[imgLocationCalced],[meta_keywords],[meta_title],[meta_description],[ShortNameForMenu]";
         try {
                $query = "SELECT TOP 450 ".$strColumns." FROM [FP Category] ".$arrQueries.$orderBy; 
                $arrResults = $this->api->Query($query);  
@@ -206,7 +206,7 @@ class FPTeamDeskCategory {
          $resultcount = 0;
          while($resultcount == 0) {
                 $arrResults='';
-                $arrQueries = "WHERE ([CategoryID] > $last_category_id AND [SendToPinnacle])";   
+                $arrQueries = "WHERE ([CategoryID] > $last_category_id AND [SendToPinnacle] AND [is_visible])";   
                 $orderBy = " ORDER BY [CategoryID],[Level]"; 
                 try { 
                         $query = "SELECT TOP 450 ".$strColumns." FROM [FP Category] ".$arrQueries.$orderBy;  
@@ -228,7 +228,7 @@ class FPTeamDeskCategory {
                        $resultcount = 0;
                   else
                        $resultcount = 1; 
-          }      
+          }  
           return  $arrCategories;
     }    
 

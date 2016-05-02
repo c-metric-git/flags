@@ -139,7 +139,7 @@ class FLTeamDeskCategory {
                             $csv_row[] = "Yes".$csv_seperator; 
                             $csv_row[] = $csv_seperator; 
                             $csv_row[] = $csv_seperator; 
-                            $csv_row[] = $tdCategory['labelCalc']=='Top Sellers'?"1 column":"No layout updates".$csv_seperator; 
+                            $csv_row[] = "No layout updates".$csv_seperator; 
                             $csv_row[] = $csv_seperator;
                             $csv_row[] = ($tdCategory['is_home']=="Yes"?"1":"0").$csv_seperator;  
                             $csv_row[] = str_replace("http://www.flagsrus.org/","",$tdCategory['url'].$csv_seperator);
@@ -149,7 +149,7 @@ class FLTeamDeskCategory {
                       fclose($fp);
                   }    
             }
-            $strReturn = "Category CSV file generated Successfully.";
+            $strReturn = "Category CSV file generated Successfully.";   
             return $strReturn; 
         } 
         else {
@@ -168,8 +168,8 @@ class FLTeamDeskCategory {
         /**
         * @desc  create the Teamdesk query, to fetch all the categories that are marked as sendToPinnacle
         */     
-        $arrQueries = "WHERE ([CategoryID] > 0 AND [SendToPinnacle] AND ([isBetaOrLive?]='Both' OR [isBetaOrLive?]='Live'))"; 
-        $orderBy = " ORDER BY [Level],[CategoryID]";          
+        $arrQueries = "WHERE ([CategoryID] > 0 AND [SendToPinnacle] AND ([isBetaOrLive?]='Both' OR [isBetaOrLive?]='Live') AND [is_visible])"; 
+        $orderBy = " ORDER BY [CategoryID],[Level]";          
         /**
         * @desc  create string of columns to be retrieved from the query
         */
@@ -193,7 +193,7 @@ class FLTeamDeskCategory {
          $resultcount = 0;
          while($resultcount == 0) {
                 $arrResults='';
-                $arrQueries = "WHERE (([CategoryID] > $last_category_id AND [SendToPinnacle])  AND ([isBetaOrLive?]='Both' OR [isBetaOrLive?]='Live'))";   
+                $arrQueries = "WHERE (([CategoryID] > $last_category_id AND [SendToPinnacle])  AND ([isBetaOrLive?]='Both' OR [isBetaOrLive?]='Live') AND [is_visible])";   
                 $orderBy = " ORDER BY [CategoryID],[Level]"; 
                 try { 
                         $query = "SELECT TOP 450 ".$strColumns." FROM [FL Category] ".$arrQueries.$orderBy;  
