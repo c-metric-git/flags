@@ -44,7 +44,7 @@ $('.responsiveGallery-wrapper').responsiveGallery({
 			     ?>
 
 				<div class="col-md-4 home_latestpost">
-					<a href="<?php echo $post->getPermalink() ?>" class="responsivGallery-link"><img src="<?php echo $featuredImageobj['guid'] ?>" alt="" width="350px" height="250px"></a>
+					<a href="<?php echo $post->getPermalink() ?>" class="responsivGallery-link"><img class="lazy" src="<?php echo $this->getSkinUrl('images/loader.gif') ?>" data-original="<?php echo $featuredImageobj['guid'] ?>" alt="" width="350px" height="250px"></a>
 				</br>
 						<div class="col-md-3" style="padding-left:0px">
 							 <div class="home_blog_li_div_date">

@@ -60,6 +60,7 @@
 			<action method="addCss"><stylesheet helper="ultimo/cssgen/getLayoutFile" /></action>
 			<!-- Override styles added via admin panel -->
 			<action method="addItem"><type>skin_css</type><name>css/override-config.css</name><params/></action>
+			<action method="addItem"><type>skin_css</type><name>css/custom-flagsrus.css</name><params/></action>
 			<!-- Custom CSS (has to be enabled in admin) -->
 			<!--<action method="addCss"
 				ifconfig="ultimo/customization/custom_css"><stylesheet>css/custom.css</stylesheet></action>-->
