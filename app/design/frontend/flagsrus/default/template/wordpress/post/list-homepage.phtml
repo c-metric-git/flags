@@ -10,6 +10,7 @@
 $posts = Mage::getResourceModel('wordpress/post_collection');
 /* print_r($posts->getData());
 exit; */
+$display_no_of_posts=0;
 ?>
 <?php if (count($posts) > 0): ?>
 <script type="text/javascript">// <![CDATA[
@@ -24,22 +25,42 @@ $('.responsiveGallery-wrapper').responsiveGallery({
 //]]&gt;
 // ]]></script>
 <div class="">
-  <section id="responsiveGallery-container" class="responsiveGallery-container">
-   <a class="responsiveGallery-btn responsiveGallery-btn_prev" href="javascript:void(0);"></a> 
-   <a class="responsiveGallery-btn responsiveGallery-btn_next" href="javascript:void(0);"></a>
-    <ul class="responsiveGallery-wrapper">
+  <section id="responsiveGallery-container" class="">
+   <!--<a class="responsiveGallery-btn responsiveGallery-btn_prev" href="javascript:void(0);"></a> 
+   <a class="responsiveGallery-btn responsiveGallery-btn_next" href="javascript:void(0);"></a>-->
+    <div class="col-md-12">
 		<?php foreach($posts as $post): ?>
 			<?php $featuredImage = $post->getFeaturedImage(); ?>
+			
 			<?php $featuredImageobj = $post->getImages()->getFirstItem()->getData(); 
 			//if(!empty($featuredImageobj)){			$featuredImageobj->getGuid();}
 			?>
-			<?php if(!empty($featuredImageobj)): ?>
-				<li class="responsiveGallery-item">
-					<a href="<?php echo $post->getPermalink() ?>" class="responsivGallery-link"><img src="<?php echo $featuredImageobj['guid'] ?>" height="320" width="320" alt="" class="responsivGallery-pic"></a>
-				</li>
-			<?php endif; ?>
+			<?php if(!empty($featuredImageobj)): 
+                  if($display_no_of_posts < 3):
+                  	$display_no_of_posts++;
+                    $timestamp=strtotime($post->getPostDate());
+                    $day = date('j', $timestamp);
+                    $month = date('M', $timestamp);
+			     ?>
+
+				<div class="col-md-4 home_latestpost">
+					<a href="<?php echo $post->getPermalink() ?>" class="responsivGallery-link"><img src="<?php echo $featuredImageobj['guid'] ?>" alt="" width="350px" height="250px"></a>
+				</br>
+						<div class="col-md-3" style="padding-left:0px">
+							 <div class="home_blog_li_div_date">
+					            <div class="home_blog_li_div_day"><?php echo $day; ?></div>
+					            <div class="home_blog_li_div_month"><?php echo $month; ?></div>
+                            </div>
+                        </div>	 			
+                        <div class="col-md-9">
+                        	<a class="title" href="<?php echo $post->getPermalink() ?>"><?php echo $post->getPostTitle() ?></a>
+                        </div>	 							
+				</div>
+			<?php endif;
+                  endif;   
+			 ?>
 		<?php endforeach; ?>
-    </ul>
+    </div>
   </section>
 </div>
 <?php endif; ?>

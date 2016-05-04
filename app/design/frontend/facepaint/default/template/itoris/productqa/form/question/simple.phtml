@@ -1,0 +1,113 @@
+<?php
+/**
+ * ITORIS
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the ITORIS's Magento Extensions License Agreement
+ * which is available through the world-wide-web at this URL:
+ * http://www.itoris.com/magento-extensions-license.html
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to sales@itoris.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extensions to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to the license agreement or contact sales@itoris.com for more information.
+ *
+ * @category   ITORIS
+ * @package    ITORIS_PRODUCTQA
+ * @copyright  Copyright (c) 2013 ITORIS INC. (http://www.itoris.com)
+ * @license    http://www.itoris.com/magento-extensions-license.html  Commercial License
+ */
+?>
+
+<?php /** @var $this Itoris_ProductQa_Block_Form_Question */ ?>
+
+<?php
+$questions = $this->getQuestions();
+if (!empty($questions) && is_array($questions)):
+	$i = 0;
+	?>
+<script type="text/javascript">hasQuestions = true;</script>
+<?php foreach ($questions as $question): ?>
+<div class="question">
+	<div class="q_text">
+		<div class="arrow_r"></div>
+		<div class="text_red qa"><?php echo $this->__('Q') ?>:</div>
+		<div class="text_black qa_text">
+			<?php echo htmlspecialchars($question['content']); ?>
+		</div>
+		<input type="hidden" class="itoris_productqa_question_id" value="<?php echo (int)$question['id'] ?>" />
+	</div>
+	<div class="q_answers">
+		<span class="answers_count"><?php echo $this->getDataHelper()->prepareHtmlText(htmlspecialchars($question['answers'])); ?></span> <?php echo $this->__('answers') ?>
+	</div>
+</div>
+
+<div class="answers" style="display:<?php if ($this->canShowQuestionInfo($i, $question['id'])): ?>block<?php else: ?>none<?php endif; ?>">
+	<?php if ($this->canShowQuestionInfo($i, $question['id'])): ?>
+	<script type="text/javascript">
+		question_id = <?php echo (int)$question['id'] ?>;
+		answer_ajax= <?php echo (int)$this->getActiveAnswer() ?>;
+	</script>
+	<?php endif; ?>
+
+	<div class="q_info_block<?php if ($this->canSubscribeOnQuestion()):?> q_info_block_subscribe<?php if (!$this->isGuest()):?>customer<?php endif; ?><?php endif; ?>">
+		<div>
+			<button type="button" class="button button_answer_question float_right"  onclick="question_id=<?php echo (int)$question['id'] ?>;">
+				<span><span><?php echo $this->__('Answer this Question') ?></span></span>
+			</button>
+			<div class="q_info">
+				<div class="info">
+					<span class="red"><?php echo $this->__('by') . ' ' . $question['nickname'] ?></span>
+					<span class="gray"><?php echo Mage::helper('itoris_productqa')->getDateStr($question['date']) ?></span>
+					<span><?php echo $question['good'] ?></span> <div class="icon_good" onclick="question_id=<?php echo (int)$question['id'] ?>;" title="<?php echo htmlspecialchars($this->__('Helpful')) ?>"></div>
+					<span><?php echo $question['bad'] ?></span> <div class="icon_bad" onclick="question_id=<?php echo (int)$question['id'] ?>;" title="<?php echo htmlspecialchars($this->__('Not Helpful')) ?>"></div>
+					<div class="icon_inappr" onclick="question_id=<?php echo (int)$question['id'] ?>;" title="<?php echo htmlspecialchars($this->__('Report as Inappropriate')) ?>"></div>
+				</div>
+			</div>
+		</div>
+		<?php if ($this->canSubscribeOnQuestion()):?>
+		<div class="qa_subscribe_box field-row">
+			<span><?php echo $this->__('Notify me by email when answer received:') ?></span>
+			<?php $isSubscribed = $this->isSubscribedToQuestion($question['id']); ?>
+			<span class="subscribed-status-text" <?php if (!$isSubscribed): ?>style="display: none;"<?php endif; ?>><?php echo $this->__('subscribed') ?></span>
+			<?php if ($this->isGuest()): ?>
+				<br/><span><?php echo $this->__('Please, enter email') ?></span> <input type="text" class="required-entry validate-email"/>
+			<?php endif; ?>
+			<button class="button subscribe" onclick="ItorisProductQa.subscribeToQuestion(<?php echo $question['id'] ?>, this);" <?php if ($isSubscribed): ?>style="display: none;"<?php endif; ?>><span><?php echo $this->__('Subscribe') ?></span></button>
+			<button class="button unsubscribe" onclick="ItorisProductQa.unsubscribeQuestion(<?php echo $question['id'] ?>, this);" <?php if (!$isSubscribed): ?>style="display: none;"<?php endif; ?>><span><?php echo $this->__('Unubscribe') ?></span></button>
+		</div>
+		<?php endif; ?>
+	</div>
+	<div class="answers_ajax">
+		<?php if (!empty($question['answer'])): ?>
+		<?php echo $this->getAnswersHtml($question['answer'], 'theme') ?>
+		<?php else: ?>
+		<div class="ie_height_bug"></div>
+		<?php endif; ?>
+	</div>
+</div>
+<?php $i++; ?>
+<?php endforeach; ?>
+<script type="text/javascript">page = <?php echo (int)Mage::registry('page') ?>;</script>
+<?php if (Mage::registry('pages') > 1): ?>
+<div id="itoris_qa_pages"><?php echo $this->__('Page') ?>
+	<?php for ($i = 1; $i <= Mage::registry('pages'); $i++): ?>
+		<span onclick="page=<?php echo $i ?>;" <?php if ($i == Mage::registry('page')):?>class="active"<?php endif; ?>>
+			<a href="<?php echo $this->preparePageUrl($i) ?>" style="color:inherit;text-decoration: none;" onclick="return false;"><?php echo $i ?></a>
+		</span>
+		<?php endfor; ?>
+	<?php if ((Mage::registry('page') + 1) <= Mage::registry('pages')): ?>
+		<span onclick="page=<?php echo (int)Mage::registry('page') + 1 ?>;"> ></span>
+		<?php endif; ?>
+</div>
+<?php endif; ?>
+<?php elseif($this->isSearchRequest()): ?>
+	<span class="itoris_qa_search_message"><?php echo $this->__('Sorry, nothing found for %s', $this->isSearchRequest()) ?></span>
+<?php else: ?>
+	<span class="itoris_qa_add_first_q_link"><?php echo $this->__('Be the first to ask a question about this product') ?></span>
+<?php endif; ?>

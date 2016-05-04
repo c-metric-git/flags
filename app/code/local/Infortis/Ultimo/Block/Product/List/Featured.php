@@ -13,10 +13,10 @@ class Infortis_Ultimo_Block_Product_List_Featured extends Mage_Catalog_Block_Pro
 	{
 		parent::_construct();
 
-		$this->addData(array(
+/* 		$this->addData(array(
 			'cache_lifetime'    => 99999999,
 			'cache_tags'        => array(Mage_Catalog_Model_Product::CACHE_TAG),
-		));
+		)); */
 	}
 	
 	/**
@@ -24,7 +24,7 @@ class Infortis_Ultimo_Block_Product_List_Featured extends Mage_Catalog_Block_Pro
 	 *
 	 * @return array
 	 */
-	public function getCacheKeyInfo()
+/* 	public function getCacheKeyInfo()
 	{
 		if (NULL === $this->_cacheKeyArray)
 		{
@@ -54,7 +54,7 @@ class Infortis_Ultimo_Block_Product_List_Featured extends Mage_Catalog_Block_Pro
 			);
 		}
 		return $this->_cacheKeyArray;
-	}
+	} */
 	
 	/**
 	 * Get collection id
@@ -153,9 +153,9 @@ class Infortis_Ultimo_Block_Product_List_Featured extends Mage_Catalog_Block_Pro
 	 * Create unique block id for frontend
 	 *
 	 * @return string
-	 */
+	 *
 	public function getFrontendHash()
 	{
 		return md5(implode("+", $this->getCacheKeyInfo()));
-	}
+	}*/
 }

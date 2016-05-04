@@ -1,0 +1,14 @@
+<?php $products = Mage::getModel('catalog/product')->getCollection();
+    $products->addStoreFilter(2)
+	//->setPageSize(50)
+	->addAttributeToFilter('type_id','simple')
+	->addAttributeToFilter(
+    'status',
+    array('eq' => Mage_Catalog_Model_Product_Status::STATUS_ENABLED))
+	->addAttributeToSelect('*');
+ 	Mage::getSingleton('cataloginventory/stock')
+    ->addInStockFilterToCollection($products);
+	Mage::register('intstockcount',1);	
+	echo $products->getSize();
+	Mage::unregister('intstockcount');
+	?>

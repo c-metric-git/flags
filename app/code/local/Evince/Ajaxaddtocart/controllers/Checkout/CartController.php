@@ -5,6 +5,39 @@ require_once 'Mage/Checkout/controllers/CartController.php';
 class Evince_Ajaxaddtocart_Checkout_CartController extends Mage_Checkout_CartController {
 
     public function addAction() {
+
+       $request_group_product_id=$this->getRequest()->getParam('product');
+       if( Mage::getModel('catalog/product')->load($request_group_product_id)->getTypeID() == "grouped") {  
+                $cart = Mage::getModel('checkout/cart')->getQuote();    
+                $request_group_product_quantity=$this->getRequest()->getParam('qty');
+                $group_max_quantity=$this->getRequest()->getParam('group_max_quantity');
+                
+                $cart_group_associated_item_qty=0;
+                foreach ($cart->getAllVisibleItems() as $item){
+                  
+                   $cart_items_options=Mage::getModel('sales/quote_item_option')->getCollection()->addFieldToFilter('item_id',$item->getItemId())->addFieldToFilter('value','grouped');
+                   foreach($cart_items_options as $cart_items_option )
+                   {
+                      if ($request_group_product_id == $cart_items_option->getProductId()) 
+                      {
+                          $cart_group_associated_item_qty=$item->getQty();
+                          break;
+                      }
+                   }
+                }
+
+               $total_qty=$cart_group_associated_item_qty + $request_group_product_quantity ; 
+               if($total_qty > $group_max_quantity)
+               {
+
+                    $_response = Mage::getModel('ajaxaddtocart/response');
+                    $_response->setQtyerror(true);
+                    $_response->setMessage($this->__('Item can not be add to shopping cart.'));
+                    $_response->send();
+                    return false; 
+               }
+         }      
+
         $cart = $this->_getCart();
         $params = $this->getRequest()->getParams();
         try {

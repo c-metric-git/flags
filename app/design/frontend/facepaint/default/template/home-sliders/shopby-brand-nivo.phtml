@@ -1,0 +1,21 @@
+  <?php
+   $banners = Mage::getModel('bannerslider/banner')->getCollection()->addFieldToFilter('bannerslider_id', 2)->setOrder('order_banner', "ASC")->getData();
+  ?>
+
+  <div class="slider-wrapper theme-default">
+             <div id="slider" class="nivoSlider">
+
+               <?php foreach ($banners as $banner) : ?>
+                  <a href="#"><img src="<?php echo $this->getBannerImage($banner['image']); ?>" alt="" title="<?php echo $banner['name']; ?>" style="width:100%"/></a> 
+
+                <?php  endforeach; ?> 
+       
+             </div>  
+ </div> 
+
+ <script>  
+  
+ jQuery(function() {
+     jQuery('#slider').nivoSlider();
+    });
+</script>

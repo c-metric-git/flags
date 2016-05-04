@@ -1,4 +1,4 @@
-RewriteRule    ^orderstatus\.html http://flagsrus.stripedsocks.com/sales/guest/form [R=301,L]
+#RewriteRule    ^orderstatus\.html http://flagsrus.stripedsocks.com/sales/guest/form [R=301,L]
 
 RewriteRule     ^adults-striped-knee-socks-neon-orange-purpl/adults-striped-knee-socks-neon-orange-purple-244-106-p.html    https://www.stripedsocks.com/adults-striped-knee-socks.html      [R=301,L]
 RewriteRule     ^basketball-socks/retro-tube-socks-black-w-hot-pink-knee-high-303-8-p.html    https://www.stripedsocks.com/retro-tube-socks-black-w-hot-pink.html      [R=301,L]
@@ -38,10 +38,10 @@ RewriteRule     ^womens-knee-high-striped-socks/striped-knee-socks-purple-hot-pi
 RewriteRule     ^womens-thigh-high-socks/striped-thigh-high-socks-rainbow-336-65-p.html    https://www.stripedsocks.com/striped-thigh-highs-white-with-rainbow.html      [R=301,L]
 RewriteRule     ^socks/adults-striped-knee-socks-399-41-p.html    https://www.stripedsocks.com/socks/womens-socks/womens-knee-high-socks/womens-knee-high-striped-socks.html      [R=301,L]
 RewriteRule     ^i-need/tube-socks-23-1-c.html    https://www.stripedsocks.com/search/?q=tube+socks      [R=301,L]
-RewriteRule     ^privacy-policy    https://www.stripedsocks.com/security#privacy_policy      [R=301,L]
-RewriteRule     ^rss    https://www.stripedsocks.com/      [R=301,L]
+#RewriteRule     ^privacy-policy    https://www.stripedsocks.com/security#privacy_policy      [R=301,L]
+#RewriteRule     ^rss    https://www.stripedsocks.com/      [R=301,L]
 RewriteRule     ^valentines-day-socks/checkered-knee-socks-red-white-63-118-p.html    https://www.stripedsocks.com/checkered-knee-socks-red-white.html      [R=301,L]
-RewriteRule     ^site-map    https://www.stripedsocks.com/      [R=301,L]
+#RewriteRule     ^site-map    https://www.stripedsocks.com/      [R=301,L]
 RewriteRule     ^womens-striped-leg-warmers/striped-leg-warmers-hot-pink-lime-green-22-132-49-p.html    https://www.stripedsocks.com/leg-warmers.html      [R=301,L]
 RewriteRule     ^womens-knee-high-solid-colored-socks/knee-high-socks-light-pink-202-105-p.html    https://www.stripedsocks.com/knee-high-socks-light-pink.html      [R=301,L]
 RewriteRule     ^customer-care    https://www.stripedsocks.com/contact-us#contact      [R=301,L]
@@ -377,9 +377,9 @@ RewriteRule     ^womens-arm-warmers/striped-arm-warmers-neon-black-neon-orange-1
 RewriteRule     ^ice-skate-socks/adults-striped-knee-socks-green-lemon-yellow-233-32-p.html    https://www.stripedsocks.com/adults-striped-knee-socks-green-lemon-yellow.html      [R=301,L]
 RewriteRule     ^other/adults-striped-knee-socks-green-red-237-122-p.html    https://www.stripedsocks.com/adults-striped-knee-socks-green-red.html      [R=301,L]
 RewriteRule     ^i-need/cheerleader-socks-tights-10-1-c.html    https://www.stripedsocks.com/tights.html      [R=301,L]
-RewriteRule     ^security.html    https://www.stripedsocks.com/privacy-policy      [R=301,L]
-RewriteRule     ^contact-us    https://www.beta.stripedsocks.com/contacts     [R=301,L]
-RewriteRule     ^shipping.html    https://www.stripedsocks.com/shipping      [R=301,L]
+#RewriteRule     ^security.html    https://www.stripedsocks.com/privacy-policy      [R=301,L]
+#RewriteRule     http://beta.stripedsocks.com/contact-us    https://www.beta.stripedsocks.com/contacts     [R=301,L]
+#RewriteRule     ^shipping.html    https://www.stripedsocks.com/shipping      [R=301,L]
 RewriteRule     ^i-need/baseball-socks-7-1-c.html    https://www.stripedsocks.com/search/?q=baseball+socks      [R=301,L]
 RewriteRule     ^womens-thigh-high-socks/retro-tube-socks-white-w-turquoise-thigh-high-335-65-p.html    https://www.stripedsocks.com/retro-tube-socks-white-w-turquoise-thigh-high.html      [R=301,L]
 
@@ -684,3 +684,20 @@ Header unset ETag
 
     FileETag none
 #SetEnv MAGE_IS_DEVELOPER_MODE "true"
+
+<filesMatch "\\.(ico|pdf|flv|jpg|jpeg|png|gif|swf|mp3|mp4)$">
+Header set Cache-Control "max-age=2592000, private"
+Header set Expires "Sun, 17 July 2011 20:00:00 GMT"
+</filesMatch>
+<filesMatch "\\.(css|css.gz)$">
+Header set Cache-Control "max-age=604800, private"
+</filesMatch>
+<filesMatch "\\.(js|js.gz)$">
+Header set Cache-Control "max-age=604800, private"
+</filesMatch>
+<filesMatch "\\.(xml|txt)$">
+Header set Cache-Control "max-age=216000, private, must-revalidate"
+</filesMatch>
+<filesMatch "\\.(html|htm)$">
+Header set Cache-Control "max-age=7200, private, must-revalidate"
+</filesMatch>

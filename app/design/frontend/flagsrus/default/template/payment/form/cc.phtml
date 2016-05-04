@@ -29,10 +29,10 @@
               $('#credit-card-type .MC').addClass('active');
               $("input[id=authorizenet_cc_type]").val('MC');
                break;
-             case 'amex':
+             /*case 'amex':
                $('#credit-card-type .AE').addClass('active');
                $("input[id=authorizenet_cc_type]").val('AE');
-               break;
+               break;*/
              case 'discover':
                $('#credit-card-type .DI').addClass('active');
               $("input[id=authorizenet_cc_type]").val('DI');
@@ -105,7 +105,7 @@ $('#authorizenet_cc_number').creditCardType();
 			<ul id="credit-card-type">
 				<li class="VI">Visa</li>
 				<li class="MC">Mastercard</li>
-				<li class="AE">American Express</li>
+				<!--li class="AE">American Express</li-->
 				<li class="DI">Discover</li>
 			</ul>
         </div>
@@ -143,8 +143,8 @@ $('#authorizenet_cc_number').creditCardType();
         </div>
     </li>
 	<div class="tool-tip" id="payment-tool-tip" style="margin-left:0px !important;">
-		<div class="btn-close"><a href="#" id="payment-tool-tip-close" title="<?php echo $this->__('Close') ?>"><?php echo $this->__('Close') ?></a></div>
-		<div class="tool-tip-content"><img style="width:85%;" src="<?php echo $this->getSkinUrl('images/cvv.gif') ?>" alt="<?php echo $this->__('Card Verification Number Visual Reference') ?>" title="<?php echo $this->__('Card Verification Number Visual Reference') ?>" /></div>
+		<div class="btn-close"><a href="#" style="display:none;" id="payment-tool-tip-close" title="<?php echo $this->__('Close') ?>"><?php echo $this->__('Close') ?></a></div>
+		<div class="tool-tip-content"><img style="width:35%;" src="<?php echo $this->getSkinUrl('images/cvv-withoutamex.gif') ?>" alt="<?php echo $this->__('Card Verification Number Visual Reference') ?>" title="<?php echo $this->__('Card Verification Number Visual Reference') ?>" /></div>
 	</div>
     <?php endif; ?>
 

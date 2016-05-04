@@ -1,0 +1,21 @@
+<script type="text/javascript">
+window.onBraintreeDataLoad = function() {
+    var formId = '<?php echo $this->getFormId()?>';
+    if (!$(formId)) {
+        formId = 'checkout_form';
+    }
+    <?php if(Mage::helper('braintree_payments')->getKountId()):?>
+    var env = BraintreeData.environments.production.withId("<?php echo Mage::helper('braintree_payments')->getKountId()?>");
+    <?php else:?>
+    var env = BraintreeData.environments.production;
+    <?php endif;?>
+
+    BraintreeData.setup("<?php echo $this->getMerchantId() ?>", formId, env);
+    if (typeof(payment) !== 'undefined' && typeof(payment.addAfterInitFunction) !== "undefined") {
+        payment.addBeforeValidateFunction('braintree', function(){
+            $('device_data').disabled = false;
+        });        
+    }
+};
+</script>
+<script type="text/javascript" src="<?php echo $this->getJsSrc() ?>"></script>

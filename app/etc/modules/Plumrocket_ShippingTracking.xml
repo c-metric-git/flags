@@ -19,13 +19,13 @@
 <config>
   <modules>
     <Plumrocket_ShippingTracking>
-      <active>false</active>
+      <active>true</active>
       <codePool>community</codePool>
       <version>1.0.4</version>
       <name>Plumrocket Order Status &amp; Shipping Tracking</name>
-      <depends>
+      <!--depends>
       	<Plumrocket_Base />
-      </depends>
+      </depends-->
     </Plumrocket_ShippingTracking>
   </modules>
 </config>

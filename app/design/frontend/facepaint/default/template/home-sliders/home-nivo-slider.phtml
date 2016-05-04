@@ -1,0 +1,29 @@
+  <?php
+
+   $banners = Mage::getModel('bannerslider/banner')->getCollection()->addFieldToFilter('bannerslider_id', 1)->setOrder('order_banner', "ASC");
+  ?>
+
+  <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8  main-slider">
+    <div class="slider-wrapper theme-default">
+         <div id="slider2" class="nivoSlider"> 
+             <?php foreach ($banners as $banner) : ?>
+                  <a href="#"><img src= "<?php echo $this->getBannerImage($banner->getImage()); ?>" alt="" title="<?php echo $banner->getName() ?>" style="width:100%"/></a> 
+
+             <?php  endforeach; ?> 
+				          	
+				          <!--	<a href="#"><img src="<?php echo $this->getSkinUrl('images/mainslider1.png'); ?>"alt="" style="width:100%" title="mainslider1"/></a>
+				          	<a href="#"><img title="mainslider2" src="<?php echo $this->getSkinUrl('images/mainslider2.png'); ?>" alt=""  style="width:100%"/></a> 
+				          	<a href="#"><img title="mainslider3" src="<?php echo $this->getSkinUrl('images/mainslider3.png'); ?>" alt=""  style="width:100%"/></a> -->
+	     </div>
+		 <div id="htmlcaption" class="nivo-html-caption"> <strong>This</strong> is an example of a <em>HTML</em> caption with 
+		 <a href="#">a link</a> 
+		 </div>
+	  </div>
+  </div>
+
+<script>  
+  
+ jQuery(function() {
+      jQuery('#slider2').nivoSlider();
+    });
+</script>

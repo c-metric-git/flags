@@ -1,0 +1,127 @@
+
+   
+        
+        <div class="main-title">
+          <h3>Shop By Brands</h3>
+        </div>
+     
+        <div class="owl-carousel owl-carousel-0 owl-theme owl-loaded">
+            <div id="itemslider-category2" class="products-grid category-products-grid itemgrid itemgrid-adaptive centered itemslider products-grid">
+
+                <?php
+
+                $children = Mage::getModel('catalog/category')->getCategories(11917);
+                $count_category=1;
+                $is_odd_category=1;
+                foreach ($children as $key => $category) {
+                  $imageurl=Mage::getModel('catalog/category')->load($category->getId())->getImageUrl();
+                  $linkurl=Mage::getModel('catalog/category')->load($category->getId())->getUrl();
+                  
+                  if($count_category == 1 ) : $is_odd_category=1;  ?> <div class="item"> <?php endif; ?>
+                            <div>
+                            <a href="<?php echo $linkurl; ?>" class="responsivGallery-link"><img src='<?php echo $imageurl; ?>' alt=''/></a>
+                            </div>
+                  <?php if($count_category == 2 ) :
+                        $is_odd_category=0;
+                         echo "</div>"; 
+                         endif; 
+                   
+                        if($count_category == 1) {
+                          $count_category++;
+                        } 
+                        else{
+                          $count_category=1;
+                    }
+                 
+                }
+               
+               if($is_odd_category == 1) : echo "</div>"; endif;
+               
+                ?>
+                 </div>
+         </div>
+        
+       <?php echo  $this->getLayout()->createBlock('bannerslider/default')->setTemplate('home-sliders/shopby-brand-nivo.phtml')->tohtml() ?>
+
+        <div class="main-title">
+          <h3>Image Gallery</h3>
+        </div>
+        <div class="owl-carousel owl-carousel-0 owl-theme owl-loaded">
+            <div id="home-image-gallery" class="products-grid category-products-grid itemgrid itemgrid-adaptive centered itemslider products-grid">
+              <?php
+                  $posts = Mage::getResourceModel('wordpress/post_collection');
+                  foreach($posts as $post): 
+                   
+                    $featuredImage = $post->getFeaturedImage();
+                    $featuredImageobj = $post->getImages()->getFirstItem()->getData(); 
+                    if(!empty($featuredImageobj)): 
+                        if($display_no_of_posts < 3):
+                          $display_no_of_posts++;
+                          $timestamp=strtotime($post->getPostDate());
+                          $day = date('F d,Y', $timestamp);
+                 ?>
+                      <div class="item">
+                        <a href="<?php echo $post->getPermalink() ?>" class="responsivGallery-link"><img src="<?php echo $featuredImageobj['guid'] ?>" alt="" ></a>
+                      </div>
+                                                            
+                <?php    endif;
+
+                    endif;   
+              
+               endforeach;
+
+                  ?>
+                 
+           </div>
+         </div> 
+<script>
+
+jQuery(function () {
+      var owl25 = jQuery('#itemslider-category2');
+           owl25.owlCarousel({
+                lazyLoad: true,
+                responsiveClass:true,
+                responsive: {0:{items:1},480:{items:2},960:{items:6}},
+                responsiveRefreshRate: 50,
+                slideSpeed: 200,
+                paginationSpeed: 500,
+                scrollPerPage: true,
+                stopOnHover: true,
+                loop: true,
+                rewindSpeed: 600,
+                pagination: false,
+                nav: true,
+                goToFirst: true,
+                navigationText: false
+            }); //end: owl
+     });
+
+
+jQuery(function () {
+      var owl25 = jQuery('#home-image-gallery');
+           owl25.owlCarousel({
+                lazyLoad: true,
+                responsiveClass:true,
+                responsive: {0:{items:1},480:{items:2},960:{items:3}},
+                responsiveRefreshRate: 50,
+                slideSpeed: 200,
+                paginationSpeed: 500,
+                scrollPerPage: true,
+                stopOnHover: true,
+                loop: true,
+                rewindSpeed: 600,
+                pagination: false,
+                nav: true,
+                goToFirst: true,
+                navigationText: false
+            }); //end: owl
+     });
+
+ jQuery(function() {
+       jQuery('#slider').nivoSlider();
+    });
+
+</script>
+
+</script>
+

@@ -1,0 +1,136 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please 
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_Shipping_Tracking
+ * @copyright   Copyright (c) 2014 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+?>
+
+<div class="page-title">
+    <h1>
+    	<?php echo $this->__('UPS Tracking Number %s', ( $this->getNumber() ? '('.$this->htmlEscape($this->getNumber()).')' : '' )) ?>
+    </h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<?php $order = $this->getOrder(); ?>
+<?php if ($order->getId()) {  ?>
+	<br/>
+	<?php
+		$info = $this->getInfo();
+		$_dateFormat = $this->__('m/d/Y');
+		$_timeFormat = $this->__('g:i a');
+	?>
+	<?php if ($info->Response->ResponseStatusDescription != 'Success') { ?>
+		<strong><?php echo $this->escapeHtml($info->Response->Error->ErrorDescription); ?></strong>
+	<?php } else { ?>
+
+		<?php if ($lastAction = $info->Shipment->Package->Activity[0]) { ?>
+		<div class="fieldset">
+			<h2 class="legend"><?php echo $this->__('General Information') ?></h2>
+			<ul class="form-list">
+				<li class="fields">
+					<strong><?php echo $this->__('Order') ?>:</strong> #<?php echo $order->getIncrementId() ?>
+				</li>
+				<li class="fields">
+					<strong><?php echo $this->__('Order Status') ?>:</strong> <?php echo $order->getStatusLabel() ?>
+				</li>
+				<?php $delivered = $lastAction->Status->StatusType->Code == 'D'; ?>
+				<li class="fields">
+					<label for="company"><?php echo $this->__('Delivered On:') ?></label>
+					<div class="input-box"><?php echo ($delivered) ? date('m/d/Y', $this->getTimeFromStr($lastAction->Date)) . ' at ' . date('h:i A', $this->getLocalTime($lastAction->Time)) : $this->__('Not delivered yet') ?></div>
+				</li>
+
+				<?php if ($delivered) { ?>
+				<li class="fields">
+					<label for="company"><?php echo $this->__('Left At:') ?></label>
+					<div class="input-box"><?php echo ucfirst(strtolower($this->escapeHtml($lastAction->ActivityLocation->Description))) ?></div>
+				</li>
+				<?php } ?>
+
+				<?php
+					$signedFor = $lastAction->ActivityLocation->SignedForByName;
+					if ($signedFor) {
+				?>
+				<li class="fields">
+					<label for="company"><?php echo $this->__('Signed For') ?></label>
+					<div class="input-box"><?php echo $this->escapeHtml($signedFor) ?></div>
+				</li>
+				<?php } ?>
+			</ul>
+		</div>
+		<?php } else if ($deliveryDateUnavailable = $info->Shipment->DeliveryDateUnavailable) { ?>
+		<div class="fieldset">
+			<h2 class="legend"><?php echo $this->__('General Information') ?></h2>
+			<ul class="form-list">
+				<li class="fields">
+					<?php echo $this->escapeHtml($deliveryDateUnavailable->Description[0]) ?>.
+				</li>
+			</ul>
+		</div>
+		<?php } ?>
+
+
+		<div class="fieldset">
+			<h2 class="legend"><?php echo $this->__('Additional Information') ?></h2>
+			<ul class="form-list">
+				<li class="fields">
+					<label for="company"><?php echo $this->__('Shipped/Billed On:') ?></label>
+					<div class="input-box">
+						<?php 
+							echo date('m/d/Y', $this->getTimeFromStr($info->Shipment->PickupDate));
+						?>
+					</div>
+				</li>
+				<li class="fields">
+					<label for="company"><?php echo $this->__('Type:') ?></label>
+					<div class="input-box"> <?php echo $this->__('Package') ?></div>
+				</li>
+			</ul>
+		</div>
+
+		<?php if ($info->Shipment->Package->Activity) { ?>
+		<div class="fieldset">
+			<h2 class="legend"><?php echo $this->__('Shipment Progress') ?></h2>
+			<table class="data-table" >
+				<thead>
+					<tr>
+						<th><?php echo $this->__('Location') ?></th>
+						<th><?php echo $this->__('Date') ?></th>
+						<th><?php echo $this->__('Time') ?></th>
+						<th><?php echo $this->__('Status') ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach($info->Shipment->Package->Activity as $item) { ?>
+					<tr>
+						<td><?php
+							$address = $item->ActivityLocation->Address;
+							echo ( ($address->City) ? $this->escapeHtml($address->City) . ', ' : '') . 
+								 ( ($address->StateProvinceCode) ? $this->escapeHtml($address->StateProvinceCode) . ', ' : '') . 
+								 ( ($address->CountryCode) ? Mage::app()->getLocale()->getCountryTranslation($address->CountryCode) : '');
+						?></td>
+						<td><?php echo date($_dateFormat, $this->getTimeFromStr($item->Date)); ?></td>
+						<td><?php echo date($_timeFormat, $this->getLocalTime($item->Time)); ?></td>
+						<td><?php echo $this->__($this->escapeHtml(ucfirst(strtolower($item->Status->StatusType->Description)))) ?></td>
+					</tr>
+					<?php } ?>
+				</tbody>
+			</table>
+		</div>
+		<?php } ?>
+	<?php } ?>
+	<br/><br/>
+<?php } else { ?>
+	<strong><?php echo $this->__('Tracking number is not associated with any order on our store.'); ?></strong>
+<?php } ?>

@@ -1,0 +1,261 @@
+<?php
+/**
+
+ * Magento
+
+ *
+
+ * NOTICE OF LICENSE
+
+ *
+
+ * This source file is subject to the Academic Free License (AFL 3.0)
+
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+
+ * It is also available through the world-wide-web at this URL:
+
+ * http://opensource.org/licenses/afl-3.0.php
+
+ * If you did not receive a copy of the license and are unable to
+
+ * obtain it through the world-wide-web, please send an email
+
+ * to license@magentocommerce.com so we can send you a copy immediately.
+
+ *
+
+ * DISCLAIMER
+
+ *
+
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+
+ * versions in the future. If you wish to customize Magento for your
+
+ * needs please refer to http://www.magentocommerce.com for more information.
+
+ *
+
+ * @category    design
+
+ * @package     base_default
+
+ * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
+
+ * @license     http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+
+ */
+?>
+
+<?php
+$theme = $this->helper('ultimo');
+
+$d = $theme->getCfgSectionDesign();
+
+
+
+//Get skin settings
+
+$footerContainerCss = array();
+
+$classString['all'] = '';
+
+$classString['top'] = '';
+
+$classString['primary'] = '';
+
+$classString['secondary'] = '';
+
+$classString['bottom'] = '';
+
+
+
+
+
+//All footer sections
+
+$classes['all'] = array();
+
+if ($theme->isColor($d['footer']['inner_bg_color']))
+    $classes['all'][] = 'show-bg';
+
+
+
+if ($classes['all'])
+    $classString['all'] = " " . implode(" ", $classes['all']); //NOTE: Add space before the first class
+
+
+
+
+
+    
+//Footer top
+
+$classes['top'] = array();
+
+if ($theme->isColor($d['footer']['inner_bg_color']) == false) {
+
+    if ($theme->isColor($d['footer_top']['inner_bg_color']))
+        $classes['top'][] = 'show-bg';
+    else
+        $classes['top'][] = 'stretched';
+}
+
+
+
+if ($classes['top'])
+    $classString['top'] = implode(" ", $classes['top']);
+
+$classString['top'] .= $classString['all'];
+
+
+
+
+
+//Footer primary
+
+$classes['primary'] = array();
+
+if ($theme->isColor($d['footer_primary']['inner_bg_color']))
+    $classes['primary'][] = 'show-bg';
+
+
+
+if ($classes['primary'])
+    $classString['primary'] = implode(" ", $classes['primary']);
+
+$classString['primary'] .= $classString['all'];
+
+
+
+
+
+//Footer secondary
+//$classes['secondary'] = array();
+//if ($classes['secondary'])
+//	$classString['secondary'] = implode(" ", $classes['secondary']);
+
+$classString['secondary'] .= $classString['all'];
+
+
+
+
+
+//Footer bottom
+
+$classes['bottom'] = array();
+
+if ($theme->isColor($d['footer_bottom']['inner_bg_color']))
+    $classes['bottom'][] = 'show-bg';
+
+
+
+if ($classes['bottom'])
+    $classString['bottom'] = implode(" ", $classes['bottom']);
+
+$classString['bottom'] .= $classString['all'];
+?>
+
+   <div class="clr"></div>
+   <div class="container">
+     <div class="row">
+      <div class="footer-top">
+        <div class="row">
+          <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+            <div class="footer-title">
+              <h4>Facepaint</h4>
+            </div>
+            <ul class="footer-list">
+              <li>Home</li>
+              <li> About Us</li>
+              <li> Gift Certificates</li>
+              <li> Customer Care</li>
+              <li> Shipping</li>
+              <li> Privacy Policy</li>
+            </ul>
+          </div>
+          <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+            <div class="footer-title">
+              <h4>Customer Service</h4>
+            </div>
+            <ul class="footer-list">
+              <li>FAQ</li>
+              <li> Contact Us</li>
+              <li> Login</li>
+              <li> Register</li>
+              <li> Coupon Codes</li>
+            </ul>
+          </div>
+          <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+            <div class="footer-title">
+              <h4>Security</h4>
+            </div>
+            <div class="pad-top5"><img src="<?php echo $this->getSkinUrl('images/verifiedandsecured.png') ?>" alt=""></div>
+            <div class="pad-top5"><img src="<?php echo $this->getSkinUrl('images/shoopperapproved.png') ?>" alt=></div>
+            <div class="pad-top5"><img src="<?php echo $this->getSkinUrl('images/SiteLock.png') ?>" alt=""></div>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+            <div class="footer-title">
+              <h4>Accepted Payment</h4>
+            </div>
+            <div class="pad-bot10"><img src="images/visa.png" alt=""> &nbsp;<img src="<?php echo $this->getSkinUrl('images/mastercard.png') ?>" alt=""> &nbsp;<img src="images/americanexpress.png" alt="">&nbsp;<img src="images/paypal.png" alt=""></div>
+            <div class="footer-title">
+              <h4>Connect with Us</h4>
+            </div>
+            <div class=""><img src="images/fb-icon.png" alt=""> &nbsp;<img src="<?php echo $this->getSkinUrl('images/twitter-icon.png') ?>" alt=""> &nbsp;<img src="images/gplus-icon.png" alt=""></div>
+          </div>
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+            <div class="footer-title">
+              <h4>Contacts</h4>
+            </div>
+            <ul class="footer-list">
+              <li><i class="fa fa-comment"></i>&nbsp;&nbsp; Live chat</li>
+              <li><i class="fa fa-phone"></i>&nbsp;&nbsp; 774-237-2468</li>
+              <li><i class="fa fa-envelope"></i>&nbsp;&nbsp; orders@facepaint.com</li>
+              <li><i class="fa fa-info-circle"></i>&nbsp;&nbsp; Website Problems</li>
+            </ul>
+          </div>
+        </div>
+        <div class="clr"></div>
+      </div>
+     </div>
+    </div>
+       <div class="container copyright">
+         <div class="text-center copyrightfont">&copy; 1997-2016 FacePaint. All rights reserved. www.facepaint.com</div>
+       </div>
+
+    <?php $code_store = Mage::app()->getStore()->getCode(); ?>       
+    <div class="footer_clownantics">
+        <div class="footer_clownantics_class" style="">
+    <?php if ($code_store == 'stripedsocks'): ?>
+                <a href="http://www.shopperapproved.com/certificates/stripedsocks.com/" rel="nofollow" target="shopperapproved">
+                    <span itemscope="" itemtype="http://schema.org/Store">
+                        <span itemprop="name">stripedsocks.com</span>
+                        <meta itemprop="url" content="stripedsocks.com">
+                        has a Shopper Approved rating of
+                        <span itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">
+                            <span itemprop="ratingValue">4.9</span>/<span itemprop="bestRating">5</span>
+                            based on <span itemprop="ratingCount">18</span> ratings and reviews
+                        </span>
+                    </span>
+                </a>
+    <?php else: ?>
+                <a href="http://www.shopperapproved.com/certificates/flagsrus.org/" rel="nofollow" target="shopperapproved">
+                    <span itemscope itemtype="http://schema.org/Store">
+                        <span itemprop="name">flagsrus.org</span>
+                        <meta itemprop="url" content="flagsrus.org"/>
+                        has a Shopper Approved rating of
+                        <span itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                            <span itemprop="ratingValue">4.8</span>/<span itemprop="bestRating">5</span>
+                            based on <span itemprop="ratingCount">5851</span> ratings and reviews
+                        </span>
+                    </span>
+                </a>
+    <?php endif; ?>    
+        </div>
+        <div class="clownatics_logo">Flagsrus is a part of the ClownAntics Network.<a href="http://www.clownantics.com/" target="_blank"><img src="<?php echo $this->getSkinUrl('images/clownatics_logo.png'); ?>" width="177" height="50" style="vertical-align:middle;"></a></div>
+</div>
+<div style="margin:30px;">&nbsp;</div>
+<!-- lav added end -->
+

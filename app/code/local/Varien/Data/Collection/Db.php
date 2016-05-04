@@ -220,6 +220,7 @@ class Varien_Data_Collection_Db extends Varien_Data_Collection
      */
     public function getSize()
     {
+        $currentCatName='';
         if (is_null($this->_totalRecords)) {
             $sql = $this->getSelectCountSql();
 			

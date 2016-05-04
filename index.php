@@ -23,9 +23,9 @@
  * @copyright  Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */       
- ini_set("memory_limit","512M"); 
+ ini_set("memory_limit","512M");  
  // ini_set("max_execution_time","1800");  
- set_time_limit(0);
+ set_time_limit(0);                 
 if (version_compare(phpversion(), '5.3.0', '<')===true) {
     echo  '<div style="font:12px/1.35em arial, helvetica, sans-serif;">
 <div style="margin:0 0 25px 0; border-bottom:1px solid #ccc;">
@@ -99,6 +99,11 @@ switch($_SERVER['HTTP_HOST']) {
     case 'amazon.flagsrus.org':
     case 'www.dev.flagsrus.org':
         $mageRunCode = 'flagsrus';
+        $mageRunType = 'website';
+    break;
+    case 'facepaint.stripedsocks.com':
+    case 'www.facepaint.stripedsocks.com':
+        $mageRunCode = 'facepaint';
         $mageRunType = 'website';
     break;
 }              

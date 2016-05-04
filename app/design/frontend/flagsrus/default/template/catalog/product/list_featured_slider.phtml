@@ -248,8 +248,8 @@ $_productCollection = $this->getLoadedProductCollection ();
 
     ?>
 
-    <?php $sa_reviews = "<script type='text/javascript'> function saLoadScript(src) { var js = window.document.createElement('script'); js.src = src; js.type = 'text/javascript'; document.getElementsByTagName('head')[0].appendChild(js); } saLoadScript('//www.shopperapproved.com/widgets/group2.0/12756.js'); </script>";
-    echo $sa_reviews;
+    <?php /* $sa_reviews = "<script type='text/javascript'> function saLoadScript(src) { var js = window.document.createElement('script'); js.src = src; js.type = 'text/javascript'; document.getElementsByTagName('head')[0].appendChild(js); } saLoadScript('//www.shopperapproved.com/widgets/group2.0/12756.js'); </script>";
+    echo $sa_reviews; */
     ?>
     <div class="page-title">
         <h3 class="section-title"><?php echo $this->getBlockName (); ?></h3>
@@ -275,8 +275,9 @@ $_productCollection = $this->getLoadedProductCollection ();
 
                             <?php if ($lazy): ?>
 
-                                <img class="lazyOwl"
-                                     src="<?php echo $helpImg->getImg ($_product, $imgWidth, $imgHeight, 'small_image'); ?>"
+                                <img class="owl-lazy"
+                                     data-src-retina="<?php echo $this->getSkinUrl('images/loader.gif') ?>" 
+									 data-src="<?php echo $helpImg->getImg ($_product, $imgWidth, $imgHeight, 'small_image'); ?>"
                                      alt="<?php echo $this->stripTags ($this->getImageLabel ($_product, 'small_image'), NULL, TRUE); ?>"/>
 
                             <?php else: ?>
@@ -440,10 +441,10 @@ $_productCollection = $this->getLoadedProductCollection ();
                     <?php $getId = $_product->getId (); ?>
                     <?php $getIdcls = "rating-and-qty-block" . $_product->getId (); ?>
                     <div class="rating-and-qty-block  <?php echo $getIdcls; ?>"><!-- start: rating-and-qty-block-->
-                        <div class="ratings"> <!-- start: ratings -->
+                        <!--div class="ratings"> <!-- start: ratings >
                             <div class="star_container <?php echo Mage::getModel ('catalog/product')
                                 ->load ($_product->getId ())->getSku (); ?>"></div>
-                        </div>
+                        </div-->
                         <!-- end: ratings -->
                         <div class="qty-in-stock"><!-- start: Qty in stock -->
                             <?php
@@ -484,17 +485,19 @@ $_productCollection = $this->getLoadedProductCollection ();
 
                 <?php endif; ?>
 
-
+                 
 
                 <?php if(!$isResponsive): ?>
 
                 responsive: false,
 
-                items: <?php echo $showItems; ?>,
+                //items: <?php echo $showItems; ?>,
 
                 <?php else: ?>
 
-                itemsCustom: [<?php echo $breakpoints; ?>],
+                //itemsCustom: [<?php echo $breakpoints; ?>],
+                 responsiveClass:true,
+                 responsive: {0:{items:1},480:{items:2},960:{items:4}},
 
                 responsiveRefreshRate: 50,
 
@@ -544,7 +547,7 @@ $_productCollection = $this->getLoadedProductCollection ();
 
                 <?php if ($loop): ?>
 
-                rewindNav: true,
+                loop: true,
 
                 rewindSpeed: 600,
 
@@ -568,7 +571,7 @@ $_productCollection = $this->getLoadedProductCollection ();
 
 
 
-                navigation: true,
+                nav: true,
 
                 navigationText: false
 

@@ -1,12 +1,13 @@
 <?php 
-/*$currentCat = Mage::registry('current_category');
+$currentCat = Mage::registry('current_category');
 
 if($currentCat)
 {
 	$CurCatName = $currentCat->getName();
-	$ParentCatId = $currentCat->getId();
-	$urlkey = $currentCat->getUrlKey();
-} */
+    $parentname = $currentCat->getParentCategory()->getName();
+	//$ParentCatId = $currentCat->getId();     
+	//$urlkey = $currentCat->getUrlKey();
+} 
 ?>
 <?php //if($CurCatName !="" && $CurCatName=="Top Sellers"){?>
         <?php /*if($this->canShowBlock()):*/ ?>
@@ -119,16 +120,19 @@ if($currentCat)
 
                 <?php $_filters = $this->getFilters() ?>
 
-                <?php foreach ($_filters as $_filter): $filter_name = $this->__($_filter->getName());?>
-
-                <?php if($_filter->getItemsCount() && $filter_name!='Filter Section'): ?>
-                        <? if(($filter_name!='Theme Subtheme' && $filter_name!='Season Theme' && $filter_name!='Occasion Theme' && $filter_name!='Holiday Theme') || (($filter_name=='Season Theme' && $_GET['multi_seasons']!='')|| ($filter_name=='Theme Subtheme' && $_GET['multi_themes']!='')|| ($filter_name=='Holiday Theme' && $_GET['holiday']!='')|| ($filter_name=='Occasion Theme' && $_GET['occassion']!=''))) : ?>
-                            <dt class="section-title collapsable_head collapsable_head-up <?php /*if($this->__($_filter->getName())== 'Feature'):  echo 'feature'; else*/if($this->__($_filter->getName())== 'New Products'): echo 'new-showall'; endif; ?>" id="<?php echo trim($filter_name); ?>"><?php if($filter_name== 'Filter Section'): echo "By Type"; elseif($filter_name== 'Theme Subtheme'): echo " By Theme"; else: echo "By ".$filter_name; endif;$_SESSION['filter_name'] = $filter_name;  ?></dt>
-
-                            <dd class="<?php if($_SESSION['filter_name']=='Color'):echo "color-class"; elseif($filter_name== 'New Products'): echo 'dd-new-showall'; endif;?> <?php echo trim($filter_name); ?>"><?php echo $_filter->getHtml() ?></dd>
-                     <?php endif; ?>
-                <?php endif; ?>
-
+                <?php foreach ($_filters as $_filter): 
+                        $filter_name = $this->__($_filter->getName());
+                        $filter_code = $_filter->getAttributeModel()->getAttributeCode();  ?>
+                
+                        <?php if($_filter->getItemsCount() && $filter_name!='Filter Section'): echo $ParentCatId;?>  
+                                    <? if(($CurCatName == 'New Designs' || $parentname == 'New Designs') && ($filter_code=='fl_filter_size')): continue;
+                                    else: ?>
+                                        <? if(($filter_name!='Theme Subtheme' && $filter_name!='Season Theme' && $filter_name!='Occasion Theme' && $filter_name!='Holiday Theme') || (($filter_name=='Season Theme' && $_GET['multi_seasons']!='')|| ($filter_name=='Theme Subtheme' && $_GET['multi_themes']!='')|| ($filter_name=='Holiday Theme' && $_GET['holiday']!='')|| ($filter_name=='Occasion Theme' && $_GET['occassion']!=''))) : ?>
+                                        <dt class="section-title collapsable_head collapsable_head-up <?php if($this->__($_filter->getName())== 'New Products'): echo 'new-showall'; endif; ?>" id="<?php echo trim($filter_name); ?>"><?php if($filter_name== 'Filter Section'): echo "By Type"; elseif($filter_name== 'Theme Subtheme'): echo " By Theme"; else: echo "By ".$filter_name; endif;$_SESSION['filter_name'] = $filter_name;  ?></dt>
+                                        <dd class="<?php if($_SESSION['filter_name']=='Color'):echo "color-class"; elseif($filter_name== 'New Products'): echo 'dd-new-showall'; endif;?> <?php echo trim($filter_name); ?>"><?php echo $_filter->getHtml() ?></dd>
+                                        <?php endif; ?>
+                                    <?php endif; ?>        
+                        <?php endif; ?>
                 <?php endforeach; ?>
 
             </dl>

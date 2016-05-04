@@ -9,12 +9,13 @@
      */
     public function formatUrlKey($str)
     {
-        $str = Mage::helper('catalog/product_url')->format($str);   
+        /*$str = Mage::helper('catalog/product_url')->format($str);   
         $urlKey = str_replace("&","and",$str);
         $urlKey = preg_replace('#[^0-9a-z]+#i', '-', $urlKey);
         $urlKey = strtolower($urlKey);
-        $urlKey = trim($urlKey, '-');  
+        $urlKey = trim($urlKey, '-'); */  
+        $urlKey = trim($str); 
         return $urlKey;
-    }  
+    }         
   }    
 ?>

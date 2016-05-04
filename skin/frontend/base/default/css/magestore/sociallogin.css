@@ -317,7 +317,7 @@ button.bt-login-social span span {
 	margin: 5px 0 5px 152px;
 }
 .magestore-invalid-email{
-	margin-left: 152px;
+	margin-left: 0px;
 	color: red;
 }
 
@@ -356,4 +356,12 @@ button.bt-login-social span span {
 .magestore-login-form-popup .ajax-login-image {
    
     margin: 5px auto 5px auto;
+}
+
+.sociallogin-field .validate-email {
+    width: 356px !important;
+}
+
+.magestore-popup .magestore-invalid-email{
+	margin-left: 0px;
 }

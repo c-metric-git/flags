@@ -4,7 +4,9 @@
 		<reference name="head">
 		<!-- JS -->			
 			<!-- jQuery -->
-			<action method="addJs"><script>infortis/jquery/jquery-1.7.2.min.js</script></action>
+			
+			<!--<action method="addJs"><script>infortis/jquery/jquery-1.7.2.min.js</script></action>-->
+			<!--<action method="addJs"><script>infortis/jquery/jquery-1.9.1.min.js</script></action>-->
 			<action method="addJs"><script>infortis/jquery/jquery-noconflict.js</script></action>
 			<!--action method="addJs"><script>infortis/jquery/plugins/modernizr.custom.min.js</script></action-->
 			<action method="addJs"><script>imagegallery/modernizr.custom.js</script></action>
@@ -21,6 +23,7 @@
 			<action method="addItem"><type>skin_js</type><name>js/app.js</name></action>
 			<action method="addItem"><type>skin_js</type><name>js/amasty/plugins/jquery-1.9.1.min.js</name><params/></action>
 			<action method="addItem"><type>skin_js</type><name>js/genralinline.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/jquery.lazyload.js</name></action>
 		<!-- CSS: -->
             <!-- Added by dinesh -->                                                                     
 			<action method="addItem"><type>skin_css</type><name>css/productqa.css</name><params/></action>  
@@ -51,6 +54,7 @@
 			<action method="addItem"><type>skin_css</type><name>css/override-theme.css</name><params/></action>
 			<!-- Grid and responsive layout -->
 			<action method="addItem"><type>skin_css</type><name>css/infortis/_shared/grid12.css</name><params/></action>
+			<action method="addItem"><type>skin_css</type><name>css/infortis/owl.carousel.css</name></action>
 			<action method="addCss"><stylesheet helper="ultimo/cssgen/getDesignFile" /></action>
 			<action method="addCss"><stylesheet helper="ultimo/cssgen/getGridFile" /></action>
 			<action method="addCss"><stylesheet helper="ultimo/cssgen/getLayoutFile" /></action>
@@ -383,6 +387,8 @@
 	<catalog_product_view>
 		<!-- Change default template for product view. IMPORTANT: the same as in 'review_product_list'. -->
 		<reference name="head">
+			<action method="addItem"><type>skin_js</type><name>js/jquery-migrate-1.0.0.js</name></action>
+			<action method="addItem"><type>skin_js</type><name>js/product_detail.js</name></action>
 			<action method="addJs"><script>list/skuswap_detail.js</script></action>
 		</reference>
 		<reference name="root">
@@ -806,6 +812,9 @@
 	</cms_index_index>
 	<!-- HOME PAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 	<cms_index_index>
+		<reference name="head">
+           	<action method="addItem"><type>skin_js</type><name>js/home-widget-silder.js</name></action>
+         </reference>			
 		<!-- Preface ====================================================================== -->
 		<reference name="preface">
 			<!-- Deprecated -->

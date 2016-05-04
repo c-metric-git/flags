@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please 
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_Shipping_Tracking
+ * @copyright   Copyright (c) 2014 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+-->
+<layout version="1.0.0">
+
+    <default>
+        <reference name="footer_links">
+            <action method="addLink" translate="label title" module="shippingtracking" ifconfig="shippingtracking/general/enabled"><label>Check Order Status</label><url helper="shippingtracking/getShippingTrackingUrl" /><title>Check Order Status</title></action>
+        </reference>
+    </default>
+
+    <shippingtracking_index_index>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="shippingTracking.main" template="shippingtracking/main.phtml"/>
+        </reference>
+    </shippingtracking_index_index>
+
+    <shippingtracking_index_info>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="shippingtracking/shipping_tracking_popup" name="shippingTracking.info" template="shippingtracking/info.phtml"/>
+        </reference>
+    </shippingtracking_index_info>
+
+    <shipping_tracking_popup translate="label">
+        <reference name="content">
+            <reference name="shipping.tracking.popup">
+                <action method="setTemplate"><template>shippingtracking/popup.phtml</template></action>
+            </reference>
+        </reference>
+    </shipping_tracking_popup>
+
+    <shippingtracking_index_ups>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="shippingtracking/ups" name="shippingTracking.ups" template="shippingtracking/info/ups.phtml"/>
+            <block type="core/template" name="shippingTracking.form" template="shippingtracking/info/form.phtml">
+                <action method="setCarrier"><carrier>ups</carrier></action>
+            </block>
+        </reference>
+    </shippingtracking_index_ups>
+
+    <shippingtracking_index_fedex>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>   
+        </reference>
+        <reference name="content">
+            <block type="shippingtracking/fedex" name="shippingTracking.fedex" template="shippingtracking/info/fedex.phtml"/>
+            <block type="core/template" name="shippingTracking.form" template="shippingtracking/info/form.phtml">
+                <action method="setCarrier"><carrier>fedex</carrier></action>
+            </block>
+        </reference>
+    </shippingtracking_index_fedex>
+
+    <shippingtracking_index_usps>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="shippingtracking/usps" name="shippingTracking.usps" template="shippingtracking/info/usps.phtml"/>
+            <block type="core/template" name="shippingTracking.form" template="shippingtracking/info/form.phtml">
+                <action method="setCarrier"><carrier>usps</carrier></action>
+            </block>
+        </reference>
+    </shippingtracking_index_usps>
+
+</layout>   
+    

@@ -1,0 +1,24 @@
+<?php
+
+/**
+
+ * @var Mage_Page_Block_Html_Header $this
+
+ */
+
+?>
+
+<div class="logo-wrapper logo-wrapper--regular" itemprop="name">
+
+	<?php if ($this->getIsHomePage()): ?>
+
+		<h1 class="logo logo--regular"><strong><?php echo $this->getLogoAlt() ?></strong><a href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><img src="<?php echo $this->getLogoSrc() ?>" width="291" height="115" alt="<?php echo $this->getLogoAlt() ?>" /></a></h1>
+
+	<?php else: ?>
+
+		<a class="logo logo--regular" href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"><strong><?php echo $this->getLogoAlt() ?></strong><img src="<?php echo $this->getLogoSrc() ?>"  width="291" height="115" alt="<?php echo $this->getLogoAlt() ?>" /></a>
+
+	<?php endif; ?>
+
+</div>
+

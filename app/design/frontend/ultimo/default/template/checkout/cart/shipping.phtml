@@ -79,6 +79,11 @@
         </script>
 
         <?php if (($_shippingRateGroups = $this->getEstimateRates())): ?>
+        <?php
+			 /*echo "<pre>";
+			 print_r($_shippingRateGroups);
+			 exit;*/
+		?>
         <form id="co-shipping-method-form" action="<?php echo $this->getUrl('checkout/cart/estimateUpdatePost') ?>">
             <dl class="sp-methods">
                 <?php foreach ($_shippingRateGroups as $code => $_rates): ?>

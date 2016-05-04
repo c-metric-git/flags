@@ -42,9 +42,42 @@ jQuery( document ).ready(function() {
 	   }
 	});
 
+	//solar search dropdown
+	jQuery('#resizing_select').change(function(){
+	 jQuery("#width_tmp_option").html(jQuery('#resizing_select option:selected').text());
+	 var wid1 = jQuery("#width_tmp_select").width();
+	 //var wid2 =  eval("wid1 + 20");
+	 var wid2 =  eval("wid1");
+	 jQuery(this).width(wid2);  
+	});
+	jQuery("#width_tmp_option").html("All");
+	var wid1 = jQuery("#width_tmp_select").width();
+	 //var wid2 =  eval("wid1 + 20");
+	 var wid2 =  eval("wid1");
+	jQuery('#resizing_select').width(wid2);  
+	
+	//Page lazyload
+	jQuery("img.lazy").lazyload({});
+});
+/*jQuery(function() {
+    jQuery(".nav-panel-inner img.lazy").lazyload({});
+});*/
+jQuery(function() {
+    /*jQuery(".nav-panel-inner img.lazy").lazyload({});*/
+	/*jQuery(".nav-panel-inner img.lazy").lazyload({
+        event : "sporty"
+    });
+	var timeout = setTimeout(function() { jQuery(".nav-panel-inner img.lazy").trigger("sporty") }, 500);*/
+});
+jQuery( window ).load(function() {
+	
 
-})
-
+	var timeout = setTimeout(	function() { 
+		jQuery(".nav-panel-inner img.lazy").lazyload({
+        event : "sporty"
+    });
+	jQuery(".nav-panel-inner img.lazy").trigger("sporty") }, 10000);
+});
 function  wishlistProductid(productId)
 {
 

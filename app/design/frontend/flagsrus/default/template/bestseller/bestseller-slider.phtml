@@ -389,7 +389,10 @@
 
                     <?php if ($lazy): ?>
 
-                        <img class="lazyOwl" src="<?php echo $helpImg->getImg($_product, $imgWidth, $imgHeight, 'small_image'); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true); ?>" />
+						<img class="owl-lazy"
+								 data-src-retina="<?php echo $this->getSkinUrl('images/loader.gif') ?>" 
+								 data-src="<?php echo $helpImg->getImg ($_product, $imgWidth, $imgHeight, 'small_image'); ?>"
+								 alt="<?php echo $this->stripTags ($this->getImageLabel ($_product, 'small_image'), NULL, TRUE); ?>"/>
 
                     <?php else: ?>
 
@@ -562,24 +565,24 @@
         owl.owlCarousel({
 
 
-
+  
         <?php if ($lazy): ?>
 
             lazyLoad: true,
 
         <?php endif; ?>
 
-
-
         <?php if(!$isResponsive): ?>
 
             responsive: false,
 
-            items: <?php echo $showItems; ?>,
+           // items: <?php echo $showItems; ?>,
 
         <?php else: ?>
 
-            itemsCustom: [ <?php echo $breakpoints; ?> ],
+            // itemsCustom: [ <?php echo $breakpoints; ?> ],
+            responsiveClass:true,
+            responsive: {0:{items:1},480:{items:2},960:{items:4}},
 
             responsiveRefreshRate: 50,
 
@@ -629,7 +632,7 @@
 
         <?php if ($loop): ?>
 
-            rewindNav: true,
+            loop: true,
 
             rewindSpeed: 600,
 
@@ -653,7 +656,7 @@
 
 
 
-            navigation: true,
+            nav: true,
 
             navigationText: false
 

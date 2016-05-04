@@ -1,24 +1,26 @@
-<?PHP 
+<?php               
+$order_id = $this->getOrderId(); //use your own order id
+$order = Mage::getModel("sales/order")->loadByIncrementId($order_id); //load order by order id 
+ ?>
+<?php 
 //-------------------------------------------
 // START IDEVAFFILIATE CODE
 //-------------------------------------------
-$order_details = Mage::getModel('sales/order')->loadByIncrementId(Mage::getSingleton('checkout/session')->getLastRealOrderId());
-$idev_subtotal = $order_details->base_subtotal; 
-$idev_discount = $order_details->base_discount_amount;
+//$order_details = Mage::getModel('sales/order')->loadByIncrementId(Mage::getSingleton('checkout/session')->getLastRealOrderId());
+$idev_subtotal = $order->base_subtotal; 
+$idev_discount = $order->base_discount_amount;
 $idev_saleamt = $idev_subtotal + $idev_discount;
-$coupon_code = $order_details->coupon_code;
+$coupon_code = $order->coupon_code;
 ?>
 
-<img border="0" src="http://flagsrus.stripedsocks.com/idevaffiliate/sale.php?profile=54&idev_saleamt=<?PHP echo $idev_saleamt; ?>&idev_ordernum=<?PHP echo $this->getOrderId(); ?>&coupon_code=<?PHP echo $coupon_code; ?>" width="1" height="1">
+<img style="display:none;" border="0" src="<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB); ?>idevaffiliate/sale.php?profile=54&idev_saleamt=<?php echo $idev_saleamt; ?>&idev_ordernum=<?php echo $this->getOrderId(); ?>&coupon_code=<?php echo $coupon_code; ?>" width="1" height="1">
 
-<?PHP 
+<?php 
 //-------------------------------------------
 // END IDEVAFFILIATE CODE
 //-------------------------------------------
 ?>
-<?php               
-$order_id = $this->getOrderId(); //use your own order id 
-$order = Mage::getModel("sales/order")->loadByIncrementId($order_id); //load order by order id 
+<?php
 
 $items = $order->getAllVisibleItems();
 
@@ -87,7 +89,7 @@ if ($aboveenable == 1 && $aboveenableid != "") {
 } 
 ?>
 <?php if($paymentmethodcode != 'checkmo'): ?>
-	<p>Thanks for shopping at FlagsRus.org. To check on the status of your order, Please login in to your account or click on the Order Status page at FlagsRus.org.</p>
+	<p>Thanks for shopping at FlagsRus.org. To check on the status of your order, please login in to your account or click on Order Status at Flagsrus.org.</p>
 	<?php echo $this->getLayout()->createBlock('meanbee_estimateddelivery/checkout_onepage_success_estimateddelivery')->setTemplate('meanbee/estimated_delivery/checkout/onepage/success/estimated_delivery.phtml')->tohtml(); ?>
 	<p>Your Order details are listed below. If you need a receipt, please print out this page.</p>
 	<p>We will send you a confirmation email of this order and an additional email with the tracking number when the order ships.</p>
@@ -95,7 +97,7 @@ if ($aboveenable == 1 && $aboveenableid != "") {
 	<p>Email: <?php echo Mage::getStoreConfig('trans_email/ident_general/email'); ?><br/>Phone: <?php  echo Mage::getStoreConfig('general/store_information/phone'); ?><br/>Hours: <?php  echo Mage::getStoreConfig('general/store_information/hours'); ?></p>
 <?php endif; ?>
 <?php if($paymentmethodcode == 'checkmo'): ?>
-	<p>To complete your order, Please call us at <?php echo Mage::getStoreConfig('general/store_information/phone'); ?> during our customer service hours: <?php  echo Mage::getStoreConfig('general/store_information/hours'); ?><br/>Or mail us a check to:<br/>Flagsrus<br/><?php  echo Mage::getStoreConfig('general/store_information/address'); ?></p>
+	<p>To complete your order, please call us at <?php echo Mage::getStoreConfig('general/store_information/phone'); ?> during our customer service hours: <?php  echo Mage::getStoreConfig('general/store_information/hours'); ?>.<br/><br/>Or mail us a check to:<br/>Flagsrus<br/><?php  echo Mage::getStoreConfig('general/store_information/address'); ?></p>
 	<p>Thanks,<br/>Customer Service<br/>Flagsrus.org</p>
 <?php endif; ?>
 <!--p>Check: Mail to :<br />FlagsRus<br />16 Dalfonso Rd<br />newburgh, NY 12550</p-->
@@ -176,12 +178,12 @@ $addressDiff = array_diff($oBillingAddressFiltered, $oShippingAddressFiltered);
             <?php echo $this->__('<a class="print-icon" href="%s" onclick="this.target=\'_blank\'">here to print</a>', $this->getPrintUrl()) ?>
             <?php // echo $this->getChildHtml() ?>
         <?php endif;*/ ?>
-        <div class="inner_content" style="padding-left: 10px;">>
+        <div class="inner_content" style="padding-left: 10px;">
             <label>Order Number<span>:</span></label> 
-            <span><?php echo '#'.$order_id; ?></span>
+            <span><?php echo $order_id; ?></span>
         </div>
         
-        <div class="inner_content" style="padding-left: 10px;">>
+        <div class="inner_content" style="padding-left: 10px;">
             <label>Order Date<span>:</span></label>
             <span> <?php echo Mage::getModel('core/date')->date('m-d-Y', strtotime($order->getCreatedAtStoreDate()));; ?></span>
         </div>
@@ -309,14 +311,21 @@ $addressDiff = array_diff($oBillingAddressFiltered, $oShippingAddressFiltered);
                     </span>
                 </td>
             </tr>
+            <?php 
+
+              $BaseTaxAmount=$order->getBaseTaxAmount();
+              $BaseTaxAmount_number = substr($BaseTaxAmount,1);
+              if( $BaseTaxAmount_number > 0 ) {  
+            ?>
              <tr>
                 <td colspan="3" class="a-right">
                     <small>Tax:</small>
                 </td>
                 <td colspan="2">
-                    <small><?php echo $this->helper('checkout')->formatPrice($order->getBaseTaxAmount()); ?></small>
+                    <small><?php echo $this->helper('checkout')->formatPrice($BaseTaxAmount); ?></small>
                 </td>
             </tr>
+            <?php } ?>
             <?php if ($order->getDiscountAmount() != 0): ?>
                 <tr class="discount">
                     <td class="a-right" colspan="3">
@@ -345,7 +354,7 @@ $addressDiff = array_diff($oBillingAddressFiltered, $oShippingAddressFiltered);
     </table>
 </div>
 
-<?php  $CustomerNote=$order_details->getCustomerNote(); 
+<?php  $CustomerNote=$order->getCustomerNote(); 
       if(isset($CustomerNote)) { ?>
 <div class="col-md-12" style="padding-left: 0 !important;line-height:20px;margin-bottom:25px;margin-top:25px;">    
     <div class="col-md-12" style="padding-left: 0 !important;">

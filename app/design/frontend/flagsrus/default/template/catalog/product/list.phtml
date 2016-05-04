@@ -73,7 +73,7 @@ $appliedFilters = Mage::getSingleton('catalog/layer')->getState()->getFilters();
                     <div class="featuredcategory-image">
                         <a title="<?php echo $category->getName () ?>" alt="<?php echo $category->getName () ?>"
                            href="<?php echo $category->getUrl () ?>">
-                            <img src="<?php if ($category->getImage ()) echo $newImageCategoriesResized ?>" height="120"
+                            <img class="lazy" data-original="<?php if ($category->getImage ()) echo $newImageCategoriesResized ?>" src="<?php echo $this->getSkinUrl('images/loader.gif') ?>" height="120"
                                  width="120" alt="<?php echo $category->getName () ?>"/>
                         </a>
                     </div>
@@ -164,7 +164,8 @@ $_collectionSize = $_productCollection->count ();
                                title="<?php echo $this->stripTags ($this->getImageLabel ($_product, 'small_image'), NULL, TRUE) ?>"
                                class="product-image" style="max-width:<?php echo $imgWidth; ?>px;">
                                 <img id="product-collection-image-<?php echo $_product->getId (); ?>"
-                                     src="<?php echo $helpImg->getImg ($_product, $imgWidth, $imgHeight, 'small_image'); ?>"
+                                     class="lazy" data-original="<?php echo $helpImg->getImg ($_product, $imgWidth, $imgHeight, 'small_image'); ?>"
+									src="<?php echo $this->getSkinUrl('images/loader.gif') ?>"
                                      alt="<?php echo $this->stripTags ($this->getImageLabel ($_product, 'small_image'), NULL, TRUE) ?>"/>
                                 <?php if ($theme->getCfg ('category/alt_image')): ?>
                                     <?php echo $theme->getAltImgHtml ($_product, $imgWidth, $imgHeight); ?>
@@ -313,7 +314,8 @@ $_collectionSize = $_productCollection->count ();
                                title="<?php echo $this->stripTags ($this->getImageLabel ($_product, 'small_image'), NULL, TRUE); ?>"
                                class="product-image">
                                 <img id="product-collection-image-<?php echo $_product->getId (); ?>"
-                                     src="<?php echo $helpImg->getImg ($_product, $imgWidth, $imgHeight, 'small_image'); ?>"
+                                     class="lazy" data-original="<?php echo $helpImg->getImg ($_product, $imgWidth, $imgHeight, 'small_image'); ?>"
+									src="<?php echo $this->getSkinUrl('images/loader.gif') ?>"
                                      alt="<?php echo $this->stripTags ($this->getImageLabel ($_product, 'small_image'), NULL, TRUE); ?>"/>
                                 <?php if ($theme->getCfg ('category/alt_image')): ?>
                                     <?php echo $theme->getAltImgHtml ($_product, $imgWidth, $imgHeight); ?>

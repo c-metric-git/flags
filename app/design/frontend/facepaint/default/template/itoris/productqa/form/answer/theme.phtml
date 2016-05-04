@@ -1,0 +1,64 @@
+<?php
+/**
+ * ITORIS
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the ITORIS's Magento Extensions License Agreement
+ * which is available through the world-wide-web at this URL:
+ * http://www.itoris.com/magento-extensions-license.html
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to sales@itoris.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade the extensions to newer
+ * versions in the future. If you wish to customize the extension for your
+ * needs please refer to the license agreement or contact sales@itoris.com for more information.
+ *
+ * @category   ITORIS
+ * @package    ITORIS_PRODUCTQA
+ * @copyright  Copyright (c) 2013 ITORIS INC. (http://www.itoris.com)
+ * @license    http://www.itoris.com/magento-extensions-license.html  Commercial License
+ */
+?>
+
+<?php /** @var $this Itoris_ProductQa_Block_Form_Answer */ ?>
+
+<?php $answers = $this->getAnswers() ?>
+<div class="ie_height_bug"></div>
+<div class="answers_ajax_smooth_back">
+	<div class="answers_ajax_smooth">
+<?php if (!empty($answers)): ?>
+			<div class="a_corner_l"></div>
+			<div class="a_corner_r"></div>
+			<div class="a_b"></div>
+			<div class="ie_height_bug_space"></div>
+			<?php foreach ($answers as $answer): ?>
+			<div class="answer">
+				<div class="a_lt"></div>
+				<div class="a_lb"></div>
+				<div class="a_rt"></div>
+				<div class="a_rb"></div>
+				<div class="answer_text">
+					<div class="text_blue qa"><?php echo $this->__('A') ?>:</div>
+					<div class="text_black qa_text"><?php echo $this->getDataHelper()->prepareHtmlText($answer['content']) ?></div><br/>
+			</div>
+			<div class="a_info_block">
+				<div class="a_info">
+					<div class="info">
+						<span class="red"><?php echo $this->__('by') .' ' . htmlspecialchars($answer['nickname']) ?></span>
+						<span class="gray"><?php echo Mage::helper('itoris_productqa')->getDateStr($answer['date']) ?></span>
+						<span><?php echo $answer['good'] ?></span> <div class="icon_good" onclick="answer_id=<?php echo (int)$answer['id'] ?>;" title="<?php echo htmlspecialchars($this->__('Helpful')) ?>"></div>
+						<span><?php echo $answer['bad'] ?></span>  <div class="icon_bad" onclick="answer_id=<?php echo (int)$answer['id'] ?>;" title="<?php echo htmlspecialchars($this->__('Not Helpful')) ?>"></div>
+						<div class="icon_inappr" onclick="answer_id=<?php echo (int)$answer['id'] ?>;" title="<?php echo htmlspecialchars($this->__('Report as Inappropriate')) ?>"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php endforeach; ?>
+		<div class="a_spacer"></div>
+	</div>
+</div>
+<?php endif; ?>

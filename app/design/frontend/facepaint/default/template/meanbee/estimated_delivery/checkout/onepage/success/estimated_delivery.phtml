@@ -1,0 +1,24 @@
+<?php /** @var $this Meanbee_EstimatedDelivery_Block_Checkout_Onepage_Success_Estimateddelivery */ ?>
+<?php $_order = $this->getOrder() ?>
+<?php /** @var $_helper Meanbee_EstimatedDelivery_Helper_Data */ ?>
+<?php $_helper = Mage::helper('meanbee_estimateddelivery'); ?>
+<?php $_method = $_order->getShippingMethod(); ?>
+
+<?php if ($_order && $_helper->canShowEstimatedDelivery($_method)): ?>
+    <?php $_from = $_helper->getDaysUntilEstimatedDeliveryFrom($_method); ?>
+    <?php $_to = $_helper->getEstimatedDeliveryToString($_method); ?>
+    <!--div class="estimated_delivery">
+        <h2 class="sub-title"><?php echo $this->__('Thanks for shopping at FlagsRus.org.') ?></h2><br/-->
+		<p><b><?php echo $this->__('We will ship your order by %s.', $_helper->getDispatchDateString($_method)) ?></b></p>
+		<p><b><?php echo $this->__('Your package should arrive arrive by %s from the US Postal Service.', $_to) ?></b></p>
+		<!--p><?php echo $this->__('To check on the status of your order Please login in to your account or click on the Order Status page at FlagsRus.org.'); ?></p-->
+        <!--p><?php echo $this->__('Your order should be dispatched on or before %s.', $_helper->getDispatchDateString($_method)) ?></p-->
+        <?php /* $_dayString = ($_to > 1) ? "days": "day"; ?>
+        <?php if ($_from == $_to): ?>
+            <p><?php echo $this->__('Your package should arrive arrive by %s %s from the US Postal Service.', $_from, $_dayString) ?></p>
+        <?php else: ?>
+            <p><?php echo $this->__('Your package should arrive arrive by %s - %s %s from the US Postal Service.', $_from, $_to, $_dayString) ?></p>
+        <?php endif */ ?>
+    <!--/div-->
+<?php endif; ?>
+

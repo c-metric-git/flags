@@ -64,7 +64,7 @@
                                 <div class="item<?php if(($i-1)%$numberCategoriesPerRow==0): ?> first<?php elseif($i%$numberCategoriesPerRow==0): ?> last<?php endif; ?>">
                                     <div class="featuredcategory-image">
 										<a title="<?php echo $category->getName() ?>" alt="<?php echo $category->getName() ?>" href="<?php echo $category->getUrl() ?>">
-                                        <img src="<?php if($category->getImage()) echo $newImageCategoriesResized?>" height="<?php echo $imageCategoriesHeight?>" width="<?php echo $imageCategoriesWidth?>" alt="<?php echo $category->getName() ?>"/>
+                                        <img class="owl-lazy" data-src-retina="<?php echo $this->getSkinUrl('images/loader.gif') ?>" data-src="<?php if($category->getImage()) echo $newImageCategoriesResized?>" height="<?php echo $imageCategoriesHeight?>" width="<?php echo $imageCategoriesWidth?>" alt="<?php echo $category->getName() ?>"/>
 										</a>
 									</div>
 									<div class="featuredcategory-name" style="width:<?php echo $imageCategoriesWidth?>px"><h5><a title="<?php echo $category->getName() ?>" alt="<?php echo $category->getName() ?>" href="<?php echo $category->getUrl() ?>" target="_blank"><?php echo $category->getName() ?></a></h5></div>
@@ -77,39 +77,10 @@
 
                 <?php endforeach ?>
                 <?php /*?></ul><?php */?>
-				<script type="text/javascript">decorateGeneric($$('ul.row-item'), ['odd','even','first','last'])</script>
+				<!--<script type="text/javascript">decorateGeneric($$('ul.row-item'), ['odd','even','first','last'])</script>-->
         <?php endif ?>
         </div>
     </div>
-    <script type="text/javascript">
-
-        //&lt;![CDATA[
-
-        jQuery(function ($) {
-
-
-            var owl = $('#itemslider-category');
-
-            owl.owlCarousel({
-                lazyLoad: true,
-                itemsCustom: [[0, 1], [480, 2], [960, 4]],
-                responsiveRefreshRate: 50,
-                slideSpeed: 200,
-                paginationSpeed: 500,
-                scrollPerPage: true,
-                stopOnHover: true,
-                rewindNav: true,
-                rewindSpeed: 600,
-                pagination: false,
-                navigation: true,
-                navigationText: false
-            }); //end: owl
-
-
-        });
-
-        //]]&gt;
-
-    </script>
+   
 <?php endif ?>
 

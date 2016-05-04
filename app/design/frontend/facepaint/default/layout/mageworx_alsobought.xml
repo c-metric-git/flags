@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * MageWorx
+ * Others Also Bought Extension
+ *
+ * @category   MageWorx
+ * @package    MageWorx_AlsoBought
+ * @copyright  Copyright (c) 2016 MageWorx (http://www.mageworx.com/)
+ */
+-->
+<layout version="0.1.0">
+    <catalog_product_view>
+        <reference name="right">
+            <block type="mageworx_alsobought/list" name="catalog.product.alsobought" before="-" template="catalog/product/list/related.phtml" />
+            <!--action method="unsetChild"><name>catalog.product.related</name></action-->
+        </reference>
+    </catalog_product_view>
+</layout>

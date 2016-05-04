@@ -1,0 +1,62 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please 
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_Shipping_Tracking
+ * @copyright   Copyright (c) 2014 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+?>
+
+<div class="page-title">
+    <h1><?php echo $this->__('Check Order Status') ?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php
+  $_request = Mage::app()->getRequest();
+?>
+<p>
+   <?php echo $this->__('Please enter the required information below to check your order status.'); ?>
+</p>
+<br/>
+<form action="<?php echo $this->getUrl('*/*/info') ?>" method="post" autocomplete="off" id="shipping-tracking" class="scaffold-form" enctype="multipart/form-data">
+    <div class="fieldset">
+        <p class="required">* Required Fields</p>
+        <ul class="form-list">
+            <li class="fields">
+                <div class="customer-name">
+                   <div class="field name-firstname">
+                       <label for="firstname" class="required"><em>*</em><?php echo $this->__('Order Number') ?></label>
+                       <div class="input-box">
+                           <input type="text" id="order" name="order" value="<?php echo $this->escapeHtml($_request->getParam('order')) ?>" title="<?php echo $this->__('Order Number') ?>" maxlength="255" class="input-text required-entry">
+                       </div>
+                   </div>
+                   <div class="field name-lastname">
+                       <label for="lastname" class="required"><em>*</em><?php echo $this->__('Phone number or email address') ?></label>
+                       <div class="input-box">
+                           <input type="text" id="info" name="info" value="<?php echo $this->escapeHtml($_request->getParam('info')) ?>" title="<?php echo $this->__('Phone number or email address') ?>" maxlength="255" class="input-text required-entry">
+                       </div>
+                   </div>
+               </div>
+            </li>
+        </ul>
+        <br/>
+    </div>
+    <div class="buttons-set">
+        <?php /* <p class="back-link"><a href="http://dev2.plumserver.com/index.php/customer/account/index/"><small>« </small>Back</a></p> */ ?>
+        <button type="submit" title="<?php echo $this->__('Track') ?>" class="button"><span><span><?php echo $this->__('Track Order') ?></span></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+    //<![CDATA[
+        var dataForm = new VarienForm('shipping-tracking', true);
+    //]]>
+</script>

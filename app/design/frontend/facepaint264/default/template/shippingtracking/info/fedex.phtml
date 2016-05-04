@@ -1,0 +1,132 @@
+<?php
+/**
+ * Plumrocket Inc.
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the End-user License Agreement
+ * that is available through the world-wide-web at this URL:
+ * http://wiki.plumrocket.net/wiki/EULA
+ * If you are unable to obtain it through the world-wide-web, please 
+ * send an email to support@plumrocket.com so we can send you a copy immediately.
+ *
+ * @package     Plumrocket_Shipping_Tracking
+ * @copyright   Copyright (c) 2014 Plumrocket Inc. (http://www.plumrocket.com)
+ * @license     http://wiki.plumrocket.net/wiki/EULA  End-user License Agreement
+ */
+?>
+
+<div class="page-title">
+    <h1>
+    	<?php echo $this->__('FedEx Tracking Number %s', ( $this->getNumber() ? '('.$this->htmlEscape($this->getNumber()).')' : '' )) ?>
+    </h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+<?php $order = $this->getOrder(); ?>
+<?php  if ($order->getId()) {  ?>
+	<br/>
+	<?php  
+		$info = $this->getInfo();
+		$_dateFormat = $this->__('m/d/Y');
+		$_timeFormat = $this->__('g:i a');
+	?>
+	<div class="fieldset">
+		<h2 class="legend"><?php echo $this->__('General Information') ?></h2>
+		<ul class="form-list">
+			<li class="fields">
+				<strong><?php echo $this->__('Order') ?>:</strong> #<?php echo $order->getIncrementId() ?>
+			</li>
+			<li class="fields">
+				<strong><?php echo $this->__('Order Status') ?>:</strong> <?php echo $order->getStatusLabel() ?>
+			</li>
+		</ul>
+	</div>
+	<?php if (!$info || $info->HighestSeverity != 'SUCCESS') { ?>
+		<div class="fieldset">
+		<br/>
+		<strong><?php echo $this->__('Tracking information is not available at this time. Please check back later or double-check the tracking number entered and try again.'); ?></strong>
+		</div>
+	<?php } else { ?>
+		<div class="fieldset">
+			<h2 class="legend"><?php echo $this->__('Shipment Progress') ?></h2>
+			<table class="data-table" >
+				<thead>
+					<tr>
+						<th><?php echo $this->__('Location') ?></th>
+						<th><?php echo $this->__('Date') ?></th>
+						<th><?php echo $this->__('Time') ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php 	
+
+						$trackDetails = array();
+						if (isset($info->TrackDetails[0])) {
+							foreach($info->TrackDetails as $item) {
+								$trackDetails[] = $item; 
+							}
+						} else {
+							$trackDetails = array($info->TrackDetails); 
+						}
+						krsort($trackDetails);
+
+						foreach($trackDetails as $trackDetail) {
+							$time = strtotime($trackDetail->ShipTimestamp)
+					?>
+						<?php if ($_events = $trackDetail->Events) {
+
+							$events = array();
+							foreach($_events as $item) {
+								$events[] = $item; 
+							}
+							krsort($events);
+
+							foreach($_events as $item) {
+								$time = strtotime($item->Timestamp);
+						?>
+							<tr>
+								<td><?php
+									$address =  $item->Address;
+									if ($address->City) {
+										echo ( ($address->City) ? $this->escapeHtml($address->City) . ', ' : '') . 
+										 ( ($address->StateOrProvinceCode) ? '('.$this->escapeHtml($address->StateOrProvinceCode).'), ' : '') . 
+										 ( ($address->CountryCode) ? Mage::app()->getLocale()->getCountryTranslation($address->CountryCode) : '');
+									} else {
+										//echo '- - -';
+									}
+								?></td>
+								<td><?php echo date($_dateFormat, $time); ?></td>
+								<td><?php echo date($_timeFormat, $time); ?></td>
+							</tr>
+							<?php } ?>
+						<?php } else { ?>
+							<tr>
+								<td>
+									<?php
+									$address = $trackDetail->DestinationAddress;
+									if ($address->City) {
+										echo ( ($address->City) ? $this->escapeHtml($address->City) . ', ' : '') . 
+										 ( ($address->StateOrProvinceCode) ? '('.$this->escapeHtml($address->StateOrProvinceCode).'), ' : '') . 
+										 ( ($address->CountryCode) ? Mage::app()->getLocale()->getCountryTranslation($address->CountryCode) : '');
+									} else {
+										//echo '- - -';
+									}
+								?>
+								</td>
+								<td><?php echo date($_dateFormat, $time); ?></td>
+								<td><?php echo date($_timeFormat, $time); ?></td>
+							</tr>
+						<?php } ?>
+					<?php } ?>
+				</tbody>
+			</table>
+		</div>
+	<?php } ?>
+	<br/><br/>
+<?php } else { ?>
+	<div class="fieldset">
+		<strong><?php echo $this->__('Tracking number is not associated with any order at our store.'); ?></strong>
+		<br/><br/>
+	</div>
+<?php } ?>

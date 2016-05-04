@@ -1,0 +1,55 @@
+<?php $arrayButton = $this->makeArrayButton(); $temp = $arrayButton; ?>
+<?php $numberShow = (is_numeric($this->getNumberButtonShow())&&$this->getNumberButtonShow()>=0)?$this->getNumberButtonShow():$this->getNumberShow();?><?php $countAll = 0;?>
+<?php $numberShow = ($numberShow)?$numberShow:100; ?>
+<?php $countMain = 0;?>
+<?php $count = 0;?>
+<?php //$this->setBlockDirection('right'); ?>
+<?php $direction = ($this->getBlockDirection()!='')?$this->getBlockDirection():$this->getDirection(); ?>
+
+<div id="sociallogin_button">	
+	<ul class="<?php echo ($direction == 'left') ? "left" : "right" ?>">
+	<?php foreach($arrayButton as $key => $button):?>	
+		<?php $check =$button['check'];?>
+		<?php if($check): unset($temp[$key]);?>					
+			<li class="button left"> <?php echo $button['button']?> </li>
+			<script type="text/javascript">
+			if($('<?php echo $button['id'] ?>'))
+				$('<?php echo $button['id'] ?>').addClassName('visible');
+			if($('<?php echo $button['id'] ?>' ))
+				$('<?php echo $button['id'] ?>' ).setStyle('min-width: 80px');
+			</script>	
+			<?php ++$countMain ;?>			
+		<?php endif;?>
+		<?php if($countMain == $numberShow){break;} ?>
+	<?php endforeach;?>  		
+	</ul>	
+	<?php if(count($temp)):?>
+	<?php $noEmpty = false;?>
+	<?php foreach($temp as $tem):?>
+	<?php if($tem['check']):?>
+	<?php $noEmpty = true;?>
+	<?php endif;?>
+	<?php endforeach;?>
+	<?php if($noEmpty):?>
+	<div class="sociallogin-other">
+	
+		<div id="sociallogin-other-div">		
+			<a id="sociallogin-other-a" onclick="showOtherButton();hideShownButtons(<?php echo $numberShow;?>);" href="#"> 
+			<?php if($direction == 'left'){ ?>
+				<span class="sociallogin-other-span-img-popup" style="float:left;margin:3px"></span>
+			<?php }?>
+			<span class="sociallogin-other-span" style="<?php if($direction == 'left'){ echo 'float:left;margin:3px';} ?>">
+				<?php echo $this->__('Other login') ?>
+			</span>			
+			<?php if($direction == 'right'){ ?>
+				<span class="sociallogin-other-span-img-popup"></span>
+			<?php }?>
+			</a>
+			
+		
+		</div>
+	</div>	
+	<?php endif; ?>
+	<?php endif; ?>
+</div>
+<div class="clear"></div>

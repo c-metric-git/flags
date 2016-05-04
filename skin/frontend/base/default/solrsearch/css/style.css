@@ -1,240 +1,479 @@
 #solr_search_facets li a.facet-item {
+
 	background: url("../images/checkboxes.png") no-repeat scroll -3px 4px transparent;
+
     clear: both;
+
     font-size: 1em;
+
     line-height: 1.1em;
+
     padding-left: 16px;
+
     padding-top: 2px !important;
+
 }
+
+
 
 #solr_search_facets .sf-menu li a.facet-item,
+
 #solr_search_facets .sf-menu li a.empty, #solr_search_facets .sf-menu li a.empty:hover
+
 {
+
 	background: none;
+
 	padding: 0;
+
 }
+
+
 
 #solr_search_facets li a.empty {
+
 	color: #000;
+
 	text-decoration: none;	
+
 }
 
+
+
 #solr_search_facets ol li{
+
 	padding: 2px 0;
+
 }
+
+
+
 
 
 #solr_search_facets dt {
+
    background: url("/skin/frontend/default/default/images/bkg_block-layered-dt.gif") no-repeat scroll 9px 5px rgba(0, 0, 0, 0);
+
     cursor: pointer;
+
     font-weight: bold;
+
     padding: 1px 10px 0 25px;
+
     text-transform: uppercase;
+
 }
+
+
 
 #solr_search_facets dt.collapsed{
+
 	
+
 }
+
+
 
 #solr_search_facets li.toggle-hide {
+
     display: none;
+
 }
+
+
 
 #solr_search_facets li.more-less {
+
     text-align: right;
+
     background: none;
+
 }
+
 #solr_search_facets li.more-less a {
+
 	color: #004b91;
+
 }
+
+
 
 #solr_search_facets li.more-less:hover, #solr_search_facets li.more-less a:hover {
+
     background:none;
+
 }
+
+
 
 #solr_search_facets li a.active, #solr_search_facets dl li a:hover {
+
     background: url("../images/checkboxes.png") no-repeat scroll -3px -14px transparent;
+
     color: #000000;
+
 }
+
+
 
 #solr_search_facets li a.empty, #solr_search_facets dl li a.empty:hover {
+
 	background: url("../images/checkboxes.png") no-repeat scroll -3px -29px transparent;
+
     color: #000000;
+
     cursor: default;
+
     opacity: 0.5;
+
 }
+
+
 
 #solr_search_price_slider {
+
     /*
+
     background: url("../images/slider-images-track-right.png") no-repeat scroll right top transparent;
+
 	height: 9px;
+
 	*/
+
 	width: 100%;
+
 }
+
 #solr_search_price_slider_handle1,  #solr_search_price_slider_handle2{
+
 	
+
 }
+
+
 
 #content_holder_prize .refine-results-price-slider {
+
     background: url("../images/basicSprite.png") no-repeat scroll -143px -87px transparent;
+
     height: 22px;
+
     padding: 0;
+
     position: relative;
+
 }
+
 #content_holder_prize .ui-slider {
+
     cursor: pointer;
+
     height: 24px;
+
     margin-bottom: -7px;
+
     position: relative;
+
     text-align: left;
+
     width: 100%;
+
 }
+
 #content_holder_prize .ui-slider .ui-slider-range {
+
     background: url("../images/basicSprite.png") no-repeat scroll -144px -55px transparent;
+
     cursor: pointer;
+
     display: block;
+
     font-size: 0;
+
     height: 100%;
+
     position: absolute;
+
     z-index: 1;
+
 }
+
 #content_holder_prize .ui-slider .ui-slider-handle {
+
     background: url("../images/basicSprite.png") no-repeat scroll -144px -122px #fff;
+
     cursor: pointer;
+
     height: 25px;
+
     /*margin-left: -8px;*/
+
     position: absolute;
+
     top: -2px;
+
     width: 16px;
+
     z-index: 2;
+
 }
+
 #content_holder_prize #refine-results-price-values input{
+
 	font-size: 15px;
+
     font-weight: bold;
+
     padding: 2px;
+
     width: 60px;
+
 }
+
 #content_holder_prize #refine-results-price-values {
+
 	margin: 5px 0;
+
 }
+
+
 
 #content_holder_category_path li li{
+
 	margin-left: 7px;
+
 }
+
 #solr_search_facets li a.facet-item span{
+
 	color: #000000;
+
     font-style: italic;
+
 }
+
+
 
 div.block-layered-nav div.solrbridge-slider {
+
 	 position:relative; margin:10px auto 5px auto; z-index:9; height:18px;  background: url(../images/solrbridge-slider-bg.gif) no-repeat 50% 50%; cursor:pointer;
+
 }
+
 div.block-layered-nav div.solrbridge-slider div.handle {width:14px; top:-1px; height:22px; background: transparent url(../images/solrbridge-hadle.png) no-repeat; position: absolute; cursor:move; z-index: 2;}
 
+
+
 /*
+
  * Slider labels
+
  */
+
 .solrbridge-slider-price {
+
 	color: #798794;
+
 }
+
 .solrbridge-slider-price-from {
+
 	float: left;
+
     
+
 }
+
 .solrbridge-slider-price-to {
+
 	float: right;
+
 }
+
+
 
 .solrbridge-slider-handle-right {
+
 	position: absolute;
+
 	top: 14px;
+
 	right: 0px;
+
 }
+
+
 
 .solrbridge-slider-handle-left {
+
 	position: absolute;
+
 	top: 14px;
+
 	left: 0px;
+
 }
+
 .solrbridge-slider-price-range 
+
 {
+
 	text-align: center;
+
 	font-size: 0.9em;
+
 }
+
 /*
+
  * Slider Bar
+
  */
+
 .solrbridge-slider-bar {
+
 	position:absolute; 
+
 	background: #999; 
+
 	height: 6px; 
+
 	top: 6px; 
+
 	z-index: 1;  
+
 }
+
 #solrbridge-price-btn{
+
 	-moz-border-bottom-colors: none;
+
     -moz-border-left-colors: none;
+
     -moz-border-right-colors: none;
+
     -moz-border-top-colors: none;
+
     background-color: #F5F5F5;
+
     background-image: linear-gradient(to bottom, #FFFFFF, #E6E6E6);
+
     background-repeat: repeat-x;
+
     border-color: #CCCCCC #CCCCCC #B3B3B3;
+
     border-image: none;
+
     border-radius: 4px 4px 4px 4px;
+
     border-style: solid;
+
     border-width: 1px;
+
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+
     color: #333333;
+
     cursor: pointer;
+
     display: inline-block;
+
     font-size: 12px;
+
     line-height: 20px;
+
     margin-bottom: 0;
+
     padding: 2px 4px;
+
     text-align: center;
+
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+
     vertical-align: middle;
+
 }
+
 #solrbridge-price-btn span {
+
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+
     border: medium none;
+
     color: #000000;
+
     display: block;
+
     padding: 0 8px;
+
     text-align: center;
+
     white-space: nowrap;
+
 }
+
+
 
 div.solrbridge-overlay {
+
     background-color: #FFFFFF;
+
     height: 100%;
+
     left: 0;
+
     opacity: 0.5;
+
     filter: alpha(opacity = 50);
+
     position: absolute;
+
     top: 0;
+
     width: 100%;
+
     z-index: 555;
-}
-div.solrbridge-overlay img {
-    top: 100px;
-    left: 45%;
-    display: block;
-    position: absolute;
+
 }
 
-div.solrbridge-overlay div {
-    margin: 0 auto;
+div.solrbridge-overlay img {
+
+    top: 100px;
+
+    left: 45%;
+
     display: block;
-	width: 300px;
-	height: 200px;
-	background:  url('../images/solrbridge-overlay.gif') 50% 50% no-repeat;
+
+    position: absolute;
+
 }
-#solr_search_facets .arrow {
-    background: url("../images/arrows.png") no-repeat scroll left center rgba(0, 0, 0, 0);
-    cursor: pointer;
+
+
+
+div.solrbridge-overlay div {
+
+    margin: 0 auto;
+
     display: block;
+
+	width: 300px;
+
+	height: 200px;
+
+	background:  url('../images/solrbridge-overlay.gif') 50% 50% no-repeat;
+
+}
+
+#solr_search_facets .arrow {
+
+    background: url("../images/arrows.png") no-repeat scroll left center rgba(0, 0, 0, 0);
+
+    cursor: pointer;
+
+    display: block;
+
     float: left;
+
     margin: 3px 3px 0;
+
 }

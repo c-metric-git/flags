@@ -379,7 +379,26 @@
       <div class="header-top header container clearer<?php if ($classes['top']) echo $classes['top']; ?>" style="border:none;">
         <div class="inner-container" style="padding-left:0;padding-right:0;">
              <div class="row">
-              <div class="col-xs-12 col-md-4 col-sm-4 col-lg-4">
+              <div class="col-xs-12 col-md-2 col-sm-2 col-lg-2" style="padding-left:0;padding-right:15px;border-right:1px solid #216DC7">
+				<?php if ($tmpHtml = $this->getChildHtml('block_header_top_right1')): ?>
+					<div class="item item-right block_header_top_right winflag-sub-div"><?php echo $tmpHtml; ?></div>
+				<?php endif; ?>
+				<p class="welcome-msg"><?php /*echo $this->getChildHtml('welcome');*/ ?> <?php echo $this->getAdditionalHtml(); ?></p>
+                <div id="currency-switcher-wrapper-regular" class="item item-right"><?php echo $currencySwitcher; ?></div>
+                <div id="lang-switcher-wrapper-regular" class="item item-right"><?php echo $languageSwitcher; ?></div>
+                <?php if ($tmpHtml = $this->getChildHtml('block_header_top_right2')): ?>
+                <div class="item item-right block_header_top_right2"><?php echo $tmpHtml; ?></div>
+                <?php endif; ?>
+                <div class="clr"></div>
+              </div>
+              <div class="col-xs-12 col-md-4 col-sm-4 col-lg-4" style="border-right:1px solid #216DC7">
+                <!--- Place for quantity -->
+                <a href="<?php echo Mage::getBaseUrl().'shopping#inventory'; ?>">
+					<div class="banner-sub-div"><?php echo $this->getChildHtml('productcount') ?><div>Designs</div></div>
+					<div class="banner-sub-second-div"><span class="instock">In Stock Today!</span><br><span class="mostonweb">MOST ON THE WEB!</span></div>
+				</a>
+              </div>			  
+              <div class="col-xs-12 col-md-4 col-sm-4 col-lg-4"  style="border-right:1px solid #216DC7;padding-right:0;">
                 <?php if (isset($p['topLeft_1'])): ?>
                 <?php foreach ($p['topLeft_1'] as $element): ?>
                 <div class="item item-left"><?php echo $element; ?></div>
@@ -393,14 +412,7 @@
                 <div class="item item-left block_header_top_left2"><?php echo $tmpHtml; ?></div>
                 <?php endif; ?>
               </div>
-              <div class="col-xs-12 col-md-4 col-sm-4 col-lg-4">
-                <!--- Place for quantity -->
-                <a href="<?php echo Mage::getBaseUrl().'shopping#inventory'; ?>">
-					<div class="banner-sub-div"><?php echo $this->getChildHtml('productcount') ?></div>
-					<div class="banner-sub-second-div">Designs In Stock Today!<br>MOST ON THE WEB!</div>
-				</a>
-              </div>
-              <div class="col-xs-12 col-md-2 col-sm-2 col-lg-2" style="padding:0;">
+              <div class="col-xs-12 col-md-2 col-sm-2 col-lg-2" style="padding-right:0;">
                 <?php if (isset($p['topRight_1'])): ?>
                 <?php foreach ($p['topRight_1'] as $element): ?>
                 <div class="item item-right"><?php echo $element; ?></div>
@@ -408,19 +420,8 @@
                 <?php endif; ?>
                 <?php echo $this->getChildHtml('container_header_top_right_1'); ?>
                 <?php if ($tmpHtml = $this->getChildHtml('block_header_top_right')): ?>
-                <div class="item item-right block_header_top_right"><?php echo $tmpHtml; ?></div>
-              </div>
-              <div class="col-xs-12 col-md-2 col-sm-2 col-lg-2">
-				<?php if ($tmpHtml = $this->getChildHtml('block_header_top_right1')): ?>
 					<div class="item item-right block_header_top_right"><?php echo $tmpHtml; ?></div>
 				<?php endif; ?>
-				<p class="welcome-msg"><?php /*echo $this->getChildHtml('welcome');*/ ?> <?php echo $this->getAdditionalHtml(); ?></p>
-                <?php endif; ?>
-                <div id="currency-switcher-wrapper-regular" class="item item-right"><?php echo $currencySwitcher; ?></div>
-                <div id="lang-switcher-wrapper-regular" class="item item-right"><?php echo $languageSwitcher; ?></div>
-                <?php if ($tmpHtml = $this->getChildHtml('block_header_top_right2')): ?>
-                <div class="item item-right block_header_top_right2"><?php echo $tmpHtml; ?></div>
-                <?php endif; ?>
               </div>
             </div>
           </div>
