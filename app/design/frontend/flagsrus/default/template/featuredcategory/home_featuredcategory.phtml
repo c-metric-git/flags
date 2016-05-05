@@ -64,7 +64,8 @@
                                 <div class="item<?php if(($i-1)%$numberCategoriesPerRow==0): ?> first<?php elseif($i%$numberCategoriesPerRow==0): ?> last<?php endif; ?>">
                                     <div class="featuredcategory-image">
 										<a title="<?php echo $category->getName() ?>" alt="<?php echo $category->getName() ?>" href="<?php echo $category->getUrl() ?>">
-                                        <img class="owl-lazy" data-src-retina="<?php echo $this->getSkinUrl('images/loader.gif') ?>" data-src="<?php if($category->getImage()) echo $newImageCategoriesResized?>" height="<?php echo $imageCategoriesHeight?>" width="<?php echo $imageCategoriesWidth?>" alt="<?php echo $category->getName() ?>"/>
+                                        <!--img class="owl-lazy" data-src-retina="<?php echo $this->getSkinUrl('images/loader.gif') ?>" data-src="<?php if($category->getImage()) echo $newImageCategoriesResized?>" height="<?php echo $imageCategoriesHeight?>" width="<?php echo $imageCategoriesWidth?>" alt="<?php echo $category->getName() ?>"/-->
+                                        <img class="owl-lazy" data-src="<?php if($category->getImage()) echo $newImageCategoriesResized?>" height="<?php echo $imageCategoriesHeight?>" width="<?php echo $imageCategoriesWidth?>" alt="<?php echo $category->getName() ?>"/>
 										</a>
 									</div>
 									<div class="featuredcategory-name" style="width:<?php echo $imageCategoriesWidth?>px"><h5><a title="<?php echo $category->getName() ?>" alt="<?php echo $category->getName() ?>" href="<?php echo $category->getUrl() ?>" target="_blank"><?php echo $category->getName() ?></a></h5></div>

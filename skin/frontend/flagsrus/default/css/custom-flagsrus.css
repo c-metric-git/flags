@@ -2909,6 +2909,9 @@ button.add-remove {
 	clear: both;
 	margin-bottom: 20px;
 }
+.form-search .input-text {
+    height: 43px;
+}
 }
 
 @media (max-width: 767px) and (min-width: 674px) {

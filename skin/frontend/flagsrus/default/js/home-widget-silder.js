@@ -92,7 +92,32 @@ jQuery( document ).ready(function() {
 
 });
 
-jQuery(function($) {		$( ".acctab" ).on( "click", function() {var widget_tab="itemslider-widget-tab-";      var carousel_tab_id=$(this).attr('id').split('-');      var itemslider_widget_tab=widget_tab+carousel_tab_id[1];      var owl = $('#'+itemslider_widget_tab);                  owl.owlCarousel({                lazyLoad: true,                responsiveClass:true,                responsive: {0:{items:1,nav: true},480:{items:3,nav: true},960:{items:6,nav: true}},                responsiveRefreshRate: 50,                slideSpeed: 200,                paginationSpeed: 500,                scrollPerPage: true,                stopOnHover: true,                loop: true,                rewindSpeed: 600,                pagination: false,                nav: true,                goToFirst: true,                navigationText: false               });			        });
+jQuery(function($) {		
+					
+$( ".acctab" ).on( "click", function() {
+      var widget_tab="itemslider-widget-tab-";
+      var carousel_tab_id=jQuery(this).attr('id').split('-');
+      var itemslider_widget_tab=widget_tab+carousel_tab_id[1];
+      var owl = jQuery('#'+itemslider_widget_tab);
+     setInterval(function(){owl.owlCarousel
+            owl.owlCarousel({
+                lazyLoad: true,
+                responsiveClass:true,
+                responsive: {0:{items:1},480:{items:3},960:{items:6}},
+                responsiveRefreshRate: 50,
+                slideSpeed: 200,
+                paginationSpeed: 500,
+                scrollPerPage: true,
+                stopOnHover: true,
+                loop: true,
+                rewindSpeed: 600,
+                pagination: false,
+                nav: true,
+                goToFirst: true,
+                navigationText: false
+               }); //end: owl
+	 },300);
+	});
             //Link to the reviews tab
             var tabOperator = {
                 root : ''
