@@ -1,5 +1,5 @@
 jQuery( document ).ready(function() {
-jQuery('input:[class="super_attribute"]radio,.super-attribute-select').on('change', function() {
+jQuery('.super_attribute,.super-attribute-select').on('change', function() {
 	var otherinfo = jQuery(this).attr('otherinfo');
 	var adddata = JSON.parse(otherinfo);
 	var parent_regular_price = adddata["parent_regular_price"];
@@ -78,7 +78,7 @@ jQuery('input:[class="super_attribute"]radio,.super-attribute-select').on('chang
 		}
 	}
   });
-	jQuery('input:[class="super_attribute"]radio:checked').each(function () {
+	jQuery('radio:checked').each(function () {
 		var otherinfo = jQuery(this).attr('otherinfo');
 		var adddata = JSON.parse(otherinfo);
 		if(adddata[jQuery(this).attr('value')])
