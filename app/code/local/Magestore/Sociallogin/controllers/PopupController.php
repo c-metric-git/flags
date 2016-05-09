@@ -32,8 +32,6 @@ class Magestore_Sociallogin_PopupController extends Mage_Core_Controller_Front_A
                     $result['redirectToWishlisturl']=Mage::getUrl('wishlist');
                     $session->addSuccess(Mage::helper('wishlist')->__("%s has been moved to wishlist", $product->getName()));
                  }   
-                
-
             } catch (Exception $e) {
                 $result['error'] = $e->getMessage();
             }
@@ -60,14 +58,15 @@ class Magestore_Sociallogin_PopupController extends Mage_Core_Controller_Front_A
                     $newPassword = $customer->generatePassword();
                     $customer->changePassword($newPassword, false);
                     $customer->sendPasswordReminderEmail();
-                    $result = array('success'=>true);
+                    Mage::getSingleton('core/session')->addNotice($this->__('If there is an account associated with ').$email.$this->__(' you will receive an email with a link to reset your password.'));
+                    $result = array('success'=>true, 'message'=>"If there is an account associated with ".$email."you will receive an email with a link to reset your password.");
                 }
                 catch (Exception $e){
-                    $result = array('success'=>false, 'error'=>$e->getMessage());
+                    $result = array('success'=>false, 'error'=>"Request Time out! Please try again.");
                 }
             }
             else {
-                $result = array('success'=>false, 'error'=>'User Not found!');
+                $result = array('success'=>false, 'error'=>'Your email address '.$email.' does not exist!');
             }
         
         $this->getResponse()->setBody(Zend_Json::encode($result));
@@ -96,9 +95,24 @@ class Magestore_Sociallogin_PopupController extends Mage_Core_Controller_Front_A
 				Mage::dispatchEvent('customer_register_success',
                         array('customer' => $customer)
                     );
-				$result = array('success'=>true);
-				$session->setCustomerAsLoggedIn($customer);
-				$url = $this->_welcomeCustomer($customer);
+				 if ($customer->isConfirmationRequired()) {
+					 /** @var $app Mage_Core_Model_App */
+					 $app =  Mage::app();
+					 /** @var $store  Mage_Core_Model_Store*/
+					 $store = $app->getStore();
+					 $customer->sendNewAccountEmail(
+						 'confirmation',
+						 $session->getBeforeAuthUrl(),
+						 $store->getId()
+					 );
+					 $customerHelper = Mage::helper('customer');            
+					 $result = array('success'=>false, 'error'=>'Account confirmation is required. Please, check your email for the confirmation link.');
+					 }	
+				 else {
+					$result = array('success'=>true);				 
+					$session->setCustomerAsLoggedIn($customer);
+					}
+				//$url = $this->_welcomeCustomer($customer);
                // $this->_redirectSuccess($url);
 			}catch(Exception $e){
 				 $result = array('success'=>false, 'error'=>$e->getMessage());

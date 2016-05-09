@@ -69,8 +69,10 @@
         if($tmpBlock = $this->getChildHtml($_tab['alias']))
 
         {
-
-            $_panes .= '<h2 class="acctab" id="acctab-'. $_tab['alias'] .'">'. $_tab['title'] .'</h2>';
+           
+            $active="";
+            if($_tab['alias'] == "description"): $active="active"; endif;
+            //$_panes .= '<h2 class="acctab" id="acctab-'. $_tab['alias'] .'">'. $_tab['title'] .'</h2>';
             if($_tab['alias'] == 'tabreviews') { 
                  /*$product_id = Mage::registry('current_product')->getId();
                  $_product=Mage::getModel('catalog/product')->load($product_id);    
@@ -78,11 +80,14 @@
                  <script type='text/javascript'> var sa_products_count = 3; var sa_date_format = 'F j, Y'; var sa_product = '".$product_sku."'; function saLoadScript(src) { var js = window.document.createElement('script'); js.src = src; js.type = 'text/javascript'; document.getElementsByTagName('head')[0].appendChild(js); } saLoadScript('//www.shopperapproved.com/product/15857/'+sa_product+'.js'); </script>*/
                  $shopper_approved = "<div id='review_header'></div><div id='product_page'></div><div id='review_image'><a href='http://www.shopperapproved.com/reviews/stripedsocks.com/' target='_blank' rel='nofollow'></a></div>";
                  
-                 $_panes .= '<div class="panel">'.$shopper_approved.'</div>';
+                 //$_panes .= '<div class="panel">'.$shopper_approved.'</div>';
+
+                 $_panes .= '<div class="tab-pane '.$active.'" id="'. $_tab['alias'] .'">'.$shopper_approved.'</div>';
                  //$_panes .= '<div class="panel">'. $tmpBlock .'</div>';  
+                 //<div role="tabpanel" class="tab-pane" id="home">
             }
             else {    
-                $_panes .= '<div class="panel">'. $tmpBlock .'</div>';
+                $_panes .= '<div class="tab-pane '.$active.'" id="'. $_tab['alias'] .'">'. $tmpBlock .'</div>';
             }    
 
         }
@@ -121,13 +126,15 @@
 
 
 
-        <ul class="tabs clearer">
+        <ul class="nav nav-tabs">
 
-            <?php $i=0; foreach ($this->getTabs() as $_index => $_tab): ?>
-
+            <?php $i=0; foreach ($this->getTabs() as $_index => $_tab): 
+               $active="";
+               if($_tab['alias'] == "description"): $active="active"; endif;    
+             ?>  
                 <?php if ($this->getChildHtml($_tab['alias'])): ?>
 
-                    <li id="tab-<?php echo $_tab['alias']?>"><a href="#" <?php if ($i++ === 0): ?>class="current"<?php endif; ?>><?php echo $_tab['title']?></a></li>
+                    <li class="<?php echo $active; ?>"><a href="#<?php echo $_tab['alias']?>"  data-toggle="tab" id="" <?php if ($i++ === 0): ?>class="current"<?php endif; ?>><?php echo $_tab['title']?></a></li>
 
                 <?php endif; ?>
 
@@ -135,7 +142,7 @@
 
         </ul>
 
-        <div class="tabs-panels"><?php echo $_panes; ?></div>
+        <div class="tab-content"><?php echo $_panes; ?></div>
 
 
 

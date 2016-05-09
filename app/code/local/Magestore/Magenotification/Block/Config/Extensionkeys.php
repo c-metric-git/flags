@@ -28,15 +28,107 @@ class Magestore_Magenotification_Block_Config_Extensionkeys
 			if((string)$moduleInfo->codePool != 'local'){
 				continue;
 			}
-			// if($moduleName != 'Magestore_Affiliate'){
-				// continue;
-			// }
-            $html .= $this->_getFieldHtml($element, $moduleName);
+			
+			if(isset($moduleInfo->nonecheckkey) && (string)$moduleInfo->nonecheckkey == 'true'){
+				continue;
+			}			
+			
+			$module_alias = (string)$moduleInfo->aliasName ? (string)$moduleInfo->aliasName : $moduleName;
+            
+            if ($this->_renderLicenseInfo($element, $moduleName, $module_alias, $html)) {
+                continue;
+            }
+			
+            $html .= $this->_getFieldHtml($element, $moduleName, $module_alias);
             $html .= $this->_getInfoHtml($element, $moduleName);
             $html .= $this->_getDividerHtml($element, $moduleName);
         }
         $html .= $this->_getFooterHtml($element);
         return $html;
+    }
+    
+    /**
+     * Render The License Information
+     * 
+     * @param type $fieldset
+     * @param type $moduleName
+     * @param type $moduleAlias
+     * @param type $html
+     * @return boolean
+     */
+    protected function _renderLicenseInfo($fieldset, $moduleName, $moduleAlias, &$html)
+    {
+        $config = Mage::getSingleton('magenotification/config');
+        $moduleConfig = $config->getNode($moduleName);
+        if ($moduleConfig === false) {
+            return false;
+        }
+        $licenseType = (string)$moduleConfig->type;
+        if ($licenseType == Magestore_Magenotification_Model_Config::TRIAL_LICENSE) {
+            // You are using a trial version of %s extension.
+            $configData = $this->getConfigData();
+            $path = 'magenotificationsecure/extension_keys/'.$moduleName;
+            $licenseKey = isset($configData[$path]) ? $configData[$path] : '';
+            
+            $helper = Mage::helper('magenotification');
+            if ($licenseKey) {
+                $licenseinfo = $helper->getLicenseInfo($licenseKey, $moduleName);
+                if ($helper->getDBResponseCode() < Magestore_Magenotification_Model_Keygen::NEW_DOMAIN_SUCCESS
+                    && (string)$moduleConfig->trial_key
+                ) {
+                    $licenseKey = (string)$moduleConfig->trial_key;
+                    $licenseinfo = $helper->getLicenseInfo($licenseKey, $moduleName);
+                }
+            } elseif ((string)$moduleConfig->trial_key) {
+                $licenseKey = (string)$moduleConfig->trial_key;
+                $licenseinfo = $helper->getLicenseInfo($licenseKey, $moduleName);
+            }
+            
+            // Render Input License Key
+            $extensionName = (string)$moduleConfig->name ? (string)$moduleConfig->name : $moduleAlias;
+            $field = $fieldset->addField($moduleName, 'text', array(
+                'name'          => 'groups[extension_keys][fields]['.$moduleName.'][value]',
+                'label'         => $extensionName,
+                'value'         => $licenseKey,
+                'style'         => 'width:688px;',
+                'inherit'       => isset($configData[$path]) ? false : true,
+                'can_use_default_value' => $this->getForm()->canUseDefaultValue($this->_dummyElement),
+                'can_use_website_value' => $this->getForm()->canUseWebsiteValue($this->_dummyElement),
+                'comment'   => $licenseKey ? '' : $helper->__('You are using a trial version of %s extension.', $extensionName),
+            ))->setRenderer($this->_getFieldRenderer());
+            $html .= $field->toHtml();
+            
+            // Get License Info by packaged license key
+            if ($licenseKey) {
+                $additionalLicenseForm = '';
+                if (in_array($helper->getLicenseType($moduleName), array(
+                    -1, 0, Magestore_Magenotification_Model_Keygen::TRIAL_VERSION
+                )) || $helper->getDBResponseCode() < Magestore_Magenotification_Model_Keygen::NEW_DOMAIN_SUCCESS) {
+                    $additionalLicenseForm = Mage::getBlockSingleton('magenotification/adminhtml_license_purchaseform')->setExtensionName($helper->getExtensionName($moduleName))->toHtml();
+                }
+                $field = $fieldset->addField($moduleName.'_license_info', 'label', array(
+					'name'          => 'groups[extension_keys][fields]['.$moduleName.'_license_info][value]',
+					'label'         => $helper->__('License Info'),
+					'value'         => $licenseinfo . $additionalLicenseForm,
+					'can_use_default_value' => $this->getForm()->canUseDefaultValue($this->_dummyElement),
+					'can_use_website_value' => $this->getForm()->canUseWebsiteValue($this->_dummyElement),
+				))->setRenderer(Mage::getBlockSingleton('magenotification/config_field'));
+                $html .= $field->toHtml();
+            } else {
+                $additionalLicenseForm = Mage::getBlockSingleton('magenotification/adminhtml_license_purchaseform')->setExtensionName($helper->getExtensionName($moduleName))->toHtml();
+                $field = $fieldset->addField($moduleName.'_license_info', 'label', array(
+					'name'          => 'groups[extension_keys][fields]['.$moduleName.'_license_info][value]',
+					'label'         => '',
+					'value'         => '<hr width="345">' . $additionalLicenseForm,
+					'can_use_default_value' => $this->getForm()->canUseDefaultValue($this->_dummyElement),
+					'can_use_website_value' => $this->getForm()->canUseWebsiteValue($this->_dummyElement),
+				))->setRenderer(Mage::getBlockSingleton('magenotification/config_field'));
+                $html .= $field->toHtml();
+            }
+            
+            $html .= $this->_getDividerHtml($fieldset, $moduleName);
+        }
+        return true;
     }
 
     protected function _getDummyElement()
@@ -81,7 +173,7 @@ class Magestore_Magenotification_Block_Config_Extensionkeys
         return $field->toHtml();
     }	
 
-    protected function _getFieldHtml($fieldset, $moduleName)
+    protected function _getFieldHtml($fieldset, $moduleName, $module_alias)
     {
         $configData = $this->getConfigData();
         $path = 'magenotificationsecure/extension_keys/'.$moduleName; //TODO: move as property of form
@@ -92,7 +184,7 @@ class Magestore_Magenotification_Block_Config_Extensionkeys
         $field = $fieldset->addField($moduleName, 'text',
             array(
                 'name'          => 'groups[extension_keys][fields]['.$moduleName.'][value]',
-                'label'         => $moduleName,
+                'label'         => $module_alias,
                 'value'         => $data,
 				'style'         => 'width:688px;',
                 'inherit'       => isset($configData[$path]) ? false : true,
@@ -114,20 +206,12 @@ class Magestore_Magenotification_Block_Config_Extensionkeys
 			$licenseinfo = $helper->getLicenseInfo($data,$moduleName);
 			//prepare additional license form
 			$licenseType = $helper->getLicenseType($moduleName);
+            $additionalLicenseForm = '';
 			if( in_array($licenseType,array(-1,
 											0,
 											Magestore_Magenotification_Model_Keygen::TRIAL_VERSION,
 											//Magestore_Magenotification_Model_Keygen::DEVELOPMENT,
-				)) || $helper->getDBResponseCode() < Magestore_Magenotification_Model_Keygen::NEW_DOMAIN_SUCCESS ){/*
-				//update license form
-				$additionalLicenseForm = Mage::getBlockSingleton('magenotification/adminhtml_license_updateform')
-										->setExtensionName($helper->getExtensionName($moduleName))
-										->setLicensekey($data)
-										->setCurrentLicenseType($licenseType)
-										->toHtml();
-			} elseif(in_array($licenseType,array(-1,0,Magestore_Magenotification_Model_Keygen::TRIAL_VERSION))){
-				//purchase license form
-			*/
+				)) || $helper->getDBResponseCode() < Magestore_Magenotification_Model_Keygen::NEW_DOMAIN_SUCCESS ){
 				$additionalLicenseForm = Mage::getBlockSingleton('magenotification/adminhtml_license_purchaseform')
 										->setExtensionName($helper->getExtensionName($moduleName))
 										->toHtml();				

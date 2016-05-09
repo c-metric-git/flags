@@ -30,7 +30,7 @@ class Magestore_Sociallogin_InstagramloginController extends Mage_Core_Controlle
 				}
 	  		}
 			Mage::getSingleton('customer/session')->setCustomerAsLoggedIn($customer);
-			die("<script type=\"text/javascript\">try{window.opener.location.href=\"".$this->_loginPostRedirect()."\";}catch(e){window.opener.location.reload(true);} window.close();</script>");
+			die("<script type=\"text/javascript\">if(navigator.userAgent.match('CriOS')){window.location.href=\"".$this->_loginPostRedirect()."\";}else{try{window.opener.location.href=\"".$this->_loginPostRedirect()."\";}catch(e){window.opener.location.reload(true);} window.close();}</script>");
 			
 		}else{	// redirect to login page
 			$name = (string)$token->username;		
@@ -43,8 +43,9 @@ class Magestore_Sociallogin_InstagramloginController extends Mage_Core_Controlle
 			$website_id = Mage::app()->getStore()->getWebsiteId();
 			$customer = Mage::helper('sociallogin')->getCustomerByEmail($user['email'], $website_id);//add edtition	
 			if(!$customer || !$customer->getId()){
-				//Login multisite
-				$customer = Mage::helper('sociallogin')->createCustomerMultiWebsite($user, $website_id, $store_id );
+				//Login multisite				
+                                $customer = Mage::helper('sociallogin')->createCustomerMultiWebsite($user, $website_id, $store_id );
+                                if(Mage::getStoreConfig(('sociallogin/general/send_newemail'),Mage::app()->getStore()->getId())) $customer->sendNewAccountEmail('registered','',Mage::app()->getStore()->getId());
 			}	
 			if ($customer->getConfirmation())
 			{
@@ -83,22 +84,12 @@ class Magestore_Sociallogin_InstagramloginController extends Mage_Core_Controlle
 	}
 	protected function _loginPostRedirect()
     {
-        $session = Mage::getSingleton('customer/session');
-
-        if (!$session->getBeforeAuthUrl() || $session->getBeforeAuthUrl() == Mage::getBaseUrl()) {
-            // Set default URL to redirect customer to
-            $session->setBeforeAuthUrl(Mage::helper('customer')->getDashboardUrl());
-            
-        } else if ($session->getBeforeAuthUrl() == Mage::helper('customer')->getLogoutUrl()) {
-            $session->setBeforeAuthUrl(Mage::helper('customer')->getDashboardUrl());
-        } else {
-            if (!$session->getAfterAuthUrl()) {
-                $session->setAfterAuthUrl($session->getBeforeAuthUrl());
-            }
-            if ($session->isLoggedIn()) {
-                $session->setBeforeAuthUrl($session->getAfterAuthUrl(true));
-            }
-        }
-        return $session->getBeforeAuthUrl(true);
+        $selecturl= Mage::getStoreConfig(('sociallogin/general/select_url'),Mage::app()->getStore()->getId());
+	if($selecturl==0) return Mage::getUrl('customer/account');	
+	if($selecturl==2) return Mage::getUrl();
+	if($selecturl==3) return Mage::getSingleton('core/session')->getSocialCurrentpage();
+	if($selecturl==4) return Mage::getStoreConfig(('sociallogin/general/custom_page'),Mage::app()->getStore()->getId());
+        if($selecturl==1 && Mage::helper('checkout/cart')->getItemsCount()!=0) return Mage::getUrl('checkout/cart');
+        else return Mage::getUrl();
     }
 }

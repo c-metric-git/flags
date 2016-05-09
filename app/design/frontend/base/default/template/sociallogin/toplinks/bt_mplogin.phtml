@@ -1,7 +1,7 @@
 <?php $isLogin = $this->helper('customer')->isLoggedIn()?>
 
 <?php if(!$isLogin){?>
-<button id="bt-loginmp-popup" class="bt-login-social" alt="<?php echo $this->__('Login by MySpace') ?>" title="<?php echo $this->__('Login by MySpace') ?>" onclick="mpLogin()" href="javascript:void(0);">
+<button id="bt-loginmp-popup" class="bt-login-social" title="<?php echo $this->__('Login by MySpace') ?>" onclick="mpLogin()">
 	<span><span><?php echo $this->__('MySpace Sign in') ?></span></span>
 </button>
 <script type="text/javascript">

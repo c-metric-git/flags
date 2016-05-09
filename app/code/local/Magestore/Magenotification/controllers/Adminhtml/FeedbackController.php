@@ -147,7 +147,7 @@ class Magestore_Magenotification_Adminhtml_FeedbackController extends Mage_Admin
 			$model->addData($data);
 			$model->setExtensionVersion($helper->getExtensionVersion($model->getExtension()));
 			if(!$model->getId()){
-				$code = strtoupper($helper->getDomain(Mage::getBaseUrl())).time();
+				$code = strtoupper($helper->getDomain(Mage::app()->getStore()->getBaseUrl())).time();
 				$code = str_replace('WWW.','',$code);
 				$model->setCode($code);
 			}

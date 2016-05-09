@@ -40,10 +40,10 @@
             </db>
             <default_setup>
                 <connection>
-                    <host><![CDATA[flagsrusnew.cuobrtussnxi.us-east-1.rds.amazonaws.com]]></host>
-                    <username><![CDATA[flagsrusnew]]></username>
-                    <password><![CDATA[harddisk]]></password>
-                    <dbname><![CDATA[flagsrus2742016]]></dbname>
+                    <host><![CDATA[localhost]]></host>
+                    <username><![CDATA[stripeds_user]]></username>
+                    <password><![CDATA[S@t(d#S*K-S]]></password>
+                    <dbname><![CDATA[stripeds_beta]]></dbname>
                     <initStatements><![CDATA[SET NAMES utf8]]></initStatements>
                     <model><![CDATA[mysql4]]></model>
                     <type><![CDATA[pdo_mysql]]></type>

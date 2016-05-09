@@ -20,23 +20,26 @@ class Magestore_Magenotification_Model_Magenotification extends Mage_Core_Model_
 		{
 			return $this;
         }
-
+		
         $notificationXml = $this->getNotificationData();
-        
 		$noticeData = array();
-
         if ($notificationXml && $notificationXml->item) 
 		{
             foreach ($notificationXml->item as $item) {
-                $noticeData[] = array(
-                    'severity'      => (int)$item->severity,
-                    'date_added'    => $this->getDate((string)$item->date_added),
-                    'title'         => (string)$item->title,
-                    'description'   => (string)$item->description,
-                    'url'           => (string)$item->url,
-                );
+					$item_data = array(
+						'severity'      => (int)$item->severity,
+						'date_added'    => $this->getDate((string)$item->date_added),
+						'title'         => (string)$item->title,
+						'description'   => (string)$item->description,
+						'url'           => (string)$item->url,
+						'added_date'	=> $this->getDate((string)$item->date_added),
+						'related_extensions' => strtolower($item->related_extensions)
+					);
+		
+					if($this->allowGetFeed($item_data)){
+						$noticeData[] = $item_data;
+					}
             }
-			
 			if($noticeData) 
 			{
 				$this->parse(array_reverse($noticeData));
@@ -47,11 +50,39 @@ class Magestore_Magenotification_Model_Magenotification extends Mage_Core_Model_
         return $this;
     }	
 	
+	public function allowGetFeed($item)
+	{	
+		if($item['related_extensions'] == null || $item['related_extensions'] == '0'){
+			return true;
+		}
+		
+        $modules = Mage::getConfig()->getNode('modules')->children();
+        foreach ($modules as $moduleName => $moduleInfo) {
+			if ($moduleName==='Mage_Adminhtml') {
+                continue;
+            }
+            if ($moduleName==='Magestore_Magenotification') {
+                continue;
+            }			
+			if(strpos('a'.$moduleName,'Magestore') == 0){
+				continue;
+			}
+			$extension_code = str_replace('Magestore_','',$moduleName);
+			$related_extensions  = explode(',',$item['related_extensions']);
+			if(count($related_extensions)){
+				foreach($related_extensions as $related_extension){
+					if(strtolower($related_extension) == strtolower($extension_code)){
+						return true;
+					}
+				}
+			}
+        }
+		return false;
+	}
 	
 	public function getLastUpdate()
 	{
 		$timestring = Mage::getStoreConfig(self::XML_LAST_UPDATE_PATH);
-
 		return strtotime($timestring);
 	}
 	
@@ -72,8 +103,7 @@ class Magestore_Magenotification_Model_Magenotification extends Mage_Core_Model_
 	public function getMagestoreUrl()
 	{
 		$lastTimeNotice = strtotime($this->getLastNotice()->getAddedDate());
-		
-		return Mage::getStoreConfig(self::XML_MAGESTORE_URL_PATH) .'/magenotification/service/getfeed/lastupdatetime/'. $lastTimeNotice;
+		return Mage::getStoreConfig(self::XML_MAGESTORE_URL_PATH) .'/magenotification/service/getfeed3/lastupdatetime/'. $lastTimeNotice;
 	}
 	
 	public function getNotificationData()
@@ -98,7 +128,6 @@ class Magestore_Magenotification_Model_Magenotification extends Mage_Core_Model_
         catch (Exception $e) {
             return false;
         }
-
         return $xml;
     }
 
@@ -124,28 +153,16 @@ class Magestore_Magenotification_Model_Magenotification extends Mage_Core_Model_
 	{
 		if(count($data))
 		{
-			$inbox = Mage::getModel('adminnotification/inbox');
-			
 			try{
-			foreach($data as $item)
-			{
-				if(! $this->is_existedUrl($item['url']) )
+				foreach($data as $item)
 				{
-					$inbox->setData($item)
-							->save();
-							
-					$this->setUrl($inbox->getUrl());
-					$this->setNotificationId($inbox->getId());
-					$this->setAddedDate($inbox->getDateAdded());
-					$this->save();
-					
-						//unset Id
-					$this->setId(null);
-					$inbox->setId(null);
+					if(!$this->is_existedUrl($item['url']) )
+					{
+						$this->setData($item)->save();
+						$this->setId(null);
+					}
 				}
-			}
 			} catch(Exception $e) {
-			
 				Mage::getSingleton('core/session')->addError($e->getMessage());
 			}
 		}
@@ -154,10 +171,9 @@ class Magestore_Magenotification_Model_Magenotification extends Mage_Core_Model_
 	public function is_existedUrl($url)
 	{
 		$collection = $this->getCollection()
-						->addFieldToFilter('url',$url);
+						->addFieldToFilter('url',(string)$url);			
 		if($collection->getSize())
 			return true;
-		
 		return false;
 	}
 	

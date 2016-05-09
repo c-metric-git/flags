@@ -3,6 +3,9 @@
 <?php $countAll = 0;?>
 <?php $countMain = 0;?>
 <?php $count = 0;?>
+<?php
+        if(!isset($_SESSION))session_start();
+        Mage::getSingleton('core/session')->setSocialCurrentpage(Mage::helper('core/url')->getCurrentUrl());?>
 
 <div id="sociallogin_button">	
 	<ul class="<?php echo ($this->getDirection() == 'left') ? "left" : "right" ?>">

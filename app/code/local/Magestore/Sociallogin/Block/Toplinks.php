@@ -221,10 +221,10 @@ class Magestore_Sociallogin_Block_Toplinks extends Mage_Core_Block_Template
 			$this->setTemplate(null);
 		}
 		
-		$check = Mage::helper('sociallogin')->getShownPositions();
+		/* $check = Mage::helper('sociallogin')->getShownPositions();
 		if (!in_array("popup", $check)){
 			$this->setTemplate(null);
-		}	
+		} */	
 		
 		return parent::_beforeToHtml();
 	}	
@@ -342,7 +342,7 @@ class Magestore_Sociallogin_Block_Toplinks extends Mage_Core_Block_Template
 		return (int) Mage::getStoreConfig('sociallogin/amazonlogin/is_active',Mage::app()->getStore()->getId())&&Mage::helper('sociallogin')->getAmazonId();
 	}
 	public function sortOrderAmazon(){
-		return (int) Mage::getStoreConfig('sociallogin/instalogin/sort_order',Mage::app()->getStore()->getId());
+		return (int) Mage::getStoreConfig('sociallogin/amazonlogin/sort_order',Mage::app()->getStore()->getId());
 	}
 	public function getAmazonButton()
 	{
@@ -357,7 +357,7 @@ class Magestore_Sociallogin_Block_Toplinks extends Mage_Core_Block_Template
 			$buttonArray[] = array(
 			'button'=>$this->getAmazonButton(),
 			'check' =>$this->isShowAmazonButton(),
-			'id'	=> 'bt-loginamazon',
+			'id'	=> 'bt-loginamazon-popup',
 			'sort'  => $this->sortOrderAmazon()
 			);        
         if ($this->isShowInsButton())

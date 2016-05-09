@@ -26,6 +26,11 @@
                     <category>Stripedsocks_Productlisting_Model_Category</category>  
                 </rewrite>
             </catalog>
+            <!--<core_resource>
+                <rewrite>
+                    <url_rewrite>Stripedsocks_Productlisting_Model_Resource_Url_Rewrite</url_rewrite>
+                </rewrite>
+            </core_resource> -->
         </models>
     </global>
 </config>

@@ -1,7 +1,7 @@
 <?php $isLogin = $this->helper('customer')->isLoggedIn()?>
 
 <?php if(!$isLogin){?>
-<button id="bt-loginfq-popup" class="bt-login-social" alt="<?php echo $this->__('Login by FoursQuare') ?>" title="<?php echo $this->__('Login by FoursQuare') ?>" onclick="fqLogin()" href="javascript:void(0);">
+<button id="bt-loginfq-popup" class="bt-login-social" title="<?php echo $this->__('Login by FoursQuare') ?>" onclick="fqLogin()">
 	<span><span><?php echo $this->__('FoursQuare Sign in') ?></span></span>
 </button>
 <script type="text/javascript">
@@ -12,9 +12,9 @@
         var	 screenY    = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop;
         var	 outerWidth = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.body.clientWidth;
         var	 outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.body.clientHeight - 22);
-        var	 width    = 500;
+        var	 width    = 960;
         var	 height   = 520;
-        var	 left     = parseInt(screenX + ((outerWidth - width) / 2), 10);
+        var	 left     = parseInt(screenX + ((outerWidth - width) / 3), 10);
         var	 top      = parseInt(screenY + ((outerHeight - height) / 2.5), 10);
         var	 features = (
                 'width=' + width +

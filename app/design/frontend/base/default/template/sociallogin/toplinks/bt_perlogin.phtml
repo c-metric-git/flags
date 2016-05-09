@@ -1,6 +1,6 @@
 <?php $isLogin = $this->helper('customer')->isLoggedIn()?>
 <?php if(!$isLogin){?>
-<button id="bt-loginper-popup" class="bt-login-social" alt="<?php echo $this->__('Login by Yahoo') ?>" title="<?php echo $this->__('Login by Persona') ?>" onclick="perLogin()" href="javascript:void(0);">
+<button id="bt-loginper-popup" class="bt-login-social" title="<?php echo $this->__('Login by Persona') ?>" onclick="perLogin()">
 	<span><span><?php echo $this->__('Persona Sign in') ?></span></span>
 </button>
 <script src="https://login.persona.org/include.js">/*thu vien js cua persona*/</script>

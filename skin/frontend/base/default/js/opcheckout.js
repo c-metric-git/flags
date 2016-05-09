@@ -39,6 +39,7 @@ Checkout.prototype = {
         this.steps = ['login', 'billing', 'shipping', 'shipping_method', 'payment', 'review'];
         //We use billing as beginning step since progress bar tracks from billing
         this.currentStep = 'billing';
+        this.onepageurl = urls.onepage;
 
         this.accordion.sections.each(function(section) {
             Event.observe($(section).down('.step-title'), 'click', this._onSectionClick.bindAsEventListener(this));
@@ -133,6 +134,11 @@ Checkout.prototype = {
         if(!reloadProgressBlock) {
             this.resetPreviousSteps();
         }
+		if(this.onepageurl!=''){
+			 try{ga('send', 'pageview', {'page': this.onepageurl+section,'title': section});}catch(e){
+							console.log(e);
+			}
+		}
     },
 
     resetPreviousSteps: function () {

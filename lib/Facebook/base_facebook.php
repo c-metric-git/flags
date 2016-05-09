@@ -383,7 +383,7 @@ abstract class BaseFacebook
       // we've already determined this and cached the value.
       return $this->user;
     }
-    
+
     return $this->user = $this->getUserFromAvailableData();
   }
 
@@ -398,7 +398,7 @@ abstract class BaseFacebook
   protected function getUserFromAvailableData() {
     // if a signed request is supplied, then it solely determines
     // who the user is.
-    $signed_request = $this->getSignedRequest();     
+    $signed_request = $this->getSignedRequest();
     if ($signed_request) {
       if (array_key_exists('user_id', $signed_request)) {
         $user = $signed_request['user_id'];
@@ -412,23 +412,23 @@ abstract class BaseFacebook
       return 0;
     }
 
-    $user = $this->getPersistentData('user_id', $default = 0);    
+    $user = $this->getPersistentData('user_id', $default = 0);
     $persisted_access_token = $this->getPersistentData('access_token');
 
     // use access_token to fetch user id if we have a user access_token, or if
     // the cached access token has changed.
-    $access_token = $this->getAccessToken(); 
+    $access_token = $this->getAccessToken();
     if ($access_token &&
         $access_token != $this->getApplicationAccessToken() &&
-        !($user && $persisted_access_token == $access_token)) {  
+        !($user && $persisted_access_token == $access_token)) {
       $user = $this->getUserFromAccessToken();
-      if ($user) {      
+      if ($user) {
         $this->setPersistentData('user_id', $user);
-      } else {           
+      } else {
         $this->clearAllPersistentData();
       }
-    }   
-   
+    }
+
     return $user;
   }
 
@@ -556,7 +556,7 @@ abstract class BaseFacebook
    */
   protected function getUserFromAccessToken() {
     try {
-      $user_info = $this->api('/me'); 
+      $user_info = $this->api('/me');
       return $user_info['id'];
     } catch (FacebookApiException $e) {
       return 0;
@@ -727,7 +727,7 @@ abstract class BaseFacebook
     if (!$ch) {
       $ch = curl_init();
     }
-      
+
     $opts = self::$CURL_OPTS;
     if ($this->useFileUploadSupport()) {
       $opts[CURLOPT_POSTFIELDS] = $params;
@@ -744,10 +744,10 @@ abstract class BaseFacebook
       $opts[CURLOPT_HTTPHEADER] = $existing_headers;
     } else {
       $opts[CURLOPT_HTTPHEADER] = array('Expect:');
-    }   
+    }
 
-    curl_setopt_array($ch, $opts);  
-    $result = curl_exec($ch);       
+    curl_setopt_array($ch, $opts);
+    $result = curl_exec($ch);
 
     if (curl_errno($ch) == 60) { // CURLE_SSL_CACERT
       self::errorLog('Invalid or no certificate authority found, '.

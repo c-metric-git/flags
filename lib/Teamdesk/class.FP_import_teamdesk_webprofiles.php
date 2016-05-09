@@ -435,6 +435,8 @@ class FPTeamDeskWebprofiles {
                                             $csv_row[] = $tdProduct['iconLabel']!=''?$tdProduct['iconLabel']:""; //iconlabel 
                                             $csv_row[] = $tdProduct['Product - Next Date Due To Arrive']>date("Y-m-d")?$tdProduct['Product - Next Date Due To Arrive']:""; //date_of_arrival                             
                                             $csv_row[] = $tdProduct['Product - QTY On Current POs']; //qy_on_current_po 
+                                            $csv_row[] = $tdProduct['requiredProductSKUForKit']; //requiredskuforkit   
+                                            $csv_row[] = $tdProduct['numOfOptionsForKit']; //num_of_options_for_kit   
                                             $csv_row[] = ""; //custom_layout_update
                                             $csv_row[] = ""; //custom_design   ultimo/default
                                             $csv_row[] = "1 column";  //page_layout
@@ -610,6 +612,8 @@ class FPTeamDeskWebprofiles {
                                                 $csv_row[] = ""; //iconlabel
                                                 $csv_row[] = ""; //date_of_arrival
                                                 $csv_row[] = ""; //qy_on_current_po  
+                                                $csv_row[] = ""; //requiredskuforkit 
+                                                $csv_row[] = ""; //num_of_options_for_kit 
                                                 $csv_row[] = ""; //custom_layout_update
                                                 $csv_row[] = ""; //custom design
                                                 $csv_row[] = ""; //page layout
@@ -761,7 +765,7 @@ class FPTeamDeskWebprofiles {
         /**
         * @desc  create string of columns to be retreived from the query  
         */       
-       $strColumns = "[is_visible],[is_home],[Quantity Available],[Product - Weight],[free_shipping],[PriceCalced],[Priority],[PinnacleSKU],[Display Name],[meta_keywords],[overview],[ProductDescription1],[isBuildYourOwnKit],[numOfOptionsForKit],[requiredProductSKUForKit],[Image Alt Text 1],[Product - Next Date Due To Arrive],[isNewProduct?],[Product - flagORMD],[Product - # of Order Line Items 365 Days],[flagDropShip],[Product - isBulkyProduct?],[vendorItemNumberCalced],[kitType],[Record ID#],[Product - UPC Code],[Product - flagOutOfStock],[Product - VENDOR - Company Display Name],[Product - QTY On Current POs],[DiscountPriceCalced],[Related Product],[Related Product Family],[url],[quantityPerPack],[meta_title],[meta_description],[addShippingDays],[Product - Type - Gender],[Product - Type - Age],[Product - Type - Default Size],[Product - Type - Google Category],[Product - Google Color],[Product - Type - SearchBarLabel],[Brand],[DisplayLabelEnteredFPCharacterCalced],[Product - FP_Colors],[FilterSizeDisplayLabelEnteredFPCalced],[TypeDisplayLabelEnteredFPCalced],[iconlabel],[imgLocationCustom]";	      
+       $strColumns = "[is_visible],[is_home],[Quantity Available],[Product - Weight],[free_shipping],[PriceCalced],[Priority],[PinnacleSKU],[Display Name],[meta_keywords],[overview],[ProductDescription1],[isBuildYourOwnKit],[numOfOptionsForKit],[requiredProductSKUForKit],[Image Alt Text 1],[Product - Next Date Due To Arrive],[isNewProduct?],[Product - flagORMD],[Product - # of Order Line Items 365 Days],[flagDropShip],[Product - isBulkyProduct?],[vendorItemNumberCalced],[kitType],[Record ID#],[Product - UPC Code],[Product - flagOutOfStock],[Product - VENDOR - Company Display Name],[Product - QTY On Current POs],[DiscountPriceCalced],[Related Product],[Related Product Family],[url],[quantityPerPack],[meta_title],[meta_description],[addShippingDays],[Product - Type - Gender],[Product - Type - Age],[Product - Type - Default Size],[Product - Type - Google Category],[Product - Google Color],[Product - Type - SearchBarLabel],[Brand],[DisplayLabelEnteredFPCharacterCalced],[Product - FP_Colors],[FilterSizeDisplayLabelEnteredFPCalced],[TypeDisplayLabelEnteredFPCalced],[iconlabel],[imgLocationCustom],[numOfOptionsForKit],[requiredProductSKUForKit]";	      
 
         try
         {        
@@ -939,6 +943,8 @@ class FPTeamDeskWebprofiles {
 				  $product_header_row[] = "iconlabel";   
                   $product_header_row[] = "date_of_arrival"; 
                   $product_header_row[] = "qty_on_current_po";
+                  $product_header_row[] = "num_of_options_for_kit";
+                  $product_header_row[] = "requiredskuforkit";
                   
                   $product_header_row[] = "custom_layout_update";
                   $product_header_row[] = "custom_design"; 

@@ -23,6 +23,13 @@
  * @copyright  Copyright (c) 2006-2015 X.commerce, Inc. (http://www.magento.com)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */       
+ /*ini_set('error_reporting', E_ERROR);
+register_shutdown_function("fatal_handler");
+function fatal_handler() {
+    $error = error_get_last();
+    echo("<pre>");
+    print_r($error);
+}*/
  ini_set("memory_limit","512M");  
  // ini_set("max_execution_time","1800");  
  set_time_limit(0);                 

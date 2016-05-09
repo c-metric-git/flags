@@ -70,7 +70,7 @@
         <div class="buttons-set">
             <p class="required">&nbsp;</p>
             <?php if ($this->getQuote()->isAllowedGuestCheckout()): ?>
-                <button id="onepage-guest-register-button" type="button" class="button" onclick="checkout.setMethod();"><span><span><?php echo $this->__('Continue') ?></span></span></button>
+                <button id="onepage-guest-register-button" type="button" class="button btn-blue btn" onclick="checkout.setMethod();"><span><span><?php echo $this->__('Continue') ?></span></span></button>
             <?php elseif ($this->helper('checkout')->isCustomerMustBeLogged()): ?>
                 <button id="onepage-guest-register-button" type="button" class="button" onclick="window.location='<?php echo $this->helper('checkout/url')->getRegistrationUrl();?>'"><span><span><?php echo $this->__('Register') ?></span></span></button>
             <?php else: ?>
@@ -112,7 +112,7 @@
         <div class="buttons-set">
             <p class="required"><?php echo $this->__('* Required Fields') ?></p>
             <a id="customer_forgot_password" href="<?php echo $this->getUrl('customer/account/forgotpassword') ?>" class="f-left"><?php echo $this->__('Forgot your password?') ?></a>
-            <button type="submit" class="button" onclick="onepageLogin(this)"><span><span><?php echo $this->__('Login') ?></span></span></button>
+            <button type="submit" class="button btn btn-blue" onclick="onepageLogin(this)"><span><span><?php echo $this->__('Login') ?></span></span></button>
         </div>
         
     </div>

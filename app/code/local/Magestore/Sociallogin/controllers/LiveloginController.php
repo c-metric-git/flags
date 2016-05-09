@@ -9,7 +9,8 @@ class Magestore_Sociallogin_LiveloginController extends Mage_Core_Controller_Fro
 			$json = $live->authenticate($code);
 			$user = $live->get("me", $live->param);	
 		}catch(Exception $e){
-			Mage::getSingleton('core/session')->addError('Login failed as you have not granted access.');			
+                        $message=$this->__('Login failed as you have not granted access.');
+			Mage::getSingleton('core/session')->addError($message);			
 			die("<script type=\"text/javascript\">try{window.opener.location.reload(true);}catch(e){window.opener.location.href=\"".Mage::app()->getStore()->getBaseUrl()."\"} window.close();</script>");
 		}		
         $first_name = $user->first_name;
@@ -25,7 +26,8 @@ class Magestore_Sociallogin_LiveloginController extends Mage_Core_Controller_Fro
 			if(!$customer || !$customer->getId()){
 				//Login multisite
 				$customer = Mage::helper('sociallogin')->createCustomerMultiWebsite($data, $website_id, $store_id );
-				if (Mage::getStoreConfig('sociallogin/livelogin/is_send_password_to_customer')){
+				if(Mage::getStoreConfig(('sociallogin/general/send_newemail'),Mage::app()->getStore()->getId())) $customer->sendNewAccountEmail('registered','',Mage::app()->getStore()->getId());
+                                if (Mage::getStoreConfig('sociallogin/livelogin/is_send_password_to_customer')){
 					$customer->sendPasswordReminderEmail();
 				}
 			}
@@ -39,28 +41,16 @@ class Magestore_Sociallogin_LiveloginController extends Mage_Core_Controller_Fro
 				}
 	  		}
 			Mage::getSingleton('customer/session')->setCustomerAsLoggedIn($customer);
-			die("<script type=\"text/javascript\">try{window.opener.location.href=\"".$this->_loginPostRedirect()."\";}catch(e){window.opener.location.reload(true);} window.close();</script>");
+			die("<script type=\"text/javascript\">if(navigator.userAgent.match('CriOS')){window.location.href=\"".$this->_loginPostRedirect()."\";}else{try{window.opener.location.href=\"".$this->_loginPostRedirect()."\";}catch(e){window.opener.location.reload(true);} window.close();}</script>");
     	}
 	}
 	protected function _loginPostRedirect()
     {
-        $session = Mage::getSingleton('customer/session');
-
-        if (!$session->getBeforeAuthUrl() || $session->getBeforeAuthUrl() == Mage::app()->getStore()->getBaseUrl()) {
-            // Set default URL to redirect customer to
-            $session->setBeforeAuthUrl(Mage::helper('customer')->getDashboardUrl());
-            
-        } else if ($session->getBeforeAuthUrl() == Mage::helper('customer')->getLogoutUrl()) {
-            $session->setBeforeAuthUrl(Mage::helper('customer')->getDashboardUrl());
-        } else {
-            if (!$session->getAfterAuthUrl()) {
-                $session->setAfterAuthUrl($session->getBeforeAuthUrl());
-            }
-            if ($session->isLoggedIn()) {
-                $session->setBeforeAuthUrl($session->getAfterAuthUrl(true));
-            }
-        }
-		
-        return $session->getBeforeAuthUrl(true);
-    }           
+        $selecturl= Mage::getStoreConfig(('sociallogin/general/select_url'),Mage::app()->getStore()->getId());
+	if($selecturl==0) return Mage::getUrl('customer/account');	
+	if($selecturl==2) return Mage::getUrl();
+	if($selecturl==3) return Mage::getSingleton('core/session')->getSocialCurrentpage();
+	if($selecturl==4) return Mage::getStoreConfig(('sociallogin/general/custom_page'),Mage::app()->getStore()->getId());
+        if($selecturl==1 && Mage::helper('checkout/cart')->getItemsCount()!=0) return Mage::getUrl('checkout/cart');else return Mage::getUrl();
+    }        
 }

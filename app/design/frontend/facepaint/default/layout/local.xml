@@ -22,7 +22,7 @@
 			<action method="addJs"><script>infortis/jquery/plugins/imagesloaded.js</script></action>
 			<action method="addItem"><type>skin_js</type><name>js/app.js</name></action>
 			<action method="addItem"><type>skin_js</type><name>js/amasty/plugins/jquery-1.9.1.min.js</name><params/></action>
-			<action method="addItem"><type>skin_js</type><name>js/genralinline.js</name></action>
+			
 			<action method="addItem"><type>skin_js</type><name>js/jquery.lazyload.js</name></action>
 		<!-- CSS: -->
             <!-- Added by dinesh -->                                                                     
@@ -85,6 +85,7 @@
            <action method="addItem"><type>skin_css</type><name>Nivo-Slider/themes/default/default.css</name></action>
            <action method="addItem"><type>skin_css</type><name>Nivo-Slider/themes/light/light.css</name></action>
            <action method="addItem"><type>skin_css</type><name>Nivo-Slider/nivo-slider.css</name></action>
+           <action method="addItem"><type>skin_css</type><name>css/facepaint_custom.css</name></action>
 
            <action method="removeItem"><type>skin_css</type><name>css/_config/design_facepaint.css</name></action>
            <action method="removeItem"><type>skin_css</type><name>css/_config/grid_facepaint.css</name></action>
@@ -94,6 +95,7 @@
            <action method="addItem"><type>skin_js</type><name>dist/js/bootstrap-submenu.min.js</name></action>
            <action method="addItem"><type>skin_js</type><name>owlcarousel/owl.carousel.min.js</name></action>
            <action method="addItem"><type>skin_js</type><name>Nivo-Slider/jquery.nivo.slider.js</name></action>
+           <action method="addItem"><type>skin_js</type><name>js/genralinline.js</name></action>
 
 
 			<block type="core/template" name="head.theme.css" template="page/html/head_theme_css.phtml" before="-" />
@@ -718,7 +720,8 @@
 		</reference>
 		<!-- Remove currency switcher from sidebar -->
 		<reference name="left">
-			<action method="unsetChild"><name>currency</name></action>			
+			<action method="unsetChild"><name>currency</name></action>	
+			<remove name="left.reports.product.viewed" />		
 		</reference>
 	</catalog_category_layered>
 	<!-- CART %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->

@@ -11,13 +11,11 @@
 	font-family: Open sans;
 }
 @media all and (min-width: 0px) and (max-width: 680px){
-#magestore-login-social .magestore-login-social li,.sociallogin-other ul li.other-button{padding: 0px 0px 10px 0px;}
 #magestore-popup_social {
     font-size: 1.5em !important;
 }
 }
 @media (min-width: 681px) {
-#magestore-login-social .magestore-login-social li,.sociallogin-other ul li.other-button{padding: 0px 0px 10px 10px;}
 }
 @media all and (min-width: 0px) and  (max-width: 459px) {
 	#sociallogin_button #magestore-popup_social ul li{padding: 0px 0px 10px 0px;}
@@ -27,16 +25,16 @@
 	#sociallogin_button #magestore-popup_social ul li{padding: 0px 0px 10px 10px;}
 	#sociallogin_button ul li{padding: 0px 0px 10px 10px;}
 }
-ul.magestore-login-social li{background:#fff;border:none;padding:}
+ul.magestore-login-social li{background:#fff;border:none; float: right}
 
 #magestore-popup{
 	width:66% !important;
 	z-index:99999;
-	max-width: 587px;
+	max-width: 630px;
 }
 #magestore-popup_social {
 	text-align: center;
-	font-size: 2.5em;
+	font-size: 1.5em;
 	line-height: 1.25em;
 	margin-bottom: 0.7em;
 	position: absolute;
@@ -49,25 +47,30 @@ ul.magestore-login-social li{background:#fff;border:none;padding:}
     float: right;
 }
 .magestore-popup_social{
-		width: 740px !important;
+		width: 90% !important;
 	}
 #other_sociallogin_label {
 	background-color: rgb(240, 240, 237);
 	line-height: 2em;
 }
 #magestore-popup_social li{
-/* 	margin: 0px !important;
-	padding: 0px !important; */
+    /* float: right; */
+    text-align: center;
 }
-
+.magestore-login-social{
+    float: right;
+    padding-right: 30px;
+}
 ul.magestore-login-social li.button{
     list-style: none !important;
+    padding: 4px 0;
 }
 ul.magestore-login-social li.button:hover{
 	background:none !important;
 	margin:0;
 	border:none;
     list-style: none !important;
+
 }
 .sociallogin-input-box .input-text{
 	box-shadow: none;
@@ -76,7 +79,7 @@ ul.magestore-login-social li.button:hover{
 	background:none;
 	border:none;
 	list-style: none !important;
-	/* padding: 0px 4px 0px 5px !important; */
+	padding: 3px 8px !important;
 }
 .sociallogin-other-button-popup li.button:hover{
 	background:none;
@@ -88,7 +91,7 @@ ul.magestore-login-social li.button:hover{
 .top-container{width:100%;}
 
 #sociallogin_button{
-	float:left;
+	/*float:left;*/
 }
 #sociallogin_button ul li,.sociallogin-other ul li{margin: 0px;}
 #sociallogin_button ul li.button,.sociallogin-other ul li.button{
@@ -96,7 +99,11 @@ ul.magestore-login-social li.button:hover{
 	border:none !important;
 	list-style: none !important;
 }
-#sociallogin_button ul li.button,.sociallogin-other ul li{}
+#sociallogin_button ul li.button,.sociallogin-other ul li{
+    display: inline-block;
+    margin: 0 auto;
+    /* float: none; */
+}
 #sociallogin_button ul li.button:hover{
 	background:none !important;
 	border:none !important;
@@ -129,12 +136,6 @@ ul.magestore-login-social li.button:hover{
 #sociallogin-other-button{
 	top:30px;
 }
-
-#magestore-popup{
-	top:100px !important;
-	position:absolute !important;
-	z-index:40020 !important;
-}
 #magestore-login-form .magestore-invalid-email{
 	margin:0;
 }
@@ -149,225 +150,128 @@ ul.magestore-login-social li.button:hover{
 	width:100%;
 	min-height:3000px;
 }
-.active .sociallogin-other-span-img-popup{	
+.active .sociallogin-other-span-img-popup{
 	float: right;
-	width: 26px;
-	height: 16px;
-	cursor: pointer;        
+	width: 20px;
+	height: 25px;
+	cursor: pointer;
 	background: url("sociallogin/sub.png") no-repeat right;
 }
+@media only screen and (max-width: 900px){
 
-@media all and (min-width: 0px) and (max-width: 680px) {}
-@media screen and (max-width:719px) {
-	.top-container{
-		margin:0 auto;
-	}
-	
-	#magestore-login-social{
-		float:left !important;
-		width:100%;
-	}
-	#magestore-login-form{
-		float:left !important;
-		width:100%;
-		margin:0;
-	}
-	.sociallogin-input-box{
-		float:left;
-		width:100%;
-	}
-	.magestore-login-input-box label{float:left;width:100% !important;}
-	.sociallogin-input-box .input-text{
-		-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
-		width:100%;
-		box-shadow: none;
-		height:30px;
-	}
-	#magestore-create-user{
-		float:left !important;
-		width:100%;
-	}
-	.form-list .sociallogin-field{float:left !important;width:100% !important;}
-	.form-list .sociallogin-field .input-text{
-		float:left;
-		width:100% !important;
-		-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
-		height:30px;
-	}
-	.sociallogin-field label{float:left;/* width:100%; */}
-	#sociallogin-other-button li.other-button{
-		float:none;
-		margin:0;
-		text-align:center;
-	}
-	#sociallogin-other-button-popup li.button{
-		float:none;
-		text-align:center;
-		width:100%;
-	}
-	
-	ul.magestore-login-social li.button{
-		text-align:center !important;
-		width:100%;
-	}
-	.magestore-popup_social{
-		width: 380px !important;
-	}
+    #magestore-sociallogin-form-forgot .magestore-login-popup-button{
+        width: 100%;
+    }
+    #magestore-popup .border-popup{
+        height: auto;
+    }
+    #magestore-login-form{
+        width: 100%;
+        background: none;
+        padding: 0;
+    }
+    .sociallogin-input-box .input-text {
+        box-shadow: none;
+        width: 100%;
+    }
+    .magestore-login-popup-button .pass-register {
+        float: right;
+        width: auto;
+    }
+    #magestore-login-social{
+        width: 100%;
+        text-align: center;
+        margin-top: 15px;
+    }
+    .magestore-login-social {
+         padding-right: 0px;
+    }
+    ul.magestore-login-social li.button {
+        margin-right: 8px;
+    }
+    ul.magestore-login-social li {
+        float: left;
+        vertical-align: middle;
+        float: none;
+    }
+    #magestore-login-social .magestore-loign-h3 {
+        float: left;
+        padding-right: 0;
+        width: 100%;
+        margin-bottom: 2px;
+    }
+    #magestore-button-sociallogin-forgot {
+         margin-top: 0px;
+        float: right;
+    }
+    #magestore-create-user {
+        width: 100%;
+        background: none;
+         padding-left: 0px;
+    }
+
+    #magestore-sociallogin-form-create .form-list > li{
+        float: left;
+        width: 100%;
+    }
+
+    #magestore-popup .form-list .sociallogin-field{
+        width: 50%;
+    }
+    #magestore-popup .form-list .sociallogin-field.right{
+        padding-left: 5px;
+    }
+    #magestore-button-sociallogin-forgot{
+        margin-bottom: 0;
+    }
 }
-@media screen and (max-width:479px) {
-	.magestore-popup_social{
-		width: 210px !important;
-	}
-	#magestore-forgot-password, #magestore-forgot-back{
-		float:left !important;
-		margin:10px 0 !important;
-		width:100%;
-	}
-	#sociallogin_button ul li.button{
-		margin:0;
-		text-align:center;
-		width:100%;
-		list-style: none !important;
-	}	
-	#sociallogin-other-button li.other-button{
-		float:none;
-		margin:0;
-		text-align:center;
-		width:100%;
-        list-style: none !important;
-	}
-	#sociallogin-other-button-popup li.button{
-		float:none;
-		text-align:center;
-		width:100%;
-        list-style: none !important;
-	}
+@media only screen and (max-width: 650px){
+    .magestore-login-social {
+        text-align: center;
+    }
+    ul.magestore-login-social li.button {
+        margin-right: 0px;
+        vertical-align: middle;
+        float:none;
+    }
+    .magestore-login-popup-button{
+        margin-bottom: 15px;
+    }
+    #magestore-forgot-password,
+    #magestore-sociallogin-create-new-customer{
+        font-size: 15px;
+    }
+    #magestore-forgot-back {
+        font-size: 14px;
+    }
 }
-@media screen and (min-width: 720px) and (max-width: 985px) {
-	.top-container{
-		margin:0 auto;
-	}
-	#magestore-login-social{
-		float:left !important;
-		width:100%;
-	}
-	#magestore-login-form{
-		float:left !important;
-		width:100%;
-		margin:0;
-	}
-	.sociallogin-input-box{
-		float:left;
-		width:100%;
-	}
-	.magestore-login-input-box label{float:left;width:100% !important;}
-	.sociallogin-input-box .input-text{
-		-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
-		width:100%;
-		box-shadow: none;
-		height:30px;
-	}
-	#magestore-create-user{
-		float:left !important;
-		width:100%;
-	}
-	.form-list .sociallogin-field{float:left !important;width:100% !important;}
-	.form-list .sociallogin-field .input-text{
-		float:left;
-		width:100% !important;
-		-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
-		height:30px;
-	}
-	.sociallogin-field label{float:left;/* width:100%; */}
-	#sociallogin-other-button li.other-button{
-		/* margin-left:65px !important; */
-	}
-	ul.magestore-login-social li.button{
-		/* text-align:center !important;
-		margin-left: 5px; */
-		/* width:100%; */
-		float:left;
-	}
-	.magestore-popup_social{
-		width: 380px !important;
-	}
+@media only screen and (max-width: 500px){
+    #magestore-popup .form-list .sociallogin-field{width: 100%}
+    .sociallogin-field .input-text{width: 100%}
+    #magestore-create-back{
+        font-size: 14px;
+        text-align: center;
+        margin-bottom: 10px;
+        float: left;
+        width: 100%;
+    }
+    #magestore-button-sociallogin-create{    width: 100%;}
 }
-@media screen and (min-width: 986px) {
-	#magestore-login-social{
-		text-align:center !important;
-	}
-	ul.magestore-login-social li.button{
-	}
-	#magestore-login-social . magestore-login-social {width:200px}
-}
-@media screen and (min-width: 986px) and (max-width: 1235px) {
-	/* #magestore-popup{border:1px solid blue;} */
-	#magestore-login-social{
-		float:left !important;
-		width:100%;
-		text-align:center !important;
-	}
-	#magestore-login-form{
-		float:left !important;
-		width:100%;
-		margin:0;
-	}
-	.sociallogin-input-box{
-		float:left;
-		width:100%;
-	}
-	.sociallogin-input-box .input-text{
-		-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
-		width:100%;
-		box-shadow: none;
-		height:30px;
-	}
-	.magestore-login-input-box label{float:left;width:100% !important;}
-	#magestore-create-user{
-		float:left !important;
-		width:100%;
-	}
-	.form-list .sociallogin-field{float:left !important;width:100% !important;}
-	.form-list .sociallogin-field .input-text{
-		float:left;
-		width:100% !important;
-		-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
-		height:30px;
-	}
-	.sociallogin-field label{float:left;/* width:100%; */}
-	#magestore-login-social ul.magestore-login-social li{
-		float:left;
-	}
-	#magestore-login-social ul.magestore-login-social li{ }
-	
-	.magestore-popup_social{
-		width: 563px !important;
-	}
-}
-	
-@media screen and (min-width: 1236px) and (max-width: 1585px) {
-	.magestore-popup_social{
-		width: 740px !important;
-	}
-}
-@media screen and (min-width: 1235px){
-	#magestore-login-form {
-		max-width: 364px;
-	}
-	#magestore-create-user{
-		max-width: 374px;
-	}
-	.sociallogin-field {
-    max-width: 187px;
-	}
-}
-@media screen and (min-width: 1586px) and (max-width: 1890px) {
-.magestore-popup_social{
-		width: 740px !important;
-	}
-}
-@media screen and (min-width:1891px) {
-.magestore-popup_social{
-		width: 740px !important;
-	}
+@media only screen and (max-width: 480px){
+    .magestore-login-popup-button button{
+        width:100%;
+    }
+    .magestore-login-popup-button .pass-register {
+        float: right;
+        clear: both;
+    }
+    #magestore-forgot-password,
+    #magestore-sociallogin-create-new-customer{
+        font-size: 14px;
+    }
+    #magestore-forgot-back {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 12px;
+    }
 }

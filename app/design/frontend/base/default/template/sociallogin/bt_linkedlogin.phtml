@@ -1,7 +1,7 @@
 <?php $isLogin = $this->helper('customer')->isLoggedIn()?>
 <?php if(!$isLogin){?>
 <?php $this->setBackUrl()?>
-<button id="bt-loginlinked" class="bt-login-social" alt="<?php echo $this->__('Login by Linkedin') ?>" title="<?php echo $this->__('Login by Linkedin') ?>" onclick="linkedLogin()" href="javascript:void(0);">
+<button id="bt-loginlinked" class="bt-login-social" title="<?php echo $this->__('Login by Linkedin') ?>" onclick="linkedLogin()" >
 	<span><span><?php echo $this->__('Linkedin Sign in') ?></span></span>
 </button>
 <script type="text/javascript">
@@ -12,8 +12,8 @@ function linkedLogin(){
 	var	 screenY    = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop;
 	var	 outerWidth = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.body.clientWidth;
 	var	 outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.body.clientHeight - 22);
-	var	 width    = 790;
-	var	 height   = 350;
+	var	 width    = 830;
+	var	 height   = 500;
 	var	 left     = parseInt(screenX + ((outerWidth - width) / 2), 10);
 	var	 top      = parseInt(screenY + ((outerHeight - height) / 2.5), 10);
 	var	 features = (

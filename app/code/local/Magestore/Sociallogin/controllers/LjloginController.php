@@ -4,14 +4,7 @@ class Magestore_Sociallogin_LjloginController extends Mage_Core_Controller_Front
    public function loginAction() {     
 		$identity = $this->getRequest()->getPost('identity');
 		Mage::getSingleton('core/session')->setData('identity',$identity);
-		$my = Mage::getModel('sociallogin/ljlogin')->newMy();
-		/*$my->required = array(
-        'namePerson/first',
-        'namePerson/last',
-        'namePerson/friendly',
-        'contact/email',
-		'namePerson' 
-        );*/
+		$my = Mage::getModel('sociallogin/ljlogin')->newMy();		
 		Mage::getSingleton('core/session')->setData('identity',$identity);
 		$userId = $my->mode;       	
 		$coreSession = Mage::getSingleton('core/session');
@@ -20,7 +13,8 @@ class Magestore_Sociallogin_LjloginController extends Mage_Core_Controller_Front
 			try{
 				$url = $my->authUrl();
 			}catch(Exception $e){
-				$coreSession->addError('Username not exacted');			
+                                $message=$this->__('Username not exacted');
+				$coreSession->addError($message);			
                 die("<script type=\"text/javascript\">try{window.opener.location.reload(true);}catch(e){window.opener.location.href=\"".Mage::app()->getStore()->getBaseUrl()."\"} window.close();</script>");
 			}
 			echo "<script type='text/javascript'>top.location.href = '$url';</script>";
@@ -32,7 +26,8 @@ class Magestore_Sociallogin_LjloginController extends Mage_Core_Controller_Front
                 try{
 				$url = $my->authUrl();
 			}catch(Exception $e){
-				$coreSession->addError('Username not exacted');			
+				$message=$this->__('Username not exacted');
+				$coreSession->addError($message);			
                 die("<script type=\"text/javascript\">try{window.opener.location.reload(true);}catch(e){window.opener.location.href=\"".Mage::app()->getStore()->getBaseUrl()."\"} window.close();</script>");
 			}
                 echo "<script type='text/javascript'>top.location.href = '$url';</script>";
@@ -62,6 +57,7 @@ class Magestore_Sociallogin_LjloginController extends Mage_Core_Controller_Front
 					if(!$customer || !$customer->getId()){
 						//Login multisite
 						$customer = Mage::helper('sociallogin')->createCustomerMultiWebsite($user, $website_id, $store_id );
+                                                if(Mage::getStoreConfig(('sociallogin/general/send_newemail'),Mage::app()->getStore()->getId())) $customer->sendNewAccountEmail('registered','',Mage::app()->getStore()->getId());
 					}
 					Mage::getModel('sociallogin/authorlogin')->addCustomer($authorId);
  					if (Mage::getStoreConfig('sociallogin/ljlogin/is_send_password_to_customer')){
@@ -78,11 +74,12 @@ class Magestore_Sociallogin_LjloginController extends Mage_Core_Controller_Front
 					}
 					Mage::getSingleton('customer/session')->setCustomerAsLoggedIn($customer);
 					$nextUrl = Mage::helper('sociallogin')->getEditUrl();						
-					die("<script type=\"text/javascript\">try{window.opener.location.href=\"".$this->_loginPostRedirect()."\";}catch(e){window.opener.location.reload(true);} window.close();</script>");
+					die("<script type=\"text/javascript\">if(navigator.userAgent.match('CriOS')){window.location.href=\"".$this->_loginPostRedirect()."\";}else{try{window.opener.location.href=\"".$this->_loginPostRedirect()."\";}catch(e){window.opener.location.reload(true);} window.close();}</script>");
 					
                 }                
                 else{
-                   $coreSession->addError('User has not shared information so login fail!');			
+                    $message=$this->__('User has not shared information so login fail!');
+                   $coreSession->addError($message);			
                    die("<script type=\"text/javascript\">try{window.opener.location.reload(true);}catch(e){window.opener.location.href=\"".Mage::app()->getStore()->getBaseUrl()."\"} window.close();</script>");
                 }
             }           
@@ -93,32 +90,17 @@ class Magestore_Sociallogin_LjloginController extends Mage_Core_Controller_Front
 	* return template au_wp.phtml
 	**/
     public function setBlockAction()
-    {             
-        /*$template =  $this->getLayout()->createBlock('sociallogin/ljlogin')
-                ->setTemplate('sociallogin/au_lj.phtml')->toHtml();
-        echo $template;*/
-		$this->loadLayout();
-		$this->renderLayout();
+    {  
+        $this->loadLayout();
+	$this->renderLayout();
     }
 	protected function _loginPostRedirect()
     {
-        $session = Mage::getSingleton('customer/session');
-
-        if (!$session->getBeforeAuthUrl() || $session->getBeforeAuthUrl() == Mage::app()->getStore()->getBaseUrl()) {
-            // Set default URL to redirect customer to
-            $session->setBeforeAuthUrl(Mage::helper('customer')->getDashboardUrl());
-            
-        } else if ($session->getBeforeAuthUrl() == Mage::helper('customer')->getLogoutUrl()) {
-            $session->setBeforeAuthUrl(Mage::helper('customer')->getDashboardUrl());
-        } else {
-            if (!$session->getAfterAuthUrl()) {
-                $session->setAfterAuthUrl($session->getBeforeAuthUrl());
-            }
-            if ($session->isLoggedIn()) {
-                $session->setBeforeAuthUrl($session->getAfterAuthUrl(true));
-            }
-        }
-		
-        return $session->getBeforeAuthUrl(true);
+        $selecturl= Mage::getStoreConfig(('sociallogin/general/select_url'),Mage::app()->getStore()->getId());
+	if($selecturl==0) return Mage::getUrl('customer/account');	
+	if($selecturl==2) return Mage::getUrl();
+	if($selecturl==3) return Mage::getSingleton('core/session')->getSocialCurrentpage();
+	if($selecturl==4) return Mage::getStoreConfig(('sociallogin/general/custom_page'),Mage::app()->getStore()->getId());
+        if($selecturl==1 && Mage::helper('checkout/cart')->getItemsCount()!=0) return Mage::getUrl('checkout/cart');else return Mage::getUrl();
     }
 }

@@ -3,7 +3,7 @@
  * Magento
  *
  * NOTICE OF LICENSE
- *
+ 
  * This source file is subject to the Academic Free License (AFL 3.0)
  * that is bundled with this package in the file LICENSE_AFL.txt.
  * It is also available through the world-wide-web at this URL:
@@ -51,12 +51,12 @@ $appliedFilters = Mage::getSingleton('catalog/layer')->getState()->getFilters();
 <?php if (count ($_subcategories) > 0 && ($currentCategoryId != 146)): ?>
 <?php if(is_array($appliedFilters) && count($appliedFilters)==0):
 ?>
-    <div class="page-title featured-category-page-title">
-        <h3 class="section-title cat-padding-right">Categories</h3>
+    <div class="main-title page-title featured-category-page-title">
+        <h3 class="">Categories</h3>
     </div>
     <div class="featured-category-list">
         <?php $i = 0; ?>
-        <ul class="row-item">
+       <!-- <ul class="row-item">-->
             <?php
             foreach ($children as $category) {
                 $categoryID    = $category->getId ();//id
@@ -69,32 +69,33 @@ $appliedFilters = Mage::getSingleton('catalog/layer')->getState()->getFilters();
                     ->resizeImgCategories ($categoryImage, $basePath, $imageCategoriesWidth, $imageCategoriesHeight);
                 // echo"<br>newImageCategoriesResized->". $newImageCategoriesResized;  // Category image
                 ?>
-                <li class="item<?php if (($i - 1) % $numberCategoriesPerRow == 0): ?> first<?php elseif ($i % $numberCategoriesPerRow == 0): ?> last<?php endif; ?>">
-                    <div class="featuredcategory-image">
+               <!-- <li class="item<?php if (($i - 1) % $numberCategoriesPerRow == 0): ?> first<?php elseif ($i % $numberCategoriesPerRow == 0): ?> last<?php endif; ?>">-->
+                    <div class="col-sm-2">
                         <a title="<?php echo $category->getName () ?>" alt="<?php echo $category->getName () ?>"
                            href="<?php echo $category->getUrl () ?>">
                             <img src="<?php if ($category->getImage ()) echo $newImageCategoriesResized ?>" height="120"
-                                 width="120" alt="<?php echo $category->getName () ?>"/>
+                                 width="120"  style="border:1px solid #524444" alt="<?php echo $category->getName () ?>"/>
                         </a>
-                    </div>
-                    <div class="featuredcategory-name" style="width:<?php echo $imageCategoriesWidth ?>px">
-                        <h5>
-                            <a title="<?php echo $category->getName () ?>" alt="<?php echo $category->getName () ?>"
-                               href="<?php echo $category->getUrl () ?>"
-                               target="_blank"><?php echo $category->getName () ?>
-                            </a>
-                        </h5>
-                    </div>
-                </li>
+                    
+                            <div class="">
+                                
+                                    <a class="cat-title" title="<?php echo $category->getName () ?>" alt="<?php echo $category->getName () ?>"
+                                       href="<?php echo $category->getUrl () ?>"
+                                       target="_blank"><?php echo $category->getName () ?>
+                                    </a>
+                                
+                            </div>
+                    </div>      
+              <!--  </li>-->
                 <?php $i++;
             } ?>
-        </ul>
+       <!-- </ul>-->
         <script type="text/javascript">decorateGeneric($$('ul.row-item'), ['odd', 'even', 'first', 'last'])</script>
     </div>
 <?php endif;?>
    <!--==================by brt for sub-catgory list ends==================-->
 <?php endif ?>
-<?php $sa_reviews = "<script type='text/javascript'> function saLoadScript(src) { var js = window.document.createElement('script'); js.src = src; js.type = 'text/javascript'; document.getElementsByTagName('head')[0].appendChild(js); } saLoadScript('//www.shopperapproved.com/widgets/group2.0/15857.js'); </script>";
+<?php $sa_reviews = "<script type='text/javascript'> function saLoadScript(src) { var js = window.document.createElement('script'); js.src = src; js.type = 'text/javascript'; document.getElementsByTagName('head')[0].appendChild(js); } saLoadScript('//www.shopperapproved.com/widgets/group2.0/10930.js'); </script>";
 echo $sa_reviews; ?>
 <?php
 $_productCollection = $this->getLoadedProductCollection ();
@@ -155,11 +156,13 @@ $_collectionSize = $_productCollection->count ();
                 $listClasses = ' hover-effect';
             ?>
             <?php $_iterator = 0; ?>
-            <ul class="products-list<?php if ($listClasses) echo $listClasses; ?>" id="products-list">
+          <div class="fp-product-wrapper mb15">  
+            <ul class="" id="products-list">
                 <?php foreach ($_productCollection as $_product): ?>
-                    <li class="item<?php if (++$_iterator == sizeof ($_productCollection)): ?> last<?php endif; ?>">
+                    <li class="products-list-view">
+                       <div class="row"> 
                         <?php //Product Image ?>
-                        <div class="product-image-wrapper grid12-4 mobile-grid-half">
+                        <div class="col-md-3 col-sm-3">
                             <a href="<?php echo $_product->getProductUrl () ?>"
                                title="<?php echo $this->stripTags ($this->getImageLabel ($_product, 'small_image'), NULL, TRUE) ?>"
                                class="product-image" style="max-width:<?php echo $imgWidth; ?>px;">
@@ -178,7 +181,7 @@ $_collectionSize = $_productCollection->count ();
                         </div>
                         <!-- end: product-image-wrapper -->
                         <?php //Product description ?>
-                        <div class="product-shop grid12-5 mobile-grid-half">
+                        <div class="product-shop col-md-5 col-sm-5">
                             <div class="product-shop-inner">
                                 <?php $_productNameStripped = $this->stripTags ($_product->getName (), NULL, TRUE); ?>
                                 <h2 class="product-name"><a href="<?php echo $_product->getProductUrl () ?>"
@@ -201,14 +204,16 @@ $_collectionSize = $_productCollection->count ();
                                 }
                                 ?>
                                 <div class="desc std">
-                                    <?php echo $_helper->productAttribute ($_product, $_product->getShortDescription (), 'short_description') ?>
+                                    <?php $short_description=explode('<br/>',$_product->getShortDescription()); ?>
+                                    <?php echo $_helper->productAttribute ($_product,$short_description[0], 'short_description') ?>
+                                    <br/>
                                     <a href="<?php echo $_product->getProductUrl () ?>"
                                        title="<?php echo $_productNameStripped ?>"
                                        class="link-learn"><?php echo $this->__ ('Learn More') ?></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="right-column grid12-3 mobile-grid-half">
+                        <div class="col-md-4 col-sm-4">
                             <?php echo $this->getPriceHtml ($_product, TRUE) ?>
                             <?php if (!$_product->canConfigure () && $_product->isSaleable ()): ?>
                                 <!--=================== by brt =================-->
@@ -219,6 +224,7 @@ $_collectionSize = $_productCollection->count ();
                                 ?>
                                 <!--=================== by brt ends =================-->
                                 <!--                <input type="text" class="input-text qty" title="Qty" value="0" maxlength="12" id="qty" name="qty">-->
+                            <div class="actions"> 
                                 <?php if ($productCount > 0) { ?>
                                     <!--=================== by brt =================-->
                                     <select class="input-text qty" name="qty" id="qty">
@@ -233,10 +239,14 @@ $_collectionSize = $_productCollection->count ();
                                     <!--=================== by brt ends =================-->
                                 <?php } ?>
                                 
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-add-to-cart-ico"> <span class="fa fa-shopping-bag"></span> </button>
                                     <button type="button" title="<?php echo $this->__ ('Add to Cart') ?>"
-                                            class="button btn-cart"
-                                            onclick="setLocation('<?php echo $this->getAddToCartUrl ($_product) ?>')">
-                                        <span><span><?php echo $this->__ ('Add to Cart') ?></span></span></button>
+                                            class="btn btn-add-to-cart"
+                                            onclick="setLocation('<?php echo $this->getAddToCartUrl ($_product) ?>')"><?php echo $this->__('Add to cart') ?>
+                                    </button>
+                                </div>
+                            </div> <!-- .actions -->           
                                 
                             <?php elseif ($_product->getStockItem () && $_product->getStockItem ()->getIsInStock ()): ?>
 								<?php if($_product->canConfigure()): ?>
@@ -255,9 +265,12 @@ $_collectionSize = $_productCollection->count ();
                                 echo $helpTemplate->getCategoryAddtoLinksComplex ($_product, $this->getAddToCompareUrl ($_product), 'addto-gaps-right');
                             ?>
                         </div>
+                      </div> <!-- .row -->  
                     </li>
+                    <div class="clr"></div>
                 <?php endforeach; ?>
             </ul>
+          </div> <!-- fp-product-wrapper -->  
             <script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
         <?php else: //Grid mode  ?>
         <?php
@@ -305,10 +318,12 @@ $_collectionSize = $_productCollection->count ();
             $actionsClasses = '';
         }
         ?>
-            <ul class="products-grid category-products-grid itemgrid itemgrid-adaptive itemgrid-<?php echo $columnCount; ?>col<?php if ($gridClasses) echo $gridClasses; ?>">
+        <div class="fp-product-wrapper mb15 row">
+           <!-- <ul class="products-grid category-products-grid itemgrid itemgrid-adaptive itemgrid-<?php echo $columnCount; ?>col<?php if ($gridClasses) echo $gridClasses; ?>"> -->
                 <?php foreach ($_productCollection as $_product): ?>
-                    <li class="item <?php echo $_product->getId (); ?>" id="<?php echo $_product->getId (); ?>">
-                        <div class="product-image-wrapper" style="max-width:<?php echo $imgWidth; ?>px;">
+                <div class="col-md-4 col-sm-6 fp-product-cust">
+                    <div class="item">
+                        <div class="product-image-wrapper">
                             <a href="<?php echo $_product->getProductUrl () ?>"
                                title="<?php echo $this->stripTags ($this->getImageLabel ($_product, 'small_image'), NULL, TRUE); ?>"
                                class="product-image">
@@ -326,146 +341,71 @@ $_collectionSize = $_productCollection->count ();
                             <?php //Add-to links
                             if ($gc['display_addtolinks'] != 0 && $gc['addtolinks_simple']) {
                                 if ($gc['display_addtolinks'] == 1) //Display on hover
-                                    echo $helpTemplate->getCategoryAddtoLinksIcons ($_product, $this->getAddToCompareUrl ($_product), 'addto-links-icons addto-onimage display-onhover');
+
+                                    echo $helpTemplate->getCategoryAddtoLinksIcons_fp ($_product, $this->getAddToCompareUrl ($_product), 'addto-links-icons addto-onimage display-onhover');
                                 else //Always display
-                                    echo $helpTemplate->getCategoryAddtoLinksIcons ($_product, $this->getAddToCompareUrl ($_product), 'addto-links-icons addto-onimage');
+                                    echo $helpTemplate->getCategoryAddtoLinksIcons_fp ($_product, $this->getAddToCompareUrl ($_product), 'addto-links-icons addto-onimage');
                             }
                             ?>
                         </div>
                         <!-- end: product-image-wrapper -->
-                        <?php if ($gc['display_name'] != 0): ?>
-                            <h2 class="product-name<?php echo $productNameClasses; ?>"><a
-                                    href="<?php echo $_product->getProductUrl () ?>"
-                                    title="<?php echo $this->stripTags ($_product->getName (), NULL, TRUE) ?>"><?php echo $_helper->productAttribute ($_product, $_product->getName (), 'name') ?></a>
-                            </h2>
-                        <?php endif; ?>
-                        <?php
-                        //Provides extra blocks on which to hang some features for products in the list
-                        //Features providing UI elements targeting this block will display directly below the product name
-                        //echo 'a: ' . $this->getChildHtml('name.after'); //TEST
-                        //echo 'b: ' . $this->getChildHtml('reg2'); //TEST
-                        if ($this->getChild ('name.after')) {
-                            $_nameAfterChildren = $this->getChild ('name.after')->getSortedChildren ();
-                            foreach ($_nameAfterChildren as $_nameAfterChildName) {
-                                $_nameAfterChild = $this->getChild ('name.after')->getChild ($_nameAfterChildName);
-                                $_nameAfterChild->setProduct ($_product);
-                                echo $_nameAfterChild->toHtml ();
-                            }
-                        }
-                        ?>
-                        <?php if ($_product->getRatingSummary ()): ?>
-                            <?php if ($gc['display_rating'] == 1): //Display on hover ?>
-                                <div
-                                    class="display-onhover ratings-wrapper"><?php echo $this->getReviewsSummaryHtml ($_product, 'short') ?></div>
-                            <?php elseif ($gc['display_rating'] == 2): //Always display ?>
-                                <?php echo $this->getReviewsSummaryHtml ($_product, 'short') ?>
+                        <div class="product-details">
+                            <?php if ($gc['display_name'] != 0): ?>
+                                <h3 class="product-name<?php echo $productNameClasses; ?>"><a
+                                        href="<?php echo $_product->getProductUrl () ?>"
+                                        title="<?php echo $this->stripTags ($_product->getName (), NULL, TRUE) ?>"><?php echo $_helper->productAttribute ($_product, $_product->getName (), 'name') ?></a>
+                                </h3>
                             <?php endif; ?>
-                        <?php endif; ?>
-                        <?php if ($gc['display_price'] == 1): //Display on hover ?>
-                            <div class="display-onhover"><?php echo $this->getPriceHtml ($_product, TRUE); ?></div>
-                        <?php elseif ($gc['display_price'] == 2): //Always display ?>
-                            <?php echo $this->getPriceHtml ($_product, TRUE); ?>
-                        <?php endif; ?>
-                        <?php
-                        //If at least one element was set as "Display on hover" but no element was set as "Display":
-                        //aggregate classes from those elements and apply them to the "actions" container.
-                        $actionsClasses = '';
-                        if ($gc['display_addtocart'] == 1 || ($gc['display_addtolinks'] == 1 && !$gc['addtolinks_simple'])) {
-                            $actionsClasses = ' display-onhover';
-                        }
-                        if ($gc['display_addtocart'] == 2 || ($gc['display_addtolinks'] == 2 && !$gc['addtolinks_simple'])) {
+                            <?php
+                            if ($this->getChild ('name.after')) {
+                                $_nameAfterChildren = $this->getChild ('name.after')->getSortedChildren ();
+                                foreach ($_nameAfterChildren as $_nameAfterChildName) {
+                                    $_nameAfterChild = $this->getChild ('name.after')->getChild ($_nameAfterChildName);
+                                    $_nameAfterChild->setProduct ($_product);
+                                    echo $_nameAfterChild->toHtml ();
+                                }
+                            }
+                            ?>
+                            <?php if ($_product->getRatingSummary ()): ?>
+                                <?php if ($gc['display_rating'] == 1): //Display on hover ?>
+                                    <div
+                                        class="display-onhover ratings-wrapper"><?php echo $this->getReviewsSummaryHtml ($_product, 'short') ?></div>
+                                <?php elseif ($gc['display_rating'] == 2): //Always display ?>
+                                    <?php echo $this->getReviewsSummaryHtml ($_product, 'short') ?>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                            <?php if ($gc['display_price'] == 1): //Display on hover ?>
+                                <div class="display-onhover"><?php echo $this->getPriceHtml ($_product, TRUE); ?></div>
+                            <?php elseif ($gc['display_price'] == 2): //Always display ?>
+                                <?php echo $this->getPriceHtml ($_product, TRUE); ?>
+                            <?php endif; ?>
+                            <?php
                             $actionsClasses = '';
-                        }
-                        ?>
-                        <div class="actions clearer<?php echo $actionsClasses; ?>">
-                            <?php if ($gc['display_addtocart'] != 0): //Cart button ?>
-                        <?php if(!$_product->canConfigure() && $_product->isSaleable()):
-                        //if($_product->isSaleable()):
-                        ?>
+                            if ($gc['display_addtocart'] == 1 || ($gc['display_addtolinks'] == 1 && !$gc['addtolinks_simple'])) {
+                                $actionsClasses = ' display-onhover';
+                            }
+                            if ($gc['display_addtocart'] == 2 || ($gc['display_addtolinks'] == 2 && !$gc['addtolinks_simple'])) {
+                                $actionsClasses = '';
+                            }
+                            ?>
+                            <div class="actions clearer<?php echo $actionsClasses; ?>">
+                                <?php if ($gc['display_addtocart'] != 0): //Cart button ?>
+                            <?php if(!$_product->canConfigure() && $_product->isSaleable()):
+                            //if($_product->isSaleable()):
+                            ?>
                     <!--=================== by brt ends =================-->
-                <?php
-                        $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
-                        $productCount=intval($stock->getQty());
-						$cartUrl = Mage::helper('checkout/cart')->getAddUrl($_product);
-                ?>
+                            <?php
+                                    $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+                                    $productCount=intval($stock->getQty());
+            						$cartUrl = Mage::helper('checkout/cart')->getAddUrl($_product);
+                            ?>
 <!--               <input type="text" class="input-text qty" title="Qty" value="0" maxlength="12" id="qty" name="qty">-->
                                         <!--===================== by brt ========================-->
-                <?php
-                if($_product->isConfigurable()){
-                  /* //$product = Mage::getModel("catalog/product")->load($_product->getId());
-                //$attVal = $_product->getTypeInstance(TRUE)->getConfigurableAttributesAsArray($_product);
-                $optStr = "";
-				Mage::unregister('product');
-                Mage::register('product', $_product); // add the product object in the registry
-                //$block = Mage::getBlockSingleton('Mage_Catalog_Block_Product_View'); // Instantiate the product view block
-				//$block = Mage::getBlockSingleton('Mage_Catalog_Block_Product_View_Type_Configurable'); // Instantiate the product view block
-                ///echo $block->getJsonConfig();
-				$block = $this->getLayout()->createBlock('catalog/product_view_type_configurable');
-				$prodblock = $this->getLayout()->createBlock('catalog/product_view');
-                $_jsonConfig = $block->getJsonConfig();
-                $_jsonConfigsp = $block->getJsonConfigsp();
-				$_jsonConfigdata = json_decode($_jsonConfig, true);				
-				$cartUrl = Mage::helper('checkout/cart')->getAddUrl($_product);
+                        <?php
+                        if($_product->isConfigurable()){
                         ?>
-                    <form action="<?php echo $cartUrl; ?>" method="post" class="product_addtocart_form" name="product_addtocart_form<?php echo $_product->getId(); ?>" id="product_addtocart_form<?php echo $_product->getId(); ?>"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
-                <?php echo $this->getBlockHtml('formkey'); ?>
-                 <!--input type="hidden" name="qty" value="1"-->
-                <input type="hidden" name="product" value="<?php echo $_product->getId();?>">
-                <input type="hidden" name="related_product" value="">
-                <input type="hidden" name="return_url" value="">
-                    <dl>
-<!--                    <dt><label class="required"><em>*</em><?php //echo $attVal[0]['label']; ?></label></dt>-->
-                        <dd<?php //if ($_attribute->decoratedIsLast){?> class="last"<?php //}?> style="text-align:left;">
-						<?php //echo "<pre>";echo print_r($_jsonConfigdata['attributes']);exit; ?>
-                            <div class="input-box">
-                                <?php //if(count($_jsonConfigdata['attributes']['options'])<=2){ ?>
-                                <?php foreach($_jsonConfigdata['attributes'] as $key => $optionValue){ 
-								//echo "<pre>";echo count($optionValue['options']);print_r($optionValue['options']);
-									if(count($optionValue['options'])>2){
-									?>
-										<select name="super_attribute[<?php echo $optionValue['id']; ?>]" otherinfo='<?php echo $_jsonConfigsp; ?>' id="attribute<?php echo $optionValue['id']; ?>" class="required-entry super-attribute-select" style="margin-top: 5px;margin-right: 10px;">
-											<option><?php echo $this->__('Choose an Option...') ?></option>
-											<?php foreach($optionValue['options'] as $key1=>$opt){ ?>
-											<option value="<?php echo$opt['id'];?>" price="<?php echo $opt['price'];?>" data-label='<?php echo $opt['label'];?>'><?php echo $opt['label'];?></option>
-											<?php }?>
-										</select>										
-									<?php }	
-									else{
-										foreach($optionValue['options'] as $key1=>$opt){
-									?>
-										<input id="super_attribute[<?php echo $optionValue['id'].$opt['id'].$_product->getId(); ?>]" name="super_attribute[<?php echo $optionValue['id']; ?>]" <?php if($key1==0){echo"checked='checked'";}?> type="radio" value="<?php echo $opt['id'];?>" class="super_attribute" otherinfo='<?php echo $_jsonConfigsp; ?>' price="<?php echo $opt['price'];?>" data-label="<?php echo $opt['label'];?>">&nbsp;<label for="super_attribute[<?php echo $optionValue['id'].$opt['id'].$_product->getId(); ?>]" style="line-height: 24px; vertical-align: middle;height: 24px;font-weight:normal"><?php echo $opt['label'];?></label><br>
-										<?php 
-										}
-									}
-								}
-									//exit;
-								?>
-                                <?php //} ?>
-                            </div>
-                        </dd>
-                </dl>
-                    <script type="text/javascript">
-						var optionsPrice<?php echo $_product->getId(); ?> = new Product.OptionsPrice(<?php echo $prodblock->getJsonConfig() ?>);
-						//var spConfig<?php echo $_product->getId(); ?> = new Product.Config(<?php echo $_jsonConfig ?>);
-                    </script>
-                    <div style="clear:both;margin-top:5px"></div>
-                                    <select class="input-text qty-select-<?php echo $_product->getId(); ?>" name="qty" id="qty" style="min-width:75px;">
-                                        <?php $i = 1 ?>
-                                        <?php do { ?>
-                                            <option value="<?php echo $i ?>"><?php echo $i ?><?php $i++ ?></option>
-                                        <?php } while ($i <= 1) ?>
-                                    </select>
-                                  <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><span><i class="icon ic ic-bag"></i><span><?php echo $this->__('Add to Cart') ?></span></span></button>
-                    </form>
-                            <script type="text/javascript">
-                                //<![CDATA[
-                                var productAddToCartForm<?php echo $_product->getId(); ?> = new VarienForm('product_addtocart_form<?php echo $_product->getId(); ?>',true);
-                                //]]>
-                            </script>
-						<?php 
-							*/ ?>
-                <?php }else{ //isConfigurable() ends here?>
-							 <!--=================== by brt =================-->
+                        <?php }else{ //isConfigurable() ends here?>
+        							 <!--=================== by brt =================-->
 							<form action="<?php echo $cartUrl; ?>" method="post" class="product_addtocart_form product_addtocart_form_<?php echo $_product->getSku(); ?>" name="product_addtocart_form<?php echo $_product->getId(); ?>" id="product_addtocart_form<?php echo $_product->getId(); ?>"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
                             <?php echo $this->getBlockHtml('formkey'); ?>
                              <!--input type="hidden" name="qty" value="1"-->
@@ -484,15 +424,15 @@ $_collectionSize = $_productCollection->count ();
 										<?php } while ($i <= $productCount) ?>
 									</select>
 									<!--=================== by brt ends =================-->
-									
-									   <!--button type="button" title="<?php echo $this->__ ('Add to Cart') ?>"
-											class="button btn-cart"
-											onclick="setLocation('<?php echo $this->getAddToCartUrl ($_product) ?>')"><span><span><?php echo $this->__ ('Add to Cart') ?></span></span>
-										</button-->
-									<button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart <?php echo $_product->getSku()."-del"; ?>" id="" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><span><i class="icon ic ic-bag"></i><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+                                    <div class="btn-group">
+                                        <button class="btn btn-add-to-cart-ico" type="button"> <span class="fa fa-shopping-bag"></span> </button>
+    									<button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="btn btn-add-to-cart <?php echo $_product->getSku()."-del"; ?>" id="" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><?php echo $this->__('Add to Cart') ?>
+                                        </button>
+                                     </div>   
+
 								</div>
 								<div class="<?php echo $_product->getSku()."-addremove"; ?>" style="display:none;">
-									<button type="button" title="<?php echo $this->__('Add/Remove') ?>" class="button btn-cart add-remove" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><span><span><?php echo $this->__('Add/Remove') ?></span></span></button>
+									<button type="button" title="<?php echo $this->__('Add/Remove') ?>" class="button btn-cart add-remove btn-blue" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><span><span><?php echo $this->__('Add/Remove') ?></span></span></button>
 								</div>
                                 </form>
                 <?php }?>
@@ -524,10 +464,14 @@ $_collectionSize = $_productCollection->count ();
                             <div class="ratings"> <!-- start: ratings -->
                                 <div class="star_container <?php echo Mage::getModel ('catalog/product')
                                     ->load ($_product->getId ())->getSku (); ?>"></div>
+                                   <!-- <div class="star_container TL9377G">
+                                      <div class="group-stars">
+                                        <span class="ind_cnt low"><span class="ind_cnt_num">1</span> <span class="ind_cnt_desc">review</span></span></div>
+                                    </div>-->
                             </div>
                             <!-- end: ratings -->
 							<?php if(!$_product->canConfigure()): ?>
-                            <div class="qty-in-stock qty-<?php echo $_product->getId() ?>"><!-- start: Qty in stock -->
+                            <div style="" class="qty-in-stock qty-<?php echo $_product->getId() ?>"><!-- start: Qty in stock -->
                                 <?php
                                 $stock = Mage::getModel ('cataloginventory/stock_item')->loadByProduct ($_product);
                                 echo $this->__ ("Qty in Stock: ") . intval ($stock->getQty ());
@@ -537,9 +481,12 @@ $_collectionSize = $_productCollection->count ();
                             <!-- end: Qty in stock -->
                         </div>
                         <!-- start: rating-and-qty-block-->
-                    </li>
+                      </div> <!-- .product-details -->  
+                    </div> <!-- .item -->
+                  </div> <!-- .fp-product-cust -->  
                 <?php endforeach; ?>
-            </ul>
+           <!-- </ul> -->
+           </div> <!-- .fp-product-wrapper --> 
         <?php endif; //end: if grid mode ?>
         <?php if (!$hideToolbar): ?>
             <div class="toolbar-bottom">

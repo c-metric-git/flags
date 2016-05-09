@@ -11,7 +11,7 @@
 				<table><tr><td width="170">
 					<span class="grid-severity-critical" style="width: 150px;"><span><?php echo $this->__('Not Sent')?></span></span>
 				</td><td>
-					<a href='<?php echo $this->getUrl('magenotification/adminhtml_feedback/resendmessage',array('id'=>$message->getId(),'feedback_id'=>$this->getFeedback()->getId(),'_secure'=>true)) ?>' >
+					<a href='<?php echo $this->getUrl('*/magenotification_feedback/resendmessage',array('id'=>$message->getId(),'feedback_id'=>$this->getFeedback()->getId(),'_secure'=>true)) ?>' >
 						<?php echo $this->__('Resend')?>
 					</a>
 				</td></tr></table>			

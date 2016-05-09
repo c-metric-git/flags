@@ -31,11 +31,6 @@ var LoginPopup = Class.create({
 		this.create_button 			= $('magestore-button-sociallogin-create');
 		this.create_ajax 			= $('progress_image_login_create');
 		this.create_invalid			= $('magestore-invalid-create');
-		this.customer_forgot_password = $('customer_forgot_password');
-		this.footer_register_link = $('footer_register_link');
-		this.magestore_popup = $('magestore-popup');
-		this.bg_fade = $('bg_fade');
-		
 		
 		this.mode			= 'form_login';
 		this.bindEventHandlers();
@@ -47,6 +42,8 @@ var LoginPopup = Class.create({
 		if (login_validator.validate()) {
 				var parameters = this.login_form.serialize(true);
 				var url = this.options.login_url;
+				if(window.location.href.slice(0,5)=='https') url= url.replace("http:","https:");
+				
 				this.showLoginLoading();
 
 				new Ajax.Request(url, {
@@ -55,11 +52,7 @@ var LoginPopup = Class.create({
 					onSuccess: function(transport) {
 						var result = transport.responseText.evalJSON();
 						this.hideLoginLoading();
-						if(result.success && result.redirectToWishlist)
-						{
-							 window.location = result.redirectToWishlisturl;
-						}
-						else if(result.success) {
+						if(result.success) {
 							window.location = window.location;
 						} else {
 							this.showLoginError(result.error);
@@ -73,6 +66,8 @@ var LoginPopup = Class.create({
 		if (login_validator_forgot.validate()) {
 			var parameters = this.login_form_forgot.serialize(true);
 			var url = this.options.send_pass_url;
+			if(window.location.href.slice(0,5)=='https') url= url.replace("http:","https:");
+				
 			this.showLoginLoading();
 
 			new Ajax.Request(url, {
@@ -82,7 +77,8 @@ var LoginPopup = Class.create({
 				var result = transport.responseText.evalJSON();
 				this.hideLoginLoading();
 				if(result.success) {
-					window.location = window.location;
+					//window.location = window.location;
+                                        this.showSendPassError(result.message);
 				} else {
 					this.showSendPassError(result.error);
 					}
@@ -94,11 +90,6 @@ var LoginPopup = Class.create({
 		this.hideFormLogin();
 		this.mode = 'form_forgot';
 		this.showFormForgot();		
-	},
-	forgot_handler1 : function(){	
-		this.hideFormLogin();
-		this.mode = 'form_forgot';
-		this.showFormForgot1();		
 	},
 	showLogin_handler : function(){
 		this.hideFormForgot();
@@ -112,17 +103,12 @@ var LoginPopup = Class.create({
 		this.mode = 'form_create';
 		this.showCreateForm();
 	},
-	showCreate_handler1: function (){
-		this.hideFormLogin();
-		this.hideFormForgot();
-		this.mode = 'form_create';
-		this.showCreateForm1();
-	},
 	createAcc_handler: function (){
 		var login_validator_create = new Validation('magestore-sociallogin-form-create');		
 		if (login_validator_create.validate()) {
 			var parameters = this.create_customer_form.serialize(true);
 			var url = this.options.create_url;
+			if(window.location.href.slice(0,5)=='https') url= url.replace("http:","https:");				
 			this.showLoginLoading();
 
 			new Ajax.Request(url, {
@@ -150,10 +136,6 @@ var LoginPopup = Class.create({
 			this.forgot_a.observe(
 				'click', this.forgot_handler.bind(this));
 		}
-		if (this.customer_forgot_password){
-			this.customer_forgot_password.observe(
-				'click', this.forgot_handler1.bind(this));
-		}
 		if (this.forgot_a_back){
 			this.forgot_a_back.observe(
 				'click', this.showLogin_handler.bind(this));
@@ -165,10 +147,6 @@ var LoginPopup = Class.create({
 		if(this.create_customer_click){
 			this.create_customer_click.observe(
 				'click', this.showCreate_handler.bind(this));
-		}
-		if(this.footer_register_link){
-			this.footer_register_link.observe(
-				'click', this.showCreate_handler1.bind(this));
 		}
 		if (this.create_form_backto_login){
 			this.create_form_backto_login.observe(
@@ -221,15 +199,6 @@ var LoginPopup = Class.create({
 		this.forgot_title.style.display = "block";
 		this.login_form_forgot.style.display = "block";		
 	},
-	showFormForgot1 : function (){
-	    this.bg_fade.style.display = "block";
-		this.bg_fade.style.visibility = "visible";
-		this.bg_fade.style.opacity = "0.3";
-		this.magestore_popup.style.display = "block";
-		this.magestore_popup.style.left = "390px";
-		this.forgot_title.style.display = "block";
-		this.login_form_forgot.style.display = "block";		
-	},
 	showSendPassError: function (error){
 		this.invalid_email_forgot.show();
 		this.invalid_email_forgot.update(error);
@@ -237,16 +206,6 @@ var LoginPopup = Class.create({
 	showCreateForm : function (){
 		this.login_form_div.style.display = "none";
 		this.create_customer_click.style.display = "none";
-		this.create_customer.style.display = "block";		
-	},
-	showCreateForm1 : function (){
-		this.login_form_div.style.display = "none";
-		this.create_customer_click.style.display = "none";
-		this.bg_fade.style.display = "block";
-		this.bg_fade.style.visibility = "visible";
-		this.bg_fade.style.opacity = "0.3";
-		this.magestore_popup.style.display = "block";
-		this.magestore_popup.style.left = "390px";
 		this.create_customer.style.display = "block";		
 	},
 	hideCreateForm : function (){

@@ -2,18 +2,18 @@
 <config>
     <modules>
         <Magestore_Magenotification>
-            <version>0.1.3</version>
+            <version>0.1.4</version>
         </Magestore_Magenotification>
     </modules>
     <admin>
         <routers>
-			<magenotification>
-				<use>admin</use>
-				<args>
-					<module>Magestore_Magenotification</module>
-					<frontName>magenotification</frontName>
-				</args>
-			</magenotification>
+            <adminhtml> 
+                <args> 
+                    <modules> 
+                        <Magestore_Magenotification after="Mage_Adminhtml">Magestore_Magenotification_Adminhtml</Magestore_Magenotification>
+                    </modules> 
+                </args> 
+            </adminhtml>
         </routers>
     </admin>
     <adminhtml>
@@ -87,6 +87,11 @@
             <magenotification>
                 <class>Magestore_Magenotification_Block</class>
             </magenotification>
+			<adminhtml>
+                <rewrite>
+                    <notification_window>Magestore_Magenotification_Block_Adminhtml_Notification_Window</notification_window>
+                </rewrite>
+            </adminhtml>
         </blocks>
         <helpers>
             <magenotification>
@@ -97,7 +102,7 @@
 	<default>
 		<magenotification>
 			<general>				
-				<frequency>1</frequency>
+				<frequency>24</frequency>
 				<last_update backend_model="magenotification/source_time"></last_update>
 				<magestore_url>http://www.magestore.com/index.php</magestore_url>
 			</general>		

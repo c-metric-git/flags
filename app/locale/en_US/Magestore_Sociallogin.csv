@@ -1,6 +1,6 @@
 Sign in,Sign in
 Please enter your email below and we will send you a new password.,Please enter your email below and we will send you a new password.
-Email Adress ,Email Adress
+Email Address,Email Address
 Password ,Password
 Forgot Your Password?,Forgot Your Password?
 Login,Login
@@ -105,3 +105,33 @@ Sign in with,Sign in with
 "Wordpress Login Configuration","Wordpress Login Configuration"
 "XML","XML"
 "Yahoo Login Configuration","Yahoo Login Configuration"
+Submit,Submit
+Other Login,Other Login
+Google Sign in,Google Sign in
+Facebook Sign in,Facebook Sign in
+Yahoo Sign in,Yahoo Sign in
+Instagram Sign in,Instagram Sign in
+Twitter Sign in,Twitter Sign in
+Vk Sign in,Vk Sign in
+LinkedIn Sign in,LinkedIn Sign in
+AOL Sign in,AOL Sign in
+Live Sign in,Live Sign in
+Clavid Sign in,Clavid Sign in
+Orange Sign in,Orange Sign in
+FoursQuare Sign in,FoursQuare Sign in
+My OpenId Sign in,My OpenId Sign in
+Live Journal,Live Journal
+Persona Sign in,Persona Sign in
+StackExchange,StackExchange
+Twitter Sign in,Twitter Sign in
+Amazon Sign in,Amazon Sign in
+Linkedin Sign in,Linkedin Sign in
+You provided a email invalid!,You provided a email invalid!
+Please enter Blog name!,Please enter Blog name!
+Login failed as you have not granted access.,Login failed as you have not granted access.
+Username not exacted,Username not exacted
+User has not shared information so login fail!,User has not shared information so login fail!
+Please enter your contact detail.,Please enter your contact detail.
+If there is an account associated with ,If there is an account associated with 
+ you will receive an email with a link to reset your password., you will receive an email with a link to reset your password.
+Htpp not request.Please input api key on config again,Htpp not request.Please input api key on config again

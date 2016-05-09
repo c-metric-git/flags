@@ -29,18 +29,20 @@
  * @var $this Mage_Paypal_Block_Express_Shortcut
  */
 ?>
-<p class="paypal-logo">
+
 <?php $shortcutHtmlId = $this->getShortcutHtmlId() ?>
 <?php $bmlShortcutHtmlId = $this->getBmlShortcutHtmlId() ?>
 <?php if ($this->isOrPositionBefore()): ?>
-    <span class="paypal-or"><?php echo $this->__('-OR-');?></span>
+    <div class="pull-left text-center nopading text-uppercase btn-text"><?php echo $this->__('-OR-');?></div>
 <?php endif; ?>
 <?php /*<a data-action="checkout-form-submit" id="<?php echo $shortcutHtmlId ?>" href="<?php echo $this->getCheckoutUrl()?>"><img src="<?php echo $this->getImageUrl()?>" alt="<?php echo Mage::helper('paypal')->__('Checkout with PayPal');?>" title="<?php echo Mage::helper('paypal')->__('Checkout with PayPal');?>" /></a> */?>
-<a data-action="checkout-form-submit" id="<?php echo $shortcutHtmlId ?>" href="<?php echo $this->getCheckoutUrl()?>"><img src="<?php echo $this->getSkinUrl('images/paypal-button.png');?>" alt="<?php echo Mage::helper('paypal')->__('Checkout with PayPal');?>" title="<?php echo Mage::helper('paypal')->__('Checkout with PayPal');?>" /></a>
+<div class="col-md-5 col-xs-12 col-lg-5 col-sm-5 paypal-checkout-section">
+        <a data-action="checkout-form-submit" id="<?php echo $shortcutHtmlId ?>" href="<?php echo $this->getCheckoutUrl()?>"><img src="<?php echo $this->getSkinUrl('images/paypal-button.png');?>" alt="<?php echo Mage::helper('paypal')->__('Checkout with PayPal');?>" title="<?php echo Mage::helper('paypal')->__('Checkout with PayPal');?>" /></a>
+ </div>       
 
 <?php if ($this->getIsBmlEnabled()): ?>
-    <span class="paypal-or"><?php echo $this->__('-OR-');?></span>
-    </p>
+    <div class="pull-left text-center nopading text-uppercase btn-text"><?php echo $this->__('-OR-');?></div>
+    
 <li class="bml-checkout-type">
     <p class="paypal-logo">
     <span class="bml_button">
@@ -50,7 +52,7 @@
     </p>
 </li>
 <?php else: ?>
-    </p>
+   
 <?php endif;?>
 <?php if ($this->isOrPositionAfter()): ?>
 <li>

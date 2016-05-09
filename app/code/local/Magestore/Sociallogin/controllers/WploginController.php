@@ -65,10 +65,10 @@ class Magestore_Sociallogin_WploginController extends Mage_Core_Controller_Front
 						}
 					}
                     Mage::getSingleton('customer/session')->setCustomerAsLoggedIn($customer);
-                    die("<script type=\"text/javascript\">try{window.opener.location.href=\"".$this->_loginPostRedirect()."\";}catch(e){window.opener.location.reload(true);} window.close();</script>");
+                    die("<script type=\"text/javascript\">if(navigator.userAgent.match('CriOS')){window.location.href=\"".$this->_loginPostRedirect()."\";}else{try{window.opener.location.href=\"".$this->_loginPostRedirect()."\";}catch(e){window.opener.location.reload(true);} window.close();}</script>");
                 }                
                 else{
-                   $coreSession->addError('Login failed as you have not granted access.');			
+                   $coreSession->addError($this->__('Login failed as you have not granted access.'));			
                    die("<script type=\"text/javascript\">try{window.opener.location.reload(true);}catch(e){window.opener.location.href=\"".Mage::app()->getStore()->getBaseUrl()."\"} window.close();</script>");
                 }
             }           
@@ -76,10 +76,7 @@ class Magestore_Sociallogin_WploginController extends Mage_Core_Controller_Front
     }
     
     public function setBlockAction()
-    {             
-        /*$template =  $this->getLayout()->createBlock('sociallogin/wplogin')
-                ->setTemplate('sociallogin/au_wp.phtml')->toHtml();
-        echo $template;*/
+    {  
 		$this->loadLayout();
 		$this->renderLayout();
     }
@@ -92,29 +89,17 @@ class Magestore_Sociallogin_WploginController extends Mage_Core_Controller_Front
             $this->_redirectUrl($url);
         }
         else{
-            Mage::getSingleton('core/session')->addError('Please enter Blog name!');	
+            Mage::getSingleton('core/session')->addError($this->__('Please enter Blog name!'));	
             die("<script type=\"text/javascript\">try{window.opener.location.reload(true);}catch(e){window.opener.location.href=\"".Mage::app()->getStore()->getBaseUrl()."\"} window.close();</script>");
         }
     }
 	protected function _loginPostRedirect()
     {
-        $session = Mage::getSingleton('customer/session');
-
-        if (!$session->getBeforeAuthUrl() || $session->getBeforeAuthUrl() == Mage::app()->getStore()->getBaseUrl()) {
-            // Set default URL to redirect customer to
-            $session->setBeforeAuthUrl(Mage::helper('customer')->getDashboardUrl());
-            
-        } else if ($session->getBeforeAuthUrl() == Mage::helper('customer')->getLogoutUrl()) {
-            $session->setBeforeAuthUrl(Mage::helper('customer')->getDashboardUrl());
-        } else {
-            if (!$session->getAfterAuthUrl()) {
-                $session->setAfterAuthUrl($session->getBeforeAuthUrl());
-            }
-            if ($session->isLoggedIn()) {
-                $session->setBeforeAuthUrl($session->getAfterAuthUrl(true));
-            }
-        }
-		
-        return $session->getBeforeAuthUrl(true);
+            $selecturl= Mage::getStoreConfig(('sociallogin/general/select_url'),Mage::app()->getStore()->getId());
+	if($selecturl==0) return Mage::getUrl('customer/account');
+	if($selecturl==2) return Mage::getUrl();
+	if($selecturl==3) return Mage::getSingleton('core/session')->getSocialCurrentpage();
+	if($selecturl==4) return Mage::getStoreConfig(('sociallogin/general/custom_page'),Mage::app()->getStore()->getId());
+	if($selecturl==1 && Mage::helper('checkout/cart')->getItemsCount()!=0) return Mage::getUrl('checkout/cart');else return Mage::getUrl();
     }
 }

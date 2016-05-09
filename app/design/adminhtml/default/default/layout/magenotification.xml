@@ -7,10 +7,10 @@
 			<action method="addCss"><stylesheet>css/magestore/magenotification.css</stylesheet></action>
 		</reference>
 	</default>	
-	<magenotification_adminhtml_feedback_index>
-        <reference name="content">
-            <block type="magenotification/adminhtml_feedback" name="extension_feedback" />
-        </reference>
-    </magenotification_adminhtml_feedback_index>
+	<adminhtml_notification_feedback_index>
+            <reference name="content">
+                <block type="magenotification/adminhtml_feedback" name="extension_feedback" />
+            </reference>
+        </adminhtml_notification_feedback_index>
 
 </layout>

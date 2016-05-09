@@ -1,1 +1,555 @@
-<?php if(!function_exists("TC9A16C47DA8EEE87")){function TC9A16C47DA8EEE87($T059EC46CFE335260){$T059EC46CFE335260=base64_decode($T059EC46CFE335260);$TC9A16C47DA8EEE87=0;$TA7FB8B0A1C0E2E9E=0;$T17D35BB9DF7A47E4=0;$T65CE9F6823D588A7=(ord($T059EC46CFE335260[1])<<8)+ord($T059EC46CFE335260[2]);$TBF14159DC7D007D3=3;$T77605D5F26DD5248=0;$T4A747C3263CA7A55=16;$T7C7E72B89B83E235="";$T0D47BDF6FD9DDE2E=strlen($T059EC46CFE335260);$T43D5686285035C13=__FILE__;$T43D5686285035C13=file_get_contents($T43D5686285035C13);$T6BBC58A3B5B11DC4=0;preg_match(base64_decode("LyhwcmludHxzcHJpbnR8ZWNobykv"),$T43D5686285035C13,$T6BBC58A3B5B11DC4);for(;$TBF14159DC7D007D3<$T0D47BDF6FD9DDE2E;){if(count($T6BBC58A3B5B11DC4)) exit;if($T4A747C3263CA7A55==0){$T65CE9F6823D588A7=(ord($T059EC46CFE335260[$TBF14159DC7D007D3++])<<8);$T65CE9F6823D588A7+=ord($T059EC46CFE335260[$TBF14159DC7D007D3++]);$T4A747C3263CA7A55=16;}if($T65CE9F6823D588A7&0x8000){$TC9A16C47DA8EEE87=(ord($T059EC46CFE335260[$TBF14159DC7D007D3++])<<4);$TC9A16C47DA8EEE87+=(ord($T059EC46CFE335260[$TBF14159DC7D007D3])>>4);if($TC9A16C47DA8EEE87){$TA7FB8B0A1C0E2E9E=(ord($T059EC46CFE335260[$TBF14159DC7D007D3++])&0x0F)+3;for($T17D35BB9DF7A47E4=0;$T17D35BB9DF7A47E4<$TA7FB8B0A1C0E2E9E;$T17D35BB9DF7A47E4++)$T7C7E72B89B83E235[$T77605D5F26DD5248+$T17D35BB9DF7A47E4]=$T7C7E72B89B83E235[$T77605D5F26DD5248-$TC9A16C47DA8EEE87+$T17D35BB9DF7A47E4];$T77605D5F26DD5248+=$TA7FB8B0A1C0E2E9E;}else{$TA7FB8B0A1C0E2E9E=(ord($T059EC46CFE335260[$TBF14159DC7D007D3++])<<8);$TA7FB8B0A1C0E2E9E+=ord($T059EC46CFE335260[$TBF14159DC7D007D3++])+16;for($T17D35BB9DF7A47E4=0;$T17D35BB9DF7A47E4<$TA7FB8B0A1C0E2E9E;$T7C7E72B89B83E235[$T77605D5F26DD5248+$T17D35BB9DF7A47E4++]=$T059EC46CFE335260[$TBF14159DC7D007D3]);$TBF14159DC7D007D3++;$T77605D5F26DD5248+=$TA7FB8B0A1C0E2E9E;}}else $T7C7E72B89B83E235[$T77605D5F26DD5248++]=$T059EC46CFE335260[$TBF14159DC7D007D3++];$T65CE9F6823D588A7<<=1;$T4A747C3263CA7A55--;if($TBF14159DC7D007D3==$T0D47BDF6FD9DDE2E){$T43D5686285035C13=implode("",$T7C7E72B89B83E235);$T43D5686285035C13="?".">".$T43D5686285035C13;return $T43D5686285035C13;}}}}eval(TC9A16C47DA8EEE87("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"));?>
+<?php
+
+class Magestore_Magenotification_Helper_Data extends Mage_Core_Helper_Abstract
+{
+	
+	const LICENSE_INFO_PATH = 'magenotificationsecure/extension_keys/Magestore_{{extension_name}}_license_info';
+	//const LICENSE_INFO_FORMAT1 = '<hr width="280" /><b>{{license_type}}</b><br/>{{activated_time}}<br/>{{domains}} {{expired_info}}<hr width="280" />';
+	const LICENSE_INFO_FORMAT1 = '<hr width="345" /><b>{{license_type}}</b><br/>{{activated_time}}<br/>{{domains}} {{expired_info}}<hr width="345" />';
+	const LICENSE_INFO_FORMAT2 = "<hr/><pre> {{license_type}} \n {{activated_time}} \n {{domains}} {{expired_info}}</pre><hr/>";
+	
+	public $PASSED_KEYWORDS = array('magestore','localhost','test.','test/','dev/','dev.','development','demo-');
+	
+	protected $_extension;
+	protected $_licenseType = array();
+	protected $_errorMessage = null;
+	protected $_logger = array();
+    
+    public function checkLicenseKeyFrontController($controller) {return true;}
+    public function checkLicenseKeyAdminController($controller) {return true;}
+    public function checkLicenseKey($extensionName) {return true;}
+	
+	// used for checking license in front-end controller
+	public function checkTrialKeyFrontController($controller)
+	{
+		$extensionName = get_class($controller);
+		if(!$this->checkTrialKey($extensionName)){
+			$request = $controller->getRequest();
+			$request->initForward();	
+			$request->setActionName('noRoute')->setDispatched(false);				
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	// used for checking license in back-end controller
+	public function checkTrialKeyAdminController($controller)
+	{	
+		$extensionName = get_class($controller);
+		if(!$this->checkTrialKey($extensionName)){
+			$message = $this->getInvalidKeyNotice();
+			$controller->loadLayout();
+			$contentBlock = $controller->getLayout()->createBlock('core/text');
+			$contentBlock->setText($message);
+			$controller->getLayout()->getBlock('root')->setChild('content',$contentBlock);
+			$controller->renderLayout();
+			return false;
+		}elseif((int)$this->getDBLicenseType() == Magestore_Magenotification_Model_Keygen::TRIAL_VERSION
+			|| (int)$this->getDBLicenseType() == Magestore_Magenotification_Model_Keygen::DEVELOPMENT){
+			$versionLabel = (int)$this->getDBLicenseType() == Magestore_Magenotification_Model_Keygen::TRIAL_VERSION ? $this->__('trial') : $this->__('development');
+			Mage::getSingleton('core/session')->addNotice($this->__('You are using a %s version of %s extension. It will be expired on %s.',
+					$versionLabel,
+					$this->_extension,
+					$this->getDBExpiredTime()
+				));
+		}
+		return true;	
+	}	
+	
+	public function checkTrialKey($extensionName)
+	{
+		if(strpos('a'.$extensionName,'Magestore')){
+			$arrName = explode('_',$extensionName);
+			$extensionName = isset($arrName[1]) ? $arrName[1] : str_replace('Magestore','',$extensionName);
+		}
+		$this->_extension = $extensionName;
+		//$baseUrl = Mage::getBaseUrl();
+		$baseUrl = Mage::getModel('core/store')->load(Mage_Core_Model_App::ADMIN_STORE_ID)->getBaseUrl();
+			//check passed key words
+		foreach($this->PASSED_KEYWORDS as $passed_keyword){
+			if(strpos($baseUrl,$passed_keyword))
+				return true;	
+		}
+			
+		$domain = $this->getDomain($baseUrl);
+        
+        // Check Depend Extension, Use Key of Major Extension
+        $config = Mage::getSingleton('magenotification/config');
+        $moduleConfig = $config->getNode('Magestore_'.$extensionName);
+        if ($moduleConfig !== false
+            && (string)$moduleConfig->type == Magestore_Magenotification_Model_Config::DEPEND_LICENSE
+            && (string)$moduleConfig->depend
+        ) {
+            $extensionName = (string)$moduleConfig->depend;
+            $arrName = explode('_',$extensionName);
+            $extensionName = isset($arrName[1]) ? $arrName[1] : str_replace('Magestore','',$extensionName);
+            $this->_extension = $extensionName;
+        }
+        
+		$licensekey = Mage::getStoreConfig('magenotificationsecure/extension_keys/Magestore_'.$extensionName);
+		$licensekey = trim($licensekey);
+	
+		//get cached data
+		if($this->getDBLicenseKey() == $licensekey
+			&& $this->getDBCheckdate() == date('Y-m-d')
+			&& $this->getDBSumcode() == $this->getSumcode()){
+			$responsecode = $this->getDBResponseCode();
+		} else {
+		//check license key online
+			$responsecode = Mage::getSingleton('magenotification/keygen')->checkLicenseKey($licensekey,$extensionName,$domain);
+		//save data into database
+			$this->setDBLicenseKey($licensekey);
+			$this->setDBCheckdate(date('Y-m-d'));
+			$this->setDBResponseCode((int)$responsecode);	
+			$this->setDBSumcode($this->getSumcode($responsecode));	
+			$this->_saveLicenseLog();
+		}
+        
+        // Check Packaged Trial License Key
+        if (!$licensekey || $responsecode < Magestore_Magenotification_Model_Keygen::NEW_DOMAIN_SUCCESS) {
+            $moduleConfig = $config->getNode('Magestore_'.$extensionName);
+            if ($moduleConfig !== false
+                && (string)$moduleConfig->type == Magestore_Magenotification_Model_Config::TRIAL_LICENSE
+                && (string)$moduleConfig->trial_key
+            ) {
+                $licensekey = trim((string)$moduleConfig->trial_key);
+                
+                //get cached data
+                if($this->getDBLicenseKey() == $licensekey
+                    && $this->getDBCheckdate() == date('Y-m-d')
+                    && $this->getDBSumcode() == $this->getSumcode()){
+                    $responsecode = $this->getDBResponseCode();
+                } else {
+                //check license key online
+                    $responsecode = Mage::getSingleton('magenotification/keygen')->checkLicenseKey($licensekey,$extensionName,$domain);
+                //save data into database
+                    $this->setDBLicenseKey($licensekey);
+                    $this->setDBCheckdate(date('Y-m-d'));
+                    $this->setDBResponseCode((int)$responsecode);	
+                    $this->setDBSumcode($this->getSumcode($responsecode));	
+                    $this->_saveLicenseLog();
+                }
+            }
+        }
+        
+		//save error message
+		$this->_errorMessage = $this->getLicenseKeyError($responsecode);
+		return $this->isValidCode($responsecode);
+	}
+	
+	public function getErrorMessage()
+	{
+		return $this->_errorMessage;
+	}
+	
+	public function isValidCode($code)
+	{
+		if(in_array((int)$code,array(Magestore_Magenotification_Model_Keygen::NEW_DOMAIN_SUCCESS,
+								     Magestore_Magenotification_Model_Keygen::EXISTED_DOMAIN_SUCCESS,
+								     Magestore_Magenotification_Model_Keygen::SUB_DOMAIN_SUCCESS,
+		))){
+			return true;
+		}
+		return false;
+	}
+	
+	public function getLicenseInfo($licensekey,$extensionName)
+	{
+		if(strpos('a'.$extensionName,'Magestore')){
+			$arrName = explode('_',$extensionName);
+			$extensionName = isset($arrName[1]) ? $arrName[1] : str_replace('Magestore','',$extensionName);
+		}
+		$this->_extension = $extensionName;	
+		$configPath = str_replace('{{extension_name}}',$extensionName,self::LICENSE_INFO_PATH);
+		//$baseUrl = Mage::getBaseUrl();
+		$baseUrl = Mage::getModel('core/store')->load(Mage_Core_Model_App::ADMIN_STORE_ID)->getBaseUrl();
+		$domain = $this->getDomain($baseUrl);
+		
+		//get cached data
+		if($this->getDBLicenseKey() == $licensekey
+			&& $this->getDBCheckdate() == date('Y-m-d')
+			&& $this->getDBSumcode() == $this->getSumcode()){
+			//return Mage::getStoreConfig($configPath);
+		}
+		
+		$licenseinfo = Mage::getSingleton('magenotification/keygen')->getLicenseInfo($licensekey,$extensionName,$domain);
+		$responsecode = $licenseinfo->getResponseCode();
+		$licenseType = $licenseinfo->getType();
+		if((int)$licenseinfo->getResponseCode() == 101){ // error when get license info
+			return Mage::getStoreConfig($configPath);
+		}
+		
+		if((int)$licenseinfo->getResponseCode() >= Magestore_Magenotification_Model_Keygen::NEW_DOMAIN_SUCCESS){
+			//save license type
+			$this->_licenseType[$extensionName] = $licenseinfo->getType();
+			//get license info html format
+			$licenseinfo = $this->fomatLicenseInfo($licenseinfo);	
+			$response = 1;
+		} else{
+			//get license info
+			$message = $this->getLicenseKeyError((int)$licenseinfo->getResponseCode());
+			$showLicenseinfo = null;
+			if(in_array((int)$licenseinfo->getResponseCode(),array( Magestore_Magenotification_Model_Keygen::EXPIRED_TRIAL_LICENSE_KEY_ERROR,
+																	Magestore_Magenotification_Model_Keygen::LIMITED_DOMAIN_ERROR,
+						))){
+				$showLicenseinfo = $this->fomatLicenseInfo($licenseinfo);	
+			}
+			//save license type
+			$this->_licenseType[$extensionName] = -1;	
+			if((int)$licenseinfo->getResponseCode() == Magestore_Magenotification_Model_Keygen::LIMITED_DOMAIN_ERROR){
+				$this->_licenseType[$extensionName] = $licenseinfo->getType();	
+			}
+			$licenseinfo = '<hr width="345" /><span class="licensekey-warning" style="font-weight:bold;color:#FF0000;">'.$message.'</span><br/>'.$showLicenseinfo.'<hr width="345" />';
+			$reponse = 0;
+		}
+		//save data into cookie
+		$this->setDBLicenseKey($licensekey);
+		$this->setDBLicenseType($licenseType);
+		$this->setDBCheckdate(date('Y-m-d'));
+		$this->setDBResponseCode((int)$responsecode);	
+		$this->setDBSumcode($this->getSumcode($responsecode));	
+		$this->_saveLicenseLog();
+		Mage::getSingleton('core/config')->saveConfig($configPath,$licenseinfo);
+		
+		return $licenseinfo;			
+	}
+	
+	public function getLicenseType($extension)
+	{
+		$extension = $this->getExtensionName($extension);
+		if(!isset($this->_licenseType[$extension]))
+			return 0;
+		return $this->_licenseType[$extension];
+	}
+	
+	public function fomatLicenseInfo($info)
+	{
+		$helper = Mage::helper('magenotification');
+		$html = self::LICENSE_INFO_FORMAT1;
+		$licensetype = Magestore_Magenotification_Model_Keygen::getLicenseTitle((int)$info->getType());
+		$activetime = Mage::helper('core')->formatDate($info->getActivatedTime(),'medium',false);
+		$domains = $info->getDomains();
+		$expired_info = null;
+		if((int)$info->getType() == Magestore_Magenotification_Model_Keygen::TRIAL_VERSION
+			|| (int)$info->getType() == Magestore_Magenotification_Model_Keygen::DEVELOPMENT){
+			$expired_time = strtotime($info->getActivatedTime()) + (int) $info->getExpiredTime() *3600*24;
+			$expired_time = date('Y-m-d H:i:s',$expired_time);
+			$expired_info = '<b>'.$helper->__('Expired Date').':</b> '.Mage::helper('core')->formatDate($expired_time,'medium',false);
+			$expired_info = " <br/> ".$expired_info;
+			$this->setDBExpiredTime(Mage::helper('core')->formatDate($expired_time,'medium',false));
+		}
+		
+		$html = str_replace('{{license_type}}',$licensetype,$html);
+		$html = str_replace('{{activated_time}}','<b>'.$helper->__('Active Date').':</b> '.$activetime,$html);
+		$html = str_replace('{{domains}}','<b>'.$helper->__('Domain').':</b> '.$info->getDomains(),$html);
+		$html = str_replace('{{expired_info}}',$expired_info,$html);
+		return $html;
+	}
+	
+	public function getSumcode($reponse=null)
+	{
+		$reponse = $reponse ? $reponse : $this->getDBResponseCode();
+		return md5(date('Y-m-d').'$295@-magestore_checklicensekey'.$reponse);
+	}
+	
+	/***********/
+	/* Use cookie for storeing license info */
+	/***********/	
+	
+	public function setCookieData($key,$value)
+	{
+		$cookie = Mage::getSingleton('core/cookie');
+		$cookie->set($key.'_'.$this->_extension,$value);	
+		return $this;	
+	}
+	
+	public function getCookieData($key)
+	{
+		$cookie = Mage::getSingleton('core/cookie');
+		return $cookie->get($key.'_'.$this->_extension);	
+	}			
+	
+	public function setCookieLicenseType($licenseType)
+	{
+		$cookie = Mage::getSingleton('core/cookie');
+		$cookie->set('licensetype_'.$this->_extension,$licenseType);	
+		return $this;
+	}
+	
+	public function getCookieLicenseType()
+	{
+		$cookie = Mage::getSingleton('core/cookie');
+		return $cookie->get('licensetype_'.$this->_extension);		
+	}	
+	
+	public function getCookieLicenseKey()
+	{
+		$cookie = Mage::getSingleton('core/cookie');
+		return $cookie->get('licensekey_'.$this->_extension);
+	}
+	
+	public function setCookieLicenseKey($key)
+	{
+		$cookie = Mage::getSingleton('core/cookie');
+		return $cookie->set('licensekey_'.$this->_extension,$key);
+	}	
+
+	public function getCookieCheckdate()
+	{
+		$cookie = Mage::getSingleton('core/cookie');
+		return $cookie->get('checkdate_'.$this->_extension);	
+	}
+	
+	public function setCookieCheckdate($date)
+	{
+		$cookie = Mage::getSingleton('core/cookie');
+		return $cookie->set('checkdate_'.$this->_extension,$date);	
+	}	
+	
+	public function getCookieSumcode()
+	{
+		$cookie = Mage::getSingleton('core/cookie');
+		return $cookie->get('sumcode_'.$this->_extension);	
+	}	
+	
+	public function setCookieSumcode($sumcode)
+	{
+		$cookie = Mage::getSingleton('core/cookie');
+		return $cookie->set('sumcode_'.$this->_extension,$sumcode);	
+	}	
+
+	public function getCookieResponseCode()
+	{
+		$cookie = Mage::getSingleton('core/cookie');
+		return $cookie->get('reponsecode_'.$this->_extension);	
+	}	
+	
+	public function setCookieResponseCode($reponseCode)
+	{
+		$cookie = Mage::getSingleton('core/cookie');
+		return $cookie->set('reponsecode_'.$this->_extension,$reponseCode);	
+	}		
+	
+	public function getCookieIsvalid()
+	{
+		$cookie = Mage::getSingleton('core/cookie');
+		return $cookie->get('valid_'.$this->_extension);	
+	}	
+	
+	public function setCookieIsvalid($isvalid)
+	{
+		$cookie = Mage::getSingleton('core/cookie');
+		return $cookie->set('valid_'.$this->_extension,$isvalid);	
+	}	
+	
+	/* End of using cookie for storeing license info */
+
+	
+	/***********/
+	/*Use database for storeing license info*/
+	/***********/
+	
+	public function setDBLicenseType($licenseType)
+	{
+		$this->_getLogger()->setData('license_type',$licenseType);
+	}
+	
+	public function getDBLicenseType()
+	{
+		return $this->_getLogger()->getData('license_type');
+	}	
+	
+	public function setDBLicenseKey($key)
+	{
+		$this->_getLogger()->setData('license_key',$key);
+	}	
+	
+	public function getDBLicenseKey()
+	{
+		 return $this->_getLogger()->getData('license_key');
+	}		
+	
+	public function setDBCheckdate($checkdate)
+	{
+		$this->_getLogger()->setData('check_date',$checkdate);
+	}			
+	
+	public function getDBCheckdate()
+	{
+		return $this->_getLogger()->getData('check_date');
+	}		
+	
+	public function setDBSumCode($sumcode)
+	{
+		$this->_getLogger()->setData('sum_code',$sumcode);
+	}			
+	
+	public function getDBSumCode()
+	{
+		return $this->_getLogger()->getData('sum_code');
+	}		
+	
+	public function setDBResponseCode($response_code)
+	{
+		$this->_getLogger()->setData('response_code',$response_code);
+	}			
+	
+	public function getDBResponseCode()
+	{
+		return $this->_getLogger()->getData('response_code');
+	}	
+	
+	public function setDBIsvalid($is_valid)
+	{
+		$this->_getLogger()->setData('is_valid',$is_valid);
+	}			
+	
+	public function getDBIsvalid()
+	{
+		return $this->_getLogger()->getData('is_valid');
+	}	
+	
+	public function setDBExpiredTime($expired_time)
+	{
+		$this->_getLogger()->setData('expired_time',$expired_time);
+	}			
+	
+	public function getDBExpiredTime()
+	{
+		return $this->_getLogger()->getData('expired_time');
+	}		
+	
+	protected function _getLogger()
+	{
+		//if($this->_logger == null){
+		if (!isset($this->_logger[$this->_extension])){
+			$this->_logger[$this->_extension] = Mage::getResourceModel('magenotification/logger_collection')
+										->addFieldToFilter('extension_code',$this->_extension)
+										->getFirstItem();
+			$this->_logger[$this->_extension]->setData('extension_code',$this->_extension);
+		}
+		return $this->_logger[$this->_extension];
+	}
+	
+	protected function _saveLicenseLog()
+	{
+		if($this->_extension != null){
+			$this->_getLogger()->save();
+		}
+	}
+	
+	/* End of using database for storeing license info */
+	
+	public function getDomain($baseUrl){
+		$parseUrl = parse_url(trim($baseUrl));
+		$domain = trim($parseUrl['host'] ? $parseUrl['host'] : array_shift(explode('/', $parseUrl['path'], 2)));
+		if (strpos($domain,'www.') === 0) $domain = substr($domain,4);
+		return $domain;
+	}
+	
+	public function getExtensionList()
+	{
+		$list = array();
+        $modules = (array) Mage::getConfig()->getNode('modules')->children();
+		
+        foreach ($modules as $moduleName => $moduleInfo) {
+            if ($moduleName==='Magestore_Magenotification') {
+                continue;
+            }			
+			if(strpos('a'.$moduleName,'Magestore') == 0){
+				continue;
+			}
+			if((string)$moduleInfo->codePool != 'local'){
+				continue;
+			}
+			$moduleName = str_replace('Magestore_','',$moduleName);
+			$list[$moduleName] = $moduleName;
+		}
+		return $list;
+	}
+	
+	public function getExtensionOption()
+	{
+		$options = array();
+		$list = $this->getExtensionList();
+		if(count($list)){
+			foreach($list as $key=>$item){
+				$options[] = array('value'=>$key,'label'=>$item);
+			}
+		}
+		return $options;	
+	}
+	
+	public function getFeedbackStatusList()
+	{
+		$list = array();
+		$list[1] = $this->__('Approved');
+		$list[2] = $this->__('Canceled');
+		$list[3] = $this->__('Pending');
+		return $list;
+	}
+	
+	public function getFeedbackStatusOption()
+	{
+		$options = array();
+		$list = $this->getFeedbackStatusList();
+		if(count($list)){
+			foreach($list as $key=>$item){
+				$options[] = array('value'=>$key,'label'=>$item);
+			}
+		}
+		return $options;	
+	}		
+	
+	public function getExtensionVersion($extension)
+	{
+        $modules = Mage::getConfig()->getNode('modules')->children();
+		$modules = (array) $modules;
+		if(isset($modules[$extension])){
+			return (string)$modules[$extension]->version;	
+		}
+		if(isset($modules['Magestore_'.$extension])){
+			return (string)$modules['Magestore_'.$extension]->version;	
+		}
+		return null;
+	}
+	
+	public function getExtensionName($extension)
+	{
+		if(strpos('a'.$extension,'Magestore')){
+			$arrName = explode('_',$extension);
+			$extension = isset($arrName[1]) ? $arrName[1] : str_replace('Magestore','',$extension);
+		}	
+		return $extension;	
+	}
+	
+	public function getInvalidKeyNotice()
+	{
+		$extensionkey_link = Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/system_config/edit',array('section'=>'magenotificationsecure','_secure'=>true));
+		$extensionkey_link = '<a href="'.$extensionkey_link.'">'.$this->__('extension key management section').'</a>';
+		$message = $this->getErrorMessage();
+		$message = $message ? $message : $this->__('Invalid License Key');
+		$message .= '! '.$this->__('Please go to %s for more information.',$extensionkey_link);
+		$message = '<div id="messages"><ul class="messages"><li class="error-msg"><ul><li>'.$message.'</li></ul></li></ul></div>';
+		return $message;
+	}
+	
+	public function getLicenseKeyError($error_code)
+	{
+		switch($error_code){
+			case Magestore_Magenotification_Model_Keygen::GENERAL_ERROR :
+				return $this->__('Invalid License Key');
+			case Magestore_Magenotification_Model_Keygen::NOT_EXIST_LICENSE_KEY_ERROR :
+				return $this->__('Invalid License Key');
+			case Magestore_Magenotification_Model_Keygen::DISABLED_LICENSE_KEY_ERROR :
+				return $this->__('Invalid License Key');
+			case Magestore_Magenotification_Model_Keygen::EXPIRED_TRIAL_LICENSE_KEY_ERROR :
+				return $this->__('Expired License');
+			case Magestore_Magenotification_Model_Keygen::LIMITED_DOMAIN_ERROR :
+				return $this->__('License key does not match');
+		}
+		return null;
+	}
+
+}

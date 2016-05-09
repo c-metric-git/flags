@@ -14,21 +14,21 @@
  *
  * @category   Zend
  * @package    Zend_Oauth
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Http.php 20232 2010-01-12 17:56:33Z matthew $
  */
 
 /** Zend_Oauth_Http_Utility */
-#require_once 'Zend/Oauth/Http/Utility.php';
+require_once 'Zend/Oauth/Http/Utility.php';
 
 /** Zend_Uri_Http */
-#require_once 'Zend/Uri/Http.php';
+require_once 'Zend/Uri/Http.php';
 
 /**
  * @category   Zend
  * @package    Zend_Oauth
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Oauth_Http
@@ -80,16 +80,16 @@ class Zend_Oauth_Http
      * @return void
      */
     public function __construct(
-        Zend_Oauth_Consumer $consumer,
+        Zend_Oauth_Consumer $consumer, 
         array $parameters = null,
         Zend_Oauth_Http_Utility $utility = null
     ) {
         $this->_consumer = $consumer;
         $this->_preferredRequestScheme = $this->_consumer->getRequestScheme();
-        if ($parameters !== null) {
+        if (!is_null($parameters)) {
             $this->setParameters($parameters);
         }
-        if ($utility !== null) {
+        if (!is_null($utility)) {
             $this->_httpUtility = $utility;
         } else {
             $this->_httpUtility = new Zend_Oauth_Http_Utility;
@@ -105,7 +105,7 @@ class Zend_Oauth_Http
     public function setMethod($method)
     {
         if (!in_array($method, array(Zend_Oauth::POST, Zend_Oauth::GET))) {
-            #require_once 'Zend/Oauth/Exception.php';
+            require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception('invalid HTTP method: ' . $method);
         }
         $this->_preferredRequestMethod = $method;
@@ -174,14 +174,14 @@ class Zend_Oauth_Http
         try {
             $response = $this->_attemptRequest($params);
         } catch (Zend_Http_Client_Exception $e) {
-            #require_once 'Zend/Oauth/Exception.php';
+            require_once 'Zend/Oauth/Exception.php';
             throw new Zend_Oauth_Exception('Error in HTTP request', null, $e);
         }
-        if ($response !== null) {
+        if (!is_null($response)) {
             $body   = $response->getBody();
             $status = $response->getStatus();
         }
-        if ($response === null // Request failure/exception
+        if (is_null($response) // Request failure/exception
             || $status == 500  // Internal Server Error
             || $status == 400  // Bad Request
             || $status == 401  // Unauthorized
@@ -230,10 +230,10 @@ class Zend_Oauth_Http
                 $this->_preferredRequestScheme = Zend_Oauth::REQUEST_SCHEME_QUERYSTRING;
                 break;
             default:
-                #require_once 'Zend/Oauth/Exception.php';
+                require_once 'Zend/Oauth/Exception.php';
                 throw new Zend_Oauth_Exception(
                     'Could not retrieve a valid Token response from Token URL:'
-                    . ($response !== null
+                    . (!is_null($response) 
                         ? PHP_EOL . $response->getBody()
                         : ' No body - check for headers')
                 );

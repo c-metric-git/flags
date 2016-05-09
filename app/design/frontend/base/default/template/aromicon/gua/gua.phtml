@@ -37,16 +37,16 @@
         Event.observe(window, 'load', function() {
             try{ga('send', 'pageview', {'page': '<?php echo $this->getCheckoutUrl() ?>/<?php echo $this->getActiveStep()?>','title': '<?php echo $this->getActiveStep()?>'});}
             catch(e){console.log(e);}
-            Checkout.prototype.gotoSection = function(section){
-                    var sectionElement = $('opc-'+section);
-                    sectionElement.addClassName('allow');
-                    this.accordion.openSection('opc-'+section);
-                    this.reloadProgressBlock(section);
-                    /**aromicon gua code*/
-                    try{ga('send', 'pageview', {'page': '<?php echo $this->getCheckoutUrl() ?>/'+section,'title': section});}catch(e){
-                        console.log(e);
-                    }
-            };
+            //Checkout.prototype.gotoSection = function(section){
+            //        var sectionElement = $('opc-'+section);
+            //        sectionElement.addClassName('allow');
+            //        this.accordion.openSection('opc-'+section);
+            //        this.reloadProgressBlock(section);
+            //        /**aromicon gua code*/
+            //        try{ga('send', 'pageview', {'page': '<?php echo $this->getCheckoutUrl() ?>/'+section,'title': section});}catch(e){
+            //            console.log(e);
+            //        }
+            //};
         });
         <?php endif;?>
         <?php if($this->isEcommerce()): ?>

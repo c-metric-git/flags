@@ -1220,7 +1220,8 @@ ul.bullet ul li, ul.disc ul li {
 }
 .mini-cart .mini-cart-content .actions button {
 	float: left;
-	margin-right: 1px
+	margin-right: 1px;
+	padding:0 10px;
 }
 .mini-cart .mini-cart-content .truncated {
 	margin-left: 3px

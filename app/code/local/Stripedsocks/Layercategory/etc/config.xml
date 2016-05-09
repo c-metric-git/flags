@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Stripedsocks_Layercategory>
+            <version>1.0.0</version>
+        </Stripedsocks_Layercategory>
+    </modules>
+    <global>
+        <models>
+            <catalog>
+                <rewrite>
+                    <layer>Stripedsocks_Layercategory_Model_Layer</layer>
+                </rewrite>
+                <rewrite>
+                    <layer_filter_item>Stripedsocks_Layercategory_Model_Layer_Filter_Item</layer_filter_item>
+                </rewrite>
+            </catalog>
+        </models>
+    </global>
+</config>

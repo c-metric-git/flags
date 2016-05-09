@@ -124,187 +124,189 @@
 			<input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
 			<input type="hidden" name="related_product" id="related-products-field" value="" />
 		</div>
-		<div class="product-img-column <?php echo $grid['imgCol']; ?>">
-			<?php echo $this->getChildHtml('media') ?>
-			<?php if($_product->getIconlabel()!=''): ?>
-				<span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span>
-			<?php endif; ?>
-			<?php //echo $this->helper('ultimo/labels')->getLabels($_product); //Product labels ?>
-			<?php echo $this->getChildHtml('container_product_image_1'); ?>
-		</div>
-		<div class="product-primary-column product-shop <?php echo $grid['primCol']; ?>">
-			<div class="product-name">
-				<h1 itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
-			</div>
-			<div <?php if ($useRichSnippets) echo $helperSnippets->getOfferItemscope(); ?>>
-				<div class="product-type-data<?php echo $productTypeClasses; ?>"><?php echo $this->getChildHtml('product_type_data'); ?></div>
-				<?php echo $this->getTierPriceHtml(); ?>
-				<?php echo $priceProperties; ?>
-			</div> 
-			<?php 
-            $product_sku = $_product->getSku(); 
-            $sa_reviews = "<script type='text/javascript'>  var sa_product = '".$product_sku."'; function saLoadScript(src) { var js = window.document.createElement('script'); js.src = src; js.type = 'text/javascript'; document.getElementsByTagName('head')[0].appendChild(js); } saLoadScript('//www.shopperapproved.com/product/12756/'+sa_product+'.js'); </script><div id='product_just_stars' class='reg'></div>";
-            echo $sa_reviews;
-            //echo $this->getReviewsSummaryHtml($_product, false, true); //magento in built reviews ?>
-			<?php /*if ($shortDescription): ?>
-				<div class="short-description"><div class="std" itemprop="description"><?php echo $shortDescription; ?></div></div>
-			<?php endif; */?>
-		 <div class="row"> 	
-		 	<div class="col-sm-4"> 	
-	             <div class="sku" style="font-family:Lato; font-weight:bold;">               
-				<?php 
-				echo $this->__("Product Id: ");?>
-	            <span class="sku-val">
-				<?php echo $_product->getSku();?>
-	            </span>
-	            </div>
-	         </div>
-	       <?php  
-	       $grouped_simpleitem_min_qty=Mage::registry('grouped_simpleitem_min_qty');
-			if(isset($grouped_simpleitem_min_qty) &&  !empty($grouped_simpleitem_min_qty))
-			{
-			   $grouped_simpleitem_min_qty=Mage::registry('grouped_simpleitem_min_qty');
-		    }
-		    else
-		    {
-		    	$grouped_simpleitem_min_qty='null';
-		    }   
-     
-         ?>
-	      <?php if(!$_product->isSaleable() && $_isActive && !$_product->isGrouped()): ?>   
-	          <div class="col-sm-4" id="product_detail_stock_lable" style="padding-top:10px"> 	
-               <strong><?php echo $this->__('Out of Stock') ?></strong>
-	         </div>     
-	      <?php  endif; ?>  
-	       <?php if($_product->isGrouped() && $grouped_simpleitem_min_qty == 0): ?>   
-	          <div class="col-sm-4" id="product_detail_stock_lable" style="padding-top:10px"> 	
-               <strong><?php echo $this->__('Out of Stock') ?></strong>
-	         </div>     
-	      <?php  endif; ?>   
-	     </div>   
-		<?php if($_product->isSaleable() && !$_product->isGrouped() ): ?>			
-			<div style="display:inline-block">
-				<?php 
-				   $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
-				?>
-				<span class="instock-qty"><?php if($stock->getQty()>0): ?><?php echo $this->__("Quantity in Stock: ");echo intval($stock->getQty()); ?><?php else: ?>&nbsp;<?php endif; ?></span>
-				&nbsp;<span class="expected-qty">&nbsp;</span>
-            </div>
-		<?php endif; ?>
-		<?php if($_product->isGrouped()): ?>
-	
-			<div style="display:inline-block">
-			<span class="instock-qty">
-				<?php if( $grouped_simpleitem_min_qty > 0): ?>
-				<?php echo $this->__("Quantity in Stock: ");
-				 echo $grouped_simpleitem_min_qty; ?>
-				  <input type='hidden' name="group_max_quantity" value="<?php  echo $grouped_simpleitem_min_qty; ?>">
-				<?php endif; ?>
-			   </span>
-				
-            </div>
-		<?php endif; ?>
-            <div style="clear:both;margin-top: 5px;"></div>
-            <!--Want more than we have? <a>Click Here</a>-->
-			<?php echo $this->getChildHtml('container_product_primary_1'); ?>
-			<?php if (isset($p['primCol_1'])) echo $p['primCol_1']; ?>
-			<?php if ($sku = $_product->getSku()): ?>
-				<?php if ($theme->getCfg('product_page/sku')): ?>
-					<div class="sku">
-						<span class="label"><?php echo $this->__('SKU'); ?>: </span>
-						<span class="value"><?php echo $sku; ?></span>
-					</div>
-				<?php endif; ?>
-				<?php if ($useRichSnippets): ?><meta itemprop="productID" content="sku:<?php echo $sku; ?>" /><?php endif; ?>
-			<?php endif; ?>
-			<?php echo $this->getChildHtml('alert_urls'); //alerts ?>
-			<?php if ($extrahint_html = $this->getChildHtml('extrahint')): //qty increments ?>
-				<div class="extrahint-wrapper"><?php echo $extrahint_html; ?></div>
-			<?php endif; ?>
-			<?php //end: offers ?>
-			<?php if (!$this->hasOptions()): //add to cart when no options (e.g. simple products) ?>
-				<?php if($_product->isSaleable() && !$_product->isGrouped() ): ?>
-					<div class="add-to-box">
-						<?php echo $this->getChildHtml('addtocart') ?>
-					</div>
-				<?php endif; ?>
-				<?php if($_product->isGrouped() && $grouped_simpleitem_min_qty > 0 ): ?>
-					<div class="add-to-box">
-						<?php echo $this->getChildHtml('addtocart') ?>
-					</div>
-				<?php endif; ?>
-				<?php echo $this->getChildHtml('extra_buttons') ?>
-			<?php endif; ?>
-			<?php if ($_product->isSaleable() && $this->hasOptions()): ?>
-				<?php if ($container1_html = $this->getChildChildHtml('container1', '', true, true)): ?>
-					<div class="container1-wrapper"><?php echo $container1_html; ?></div>
-				<?php endif; ?>
-			<?php endif;?>	
-		<?php if( !$_product->isSaleable() && $_isActive && !$_product->isGrouped()): ?>
-                <div class="product-options">
-                    <table width="100%">
-                                             
-                        <tr>
-            				<td class="product_detail_email_sunscription" style="padding-bottom: 5px; width: 60px;"><?php echo $this->__('Email') ?></td>
-                            <td class="product_detail_email_sunscription">
-                                <input type="text" id="subscription_email" name="subscription_email" value="" style="width:200px;" class="test input-text required-entry validate-email" />
-                            </td>
-                            <td>
-                                <button onclick="productAddToCartForm.submit();" class="button btn-cart pull-left" type="button"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
-                            </td>
-                        </tr>
-                        <!--<tr>
-                            <td>&nbsp;</td>
-                            <td style="font-size:10px;">
-                                (<?php echo $this->__("Notify me when this product is back in stock") ?>)
-                            </td>
-                        </tr>-->
-                      <!--  <tr>
-                            <td style="">&nbsp;</td>
-                            <td>
-                                <button onclick="productAddToCartForm.submit();" class="button btn-cart pull-left" type="button"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
-                            </td>
-                        </tr>-->
-                    </table>
-                </div>
-            <?php endif; ?>	
-            <?php if( $_product->isGrouped()  &&  $grouped_simpleitem_min_qty == 0  ): ?>
-                <div class="product-options">
-                    <table width="100%">
-                                             
-                        <tr>
-            				<td class="product_detail_email_sunscription" style="padding-bottom: 5px; width: 60px;"><?php echo $this->__('Email') ?></td>
-                            <td class="product_detail_email_sunscription">
-                                <input type="text" id="subscription_email" name="subscription_email" value="" style="width:200px;" class="test input-text required-entry validate-email" />
-                            </td>
-                            <td>
-                                <button onclick="productAddToCartForm.submit();" class="button btn-cart pull-left" type="button"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
-                            </td>
-                        </tr>
-                        <!--<tr>
-                            <td>&nbsp;</td>
-                            <td style="font-size:10px;">
-                                (<?php echo $this->__("Notify me when this product is back in stock") ?>)
-                            </td>
-                        </tr>-->
-                      <!--  <tr>
-                            <td style="">&nbsp;</td>
-                            <td>
-                                <button onclick="productAddToCartForm.submit();" class="button btn-cart pull-left" type="button"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
-                            </td>
-                        </tr>-->
-                    </table>
-                </div>
-            <?php endif; ?>	
-			<?php if ($addtoLinksHtml = $this->getChildHtml('addto')): //compare, wishlist, send to friend ?>
-				<div class="action-box clearer">
-					<?php echo $addtoLinksHtml; ?>
+	  <div class="">	
+				<div class="product-img-column <?php echo $grid['imgCol']; ?>">
+					<?php echo $this->getChildHtml('media') ?>
+					<?php if($_product->getIconlabel()!=''): ?>
+						<span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span>
+					<?php endif; ?>
+					<?php //echo $this->helper('ultimo/labels')->getLabels($_product); //Product labels ?>
+					<?php echo $this->getChildHtml('container_product_image_1'); ?>
 				</div>
-			<?php endif; ?>
-			<?php if (isset($p['primCol_2'])) echo $p['primCol_2']; ?>
-			<?php echo $this->getChildHtml('other'); ?>
-			<?php echo $this->getChildHtml('container_product_primary_2'); ?>
-		</div> <!-- end: product-shop -->
+				<div class="product-primary-column fp-product-detail product-shop <?php echo $grid['primCol']; ?>">
+						<h3 itemprop="name"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h3>
+					<!--<div <?php if ($useRichSnippets) echo $helperSnippets->getOfferItemscope(); ?>>-->
+				     <div class="fp-prod-price">
+						 <ul class="nav">	
+							<?php echo $this->getChildHtml('product_type_data'); ?>
+				
+							<?php echo $this->getTierPriceHtml(); ?>
+							<?php echo $priceProperties; ?>
+							<!--</div> -->
+							<?php 
+				            $product_sku = $_product->getSku(); 
+				            $sa_reviews = "<script type='text/javascript'>  var sa_product = '".$product_sku."'; function saLoadScript(src) { var js = window.document.createElement('script'); js.src = src; js.type = 'text/javascript'; document.getElementsByTagName('head')[0].appendChild(js); } saLoadScript('//www.shopperapproved.com/product/12756/'+sa_product+'.js'); </script><div id='product_just_stars' class='reg'></div>";
+				            echo $sa_reviews;
+				            //echo $this->getReviewsSummaryHtml($_product, false, true); //magento in built reviews ?>
+							<?php /*if ($shortDescription): ?>
+								<div class="short-description"><div class="std" itemprop="description"><?php echo $shortDescription; ?></div></div>
+							<?php endif; */?>
+						 
+					            <label class="fp-prod-id" ><?php echo $this->__("Product ID: ");?>
+						            <span class="">
+									<?php echo $_product->getSku();?>
+						            </span>
+						        </label>
+			              </ul>
+			          </div>  <!-- .fp-prod-price -->  
+			       <?php  
+			       $grouped_simpleitem_min_qty=Mage::registry('grouped_simpleitem_min_qty');
+					if(isset($grouped_simpleitem_min_qty) &&  !empty($grouped_simpleitem_min_qty))
+					{
+					   $grouped_simpleitem_min_qty=Mage::registry('grouped_simpleitem_min_qty');
+				    }
+				    else
+				    {
+				    	$grouped_simpleitem_min_qty='null';
+				    }   
+		     
+		         ?>
+			      <?php if(!$_product->isSaleable() && $_isActive && !$_product->isGrouped()): ?>   
+			          <div class="col-sm-4" id="product_detail_stock_lable" style="padding-top:10px"> 	
+		               <strong><?php echo $this->__('Out of Stock') ?></strong>
+			         </div>     
+			      <?php  endif; ?>  
+			       <?php if($_product->isGrouped() && $grouped_simpleitem_min_qty == 0): ?>   
+			          <div class="col-sm-4" id="product_detail_stock_lable" style="padding-top:10px"> 	
+		               <strong><?php echo $this->__('Out of Stock') ?></strong>
+			         </div>     
+			      <?php  endif; ?>   
+			     <!--</div>   -->
+				<?php if($_product->isSaleable() && !$_product->isGrouped() ): ?>			
+					<div style="fp-prod-qty form-group">
+						<?php 
+						   $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+						?>
+						<span class=""><?php if($stock->getQty()>0): ?><?php echo $this->__("Quantity in Stock: ");echo intval($stock->getQty()); ?><?php else: ?>&nbsp;<?php endif; ?></span>
+						
+		            </div>
+				<?php endif; ?>
+				<?php if($_product->isGrouped()): ?>
+			
+					<div style="display:inline-block">
+					<span class="instock-qty">
+						<?php if( $grouped_simpleitem_min_qty > 0): ?>
+						<?php echo $this->__("Quantity in Stock: ");
+						 echo $grouped_simpleitem_min_qty; ?>
+						  <input type='hidden' name="group_max_quantity" value="<?php  echo $grouped_simpleitem_min_qty; ?>">
+						<?php endif; ?>
+					   </span>
+						
+		            </div>
+				<?php endif; ?>
+		            <div style="clear:both;margin-top: 15px;"></div>
+		            <!--Want more than we have? <a>Click Here</a>-->
+					<?php echo $this->getChildHtml('container_product_primary_1'); ?>
+					<?php if (isset($p['primCol_1'])) echo $p['primCol_1']; ?>
+					<?php if ($sku = $_product->getSku()): ?>
+						<?php if ($theme->getCfg('product_page/sku')): ?>
+							<div class="sku">
+								<span class="label"><?php echo $this->__('SKU'); ?>: </span>
+								<span class="value"><?php echo $sku; ?></span>
+							</div>
+						<?php endif; ?>
+						<?php if ($useRichSnippets): ?><meta itemprop="productID" content="sku:<?php echo $sku; ?>" /><?php endif; ?>
+					<?php endif; ?>
+					<?php echo $this->getChildHtml('alert_urls'); //alerts ?>
+					<?php if ($extrahint_html = $this->getChildHtml('extrahint')): //qty increments ?>
+						<div class="extrahint-wrapper"><?php echo $extrahint_html; ?></div>
+					<?php endif; ?>
+					<?php //end: offers ?>
+					<?php if (!$this->hasOptions()): //add to cart when no options (e.g. simple products) ?>
+						<?php if($_product->isSaleable() && !$_product->isGrouped() ): ?>
+							<!-- class="add-to-box">-->
+								<?php echo $this->getChildHtml('addtocart') ?>
+						 <!--	</div> -->
+						<?php endif; ?>
+						<?php if($_product->isGrouped() && $grouped_simpleitem_min_qty > 0 ): ?>
+							<div class="add-to-box">
+								<?php echo $this->getChildHtml('addtocart') ?>
+							</div>
+						<?php endif; ?>
+						<?php echo $this->getChildHtml('extra_buttons') ?>
+					<?php endif; ?>
+					<?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+
+						<?php if ($container1_html = $this->getChildChildHtml('container1', '', true, true)): ?>
+							<div class="container1-wrapper"><?php echo $container1_html; ?></div>
+						<?php endif; ?>
+					<?php endif;?>	
+				<?php if( !$_product->isSaleable() && $_isActive && !$_product->isGrouped()): ?>
+		                <div class="product-options">
+		                    <table width="100%">
+		                                             
+		                        <tr>
+		            				<td class="product_detail_email_sunscription" style="padding-bottom: 5px; width: 60px;"><?php echo $this->__('Email') ?></td>
+		                            <td class="product_detail_email_sunscription">
+		                                <input type="text" id="subscription_email" name="subscription_email" value="" style="width:200px;" class="test input-text required-entry validate-email" />
+		                            </td>
+		                            <td>
+		                                <button onclick="productAddToCartForm.submit();" class="button btn-cart pull-left" type="button"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
+		                            </td>
+		                        </tr>
+		                        <!--<tr>
+		                            <td>&nbsp;</td>
+		                            <td style="font-size:10px;">
+		                                (<?php echo $this->__("Notify me when this product is back in stock") ?>)
+		                            </td>
+		                        </tr>-->
+		                      <!--  <tr>
+		                            <td style="">&nbsp;</td>
+		                            <td>
+		                                <button onclick="productAddToCartForm.submit();" class="button btn-cart pull-left" type="button"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
+		                            </td>
+		                        </tr>-->
+		                    </table>
+		                </div>
+		            <?php endif; ?>	
+		            <?php if( $_product->isGrouped()  &&  $grouped_simpleitem_min_qty == 0  ): ?>
+		                <div class="product-options">
+		                    <table width="100%">
+		                                             
+		                        <tr>
+		            				<td class="product_detail_email_sunscription" style="padding-bottom: 5px; width: 60px;"><?php echo $this->__('Email') ?></td>
+		                            <td class="product_detail_email_sunscription">
+		                                <input type="text" id="subscription_email" name="subscription_email" value="" style="width:200px;" class="test input-text required-entry validate-email" />
+		                            </td>
+		                            <td>
+		                                <button onclick="productAddToCartForm.submit();" class="button btn-cart pull-left" type="button"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
+		                            </td>
+		                        </tr>
+		                        <!--<tr>
+		                            <td>&nbsp;</td>
+		                            <td style="font-size:10px;">
+		                                (<?php echo $this->__("Notify me when this product is back in stock") ?>)
+		                            </td>
+		                        </tr>-->
+		                      <!--  <tr>
+		                            <td style="">&nbsp;</td>
+		                            <td>
+		                                <button onclick="productAddToCartForm.submit();" class="button btn-cart pull-left" type="button"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
+		                            </td>
+		                        </tr>-->
+		                    </table>
+		                </div>
+		            <?php endif; ?>	
+					<?php if ($addtoLinksHtml = $this->getChildHtml('addto')): //compare, wishlist, send to friend ?>
+						<div class="action-box clearer">
+							<?php echo $addtoLinksHtml; ?>
+						</div>
+					<?php endif; ?>
+					<?php if (isset($p['primCol_2'])) echo $p['primCol_2']; ?>
+					<?php echo $this->getChildHtml('other'); ?>
+					<?php echo $this->getChildHtml('container_product_primary_2'); ?>
+				</div> <!-- end: product-shop -->
+			</div> <!-- .row -->	
 		<?php if (isset($grid['secCol'])): //(!empty($secondaryColUnits)): ?>
 			<div class="product-secondary-column <?php echo $grid['secCol']; ?> custom-sidebar-right">
 				<div class="inner">
@@ -321,7 +323,7 @@
 		<?php endif; ?>
 		<?php if ($_product->isSaleable() && $this->hasOptions()): ?>
 			<?php if ($container2_html = $this->getChildChildHtml('container2', '', true, true)): ?>
-				<div class="box-additional <?php echo $grid['cont2Col']; ?>">
+				<div class="box-additional<?php echo $grid['cont2Col']; ?>">
 					<div class="container2-wrapper"><?php echo $container2_html; ?></div>
 				</div>
 			<?php endif; ?>
@@ -390,7 +392,8 @@ else
 	<?php if (isset($p['lowerPrimCol_2'])): ?>
 		<div class="box-additional <?php echo $grid['lowerPrimCol']; ?>"><?php echo $p['lowerPrimCol_2']; ?></div>
 	<?php endif; ?>
-<div class="box-additional grid12-12">    
+<!--<div class="box-additional grid12-12">  -->
+<div class="col-md-12 mb15">
 <?php
 //Related products
 	$position = $theme->getCfg('product_page/related_position');

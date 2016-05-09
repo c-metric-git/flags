@@ -127,7 +127,7 @@ class FLTeamDeskCategory {
                             $csv_row[] = ($tdCategory["Level"]==1?"Flagsrus":"Flagsrus/".$category_path).$csv_seperator; 
                             $csv_row[] = $tdCategory['Magento_Sort Order'].$csv_seperator; 
                             $csv_row[] = ($tdCategory['is_visible']=="Yes"?"Yes":"No").$csv_seperator; 
-                            $csv_row[] = $csv_seperator; 
+                            $csv_row[] = str_replace("http://www.flagsrus.org/","",$tdCategory['url'].$csv_seperator);  
                             $csv_row[] = $tdCategory['description'].$csv_seperator; 
                             $csv_row[] = $filename.$csv_seperator; 
                             $csv_row[] = $csv_seperator; 

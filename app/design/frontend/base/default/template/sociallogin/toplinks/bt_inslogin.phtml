@@ -2,29 +2,29 @@
 
 <?php if(!$isLogin){?>
     <?php $user = $this->getFbUser()?>
-	<button id="bt-loginins-popup" class="bt-login-social" alt="<?php echo $this->__('Login by Instagram') ?>" title="<?php echo $this->__('Login by Instagram') ?>" onclick="instaLogin()" href="javascript:void(0);">
+	<button id="bt-loginins-popup" class="bt-login-social" title="<?php echo $this->__('Login by Instagram') ?>" onclick="instaLogin()" >
 	<span><span><?php echo $this->__('Instagram Sign in') ?></span></span>
 </button>
     <script type="text/javascript">
     var newwindow;
     var intId;
     function instaLogin(){
-        var  screenX    = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft;
-        var	 screenY    = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop;
-        var	 outerWidth = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.body.clientWidth;
-        var	 outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.body.clientHeight - 22);
-        var	 width    = 500;
-        var	 height   = 270;
-        var	 left     = parseInt(screenX + ((outerWidth - width) / 2), 10);
-        var	 top      = parseInt(screenY + ((outerHeight - height) / 2.5), 10);
-        var	 features = (
-                'width=' + width +
-                ',height=' + height +
-                ',left=' + left +
-                ',top=' + top
+        var  screenXinsp    = typeof window.screenX != 'undefined' ? window.screenX : window.screenLeft;
+        var	 screenYinsp    = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop;
+        var	 outerWidthinsp = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.body.clientWidth;
+        var	 outerHeightinsp = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.body.clientHeight - 22);
+        var	 widthinsp    = 500;
+        var	 heightinsp   = 510;
+        var	 leftinsp     = parseInt(screenXinsp + ((outerWidthinsp - widthinsp) / 2), 10);
+        var	 topinsp      = parseInt(screenYinsp + ((outerHeightinsp - heightinsp) / 2), 10);
+        var	 featuresinsp = (
+                'width=' + widthinsp +
+                ',height=' + heightinsp +
+                ',left=' + leftinsp +
+                ',top=' + topinsp
               );
     
-        newwindow=window.open('<?php echo $this->getInstagramLoginUrl() ?>','Login_by_instagram',features);
+        newwindow=window.open('<?php echo $this->getInstagramLoginUrl() ?>','Login_by_instagram',featuresinsp);
     
         if (window.focus) {
             newwindow.focus()

@@ -2,7 +2,7 @@
 
 <?php if(!$isLogin){?>
     <?php $user = $this->getFbUser()?>
-	<button id="bt-loginfb-popup" class="bt-login-social" alt="<?php echo $this->__('Login by Facebook') ?>" title="<?php echo $this->__('Login by Facebook') ?>" onclick="fbLogin()" href="javascript:void(0);">
+	<button id="bt-loginfb-popup" class="bt-login-social" title="<?php echo $this->__('Login by Facebook') ?>" onclick="fbLogin()" >
 	<span><span><?php echo $this->__('Facebook Sign in') ?></span></span>
 </button>
     <script type="text/javascript">

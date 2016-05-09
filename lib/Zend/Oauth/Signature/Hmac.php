@@ -14,31 +14,31 @@
  *
  * @category   Zend
  * @package    Zend_Oauth
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Hmac.php 20217 2010-01-12 16:01:57Z matthew $
  */
 
 /** Zend_Oauth_Signature_SignatureAbstract */
-#require_once 'Zend/Oauth/Signature/SignatureAbstract.php';
+require_once 'Zend/Oauth/Signature/SignatureAbstract.php';
 
 /** Zend_Crypt_Hmac */
-#require_once 'Zend/Crypt/Hmac.php';
+require_once 'Zend/Crypt/Hmac.php';
 
 /**
  * @category   Zend
  * @package    Zend_Oauth
- * @copyright  Copyright (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 class Zend_Oauth_Signature_Hmac extends Zend_Oauth_Signature_SignatureAbstract
 {
     /**
      * Sign a request
-     *
-     * @param  array $params
-     * @param  mixed $method
-     * @param  mixed $url
+     * 
+     * @param  array $params 
+     * @param  mixed $method 
+     * @param  mixed $url 
      * @return string
      */
     public function sign(array $params, $method = null, $url = null)

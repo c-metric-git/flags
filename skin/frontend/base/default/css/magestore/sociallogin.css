@@ -5,7 +5,7 @@
 }
 
 .magestore-popup_social {
-    max-width: 565px !important;
+    max-width: 622px !important;
 }
 .clear{
  width:100%;
@@ -23,123 +23,118 @@
 	box-sizing: border-box;
 }
 
-#sociallogin_button #bt-loginfb span, #bt-loginfb-popup span{
+ #bt-loginfb span, #bt-loginfb-other span, #bt-loginfb-popup span{
     height:35px;
     background: url("sociallogin/fb.png") no-repeat;
     display: block;
     float: left;
 }
-#sociallogin_button #bt-loginfb span span, #bt-loginfb-popup span span{background: none repeat scroll 0 0 #2d78bd;}
-#sociallogin_button #bt-loginamazon span, #bt-loginamazon-popup span{
+#bt-loginfb span span,#bt-loginfb-other span span, #bt-loginfb-popup span span{background: none repeat scroll 0 0 #2d78bd;}
+#bt-loginamazon span,#bt-loginamazon-other span, #bt-loginamazon-popup span{
     height:35px;
     background: url("sociallogin/bt_amazon.png") no-repeat;
     display: block;
     float: left;
 }
-#sociallogin_button #bt-loginamazon span span, #bt-loginamazon-popup span span{background: none repeat scroll 0 0 #fe9900;}
-#sociallogin_button #bt-loginins span, #bt-loginins-popup span{
+#bt-loginamazon span span,#bt-loginamazon-other span span, #bt-loginamazon-popup span span{background: none repeat scroll 0 0 #fe9900;}
+#bt-loginins span,#bt-loginins-other span, #bt-loginins-popup span{
     height:35px;
     background: url("sociallogin/bt_intagram.png") no-repeat;
     display: block;
     float: left;
 }
-#sociallogin_button #bt-loginins span span, #bt-loginins-popup span span{background: none repeat scroll 0 0 #42729a;}
-#sociallogin_button #bt-logingo span, #bt-logingo-popup span{
+#bt-loginins span span,#bt-loginins-other span span, #bt-loginins-popup span span{background: none repeat scroll 0 0 #42729a;}
+#bt-logingo span,#bt-logingo-other span, #bt-logingo-popup span{
     height: 35px;
     background: url("sociallogin/google.png") no-repeat;
     display: block;
     float: left;
 }
-#sociallogin_button #bt-logingo span span, #bt-logingo-popup span span{background: none repeat scroll 0 0 #dd4b39;}
+#bt-logingo span span,#bt-logingo-other span span, #bt-logingo-popup span span{background: none repeat scroll 0 0 #dd4b39;}
 #magestore-popup  .input-box{width:100%;}
-#sociallogin_button #bt-loginvk span, #bt-loginvk-popup span{
+#bt-loginvk span,#bt-loginvk-other span, #bt-loginvk-popup span{
     height: 35px;
     background: url("sociallogin/vk.png") no-repeat;
     display: block;
     float: left;
 }
-#sociallogin_button #bt-loginvk span span, #bt-loginvk-popup span span{background: none repeat scroll 0 0 #44678d;}
-#sociallogin_button #bt-loginper span, #bt-loginper-popup span{
+#bt-loginvk span span,#bt-loginvk-other span span, #bt-loginvk-popup span span{background: none repeat scroll 0 0 #44678d;}
+#bt-loginper span,#bt-loginper-other span, #bt-loginper-popup span{
     height: 35px;
     background: url("sociallogin/persional.png") no-repeat;
     display: block;
     float: left;
 }
-#sociallogin_button #bt-loginper span span, #bt-loginper-popup span span{background: none repeat scroll 0 0 #ffc823;}
-#bt-logintw-popup span{
-    height: 35px;
-    background: url("sociallogin/twit.png") no-repeat;
-    display: block;
-    float: left;
-}
-#sociallogin_button #bt-loginse span, #bt-loginse-popup span{
+#bt-loginper span span,#bt-loginper-other span span, #bt-loginper-popup span span{background: none repeat scroll 0 0 #ffc823;}
+
+#bt-loginse span,#bt-loginse-other span, #bt-loginse-popup span{
     height: 35px;
     background: url("sociallogin/stack.png") no-repeat;
     display: block;
     float: left;
 }
-#sociallogin_button #bt-loginse span span, #bt-loginse-popup span  span{background: none repeat scroll 0 0 #3170c3;}
+#bt-loginse span span,#bt-loginse-other span span, #bt-loginse-popup span  span{background: none repeat scroll 0 0 #3170c3;}
 
-#sociallogin_button #bt-logintw span, #bt-loginaol-popup span{
+#bt-logintw span,#bt-logintw-other span, #bt-loginaol-popup span{
     height: 35px;
 	background: url("sociallogin/twit.png") no-repeat;
     display: block;
     float: left;
 }
-#sociallogin_button #bt-logintw span span, #bt-loginaol-popup span span{background: none repeat scroll 0 0 #28bceb;}
-#sociallogin_button #bt-loginwp span, #bt-loginwp-popup span{   
+#bt-logintw span span,#bt-logintw-other span span, #bt-loginaol-popup span span{background: none repeat scroll 0 0 #28bceb;}
+#bt-loginwp span,#bt-loginwp-other span, #bt-loginwp-popup span{   
 	background: url("sociallogin/wpress.png") no-repeat;  
 }
-#sociallogin_button #bt-loginwp span span, #bt-loginwp-popup span span{background: none repeat scroll 0 0 #555555;}
-#sociallogin_button #bt-loginya span, #bt-loginya-popup span{
+#bt-loginwp span span,#bt-loginwp-other span span, #bt-loginwp-popup span span{background: none repeat scroll 0 0 #555555;}
+#bt-loginya span, #bt-loginya-popup span{
     height: 35px;
 	background: url("sociallogin/yh.png") no-repeat;
     display: block;
     float: left;
 }
-#sociallogin_button #bt-loginya span span, #bt-loginya-popup span span{background: none repeat scroll 0 0 #6f2b90;}
+#bt-loginya span span,#bt-loginya-other span span, #bt-loginya-popup span span{background: none repeat scroll 0 0 #6f2b90;}
 /* by Hai Ta */
-#sociallogin_button #bt-loginaol span, #bt-loginaol-popup span{    
+#bt-loginaol span,#bt-loginaol-other span, #bt-loginaol-popup span{    
 	background: url("sociallogin/aol.png") no-repeat;  
 }
-#sociallogin_button #bt-loginaol span span, #bt-loginaol-popup span span{background: none repeat scroll 0 0 #ffc923;}
-#sociallogin_button #bt-loginwp span, #bt-loginwp-popup span{   
+#bt-loginaol span span,#bt-loginaol-other span span, #bt-loginaol-popup span span{background: none repeat scroll 0 0 #ffc923;}
+#bt-loginwp span,#bt-loginwp-other span, #bt-loginwp-popup span{   
 	background: url("sociallogin/wpress.png") no-repeat;  
 }
-#sociallogin_button #bt-loginwp span span, #bt-loginwp-popup span span{background: none repeat scroll 0 0 #555555;}
-#sociallogin_button #bt-logincal span, #bt-logincal-popup span{    
+#bt-loginwp span span,#bt-loginwp-other span span, #bt-loginwp-popup span span{background: none repeat scroll 0 0 #555555;}
+#bt-logincal span,#bt-logincal-other span, #bt-logincal-popup span{    
 	background: url("sociallogin/clavid.png") no-repeat;    
 }
-#sociallogin_button #bt-logincal span span, #bt-logincal-popup span span{ background: none repeat scroll 0 0 #12396b;}
-#sociallogin_button #bt-loginorg span, #bt-loginorg-popup span{    
+#bt-logincal span span,#bt-logincal-other span span, #bt-logincal-popup span span{ background: none repeat scroll 0 0 #12396b;}
+#bt-loginorg span,#bt-loginorg-other span, #bt-loginorg-popup span{    
 	background: url("sociallogin/orange.png") no-repeat;    
 }
-#sociallogin_button #bt-loginorg span span, #bt-loginorg-popup span span{background: none repeat scroll 0 0 #ff6501;}
-#sociallogin_button #bt-loginmp span, #bt-loginmp-popup span{    
+#bt-loginorg span span,#bt-loginorg-other span span, #bt-loginorg-popup span span{background: none repeat scroll 0 0 #ff6501;}
+#bt-loginmp span,#bt-loginmp-other span, #bt-loginmp-popup span{    
 	background: url("sociallogin/mysp.png") no-repeat;    
 }
-#sociallogin_button #bt-loginmp span span, #bt-loginmp-popup span span{background: none repeat scroll 0 0 #ff6501;}
-#sociallogin_button #bt-loginlive span, #bt-loginlive-popup span{    
+#bt-loginmp span span,#bt-loginmp-other span span, #bt-loginmp-popup span span{background: none repeat scroll 0 0 #ff6501;}
+#bt-loginlive span,#bt-loginlive-other span, #bt-loginlive-popup span{    
 	background: url("sociallogin/live.png") no-repeat;
 }
-#sociallogin_button #bt-loginlive span span, #bt-loginlive-popup span span{  background: none repeat scroll 0 0 #30a8e4;}
-#sociallogin_button #bt-loginfq span, #bt-loginfq-popup span{    
+#bt-loginlive span span,#bt-loginlive-other span span, #bt-loginlive-popup span span{  background: none repeat scroll 0 0 #30a8e4;}
+#bt-loginfq span,#bt-loginfq-other span, #bt-loginfq-popup span{    
 	background: url("sociallogin/fq.png") no-repeat;   
 }
-#sociallogin_button #bt-loginfq span span, #bt-loginfq-popup span span{	background: none repeat scroll 0 0 #099eba;}
+#bt-loginfq span span,#bt-loginfq-other span span, #bt-loginfq-popup span span{	background: none repeat scroll 0 0 #099eba;}
 
-#sociallogin_button #bt-loginlinked span, #bt-loginlinked-popup span{    
+#bt-loginlinked span,#bt-loginlinked-other span, #bt-loginlinked-popup span{    
 	background: url("sociallogin/linked.png") no-repeat;   
 }
-#sociallogin_button #bt-loginlinked span span, #bt-loginlinked-popup span span{background: none repeat scroll 0 0 #017fb2;}
-#sociallogin_button #bt-loginopen span, #bt-loginopen-popup span{    
+#bt-loginlinked span span,#bt-loginlinked-other span span, #bt-loginlinked-popup span span{background: none repeat scroll 0 0 #017fb2;}
+#bt-loginopen span,#bt-loginopen-other span, #bt-loginopen-popup span{    
 	background: url("sociallogin/myop.png") no-repeat;
 }
-#sociallogin_button #bt-loginopen span span, #bt-loginopen-popup span span{background: none repeat scroll 0 0 #74bc52;}
-#sociallogin_button #bt-loginlj span, #bt-loginlj-popup span{    
+#bt-loginopen span span,#bt-loginopen-other span span, #bt-loginopen-popup span span{background: none repeat scroll 0 0 #74bc52;}
+#bt-loginlj span,#bt-loginlj-other span, #bt-loginlj-popup span{    
 	background: url("sociallogin/liveJ.png") no-repeat;   
 }
-#sociallogin_button #bt-loginlj span span, #bt-loginlj-popup span span{background: none repeat scroll 0 0 #143ea9;}
+#bt-loginlj span span,#bt-loginlj-other span span, #bt-loginlj-popup span span{background: none repeat scroll 0 0 #143ea9;}
 
 #sociallogin-other-div{	
 	display: block;	
@@ -149,22 +144,24 @@
 	width: 91px;
 	display: block;
 }
+#sociallogin-other-a-popup{margin-right:30px}
 .sociallogin-other{
-	display: block;	
+	display: block;
 	float: right;
-    width: 100%;
+	width: 100%;
+	/* margin-top: -25px; */
 }
 .sociallogin-other-span{
-	cursor: pointer;    
+	cursor: pointer;
 	font-weight: bold;
-    white-space: nowrap;
+	white-space: nowrap;
 }
 
-.sociallogin-other-span-img-popup{	
+.sociallogin-other-span-img-popup{
 	float: right;
-	width: 26px;
-	height: 16px;
-	cursor: pointer;        
+	width: 20px;
+	height: 25px;
+	cursor: pointer;
 	background: url("sociallogin/add.png") no-repeat right;
 }
 
@@ -175,16 +172,22 @@
     width: auto;
 	max-width:375px;
 }
+
 button.bt-login-social{background:none;border:none;cursor: pointer;}
-button.bt-login-social:hover{opacity: 0.9;}
-button.bt-login-social span{	
+button.bt-login-social:hover{opacity: 0.9; /* width: 88%; */}
+button.bt-login-social span{
 	height:35px;
 	line-height:35px;
 	color:#fff;
-	padding:0 0 0 35px;
+	padding: 0 0 0 35px;
 	float:left;
 	}
-
+button#bt-logintw-popup span{
+    height: 35px;
+    background: url("sociallogin/twit.png") no-repeat;
+    display: block;
+    float: left;
+}
 #sociallogin_button .sociallogin-other #other_sociallogin_label{font-family: Open sans;}
 button.bt-login-social span span{
 	background-position:100% 0 !important;
@@ -203,24 +206,31 @@ button.bt-login-social span span{
 	text-transform:none;
 }
 button.bt-login-social span span {
-	min-width: 134px;
+	min-width: 125px;
 }
 	
 /* change poppup */
 #magestore-popup{
-	padding: 10px;
-    position: fixed;
-    width: 706px;
-    z-index: 9990;
-	background: #fff;
-	border: 2px;
-	min-width: 200px;
-	/* border-radius: 7px; */
+    top: 100px;
+    position: absolute;
+    z-index: 40020;
+    border-radius: 7px;
+    border: 10px solid rgba(255, 255, 255, 0.58);
+}
+#magestore-popup .border-popup{
+    float: left;
+    width: 100%;
+    padding: 15px;
+    height: auto;
+    background: #fff;
 }
 #magestore-login-social{
 	float: right;
-	width: 34%;
-	/* text-align: center; */
+	width: 43%;
+}
+#magestore-login-social .magestore-loign-h3{
+    float: right;
+    padding-right: 102px;
 }
 #bg_fade {
     background-color: #000000;
@@ -251,36 +261,44 @@ button.bt-login-social span span {
 #sociallogin-close:hover{
 	text-decoration: underline;
 }
+#sociallogin-close-popup{
+    cursor: pointer;
+    position: absolute;
+    z-index: 9999;
+    right: -22px;
+    top: -22px;
+    height: 34px;
+    width: 33px;
+    background: url("sociallogin/close.png") no-repeat;
+}
+#sociallogin-close-popup:hover{
+	text-decoration: underline;
+}
 #magestore-login-form{
-	margin-left: 10px;
+	padding-left: 33px;
+    width: 57%;
+    background: url("sociallogin/bg-login.png") no-repeat right center;
 }
 .magestore-loign-h3{
 	margin-bottom: 18px;
-	border-bottom: 1px solid #CCCCCC;
 	font-family: 'tahoma',Arial,Helvetica,sans-serif;
     font-size: 15px;
 	padding-bottom: 3px;
 }
 .magestore-login-input-box{
-	margin-bottom: 12px;
-	height: 30px;
+
 }
 .login-label{
-	float: left;	
-	padding-top: 5px;
-    width: 32%;
-	font-weight: bold;
-	color: #666;
+    padding-top: 5px;
+    font-weight: normal;
+    color: #666;
+    margin: 5px;
 }
-#magestore-popup .form-list label{float: left;text-align: left;}
-#magestore-popup .form-list .sociallogin-field {clear: none;}
 .login-label em{
 	color: red;
 }
 .sociallogin-input-box{
-	float: right;
-	width: 246px;
-	margin-bottom: 12px;
+
 }
 .sociallogin-input-box .input-text{
 	border: 1px solid #CCCCCC;
@@ -291,22 +309,31 @@ button.bt-login-social span span {
     margin: 0;
     padding: 5px 4px;
     width: 230px;
+    height: 32px;
 }
 .magestore-login-popup-button{
-	float: right;
+    float: left;
+    margin-top: 15px;
 }
-#magestore-forgot-password, #magestore-forgot-back{
-	margin-right: 69px;
-	font-size: 10px;
-	float: left;
-	width: 100%;
+.magestore-login-popup-button button{
+    float: left;
+    margin-bottom: 15px;
+}
+.magestore-login-popup-button .pass-register {
+    float: left;
+    width: 100%;
+}
+#magestore-forgot-password, #magestore-forgot-back,
+#magestore-sociallogin-create-new-customer{
+    font-size: 16px;
+    float: left;
 }
 #magestore-forgot-back{
 	margin-right: 40px;
 }
 .popup_click_btn{
-	margin-right: 10px !important;
-	float: right;
+	float: left;
+	/* margin-left: 137px; */
 }
 .magestore-login-input-box  .login-label em{	
 }
@@ -317,51 +344,54 @@ button.bt-login-social span span {
 	margin: 5px 0 5px 152px;
 }
 .magestore-invalid-email{
-	margin-left: 0px;
+	margin-left: 152px;
 	color: red;
 }
 
 #sociallogin-forgot{
 	margin-bottom : 20px;
+    padding-right: 15px;
 }
 .magestore-sociallogin-create-new-customer{
 	float: left;	
 	clear: both;
 }
-.magestore-sociallogin-create-new-customer a{	
-	margin-left: 10px;
+#magestore-button-sociallogin-forgot{
+    margin-top: 15px;
+}
+.magestore-sociallogin-create-new-customer a{
+    padding-left: 32px;
 	font-weight: bold;
 }
 .sociallogin-field{
-	width: 218px !important;
+	width: 218px;
 	float: left;
 }
 .sociallogin-field .input-text{
-	width: 168px  !important;
+    width: 230px;
 }
 #magestore-create-back{
-	font-size: 10px;
+	font-size: 14px;
+	float: left;
+	margin-left: 80px;
+	margin-top: 6px;
 }
 .sociallogin-other-button-popup{
 	float: left;
+	text-align: center;
+	padding: 15px 0px 0px;
 }
-#magestore-login-social  .magestore-loign-h3{text-align:center;}
-#sociallogin_button ul.right{float:right;}
+#sociallogin_button ul.right{float:right;    width: 100%;text-align: center;}
 #sociallogin_button ul.left{float:left;}
 
-
-/* CSS added by JS on 11th March 2016, 17:20 */
-
-
-.magestore-login-form-popup .ajax-login-image {
-   
-    margin: 5px auto 5px auto;
+/*Register*/
+#magestore-create-user {
+    width: 57%;
+    background: url("sociallogin/bg-login.png") no-repeat right center;
+    padding-left: 33px;
 }
-
-.sociallogin-field .validate-email {
-    width: 356px !important;
-}
-
-.magestore-popup .magestore-invalid-email{
-	margin-left: 0px;
+.magestore-create-popup-button{
+    float: left;
+    width: 100%;
+    margin-top: 15px;
 }

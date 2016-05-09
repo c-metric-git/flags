@@ -50,9 +50,9 @@
 // Use OAuthConsumer as a test to see if any other instances of OAuth.php may
 // have been included. require_once() won't catch situations where multiple
 // copies of OAuth.php are included by different parts of an application.
-if(!class_exists("OAuthConsumer")) {
+//if(!class_exists("OAuthConsumer")) {
     require_once("OAuth.php");
-}
+//}
 
 define("OAUTH_PARAMS_IN_HEADERS", "HEADERS");
 define("OAUTH_PARAMS_IN_POST_BODY", "POSTBODY");

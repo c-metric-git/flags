@@ -1,7 +1,7 @@
 <?php $isLogin = $this->helper('customer')->isLoggedIn()?>
 <?php if(!$isLogin){?>
 <?php $this->setBackUrl()?>
-<button id="bt-loginlj-popup" class="bt-login-social" alt="<?php echo $this->__('Login by LiveJournal') ?>" title="<?php echo $this->__('Login by LiveJournal') ?>" onclick="ljLogin()" href="javascript:void(0);">
+<button id="bt-loginlj-popup" class="bt-login-social" title="<?php echo $this->__('Login by LiveJournal') ?>" onclick="ljLogin()">
 	<span><span><?php echo $this->__('Live Journal') ?></span></span>
 </button>
 <script type="text/javascript">

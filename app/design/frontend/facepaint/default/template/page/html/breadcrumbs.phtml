@@ -51,10 +51,10 @@
 ?>
 
 <?php if($crumbs && is_array($crumbs)): ?>
-                                
-<div class="breadcrumbs">
+                            
+<div class="row">
 
-    <ul>
+    <ol class="breadcrumb custom-brd">
 
         <?php foreach($crumbs as $_crumbName=>$_crumbInfo): ?>
 
@@ -62,7 +62,7 @@
 
                 <li class="<?php echo $_crumbName ?>" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
 
-                    <a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->escapeHtml($_crumbInfo['title']) ?>" itemprop="url"><span itemprop="title"><?php echo $this->escapeHtml($_crumbInfo['label']) ?></span></a>
+                    <a href="<?php echo $_crumbInfo['link'] ?>" title="<?php echo $this->escapeHtml($_crumbInfo['title']) ?>" itemprop="url"><?php echo $this->escapeHtml($_crumbInfo['label']) ?></a>
             <?php elseif($_crumbInfo['last']): ?>
                     <?php   
                     /**
@@ -74,7 +74,7 @@
                    <?php /********************End of code added by dhiraj **************/ ?>
                 <li class="<?php echo $_crumbName ?>">
 
-                    <span class="last-crumb"><?php echo $this->escapeHtml($_crumbInfo['label']) ?></span>
+                    <?php echo $this->escapeHtml($_crumbInfo['label']) ?>
 
             <?php else: ?>
 
@@ -88,7 +88,7 @@
 
             <?php if(!$_crumbInfo['last']): ?>
 
-                    <span class="sep"></span>
+                   <i class="brd-arw"></i>
 
             <?php endif; ?>
 
@@ -98,7 +98,7 @@
 
         <?php endforeach; ?>
 
-    </ul>
+    </0l>
 
 </div>
 

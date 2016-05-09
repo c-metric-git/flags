@@ -95,7 +95,7 @@ class Magestore_Sociallogin_Helper_Data extends Mage_Core_Helper_Abstract{
 		return trim(Mage::getStoreConfig('sociallogin/amazonlogin/redirect_url'));
 	}
         
-	public function getFbAppId(){     
+	public function getFbAppId(){
 		return trim(Mage::getStoreConfig('sociallogin/fblogin/app_id'));
 	}
 	
@@ -104,7 +104,7 @@ class Magestore_Sociallogin_Helper_Data extends Mage_Core_Helper_Abstract{
 	}
 	
 	public function getAuthUrl(){
-		$isSecure = Mage::getStoreConfig('web/secure/use_in_frontend');  
+		$isSecure = Mage::getStoreConfig('web/secure/use_in_frontend');
 		return $this->_getUrl('sociallogin/fblogin/login', array('_secure'=>$isSecure, 'auth'=>1));
 	}
 	

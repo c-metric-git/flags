@@ -53,6 +53,36 @@ jQuery( document ).ready(function() {
 	var wid1 = jQuery("#width_tmp_select").width();
 	var wid2 =  eval("wid1 + 20");
 	jQuery('#resizing_select').width(wid2);  */
+
+	jQuery('.fp-product-wrapper .fp-product-cust').mouseover(function(){
+	  jQuery(this).find('.rating-and-qty-block').show();
+	  jQuery(this).find('.add-to-links').show();	  
+	});
+
+	jQuery('.fp-product-wrapper .fp-product-cust').mouseout(function(){
+	  jQuery(this).find('.rating-and-qty-block ').hide();
+	  jQuery(this).find('.add-to-links').hide();
+	});
+
+	jQuery('a.link-wishlist,a.link-compare').mouseover(function(){
+	jQuery(this).find('span.fa').css('color','#FFFFFF');
+	});
+
+	jQuery('.toolbar-bottom .catg-detail-head').remove();
+   
+    /* product detail page Tabbing */
+    jQuery(document).off('click.tab.data-api');
+    jQuery(document).on('click.tab.data-api', '[data-toggle="tab"]', function (e) {
+        e.preventDefault();
+        var tab =jQuery(jQuery(this).attr('href'));
+        var activate = !tab.hasClass('active');
+        jQuery('div.tab-content>div.tab-pane.active').removeClass('active');
+        jQuery('ul.nav.nav-tabs>li.active').removeClass('active');
+        if (activate) {
+            jQuery(this).tab('show')
+        }
+    });
+
 });
 /*jQuery(function() {
     jQuery(".nav-panel-inner img.lazy").lazyload({});
@@ -76,3 +106,4 @@ function  wishlistProductid(productId)
 			    value: productId
 			}).prependTo('#magestore-sociallogin-form'); 
 }
+

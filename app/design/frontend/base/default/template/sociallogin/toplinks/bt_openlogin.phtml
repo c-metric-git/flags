@@ -1,7 +1,7 @@
 <?php $isLogin = $this->helper('customer')->isLoggedIn()?>
 <?php if(!$isLogin){?>
 <?php $this->setBackUrl()?>
-<button id="bt-loginopen-popup" class="bt-login-social" alt="<?php echo $this->__('Login by MyOpenId') ?>" title="<?php echo $this->__('Login by MyOpenId') ?>" onclick="openLogin()" href="javascript:void(0);">
+<button id="bt-loginopen-popup" class="bt-login-social" title="<?php echo $this->__('Login by MyOpenId') ?>" onclick="openLogin()">
 	<span><span><?php echo $this->__('My OpenId Sign in') ?></span></span>
 </button>
 <script type="text/javascript">

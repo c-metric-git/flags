@@ -1,7 +1,7 @@
 <?php $isLogin = $this->helper('customer')->isLoggedIn();?>
 
 <?php if(!$isLogin){?>	
-	<button id="bt-loginorg" class="bt-login-social" alt="<?php echo $this->__('Login by Orange') ?>" title="<?php echo $this->__('Login by Orange') ?>" onclick="orgLogin()" href="javascript:void(0);">
+	<button id="bt-loginorg" class="bt-login-social" title="<?php echo $this->__('Login by Orange') ?>" onclick="orgLogin()">
 		<span><span><?php echo $this->__('Orange Sign in') ?></span></span>
 	</button>
     <script type="text/javascript">

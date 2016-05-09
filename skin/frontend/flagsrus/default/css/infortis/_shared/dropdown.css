@@ -48,7 +48,7 @@
 }
 
 	/* Elements of the dropdown heading */
-	.dropdown .dropdown-heading .label { font-size:14px; font-family:"Lato Regular";}
+	.dropdown .dropdown-heading .label { font-size:14px; }
 	.dropdown .dropdown-heading .value {
 		margin-left: 2px;
 	}

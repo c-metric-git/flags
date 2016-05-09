@@ -7,7 +7,7 @@ class Magestore_Magenotification_Block_Rewrite_AdminhtmlNotificationWindow exten
 
 		if(Mage::getModel('magenotification/magenotification')->is_existedUrl($this->getLastNotice()->getUrl()))
 		{
-			$url = $this->getUrl('magenotification/adminhtml_magenotification/readdetail',array('id'=>$this->getLastNotice()->getId()));
+			$url = $this->getUrl('*/magenotification_magenotification/readdetail',array('id'=>$this->getLastNotice()->getId()));
 			
 			$this->setHeaderText(addslashes($this->__('Magestore Message')));
 	

@@ -21,7 +21,7 @@
 * });
 *
 */
-var Lightbox = Class.create({
+var Lightboxsocial = Class.create({
 	open : function () {
 		this._centerWindow(this.container);
 		this._fade('open', this.container);

@@ -674,19 +674,19 @@ $_productCollection = $this->getItems();
 
 ?>
 
-<div class="page-title">
+<div class="main-title">
 
-<h3 class="section-title"><?php echo $this->__('Related Products & Accessories'); ?></h3>
+<h3 class=""><?php echo $this->__('Related Products & Accessories'); ?></h3>
 
 </div>
 
 
 
-<div class="itemslider-wrapper product-related slider-arrows1 slider-arrows1-pos-top-right slider-pagination1">
+<div class="owl-carousel owl-carousel-11 owl-theme owl-loaded">
 
 
 
-    <div id="<?php echo $sliderId; ?>" class="products-grid category-products-grid itemgrid itemgrid-adaptive centered hover-effect equal-height itemslider<?php if($sliderClasses) echo $sliderClasses; ?> products-grid<?php if($gridClasses) echo $gridClasses; ?>">
+    <div id="related-product-view" class="products-grid category-products-grid itemgrid itemgrid-adaptive centered hover-effect equal-height itemslider<?php if($sliderClasses) echo $sliderClasses; ?> products-grid<?php if($gridClasses) echo $gridClasses; ?>">
 
 
 
@@ -694,21 +694,9 @@ $_productCollection = $this->getItems();
 
 
 
-        <div class="item" id="<?php echo $_product->getId();?>">
+        <div class="item" style="height:380px" id="<?php echo $_product->getId();?>">
 
-
-
-        
-
-
-
-            <div class="product-image-wrapper" style="max-width:<?php echo $imgWidth; ?>px;">
-
-
-
-            
-
-
+            <div class="product-image-wrapper" style="">
 
                 <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true); ?>" class="product-image">
 
@@ -797,7 +785,7 @@ $_productCollection = $this->getItems();
 
 
 
-                            echo $helpTemplate->getCategoryAddtoLinksIcons(
+                            echo $helpTemplate->getCategoryAddtoLinksIcons_fp(
 
 
 
@@ -817,7 +805,7 @@ $_productCollection = $this->getItems();
 
 
 
-                            echo $helpTemplate->getCategoryAddtoLinksIcons(
+                            echo $helpTemplate->getCategoryAddtoLinksIcons_fp(
 
 
 
@@ -845,7 +833,7 @@ $_productCollection = $this->getItems();
 
 
 
-
+ <div class="product-details">
 
 
 
@@ -869,7 +857,7 @@ $_productCollection = $this->getItems();
 
 
 
-            <div class="actions">
+            <div class="actions" style="padding-top:15px">
 
 
 
@@ -917,7 +905,14 @@ $_productCollection = $this->getItems();
 								class="button btn-cart"
 								onclick="setLocation('<?php echo $this->getAddToCartUrl ($_product) ?>')"><span><span><?php echo $this->__ ('Add to Cart') ?></span></span>
 							</button-->
-						<button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart <?php echo $_product->getSku()."-del"; ?>" id="" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><span><i class="icon ic ic-bag"></i><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+                     <div class="btn-group">
+						<button class="btn btn-add-to-cart-ico" type="button"> <span class="fa fa-shopping-bag"></span> </button>
+                        <button class="btn btn-add-to-cart"onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"  type="button">Add to cart</button>
+                    </div>  
+                                            
+            
+            
+
 					</div>
 					<div class="<?php echo $_product->getSku()."-addremove"; ?>" style="display:none;">
 						<button type="button" title="<?php echo $this->__('Add/Remove') ?>" class="button btn-cart add-remove" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><span><span><?php echo $this->__('Add/Remove') ?></span></span></button>
@@ -1028,7 +1023,7 @@ $_productCollection = $this->getItems();
 
                </div><!-- end: rating-and-qty-block-->
 
-
+       </div>  <!-- .product-details     -->
 
             
 
@@ -1049,247 +1044,29 @@ $_productCollection = $this->getItems();
 </div> <!-- end: itemslider-wrapper -->
 
 
+<?php endif; ?>
 
 <script type="text/javascript">
-
-
-
-//<![CDATA[
-
-
-
-    jQuery(function($) {
-
-
-
-        
-
-
-
-        var owl = $('#<?php echo $sliderId; ?>');
-
-
-
-        owl.owlCarousel({
-
-
-
-
-
-
-
-        <?php if ($lazy): ?>
-
-
-
-            lazyLoad: true,
-
-
-
-        <?php endif; ?>
-
-
-
-
-
-
-
-        <?php if(!$isResponsive): ?>
-
-
-
-            responsive: false,
-
-
-
-            items: <?php echo $showItems; ?>,
-
-
-
-        <?php else: ?>
-
-
-
-            //itemsCustom: [ <?php echo $breakpoints; ?> ],
-            responsiveClass:true,
-            responsive: {0:{items:1},480:{items:2},960:{items:4}},
-
-
-
-            responsiveRefreshRate: 50,
-
-
-
-        <?php endif; ?>
-
-
-
-
-
-
-
-        <?php if ($speed): ?>
-
-
-
-            slideSpeed: <?php echo $speed; ?>,
-
-
-
-        <?php endif; ?>
-
-
-
-
-
-
-
-        <?php if ($autoSpeed): ?>
-
-
-
-            paginationSpeed: <?php echo $autoSpeed; ?>,
-
-
-
-        <?php endif; ?>
-
-
-
-
-
-
-
-        <?php if ($move !== 1): ?>
-
-
-
-            scrollPerPage: true,
-
-
-
-        <?php endif; ?>
-
-
-
-
-
-
-
-        <?php if ($timeout): ?>
-
-
-
-            autoPlay: <?php echo $timeout; ?>,
-
-
-
-        <?php endif; ?>
-
-
-
-
-
-
-
-        <?php if ($pause): ?>
-
-
-
-            stopOnHover: true,
-
-
-
-        <?php endif; ?>
-
-
-
-
-
-
-
-        <?php if ($loop): ?>
-
-
-
-            loop: true,
-
-
-
-            rewindSpeed: 600,
-
-
-
-        <?php else: ?>
-
-
-
-            rewindNav: false,
-
-
-
-        <?php endif; ?>
-
-
-
-
-
-
-
-        <?php if ($pagination): ?>
-
-
-
-            pagination: true,
-
-
-
-        <?php else: ?>
-
-
-
-            pagination: false,
-
-
-
-        <?php endif; ?>
-
-
-
-
-
-
-            nav: true,
-      
-
-
-            navigationText: false
-
-
-
-
-
-
-
-        }); //end: owl
-
-
-
-
-
-
-
-    });
-
-
-
-//]]>
-
+   
+    jQuery(function () {
+      var owl20 = jQuery('#related-product-view');
+           owl20.owlCarousel({
+                lazyLoad: true,
+                responsiveClass:true,
+                responsive: {0:{items:1},480:{items:2},960:{items:4}},
+                responsiveRefreshRate: 50,
+                slideSpeed: 200,
+                paginationSpeed: 500,
+                scrollPerPage: true,
+                stopOnHover: true,
+                loop: true,
+                rewindSpeed: 600,
+                pagination: false,
+                nav: true,
+                goToFirst: true,
+                navigationText: false
+            }); //end: owl
+     });
 
 
 </script>
-
-
-
-<?php endif; ?>
-

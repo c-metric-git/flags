@@ -10,7 +10,7 @@ class Magestore_Magenotification_Block_Rewrite_AdminhtmlNotificationGridRenderer
 			return parent::render($row);
 		}
 		
-		$read_url = $this->getUrl('magenotification/adminhtml_magenotification/readdetail',array('id'=>$row->getId()));
+		$read_url = $this->getUrl('*/magenotification_magenotification/readdetail',array('id'=>$row->getId()));
 			
 		if (!$row->getIsRead()) {
             return sprintf('<a target="_blank" href="%s">%s</a> | <a href="%s">%s</a> | <a href="%s" onClick="deleteConfirm(\'%s\',this.href); return false;">%s</a>',

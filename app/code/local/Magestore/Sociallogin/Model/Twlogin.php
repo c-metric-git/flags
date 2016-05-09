@@ -9,7 +9,7 @@ class Magestore_Sociallogin_Model_Twlogin extends Zend_Oauth_Consumer {
 			'consumerSecret'    => Mage::helper('sociallogin')->getTwConsumerSecret(),
 			//'siteUrl'           => 'http://localhost/oss/magento14_3/index.php',
 			'signatureMethod'   => 'HMAC-SHA1',
-			'version'           => '1.1',
+			'version'           => '1.0',
 			'requestTokenUrl'   => 'https://api.twitter.com/oauth/request_token',
 			'accessTokenUrl'    => 'https://api.twitter.com/oauth/access_token',
 			'authorizeUrl'      => 'https://api.twitter.com/oauth/authorize'

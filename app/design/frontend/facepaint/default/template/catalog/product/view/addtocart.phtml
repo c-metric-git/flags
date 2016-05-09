@@ -65,23 +65,20 @@
 	if ($_product->isSaleable()){ ?>
 
 
-    <div class="add-to-cart left-side">
+    <div class="row mb15">
 
         <?php if(!$_product->isGrouped()): ?>
 
-            <div class="qty-wrapper">
+            <div class="form-group col-md-2 fp-prod-qty-dropdown col-sm-2" style="padding-right:0px">
 
                 <label for="qty"><?php echo $this->__('Qty:') ?></label>
 
 <!--                <input type="text" name="qty" id="qty" maxlength="12" value="<?php echo $this->getProductDefaultQty() * 1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />-->
 
-                <select class="input-text qty qty-select-<?php echo $_product->getId(); ?>" name="qty" id="qty">
+                <select class="" name="qty" id="qty">
                 <?php $i = 1 ?>
                 <?php do { ?>
-                <option value="<?php echo $i?>">
-                <?php echo $i?>
-                <?php $i++ ?>
-                </option>
+                <option value="<?php echo $i?>"><?php echo $i?><?php $i++ ?></option>
                 <?php } while ($i <= $productCount) ?>
                 </select>
             </div>
@@ -90,7 +87,7 @@
 
           <?php if($_product->isGrouped()): ?>
            <?php  $grouped_simpleitem_min_qty=Mage::registry('grouped_simpleitem_min_qty'); ?>
-            <div class="qty-wrapper">
+            <div class="form-group col-md-2 fp-prod-qty-dropdown col-sm-2">
 
                 <label for="qty"><?php echo $this->__('Qty:') ?></label>
                 <select class="input-text grouped_simpleitem_min_qty_select qty qty-select-<?php echo $_product->getId(); ?>" name="qty" id="qty">
@@ -105,13 +102,18 @@
             </div>
 
         <?php endif; ?>
-        
-        <button type="button" title="<?php echo $buttonTitle ?>" id="product-addtocart-button" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><i class="icon ic ic-bag"></i><span><?php echo $buttonTitle ?></span></span></button>
 
-    </div>
-<input type="hidden" class="is_paypal" value="0" id="is_paypal"/>
-    <div class="paypal-wrapper"><?php echo $this->getChildHtml('', true, true) ?></div>
+       <div class="btn-group col-md-4 col-sm-4 nopading col-xs-12" style="margin-left:15px">
+         <!--<button type="button" title="<?php echo $buttonTitle ?>" id="product-addtocart-button" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><i class="icon ic ic-bag"></i><span><?php echo $buttonTitle ?></span></span></button>-->
 
+         <button type="button" class="btn btn-danger btn-add-to-cart-ico" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="fa fa-shopping-bag"></span> </button>
+         <button type="button" class="btn btn-danger text-uppercase btn-add-to-cart" onclick="productAddToCartForm.submit(this)">Add to cart</button>
+       </div>
+ 
+        <input type="hidden" class="is_paypal" value="0" id="is_paypal"/>
+        <?php echo $this->getChildHtml('', true, true) ?>
+
+ </div> <!-- .row -->
 <?php }else{
     
    // echo "<span style='color:red;font-weight:bold;'> Out of Stock </span>";

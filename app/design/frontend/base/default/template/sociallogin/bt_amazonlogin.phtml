@@ -1,10 +1,10 @@
 <?php $isLogin = $this->helper('customer')->isLoggedIn();?>
 
 <?php if(!$isLogin && Mage::helper('sociallogin')->getAmazonId()){?>
-	<button id="bt-loginamazon" class="bt-login-social" alt="<?php echo $this->__('Login by Amazon') ?>" title="<?php echo $this->__('Login by Amazon') ?>" onclick="LoginWithAmazon()" href="javascript:void(0);">
+	<button id="bt-loginamazon" class="bt-login-social" title="<?php echo $this->__('Login by Amazon') ?>" onclick="LoginWithAmazon()">
 	<span><span><?php echo $this->__('Amazon Sign in') ?></span></span>
 </button>
-<div id="amazon-root"></div>
+<div id="amazon-root-header"></div>
 <script type="text/javascript">
 /*<![CDATA[*/
 window.onAmazonLoginReady = function() {
@@ -14,7 +14,7 @@ window.onAmazonLoginReady = function() {
     var a = d.createElement('script'); a.type = 'text/javascript';
     a.async = true; a.id = 'amazon-login-sdk';
     a.src = 'https://api-cdn.amazon.com/sdk/login1.js';
-    d.getElementById('amazon-root').appendChild(a);
+    d.getElementById('amazon-root-header').appendChild(a);
 })(document);
 
 function LoginWithAmazon() {

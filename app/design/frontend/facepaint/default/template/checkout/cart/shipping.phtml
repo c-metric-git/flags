@@ -41,7 +41,7 @@
                 <li>
                     <label for="region_id"<?php if ($this->isStateProvinceRequired()) echo ' class="required"' ?>><?php if ($this->isStateProvinceRequired()) echo '<em>*</em>' ?><?php echo $this->__('State/Province') ?></label>
                     <div class="input-box">
-                        <select id="region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>" style="display:none;"<?php echo ($this->isStateProvinceRequired() ? ' class="validate-select"' : '') ?>>
+                        <select id="region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>" style="display:none;"<?php echo ($this->isStateProvinceRequired() ? ' class="validate-select form-control"' : '') ?>>
                             <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
                         </select>
                        <script type="text/javascript">
@@ -69,7 +69,7 @@
                 </li>
             </ul>
             <div class="buttons-set">
-                <button type="button" title="<?php echo $this->__('Get a Quote') ?>" onclick="coShippingMethodForm.submit()" class="button"><span><span><?php echo $this->__('Get a Quote') ?></span></span></button>
+                <button type="button" title="<?php echo $this->__('Get a Quote') ?>" onclick="coShippingMethodForm.submit()" class="button btn-blue"><span><span><?php echo $this->__('Get a Quote') ?></span></span></button>
             </div>
         </form>
         <script type="text/javascript">
@@ -129,7 +129,7 @@
                 <?php endforeach; ?>
             </dl>
             <div class="buttons-set">
-                <button type="submit" title="<?php echo $this->__('Update Total') ?>" class="button" name="do" value="<?php echo $this->__('Update Total') ?>"><span><span><?php echo $this->__('Update Total') ?></span></span></button>
+                <button type="submit" title="<?php echo $this->__('Update Total') ?>" class="button btn-blue" name="do" value="<?php echo $this->__('Update Total') ?>"><span><span><?php echo $this->__('Update Total') ?></span></span></button>
             </div>
         </form>
         <?php endif; ?>

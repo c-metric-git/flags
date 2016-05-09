@@ -1,6 +1,6 @@
 <?php $isLogin = $this->helper('customer')->isLoggedIn()?>
 <?php if(!$isLogin){?>
-<button id="bt-logingo-popup" class="bt-login-social" alt="<?php echo $this->__('Login by Google') ?>" title="<?php echo $this->__('Login by Google') ?>" onclick="goLogin()" href="javascript:void(0);">
+<button id="bt-logingo-popup" class="bt-login-social" title="<?php echo $this->__('Login by Google') ?>" onclick="goLogin()" >
 	<span><span><?php echo $this->__('Google Sign in') ?></span></span>
 </button>
 <script type="text/javascript">
@@ -11,15 +11,15 @@ function goLogin(){
 	var	 screenY    = typeof window.screenY != 'undefined' ? window.screenY : window.screenTop;
 	var	 outerWidth = typeof window.outerWidth != 'undefined' ? window.outerWidth : document.body.clientWidth;
 	var	 outerHeight = typeof window.outerHeight != 'undefined' ? window.outerHeight : (document.body.clientHeight - 22);
-	var	 width    = 700;
-	var	 height   = 400;
-	var	 left     = parseInt(screenX + ((outerWidth - width) / 2), 10);
-	var	 top      = parseInt(screenY + ((outerHeight - height) / 2.5), 10);
+	var	 widthgg    = 500;
+	var	 heightgg   = 600;
+	var	 leftgg     = parseInt(screenX + ((outerWidth - widthgg) / 2), 10);
+	var	 topgg      = parseInt(screenY + ((outerHeight - heightgg) / 2.5), 10);
 	var	 features = (
-			'width=' + width +
-			',height=' + height +
-			',left=' + left +
-			',top=' + top
+			'width=' + widthgg +
+			',height=' + heightgg +
+			',left=' + leftgg +
+			',top=' + topgg
 		  );
 
 	newwindow=window.open('<?php echo $this->getLoginUrl() ?>','Login_by_google',features);

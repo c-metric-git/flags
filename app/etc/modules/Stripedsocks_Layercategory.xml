@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Stripedsocks_Layercategory>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Stripedsocks_Layercategory>
+    </modules>
+</config>

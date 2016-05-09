@@ -80,7 +80,7 @@
 
 <?php if($this->getCollection()->getSize()): ?>
 
-<div class="toolbar">
+<div class="catg-detail-head toolbar">
 
 
 
@@ -105,11 +105,11 @@
 
 		
 
-		<div class="sort-by">
+		<div class="sort-by" style="width:25% !important;">
 
 			<label><?php echo $this->__('Sort By') ?></label>
 
-			<select onchange="setLocation(this.value)">
+			<select onchange="setLocation(this.value)" style="width:45% !important;">
 
 			<?php foreach($this->getAvailableOrders() as $_key=>$_order): ?>
 				<?php if ($_order != 'Position'): ?>
@@ -137,11 +137,11 @@
 
 		
 
-		<div class="limiter">
+		<div class="limiter" style="width:25%">
 
 			<label><?php echo $this->__('Show') ?></label>
 
-			<select onchange="setLocation(this.value)">
+			<select onchange="setLocation(this.value)" style="width:25%">
 
 			<?php foreach ($this->getAvailableLimit() as  $_key=>$_limit): ?>
 
@@ -161,7 +161,7 @@
 
 		<?php if( $this->isEnabledViewSwitcher() ): ?>
 
-		<p class="view-mode">
+		<p class="view-mode" style="width:20%">
 
 			<?php $_modes = $this->getModes(); ?>
 
@@ -171,7 +171,11 @@
 
 				<?php //Removed spaces from the foreach loop to improve layout of the buttons ?>
 
-				<?php foreach ($this->getModes() as $_code=>$_label): ?><?php $codeToLower = strtolower($_code); if($this->isModeActive($_code)): ?><span title="<?php echo $_label ?>" class="<?php echo $codeToLower; ?> ic ic-<?php echo $codeToLower; ?>"></span><?php else: ?><a href="<?php echo $this->getModeUrl($_code) ?>" title="<?php echo $_label ?>" class="<?php echo $codeToLower; ?> ic ic-<?php echo $codeToLower; ?>"></a><?php endif; ?><?php endforeach; ?>
+              <?php foreach ($this->getModes() as $_code=>$_label): ?><?php $codeToLower = strtolower($_code); if($this->isModeActive($_code)): ?>
+              <span class="fp-grid-view fp-view">
+              	<span title="<?php echo $_label ?>" class="<?php echo $codeToLower; ?> ic ic-<?php echo $codeToLower; ?>"></span>
+              </span>
+              <?php else: ?><a href="<?php echo $this->getModeUrl($_code) ?>" title="<?php echo $_label ?>" class="<?php echo $codeToLower; ?> ic ic-<?php echo $codeToLower; ?>"></a><?php endif; ?><?php endforeach; ?>
 
 			<?php endif; ?>
 
@@ -186,22 +190,18 @@
 	<?php endif; ?>
 
 	
-
+</div>
 	<?php //Show pager only if there are pages ?>
 
 	<?php if ($pagerHtml = trim($this->getPagerHtml())): ?>
 
-	<div class="pager">
+	<div class="custom-paginatn text-center mb15">
 
 		<?php echo $pagerHtml; ?>
 
 	</div>
 
 	<?php endif; ?>
-
-	
-
-</div>
 
 <?php endif ?>
 

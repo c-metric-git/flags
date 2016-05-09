@@ -1,7 +1,7 @@
 <?php $isLogin = $this->helper('customer')->isLoggedIn();?>
 
 <?php if(!$isLogin){?>	
-	<button id="bt-loginaol-popup" class="bt-login-social" alt="<?php echo $this->__('Login by AOL') ?>" title="<?php echo $this->__('Login by AOL') ?>" onclick="alLogin()" href="javascript:void(0);">
+	<button id="bt-loginaol-popup" class="bt-login-social" title="<?php echo $this->__('Login by AOL') ?>" onclick="alLogin()" >
 		<span><span><?php echo $this->__('AOL Sign in') ?></span></span>
 	</button>
     <script type="text/javascript">

@@ -55,6 +55,8 @@
                     <div class="postscript"><?php echo $this->getChildHtml('postscript') ?></div>
                 	<div style="clear:both; margin-bottom:10px;">
                     	<?php if(Mage::getBlockSingleton('page/html_header')->getIsHomePage()) {echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-content')->toHtml();}?>
+                             <?php echo $this->getChildHtml('wordpress_post_list') ?>
+                         <?php echo $this->getChildHtml('why-shop-at-facepaint') ?>
 						<?php if((Mage::app()->getRequest()->getModuleName() != 'onestepcheckout' || Mage::app()->getRequest()->getControllerName()!='index') && (Mage::app()->getRequest()->getModuleName() != 'ajaxaddtocart' && Mage::app()->getRequest()->getControllerName()!='checkout_cart	')): ?>
 						<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-promotion')->toHtml();?>
 						<?php endif; ?>

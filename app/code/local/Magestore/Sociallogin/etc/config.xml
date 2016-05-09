@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Magestore_Sociallogin>
-            <version>0.3.0</version>
+            <version>0.3.1</version>
         </Magestore_Sociallogin>
     </modules>
     <frontend>
@@ -42,6 +42,48 @@
 				</Magestore_Sociallogin>	
 			</modules>
 		</translate>
+		<enterprise>
+			<websiterestriction>
+				<full_action_names>
+					<generic>
+						<sociallogin_allogin_login/>
+						<sociallogin_allogin_setblock/>
+						<sociallogin_allogin_setscreenname/>
+						<sociallogin_amazonlogin_login/>
+						<sociallogin_callogin_login/>
+						<sociallogin_callogin_setblock/>
+						<sociallogin_callogin_setclaivdname/>
+						<sociallogin_fblogin_login/>
+						<sociallogin_fqlogin_login/>
+						<sociallogin_gologin_login/>
+						<sociallogin_gologin_user/>
+						<sociallogin_instagramlogin_login/>
+						<sociallogin_linkedlogin_login/>
+						<sociallogin_linkedlogin_user/>
+						<sociallogin_livelogin_login/>
+						<sociallogin_ljlogin_login/>
+						<sociallogin_ljlogin_setblock/>
+						<sociallogin_mplogin_login/>
+						<sociallogin_openlogin_login/>
+						<sociallogin_openlogin_setblock/>
+						<sociallogin_orglogin_login/>
+						<sociallogin_perlogin_login/>
+						<sociallogin_popup_login/>
+						<sociallogin_popup_sendpass/>
+						<sociallogin_popup_createacc/>
+						<sociallogin_selogin_login/>
+						<sociallogin_twlogin_login/>
+						<sociallogin_twlogin_user/>
+						<sociallogin_vklogin_login/>
+						<sociallogin_vklogin_user/>
+						<sociallogin_wplogin_login/>
+						<sociallogin_wplogin_setblock/>
+						<sociallogin_wplogin_setblogname/>
+						<sociallogin_yalogin_login/>
+					</generic>
+				</full_action_names>
+			</websiterestriction>
+		</enterprise>
     </frontend>
     <admin>
         <routers>

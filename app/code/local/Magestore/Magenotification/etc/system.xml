@@ -7,12 +7,33 @@
         </magestore>
     </tabs>
 	<sections>
-        <magenotificationsecure translate="label" module="magenotification">
+        <magenotificationcerts translate="label" module="magenotification">
+            <class>separator-top</class>
+            <label>License Certificate Information</label>
+            <tab>magestore</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>99</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+			<groups>
+                <extension_keys translate="label">
+                    <label><![CDATA[List of License Certificates]]></label>
+                    <frontend_type>text</frontend_type>
+                    <frontend_model>magenotification/config_extensioncerts</frontend_model>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </extension_keys>					
+			</groups>
+        </magenotificationcerts>
+        <!--magenotificationsecure translate="label" module="magenotification">
             <class>separator-top</class>
             <label>License Key Management</label>
             <tab>magestore</tab>
             <frontend_type>text</frontend_type>
-            <sort_order>1</sort_order>
+            <sort_order>100</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
             <show_in_store>1</show_in_store>
@@ -27,13 +48,14 @@
                     <show_in_store>1</show_in_store>
                 </extension_keys>					
 			</groups>
-		</magenotificationsecure>	
+		</magenotificationsecure-->
+        <!--
         <magestore_extension_feedback translate="label" module="magenotification">
             <class>separator-top</class>
             <label>Extension Feedbacks</label>
             <tab>magestore</tab>
             <frontend_type>text</frontend_type>
-            <sort_order>10</sort_order>
+            <sort_order>200</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
             <show_in_store>1</show_in_store>
@@ -68,12 +90,13 @@
                 </email>					
 			</groups>
 		</magestore_extension_feedback>		
+        -->
         <magenotification translate="label" module="magenotification">
             <class>separator-top</class>
             <label>MageNotification</label>
             <tab>magestore</tab>
             <frontend_type>text</frontend_type>
-            <sort_order>299</sort_order>
+            <sort_order>300</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
             <show_in_store>1</show_in_store>

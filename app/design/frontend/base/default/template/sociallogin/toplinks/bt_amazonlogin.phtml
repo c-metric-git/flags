@@ -1,7 +1,7 @@
 <?php $isLogin = $this->helper('customer')->isLoggedIn();?>
 
 <?php if(!$isLogin && Mage::helper('sociallogin')->getAmazonId()){?>
-	<button id="bt-loginamazon-popup" class="bt-login-social" alt="<?php echo $this->__('Login by Amazon') ?>" title="<?php echo $this->__('Login by Amazon') ?>" onclick="LoginWithAmazon()" href="javascript:void(0);">
+	<button id="bt-loginamazon-popup" class="bt-login-social" title="<?php echo $this->__('Login by Amazon') ?>" onclick="LoginWithAmazon()">
 	<span><span><?php echo $this->__('Amazon Sign in') ?></span></span>
 </button>
 <div id="amazon-root"></div>

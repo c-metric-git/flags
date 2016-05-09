@@ -58,7 +58,9 @@
 				   <?php //if(Mage::getBlockSingleton('page/html_header')->getIsHomePage()) {?>
                    <div style="clear:both;">
                     	<?php if(Mage::getBlockSingleton('page/html_header')->getIsHomePage()) {echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-content')->toHtml();}?>
-						<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('home-promotion')->toHtml();?>
+                        <?php echo $this->getChildHtml('wordpress_post_list') ?>
+                         <?php echo $this->getChildHtml('why-shop-at-facepaint') ?>
+                        <?php //echo $this->getChildHtml('facepaint-shopper-approved-reviews') ?>
                     </div>					<?php echo $this->getLayout()->createBlock('cms/block')->setBlockId('shopper-approved-reviews')->toHtml();?>
                     <?php //}?>
                 </div>

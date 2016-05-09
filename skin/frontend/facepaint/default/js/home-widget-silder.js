@@ -76,6 +76,7 @@ jQuery( document ).ready(function() {
             }); //end: owl
      });
 
+
    
    /* var itemCount = jQuery("#owl-demo div").length;
     var category_item =jQuery('div#itemslider-bestseller- div.owl-stage-outer div.owl-stage > *').length;
