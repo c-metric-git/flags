@@ -961,7 +961,7 @@ h3.product-name a {
 	color: #fff;
 }
 .section-title {
-	border-bottom: 1px solid #fff !important;
+	
 	color: #194ba1;
 	font-family: Cherry Swash;
 	font-weight: 400;
@@ -1161,7 +1161,33 @@ select.form-control, .form-list .input-box select {
 
 /*success page*/
 .lrshare_iconsprite32 {border-radius: 50%;}
+.block .block-title, .block-layered-nav .block-subtitle--filter, .cart .crosssell h2, .cart .discount h2, .cart .shipping h2, .section-title {
+    border-bottom: 1px solid #0184a2;
+    color: #0184a2;
+    font-family: Cherry Swash;
+    font-weight: 400;
+   
+}
 
+
+/*account pages*/
+.section-title {
+    margin: 0;
+    padding: 6px 0;
+}
+.inner-container p {
+    margin-bottom: 15px;
+}
+.box-account .box-head h2{ color:#333;font-weight: 600;}
+.data-table td a:hover{ color:#0184a2;}
+.dashboard .box .box-title h3, .dashboard .box .box-title h4, .dashboard .box-info h4, .addresses-list h2, .addresses-list h3{ color:#333;}
+#opc-login h3, .account-login h2, .fieldset .legend, .info-set h2.legend, .multiple-checkout .col2-set h2.legend {
+    border-bottom: 1px solid #0086d4;
+    color: #0086d4;
+}
+.cms-page-view .col3-set, .cms-page-view tbody .contentLargeText, .customer-account .addresses-list, .customer-account .billing-agreements, .customer-account .fieldset .legend, .customer-account .recurring-profiles, .customer-account .wishlist-empty, .customer-account-login .new-users .content, .info-set h2.legend, .multiple-checkout .col2-set h2.legend {
+    padding-top: 7px;
+}
 @media (min-width: 768px) {
 }
 

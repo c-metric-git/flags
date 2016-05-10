@@ -2138,7 +2138,7 @@ input[type="radio"]:checked {
 	line-height: 24px;
 }
 .header-top-container {
-	background: #001F55;
+	background: #1d2552;
 	color: #FFFFFF;
 	border-bottom: 1px solid #d6d6d6;
 }
@@ -2162,7 +2162,7 @@ input[type="radio"]:checked {
 	margin-top: 16px;
 }
 .item.item-right.block_header_top_right {
-	margin-top: 8px;
+	margin-top: 0px;
 }
 p.welcome-msg {
 	margin-top: 11px;
@@ -2227,8 +2227,8 @@ a .banner-sub-second-div, a:hover .banner-sub-second-div {
 	margin-bottom: 15px !important;
 }
 .item.item-left.block_header_top_left {
-	margin-top: 5px;
-	margin-bottom: 5px;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 /* CSS added by JS on 15 March 2016, 14:45 */
 .header-regular #search-wrapper-regular {
@@ -3151,18 +3151,6 @@ div.home_latestpost .home_blog_li_ div_month {
 }
 .block_header_top_right.winflag-sub-div {
 	float: left;
-	font-size: 36px;
-	background: #f9ed10;
-	color: #1c2452;
-	border-radius: 6px;
-	font-weight: bold;
-	padding-left: 6px;
-	padding-right: 6px;
-	line-height: 50px;
-	margin-top: 5px;
-	margin-right: 10px;
-	margin-bottom: 5px;
-	text-transform: uppercase;
 }
 .item.item-right.block_header_top_right a {
 	color: #1c2452;
@@ -3183,7 +3171,7 @@ div.home_latestpost .home_blog_li_ div_month {
 	font-size: 16px;
 }
 .block_header_top_left img {
-	float: left;
+	float: none;
 }
 .item.item-left.block_header_top_left, .item.item-right.block_header_top_right {
 	text-transform: uppercase;
@@ -3214,7 +3202,7 @@ div.home_latestpost .home_blog_li_ div_month {
 	padding-top: 10px;
 }
 .item.item-right.block_header_top_right {
-	padding-bottom: 10px;
+	padding-bottom: 0px;
 	width: 100%;
 }
 .block_header_top_right.winflag-sub-div {
@@ -3393,4 +3381,41 @@ div.home_latestpost .home_blog_li_ div_month {
 
 .catalog-product-view  .img-box .product-image {
     margin: 0 ;
+}
+
+
+.block_header_top_left img {
+    width: 100%;
+    max-width: 286px;
+    text-align: center;
+    margin: 0 auto;
+}
+.instock-img  img {
+    width: 100%;
+    max-width: 274px;
+    text-align: center;
+    margin: 0 auto;
+}
+.winflags  img {
+    width: 100%;
+    max-width: 184px;
+    text-align: center;
+    margin: 0 auto;
+}
+.samedayshipping img {
+    width: 100%;
+    max-width: 213px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+
+.instock-img
+{
+	text-align:center;
+}
+.header-top
+{
+	padding-top:10px;
+	padding-bottom:10px;
 }
