@@ -370,7 +370,7 @@
 <div class="itemslider-wrapper slider-arrows1 slider-arrows1-pos-top-right slider-pagination1">
 
     <div id="<?php echo $sliderId; ?>" class="products-grid category-products-grid itemgrid itemgrid-adaptive centered hover-effect equal-height itemslider<?php if($sliderClasses) echo $sliderClasses; ?> products-grid<?php if($gridClasses) echo $gridClasses; ?>">
-
+    <?php $productcount = count(array_filter($_productCollection)); ?>
     <?php foreach ($_productCollection as $_product): 
 	if($_product){
 	?>
@@ -389,9 +389,16 @@
 
                     <?php if ($lazy): ?>
 
-						<img class="owl-lazy"
+						<?php if($productcount>4): ?>
+							<img class="owl-lazy"
 								 data-src="<?php echo $helpImg->getImg ($_product, $imgWidth, $imgHeight, 'small_image'); ?>"
 								 alt="<?php echo $this->stripTags ($this->getImageLabel ($_product, 'small_image'), NULL, TRUE); ?>"/>
+						<?php else: ?>
+							<img class="lazy"
+								 data-original="<?php echo $helpImg->getImg ($_product, $imgWidth, $imgHeight, 'small_image'); ?>"
+								 src="<?php echo $this->getSkinUrl('images/loader.gif') ?>"
+								 alt="<?php echo $this->stripTags ($this->getImageLabel ($_product, 'small_image'), NULL, TRUE); ?>"/>
+						<?php endif; ?>
 
                     <?php else: ?>
 
@@ -411,7 +418,8 @@
 
 					<?php //echo $helpLabels->getLabels ($_product); //Product labels ?>
 					<?php if($_product->getIconlabel()!=''): ?>
-						<span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span>
+							<!--span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span-->
+							<span class="tag-label-<?php echo strtolower(str_replace(' ', '', $_product->getIconlabel())); ?>"></span>
 					<?php endif; ?>
 
                 </a>
@@ -491,7 +499,7 @@
                     </script>
                     <?php elseif($_product->getStockItem() && $_product->getStockItem()->getIsInStock()): ?>
 
-                        <a title="<?php echo $this->__('View Details') ?>" class="button btn-cart" href="<?php echo $_product->getProductUrl() ?>"><?php echo $this->__('View Details') ?></a>
+                        <a title="<?php echo $this->__('See Options') ?>" style="float:none" class="button btn-cart" href="<?php echo $_product->getProductUrl() ?>"><?php echo $this->__('See Options') ?></a>
 
                     <?php else: ?>
 
@@ -532,12 +540,13 @@
                    <div class="ratings"> <!-- start: ratings -->                 
                     	<div class="star_container <?php echo Mage::getModel('catalog/product')->load($_product->getId())->getSku();?>"></div>
                    </div><!-- end: ratings -->                    
-                   <div class="qty-in-stock"><!-- start: Qty in stock -->
                        <?php  
-                           $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
-                           echo $this->__("Qty in Stock: ").intval($stock->getQty());
-                       ?>
-                   </div><!-- end: Qty in stock -->                   
+                           $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product); ?>
+						<?php if($stock->getQty()>0): ?>
+							<div class="qty-in-stock"><!-- start: Qty in stock -->
+								<? echo $this->__("Qty in Stock: ").intval($stock->getQty()); ?>
+						   </div><!-- end: Qty in stock -->                   
+						<?php endif; ?>               
                    
                </div><!-- end: rating-and-qty-block-->
 

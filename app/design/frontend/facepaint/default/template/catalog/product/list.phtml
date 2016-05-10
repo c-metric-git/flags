@@ -470,14 +470,19 @@ $_collectionSize = $_productCollection->count ();
                                     </div>-->
                             </div>
                             <!-- end: ratings -->
-							<?php if(!$_product->canConfigure()): ?>
-                            <div style="" class="qty-in-stock qty-<?php echo $_product->getId() ?>"><!-- start: Qty in stock -->
-                                <?php
-                                $stock = Mage::getModel ('cataloginventory/stock_item')->loadByProduct ($_product);
-                                echo $this->__ ("Qty in Stock: ") . intval ($stock->getQty ());
+							<?php if(!$_product->canConfigure()): 
+                                  $stock = Mage::getModel ('cataloginventory/stock_item')->loadByProduct ($_product);
+                                  if(intval ($stock->getQty ()) > 0) :
+                             ?>
+                                    <div style="" class="qty-in-stock qty-<?php echo $_product->getId() ?>"><!-- start: Qty in stock -->
+                                        <?php
+                                        
+                                        echo $this->__ ("Qty in Stock: ") . intval ($stock->getQty ());
+                                        ?>
+                                    </div>
+							<?php endif; 
+                               endif;
                                 ?>
-                            </div>
-							<?php endif; ?>
                             <!-- end: Qty in stock -->
                         </div>
                         <!-- start: rating-and-qty-block-->

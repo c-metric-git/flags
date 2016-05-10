@@ -156,6 +156,16 @@ h3.product-name {
 	padding-left: 15px !important;
 	padding-right: 15px !important;
 }
+.catalog-product-view .required{
+	display: none;
+}
+.catalog-product-view .fp-prod-price li{
+	margin: 15px 0px;
+	padding-left: 0px;
+}
+.catalog-product-view  .fp-prod-price li span{
+	margin-left: 0px;
+}
 /*head*/
 
 /* Configure product*/

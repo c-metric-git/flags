@@ -223,7 +223,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
         <?php $_originalWeeeTaxAmount = $_store->roundPrice($_store->convertPrice($_originalWeeeTaxAmount)) ?>
 
         <?php if ($_weeeTaxAmount && $_weeeHelper->typeOfDisplay($_product, 0)): // including ?>
-          <li>
+          <li class="col-sm-4">
             <p class="old-price">
                 <span class="price-label"><?php echo $this->__('Regular Price:') ?></span>
                 <span class="price" id="old-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
@@ -232,7 +232,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
             </p>
            </li>  
             <?php if ($_taxHelper->displayBothPrices()): ?>
-              <li>
+              <li class="col-sm-4">
                 <p class="special-price">
                     <span class="price-label"><?php echo $_specialPriceStoreLabel ?></span>
                     <span class="price-excluding-tax">
@@ -251,7 +251,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
                 </p>
                </li> 
             <?php else: ?>
-              <li>
+              <li class="col-sm-4">
             
                     <h4 class="price-label"><?php echo $_specialPriceStoreLabel ?></h4>
                     <span class="price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
@@ -262,7 +262,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
             <?php endif; ?>
 
         <?php elseif ($_weeeTaxAmount && $_weeeHelper->typeOfDisplay($_product, 1)): // incl. + weee ?>
-        <li>
+        <li class="col-sm-4">
             <p class="old-price">
                 <span class="price-label"><?php echo $this->__('Regular Price:') ?></span>
                 <span class="price" id="old-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
@@ -270,7 +270,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
                 </span>
             </p>
         </li>
-        <li>
+        <li class="col-sm-4">
             <p class="special-price">
             <?php if ($_taxHelper->displayBothPrices()): ?>
                <!-- <span class="price-label"><?php echo $_specialPriceStoreLabel ?></span>-->
@@ -295,7 +295,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
                 </span>
                 </span>
             <?php else: ?>
-              <li>
+              <li class="col-sm-4">
                 
                     <h4><?php echo $this->__('Sale Price:') ?></h4>
                     <span class="sale-price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
@@ -315,7 +315,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
             </p>
            </li> 
         <?php elseif ($_weeeTaxAmount && $_weeeHelper->typeOfDisplay($_product, 4)): // incl. + weee ?>
-         <li>
+         <li class="col-sm-4">
             <p class="old-price">
                 <span class="price-label"><?php echo $this->__('Regular Price:') ?></span>
                 <span class="price" id="old-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
@@ -323,7 +323,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
                 </span>
             </p>
          </li>
-         <li>
+         <li class="col-sm-4">
             <p class="special-price">
                 <span class="price-label"><?php echo $_specialPriceStoreLabel ?></span>
                 <span class="price-excluding-tax">
@@ -348,7 +348,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
             </p>
            </li> 
         <?php elseif ($_weeeTaxAmount && $_weeeHelper->typeOfDisplay($_product, 2)): // excl. + weee + final ?>
-         <li>
+         <li class="col-sm-4">
             <p class="old-price">
                 <span class="price-label"><?php echo $this->__('Regular Price:') ?></span>
                 <span class="price" id="old-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
@@ -356,7 +356,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
                 </span>
             </p>
           </li>
-          <li>
+          <li class="col-sm-4">
             <p class="special-price">
                 <span class="price-label"><?php echo $_specialPriceStoreLabel ?></span>
                 <span class="price-excluding-tax">
@@ -381,7 +381,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
             </li>
         <?php else: // excl. ?>
         
-         <li> 
+         <li class="col-sm-4"> 
             
                 <h4><?php echo $this->__('Original Price:') ?></h4>
                 <span class="old-price" id="old-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
@@ -390,7 +390,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
             
          </li>   
 			<?php if ($_taxHelper->displayBothPrices()): ?>
-             <li>
+             <li class="col-sm-4">
                 <p class="special-price">
                    <span class="price-label"><?php echo $_specialPriceStoreLabel ?></span>
                     <span class="price-excluding-tax">
@@ -410,7 +410,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
                 </p>
              </li>   
             <?php else: ?>
-              <li>
+              <li class="col-sm-4">
                 
                     <h4><?php echo $this->__("Sale Price: ") ?></h4>
                     <span class="sale-price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
@@ -424,7 +424,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
                 $_savePercent = 100 - round(($_finalPrice / $_price) * 100); 
                 $_saveAmount = number_format(($_price - $_finalPrice), 2);  
                 ?>
-                <li>
+                <li class="col-sm-4">
                         <h4><?php echo $this->__("You Save: ")?></h4>
                         <span class="saved-price">
                             <?php echo $this->__("$");?><?php echo $_saveAmount; ?><?php //echo $_savePercent."%"; ?>

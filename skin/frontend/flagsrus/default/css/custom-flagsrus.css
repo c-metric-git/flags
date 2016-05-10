@@ -3057,16 +3057,16 @@ div.home_latestpost .home_blog_li_ div_month {
 	padding: 10px 10px 0;
 }
 .ind_cnt {
-	font-size: 12px;
-	display: inline;
-	text-align: center;
-	width: auto;
+	font-size: 12px !important;
+	display: inline !important;
+	text-align: center !important;
+	width: auto !important;
 	position: relative;
 	top: -5px;
 	left: 5px;
 }
 .catalog-product-view .itemslider .owl-stage-outer {
-	height: 420px !important;
+	height: 430px !important;
 }
 .catalog-product-view .owl-carousel .owl-item {
 	height: 320px;
@@ -3338,36 +3338,59 @@ div.home_latestpost .home_blog_li_ div_month {
 
 .tag-label-new{
 	position: absolute;
-    left: -10px;
-    top: -10px;
+    left: 0px;
+    top: 0px;
     background: url("images/FL_CategoryImage_New.png") left top no-repeat;
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
+	z-index:1111;
 }
 
 .tag-label-sale{
 	position: absolute;
-    left: -10px;
-    top: -10px;
+  left: 0px;
+    top: 0px;
     background: url("images/FL_CategoryImage_SALE.png") left top no-repeat;
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
+	z-index:1111;
 }
 
 .tag-label-doublesided{
 	position: absolute;
-    left: -10px;
-    top: -10px;
+   left: 0px;
+    top: 0px;
     background: url("images/FL_CategoryImage_DOUBLESIDED.png") left top no-repeat;
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
+	z-index:1111;
 }
 
 .tag-label-coupon{
 	position: absolute;
-    left: -10px;
-    top: -10px;
+    left: 0px;
+    top: 0px;
     background: url("images/FL_CategoryImage_Coupon.png") left top no-repeat;
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 50px;
+	z-index:1111;
+}
+
+.tag-label-set{
+	position: absolute;
+    left: 0px;
+    top: 0px;
+    background: url("images/FL_CategoryImage_SET.png") left top no-repeat;
+    width: 50px;
+    height: 50px;
+	z-index:1111;
+}
+
+.checkout-onepage-index .col-right #checkout-progress-wrapper
+{
+	margin-left: 12px;
+}
+
+.catalog-product-view  .img-box .product-image {
+    margin: 0 ;
 }

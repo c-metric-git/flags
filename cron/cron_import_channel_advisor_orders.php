@@ -3,6 +3,7 @@ define(BASE_PATH,"/home/stripedsocks/beta/");
 $mageFilename = BASE_PATH.'app/Mage.php';
 require_once $mageFilename;
 Mage::app();
+ini_set('memory_limit','256M');
 
 //for debug
 function showNiceXML($xml){
@@ -38,7 +39,7 @@ function showNiceXML($xml){
                        'CheckoutStatusFilter'  => 'Completed',
                        'ShippingStatusFilter'  =>'Shipped',
                        'PageNumberFilter'=>1,
-                       'PageSize'=>100
+                       'PageSize'=>30
                     );
 
         //Here date1 and date2 variable specify date range for orders. After this call function of API to get order data.
@@ -48,7 +49,7 @@ function showNiceXML($xml){
                        'orderCriteria'=>$OrderCriteria  
               );
         $result=$client->GetOrderList($arrData);
-        echo $count_of_orders = count($result->GetOrderListResult->ResultData->OrderResponseItem);
+        $count_of_orders = count($result->GetOrderListResult->ResultData->OrderResponseItem);
         if(isset($result->GetOrderListResult->ResultData->OrderResponseItem) && $count_of_orders > 0) {
             if($count_of_orders == 1) {
                  insertOrder($result->GetOrderListResult->ResultData->OrderResponseItem);
@@ -82,13 +83,10 @@ exit;
 <?php
 
 function insertOrder($order_details) {
-    echo '<pre>';
-    print_R($order_details);
-    exit;
     $channel_advisor_orderid = $order_details->ClientOrderIdentifier;
     $order_collection = Mage::getModel('sales/order')->getCollection()->addFieldToFilter('channel_advisor_orderid', $channel_advisor_orderid);
     if ($order_collection->count()==0) {
-            echo "<br />Processing Order : ".$channel_advisor_orderid; 
+            //echo "<br />Processing Order : ".$channel_advisor_orderid; 
             $email = $order_details->BuyerEmailAddress;  
             $productids=array();
             $websiteId = Mage::app()->getWebsite()->getId();
@@ -113,13 +111,16 @@ function insertOrder($order_details) {
              
              // Assign Customer To Sales Order Quote
              $quote->assignCustomer($customer);
-             
+             $quote->setIsSuperMode(true);
+             $quote->channel_advisor_orderid = $channel_advisor_orderid; 
                  // Configure Notification
             // $quote->setSendCconfirmation(1);
-             if($order_details->ShoppingCart->LineItemSKUList) {
-                 foreach($productsids as $id){
-                     $product=Mage::getModel('catalog/product')->load($id);
-                     $quote->addProduct($product,new Varien_Object(array('qty'   => 1)));
+             $shipping_cost=0;
+             if(isset($order_details->ShoppingCart->LineItemSKUList)) {
+                 foreach($order_details->ShoppingCart->LineItemSKUList as $item_details){
+                     $product=Mage::getModel('catalog/product')->loadByAttribute('sku',$item_details->SKU);
+                     $quote->addProduct($product,new Varien_Object(array('qty'   => (int) $item_details->Quantity)));
+                     $shipping_cost += $item_details->ShippingCost;
                  }
              }
              // Set Sales Order Billing Address
@@ -167,14 +168,17 @@ function insertOrder($order_details) {
                  'vat_id' => '',
                  'save_in_address_book' => 1
              ));
-             if($shipprice==0){
+             if($shipping_cost==0){
                  $shipmethod='freeshipping_freeshipping';
              }
+             else {
+                 $shipmethod='freeshipping_freeshipping';
+             }    
              
              // Collect Rates and Set Shipping & Payment Method
              $shippingAddress->setCollectShippingRates(true)
                              ->collectShippingRates()
-                             ->setShippingMethod('flatrate_flatrate')
+                             ->setShippingMethod($shipmethod)
                              ->setPaymentMethod('checkmo');
              
              // Set Sales Order Payment
@@ -192,7 +196,8 @@ function insertOrder($order_details) {
              $quote = $customer = $service = null;
              
              // Finished
-             return $increment_id;
+             echo "order created successfully =". $increment_id;
+             exit;
     }
 }    
 /*Mage::app();

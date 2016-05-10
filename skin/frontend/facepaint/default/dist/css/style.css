@@ -1151,10 +1151,17 @@ select.form-control, .form-list .input-box select {
 #opc-login h4, #login-form h4{ color:#0184a2;}
 .opc .allow .step-title a{ color:#333;}
 .sp-methods li input.radio, .sp-methods dt input.radio{display: inline-block;}
-.sp-methods label{display: inline-block;margin-left: 5px;margin-top: 2px;}
+.sp-methods label{display: inline-block;margin-left: 5px;margin-top: 2px; max-width: 90%;}
 #checkoutSteps{ line-height:21px;font-size: 14px;}
 .order-review  h3.product-name{ margin:0; font-size:15px;font-family: Lato,georgia,serif; font-weight:600;}
 .cart-table-wrapper table td input{ margin:0 auto;}
+#opc-login .buttons-set button{padding-bottom: 0;padding-top: 0;}
+.form-list textarea.form-control{ width:100%; resize:none;}
+.opc .step-title h2{ font-weight:600;}
+
+/*success page*/
+.lrshare_iconsprite32 {border-radius: 50%;}
+
 @media (min-width: 768px) {
 }
 
@@ -1253,6 +1260,15 @@ select.form-control, .form-list .input-box select {
     max-width: 140px;
     min-width: 100px;
     width: 30%;}
+.block-layered-nav .block-title::after, .mobile-collapsible .block-title::after, .sidebar .block .block-title::after {
+    display: inline-block !important;
+}
+.col-left > * {
+    margin-right: 0;
+}
+.col-right > * {
+    margin-left: 0;
+}
 }
 
 @media (max-width: 479px) {
@@ -1268,5 +1284,19 @@ select.form-control, .form-list .input-box select {
 }
 .cart-btns .btn {
 	margin: 10px 0;
+}
+.opc .step-title h2 {
+    font-size: 1em;
+    line-height: 2.8333em;
+}
+.buttons-set .button, .cart .btn-checkout, .mini-cart .actions .button, .mini-compare .actions .button, .title-buttons .button {
+    float: none;
+    margin-bottom: 7px;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+}
+.buttons-set .back-link, .buttons-set .required {
+    display: none;
 }
 }

@@ -275,9 +275,16 @@ $_productCollection = $this->getLoadedProductCollection ();
 
                             <?php if ($lazy): ?>
 
-                                <img class="owl-lazy"
+							<?php if($_collectionSize>4): ?>
+								<img class="owl-lazy"
 									 data-src="<?php echo $helpImg->getImg ($_product, $imgWidth, $imgHeight, 'small_image'); ?>"
-                                     alt="<?php echo $this->stripTags ($this->getImageLabel ($_product, 'small_image'), NULL, TRUE); ?>"/>
+									 alt="<?php echo $this->stripTags ($this->getImageLabel ($_product, 'small_image'), NULL, TRUE); ?>"/>
+							<?php else: ?>
+								<img class="lazy"
+									 data-original="<?php echo $helpImg->getImg ($_product, $imgWidth, $imgHeight, 'small_image'); ?>"
+									 src="<?php echo $this->getSkinUrl('images/loader.gif') ?>"
+									 alt="<?php echo $this->stripTags ($this->getImageLabel ($_product, 'small_image'), NULL, TRUE); ?>"/>
+							<?php endif; ?>	
 
                             <?php else: ?>
 
@@ -299,7 +306,8 @@ $_productCollection = $this->getLoadedProductCollection ();
 
 						<?php //echo $helpLabels->getLabels ($_product); //Product labels ?>
 						<?php if($_product->getIconlabel()!=''): ?>
-							<span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span>
+							<!--span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span-->
+							<span class="tag-label-<?php echo strtolower(str_replace(' ', '', $_product->getIconlabel())); ?>"></span>
 						<?php endif; ?>
 
                         </a>

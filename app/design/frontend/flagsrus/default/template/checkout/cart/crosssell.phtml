@@ -12,7 +12,7 @@
  */
 ?>
 
-<?php if($this->getItemCount()): ?>
+<?php if($_collectionSize = $this->getItemCount()): ?>
 <?php
 
 $_productCollection = $this->getItems();
@@ -165,7 +165,16 @@ $_productCollection = $this->getItems();
                 <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true); ?>" class="product-image">
                     
                     <?php if ($lazy): ?>
-                        <img class="lazyOwl" src="<?php echo $helpImg->getImg($_product, $imgWidth, $imgHeight, 'small_image'); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true); ?>" />
+						<?php if($_collectionSize>4): ?>
+							<img class="owl-lazy"
+								 data-src="<?php echo $helpImg->getImg ($_product, $imgWidth, $imgHeight, 'small_image'); ?>"
+								 alt="<?php echo $this->stripTags ($this->getImageLabel ($_product, 'small_image'), NULL, TRUE); ?>"/>
+						<?php else: ?>
+							<img class="lazy"
+								 data-original="<?php echo $helpImg->getImg ($_product, $imgWidth, $imgHeight, 'small_image'); ?>"
+								 src="<?php echo $this->getSkinUrl('images/loader.gif') ?>"
+								 alt="<?php echo $this->stripTags ($this->getImageLabel ($_product, 'small_image'), NULL, TRUE); ?>"/>
+						<?php endif; ?>	
                     <?php else: ?>
                         <img src="<?php echo $helpImg->getImg($_product, $imgWidth, $imgHeight, 'small_image'); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true); ?>" />
                     <?php endif; ?>
@@ -174,7 +183,8 @@ $_productCollection = $this->getItems();
                     <?php endif; ?>
 					<?php //echo $helpLabels->getLabels ($_product); //Product labels ?>
 					<?php if($_product->getIconlabel()!=''): ?>
-						<span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span>
+						<!--span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span-->
+						<span class="tag-label-<?php echo strtolower(str_replace(' ', '', $_product->getIconlabel())); ?>"></span>
 					<?php endif; ?>
                 </a>
             
@@ -245,7 +255,7 @@ $_productCollection = $this->getItems();
                                 //]]>
 					</script>
                     <?php elseif($_product->getStockItem() && $_product->getStockItem()->getIsInStock()): ?>
-                        <a title="<?php echo $this->__('View Details') ?>" class="button btn-cart" href="<?php echo $_product->getProductUrl() ?>"><?php echo $this->__('View Details') ?></a>
+                        <a title="<?php echo $this->__('See Options') ?>" style="float:none" class="button btn-cart" href="<?php echo $_product->getProductUrl() ?>"><?php echo $this->__('See Options') ?></a>
                     <?php else: ?>
                         <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
                     <?php endif; ?>
@@ -267,12 +277,13 @@ $_productCollection = $this->getItems();
                    <div class="ratings"> <!-- start: ratings -->                 
                     	<div class="star_container <?php echo Mage::getModel('catalog/product')->load($_product->getId())->getSku();?>"></div>
                    </div><!-- end: ratings -->                    
-                   <div class="qty-in-stock"><!-- start: Qty in stock -->
                        <?php  
-                           $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
-                           echo $this->__("Qty in Stock: ").intval($stock->getQty());
-                       ?>
-                   </div><!-- end: Qty in stock -->                   
+                           $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product); ?>
+						<?php if($stock->getQty()>0): ?>
+							<div class="qty-in-stock"><!-- start: Qty in stock -->
+								<? echo $this->__("Qty in Stock: ").intval($stock->getQty()); ?>
+						   </div><!-- end: Qty in stock -->                   
+						<?php endif; ?>
                    
                </div><!-- end: rating-and-qty-block-->
             

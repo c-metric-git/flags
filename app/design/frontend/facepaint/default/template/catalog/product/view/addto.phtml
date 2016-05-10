@@ -42,22 +42,22 @@
 ?>
 <?php if($_compareUrl) : ?>
 
-	<!--<li>
+	<li>
         <a class="link-compare feature feature-icon-hover first" href="<?php echo $_compareUrl ?>" title="<?php echo $this->__('Add to Compare') ?>">
 			<span class="ic ic-compare ib icon-color-productview"></span>
 			<span class="label"><?php echo $this->__('Add to Compare') ?></span>
 		</a>
-	</li>-->
+	</li>
 
 <?php endif; ?>
 <?php if ($this->canEmailToFriend()): ?>
 
-	<!--<li>
+	<li>
     	<a class="link-share feature feature-icon-hover first" href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>" title="<?php echo $this->__('Email to a Friend') ?>">
 			<span class="ic ic-share ib icon-color-productview"></span>
 			<span class="label"><?php echo $this->__('Email to a Friend') ?></span>
 		</a>
-	</li>-->
+	</li>
 
 <?php endif; ?>
 </ul>

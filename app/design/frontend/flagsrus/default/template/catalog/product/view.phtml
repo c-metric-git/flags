@@ -127,7 +127,8 @@
 		<div class="product-img-column <?php echo $grid['imgCol']; ?>">
 			<?php echo $this->getChildHtml('media') ?>
 			<?php if($_product->getIconlabel()!=''): ?>
-				<span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span>
+				<!--span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span-->
+				<span class="tag-label-<?php echo strtolower(str_replace(' ', '', $_product->getIconlabel())); ?>"></span>
 			<?php endif; ?>
 			<?php //echo $this->helper('ultimo/labels')->getLabels($_product); //Product labels ?>
 			<?php echo $this->getChildHtml('container_product_image_1'); ?>

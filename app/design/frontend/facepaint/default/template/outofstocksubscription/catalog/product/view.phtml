@@ -145,7 +145,7 @@
 							<!--</div> -->
 							<?php 
 				            $product_sku = $_product->getSku(); 
-				            $sa_reviews = "<script type='text/javascript'>  var sa_product = '".$product_sku."'; function saLoadScript(src) { var js = window.document.createElement('script'); js.src = src; js.type = 'text/javascript'; document.getElementsByTagName('head')[0].appendChild(js); } saLoadScript('//www.shopperapproved.com/product/12756/'+sa_product+'.js'); </script><div id='product_just_stars' class='reg'></div>";
+				            $sa_reviews = "<script type='text/javascript'>  var sa_product = '".$product_sku."'; function saLoadScript(src) { var js = window.document.createElement('script'); js.src = src; js.type = 'text/javascript'; document.getElementsByTagName('head')[0].appendChild(js); } saLoadScript('//www.shopperapproved.com/product/10930/'+sa_product+'.js'); </script><div id='product_just_stars' class='reg'></div>";
 				            echo $sa_reviews;
 				            //echo $this->getReviewsSummaryHtml($_product, false, true); //magento in built reviews ?>
 							<?php /*if ($shortDescription): ?>
@@ -153,7 +153,7 @@
 							<?php endif; */?>
 						 
 					            <label class="fp-prod-id" ><?php echo $this->__("Product ID: ");?>
-						            <span class="">
+						            <span class="sku-val">
 									<?php echo $_product->getSku();?>
 						            </span>
 						        </label>
@@ -183,13 +183,14 @@
 			      <?php  endif; ?>   
 			     <!--</div>   -->
 				<?php if($_product->isSaleable() && !$_product->isGrouped() ): ?>			
-					<div style="fp-prod-qty form-group">
 						<?php 
 						   $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
-						?>
-						<span class=""><?php if($stock->getQty()>0): ?><?php echo $this->__("Quantity in Stock: ");echo intval($stock->getQty()); ?><?php else: ?>&nbsp;<?php endif; ?></span>
-						
-		            </div>
+						   if($stock->getQty()>0) : ?>
+						    <div style="fp-prod-qty form-group">		
+								<span class=""><?php if($stock->getQty()>0): ?><?php echo $this->__("Quantity in Stock: ");echo intval($stock->getQty()); ?><?php else: ?>&nbsp;<?php endif; ?></span>
+								
+				            </div>	
+				           <?php endif ?> 
 				<?php endif; ?>
 				<?php if($_product->isGrouped()): ?>
 			

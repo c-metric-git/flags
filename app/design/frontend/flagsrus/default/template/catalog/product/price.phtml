@@ -52,7 +52,11 @@ $_minimalPrice = $_taxHelper->getPrice($_product, $_minimalPriceValue, $_simpleP
 $_convertedFinalPrice = $_store->roundPrice($_store->convertPrice($_product->getFinalPrice()));
 $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStoreLabel();
 ?>
-
+<div class="price-box">   
+    
+        <div class="sku sku-<?php echo $_product->getId(); ?>" style="font-family:Lato Regular">               
+			<?php echo $_product->getProductPage(); echo "ID: ".Mage::getModel('catalog/product')->load($_product->getId())->getSku();?>
+        </div>	
 <?php if (!$_product->isGrouped()): ?>
     <?php $_weeeTaxAmount = $_weeeHelper->getAmountForDisplay($_product); ?>
     <?php $_weeeTaxAttributes = $_weeeHelper->getProductWeeeAttributesForRenderer($_product, null, null, null, true); ?>
@@ -63,11 +67,11 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
     <?php $_weeeTaxAmount = $_store->roundPrice($_store->convertPrice($_weeeTaxAmount)); ?>
     <?php $_weeeTaxAmountInclTaxes = $_store->roundPrice($_store->convertPrice($_weeeTaxAmountInclTaxes)); ?>
 
-    <div class="price-box">   
+    <!--div class="price-box">   
     
         <div class="sku sku-<?php echo $_product->getId(); ?>" style="font-family:Lato Regular">               
 			<?php echo $_product->getProductPage(); echo "ID: ".Mage::getModel('catalog/product')->load($_product->getId())->getSku();?>
-        </div>	
+        </div-->	
     <?php $_convertedPrice = $_store->roundPrice($_store->convertPrice($_product->getPrice())); ?>
     <?php $_price = $_taxHelper->getPrice($_product, $_convertedPrice); ?>
     <?php $_regularPrice = $_taxHelper->getPrice($_product, $_convertedPrice, $_simplePricesTax); ?>
@@ -438,7 +442,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
             </span>
         <?php endif ?>
     <?php endif; /* if ($this->getDisplayMinimalPrice() && $_minimalPrice && $_minimalPrice < $_finalPrice): */ ?>
-    </div>
+    <!--/div-->
 
 <?php else: /* if (!$_product->isGrouped()): */ ?>
     <?php
@@ -457,7 +461,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
         <div class="price-box">
             <p<?php if ($showMinPrice): ?> class="minimal-price"<?php endif ?>>
                 <?php if ($showMinPrice): ?>
-                    <span class="price-label"><?php echo $this->__('Starting at:') ?></span>
+                    <!--span class="price-label"><?php echo $this->__('Starting at:') ?></span-->
                 <?php endif ?>
                 <?php if ($_taxHelper->displayBothPrices()): ?>
                     <span class="price-excluding-tax">
@@ -481,11 +485,15 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
                         $_showPrice = $_exclTax;
                     }
                     ?>
-                    <span class="price" id="product-minimal-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                    <!--span class="price" id="product-minimal-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
                     <?php echo $_coreHelper->formatPrice($_showPrice, false) ?>
-                </span>
+                </span-->
+				<span id="product-price-<?php echo $_id ?>" class="regular-price">
+						<span class="price"><?php echo $_coreHelper->formatPrice($_showPrice, false) ?></span>
+				</span>
                 <?php endif; ?>
             </p>
         </div>
     <?php endif; /* if ($this->getDisplayMinimalPrice() && $_minimalPrice): */ ?>
 <?php endif; /* if (!$_product->isGrouped()): */ ?>
+</div>

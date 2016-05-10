@@ -106,7 +106,7 @@ $newsLetter = Mage::getStoreConfig('successpagesettings/newsletter/enablenewslet
 ?>
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
 <!--<h2 class="sub-title"><?php //echo $this->__('Thank you for your purchase!') ?></h2>-->
-<h2 class="sub-title"><?php echo $this->__('Order Complete') ?></h2>
+<div class="page-title"><h1 class="sub-title"><?php echo $this->__('Order Complete') ?></h1></div>
 <p><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($this->getOrderId())) ?></p>
 <?php
 if ($aboveenable == 1 && $aboveenableid != "") {
@@ -114,8 +114,8 @@ if ($aboveenable == 1 && $aboveenableid != "") {
 } 
 ?>
 
-<div class="myorder-wrapper col-md-12">
-    <div class="order_summery col-md-6">
+<div class="row"><div class="myorder-wrapper col-md-12">
+   <div class="row"> <div class="order_summery col-md-12">
         <h3 class="bg-info">Billing Address</h3>
         <div class="inner_content">
             
@@ -137,7 +137,7 @@ if ($aboveenable == 1 && $aboveenableid != "") {
         
     </div>
     
-    <div class="order_summery col-md-6">
+    <div class="order_summery col-md-12">
         <h3 class="bg-info">Shipping Address</h3>
         <div class="inner_content">
            
@@ -158,9 +158,9 @@ if ($aboveenable == 1 && $aboveenableid != "") {
         </div>
        
     </div>
-    
+    <div class="clearfix"></div></div>
 </div>
-
+<div class="clearfix"></div></div>
 <div class="myorder-wrapper">
     <div class="myorder">
         <h3 class="bg-info">Order Information</h3>

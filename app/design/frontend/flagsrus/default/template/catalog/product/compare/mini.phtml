@@ -63,8 +63,7 @@
       <script type="text/javascript">decorateList('compare-items')</script>
       <div class="actions"> <a href="<?php echo $_helper->getClearListUrl() ?>" class="button btn-inline" onclick="return confirm('<?php echo $this->__('Are you sure you would like to remove all products from your comparison?') ?>');"><?php echo $this->__('Clear All') ?></a> 
         
-        <!--button type="button" title="<?php echo $this->__('Compare Products') ?>" class="button btn-inline" onclick="popWin('<?php echo $_helper->getListUrl() ?>','compare','top:0,left:0,width=820,height=600,resizable=yes,scrollbars=yes')"><span><span><?php echo $this->__('Compare') ?></span></span></button-->
-        <button type="button" title="<?php echo $this->__('Compare Products') ?>" class="button btn-inline" onclick="window.open('<?php echo $_helper->getListUrl() ?>','_self')"><span><span><?php echo $this->__('Compare') ?></span></span></button>
+       <button type="button" title="<?php echo $this->__('Compare Products') ?>" class="button btn-inline" onclick="window.open('<?php echo $_helper->getListUrl() ?>','_self')"><span><span><?php echo $this->__('Compare') ?></span></span></button>
       </div>
       <?php else: ?>
       <div class="empty"><?php echo $this->__('You have no items to compare.') ?></div>
