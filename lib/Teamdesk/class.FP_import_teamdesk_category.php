@@ -115,8 +115,8 @@ class FPTeamDeskCategory {
                       
                       fputcsv($fp,$csv_row);
                       foreach ($arrTDCategories as $tdCategory) {    
-                            $image_path = str_replace("http://myclownantics.com/","/home/myclown/public_html/",$tdCategory['imgLocationCalced']);
-                            if(file_exists($image_path) && $tdCategory['imgLocationCalced']!='') {
+                            $image_path = $tdCategory['imgLocationCalced'];//str_replace("http://myclownantics.com/","/home/myclown/public_html/",$tdCategory['imgLocationCalced']);
+                            if($tdCategory['imgLocationCalced']!='') {
                                 $filename = basename($tdCategory['imgLocationCalced']);
                                 copy($image_path,"media/catalog/category/".$filename);
                             }    

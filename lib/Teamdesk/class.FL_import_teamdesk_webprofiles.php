@@ -1236,7 +1236,7 @@ class FLTeamDeskWebprofiles {
                 $type = " AND [Type Attribute]='".$type."'";
             }    
         }
-        $arrQueries = "WHERE [SendToPinnacle] $type";
+        $arrQueries = "WHERE [SendToPinnacle] $type AND [is_visible]";
         /**
         * @desc  create string of columns to be retreived from the query  
         */       
