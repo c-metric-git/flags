@@ -23,7 +23,8 @@
             <catalog>
                 <rewrite>
                     <product_url>Stripedsocks_Productlisting_Model_Product_Url</product_url>
-                    <category>Stripedsocks_Productlisting_Model_Category</category>  
+                    <category>Stripedsocks_Productlisting_Model_Category</category>
+					<url>Stripedsocks_Productlisting_Model_Url</url>  
                 </rewrite>
             </catalog>
             <!--<core_resource>

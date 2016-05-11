@@ -13,5 +13,12 @@
                 </rewrite>
             </sales>
         </helpers>
+        <models>
+            <sales>
+                <rewrite>
+                    <service_quote>Stripedsocks_Orderstatus_Sales_Model_Service_Quote</service_quote>  
+                </rewrite>
+            </sales>
+        </models>
     </global>
 </config>

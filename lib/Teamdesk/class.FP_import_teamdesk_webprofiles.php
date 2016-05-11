@@ -444,15 +444,17 @@ class FPTeamDeskWebprofiles {
                                             /****
                                             * @desc code for copying the images
                                             */
-                                            $image_path = str_replace("http://myclownantics.com/","/home/myclown/public_html/",$tdProduct['imgLocationCustom']);
-                                            $related_image_path = "/home/myclown/public_html/admin/CA_resize_500_500/".strtolower($tdProduct['Related Product']).".jpg"; 
-                                            if(file_exists($image_path) && $tdProduct['imgLocationCustom']!='') {
+                                            $image_path = $tdProduct['imgLocationCustom'];//str_replace("http://myclownantics.com/","/home/myclown/public_html/",$tdProduct['imgLocationCustom']);
+                                            $image_arr = @getimagesize($image_path);  
+                                            $related_image_path = "http://myclownantics.com/admin/CA_resize_500_500/".strtolower($tdProduct['Related Product']).".jpg";//"/home/myclown/public_html/admin/CA_resize_500_500/".strtolower($tdProduct['Related Product']).".jpg"; 
+                                            $related_image_arr = @getimagesize($related_image_path); 
+                                            if(is_array($image_arr) && $tdProduct['imgLocationCustom']!='') {
                                                 $filename = basename($tdProduct['imgLocationCustom']);
                                                 if(!file_exists("media/import/".$filename)) {
                                                     copy($image_path,"media/import/".$filename);
                                                 }    
                                             } 
-                                            else if(file_exists($related_image_path) && $tdProduct['imgLocationCustom']!='') {
+                                            else if(is_array($related_image_arr) && $tdProduct['imgLocationCustom']!='') {
                                                 $filename = basename($tdProduct['imgLocationCustom']);
                                                 if(!file_exists("media/import/".$filename)) {
                                                     copy($related_image_path,"media/import/".$filename);

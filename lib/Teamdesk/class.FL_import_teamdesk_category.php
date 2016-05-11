@@ -103,14 +103,16 @@ class FLTeamDeskCategory {
                       $csv_row[] = "Default Sort By".$csv_seperator;
                       $csv_row[] = "Page Layout".$csv_seperator;
                       $csv_row[] = "Custom Layout Update".$csv_seperator;
-                      $csv_row[] = "Featured Category".$csv_seperator;  
+                      $csv_row[] = "Featured Category".$csv_seperator; 
+                      $csv_row[] = "Short Name For Menu".$csv_seperator;     
                       $csv_row[] = "Custom URL".$csv_seperator; 
                       $csv_row[] = "Submenu Type".$csv_seperator; 
                       
                       fputcsv($fp,$csv_row);
                       foreach ($arrTDCategories as $tdCategory) {    
                             $image_path = $tdCategory['imgLocationCalced'];//str_replace("http://myclownantics.com/","/home/myclown/public_html/",$tdCategory['imgLocationCalced']);
-                            if($tdCategory['imgLocationCalced']!='') {
+                            $image_arr = @getimagesize($image_path);    
+                            if(is_array($image_arr) && $tdCategory['imgLocationCalced']!='') {
                                 $filename = basename($tdCategory['imgLocationCalced']);
                                 copy($image_path,"media/catalog/category/".$filename);
                             }    
@@ -141,7 +143,8 @@ class FLTeamDeskCategory {
                             $csv_row[] = $csv_seperator; 
                             $csv_row[] = "No layout updates".$csv_seperator; 
                             $csv_row[] = $csv_seperator;
-                            $csv_row[] = ($tdCategory['is_home']=="Yes"?"1":"0").$csv_seperator;  
+                            $csv_row[] = ($tdCategory['is_home']=="Yes"?"1":"0").$csv_seperator; 
+                            $csv_row[] = $tdCategory['ShortNameForMenu'].$csv_seperator; 
                             $csv_row[] = str_replace("http://www.flagsrus.org/","",$tdCategory['url'].$csv_seperator);
                             $csv_row[] = "1".$csv_seperator;
                             fputcsv($fp,$csv_row);

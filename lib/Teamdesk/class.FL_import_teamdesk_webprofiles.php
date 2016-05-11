@@ -340,15 +340,17 @@ class FLTeamDeskWebprofiles {
                                             $csv_row[] = "Disabled (do not show)"; //estimated_delivery_enable : Inherited  
                                             $csv_row[] = "Disabled (do not show)"; //estimated_shipping_enable :Inherited 
                                             $csv_row[] = $tdProductAtt['Product - Description']!=''?$tdProductAtt['Product - Description']:$tdProductAtt['Web Profile - Description']; //description
-                                            $image_path = str_replace("http://myclownantics.com/","/home/myclown/public_html/",$tdProductAtt['imgLocationCustom']);
-                                            $related_image_path = "/home/myclown/public_html/admin/CA_resize_500_500/".strtolower($tdProductAtt['Related Product']).".jpg"; 
-                                            if(file_exists($image_path) && $tdProductAtt['imgLocationCustom']!='') {
+                                            $image_path = $tdProductAtt['imgLocationCustom'];//str_replace("http://myclownantics.com/","/home/myclown/public_html/",$tdProductAtt['imgLocationCustom']);
+                                            $image_arr = @getimagesize($image_path);   
+                                            $related_image_path = "http://myclownantics.com/admin/CA_resize_500_500/".strtolower($tdProductAtt['Related Product']).".jpg"; 
+                                            $related_image_arr = @getimagesize($related_image_path); 
+                                            if(is_array($image_arr) && $tdProductAtt['imgLocationCustom']!='') {
                                                 $filename = basename($tdProductAtt['imgLocationCustom']);
                                                 if(!file_exists("media/import/".$filename)) {
                                                     copy($image_path,"media/import/".$filename);
                                                 }    
                                             }
-                                            else if(file_exists($related_image_path) && $tdProductAtt['imgLocationCustom']!='') {
+                                            else if(is_array($related_image_arr) && $tdProductAtt['imgLocationCustom']!='') {
                                                 $filename = basename($tdProductAtt['imgLocationCustom']);
                                                 if(!file_exists("media/import/".$filename)) {
                                                     copy($related_image_path,"media/import/".$filename);
@@ -937,15 +939,17 @@ class FLTeamDeskWebprofiles {
                                             /****
                                             * @desc code for copying the images
                                             */
-                                            $image_path = str_replace("http://myclownantics.com/","/home/myclown/public_html/",$tdProduct['imgLocationCustom']);
-                                            $related_image_path = "/home/myclown/public_html/admin/CA_resize_500_500/".strtolower($tdProduct['Related Product']).".jpg"; 
-                                            if(file_exists($image_path) && $tdProduct['imgLocationCustom']!='') {
+                                            $image_path = $tdProduct['imgLocationCustom'];//str_replace("http://myclownantics.com/","/home/myclown/public_html/",$tdProduct['imgLocationCustom']);
+                                            $image_arr = @getimagesize($image_path);  
+                                            $related_image_path = "http://myclownantics.com/admin/CA_resize_500_500/".strtolower($tdProduct['Related Product']).".jpg"; 
+                                            $related_image_arr = @getimagesize($related_image_path); 
+                                            if(is_array($image_arr) && $tdProduct['imgLocationCustom']!='') {
                                                 $filename = basename($tdProduct['imgLocationCustom']);
                                                 if(!file_exists("media/import/".$filename)) {
                                                     copy($image_path,"media/import/".$filename);
                                                 }    
                                             } 
-                                            else if(file_exists($related_image_path) && $tdProduct['imgLocationCustom']!='') {
+                                            else if(is_array($related_image_arr) && $tdProduct['imgLocationCustom']!='') {
                                                 $filename = basename($tdProduct['imgLocationCustom']);
                                                 if(!file_exists("media/import/".$filename)) {
                                                     copy($related_image_path,"media/import/".$filename);
@@ -1203,7 +1207,7 @@ class FLTeamDeskWebprofiles {
                                         fputcsv($this->fp,$csv_row);
                                     } // End of for largest counter loop
                             } // End of if not in product added array  
-                            if($this->product_counter % 800 == 0) {
+                            if($this->product_counter % 900 == 0) {
                                  $this->csv_counter++;  
                                  fclose($this->fp);
                                  $this->fp = fopen("var/import/products/FL_Products".$this->csv_counter.".csv","w+");
