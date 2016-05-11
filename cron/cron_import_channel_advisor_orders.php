@@ -82,7 +82,7 @@ exit;
 
 <?php
 
-function insertOrder($order_details) {
+function insertOrder($order_details) {         
     $channel_advisor_orderid = $order_details->ClientOrderIdentifier;
     $order_collection = Mage::getModel('sales/order')->getCollection()->addFieldToFilter('channel_advisor_orderid', $channel_advisor_orderid);
     if ($order_collection->count()==0) {
@@ -112,7 +112,12 @@ function insertOrder($order_details) {
              // Assign Customer To Sales Order Quote
              $quote->assignCustomer($customer);
              $quote->setIsSuperMode(true);
-             $quote->channel_advisor_orderid = $channel_advisor_orderid; 
+             $quote->setChannelAdvisorOrderid($channel_advisor_orderid);
+             $quote->setCustomerNote("Channel Advisor Order id : ".$channel_advisor_orderid);
+             /*echo '<pre>';
+             print_R($quote);
+             exit;       */
+             //$quote->channel_advisor_orderid = $channel_advisor_orderid; 
                  // Configure Notification
             // $quote->setSendCconfirmation(1);
              $shipping_cost=0;

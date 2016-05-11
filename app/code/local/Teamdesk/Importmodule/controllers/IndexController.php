@@ -543,7 +543,7 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                     $succ_message ='';       
                     $product_csv_counter = $_SESSION['product_csv_counter']!=''?$_SESSION['product_csv_counter']:0;   
                     $counter_loop = 0; 
-                    for($i=0;$i<=$product_csv_counter;$i++) {                   
+                    for($i=0;$i<=14;$i++) {                   
                         $succ_message['error'] .= "<br /><br />Processing File => FL_Products$i.csv<br />";   
                         $succ_message['success'] .= "<br /><br />Processing File => FL_Products$i.csv<br />";    
                         $tmp_succ_message = $this->AddProduct("var/import/products/FL_Products$i.csv");

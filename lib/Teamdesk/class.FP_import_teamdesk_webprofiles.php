@@ -117,55 +117,55 @@ class FPTeamDeskWebprofiles {
             /**
             * @desc code to get the product families contents.  
             */
-            if($_SESSION['arrTDProductFamilyContents'] !='' && isset($_SESSION['arrTDProductFamilyContents'])) {
+            if($_SESSION['FParrTDProductFamilyContents'] !='' && isset($_SESSION['arrTDProductFamilyContents'])) {
                 $this->arrTDProductFamilyContents = $_SESSION['arrTDProductFamilyContents'];
             }
             else {
                 $this->arrTDProductFamilyContents = $this->getTDProductFamilyContents();   
-                $_SESSION['arrTDProductFamilyContents'] = $this->arrTDProductFamilyContents; 
+                $_SESSION['FParrTDProductFamilyContents'] = $this->arrTDProductFamilyContents; 
             } 
             /**
             * @desc code to get the solo products.  
             */
-            if($_SESSION['arrSoloProducts'] !='' && isset($_SESSION['arrSoloProducts'])) {   
+            if($_SESSION['FParrSoloProducts'] !='' && isset($_SESSION['arrSoloProducts'])) {   
                 $arrSoloTDProducts = $_SESSION['arrSoloProducts'];
             }
             else {
                 $arrSoloTDProducts = $this->getTDProducts('Solo');
-                $_SESSION['arrSoloProducts'] = $arrSoloTDProducts; 
+                $_SESSION['FParrSoloProducts'] = $arrSoloTDProducts; 
             }  
             /**
             * @desc get all the product categories
             */
-            if($_SESSION['arrTDProductCategories'] !='' && isset($_SESSION['arrTDProductCategories'])) {
+            if($_SESSION['FParrTDProductCategories'] !='' && isset($_SESSION['arrTDProductCategories'])) {
                 $this->arrTDProductCategories = $_SESSION['arrTDProductCategories'];
             }
             else { 
                 $this->arrTDProductCategories = $this->getALLTDProductCategory();  
-                $_SESSION['arrTDProductCategories'] = $this->arrTDProductCategories; 
+                $_SESSION['FParrTDProductCategories'] = $this->arrTDProductCategories; 
             }  
             /**
             * @desc get all attributes 
             */
-            if($_SESSION['arrTDProductsAttributes'] !='' && isset($_SESSION['arrTDProductsAttributes'])) {
+            if($_SESSION['FParrTDProductsAttributes'] !='' && isset($_SESSION['arrTDProductsAttributes'])) {
                 $arrTDProductsAttributes = $_SESSION['arrTDProductsAttributes'];
             }
             else {
                 $arrTDProductsAttributes = $this->getTDProductsAttributes();   
-                $_SESSION['arrTDProductsAttributes'] = $arrTDProductsAttributes; 
+                $_SESSION['FParrTDProductsAttributes'] = $arrTDProductsAttributes; 
             }
-            if($_SESSION['arrProductConfigurableAttributes'] !='' && isset($_SESSION['arrProductConfigurableAttributes'])) {
+            if($_SESSION['FParrProductConfigurableAttributes'] !='' && isset($_SESSION['arrProductConfigurableAttributes'])) {
                 $this->arrProductConfigurableAttributes = $_SESSION['arrProductConfigurableAttributes'];
             }
             else {
-                $_SESSION['arrProductConfigurableAttributes'] = $this->arrProductConfigurableAttributes; 
+                $_SESSION['FParrProductConfigurableAttributes'] = $this->arrProductConfigurableAttributes; 
             }
-            if($_SESSION['arrParentTDProducts'] !='' && isset($_SESSION['arrParentTDProducts'])) {
+            if($_SESSION['FParrParentTDProducts'] !='' && isset($_SESSION['arrParentTDProducts'])) {
                 $arrParentTDProducts = $_SESSION['arrParentTDProducts'];
             }
             else {
                 $arrParentTDProducts = $this->getTDProducts('Parent');
-                $_SESSION['arrParentTDProducts'] = $arrParentTDProducts; 
+                $_SESSION['FParrParentTDProducts'] = $arrParentTDProducts; 
             }   
             echo "<br />count of prodct family content = ".count($_SESSION['arrTDProductFamilyContents']);
             echo "<br />count of solo = ".count($_SESSION['arrSoloProducts']);
