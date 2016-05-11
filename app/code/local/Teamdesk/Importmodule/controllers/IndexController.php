@@ -533,9 +533,9 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
 						 unset($_SESSION["$clearsession_result"]);					
 					 }   
 					ini_set("display_errors",1);
-                    require_once('lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php'); 
+                    /*require_once('lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php'); 
                     $objTDProducts = new FLTeamDeskWebprofiles(); 
-                    $strReturn = $objTDProducts->importTeamdeskProduct();    
+                    $strReturn = $objTDProducts->importTeamdeskProduct();  */  
                     $strMessage = "Product Import Status"; 
                     if($strReturn !='') {
                         $strMessage .= $strReturn; 
