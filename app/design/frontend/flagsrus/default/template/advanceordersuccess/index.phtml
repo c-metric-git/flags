@@ -141,7 +141,7 @@ $addressDiff = array_diff($oBillingAddressFiltered, $oShippingAddressFiltered);
         </div>
         
     </div>
-    <?php if($order->getShippingAddress() && $addressDiff): ?>
+    <?php //if($order->getShippingAddress() && $addressDiff): ?>
 	<?php 
 		$shipping_address_data = $order->getShippingAddress();
 		$shippcode = $order->getShippingAddress()->getCountry();
@@ -167,7 +167,7 @@ $addressDiff = array_diff($oBillingAddressFiltered, $oShippingAddressFiltered);
         </div>
        
     </div>
-	<?php endif; ?>
+	<?php //endif; ?>
    
 </div>
 

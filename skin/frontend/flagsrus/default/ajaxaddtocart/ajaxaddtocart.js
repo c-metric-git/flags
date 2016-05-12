@@ -143,7 +143,7 @@ var ajaxaddtocart = {
                     var url	 = 	obj.form.action;
                   //  var subcribeurl  =  jQuery(obj.form).attr('data-subscribeurl');
                     data =	obj.form.serialize();
-
+					var $j = jQuery.noConflict();
                     new Ajax.Request(url, {
                         method		: 'post',
                         postBody	: data,
@@ -213,6 +213,8 @@ var ajaxaddtocart = {
 										}
                                     } else {
                                         if(typeof res.messages != 'undefined') {
+											var $j = jQuery.noConflict();
+											$j('#addtooverlay').hide();
                                             _this.showError(res.messages);
                                         } else {
                                             _this.showError("Something happened wrong");

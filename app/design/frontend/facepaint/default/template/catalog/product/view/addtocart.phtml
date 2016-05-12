@@ -60,14 +60,14 @@
     $productCount=intval($stock->getQty());
 ?>
 <!--=================== by brt ends =================-->
-
+<?php  $product_type=$_product->getTypeId(); ?>
 <?php //if ($_product->isSaleable() && ($productCount>0)){
 	if ($_product->isSaleable()){ ?>
 
 
     <div class="row mb15">
 
-        <?php if(!$_product->isGrouped()): ?>
+        <?php if(!$_product->isGrouped() && $product_type != 'bundle'): ?>
 
             <div class="form-group col-md-2 fp-prod-qty-dropdown col-sm-2" style="padding-right:0px">
 
@@ -84,7 +84,28 @@
             </div>
 
         <?php endif; ?>
-
+        <?php if($product_type == 'bundle'): ?>
+              <?php
+                   $bundle_item_qty=array();
+                   $bundle_options=Mage::getResourceModel('bundle/selection')->getChildrenIds($_product->getId() ,false);
+                   foreach ($bundle_options as  $bundle_option) {
+                       foreach ($bundle_option as  $bundle_option_product) {
+                          $product_obj=Mage::getModel('catalog/product')->load($bundle_option_product);
+                          $bundle_item_qty[]=intval(Mage::getModel('cataloginventory/stock_item')->loadByProduct($product_obj)->getQty());
+                       }
+                   }
+                   $min_bundle_item_qty=min($bundle_item_qty);
+              ?>
+              <div class="form-group col-md-2 fp-prod-qty-dropdown col-sm-2 bundle-qty" style="padding-right:0px">
+                <label for="qty"><?php echo $this->__('Qty:') ?></label>
+                <select class="" name="qty" id="qty">
+                <?php $i = 1 ?>
+                <?php do { ?>
+                <option value="<?php echo $i?>"><?php echo $i?><?php $i++ ?></option>
+                <?php } while ($i <= $min_bundle_item_qty) ?>
+                </select>
+            </div>
+        <?php endif; ?>
           <?php if($_product->isGrouped()): ?>
            <?php  $grouped_simpleitem_min_qty=Mage::registry('grouped_simpleitem_min_qty'); ?>
             <div class="form-group col-md-2 fp-prod-qty-dropdown col-sm-2">
@@ -103,7 +124,7 @@
 
         <?php endif; ?>
 
-       <div class="btn-group col-md-4 col-sm-4 nopading col-xs-12" style="margin-left:15px">
+       <div class="btn-group col-md-4 col-sm-4 nopading fp-cust-add-cart" >
          <!--<button type="button" title="<?php echo $buttonTitle ?>" id="product-addtocart-button" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><i class="icon ic ic-bag"></i><span><?php echo $buttonTitle ?></span></span></button>-->
 
          <button type="button" class="btn btn-danger btn-add-to-cart-ico" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="fa fa-shopping-bag"></span> </button>

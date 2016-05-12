@@ -126,7 +126,7 @@ class Meanbee_EstimatedDelivery_Helper_Data extends Mage_Core_Helper_Abstract {
      * @param string $format
      * @return string
      */
-    public function getEstimatedDeliveryFromString($shippingMethod, $date = null, $format = 'EEEE, dSS MMMM') {
+    public function getEstimatedDeliveryFromString($shippingMethod, $date = null, $format = 'EEEE, MMMM dSS') {
         if (!$this->canShowEstimatedDelivery($shippingMethod)) {
             return false;
         }
@@ -144,7 +144,7 @@ class Meanbee_EstimatedDelivery_Helper_Data extends Mage_Core_Helper_Abstract {
      * @param string $format
      * @return string
      */
-    public function getEstimatedDeliveryToString($shippingMethod, $date = null, $format = 'EEEE, dSS MMMM') {
+    public function getEstimatedDeliveryToString($shippingMethod, $date = null, $format = 'EEEE, MMMM dSS') {
         if (!$this->canShowEstimatedDelivery($shippingMethod)) {
             return false;
         }
@@ -162,7 +162,7 @@ class Meanbee_EstimatedDelivery_Helper_Data extends Mage_Core_Helper_Abstract {
      * @param string $format
      * @return string
      */
-    public function getDispatchDateString($shippingMethod, $date = null, $format = 'EEEE, dSS MMMM') {
+    public function getDispatchDateString($shippingMethod, $date = null, $format = 'EEEE, MMMM dSS') {
         if (!$this->canShowEstimatedDelivery($shippingMethod)) {
             return false;
         }

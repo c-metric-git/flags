@@ -272,22 +272,23 @@
 	      </ul>
       <div style="clear:right;margin-top:0px;">
         <div class="row">
-	        <div class="col-md-6">
+	        <div class="col-md-5">
 	          <?php if (isset($p['primCentralCol'])): ?>
 	              <?php foreach ($p['primCentralCol'] as $element): ?>
 	             <?php echo $element; ?>
 	              <?php endforeach; ?>
 	           <?php endif; ?>
-	        
-          <div class="col-md-3 pull-right">
-	            <div class="pull-left">
-	              <div class="phone-no">734-237-2468</div>
-	              <div class="time">Mon-Fri 10am - 4pm EST</div>
-	            </div>
-	            <div class="pull-right">
+	      
+          <div class="col-md-4 pull-right">
+           <div class="pull-right">
 	              <div class="live-chat"><a href="#" onclick="return SnapEngage.startLink();"><img  src="<?php echo $skinpath.'images/livechat.png';?>" alt="Contact us"></a></div>
 
 	            </div>
+	            <div class="phnnumber-sectn">
+	              <div class="phone-no">734-237-2468</div>
+	              <div class="time">Mon-Fri 10am - 4pm EST</div>
+	            </div>
+	           
           </div>
         </div>
       </div>

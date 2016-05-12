@@ -70,11 +70,11 @@ $appliedFilters = Mage::getSingleton('catalog/layer')->getState()->getFilters();
                 // echo"<br>newImageCategoriesResized->". $newImageCategoriesResized;  // Category image
                 ?>
                <!-- <li class="item<?php if (($i - 1) % $numberCategoriesPerRow == 0): ?> first<?php elseif ($i % $numberCategoriesPerRow == 0): ?> last<?php endif; ?>">-->
-                    <div class="col-sm-2">
+                    <div class="col-sm-3 catg-detail-row">
                         <a title="<?php echo $category->getName () ?>" alt="<?php echo $category->getName () ?>"
                            href="<?php echo $category->getUrl () ?>">
                             <img src="<?php if ($category->getImage ()) echo $newImageCategoriesResized ?>" height="120"
-                                 width="120"  style="border:1px solid #524444" alt="<?php echo $category->getName () ?>"/>
+                                 width="120"  alt="<?php echo $category->getName () ?>"/>
                         </a>
                     
                             <div class="">

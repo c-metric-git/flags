@@ -3412,7 +3412,22 @@ div.home_latestpost .home_blog_li_ div_month {
 
 .instock-img
 {
-	text-align:center;
+	text-align: left;
+    background: url(images/instocktoday.png) 15px top no-repeat;
+    height: 48px;
+    font-size: 25px;
+    color: #0086d4;
+    margin-left: 0px;
+    padding-left: 20px;
+    padding-top: 0;
+    line-height: 28px;
+    font-weight: bold;
+    letter-spacing: 5px;
+}
+.instock-img a
+{
+    color: #0086d4;
+	text-decoration:none;
 }
 .header-top
 {

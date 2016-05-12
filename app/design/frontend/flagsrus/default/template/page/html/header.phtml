@@ -391,7 +391,8 @@
               <div class="col-xs-12 col-md-4 col-sm-4 col-lg-4 instock-img">
                 <!--- Place for quantity -->
                 <a href="<?php echo Mage::getBaseUrl().'shopping#inventory'; ?>">
-					<img src="<?php echo $this->getSkinUrl('images/instocktoday.png') ?>" alt=""/>
+					<!--<img src="<?php // echo $this->getSkinUrl('images/instocktoday.png') ?>" alt=""/>-->
+                    <?php echo $this->getChildHtml('productcount') ?>
 				</a>
               </div>			  
               <div class="col-xs-12 col-md-4 col-sm-4 col-lg-4"  style="padding-right:0;">

@@ -393,7 +393,10 @@ $_productCollection = $this->getLoadedProductCollection ();
 											class="button btn-cart"
 											onclick="setLocation('<?php echo $this->getAddToCartUrl ($_product) ?>')"><span><span><?php echo $this->__ ('Add to Cart') ?></span></span>
 										</button-->
-									<button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="btn btn-primary btn-sm <?php echo $_product->getSku()."-del"; ?>" id="" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><span><i class="icon ic ic-bag"></i><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+                                       <div class="btn-group">
+                                         <button class="btn btn-add-to-cart-ico" type="button"> <span class="fa fa-shopping-bag"></span> </button>
+									     <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="btn btn-add-to-cart  <?php echo $_product->getSku()."-del"; ?>" id="" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><?php echo $this->__('Add to Cart') ?></button>
+                                      </div>   
 								</div>
 								<div class="<?php echo $_product->getSku()."-addremove"; ?>" style="display:none;">
 									<button type="button" title="<?php echo $this->__('Add/Remove') ?>" class="button btn-cart add-remove" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><span><span><?php echo $this->__('Add/Remove') ?></span></span></button>

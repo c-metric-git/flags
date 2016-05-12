@@ -59,7 +59,7 @@ class Magestore_Sociallogin_PopupController extends Mage_Core_Controller_Front_A
                     $customer->changePassword($newPassword, false);
                     $customer->sendPasswordReminderEmail();
                     Mage::getSingleton('core/session')->addNotice($this->__('If there is an account associated with ').$email.$this->__(' you will receive an email with a link to reset your password.'));
-                    $result = array('success'=>true, 'message'=>"If there is an account associated with ".$email."you will receive an email with a link to reset your password.");
+                    $result = array('success'=>true, 'message'=>"If there is an account associated with ".$email." you will receive an email with a link to reset your password.");
                 }
                 catch (Exception $e){
                     $result = array('success'=>false, 'error'=>"Request Time out! Please try again.");

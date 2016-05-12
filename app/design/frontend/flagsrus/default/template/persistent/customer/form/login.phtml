@@ -72,7 +72,7 @@
                 <p class="required"><?php echo $this->__('* Required Fields') ?></p>
             </div>
             <div class="buttons-set">
-                <a id="customer_forgot_password" href="javascript:void(0);" class="f-left"><?php echo $this->__('Forgot Your Password?') ?></a>
+                <a id="customer_forgot_password" href="javascript:void(0);" class="f-left" onclick="document.getElementById('magestore-forgot-password').click();javascript:socialLogin.open();"><?php echo $this->__('Forgot Your Password?') ?></a>
                 <button type="submit" class="button" title="<?php echo $this->__('Login') ?>" name="send" id="send2"><span><span><?php echo $this->__('Login') ?></span></span></button>
             </div>
         </div>

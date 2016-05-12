@@ -13,12 +13,9 @@
 	<div id="magestore-popup" style="display: none; text-align: left;">
 		<div id="sociallogin-close" title="Close" style="font-weight:bold;font-size:11px;color:#f18200"></div>
 		<div id="magestore-login-form" style="float: left">
-			<h3 class="magestore-loign-h3"><?php echo $this->__("Sign in") ?></h3>
-			<div id="sociallogin-forgot" style="display: none">				
-				<span class="sociallogin-forgot-content"><?php echo $this->__('Please enter your email below and we will send you a new password.');?></span>
-			</div>
 			<!-- formm Login -->
 			<form id="magestore-sociallogin-form" class="magestore-login-form-popup">
+						<h3 class="magestore-loign-h3"><?php echo $this->__("Sign in") ?></h3>
 				<!-- email -->
 				<div class="magestore-login-input-box">
 					<!--<label class="required login-label" for="email"> -->
@@ -58,6 +55,10 @@
 			</form>		
 			<!-- form forgot -->
 			<form id="magestore-sociallogin-form-forgot" class="magestore-login-form-popup" style="display: none">
+				<h3 class="magestore-loign-h3"><?php echo $this->__("Forget Password") ?></h3>
+				<div id="sociallogin-forgot" style="display: none">				
+					<span class="sociallogin-forgot-content"><?php echo $this->__('Please enter your email below and we will send you a new password.');?></span>
+				</div>
 				<div class="magestore-login-input-box">
 					<label class="required login-label" for="email">
 						<?php echo $this->__('Email Address ');?><em>*</em> 

@@ -46,7 +46,7 @@
     $grouped_simpleitem_qty=array();
 
  ?>
-<?php if ($this->displayProductStockStatus()): ?>
+<?php /*if ($this->displayProductStockStatus()): ?>
     <?php if ($_product->isAvailable() && $_hasAssociatedProducts): ?>
         <p class="availability in-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('In stock') ?></span></p>
         <meta itemprop="availability" content="http://schema.org/InStock">
@@ -54,7 +54,7 @@
         <p class="availability out-of-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('Out of stock') ?></span></p>
         <meta itemprop="availability" content="http://schema.org/OutOfStock">
     <?php endif; ?>
-<?php endif; ?>
+<?php endif; */?>
 <?php echo $this->getChildHtml('product_type_data_extra') ?>
 <!-- style="display:none" -->
 <table class="data-table grouped-items-table" id="super-product-table" style="display:none">
@@ -131,7 +131,7 @@
             <span class="price" id="">
            <?php  echo   Mage::helper('core')->currency((float)$final_price_total, true, false);    ?>         </span>
         </p>               
-        <p class="yousave">
+        <p class="yousave" style="display:block">
                     <span class="price-label label">You Save: </span>
                     <span class="price">
            <?php  echo     Mage::helper('core')->currency((float)$total_save_price, true, false);     ?>           </span>

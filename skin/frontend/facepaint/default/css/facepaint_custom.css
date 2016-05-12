@@ -97,9 +97,6 @@ div.product-details h3.product-name{
 .product-img-column{
 	margin-right: 0px !important;
 }
-.old-price{
-	color: #0085d3;
-}
 .sale-price{
 	color: #e7453d;
 }
@@ -114,13 +111,11 @@ label.fp-prod-id,label{
 .fp-prod-id span{
 	color: #0086d4;
 }
-.add-to-links{
-	display: block !important;
-}
+
 h3.product-name {
-	font-size: 16px ;
+	font-size: 15px ;
 	color: #333;
-	font-family: 'Lato Bold';
+	font-family: 'Lato';
 	 margin: 8px 0 20px;
 	padding: 5px 0;
 }
