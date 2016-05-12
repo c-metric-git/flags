@@ -402,7 +402,7 @@ $_productCollection = $this->getLoadedProductCollection ();
 									<button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart <?php echo $_product->getSku()."-del"; ?>" id="" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><span><i class="icon ic ic-bag"></i><span><?php echo $this->__('Add to Cart') ?></span></span></button>
 								</div>
 								<div class="<?php echo $_product->getSku()."-addremove"; ?>" style="display:none;">
-									<button type="button" title="<?php echo $this->__('Add/Remove') ?>" class="button btn-cart add-remove" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><span><span><?php echo $this->__('Add/Remove') ?></span></span></button>
+									<button type="button" title="<?php echo $this->__('Added/Remove') ?>" class="button btn-cart add-remove" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><span><span><?php echo $this->__('Added/Remove') ?></span></span></button>
 								</div>
                                 </form>
                         <script type="text/javascript">
