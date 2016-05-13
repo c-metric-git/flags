@@ -1131,7 +1131,7 @@ class FPTeamDeskWebprofiles {
             * @desc  create the teamdesk query, to fetch all the categories
             */  
             // Get all products inventory for which send to pinnacle flag is true
-            $arrQueries = "WHERE [sendToPinnacle] AND [Product - Weight]>0 AND [is_visible]";  
+            $arrQueries = "WHERE [sendToPinnacle]"; //AND [Product - Weight]>0 AND [is_visible]  
             /**
             * @desc  create string of columns to be retreived from the query  
             */       
@@ -1144,7 +1144,7 @@ class FPTeamDeskWebprofiles {
                 }        
                 $resultcount = 0;
                 while($resultcount == 0) {
-                      $arrQueries = "WHERE [sendToPinnacle] AND [Product - Weight]>0 AND [is_visible] AND [PinnacleSKU] > '".$last_record."'";
+                      $arrQueries = "WHERE [sendToPinnacle] AND [PinnacleSKU] > '".$last_record."'";    //AND [Product - Weight]>0 AND [is_visible] 
                       try {  
                             $arrTDProducts = $this->api->Query("SELECT TOP 1500 ".$strColumns." FROM [FP Web Profile] ".$arrQueries." ORDER BY [PinnacleSKU]");
                             if (isset($arrTDProducts->Rows)) {
@@ -1182,7 +1182,11 @@ class FPTeamDeskWebprofiles {
                 $db->query("SELECT attribute_id from eav_attribute where attribute_code='date_of_arrival'");   
                 if($db->moveNext()) {
                     $date_of_arrival_id = $db->col['attribute_id'];
-                }       
+                } 
+                $db->query("SELECT attribute_id from eav_attribute where attribute_code='status'");   
+                if($db->moveNext()) {
+                    $status_id = $db->col['attribute_id'];
+                }         
                 foreach ($arrProducts as $TDProduct) {  
                     $productSKU = $TDProduct['PinnacleSKU'];     
                     if(!in_array($productSKU,$product_added)) {   
@@ -1201,6 +1205,10 @@ class FPTeamDeskWebprofiles {
                         $db->assignStr("is_in_stock", $is_in_stock);    
                         if($product_id > 0) {
                             $db->update("cataloginventory_stock_item", "WHERE product_id='".addslashes($product_id)."'"); 
+                            
+                            $db->reset();  
+                            $db->assignStr("value", $TDProduct['is_visible']=="Yes"?1:2);  
+                            $db->update("catalog_product_entity_int", "WHERE entity_id='".addslashes($product_id)."' and attribute_id='".addslashes($status_id)."'");
                             
                             $db->reset();  
                             $db->assignStr("value", $TDProduct['Product - QTY On Current POs']!=''?$TDProduct['Product - QTY On Current POs']:0);  
