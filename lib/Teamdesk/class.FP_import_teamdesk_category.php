@@ -140,7 +140,7 @@ class FPTeamDeskCategory {
                             $csv_row[] = $csv_seperator; 
                             $csv_row[] = $tdCategory['meta_keywords'].$csv_seperator; 
                             $csv_row[] = $tdCategory['meta_description'].$csv_seperator; 
-                            $csv_row[] = $tdCategory["labelCalc"]=='I Need' || $tdCategory["labelCalc"]=='Vendors' || $tdCategory["labelCalc"]=='Face Paint Designs' || $tdCategory["labelCalc"]=='Face Painting For Beginners' || $tdCategory["labelCalc"]=='New Products' || $tdCategory["labelCalc"]=='On Sale'?"No":"Yes".$csv_seperator; 
+                            $csv_row[] = $tdCategory["labelCalc"]=='I Need' || $tdCategory["labelCalc"]=='Vendors' || $tdCategory["labelCalc"]=='Face Paint Designs' || $tdCategory["labelCalc"]=='Face Painting For Beginners' || $tdCategory["labelCalc"]=='New Products' || $tdCategory["labelCalc"]=='On Sale' || $tdCategory["Level"]>2 ?"No":"Yes".$csv_seperator; 
                             $csv_row[] = "Products only".$csv_seperator; 
                             $csv_row[] = $csv_seperator; 
                             $csv_row[] = "Yes".$csv_seperator; 

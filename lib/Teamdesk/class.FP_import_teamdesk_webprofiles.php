@@ -117,8 +117,8 @@ class FPTeamDeskWebprofiles {
             /**
             * @desc code to get the product families contents.  
             */
-            if($_SESSION['FParrTDProductFamilyContents'] !='' && isset($_SESSION['arrTDProductFamilyContents'])) {
-                $this->arrTDProductFamilyContents = $_SESSION['arrTDProductFamilyContents'];
+            if($_SESSION['FParrTDProductFamilyContents'] !='' && isset($_SESSION['FParrTDProductFamilyContents'])) {
+                $this->arrTDProductFamilyContents = $_SESSION['FParrTDProductFamilyContents'];
             }
             else {
                 $this->arrTDProductFamilyContents = $this->getTDProductFamilyContents();   
@@ -127,8 +127,8 @@ class FPTeamDeskWebprofiles {
             /**
             * @desc code to get the solo products.  
             */
-            if($_SESSION['FParrSoloProducts'] !='' && isset($_SESSION['arrSoloProducts'])) {   
-                $arrSoloTDProducts = $_SESSION['arrSoloProducts'];
+            if($_SESSION['FParrSoloProducts'] !='' && isset($_SESSION['FParrSoloProducts'])) {   
+                $arrSoloTDProducts = $_SESSION['FParrSoloProducts'];
             }
             else {
                 $arrSoloTDProducts = $this->getTDProducts('Solo');
@@ -137,8 +137,8 @@ class FPTeamDeskWebprofiles {
             /**
             * @desc get all the product categories
             */
-            if($_SESSION['FParrTDProductCategories'] !='' && isset($_SESSION['arrTDProductCategories'])) {
-                $this->arrTDProductCategories = $_SESSION['arrTDProductCategories'];
+            if($_SESSION['FParrTDProductCategories'] !='' && isset($_SESSION['FParrTDProductCategories'])) {
+                $this->arrTDProductCategories = $_SESSION['FParrTDProductCategories'];
             }
             else { 
                 $this->arrTDProductCategories = $this->getALLTDProductCategory();  
@@ -147,32 +147,32 @@ class FPTeamDeskWebprofiles {
             /**
             * @desc get all attributes 
             */
-            if($_SESSION['FParrTDProductsAttributes'] !='' && isset($_SESSION['arrTDProductsAttributes'])) {
-                $arrTDProductsAttributes = $_SESSION['arrTDProductsAttributes'];
+            if($_SESSION['FParrTDProductsAttributes'] !='' && isset($_SESSION['FParrTDProductsAttributes'])) {
+                $arrTDProductsAttributes = $_SESSION['FParrTDProductsAttributes'];
             }
             else {
                 $arrTDProductsAttributes = $this->getTDProductsAttributes();   
                 $_SESSION['FParrTDProductsAttributes'] = $arrTDProductsAttributes; 
             }
-            if($_SESSION['FParrProductConfigurableAttributes'] !='' && isset($_SESSION['arrProductConfigurableAttributes'])) {
-                $this->arrProductConfigurableAttributes = $_SESSION['arrProductConfigurableAttributes'];
+            if($_SESSION['FParrProductConfigurableAttributes'] !='' && isset($_SESSION['FParrProductConfigurableAttributes'])) {
+                $this->arrProductConfigurableAttributes = $_SESSION['FParrProductConfigurableAttributes'];
             }
             else {
                 $_SESSION['FParrProductConfigurableAttributes'] = $this->arrProductConfigurableAttributes; 
             }
-            if($_SESSION['FParrParentTDProducts'] !='' && isset($_SESSION['arrParentTDProducts'])) {
-                $arrParentTDProducts = $_SESSION['arrParentTDProducts'];
+            if($_SESSION['FParrParentTDProducts'] !='' && isset($_SESSION['FParrParentTDProducts'])) {
+                $arrParentTDProducts = $_SESSION['FParrParentTDProducts'];
             }
             else {
                 $arrParentTDProducts = $this->getTDProducts('Parent');
                 $_SESSION['FParrParentTDProducts'] = $arrParentTDProducts; 
             }   
-            echo "<br />count of prodct family content = ".count($_SESSION['arrTDProductFamilyContents']);
-            echo "<br />count of solo = ".count($_SESSION['arrSoloProducts']);
-            echo "<br />count of categories =".count($_SESSION['arrTDProductCategories']);
-            echo "<br />count of attributes = ".count($_SESSION['arrTDProductsAttributes']);
-            echo "<br />count of config attributes = ".count($_SESSION['arrProductConfigurableAttributes']);  
-            echo "<br />count of parent = ".count($_SESSION['arrParentTDProducts']);   
+            echo "<br />count of prodct family content = ".count($_SESSION['FParrTDProductFamilyContents']);
+            echo "<br />count of solo = ".count($_SESSION['FParrSoloProducts']);
+            echo "<br />count of categories =".count($_SESSION['FParrTDProductCategories']);
+            echo "<br />count of attributes = ".count($_SESSION['FParrTDProductsAttributes']);
+            echo "<br />count of config attributes = ".count($_SESSION['FParrProductConfigurableAttributes']);  
+            echo "<br />count of parent = ".count($_SESSION['FParrParentTDProducts']);   
             /*  
             * @desc code to create the simple products csv file for uploading in magento
             */
@@ -532,6 +532,9 @@ class FPTeamDeskWebprofiles {
                                             if(strtolower($this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Web Option Label'])=='size') {
                                                 $web_option = 'fp_size';
                                             }
+                                            elseif(strtolower($this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Web Option Label'])=='brand & size') {
+                                                $web_option = 'brand_and_size';
+                                            }
                                             elseif(strtolower($this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Web Option Label'])=='color') {
                                                 $web_option = 'fp_color';
                                             }
@@ -688,6 +691,9 @@ class FPTeamDeskWebprofiles {
                                                 if(strtolower($this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Web Option Label'])=='size') {
                                                     $web_option = 'fp_size';
                                                 }
+                                                elseif(strtolower($this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Web Option Label'])=='brand & size') {
+                                                    $web_option = 'brand_and_size';
+                                                }
                                                 elseif(strtolower($this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Web Option Label'])=='color') {
                                                     $web_option = 'fp_color';
                                                 }
@@ -756,21 +762,24 @@ class FPTeamDeskWebprofiles {
         * @desc  create the Teamdesk query, to fetch all the products that are marked as sendToPinnacle
         */ 
         if($type != '') {
-            if($type == 'Parent') {
-                $type = " AND ([Type Attribute]='".$type."')";  
+            if($type=='Build Your Own') {
+                $type = " AND ([kitType]!=".$type."')"; 
+            }   
+            else if($type == 'Parent') {
+                $type = " AND Nz([kitType],'')<>'Build Your Own' AND ([Type Attribute]='".$type."')";  
             }
             else {    
-                $type = " AND [Type Attribute]='".$type."'";
+                $type = " AND Nz([kitType],'')<>'Build Your Own' AND [Type Attribute]='".$type."'";
             }    
         }
-        $arrQueries = "WHERE [is_visible] AND [SendToPinnacle] $type";
+        $arrQueries = "WHERE [is_visible] AND [SendToPinnacle] $type ";
         /**
         * @desc  create string of columns to be retreived from the query  
         */       
        $strColumns = "[is_visible],[is_home],[Quantity Available],[Product - Weight],[free_shipping],[PriceCalced],[Priority],[PinnacleSKU],[Display Name],[meta_keywords],[overview],[ProductDescription1],[isBuildYourOwnKit],[numOfOptionsForKit],[requiredProductSKUForKit],[Image Alt Text 1],[Product - Next Date Due To Arrive],[isNewProduct?],[Product - flagORMD],[Product - # of Order Line Items 365 Days],[flagDropShip],[Product - isBulkyProduct?],[vendorItemNumberCalced],[kitType],[Record ID#],[Product - UPC Code],[Product - flagOutOfStock],[Product - VENDOR - Company Display Name],[Product - QTY On Current POs],[DiscountPriceCalced],[Related Product],[Related Product Family],[url],[quantityPerPack],[meta_title],[meta_description],[addShippingDays],[Product - Type - Gender],[Product - Type - Age],[Product - Type - Default Size],[Product - Type - Google Category],[Product - Google Color],[Product - Type - SearchBarLabel],[Brand],[DisplayLabelEnteredFPCharacterCalced],[Product - FP_Colors],[FilterSizeDisplayLabelEnteredFPCalced],[TypeDisplayLabelEnteredFPCalced],[iconlabel],[imgLocationCustom],[numOfOptionsForKit],[requiredProductSKUForKit]";	      
 
         try
-        {        
+        {           
             $arrResults = $this->api->Query("SELECT TOP 700 ".$strColumns." FROM [FP Web Profile] ".$arrQueries." ORDER BY [PinnacleSKU]");     
             if (isset($arrResults->Rows)) { 
                  foreach ($arrResults->Rows as $productDetails) {
