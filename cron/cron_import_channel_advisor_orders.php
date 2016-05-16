@@ -1,14 +1,13 @@
 <?php
 ob_start(); 
 define(BASE_PATH,"/home/stripedsocks/beta/");
+require_once BASE_PATH.'cron/ca_config.php';     
 $mageFilename = BASE_PATH.'app/Mage.php';
 require_once $mageFilename;
 Mage::app();
 ini_set('memory_limit','256M');   
 
-$websiteId = 2;//Mage::app()->getWebsite()->getId();
-$storeId = 2;//Mage::app()->getStore();      
-Mage::app()->setCurrentStore($storeId);
+Mage::app()->setCurrentStore(FLStoreId);
 $store = Mage::app()->getStore();
             
 //for debug
@@ -21,9 +20,7 @@ function showNiceXML($xml){
     try {
         //create SOAP object that will let us send calls, we need to pass the url of the WSDL
         $client = new SoapClient($urlToWsdl, array("trace" => 1, "exception" => 0) );
-        $developerKey = 'ef67593b-9813-432b-a25d-f6a9c9bb9387';
-        $password = 'Clown@123';                                           
-        $headersData = array('DeveloperKey' => $developerKey, 'Password' => $password);
+        $headersData = array('DeveloperKey' => DeveloperKey, 'Password' => CAPassword);  
         $head = new SoapHeader("http://api.channeladvisor.com/webservices/","APICredentials",$headersData);
         $client->__setSoapHeaders($head);
         
@@ -31,31 +28,32 @@ function showNiceXML($xml){
         $no_of_days=7;
         $seconds_calc = $no_of_days * (24*60*60);  
         $start_date = date("Y-m-d",time() - $seconds_calc);  
+        $start_date = new DateTime($start_date, new DateTimeZone('UTC'));
         $end_date = date("Y-m-d"); // End Date
-        $accountID = '96133f54-ded0-4134-a2fd-d1ec9bfa88e2';
+        $end_date = new DateTime($end_date, new DateTimeZone('UTC')); 
         $page_number=1;
         $page_size = 50;  
         $counter=1;
         $OrderCriteria = array(
-                       'OrderCreationFilterBeginTimeGMT'=> $start_date,
-                       'OrderCreationFilterEndTimeGMT'=> $end_date,
-                       'StatusUpdateFilterBeginTimeGMT' => $start_date,
-                       'StatusUpdateFilterEndTimeGMT' => $end_date,
+                       /*'OrderCreationFilterBeginTimeGMT'=> $start_date,
+                       'OrderCreationFilterEndTimeGMT'=> $end_date,   */
+                       'StatusUpdateFilterBeginTimeGMT' => $start_date->date,
+                       'StatusUpdateFilterEndTimeGMT' => $end_date->date,
                        'DetailLevel' => 'Complete',
-                       'ExportState' => 'NotExported',
+                       /*'ExportState' => 'NotExported',  */
                        'OrderStateFilter' => 'Active',
                        'PaymentStatusFilter' => 'Cleared',
                        'CheckoutStatusFilter'  => 'Completed',
-                       'ShippingStatusFilter'  =>'Unshipped',
+                       'ShippingStatusFilter'  =>'Unshipped',  //Unshipped
                        'PageNumberFilter'=>$page_number,
                        'PageSize'=>$page_size
                     );
         //Here date1 and date2 variable specify date range for orders. After this call function of API to get order data.
         $arrData = array(
-                       'accountID'=>$accountID,
+                       'accountID'=>CAAccountID,
                        'orderCriteria'=>$OrderCriteria  
-              );
-        $result=$client->GetOrderList($arrData);  
+              );  
+        $result=$client->GetOrderList($arrData);    
         $total_orders_count = isset($result->GetOrderListResult->ResultData->OrderResponseItem->NumberOfMatches)?$result->GetOrderListResult->ResultData->OrderResponseItem->NumberOfMatches:$result->GetOrderListResult->ResultData->OrderResponseItem[0]->NumberOfMatches;
         $page_count = ceil($total_orders_count/$page_size);
         $count_of_orders = count($result->GetOrderListResult->ResultData->OrderResponseItem);
@@ -72,13 +70,13 @@ function showNiceXML($xml){
         else {
             echo "<br />No more orders to import into magento";
         }
-        while($counter<$page_count) {
+        while($counter<$page_count) {    
                 $page_number++;
                 $OrderCriteria = array(
-                           'OrderCreationFilterBeginTimeGMT'=> $start_date,
-                           'OrderCreationFilterEndTimeGMT'=> $end_date,
-                           'StatusUpdateFilterBeginTimeGMT' => $start_date,
-                           'StatusUpdateFilterEndTimeGMT' => $end_date,
+                           /*'OrderCreationFilterBeginTimeGMT'=> $start_date,
+                           'OrderCreationFilterEndTimeGMT'=> $end_date,    */
+                           'StatusUpdateFilterBeginTimeGMT' => $start_date->date,
+                           'StatusUpdateFilterEndTimeGMT' => $end_date->date,
                            'DetailLevel' => 'Complete',
                            'ExportState' => 'NotExported',
                            'OrderStateFilter' => 'Active',
@@ -90,7 +88,7 @@ function showNiceXML($xml){
                         ); 
                 //Here date1 and date2 variable specify date range for orders. After this call function of API to get order data.
                 $arrData = array(
-                               'accountID'=>$accountID,
+                               'accountID'=>CAAccountID,
                                'orderCriteria'=>$OrderCriteria  
                       );
                 $result=$client->GetOrderList($arrData);  
@@ -120,9 +118,9 @@ function showNiceXML($xml){
 
         //$result = $client->__soapCall("Ping", array("Ping" => array()), NULL, $oHeader);
  } catch (SOAPFault $e) {
-    echo "ERROR:".$f->faultstring."\n\n";
-    echo "Request :\n".showNiceXML( $client->__getLastRequest() )."\n\n";
-    echo "Response:\n".showNiceXML( $client->__getLastResponse() )."\n\n";
+    echo "ERROR:".$e->faultstring."\n\n";
+    //echo "Request :\n".showNiceXML( $client->__getLastRequest() )."\n\n";
+    //echo "Response:\n".showNiceXML( $client->__getLastResponse() )."\n\n";
 }
 exit;
 ?>
@@ -130,8 +128,8 @@ exit;
 <?php
 
 function insertOrder($order_details) { 
-    global $websiteId,$storeId,$store;
-    $channel_advisor_orderid = $order_details->ClientOrderIdentifier;
+    global $store;
+    $channel_advisor_orderid = $order_details->OrderID;
     //$insert=1;
     $order_collection = Mage::getModel('sales/order')->getCollection()->addFieldToFilter('channel_advisor_orderid', $channel_advisor_orderid);
     if ($order_collection->count()==0) {
@@ -140,7 +138,7 @@ function insertOrder($order_details) {
             $email = $order_details->BuyerEmailAddress;  
             $productids=array();
              // Start New Sales Order Quote
-            $quote = Mage::getModel('sales/quote')->setStoreId($storeId);
+            $quote = Mage::getModel('sales/quote')->setStoreId(FLStoreId);
              // Set Sales Order Quote Currency
             $quote->setCurrency($order->AdjustmentAmount->currencyID);
             $quote->setIsSuperMode(true);
@@ -150,7 +148,13 @@ function insertOrder($order_details) {
                  foreach($order_details->ShoppingCart->LineItemSKUList as $item_details){   
                         $product=Mage::getModel('catalog/product')->loadByAttribute('sku',$item_details->SKU);
                         if($product!='') {
-                            $quote->addProduct($product,new Varien_Object(array('qty'   => (int) $item_details->Quantity)));
+                            $quoteItem = Mage::getModel('sales/quote_item')->setProduct($product);
+                            $quoteItem->setQuote($quote);
+                            $quoteItem->setQty((int) $item_details->Quantity);
+                            $quoteItem->setLineItemId($item_details->LineItemID);
+                            $quoteItem->setStoreId(FLStoreId);
+                            $quote->addItem($quoteItem);
+                            //$quote->setLineItemID($item_details->LineItemID);
                         }
                         else { 
                             echo $message = "     Channel Advisor Order : $channel_advisor_orderid Product not found on magento :".$item_details->SKU;
@@ -163,7 +167,7 @@ function insertOrder($order_details) {
              
              if($error_order==0) {
                  $customer = Mage::getModel('customer/customer')
-                             ->setWebsiteId($websiteId)
+                             ->setWebsiteId(FLWebsiteId)
                              ->loadByEmail($email);
                  if($customer->getId()==""){
                      $customer = Mage::getModel('customer/customer');
