@@ -497,7 +497,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
 								$group_assoitem_price_total += $value->getPrice();
 							}
 						?>
-						<?php if($group_assoitem_final_price_total < $group_assoitem_price_total): ?>
+						<?php if($group_assoitem_final_price_total < $group_assoitem_price_total && ($_product->getIconlabel()=='Sale')): ?>
 							<p class="old-price">
 								<span class="price-label"><?php echo $this->__('Regular Price:') ?></span>
 								<span class="price" id="old-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
