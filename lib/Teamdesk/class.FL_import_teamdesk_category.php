@@ -107,6 +107,7 @@ class FLTeamDeskCategory {
                       $csv_row[] = "Short Name For Menu".$csv_seperator;     
                       $csv_row[] = "Custom URL".$csv_seperator; 
                       $csv_row[] = "Submenu Type".$csv_seperator; 
+                      $csv_row[] = "Has Sets".$csv_seperator;
                       
                       fputcsv($fp,$csv_row);
                       foreach ($arrTDCategories as $tdCategory) {    
@@ -147,6 +148,7 @@ class FLTeamDeskCategory {
                             $csv_row[] = $tdCategory['ShortNameForMenu'].$csv_seperator; 
                             $csv_row[] = str_replace("http://www.flagsrus.org/","",$tdCategory['url'].$csv_seperator);
                             $csv_row[] = "1".$csv_seperator;
+                            $csv_row[] = $tdCategory["isSetCategory?"]==1?"Yes":"No".$csv_seperator;
                             fputcsv($fp,$csv_row);
                       }    
                       fclose($fp);
@@ -176,7 +178,7 @@ class FLTeamDeskCategory {
         /**
         * @desc  create string of columns to be retrieved from the query
         */
-        $strColumns = "[CategoryID],[Level],[labelCalc],[Label],[Magento_Sort Order],[is_home],[is_visible],[url],[description],[imgLocationCalced],[meta_keywords],[meta_title],[meta_description],[ShortNameForMenu],[TopProductSKU Calced]";
+        $strColumns = "[CategoryID],[Level],[labelCalc],[Label],[Magento_Sort Order],[is_home],[is_visible],[url],[description],[imgLocationCalced],[meta_keywords],[meta_title],[meta_description],[ShortNameForMenu],[TopProductSKU Calced],[isSetCategory?]";
         try {
                $query = "SELECT TOP 450 ".$strColumns." FROM [FL Category] ".$arrQueries.$orderBy; 
                $arrResults = $this->api->Query($query);  
