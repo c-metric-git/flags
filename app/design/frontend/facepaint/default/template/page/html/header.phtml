@@ -237,65 +237,67 @@
 </div>
 </div>
  
-<div class="container">
-  <nav class="navbar navbar-default"> 
+<div class="container nopading">
+	<div id="addtooverlay" style="display:none;">
+		<div id="acp-overlay" class=""></div>
+		<div id="ajaxcartpro-progress" class="" style="height: auto; width: auto; left: 533.5px; top: 266px;"> <img src="<?php echo $this->getSkinUrl('images/processing.gif');?>" alt="Loading"> <p>Please wait...</p> </div>
+	</div>
+<nav class="navbar navbar-default"> 
 
-  <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> 
-      	<span class="sr-only">Toggle navigation</span> 
-      	<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-       </button>
-      <?php if (isset($p['primLeftCol'])): ?>
-              <?php foreach ($p['primLeftCol'] as $element): 
-                                     //if($counter==1):
-                                     //    $searchHtmltext = $element;
-                                     //elseif($counter!=1): ?>
-              <?php echo $element; ?>
-              <?php /*endif;  $counter++;*/?>
+<div class="navbar-header">
+  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> 
+  	<span class="sr-only">Toggle navigation</span> 
+  	<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+   </button>
+  <?php if (isset($p['primLeftCol'])): ?>
+          <?php foreach ($p['primLeftCol'] as $element): 
+                                 //if($counter==1):
+                                 //    $searchHtmltext = $element;
+                                 //elseif($counter!=1): ?>
+          <?php echo $element; ?>
+          <?php /*endif;  $counter++;*/?>
+          <?php endforeach; ?>
+  	<?php endif; ?>
+
+</div> <!-- /.navbar-header  -->
+
+<!-- Collect the nav links, forms, and other content for toggling -->
+<div class="collapse navbar-collapse nopading" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="<?php echo $store_url.'coupon-codes'; ?>">Coupons</a></li>
+        <li><a href="<?php echo $store_url.'design-contest'; ?>">Design Contest</a></li>
+        <li><a href="<?php echo $store_url.'blog'; ?>">Our Blog</a></li>
+        <li><a href="<?php echo $store_url.'sales/guest/form/'; ?>">Order Status</a></li> 
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+         <?php echo $this->getChildHtml('user_menu') ?>
+      </ul>
+  <div class="header-top-search">
+    <div class="row">
+        <div class="col-md-6">
+          <?php if (isset($p['primCentralCol'])): ?>
+              <?php foreach ($p['primCentralCol'] as $element): ?>
+             <?php echo $element; ?>
               <?php endforeach; ?>
-      	<?php endif; ?>
+           <?php endif; ?>
+      
+      <div class="col-md-3 pull-right">
+       <div class="pull-right">
+              <div class="live-chat"><a href="#" onclick="return SnapEngage.startLink();"><img  src="<?php echo $skinpath.'images/livechat.png';?>" alt="Contact us"></a></div>
 
-   </div> <!-- /.navbar-header  -->
-   
-   <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      <ul class="nav navbar-nav">
-	        <li><a href="<?php echo $store_url.'coupon-codes'; ?>">Coupons</a></li>
-	        <li><a href="<?php echo $store_url.'design-contest'; ?>">Design Contest</a></li>
-	        <li><a href="<?php echo $store_url.'blog'; ?>">Our Blog</a></li>
-	      </ul>
-	      <ul class="nav navbar-nav navbar-right">
-	        <li><a href="<?php echo $store_url.'customer/account'; ?>">Account</a></li>
-	        <li><a href="<?php echo $store_url.'sales/guest/form/'; ?>">Order Status</a></li> 
-	        <li><a href="<?php echo $store_url.'wishlist'; ?>">Wishlist</a></li>
-	         <?php echo $this->getChildHtml('user_menu') ?>
-	      </ul>
-      <div style="clear:right;margin-top:0px;">
-        <div class="row">
-	        <div class="col-md-5">
-	          <?php if (isset($p['primCentralCol'])): ?>
-	              <?php foreach ($p['primCentralCol'] as $element): ?>
-	             <?php echo $element; ?>
-	              <?php endforeach; ?>
-	           <?php endif; ?>
-	      
-          <div class="col-md-4 pull-right">
-           <div class="pull-right">
-	              <div class="live-chat"><a href="#" onclick="return SnapEngage.startLink();"><img  src="<?php echo $skinpath.'images/livechat.png';?>" alt="Contact us"></a></div>
-
-	            </div>
-	            <div class="phnnumber-sectn">
-	              <div class="phone-no">734-237-2468</div>
-	              <div class="time">Mon-Fri 10am - 4pm EST</div>
-	            </div>
-	           
-          </div>
-        </div>
+            </div>
+            <div class="phnnumber-sectn">
+              <div class="phone-no">734-237-2468</div>
+              <div class="time">Mon-Fri 10am - 4pm EST</div>
+            </div>
+           
       </div>
     </div>
+  </div>
+</div>
 
-  </nav>
-  <!-- /.navbar-collapse --> 
+</nav>
+<!-- /.navbar-collapse --> 
 </div>
 <!-- /.container -->     
           <?php

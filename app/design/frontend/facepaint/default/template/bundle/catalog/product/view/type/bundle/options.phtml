@@ -26,9 +26,20 @@
 ?>
 
 <?php $_product = $this->getProduct(); ?>
+<?php $bundle_option_arr=array();
+       $bundle_options=Mage::getResourceModel('bundle/selection')->getChildrenIds($_product->getId() ,false);
+       foreach ($bundle_options as  $bundle_option) {
+           $bundle_option_items_arr=array();
+           foreach ($bundle_option as  $bundle_option_product) {
+              $product_obj=Mage::getModel('catalog/product')->load($bundle_option_product);
+              $bundle_option_items_arr[]=intval(Mage::getModel('cataloginventory/stock_item')->loadByProduct($product_obj)->getQty());
+           }
+          $bundle_option_arr[]= count(array_keys($bundle_option_items_arr,0)) == count($bundle_option_items_arr) ;   
+       }
+ ?>      
 <?php $_options = Mage::helper('core')->decorateArray($this->getOptions()); ?>
 <?php if ($_product->isSaleable()):?>
-    <?php if (count($_options)): ?>
+    <?php if (count($_options) && !in_array(1,$bundle_option_arr)): ?>
         <dl>
         <?php foreach ($_options as $_option): ?>
             <?php if (!$_option->getSelections()): ?>

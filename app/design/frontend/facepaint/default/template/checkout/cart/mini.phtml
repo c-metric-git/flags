@@ -100,20 +100,21 @@
 
 
 
-    <a href="#header-cart" class="mini-cart-heading dropdown-heading cover skip-link skip-cart">
+    <!--a href="#header-cart" class="mini-cart-heading dropdown-heading cover skip-link skip-cart"-->
+	<a onclick="window.open('<?php echo $this->getUrl('checkout/cart'); ?>','_self')" href="<?php echo $this->getUrl('checkout/cart'); ?>" class="mini-cart-heading dropdown-heading cover skip-link skip-cart">
 
         <span>
 
         
 
-            <!--<span class="icon ic ic-cart">
+            <span class="icon ic ic-cart">
 
             <img class="desktop-ic-cart" height="19" width="19" src="<?php if($code_store != 'stripedsocks'):?><?php echo $this->getSkinUrl('images/infortis/_shared/cart-icon.jpg');?><?php else:?><?php echo $this->getSkinUrl('images/flagsrus-cart-icon.jpg');?><?php endif;?>" alt="Cart" />
 
-            <img class="responsive-ic-cart" height="21" width="21" src="<?php echo $this->getSkinUrl('images/infortis/_shared/cart-icon-responsive.png');?>" alt="Cart" />            
-
+           <!-- <img class="responsive-ic-cart" height="21" width="21" src="<?php echo $this->getSkinUrl('images/infortis/_shared/cart-icon-responsive.png');?>" alt="Cart" />            -->
+ 
             </span>
-            -->
+        
             <?php if ($_cartQty > 0): ?>
 
                 <span class="count"><?php echo $_cartQty; ?></span>

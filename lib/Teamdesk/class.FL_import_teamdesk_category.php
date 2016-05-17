@@ -148,7 +148,7 @@ class FLTeamDeskCategory {
                             $csv_row[] = $tdCategory['ShortNameForMenu'].$csv_seperator; 
                             $csv_row[] = str_replace("http://www.flagsrus.org/","",$tdCategory['url'].$csv_seperator);
                             $csv_row[] = "1".$csv_seperator;
-                            $csv_row[] = $tdCategory["isSetCategory?"]==1?"Yes":"No".$csv_seperator;
+                            $csv_row[] = $tdCategory["isSetCategory?"]==1?"1":"0".$csv_seperator;
                             fputcsv($fp,$csv_row);
                       }    
                       fclose($fp);

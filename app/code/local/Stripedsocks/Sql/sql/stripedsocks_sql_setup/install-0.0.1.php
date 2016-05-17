@@ -119,5 +119,5 @@
      'user_defined'          => true, // or false
      'default'               => '',
      'position'              => 11, // Number depends on where you want it to display in the grid.
- ));
+ ));             
  $this->endSetup();

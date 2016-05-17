@@ -61,7 +61,7 @@ jQuery( document ).ready(function() {
            owl20.owlCarousel({
                 lazyLoad: true,
                 responsiveClass:true,
-                responsive: {0:{items:1},480:{items:2},960:{items:4}},
+                responsive: {0:{items:1},480:{items:3},960:{items:4}},
                 responsiveRefreshRate: 50,
                 slideSpeed: 200,
                 paginationSpeed: 500,

@@ -38,6 +38,7 @@ class Mageworks_Core_Helper_Category extends Mage_Core_Helper_Abstract
 		$data[] = array ('field' => 'short_name', 'label' => 'Short Name For Menu'); 
         $data[] = array ('field' => 'umm_cat_target', 'label' => 'Custom URL'); 
         $data[] = array ('field' => 'umm_dd_type', 'label' => 'Submenu Type');  
+        $data[] = array ('field' => 'has_sets', 'label' => 'Has Sets'); 
         return $data;
 	}
 }

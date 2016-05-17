@@ -1,17 +1,13 @@
 <?php
 ob_start(); 
-define(BASE_PATH,"/home/stripedsocks/beta/");
+define('BASE_PATH', $_SERVER["DOCUMENT_ROOT"].'/');
 require_once BASE_PATH.'cron/ca_config.php'; 
 $mageFilename = BASE_PATH.'app/Mage.php';
 require_once $mageFilename;
 Mage::app();
-ini_set('memory_limit','256M');   
+ini_set('memory_limit','256M');
+ini_set("display_errors",1);     
 
-$websiteId = 2;//Mage::app()->getWebsite()->getId();
-$storeId = 2;//Mage::app()->getStore();      
-Mage::app()->setCurrentStore($storeId);
-$store = Mage::app()->getStore();
-            
 //for debug
 function showNiceXML($xml){
     return htmlspecialchars( str_replace("<", "\n<", $xml) );

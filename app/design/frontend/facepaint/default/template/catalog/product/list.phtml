@@ -36,8 +36,8 @@
 $layer                  = Mage::getSingleton ('catalog/layer');
 $_category              = $layer->getCurrentCategory ();
 $currentCategoryId      = $_category->getId ();
-$children               = Mage::getModel ('catalog/category')->getCategories ($currentCategoryId);
-$count                  = count ($children);
+//$children               = Mage::getModel ('catalog/category')->getCategories ($currentCategoryId);
+//$count                  = count ($children);
 $baseUrl                = Mage::getBaseUrl (Mage_Core_Model_Store::URL_TYPE_WEB);
 $baseMediaUrl           = Mage::getBaseUrl (Mage_Core_Model_Store::URL_TYPE_MEDIA);
 $numberCategoriesPerRow = 4;
@@ -58,9 +58,9 @@ $appliedFilters = Mage::getSingleton('catalog/layer')->getState()->getFilters();
         <?php $i = 0; ?>
        <!-- <ul class="row-item">-->
             <?php
-            foreach ($children as $category) {
+            foreach ($_subcategories as $category) {
                 $categoryID    = $category->getId ();//id
-                $imageUrl      = Mage::getModel ('catalog/category')->load ($categoryID)->getImageUrl ();// base path
+                //$imageUrl      = Mage::getModel ('catalog/category')->load ($categoryID)->getImageUrl ();// base path
                 $category      = Mage::getModel ('catalog/category')->load ($categoryID);
                 $categoryImage = $category->getImage (); // image name
                 $basePath      = Mage::getBaseDir (Mage_Core_Model_Store::URL_TYPE_MEDIA) . '/catalog/category/' . $category->getImage ();

@@ -100,7 +100,7 @@
 
 
 
-    <a href="#header-cart" class="mini-cart-heading dropdown-heading cover skip-link skip-cart">
+    <a onclick="window.open('<?php echo $this->getUrl('checkout/cart'); ?>','_self')" href="<?php echo $this->getUrl('checkout/cart'); ?>" class="mini-cart-heading dropdown-heading cover skip-link skip-cart">
 
         <span>
 

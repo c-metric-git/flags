@@ -12,6 +12,21 @@
                     <system_config_source_shipping_allmethods>Stripedsocks_Adminhtml_Model_System_Config_Source_Shipping_Allmethods</system_config_source_shipping_allmethods>
                 </rewrite>
             </adminhtml>
+                 <stripedsocks_adminhtml>
+                   <class>Stripedsocks_Adminhtml_Model</class>
+                </stripedsocks_adminhtml>
         </models>
+         <events>
+              <catalog_product_save_before>
+                <observers>
+                    <bundle_save_after>
+                        <type>model</type>     
+                        <class>stripedsocks_adminhtml/observer</class>
+                        <method>save_price_type</method>
+                    </bundle_save_after>
+                </observers>
+            </catalog_product_save_before>
+        </events>
     </global>
+
 </config>

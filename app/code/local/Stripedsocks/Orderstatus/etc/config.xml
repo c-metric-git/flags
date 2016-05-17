@@ -16,7 +16,7 @@
         <models>
             <sales>
                 <rewrite>
-                    <service_quote>Stripedsocks_Orderstatus_Sales_Model_Service_Quote</service_quote>  
+                    <service_quote>Stripedsocks_Orderstatus_Sales_Model_Service_Quote</service_quote>        
                 </rewrite>
             </sales>
         </models>

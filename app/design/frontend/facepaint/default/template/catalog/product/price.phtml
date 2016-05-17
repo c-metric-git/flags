@@ -481,8 +481,20 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
                         $_showPrice = $_exclTax;
                     }
                     ?>
-                    <span class="price" id="product-minimal-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
-                    <?php echo $_coreHelper->formatPrice($_showPrice, false) ?>
+                    <?php 
+                        $group_assoitem_price_total="";
+                        $groupassoc= $this->getProduct()->getTypeInstance(true)->getAssociatedProducts($_product);
+                        foreach ($groupassoc as  $value) {
+                            $group_assoitem_price_total += $value->getFinalprice();
+                        }
+                    ?>
+                    <?php if($_product->isGrouped()): ?>
+                       <span class="price" id="product-minimal-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                       <?php echo  $_coreHelper->formatPrice($group_assoitem_price_total, false); ?> 
+                    <?php else: ?>
+                       <span class="price" id="product-minimal-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+                       <?php echo $_coreHelper->formatPrice($_showPrice, false) ?>
+                    <?php endif; ?>   
                 </span>
                 <?php endif; ?>
             </p>

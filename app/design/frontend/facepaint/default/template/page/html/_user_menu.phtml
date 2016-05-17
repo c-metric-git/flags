@@ -250,18 +250,18 @@
 
 ?>
 
-<div id="user-menu-wrapper-regular">
+<!--<div id="user-menu-wrapper-regular">-->
 
-	<div id="user-menu" class="user-menu">
+	<!--<div id="user-menu" class="user-menu">-->
     
-    <div class= "left-column left-second">
+ <!--   <div class= "left-column left-second">
      <?php if ($accountLinksHtml): //Account links ?>
 
 			<div id="account-links-wrapper-regular1">
 
 				<div id="header-account1" class="top-links links-wrapper-separators-left skip-content skip-content--style">
 
-					<?php echo $accountLinksHtml; ?>
+					<?php //echo $accountLinksHtml; ?>
 
 				</div>
 
@@ -271,25 +271,25 @@
         
 		<?php if (isset($lineBreak[5])) echo $lineBreak[5]; ?>    	
 	
-    </div>
-    <div class= "right-column right-second">
+    </div>-->
+    <!--<div class= "right-column right-second">-->
 
 		<?php if (isset($p[0])) echo $p[0]; ?>
 
 		<?php if (isset($lineBreak[0])) echo $lineBreak[0]; ?> 
-        <div id="account-links-wrapper-regular">
+       <!-- <div id="account-links-wrapper-regular">
         <div id="header-account" class="top-links links-wrapper-separators-left skip-content skip-content--style">
         <?php 	if ($theme->getCfg('magento_blocks/top_links'))
 
 		{
 
-			echo $this->getChildHtml('topLinks');
+			//echo $this->getChildHtml('topLinks');
 
 		}
 		?>
         </div>
 		</div>
-
+       -->
 		<?php if (isset($p[1])) echo $p[1]; ?>
 
 		
@@ -300,7 +300,7 @@
 
 		<?php if ($compareHtml): //Mini compare ?>
 
-			<?php echo $compareHtml; ?>
+		<li>	<?php echo $compareHtml; ?> </li>
 
 		<?php endif; ?>
 
@@ -308,10 +308,11 @@
 		<?php if (isset($lineBreak[3])) echo $lineBreak[3]; ?>
         
         <?php if ($cartHtml): //Mini cart ?>
+        <li>
             <div class="block block-cart mini-cart">
 			<?php echo $cartHtml; ?>
             </div>
-
+        </li>
 		<?php endif; ?>
 
 		<?php if (isset($lineBreak[1])) echo $lineBreak[1]; ?>
@@ -326,8 +327,8 @@
 
 		<?php if (isset($p[3])) echo $p[3]; ?>
 
-		</div>
+	<!--	</div>
 
 	</div> <!-- end: user-menu -->
 
-</div>
+<!--</div>-->

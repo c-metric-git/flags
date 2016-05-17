@@ -1,6 +1,6 @@
 <?php
 ob_start(); 
-define(BASE_PATH,"/home/stripedsocks/beta/");
+define('BASE_PATH', $_SERVER["DOCUMENT_ROOT"].'/');
 require_once BASE_PATH.'cron/ca_config.php';     
 $mageFilename = BASE_PATH.'app/Mage.php';
 require_once $mageFilename;

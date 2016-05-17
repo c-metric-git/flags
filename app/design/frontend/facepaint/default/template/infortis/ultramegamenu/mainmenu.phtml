@@ -37,9 +37,8 @@
 
 
 	<?php //Menu %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ?>
-<div class="collapse navbar-collapse">	
-  <nav class="navbar navbar-default navbar-main">
-	<ul id="nav" class="navbar-nav">
+
+	<ul id="nav" class="nav-regular opt-fx-fade-inout <?php if ($helper->getCfg('mainmenu/centered')) echo 'centered '; echo $helper->getBlocksVisibilityClassOnMobile(); ?>">
 
 		<li id="nav-holder1" class="nav-item level0 level-top nav-holder"></li>
 		<li id="nav-holder2" class="nav-item level0 level-top nav-holder"></li>
@@ -110,7 +109,7 @@
 	
 		<?php //Static block as a dropdown ?>
 		<?php if ($tmpHtml = $this->getChildHtml('block_header_nav_dropdown')): ?>
-			<li class="">
+			<li class="nav-item nav-item--parent nav-item--only-blocks level0 level-top parent nav-custom-link<?php if ($helper->getCfg('mainmenu/custom_block_floating')) echo ' right'; ?>">
 				<?php // Get the block title, and display it as menu item
 					$blockTitle = Mage::getModel('cms/block')
 						->setStoreId(Mage::app()->getStore()->getId())->load('block_header_nav_dropdown')->getTitle();
@@ -129,8 +128,8 @@
 		<?php echo $linksHtml; ?>
 		<li class="newflag"> <span class="sticker-wrapper top-left"><span class="sticker new">New</span></span></li>
 	</ul>
-</nav>
-</div>
+
+
 
 	<?php //Scripts %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% ?>
 

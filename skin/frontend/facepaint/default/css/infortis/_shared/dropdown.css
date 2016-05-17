@@ -23,7 +23,7 @@
 	color: inherit;
 }
 .dropdown a.dropdown-heading:hover {
-	color: inherit;
+	color: inherit;	cursor:pointer;
 }
 
 /* Inside dropdown heading

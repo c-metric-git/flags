@@ -1247,7 +1247,7 @@ class FLTeamDeskWebprofiles {
         $strColumns = "[isNewProduct?], [Product - VENDOR - DisplayLabelEnteredFL],[Product - Type - DisplayLabelEnteredFL],[Product - Filter - Size - DisplayLabelEnteredFL],[Product - Seasons], [Product - Themes], [Product - SubThemes],[Product - Themes Full Name],[PinnacleSKU],[Description],[Display Name],[PriceCalced],[DiscountPriceCalced],[overview],[is_visible],[Product - Weight],[Quantity Available],[imgLocationCustom],[Related Product],[meta_description],[meta_keywords],[meta_title],[kitType],[Related Design Family],[Related Product Family],[Priority_Cached],[FLFilterSectionCalced],[url],[flagFeaturesSearchLabel],[Image Alt Text 1],[Product - Next Date Due To Arrive],[Product - QTY On Current POs],[iconLabel]";   
         try
         {        
-            $arrResults = $this->api->Query("SELECT TOP 1000 ".$strColumns." FROM [FL Web Profile] ".$arrQueries." ORDER BY [PinnacleSKU]");     
+            $arrResults = $this->api->Query("SELECT TOP 800 ".$strColumns." FROM [FL Web Profile] ".$arrQueries." ORDER BY [PinnacleSKU]");     
             if (isset($arrResults->Rows)) { 
                  foreach ($arrResults->Rows as $productDetails) {
                     $last_record = $productDetails['PinnacleSKU'];
@@ -1260,7 +1260,7 @@ class FLTeamDeskWebprofiles {
                     * @desc  create string of columns to be retreived from the query - Related Category, is_primary, Related Web Profile, Priority  
                     */                      
                     try {  
-                        $arrResults = $this->api->Query("SELECT TOP 1500 ".$strColumns." FROM [FL Web Profile] ".$arrQueries." ORDER BY [PinnacleSKU]");
+                        $arrResults = $this->api->Query("SELECT TOP 800 ".$strColumns." FROM [FL Web Profile] ".$arrQueries." ORDER BY [PinnacleSKU]");
                     }
                     catch (Exception $e) {
                          echo $this->tdErrorLog = "<br/>Error Fetching Profiles from TD for type $type. Caught exception: " .$e->getMessage(). "<br/>";
@@ -1552,6 +1552,7 @@ class FLTeamDeskWebprofiles {
         catch (Exception $e) {
              echo $this->tdErrorLog = '<br/>Error Fetching Web entries from TD. Caught exception: ' .$e->getMessage(). "<br/>";
              $strReturn .= $this->tdErrorLog;    
+             die;
              return  $strReturn;         
         }
         if (isset($arrResults->Rows)) {                                
@@ -1580,8 +1581,8 @@ class FLTeamDeskWebprofiles {
             catch (Exception $e) {
                  echo $this->tdErrorLog = '<br/>Error Fetching Web entries from TD.Caught exception: ' .$e->getMessage(). "<br/>";
                  $strReturn .= $this->tdErrorLog;    
-                 return  $strReturn;  
                  die;       
+                 return  $strReturn;  
             }    
             /**
             * @desc code to check the records and assign the same into the array
@@ -1771,7 +1772,7 @@ class FLTeamDeskWebprofiles {
         }
         catch (Exception $e) {
             $this->tdErrorLog = '<br/>Caught exception: ' .$e->getMessage(). "<br/>";
-            echo $this->tdErrorLog;
+            echo $this->tdErrorLog;     
             return $this->insert_rec;           
         }
         // return number of records updated
@@ -1981,6 +1982,37 @@ class FLTeamDeskWebprofiles {
             echo $this->tdErrorLog;
             die;         
         } 
+    }
+    /**
+    * @desc function to get channel advisor products and inventory from teamdesk
+    */
+    public function getCATDProductsInventory()
+    {
+        $arrTDProductInventory = array();
+        $this->connectToTeamDesk();
+        if($this->api !='' )      
+        { 
+            /** 
+            * @desc  create the teamdesk query, to fetch all the promo codes
+            */
+            $arrQueries = 'WHERE [Product - is_visible]=true and [Product - isFlagsrusProduct?]=true and Ask(Contains([sku], Parameter([sku], Text))) and Ask(Contains([Related Amazon entry], Parameter([Related Amazon entry], Text))) and [isVisibleOnAmazon?]=true and [TypeJet]<>"Parent"';  
+            $strColumns = "[sku],[quantity],[item-price]";
+            $sqlQuery = "SELECT ".$strColumns." FROM [Amazon Entry] ".$arrQueries; 
+            try{
+                /** 
+                * @desc  create string of columns to be retreived from the query
+                */
+                $arrResults = $this->api->Query($sqlQuery);     
+                 if (isset($arrResults)) {   
+                    return $arrResults->Rows;               
+                }
+            }      
+            catch (Exception $e) {
+                $this->tdErrorLog = '<br/>Error fetching Channel Advisor products from Amazon Entry table : Caught exception: ' .$e->getMessage(). "<br/>";
+                echo $this->tdErrorLog;
+                die;         
+            } 
+        }     
     }
 }
 

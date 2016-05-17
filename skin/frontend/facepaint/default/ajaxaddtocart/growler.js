@@ -101,7 +101,8 @@ Growler = (function(){
 			options = options || {};
 			Object.extend(opt, options);
 			this.growler = new Element("div", { "class": "Growler", "id": "Growler" });
-			this.growler.setStyle({ position: ((IE==6)?"absolute":"fixed"), padding: "10px", "width": opt.width, "z-index": "50000" });
+			//this.growler.setStyle({ position: ((IE==6)?"absolute":"fixed"), padding: "10px", "width": opt.width, "z-index": "50000" });
+			this.growler.setStyle({ position: ((IE==6)?"absolute":"fixed"), "width": opt.width, "z-index": "50000" });
 			if(IE==6){
 				var offset = { w: parseInt(this.growler.style.width)+parseInt(this.growler.style.padding)*3, h: parseInt(this.growler.style.height)+parseInt(this.growler.style.padding)*3 };
 				switch(opt.location){

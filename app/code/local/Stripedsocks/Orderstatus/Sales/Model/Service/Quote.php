@@ -72,15 +72,16 @@ class Stripedsocks_Orderstatus_Sales_Model_Service_Quote extends Mage_Sales_Mode
         foreach ($this->_orderData as $key => $value) {
             $order->setData($key, $value);
         }
-
         foreach ($quote->getAllItems() as $item) {
             $orderItem = $this->_convertor->itemToOrderItem($item);
+            if($item->getLineItemId()) {  
+                $orderItem->setLineItemId($item->getLineItemID());   
+            }
             if ($item->getParentItem()) {
                 $orderItem->setParentItem($order->getItemByQuoteItemId($item->getParentItem()->getId()));
-            }
+            }    
             $order->addItem($orderItem);
         }
-
         $order->setQuote($quote);
 
         $transaction->addObject($order);

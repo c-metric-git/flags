@@ -3331,7 +3331,7 @@ div.home_latestpost .home_blog_li_ div_month {
     background: url("images/FL_CategoryImage_New.png") left top no-repeat;
     width: 50px;
     height: 50px;
-	z-index:1111;
+	z-index:99;
 }
 
 .tag-label-sale{
@@ -3341,7 +3341,7 @@ div.home_latestpost .home_blog_li_ div_month {
     background: url("images/FL_CategoryImage_SALE.png") left top no-repeat;
     width: 50px;
     height: 50px;
-	z-index:1111;
+	z-index:99;
 }
 
 .tag-label-doublesided{
@@ -3351,7 +3351,7 @@ div.home_latestpost .home_blog_li_ div_month {
     background: url("images/FL_CategoryImage_DOUBLESIDED.png") left top no-repeat;
     width: 50px;
     height: 50px;
-	z-index:1111;
+	z-index:99;
 }
 
 .tag-label-coupon{
@@ -3361,7 +3361,7 @@ div.home_latestpost .home_blog_li_ div_month {
     background: url("images/FL_CategoryImage_Coupon.png") left top no-repeat;
     width: 50px;
     height: 50px;
-	z-index:1111;
+	z-index:99;
 }
 
 .tag-label-set{
@@ -3371,7 +3371,7 @@ div.home_latestpost .home_blog_li_ div_month {
     background: url("images/FL_CategoryImage_SET.png") left top no-repeat;
     width: 50px;
     height: 50px;
-	z-index:1111;
+	z-index:99;
 }
 
 .checkout-onepage-index .col-right #checkout-progress-wrapper
@@ -3433,4 +3433,18 @@ div.home_latestpost .home_blog_li_ div_month {
 {
 	padding-top:10px;
 	padding-bottom:10px;
+}
+
+@media only screen and (min-width: 769px) {
+.cms-index-index .why-shop-at-stripedsocks ul {
+    float: left;
+    width: 49%;
+    font-size: 12px;
+}
+.cms-index-index .why-shop-at-stripedsocks ul li a {
+    text-decoration:underline;
+}
+}
+.catalog-category-view .products-grid.equal-height .item .actions {
+    margin-top: 5px;
 }

@@ -172,7 +172,8 @@ $_collectionSize = $_productCollection->count ();
                                 <?php endif; ?>
                                 <?php //echo $helpLabels->getLabels ($_product); //Product labels ?>
 								<?php if($_product->getIconlabel()!=''): ?>
-									<span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span>
+									<!--span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span-->
+									<span class="tag-label-<?php echo strtolower(str_replace(' ', '', $_product->getIconlabel())); ?>"></span>
 								<?php endif; ?>
 								<?php //echo $helpLabels->getLabels ($_product); //Product labels ?>
                             </a>
@@ -322,8 +323,10 @@ $_collectionSize = $_productCollection->count ();
                                 <?php endif; ?>
                                 <?php //echo $helpLabels->getLabels ($_product); //Product labels ?>
 								<?php if($_product->getIconlabel()!=''): ?>
-									<span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span>
+									<!--span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span-->
+									<span class="tag-label-<?php echo strtolower(str_replace(' ', '', $_product->getIconlabel())); ?>"></span>
 								<?php endif; ?>
+
                             </a>
                             <?php //Add-to links
                             if ($gc['display_addtolinks'] != 0 && $gc['addtolinks_simple']) {

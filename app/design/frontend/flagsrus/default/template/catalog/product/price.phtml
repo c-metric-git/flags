@@ -78,7 +78,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
     <?php $_finalPrice = $_taxHelper->getPrice($_product, $_convertedFinalPrice) ?>
     <?php $_finalPriceInclTax = $_taxHelper->getPrice($_product, $_convertedFinalPrice, true) ?>
     <?php $_weeeDisplayType = $_weeeHelper->getPriceDisplayType(); ?>
-    <?php if ($_finalPrice >= $_price): ?>
+    <?php if ($_finalPrice >= $_price || ($_product->getIconlabel()!='Sale' && !Mage::registry('current_product'))): ?>
         <?php if ($_taxHelper->displayBothPrices()): ?>
             <?php if ($_weeeTaxAmount && $_weeeHelper->typeOfDisplay($_product, 0)): // including ?>
                 <span class="price-excluding-tax">
@@ -458,7 +458,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
     }
     ?>
     <?php if ($price): ?>
-        <div class="price-box">
+        <div class="price-right">
             <p<?php if ($showMinPrice): ?> class="minimal-price"<?php endif ?>>
                 <?php if ($showMinPrice): ?>
                     <!--span class="price-label"><?php echo $this->__('Starting at:') ?></span-->
@@ -488,9 +488,38 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
                     <!--span class="price" id="product-minimal-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
                     <?php echo $_coreHelper->formatPrice($_showPrice, false) ?>
                 </span-->
-				<span id="product-price-<?php echo $_id ?>" class="regular-price">
-						<span class="price"><?php echo $_coreHelper->formatPrice($_showPrice, false) ?></span>
-				</span>
+                    <?php if($_product->isGrouped()): ?>
+						<?php 
+							$group_assoitem_final_price_total="";
+							$groupassoc= $this->getProduct()->getTypeInstance(true)->getAssociatedProducts($_product);
+							foreach ($groupassoc as  $value) {
+								$group_assoitem_final_price_total += $value->getFinalprice();
+								$group_assoitem_price_total += $value->getPrice();
+							}
+						?>
+						<?php if($group_assoitem_final_price_total < $group_assoitem_price_total): ?>
+							<p class="old-price">
+								<span class="price-label"><?php echo $this->__('Regular Price:') ?></span>
+								<span class="price" id="old-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+									<?php echo $_coreHelper->formatPrice($group_assoitem_price_total, false) ?>
+								</span>
+							</p>
+							<p class="special-price">
+								<span class="price-label"><?php echo $_specialPriceStoreLabel ?></span>
+							<span class="price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+								<?php echo $_coreHelper->formatPrice($group_assoitem_final_price_total, false) ?>
+							</span>
+							</p>
+						<?php else: ?>						
+							<span id="product-price-<?php echo $_id ?>" class="regular-price">
+									<span class="price"><?php echo $_coreHelper->formatPrice($group_assoitem_price_total, false) ?></span>
+							</span>
+						<?php endif; ?>					   
+                    <?php else: ?>
+						<span id="product-price-<?php echo $_id ?>" class="regular-price">
+								<span class="price"><?php echo $_coreHelper->formatPrice($_showPrice, false) ?></span>
+						</span>
+                    <?php endif; ?>   
                 <?php endif; ?>
             </p>
         </div>
