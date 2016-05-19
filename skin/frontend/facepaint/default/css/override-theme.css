@@ -491,6 +491,10 @@
 .sample-block:hover {
 	color: #333
 }
+.note-msg.empty-catalog {
+    clear: both;
+}
+
 
 @media only screen and (-webkit-min-device-pixel-ratio:1.5), only screen and (min--moz-device-pixel-ratio:1.5), only screen and (-o-min-device-pixel-ratio:3/2), only screen and (-ms-min-device-pixel-ratio:1.5), only screen and (min-device-pixel-ratio:1.5) {
 .rating-box, .rating-box .rating {

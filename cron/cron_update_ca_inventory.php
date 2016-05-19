@@ -57,7 +57,7 @@ function showNiceXML($xml){
                 $itemList[$counter]['UpdateType'] =  'UnShipped';
                 $itemList[$counter]['PriceInfo'] =  array('RetailPrice'=>$Productdata['item-price']);   
                 
-                if($counter==999) {      
+                if($counter==499) {      
                     $arrData = array(
                                'accountID'=>CAAccountID,
                                'itemQuantityAndPriceList'=>$itemList
@@ -73,8 +73,9 @@ function showNiceXML($xml){
                                     $error_update_arr[$update_sku] = $items_updated->Result; 
                                }      
                           }    
-                         //  echo "<br /> Inventory updated for items ".count($inventory_update_arr);
                      }
+                     echo "<br /> Inventory updated for items ".count($inventory_update_arr);
+                     echo "<br /> Error Inventory updated for items ".count($error_update_arr);
                      /*else {
                          echo "<br />Error updating inventory for this batch: "; 
                          echo '<pre>';

@@ -76,48 +76,146 @@ if($_GET['multi_themes']) {
 }
   
 ?>
-<?php if($_SESSION['filter_name']=='Color'):?>
-       <ol>
-    <?php 
-        $item_counter = 0;
-        ?><li> 
-        <?php 
-        $total_items = count($this->getItems());
-        foreach ($this->getItems() as $_item): ?>
-            <?php if ($_item->getCount() > 0): ?>
-                <a onclick="ga('send', 'event', 'Filters', 'Color','<?php echo $_item->getLabel();?>');" href="<?php echo $this->urlEscape($_item->getUrl()) ?>" class="color_swatch_class">     
-                    <?php $label_name = strtolower($_item->getLabel()); 
-                         $label_name = str_replace(" ","-",$label_name);
-                        //if (file_exists("media/wysiwyg/swatches/".$label_name.".png")): ?>
-                            <img class="color_swatch_img" style="border:1px solid #d2d2d2" width="40" height="20" src="/media/wysiwyg/swatches/<? echo $label_name;?>.png" title="<? echo $_item->getLabel();?>"> 
-                            <? //else: echo $_item->getLabel() ?>
-                                <?php //if ($this->shouldDisplayProductCount()): ?>
+<?php if($_SESSION['filter_name']=='Color' || $_SESSION['filter_name'] =='Color_Types'):
+       if($_SESSION['filter_name']=='Color_Types'): ?>
+                         
+                 <?php foreach ($this->getItems() as $_item): ?>
+                <?php
+                if($_GET['multi_themes']) {
+                $name=array(); 
+                $sub_theme_label = $_item->getLabel();
+                $sub_theme_arr = explode(":",$sub_theme_label);
+                $sub_theme = trim($sub_theme_arr[1]);
+                $theme = trim($sub_theme_arr[0]);
+                }
+                ?>
+                <?php //if($name[0]==$label): ?>
+
+                    <li style="list-style-type: none;">
+
+                        <?php if ($_item->getCount() > 0): ?>
+
+                            <form>
+                            <?php if ($theme==$theme_label && $_SESSION['filter_name'] == 'Theme Subtheme'): ?>
+                                <span class="check-box">
+
+                                    <input type="radio" name="vehicle" <?php if($_GET['fl_new_products']=='' && $_item->getLabel()=='Show All' ): echo "checked='checked'"; endif; ?> onclick='window.location.assign("<?php echo $this->urlEscape($_item->getUrl()) ?>")'/>
+
+                                </span>
+
+                                <a href="<?php echo $this->urlEscape($_item->getUrl()) ?>">
+
+                                    <?php if($_SESSION['filter_name'] == 'Theme Subtheme'): echo $sub_theme; else: echo $_item->getLabel(); endif; ?>
+
+                                    <?php if ($this->shouldDisplayProductCount()): ?>
+
                                    <!-- <span class="count">(<?php echo $_item->getCount() ?>)</span>-->
-                                <?php //endif; ?>
-                       <?php //endif; ?>  
-                </a>
-            <?php else: ?>
-                <a onclick="ga('send', 'event', 'Filters', 'Color','<?php echo $_item->getLabel();?>');" href="<?php echo $this->urlEscape($_item->getUrl()) ?>" class="color_swatch_class">  
-                   <?php $label_name = strtolower($_item->getLabel()); 
-                         $label_name = str_replace(" ","-",$label_name);
-                        if (file_exists("media/wysiwyg/swatches/".$label_name.".png")): ?>
-                            <img class="color_swatch_img" width="40" height="20" src="/media/wysiwyg/swatches/<? echo $label_name;?>.png" title="<? echo $_item->getLabel();?>"> 
-                            <? else: echo $_item->getLabel() ?>
-                                <?php if ($this->shouldDisplayProductCount()): ?>
-                                    <span class="count">(<?php echo $_item->getCount() ?>)</span>
-                                <?php endif; ?>
+
+                                    <?php endif; ?>
+
+                                </a>
+                            <?php elseif ($_SESSION['filter_name'] != 'Theme Subtheme'): ?>   
+                            
+                            
+                              <span class="check-box">
+
+                                    <input type="radio" name="vehicle" <?php if($_GET['fl_new_products']=='' && $_item->getLabel()=='Show All' ): echo "checked='checked'"; endif; ?> onclick='window.location.assign("<?php echo $this->urlEscape($_item->getUrl()) ?>")'/>
+
+                                </span>
+
+                                <a href="<?php echo $this->urlEscape($_item->getUrl()) ?>">
+
+                                    <?php //if($_SESSION['filter_name'] == 'Theme Subtheme'): echo $sub_theme; else: echo $_item->getLabel(); endif; ?>
+                                    <?php echo $_item->getLabel();?>
+
+                                    <?php if ($this->shouldDisplayProductCount()): ?>
+
+                                    <!--<span class="count">(<?php echo $_item->getCount() ?>)</span>-->
+
+                                    <?php endif; ?>
+
+                                </a>
+                             
+                            <?php endif; ?>
+                            </form>
+
+                        <?php else: ?>
+
+                            <form>
+
+                                <span class="check-box">
+
+                                    <input type="radio" name="vehicle" onclick='window.location.assign("<?php echo $this->urlEscape($_item->getUrl()) ?>")'/>
+
+                                </span>
+
+                                <span>
+
+                                    <?php echo $_item->getLabel(); ?>
+
+                                    <?php if ($this->shouldDisplayProductCount()): ?>
+
+                                     <!--   <span class="count">(<?php echo $_item->getCount() ?>)</span>-->
+
+                                    <?php endif; ?>
+
+                                </span>
+
+                            </form>
+
                         <?php endif; ?>
-                  </a>      
-             <?php endif; ?>  
-            <? $item_counter++;  ?>   
-        <?php if(($item_counter%4==0) || ($item_counter==$total_items)):?> 
-            </li>
-            <?php if($item_counter!=$total_items): ?>
-                <li>
-            <?php endif; ?>     
-        <?php endif; ?>
-    <?php endforeach ?>
-    </ol>
+
+                    </li>
+                    <?php //endif;?>
+
+                <?php endforeach ?>
+
+             </ol>
+      <?php else: ?>       
+               <ol>
+                        <?php 
+                            $item_counter = 0;
+                            ?><li> 
+                            <?php 
+                            $total_items = count($this->getItems());
+                            foreach ($this->getItems() as $_item): ?>
+                                <?php if ($_item->getCount() > 0): ?>
+                                    <a onclick="ga('send', 'event', 'Filters', 'Color','<?php echo $_item->getLabel();?>');" href="<?php echo $this->urlEscape($_item->getUrl()) ?>" class="color_swatch_class">     
+                                        <?php $label_name = strtolower($_item->getLabel()); 
+                                             $label_name = str_replace(" ","-",$label_name);
+                                            //if (file_exists("media/wysiwyg/swatches/".$label_name.".png")): ?>
+                                                <img class="color_swatch_img" style="border:1px solid #d2d2d2" width="40" height="20" src="/media/wysiwyg/swatches/<? echo $label_name;?>.png" title="<? echo $_item->getLabel();?>"> 
+                                                <? //else: echo $_item->getLabel() ?>
+                                                    <?php //if ($this->shouldDisplayProductCount()): ?>
+                                                       <!-- <span class="count">(<?php echo $_item->getCount() ?>)</span>-->
+                                                    <?php //endif; ?>
+                                           <?php //endif; ?>  
+                                    </a>
+                                <?php else: ?>
+                                    <a onclick="ga('send', 'event', 'Filters', 'Color','<?php echo $_item->getLabel();?>');" href="<?php echo $this->urlEscape($_item->getUrl()) ?>" class="color_swatch_class">  
+                                       <?php $label_name = strtolower($_item->getLabel()); 
+                                             $label_name = str_replace(" ","-",$label_name);
+                                            if (file_exists("media/wysiwyg/swatches/".$label_name.".png")): ?>
+                                                <img class="color_swatch_img" width="40" height="20" src="/media/wysiwyg/swatches/<? echo $label_name;?>.png" title="<? echo $_item->getLabel();?>"> 
+                                                <? else: echo $_item->getLabel() ?>
+                                                    <?php if ($this->shouldDisplayProductCount()): ?>
+                                                        <span class="count">(<?php echo $_item->getCount() ?>)</span>
+                                                    <?php endif; ?>
+                                            <?php endif; ?>
+                                      </a>      
+                                 <?php endif; ?>  
+                                <? $item_counter++;  ?>   
+                            <?php if(($item_counter%4==0) || ($item_counter==$total_items)):?> 
+                                </li>
+                                <?php if($item_counter!=$total_items): ?>
+                                    <li>
+                                <?php endif; ?>     
+                            <?php endif; ?>
+                        <?php endforeach ?>
+                        </ol>
+ 
+<?php endif; ?>                
+
 <?php else: ?>   
 
             <?php foreach ($this->getItems() as $_item): ?>

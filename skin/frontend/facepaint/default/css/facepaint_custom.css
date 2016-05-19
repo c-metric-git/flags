@@ -201,3 +201,36 @@ input[type="radio"]{
 .item-options dd span.price{
       display:none;
   }
+ .cart-table .btn-update{
+ 	float: none;
+ }  
+  /* hompepage */
+  dt#Color_Types{
+  	display: none;
+  }
+/* onepage */
+#credit-card-type li {
+    display: block;
+    width: 51px;
+    height: 32px;
+    background: url('../images/credit-card-icons.jpg') 0 -32px no-repeat;
+    margin: 5px 6px 0 0;
+    overflow: hidden;
+    text-indent: -500em;
+    float: left;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+}
+#credit-card-type .MC{
+	background-position:-102px -32px;
+}
+#credit-card-type .AE{
+	background-position:-51px -32px;
+}
+#credit-card-type .DI{
+	background-position:-153px -32px;
+}
+

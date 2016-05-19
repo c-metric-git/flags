@@ -82,6 +82,8 @@ jQuery( document ).ready(function() {
             jQuery(this).tab('show')
         }
     });
+    /* hompepage */
+    jQuery('dl#narrow-by-list dd.Color').prepend(jQuery('dl#narrow-by-list dd.Color_Types'));
 
 });
 /*jQuery(function() {
@@ -106,4 +108,6 @@ function  wishlistProductid(productId)
 			    value: productId
 			}).prependTo('#magestore-sociallogin-form'); 
 }
+
+
 

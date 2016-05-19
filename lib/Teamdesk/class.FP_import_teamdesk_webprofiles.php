@@ -535,6 +535,9 @@ class FPTeamDeskWebprofiles {
                                             elseif(strtolower($this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Web Option Label'])=='brand & size') {
                                                 $web_option = 'brand_and_size';
                                             }
+                                            elseif(strtolower($this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Web Option Label'])=='skin color') {
+                                                $web_option = 'skin_color';
+                                            }
                                             elseif(strtolower($this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Web Option Label'])=='color') {
                                                 $web_option = 'fp_color';
                                             }
@@ -693,6 +696,9 @@ class FPTeamDeskWebprofiles {
                                                 }
                                                 elseif(strtolower($this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Web Option Label'])=='brand & size') {
                                                     $web_option = 'brand_and_size';
+                                                }
+                                                elseif(strtolower($this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Web Option Label'])=='skin color') {
+                                                    $web_option = 'skin_color';
                                                 }
                                                 elseif(strtolower($this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Web Option Label'])=='color') {
                                                     $web_option = 'fp_color';

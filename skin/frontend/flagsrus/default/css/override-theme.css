@@ -521,3 +521,6 @@ vertical-align: top !important;
     padding-left: 0;
 	}
 }
+.note-msg.empty-catalog {
+    clear: both;
+}

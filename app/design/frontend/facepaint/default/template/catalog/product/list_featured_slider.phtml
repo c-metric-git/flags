@@ -251,7 +251,7 @@ $_productCollection = $this->getLoadedProductCollection ();
     <?php $sa_reviews = "<script type='text/javascript'> function saLoadScript(src) { var js = window.document.createElement('script'); js.src = src; js.type = 'text/javascript'; document.getElementsByTagName('head')[0].appendChild(js); } saLoadScript('//www.shopperapproved.com/widgets/group2.0/12756.js'); </script>";
     echo $sa_reviews;
     ?>
-    <div class="main-title">
+    <div class="main-title mb0">
         <h3 class="">New Products</h3>
     </div>
 
@@ -453,12 +453,16 @@ $_productCollection = $this->getLoadedProductCollection ();
                             </div>
                         
                         <!-- end: ratings -->
-                        <div class="qty-in-stock" style="margin-left:20px;margin-top:10px"><!-- start: Qty in stock -->
-                            <?php
+                        <?php
                             $stock = Mage::getModel ('cataloginventory/stock_item')->loadByProduct ($_product);
+                            if(intval ($stock->getQty ()) > 0 ): 
+                        ?>
+                        <div class="qty-in-stock" style="margin-left:20px;margin-top:10px"><!-- start: Qty in stock -->
+                        <?php    
                             echo $this->__ ("Qty in Stock: ") . intval ($stock->getQty ());
-                            ?>
+                        ?>
                         </div>
+                    <?php endif; ?>
                       </div>  
                         <!-- end: Qty in stock -->
 

@@ -51,7 +51,8 @@ $_renderers = $this->getChild('attr_renderers')->getSortedChildren();
 
         if (!$_rendered):
         ?>
-        <dt><label class=""><?php echo $_attribute->getLabel() ?></label></dt>
+       <!-- <dt><label class=""><?php echo $_attribute->getLabel() ?></label></dt> -->
+        <dt><b><?php echo $_attribute->getLabel() ?></b></dt> 
         <dd<?php if ($_attribute->decoratedIsLast){?> class="last"<?php }?>>
             <div class="input-box">
 

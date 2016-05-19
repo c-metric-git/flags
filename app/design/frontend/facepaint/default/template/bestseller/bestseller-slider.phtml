@@ -364,7 +364,7 @@
 ?>
 
 
-<div class="main-title">
+<div class="main-title mb0">
 <h3 class="">Best Sellers<?php //echo $this->getBlockName(); ?></h3>
 </div>
 
@@ -541,14 +541,17 @@
                                 ->load ($_product->getId ())->getSku (); ?>">
                           <span class="ind_cnt low"><span class="ind_cnt_num">1</span> <span class="ind_cnt_desc">review</span></span>
                        </div>
-                   </div><!-- end: ratings -->                    
-                   <div class="qty-in-stock" style="margin-top:5px"><!-- start: Qty in stock -->
-                       <?php  
-                           $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
-                           echo $this->__("Qty in Stock: ").intval($stock->getQty());
-                       ?>
-                   </div><!-- end: Qty in stock -->                   
-                   
+                   </div><!-- end: ratings -->         
+                   <?php 
+                       $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+                       if(intval($stock->getQty()) > 0 ):
+                    ?>           
+                       <div class="qty-in-stock" style="margin-top:5px"><!-- start: Qty in stock -->
+                           <?php      
+                               echo $this->__("Qty in Stock: ").intval($stock->getQty());
+                           ?>
+                       </div><!-- end: Qty in stock -->                   
+                   <?php  endif; ?>
                </div><!-- end: rating-and-qty-block-->
 
          </div> <!--  .product-details -->   

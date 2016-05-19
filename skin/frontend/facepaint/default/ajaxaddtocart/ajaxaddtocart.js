@@ -213,7 +213,9 @@ var ajaxaddtocart = {
 										}
                                     } else {
                                         if(typeof res.messages != 'undefined') {
+                                             var $q = jQuery.noConflict();
                                             _this.showError(res.messages);
+                                             $q('#addtooverlay').hide();
                                         } else {
                                             _this.showError("Something happened wrong");
                                         }

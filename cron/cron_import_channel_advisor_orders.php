@@ -25,7 +25,7 @@ function showNiceXML($xml){
         $client->__setSoapHeaders($head);
         
         //To get necessary order details, we need to set order criteria. Following is the example of order criteria.
-        $no_of_days=7;
+        $no_of_days=4;
         $seconds_calc = $no_of_days * (24*60*60);  
         $start_date = date("Y-m-d",time() - $seconds_calc);  
         $start_date = new DateTime($start_date, new DateTimeZone('UTC'));
@@ -122,12 +122,19 @@ function showNiceXML($xml){
     //echo "Request :\n".showNiceXML( $client->__getLastRequest() )."\n\n";
     //echo "Response:\n".showNiceXML( $client->__getLastResponse() )."\n\n";
 }
-exit;
+require_once("cron_init.php");
+require_once(BASE_PATH."lib/Teamdesk/class.export_teamdesk_user.php");
+require_once(BASE_PATH."lib/Teamdesk/class.export_teamdesk_orders.php");
+$strReturn ='';       
+$channel_advisor='yes';
+$objTeamDeskOrder = new TeamDeskOrder($db);   
+$strReturn = $objTeamDeskOrder->exportOrdersToTeamDesk($channel_advisor);   
+
 ?>
 
 <?php
 
-function insertOrder($order_details) { 
+function insertOrder($order_details) {        
     global $store;
     $channel_advisor_orderid = $order_details->OrderID;
     //$insert=1;

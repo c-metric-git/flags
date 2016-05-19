@@ -58,16 +58,20 @@ class TeamDeskOrder {
     * @since 12-Feb-2013  
     * @author Dinesh Nagdev
     */
-    public function exportOrdersToTeamDesk()
+    public function exportOrdersToTeamDesk($channel_advisor='')
     {                               
         $arrOrders = array();
         $this->totalOrderUpdateFromTD = '';
         $this->connectToTeamDesk();
-        if ($this->api !='') {                                                             
+        $where_channel='';
+        if ($this->api !='') {     
+            if($channel_advisor=='yes') {
+                 $where_channel = " AND channel_advisor_orderid!='' ";
+            }                                                        
             $orderSQL = "SELECT *, created_at AS order_date, DATE_FORMAT(created_at, '%H:%i') AS order_time                     
                          FROM sales_flat_order 
-                         WHERE (status = 'processing' || status = 'pending' || status ='holded' || status ='pending_payment' || status ='pending_paypal' || status ='payment_review')
-                         AND order_teamdesk_id = 0 ORDER BY sales_flat_order.entity_id ASC";
+                         WHERE (status = 'processing' || status = 'pending' || status ='holded' || status ='fraud' || status ='pending_payment' || status ='pending_paypal' || status ='payment_review')
+                         AND order_teamdesk_id = 0 $where_channel ORDER BY sales_flat_order.entity_id ASC";
             /** 
             * get list of all the new users registered with the site (pinnacle)   
             */
@@ -232,7 +236,33 @@ class TeamDeskOrder {
                     $PayPalProMsg = $payment_additional_information['paypal_payment_status']=='completed'?'Completed':'Completed'; //Pending 
                     $PayPalProReason = $payment_additional_information['paypal_pending_reason'];  
                 }
-                else if ($payment_data['method'] == 'paypaluk_express') {
+                else if ($payment_data['method'] == 'authorizenet') {
+                    $payment_additional_information = unserialize($payment_data['additional_information']); 
+                    foreach($payment_additional_information['authorize_cards'] as $pay_key => $pay_detail) {
+                        if(strtolower($pay_detail['cc_type'])=='vi' || strtolower($pay_detail['cc_type'])=='visa') {
+                            $paymentMethod = "VISA";
+                        } 
+                        else if(strtolower($pay_detail['cc_type'])=='mc' || strtolower($pay_detail['cc_type'])=='master card') {
+                            $paymentMethod = "MC";
+                        } 
+                        else if(strtolower($pay_detail['cc_type'])=='di' || strtolower($pay_detail['cc_type'])=='discover') {
+                            $paymentMethod = "DISC";
+                        } 
+                        else if(strtolower($pay_detail['cc_type'])=='ae' || strtolower($pay_detail['cc_type'])=='american express') {
+                            $paymentMethod = "AMEX";
+                        }    
+                    }   
+                    $transaction_id = $payment_additional_information['otherinfo']['trans_id'];
+                    $Authcode = $payment_additional_information['otherinfo']['auth_code']; 
+                    $AVSAddressMatch = $payment_additional_information['otherinfo']['avs_addmatch']=='Y'?'Y':'N'; //N  
+                    $AVSZipMatch = $payment_additional_information['otherinfo']['avs_zipmatch']=='Y'?'Y':'N';
+                    $CVVMatch = $payment_additional_information['otherinfo']['cvv_match']=='M'?'Y':'N'; //N  
+                    $PayPalProMsg = $payment_additional_information['otherinfo']['response_code']!='Approved'?'Pending':'Completed'; //Pending 
+                    $PayPalProReason = $payment_additional_information['otherinfo']['response_code'];
+                    $CCFirstName = $payment_additional_information['otherinfo']['first_name'];  
+                    $CCLastName = $payment_additional_information['otherinfo']['last_name'];
+                }
+                else if ($payment_data['method'] == 'paypaluk_express' || $payment_data['method'] == 'paypal_express') {
                     $paymentMethod = 'PayPal Express';  
                     $payment_additional_information = unserialize($payment_data['additional_information']);
                     $transaction_id = $payment_additional_information['paypal_correlation_id'];
@@ -247,6 +277,9 @@ class TeamDeskOrder {
                     $paymentMethod = "Other";
                 }
                 $order_source = "SS";   
+                if($channel_advisor=='yes') {
+                    $paymentMethod = "Jet";   
+                } 
                 /**
                 * @desc code added by dinesh for checking the order status and assigning the same.
                 */
@@ -336,8 +369,8 @@ class TeamDeskOrder {
                                     'AVSZipMatch' => $AVSZipMatch,   
                                     'CVV Match' => $CVVMatch,  
                                     'Authcode' => $Authcode,
-                                    'CCFirstName' => $CCFirstName,   
-                                    'CCLastName' => $CCLastName,  
+                                    'CC First Name' => $CCFirstName,   
+                                    'CC Last Name' => $CCLastName,  
                                     'IntlAVSMatch' => NULL,
                                     'AVSCode' => NULL,
                                     'PayPalProReason' => $PayPalProReason,
