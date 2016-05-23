@@ -371,6 +371,7 @@ Varien_Profiler::start('LabelForCodeFragmentToProfile');
 
     <div id="<?php echo $sliderId; ?>" class="products-grid category-products-grid itemgrid itemgrid-adaptive centered hover-effect equal-height itemslider<?php if($sliderClasses) echo $sliderClasses; ?> products-grid<?php if($gridClasses) echo $gridClasses; ?>">
     <?php //$productcount = count(array_filter($_productCollection)); ?>
+	<?php $productcount = $bestseller_collection->getSize();  ?>
     <?php foreach ($bestseller_collection as $_product): 
 	if($_product){
 	?>
@@ -395,7 +396,7 @@ Varien_Profiler::start('LabelForCodeFragmentToProfile');
 
                     <?php if ($lazy): ?>
 
-						<?php if($productcount>4): ?>
+						<?php if($productcount>3): ?>
 							<img class="owl-lazy"
 								 data-src="<?php echo $product_img; ?>"
 								 alt="<?php echo $imglabel; ?>"/>

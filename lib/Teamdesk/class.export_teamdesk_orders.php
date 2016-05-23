@@ -83,7 +83,7 @@ class TeamDeskOrder {
                * @desc code to get the schema of orders table  from teamdesk
                */
               try {
-                 $this->orderset = $this->api->GetSchema("Order",array('Related Contact','OrderNumber','Date','ShippingCharged','TrackingNumber','TotalSmallOrderFee','TotalProductCost','TotalCustomerTax','TotalCost','Special Instructions','Ship To First Name','Ship To Company','Ship To Address 1','Ship To Address 2','Ship To City','Ship To State','Ship To Province','Ship To Zip','Ship To Country','Bill To First Name','Bill To Last Name','Bill To Company','Bill To Address 1','Bill To Address 2','Bill To City','Bill To State','Bill To Zip','Bill To Country','Time','Status','Bill To Province','pinnacleId','Email','Phone','Shipping Method','Authcode','AVSZipMatch','Credit Card Transaction ID','CCType','promo_discount_amount','promo_discount_value','promo_discount_type','Promotion Code - Record ID#','shipping - Shipping Method Code','discount_amount','discount_value','discount_type','TotalTaxEntered','Ship To Last Name','gift_cert_first_name','gift_cert_last_name','gift_cert_voucher','gift_cert_amount','Gift Message','Ship To Zip Plus Four','CVV Match','Estimated Shipping Date','Tracking_info','is_correct_address','Coupon Code','ShipDate','PaymentStatus','sendToPinnacle','RecordHistory','OrderSource','PayPalProMsg','AVSAddressMatch','CC First Name','CC Last Name','IntlAVSMatch','PayPalProReason','AVS Code','isCallOrder?','Case Type'));  
+                 $this->orderset = $this->api->GetSchema("Order",array('Related Contact','OrderNumber','Date','ShippingCharged','TrackingNumber','TotalSmallOrderFee','TotalProductCost','TotalCustomerTax','TotalCost','Special Instructions','Ship To First Name','Ship To Company','Ship To Address 1','Ship To Address 2','Ship To City','Ship To State','Ship To Province','Ship To Zip','Ship To Country','Bill To First Name','Bill To Last Name','Bill To Company','Bill To Address 1','Bill To Address 2','Bill To City','Bill To State','Bill To Zip','Bill To Country','Time','Status','Bill To Province','pinnacleId','Email','Phone','Shipping Method','Authcode','AVSZipMatch','Credit Card Transaction ID','CCType','promo_discount_amount','promo_discount_value','promo_discount_type','Promotion Code - Record ID#','shipping - Shipping Method Code','discount_amount','discount_value','discount_type','TotalTaxEntered','Ship To Last Name','gift_cert_first_name','gift_cert_last_name','gift_cert_voucher','gift_cert_amount','Gift Message','Ship To Zip Plus Four','CVV Match','Estimated Shipping Date','Tracking_info','is_correct_address','Coupon Code','ShipDate','PaymentStatus','sendToPinnacle','RecordHistory','OrderSource','PayPalProMsg','AVSAddressMatch','CC First Name','CC Last Name','IntlAVSMatch','PayPalProReason','AVS Code','isCallOrder?','Case Type','OrderSourceText'));  
               } 
               catch (Exception $e) {
                       echo $this->tdErrorLog = '<br/>Caught exception: Error fetching schema of order table '.$e->getMessage(). "<br/>";
@@ -276,9 +276,31 @@ class TeamDeskOrder {
                 else {
                     $paymentMethod = "Other";
                 }
-                $order_source = "SS";   
+                if(strstr($orderData['increment_id'], 'CA')) {
+                   $order_source = "CA";   
+                }
+                elseif(strstr($orderData['increment_id'], 'FP')) {
+                   $order_source = "FP";   
+                }
+                elseif(strstr($orderData['increment_id'], 'HM')) {
+                   $order_source = "HM";   
+                }
+                elseif(strstr($orderData['increment_id'], 'FL')) {
+                   $order_source = "FL";   
+                }
+                elseif(strstr($orderData['increment_id'], 'SS')) {
+                   $order_source = "SS";   
+                } 
+                else {   
+                    $order_source = "SS";   
+                }
+                $order_channel='';
+                $ordersourcetext='';
                 if($channel_advisor=='yes') {
-                    $paymentMethod = "Jet";   
+                    $order_channel_arr = explode("Order id : ",$orderData['customer_note']);     
+                    $order_channel = trim($order_channel_arr[0]); 
+                    $paymentMethod = $order_channel;  
+                    $ordersourcetext = $order_source." ".$paymentMethod; 
                 } 
                 /**
                 * @desc code added by dinesh for checking the order status and assigning the same.
@@ -377,6 +399,7 @@ class TeamDeskOrder {
                                     'RecordHistory' => date("Y-m-d H:i:s").' - '.'Record added in TeamDesk',
                                     'PaymentStatus' => $payment_status,
                                     'OrderSource' => $order_source, 
+                                    'OrderSourceText' => $ordersourcetext,
                                     'sendToPinnacle' =>1
                                 );    
                 array_push($this->orderset->Rows, $arrRecords);  
@@ -661,7 +684,7 @@ class TeamDeskOrder {
             /**
             * @desc  get all the records with sendToPinnacle marked as checked
             */
-            $arrQueries = "WHERE [sendToPinnacle] AND ([OrderSource]='SS') AND ([Status]='Shipped' OR [Status]='Cancelled')";     
+            $arrQueries = "WHERE [sendToPinnacle] AND ([OrderSource]='SS' OR [OrderSourceText]='FL Jet') AND ([Status]='Shipped' OR [Status]='Cancelled')";     
             try {
                 $strColumns =  "[pinnacleId],[Status],[OrderNumber],[ShipDateCalced],[TrackingNumber],[WRHS Freight Carrier/Service],[sendToPinnacle],[Shipping Method],[Ship To Full Name Calc]";
                 $arrResults = $this->api->Query("SELECT $strColumns FROM [Order] ".$arrQueries);
@@ -739,8 +762,8 @@ class TeamDeskOrder {
                                         /**
                                         * @desc  tracking number type 
                                         */
-                                        if (preg_match('/^UPS/i', $tdOrder['WRHS Freight Carrier/Service']) > 0) {
-                                            $tracking_number_type = 'ups';
+                                        if ((preg_match('/^UPS/i', $tdOrder['WRHS Freight Carrier/Service']) > 0) || ($tdOrder['WRHS Freight Carrier/Service']=='M6')) {
+                                            $tracking_number_type = 'ups';   
                                         }     
                                         elseif (preg_match('/^USPS/i', $tdOrder['WRHS Freight Carrier/Service']) > 0) {
                                             $tracking_number_type = 'usps';  
@@ -753,7 +776,33 @@ class TeamDeskOrder {
                                         } 
                                         elseif (preg_match('/^US/i', $tdOrder['WRHS Freight Carrier/Service']) > 0) {
                                             $tracking_number_type = 'usps';  
-                                        }                          
+                                        }     
+                                        if($tdOrder['Shipping Method']=='freeshipping_freeshipping') {
+                                            if($tdOrder['WRHS Freight Carrier/Service']=='M6') {
+                                                $tdOrder['Shipping Method']='Mail Innovations';
+                                            }
+                                            elseif($tdOrder['WRHS Freight Carrier/Service']=='USPS1') {                                  
+                                                $tdOrder['Shipping Method']='First Class Parcel';
+                                            }
+                                            elseif($tdOrder['WRHS Freight Carrier/Service']=='USPP') {
+                                                $tdOrder['Shipping Method']='Priority';
+                                            }
+                                            elseif($tdOrder['WRHS Freight Carrier/Service']=='UPSG') {
+                                                $tdOrder['Shipping Method']='Ground';
+                                            }
+                                            elseif($tdOrder['WRHS Freight Carrier/Service']=='UP3R') {
+                                                $tdOrder['Shipping Method']='3 Day Select';
+                                            } 
+                                            elseif($tdOrder['WRHS Freight Carrier/Service']=='UP2R') {
+                                                $tdOrder['Shipping Method']='2nd Day Air';
+                                            }
+                                            elseif($tdOrder['WRHS Freight Carrier/Service']=='UPND') {
+                                                $tdOrder['Shipping Method']='Next Day Air';
+                                            }
+                                            elseif($tdOrder['WRHS Freight Carrier/Service']=='USEX') {
+                                                $tdOrder['Shipping Method']='Express (1-2 Days)';
+                                            }   
+                                        }                     
                                         $this->db->assignStr("carrier_code", $tracking_number_type); 
                                         $this->db->assignStr("title", $tdOrder['Shipping Method']);  
                                         $shipping_tracking_id = $this->db->insert("sales_flat_shipment_track");  

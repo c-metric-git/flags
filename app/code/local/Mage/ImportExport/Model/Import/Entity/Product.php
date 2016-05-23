@@ -481,7 +481,7 @@ class Mage_ImportExport_Model_Import_Entity_Product extends Mage_ImportExport_Mo
             $this->_saveProducts();
             $this->_saveStockItem();
             $this->_saveLinks();
-            $this->_saveCustomOptions();
+            $this->_saveCustomOptions();         
             foreach ($this->_productTypeModels as $productType => $productTypeModel) {
                 $productTypeModel->saveData();
             }

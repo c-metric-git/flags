@@ -1,7 +1,6 @@
 <?php
 ob_start(); 
-define('BASE_PATH', $_SERVER["DOCUMENT_ROOT"].'/');
-require_once BASE_PATH.'cron/ca_config.php'; 
+require_once 'ca_config.php'; 
 $mageFilename = BASE_PATH.'app/Mage.php';
 require_once $mageFilename;
 Mage::app();
@@ -75,7 +74,7 @@ function showNiceXML($xml){
                                    'FulfillmentType'=> 'Ship',
                                    'FulfillmentStatus'=> 'Complete',
                                    'CarrierCode'=>$carrier_code,
-                                   'ClassCode'=>$shipping_method,
+                                   'ClassCode'=>$shipping_method,  
                                    'TrackingNumber'=>$tracking_number,
                                    'DistributionCenterCode'=>'New York',
                                    'ShippedDateGMT'=>$ship_date->date,
@@ -89,7 +88,7 @@ function showNiceXML($xml){
                           );
                      $result=$client->CreateOrderFulfillments($arrData);  
                      if($result->CreateOrderFulfillmentsResult->Status == 'Success') {   
-                           $orderModel = Mage::getModel('sales/order')->loadByIncrementId($increment_id);
+                         $orderModel = Mage::getModel('sales/order')->loadByIncrementId($increment_id);
                            $orderModel->setChannelAdvisorTrackingUpdated("Yes")
                                 ->save();
                            echo "<br /> Tracking info updated for the order : ".$increment_id;

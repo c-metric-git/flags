@@ -134,7 +134,8 @@ $_productCollection = $this->getLoadedProductCollection ();
     <div class="itemslider-wrapper slider-arrows1 slider-arrows1-pos-top-right slider-pagination1">
         <div id="<?php echo $sliderId; ?>"
              class="products-grid category-products-grid itemgrid itemgrid-adaptive centered hover-effect equal-height itemslider<?php if ($sliderClasses) echo $sliderClasses; ?> products-grid<?php if ($gridClasses) echo $gridClasses; ?>">
-<?php foreach ($_productCollection as $_product): 
+<?php $productcount = $_productCollection->getSize();  ?>
+ <?php foreach ($_productCollection as $_product): 
 	if($_product){
 	?>
 		<?php 
@@ -152,7 +153,7 @@ $_productCollection = $this->getLoadedProductCollection ();
                 <a href="<?php echo $producturl ?>" title="<?php echo $imglabel; ?>" class="product-image">
                     
                     <?php if ($lazy): ?>
-						<?php if($productcount>4): ?>
+						<?php if($productcount>3): ?>
 							<img class="owl-lazy"
 								 data-src="<?php echo $product_img; ?>"
 								 alt="<?php echo $imglabel; ?>"/>

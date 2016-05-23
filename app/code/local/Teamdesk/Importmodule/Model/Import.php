@@ -88,7 +88,7 @@ class Teamdesk_Importmodule_Model_Import extends Mage_ImportExport_Model_Abstrac
     protected function _getEntityAdapter()
     {                                
         if (!$this->_entityAdapter) {      
-            $validTypes = Mage_ImportExport_Model_Config::getModels(self::CONFIG_KEY_ENTITIES); 
+            $validTypes = Mage_ImportExport_Model_Config::getModels(self::CONFIG_KEY_ENTITIES);                                           
             if (isset($validTypes[$this->getEntity()])) {
                 try {                   
                     $this->_entityAdapter = Mage::getModel($validTypes[$this->getEntity()]['model']);    
@@ -317,7 +317,7 @@ class Teamdesk_Importmodule_Model_Import extends Mage_ImportExport_Model_Abstrac
      * @return bool
      */
     public function importSource()
-    {
+    {            
         $this->setData(array(
             'entity'   => self::getDataSourceModel()->getEntityTypeCode(),
             'behavior' => self::getDataSourceModel()->getBehavior()
@@ -439,8 +439,8 @@ class Teamdesk_Importmodule_Model_Import extends Mage_ImportExport_Model_Abstrac
      * @return bool
      */
     public function validateSource($sourceFile)
-    {             
-        $this->addLogComment(Mage::helper('importexport')->__('Begin data validation'));
+    {                 
+        $this->addLogComment(Mage::helper('importexport')->__('Begin data validation')); 
         $result = $this->_getEntityAdapter()
             ->setSource($this->_getSourceAdapter($sourceFile))
             ->isDataValid(); 

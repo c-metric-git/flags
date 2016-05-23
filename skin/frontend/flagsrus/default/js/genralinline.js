@@ -76,7 +76,7 @@ jQuery( window ).load(function() {
 		jQuery(".nav-panel-inner img.lazy").lazyload({
         event : "sporty"
     });
-	jQuery(".nav-panel-inner img.lazy").trigger("sporty") }, 1000);
+	jQuery(".nav-panel-inner img.lazy").trigger("sporty") }, 100);
 });
 function  wishlistProductid(productId)
 {

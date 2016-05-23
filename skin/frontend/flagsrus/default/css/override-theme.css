@@ -52,7 +52,7 @@
 }
 .skip-link .count {
 	display: inline-block;
-	width: 18px;
+	/*width: 18px;*/
 	height: 18px;
 	line-height: 18px;
 	text-align: center;
@@ -67,7 +67,9 @@
 	margin-left: -14px;
 	margin-right: -7px;
 	margin-top: -22px;
-	position: relative
+	position: relative;
+	min-width: 18px;
+    max-width: 36px;
 }
 .header-regular .mini-cart-heading, .header-regular .mini-compare-heading {
 	display: block

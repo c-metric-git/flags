@@ -160,7 +160,7 @@ $_collectionSize = $_productCollection->count ();
             <ul class="" id="products-list">
                 <?php foreach ($_productCollection as $_product): ?>
                     <li class="products-list-view">
-                       <div class="row"> 
+                       <div class="row" id="<?php echo $_product->getId() ?>"> 
                         <?php //Product Image ?>
                         <div class="col-md-3 col-sm-3">
                             <a href="<?php echo $_product->getProductUrl () ?>"
@@ -249,11 +249,13 @@ $_collectionSize = $_productCollection->count ();
                             </div> <!-- .actions -->           
                                 
                             <?php elseif ($_product->getStockItem () && $_product->getStockItem ()->getIsInStock ()): ?>
+                             <div class="actions"><div class="btn-group">
 								<?php if($_product->canConfigure()): ?>
 									<a title="<?php echo $this->__('See Options') ?>" class="button btn-cart" href="<?php echo $_product->getProductUrl() ?>"><?php echo $this->__('See Options') ?></a>
 								<?php else: ?>
 									<a title="<?php echo $this->__('View Details') ?>" class="button btn-cart" href="<?php echo $_product->getProductUrl() ?>"><?php echo $this->__('View Details') ?></a>
 								<?php endif; ?>
+                              </div></div>
                             <?php else: ?>
                                 <p class="availability out-of-stock">
                                     <span><?php echo $this->__ ('Out of stock') ?></span></p>

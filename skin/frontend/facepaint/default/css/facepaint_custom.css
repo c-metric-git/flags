@@ -27,7 +27,7 @@ border-bottom:1px solid #0086d4 ;
 
 /* product list view*/
 .products-list-view h2.product-name a{
-	color:#337ab7;
+	
 	font-weight:initial !important;
 }
 .products-list-view div.desc ,.products-list-view div.desc a ,.products-list-view .price-box .sku ,.products-list-view .price ,.products-list-view .qty,
@@ -234,3 +234,7 @@ input[type="radio"]{
 	background-position:-153px -32px;
 }
 
+/* bundle product*/
+.product-options dd .qty-holder{
+	display:none;
+}

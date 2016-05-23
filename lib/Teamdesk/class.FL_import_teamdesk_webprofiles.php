@@ -1327,7 +1327,7 @@ class FLTeamDeskWebprofiles {
                 
                 $resultcount = 0;
                 while($resultcount == 0) {
-                    $arrQueries = "WHERE [SendToPinnacle] AND [PinnacleAttributeSKU] > '".$last_record."'";
+                    $arrQueries = "WHERE [sendToPinnacle] AND [is_active]='Yes' AND [PinnacleAttributeSKU] > '".$last_record."'";
                     /**
                     * @desc  create string of columns to be retreived from the query - Related Category, is_primary, Related Web Profile, Priority  
                     */                      

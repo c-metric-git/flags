@@ -315,9 +315,9 @@ input.input-text:focus, input.input-text:hover, select:focus, select:hover, text
 	line-height: 36px
 }
 .btn-checkout, .product-view .btn-cart {
-	line-height: 55px;
+	/*line-height: 55px;
 	font-size: 1.1666em;
-	    font-size: 12px;
+	    font-size: 12px;*/
 }
 p.control input.checkbox, p.control input.radio {
 	margin-right: 6px
@@ -542,7 +542,7 @@ p.required {
 	min-width: 180px
 }
 #opc-review .btn-checkout, .product-view .btn-cart {
-	min-width: 200px
+	/*min-width: 200px*/
 }
 #contactForm textarea {
 	width: 100%;
@@ -1607,8 +1607,8 @@ ul.bullet ul li, ul.disc ul li {
 	font-size: 12px
 }
 .products-grid .product-name, .products-list .price-box, .products-list .product-name, h3.product-name {
-	font-size: 1.3333em;
-	line-height: 1.25em
+	/*font-size: 1.3333em;
+	line-height: 1.25em*/
 }
 .block-tags .actions {
 	text-align: right

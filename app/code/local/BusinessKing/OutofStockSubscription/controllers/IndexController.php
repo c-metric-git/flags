@@ -80,13 +80,13 @@ class BusinessKing_OutofStockSubscription_IndexController extends Mage_Core_Cont
 
     {
 
-    	/*$product = Mage::getModel('catalog/product')->load(104979);
+    	/*$product = Mage::getModel('catalog/product')->load(99974);
 
 $cats = $product->getCategoryIds();
 foreach ($cats as $category_id) {
-    $_cat = Mage::getModel('catalog/category')->load($category_id) ;
+    $_cat = Mage::getModel('catalog/category')->load($category_id)->getParentCategory() ;
     echo $_cat->getName();
-    echo "";
+    echo "<br>";
 } */
 
     }

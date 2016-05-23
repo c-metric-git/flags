@@ -155,7 +155,7 @@ $_productCollection = $this->getItems();
 <div class="page-title">
 <h3 class="section-title"><?php echo $this->__('Based on your selection, you may be interested in the following items:') ?></h3>
 </div>
-<div class="itemslider-wrapper product-related slider-arrows1 slider-arrows1-pos-top-right slider-pagination1">
+<div class="owl-carousel owl-carousel-11 owl-theme owl-loaded"><div class="itemslider-wrapper product-related slider-arrows1 slider-arrows1-pos-top-right slider-pagination1">
     <div id="<?php echo $sliderId; ?>" class="products-grid category-products-grid itemgrid itemgrid-adaptive centered hover-effect equal-height itemslider<?php if($sliderClasses) echo $sliderClasses; ?> products-grid<?php if($gridClasses) echo $gridClasses; ?>">
     <?php foreach ($_productCollection as $_product): ?>
         <div class="item" id="<?php echo $_product->getId();?>">
@@ -279,7 +279,7 @@ $_productCollection = $this->getItems();
         </div>
     <?php endforeach; ?>
     </div> <!-- end: itemslider -->
-</div> <!-- end: itemslider-wrapper -->
+</div> </div><!-- end: itemslider-wrapper -->
 <script type="text/javascript">
 //<![CDATA[
     jQuery(function($) {

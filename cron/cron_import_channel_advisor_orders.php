@@ -1,7 +1,6 @@
 <?php
 ob_start(); 
-define('BASE_PATH', $_SERVER["DOCUMENT_ROOT"].'/');
-require_once BASE_PATH.'cron/ca_config.php';     
+require_once 'ca_config.php';     
 $mageFilename = BASE_PATH.'app/Mage.php';
 require_once $mageFilename;
 Mage::app();
@@ -25,7 +24,7 @@ function showNiceXML($xml){
         $client->__setSoapHeaders($head);
         
         //To get necessary order details, we need to set order criteria. Following is the example of order criteria.
-        $no_of_days=4;
+        $no_of_days=2;
         $seconds_calc = $no_of_days * (24*60*60);  
         $start_date = date("Y-m-d",time() - $seconds_calc);  
         $start_date = new DateTime($start_date, new DateTimeZone('UTC'));
@@ -59,11 +58,11 @@ function showNiceXML($xml){
         $count_of_orders = count($result->GetOrderListResult->ResultData->OrderResponseItem);
         if(isset($result->GetOrderListResult->ResultData->OrderResponseItem) && $count_of_orders > 0) {
             if($count_of_orders == 1) {
-                 insertOrder($result->GetOrderListResult->ResultData->OrderResponseItem);
+                 insertOrder($result->GetOrderListResult->ResultData->OrderResponseItem); 
             }
             else {    
                 foreach($result->GetOrderListResult->ResultData->OrderResponseItem as $key => $order_details) {
-                    insertOrder($order_details);
+                    insertOrder($order_details);  
                 }
             }       
         }
@@ -128,15 +127,17 @@ require_once(BASE_PATH."lib/Teamdesk/class.export_teamdesk_orders.php");
 $strReturn ='';       
 $channel_advisor='yes';
 $objTeamDeskOrder = new TeamDeskOrder($db);   
-$strReturn = $objTeamDeskOrder->exportOrdersToTeamDesk($channel_advisor);   
+$strReturn = $objTeamDeskOrder->exportOrdersToTeamDesk($channel_advisor); 
 
 ?>
 
 <?php
 
-function insertOrder($order_details) {        
+function insertOrder($order_details) { 
     global $store;
     $channel_advisor_orderid = $order_details->OrderID;
+    $marketplace_orderid =  $order_details->ClientOrderIdentifier;
+    $order_channel = $order_details->PaymentInfo->PaymentType;
     //$insert=1;
     $order_collection = Mage::getModel('sales/order')->getCollection()->addFieldToFilter('channel_advisor_orderid', $channel_advisor_orderid);
     if ($order_collection->count()==0) {
@@ -190,7 +191,7 @@ function insertOrder($order_details) {
                  // Assign Customer To Sales Order Quote
                  $quote->assignCustomer($customer);
                  $quote->setChannelAdvisorOrderid($channel_advisor_orderid);
-                 $quote->setCustomerNote("Channel Advisor Order id : ".$channel_advisor_orderid);
+                 $quote->setCustomerNote("$order_channel Order id : ".$marketplace_orderid);
                      // Configure Notification
                 // $quote->setSendCconfirmation(1);
             

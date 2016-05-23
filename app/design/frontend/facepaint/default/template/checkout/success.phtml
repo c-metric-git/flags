@@ -107,7 +107,10 @@ $newsLetter = Mage::getStoreConfig('successpagesettings/newsletter/enablenewslet
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
 <!--<h2 class="sub-title"><?php //echo $this->__('Thank you for your purchase!') ?></h2>-->
 <div class="page-title"><h1 class="sub-title"><?php echo $this->__('Order Complete') ?></h1></div>
-<p><?php echo $this->__('Your order # is: %s.', $this->escapeHtml($this->getOrderId())) ?></p>
+<p><?php echo $this->__('Details For Order # : %s.', $this->escapeHtml($this->getOrderId())) ?></p>
+<p>To complete your order, please call us at <?php echo Mage::getStoreConfig('general/store_information/phone');?> during our customer service hours: <?php echo Mage::getStoreConfig('general/store_information/hours');?>.<br><br>Or mail us a check to:<br>Facepaint<br><?php echo nl2br(Mage::getStoreConfig('general/store_information/address'));?><br>
+</p>
+<p>Thanks,<br>Customer Service<br>facepaint.com</p>
 <?php
 if ($aboveenable == 1 && $aboveenableid != "") {
     echo $this->getLayout()->createBlock('cms/block')->setBlockId($aboveenableid)->toHtml();
@@ -115,7 +118,7 @@ if ($aboveenable == 1 && $aboveenableid != "") {
 ?>
 
 <div class="row"><div class="myorder-wrapper col-md-12">
-   <div class="row"> <div class="order_summery col-md-12">
+   <div class="row"> <div class="order_summery col-md-6">
         <h3 class="bg-info">Billing Address</h3>
         <div class="inner_content">
             
@@ -137,7 +140,7 @@ if ($aboveenable == 1 && $aboveenableid != "") {
         
     </div>
     
-    <div class="order_summery col-md-12">
+    <div class="order_summery col-md-6">
         <h3 class="bg-info">Shipping Address</h3>
         <div class="inner_content">
            
@@ -189,10 +192,10 @@ if ($aboveenable == 1 && $aboveenableid != "") {
         <thead>
             <tr>
                 <th rowspan="<?php echo $rowspan ?>"><?php echo $this->__('Product Name') ?></th>
-                <th class="a-center"><?php echo $this->__('Unit Price') ?></th>
-                <th class="a-center"><?php echo $this->__('Qty') ?></th>
-                <th class="a-center"><?php echo $this->__('SKU') ?></th>
-                <th class="a-center"><?php echo $this->__('Sub Total') ?></th>
+                <th ><?php echo $this->__('Unit Price') ?></th>
+                <th ><?php echo $this->__('Qty') ?></th>
+                <th><?php echo $this->__('SKU') ?></th>
+                <th ><?php echo $this->__('Sub Total') ?></th>
             </tr>
         </thead>
         <?php echo $this->getChildHtml('totals'); ?>
@@ -330,7 +333,15 @@ if ($aboveenable == 1 && $aboveenableid != "") {
 </div>
 
 <div class="buttons-set">
-    <button type="button" class="button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location = '<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+    <button type="button" class="button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location = '<?php echo $this->getUrl() ?>'"><span>
+        <span><?php echo $this->__('Continue Shopping') ?></span></span></button>
+    <?php if ($this->getCanViewOrder() && $this->getCanPrintOrder()) : ?>
+        <?php //echo $this->__('<a class="print-icon" href="%s" onclick="this.target=\'_blank\'">here to print</a>', $this->getPrintUrl()) ?>
+        <?php // echo $this->getChildHtml() ?>
+    
+     <a href="<?php echo $this->getPrintUrl() ?>" target="_blank" class="button" title="<?php echo $this->__('Print') ?>" onclick="window.location = '<?php echo $this->getUrl() ?>'"><span><?php echo $this->__('Print') ?></span></a>
+     <?php endif; ?>
+        
 </div>
 <?php
 if ($belowenable == 1 && $belowenableid != "") {

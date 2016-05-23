@@ -248,7 +248,7 @@ $_productCollection = $this->getLoadedProductCollection ();
 
     ?>
 
-    <?php $sa_reviews = "<script type='text/javascript'> function saLoadScript(src) { var js = window.document.createElement('script'); js.src = src; js.type = 'text/javascript'; document.getElementsByTagName('head')[0].appendChild(js); } saLoadScript('//www.shopperapproved.com/widgets/group2.0/12756.js'); </script>";
+    <?php $sa_reviews = "<script type='text/javascript'> function saLoadScript(src) { var js = window.document.createElement('script'); js.src = src; js.type = 'text/javascript'; document.getElementsByTagName('head')[0].appendChild(js); } saLoadScript('//www.shopperapproved.com/widgets/group2.0/10930.js'); </script>";
     echo $sa_reviews;
     ?>
     <div class="main-title mb0">
@@ -447,10 +447,12 @@ $_productCollection = $this->getLoadedProductCollection ();
                     <?php $getIdcls = "rating-and-qty-block" . $_product->getId (); ?>
                    
                         <div class="ratings"> <!-- start: ratings -->
-                            <div  class="star_container <?php echo Mage::getModel ('catalog/product')
+                             <div class="star_container <?php echo Mage::getModel ('catalog/product')
+                                    ->load ($_product->getId ())->getSku (); ?>"></div>
+                            <!--<div  class="star_container <?php echo Mage::getModel ('catalog/product')
                                 ->load ($_product->getId ())->getSku (); ?>" style="float:left;margin-top:10px">
                                <span class="ind_cnt low"><span class="ind_cnt_num">1</span> <span class="ind_cnt_desc">review</span></span>
-                            </div>
+                            </div>-->
                         
                         <!-- end: ratings -->
                         <?php

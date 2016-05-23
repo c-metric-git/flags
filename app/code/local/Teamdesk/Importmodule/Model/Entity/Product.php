@@ -511,7 +511,7 @@ class Teamdesk_Importmodule_Model_Entity_Product extends Teamdesk_Importmodule_M
      * @return Mage_ImportExport_Model_Import_Entity_Product
      */
     protected function _initCategories()
-    {
+    {                           
         $collection = Mage::getResourceModel('catalog/category_collection')->addNameToResult();
         /* @var $collection Mage_Catalog_Model_Resource_Eav_Mysql4_Category_Collection */
         foreach ($collection as $category) {
@@ -610,7 +610,7 @@ class Teamdesk_Importmodule_Model_Entity_Product extends Teamdesk_Importmodule_M
                 $this->_particularAttributes,
                 $model->getParticularAttributes()
             );
-        }
+        }   
         // remove doubles
         $this->_particularAttributes = array_unique($this->_particularAttributes);
 
@@ -2022,8 +2022,8 @@ class Teamdesk_Importmodule_Model_Entity_Product extends Teamdesk_Importmodule_M
             return true;
         }
 
-        $this->_validate($rowData, $rowNum, $sku);
-
+        $this->_validate($rowData, $rowNum, $sku);  
+            
         if (self::SCOPE_DEFAULT == $rowScope) { // SKU is specified, row is SCOPE_DEFAULT, new product block begins
             $this->_processedEntitiesCount ++;
 

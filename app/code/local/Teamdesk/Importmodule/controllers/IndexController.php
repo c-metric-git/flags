@@ -580,9 +580,9 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
 						 unset($_SESSION["$clearsession_result"]);					
 					 }   
 					ini_set("display_errors",1);
-                    require_once('lib/Teamdesk/class.FP_import_teamdesk_webprofiles.php'); 
+                    /*require_once('lib/Teamdesk/class.FP_import_teamdesk_webprofiles.php'); 
                     $objTDProducts = new FPTeamDeskWebprofiles(); 
-                    $strReturn = $objTDProducts->importTeamdeskProduct();   
+                    $strReturn = $objTDProducts->importTeamdeskProduct();    */
                     $strMessage = "Product Import Status"; 
                     if($strReturn !='') {
                         $strMessage .= $strReturn; 
@@ -593,7 +593,7 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                     for($i=0;$i<=$product_csv_counter;$i++) {                   
                         $succ_message['error'] .= "<br /><br />Processing File => FP_Products$i.csv<br />";   
                         $succ_message['success'] .= "<br /><br />Processing File => FP_Products$i.csv<br />";    
-                        $tmp_succ_message = $this->AddProduct("var/import/products/FP_Products$i.csv");
+                        $tmp_succ_message = $this->AddProduct("var/import/products/FP_BundleProducts.csv");
                         echo '<pre>';
                         print_R($tmp_succ_message);
                         if($tmp_succ_message['success']!='') {
@@ -794,14 +794,14 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
             // common actions
             try {
                 /** @var $import Mage_ImportExport_Model_Import */
-                $import = Mage::getModel('importmodule/import');  
+                /*$import = Mage::getModel('importmodule/import');  
                 $validationResult = $import->validateSource($data);       
                 $result='';
                 if(count($validationResult) > 0) {
                     foreach($validationResult as $validresult) {   
                         $result['error'] .= $validresult."<br />";
                     }    
-                } 
+                } */
                 $importModel = Mage::getModel('importexport/import');
                 $importModel->behaviour = 'replace';           
                 $importModel->importSource();  

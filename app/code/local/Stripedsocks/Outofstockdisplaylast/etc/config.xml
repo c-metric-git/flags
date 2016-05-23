@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Stripedsocks_Outofstockdisplaylast>
+            <version>1.0.0</version>
+        </Stripedsocks_Outofstockdisplaylast>
+    </modules>
+    <global>
+        <models>
+            <catalog>
+                <rewrite>
+                    <layer>Stripedsocks_Outofstockdisplaylast_Model_Layer</layer>
+                </rewrite>
+            </catalog>
+        </models>
+    </global>
+</config>

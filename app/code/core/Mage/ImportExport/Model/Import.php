@@ -89,7 +89,7 @@ class Mage_ImportExport_Model_Import extends Mage_ImportExport_Model_Abstract
     {
         if (!$this->_entityAdapter) {
             $validTypes = Mage_ImportExport_Model_Config::getModels(self::CONFIG_KEY_ENTITIES);
-
+                   
             if (isset($validTypes[$this->getEntity()])) {
                 try {
                     $this->_entityAdapter = Mage::getModel($validTypes[$this->getEntity()]['model']);

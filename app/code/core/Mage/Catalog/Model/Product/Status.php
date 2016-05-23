@@ -92,7 +92,7 @@ class Mage_Catalog_Model_Product_Status extends Mage_Core_Model_Abstract
      */
     public function addVisibleFilterToCollection(Mage_Eav_Model_Entity_Collection_Abstract $collection)
     {
-        //$collection->addAttributeToFilter('status', array('in'=>$this->getVisibleStatusIds()));
+        $collection->addAttributeToFilter('status', array('in'=>$this->getVisibleStatusIds()));
         return $this;
     }
 
@@ -105,7 +105,7 @@ class Mage_Catalog_Model_Product_Status extends Mage_Core_Model_Abstract
      */
     public function addSaleableFilterToCollection(Mage_Eav_Model_Entity_Collection_Abstract $collection)
     {
-        //$collection->addAttributeToFilter('status', array('in'=>$this->getSaleableStatusIds()));
+        $collection->addAttributeToFilter('status', array('in'=>$this->getSaleableStatusIds()));
         return $this;
     }
 

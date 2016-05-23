@@ -35,7 +35,7 @@
 }
 body {
 	font-family: Lato, Lato Regular, Lato Bold, 'Lato Regular2', Lato Regular2, Caduceus;
-/*	font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; */
+	/*font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif; */
 }
 .header-primary {
 	background: #fff;
@@ -1698,7 +1698,6 @@ a.secured_icon {
 }
 .the-cart-form .input-text.qty {
 	height: 26px;
-	width: 31px !important;
 }
 #checkoutSteps {
 	font-size: 14px;
@@ -2184,7 +2183,8 @@ p.welcome-msg {
 	margin-top: 5px;
 }
 .the-cart-form .input-text.qty {
-	width: 63px !important;
+    min-width: 80px !important;
+    max-width: 100px !important;
 }
 .checkout-review-submit .form-list textarea {
 	width: 100%;
@@ -3434,19 +3434,19 @@ div.home_latestpost .home_blog_li_ div_month {
 }
 .header-top
 {
-	padding-top:10px;
-	padding-bottom:10px;
+	padding-top:3px;
+	padding-bottom:3px;
 }
 
 @media only screen and (min-width: 769px) {
 
 
-.cms-index-index .why-shop-at-stripedsocks ul {
+.why-shop-at-stripedsocks ul {
     float: left;
     width: 50%;
     font-size: 12px;
 }
-.cms-index-index .why-shop-at-stripedsocks ul li a {
+.why-shop-at-stripedsocks ul li a {
     text-decoration:underline;
 }
 }
@@ -3479,9 +3479,69 @@ div.home_latestpost .home_blog_li_ div_month {
 .mini-cart.dropdown .mini-cart-content.return-cart-block {
     padding: 10px 25px;
 }
-/*
+
 #opc-login h3, #subscribe-form label, .accordion .heading, .block .block-title, .block-layered-nav .block-subtitle--filter, .box-account .box-head h2, .caption .heading, .feature .heading, .footer .heading, .gen-tabs .tabs a, .main-font, .mobnav-trigger, .nav-mobile .nav-item.level0>a, .nav-mobile .nav-item.level1>a, .nav-mobile .nav-item.level2>a, .nav-regular .nav-item.level0>a, .nav-regular .nav-submenu--mega>li>a, .order-items .order-comments h2, .order-items h2.sub-title, .order-items h2.table-caption, .product-view .box-reviews dt .heading, .products-grid .product-name, .products-list .product-name, .section-title, h1, h2, h3, h3.product-name, h4, h5
 {
-	font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+	/*font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;*/
 }
-*/
+
+.topbanner
+{
+	 background: url(images/header-banner.png) left top no-repeat;
+	     height: 55px;
+		     background-size: 100%;
+}
+.instock-img2 a {
+    color: #0086d4;
+    text-decoration: none;
+}
+	.instock-img2 {
+    text-align: left;
+    height: 48px;
+    font-size: 25px;
+    color: #0086d4;
+    margin-left: 0px;
+    left: 21.8%;
+    padding-top: 0;
+    line-height: 39px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    position: relative;
+}
+
+@media only screen and (min-width: 769px){
+.catalog-product-view .price-right {
+    width: 46%;
+	    line-height: 1px;
+}
+}
+@media only screen and (max-width: 1024px){
+  .instock-img2 {
+    font-size: 26px;
+    line-height: 32px;
+	 letter-spacing: 2px;
+}
+}
+@media only screen and (max-width: 900px){
+  .instock-img2 {
+    font-size: 20px;
+    line-height: 29px;
+}
+}
+.catalog-product-view .price-box .price-right .minimal-price {
+  color: #0085d3;
+    font-family: "Open Sans";
+    font-weight: 700;
+    font-size: 16px;
+    float: right;
+}
+.catalog-product-view .owl-item .price-box .regular-price{
+    padding-top: 0;
+    margin-top: 0;
+        line-height: 1px;
+}
+
+.catalog-product-view .price-box .price-right p .regular-price span {
+    line-height: 12px;
+	font-size: 16px;
+}
