@@ -55,7 +55,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
 <div class="price-box">   
     
         <div class="sku sku-<?php echo $_product->getId(); ?>" style="font-family:Lato Regular">               
-			<?php echo $_product->getProductPage(); echo "ID: ".Mage::getModel('catalog/product')->load($_product->getId())->getSku();?>
+			<?php echo $_product->getProductPage(); echo "ID: ".$_product->getSku();?>
         </div>	
 <?php if (!$_product->isGrouped()): ?>
     <?php $_weeeTaxAmount = $_weeeHelper->getAmountForDisplay($_product); ?>
@@ -70,7 +70,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
     <!--div class="price-box">   
     
         <div class="sku sku-<?php echo $_product->getId(); ?>" style="font-family:Lato Regular">               
-			<?php echo $_product->getProductPage(); echo "ID: ".Mage::getModel('catalog/product')->load($_product->getId())->getSku();?>
+			<?php echo $_product->getProductPage(); echo "ID: ".$_product->getSku();?>
         </div-->	
     <?php $_convertedPrice = $_store->roundPrice($_store->convertPrice($_product->getPrice())); ?>
     <?php $_price = $_taxHelper->getPrice($_product, $_convertedPrice); ?>

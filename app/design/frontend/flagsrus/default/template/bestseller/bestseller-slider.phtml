@@ -5,13 +5,13 @@
  * Featured Products Slider
 
  */
-
+Varien_Profiler::start('LabelForCodeFragmentToProfile');
 ?>
 
 <?php
 
     $bestseller_collection = $this->getBestsellerProduct();//$this->getLoadedProductCollection();
-    foreach($bestseller_collection as $collection){
+   /*  foreach($bestseller_collection as $collection){
 
         $pr_result = $collection->getEntityId();
         $_product = $this->getProducts($pr_result); 
@@ -44,11 +44,11 @@
         }
 
     }
-    $_productCollection = $result;   
+    $_productCollection = $result;    */
 	//echo "<pre>";print_r($_productCollection);
 ?>
 
-<?php if ($_productCollection): ?>
+<?php if ($bestseller_collection): ?>
 
 <?php
 
@@ -364,26 +364,32 @@
 
 
 <div class="page-title">
-<h3 class="section-title">Best Sellers<?php //echo $this->getBlockName(); ?></h3>
+<h3 class="section-title">Best Sellers</h3>
 </div>
 
 <div class="itemslider-wrapper slider-arrows1 slider-arrows1-pos-top-right slider-pagination1">
 
     <div id="<?php echo $sliderId; ?>" class="products-grid category-products-grid itemgrid itemgrid-adaptive centered hover-effect equal-height itemslider<?php if($sliderClasses) echo $sliderClasses; ?> products-grid<?php if($gridClasses) echo $gridClasses; ?>">
-    <?php $productcount = count(array_filter($_productCollection)); ?>
-    <?php foreach ($_productCollection as $_product): 
+    <?php //$productcount = count(array_filter($_productCollection)); ?>
+    <?php foreach ($bestseller_collection as $_product): 
 	if($_product){
 	?>
-
-        <div class="item" id="<?php echo $_product->getId();?>">
+		<?php 
+			$productid = $_product->getId();
+			$producturl = $_product->getProductUrl();
+			$imglabel = $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true); 
+			$product_img = $helpImg->getImg ($_product, $imgWidth, $imgHeight, 'small_image'); 
+			$iconlabel = $_product->getIconlabel(); 
+			$productname = $_product->getName(); 
+			$productsku =  $_product->getSku(); ?>
+        <div class="item" id="<?php echo $productid;?>">
 
         
 
             <div class="product-image-wrapper" style="max-width:<?php echo $imgWidth; ?>px;">
 
             
-
-                <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true); ?>" class="product-image">
+                <a href="<?php echo $producturl ?>" title="<?php echo $imglabel; ?>" class="product-image">
 
                     
 
@@ -391,18 +397,18 @@
 
 						<?php if($productcount>4): ?>
 							<img class="owl-lazy"
-								 data-src="<?php echo $helpImg->getImg ($_product, $imgWidth, $imgHeight, 'small_image'); ?>"
-								 alt="<?php echo $this->stripTags ($this->getImageLabel ($_product, 'small_image'), NULL, TRUE); ?>"/>
+								 data-src="<?php echo $product_img; ?>"
+								 alt="<?php echo $imglabel; ?>"/>
 						<?php else: ?>
 							<img class="lazy"
-								 data-original="<?php echo $helpImg->getImg ($_product, $imgWidth, $imgHeight, 'small_image'); ?>"
+								 data-original="<?php echo $product_img; ?>"
 								 src="<?php echo $this->getSkinUrl('images/loader.gif') ?>"
-								 alt="<?php echo $this->stripTags ($this->getImageLabel ($_product, 'small_image'), NULL, TRUE); ?>"/>
+								 alt="<?php echo $imglabel; ?>"/>
 						<?php endif; ?>
 
                     <?php else: ?>
 
-                        <img src="<?php echo $helpImg->getImg($_product, $imgWidth, $imgHeight, 'small_image'); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true); ?>" />
+                        <img src="<?php echo $product_img; ?>" alt="<?php echo $imglabel; ?>" />
 
                     <?php endif; ?>
 
@@ -417,9 +423,9 @@
 
 
 					<?php //echo $helpLabels->getLabels ($_product); //Product labels ?>
-					<?php if($_product->getIconlabel()!=''): ?>
-							<!--span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span-->
-							<span class="tag-label-<?php echo strtolower(str_replace(' ', '', $_product->getIconlabel())); ?>"></span>
+					<?php if($iconlabel!=''): ?>
+							<!--span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $iconlabel; ?></span></span-->
+							<span class="tag-label-<?php echo strtolower(str_replace(' ', '', $iconlabel)); ?>"></span>
 					<?php endif; ?>
 
                 </a>
@@ -462,15 +468,13 @@
 
             </div> <!-- end: product-image-wrapper -->
 
+            <h3 class="product-name"><a href="<?php echo $producturl ?>" title="<?php echo $this->stripTags($productname, null, true) ?>"><?php echo $productname ?></a></h3>
 
-
-            <h3 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h3>
-
-            <?php if($_product->getRatingSummary()): ?>
+            <?php /*if($_product->getRatingSummary()): ?>
 
                 <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
 
-            <?php endif; ?>
+            <?php endif;*/ ?>
 
             <?php echo $this->getPriceHtml($_product, true, $hash) ?>
 
@@ -484,22 +488,41 @@
 			
                  <!--=================== by brt =================-->
                 <?php
-                $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+                $stock = Mage::getSingleton('cataloginventory/stock_item')->loadByProduct($_product);
                 $productCount=intval($stock->getQty());
                 ?>
                 <!--=================== by brt ends =================-->
-
-<!--                <input type="text" class="input-text qty" title="Qty" value="0" maxlength="12" id="qty" name="qty">-->
                   <?php $cartUrl = Mage::helper('checkout/cart')->getAddUrl($_product); ?>
-					<form action="<?php echo $cartUrl; ?>" method="post" class="product_addtocart_form product_addtocart_form_<?php echo $_product->getSku(); ?>" name="product_addtocart_form<?php echo $_product->getId(); ?>" id="product_addtocart_form<?php echo $_product->getId(); ?>"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>                            <?php echo $this->getBlockHtml('formkey'); ?>                             <!--input type="hidden" name="qty" value="1"-->                            <input type="hidden" id="<?php echo $_product->getSku()."-addtourl"; ?>" name="addtourl" value="<?php echo $cartUrl;?>">                            <input type="hidden" name="product" value="<?php echo $_product->getId();?>">                            <input type="hidden" name="related_product" value="">                            <input type="hidden" name="return_url" value="">                                <div class="<?php echo $_product->getSku()."-addto"; ?>">									<select class="input-text qty" name="qty" id="qty">										<?php $i = 1 ?>										<?php do { ?>											<option value="<?php echo $i?>">												<?php echo $i?>												<?php $i++ ?>											</option>										<?php } while ($i <= $productCount) ?>									</select>									<!--=================== by brt ends =================-->																		   <!--button type="button" title="<?php echo $this->__ ('Add to Cart') ?>"											class="button btn-cart"											onclick="setLocation('<?php echo $this->getAddToCartUrl ($_product) ?>')"><span><span><?php echo $this->__ ('Add to Cart') ?></span></span>										</button-->									<button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart <?php echo $_product->getSku()."-del"; ?>" id="" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><span><i class="icon ic ic-bag"></i><span><?php echo $this->__('Add to Cart') ?></span></span></button>								</div>								<div class="<?php echo $_product->getSku()."-addremove"; ?>" style="display:none;">									<button type="button" title="<?php echo $this->__('Added/Remove') ?>" class="button btn-cart  add-remove" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><span><span><?php echo $this->__('Added/Remove') ?></span></span></button>								</div>                                </form>
+					<form action="<?php echo $cartUrl; ?>" method="post" class="product_addtocart_form product_addtocart_form_<?php echo $productsku; ?>" name="product_addtocart_form<?php echo $productid; ?>" id="product_addtocart_form<?php echo $productid; ?>"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+						<?php echo $this->getBlockHtml('formkey'); ?>
+						<input type="hidden" id="<?php echo $productsku."-addtourl"; ?>" name="addtourl" value="<?php echo $cartUrl;?>">
+						<input type="hidden" name="product" value="<?php echo $productid;?>">
+						<input type="hidden" name="related_product" value="">
+						<input type="hidden" name="return_url" value="">
+						<div class="<?php echo $productsku."-addto"; ?>">
+							<select class="input-text qty" name="qty" id="qty">
+							<?php $i = 1 ?>
+							<?php do { ?>
+								<option value="<?php echo $i?>">
+									<?php echo $i ?>
+									<?php $i++ ?>
+								</option>
+							<?php } while ($i <= $productCount) ?>
+							</select>
+							<button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart <?php echo $productsku."-del"; ?>" id="" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $productid; ?>);"><span><i class="icon ic ic-bag"></i><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+						</div>
+						<div class="<?php echo $productsku."-addremove"; ?>" style="display:none;">
+							<button type="button" title="<?php echo $this->__('Added/Remove') ?>" class="button btn-cart  add-remove" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $productid; ?>);"><span><span><?php echo $this->__('Added/Remove') ?></span></span></button>
+						</div>
+					</form>
                     <script type="text/javascript">
                             //<![CDATA[
-                            var productAddToCartForm<?php echo $_product->getId(); ?> = new VarienForm('product_addtocart_form<?php echo $_product->getId(); ?>');
+                            var productAddToCartForm<?php echo $productid; ?> = new VarienForm('product_addtocart_form<?php echo $productid; ?>');
                             //]]>
                     </script>
                     <?php elseif($_product->getStockItem() && $_product->getStockItem()->getIsInStock()): ?>
 
-                        <a title="<?php echo $this->__('See Options') ?>" style="float:none" class="button btn-cart" href="<?php echo $_product->getProductUrl() ?>"><?php echo $this->__('See Options') ?></a>
+                        <a title="<?php echo $this->__('See Options') ?>" style="float:none" class="button btn-cart" href="<?php echo $producturl ?>"><?php echo $this->__('See Options') ?></a>
 
                     <?php else: ?>
 
@@ -534,17 +557,17 @@
             </div>
             
             <div class="clearer"></div>    
-                <?php $getId = $_product->getId();?>
-               <?php $getIdcls = "rating-and-qty-block".$_product->getId();?>
+                <?php //$getId = $productid;?>
+               <?php $getIdcls = "rating-and-qty-block".$productid;?>
                <div class="rating-and-qty-block  <?php echo $getIdcls;?>"><!-- start: rating-and-qty-block-->                    
                    <div class="ratings"> <!-- start: ratings -->                 
-                    	<div class="star_container <?php echo Mage::getModel('catalog/product')->load($_product->getId())->getSku();?>"></div>
+                    	<div class="star_container <?php echo $productsku;?>"></div>
                    </div><!-- end: ratings -->                    
                        <?php  
-                           $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product); ?>
-						<?php if($stock->getQty()>0): ?>
+                           //$stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product); ?>
+						<?php if($productCount>0): ?>
 							<div class="qty-in-stock"><!-- start: Qty in stock -->
-								<? echo $this->__("Qty in Stock: ").intval($stock->getQty()); ?>
+								<? echo $this->__("Qty in Stock: ").intval($productCount); ?>
 						   </div><!-- end: Qty in stock -->                   
 						<?php endif; ?>               
                    
@@ -701,3 +724,4 @@ if (jQuery(window).width() > 768)
 }
 });
 </script>
+<?php Varien_Profiler::stop('LabelForCodeFragmentToProfile'); ?>

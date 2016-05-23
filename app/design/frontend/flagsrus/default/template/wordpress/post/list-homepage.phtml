@@ -8,11 +8,19 @@
 ?>
 <?php //$posts = $this->getPostCollection();
 $posts = Mage::getResourceModel('wordpress/post_collection');
-/* print_r($posts->getData());
-exit; */
+$posts->addFieldToFilter('main_table.post_content',array('neq'=>''));
+$posts->addFieldToFilter('main_table.post_type',array('eq'=>'post'));
+/* $posts->getSelect()->joinLeft(array('postmeta' => 'wp_postmeta'), 'main_table.id = postmeta.post_id and postmeta.meta_key="_thumbnail_id" and postmeta.meta_value!=""', '');
+$posts->getSelect()->joinLeft(array('postimage' => 'wp_posts'), 'postimage.id = postmeta.meta_value and postimage.post_type="attachment" and postimage.post_mime_type="image/png" and postimage.post_mime_type!=""', ''); */
+$posts->getSelect()->limit(4);
+/* echo $posts->getSelect()->__toString();exit;*/
+
+/* echo $posts->getSize()." test";exit;
+ print_r($posts->getData());
+exit;  */
 $display_no_of_posts=0;
 ?>
-<?php if (count($posts) > 0): ?>
+<?php if ($posts->getSize() > 0): ?>
 <script type="text/javascript">// <![CDATA[
 //&lt;![CDATA[
 		jQuery(function ($) {

@@ -36,19 +36,21 @@
 $layer                  = Mage::getSingleton ('catalog/layer');
 $_category              = $layer->getCurrentCategory ();
 $currentCategoryId      = $_category->getId ();
-$children               = Mage::getModel ('catalog/category')->getCategories ($currentCategoryId);
-$count                  = count ($children);
+//$children               = Mage::getSingleton ('catalog/category')->getCategories ($currentCategoryId);
+//$count                  = count ($children);
 $baseUrl                = Mage::getBaseUrl (Mage_Core_Model_Store::URL_TYPE_WEB);
 $baseMediaUrl           = Mage::getBaseUrl (Mage_Core_Model_Store::URL_TYPE_MEDIA);
 $numberCategoriesPerRow = 4;
 $imageCategoriesHeight  = 120;
 $imageCategoriesWidth   = 120;
-$_subcategories = $_category->getChildrenCategories ();
-
+if($currentCategoryId)
+{
+	$_subcategories = $_category->getChildrenCategories ();
+}
 $appliedFilters = Mage::getSingleton('catalog/layer')->getState()->getFilters(); 
 //echo "currentCategoryId->".$currentCategoryId;
 ?>
-<?php if (count ($_subcategories) > 0 && ($currentCategoryId != 146)): ?>
+<?php if ($_subcategories->getSize() > 0 && ($currentCategoryId != 146)): ?>
 <?php if(is_array($appliedFilters) && count($appliedFilters)==0):
 ?>
     <div class="page-title featured-category-page-title">
@@ -58,10 +60,10 @@ $appliedFilters = Mage::getSingleton('catalog/layer')->getState()->getFilters();
         <?php $i = 0; ?>
         <ul class="row-item">
             <?php
-            foreach ($children as $category) {
+            foreach ($_subcategories as $category) {
                 $categoryID    = $category->getId ();//id
-                $imageUrl      = Mage::getModel ('catalog/category')->load ($categoryID)->getImageUrl ();// base path
-                $category      = Mage::getModel ('catalog/category')->load ($categoryID);
+                //$imageUrl      = Mage::getSingleton ('catalog/category')->load ($categoryID)->getImageUrl ();// base path
+                $category      = Mage::getSingleton ('catalog/category')->load ($categoryID);
                 $categoryImage = $category->getImage (); // image name
                 $basePath      = Mage::getBaseDir (Mage_Core_Model_Store::URL_TYPE_MEDIA) . '/catalog/category/' . $category->getImage ();
                 //$imageUrl = $baseMediaUrl.'/catalog/category/'.$category->getImage();
@@ -98,7 +100,7 @@ $appliedFilters = Mage::getSingleton('catalog/layer')->getState()->getFilters();
 echo $sa_reviews; ?>
 <?php
 $_productCollection = $this->getLoadedProductCollection ();
-$_collectionSize = $_productCollection->count ();
+$_collectionSize = $_productCollection->getSize();
 ?>
 <?php if ($_collectionSize && $tmpHtml = $this->getChildHtml ('block_category_above_collection')): ?>
     <div class="block_category_above_collection std"><?php echo $tmpHtml; ?></div>
@@ -212,34 +214,46 @@ $_collectionSize = $_productCollection->count ();
                         </div>
                         <div class="right-column grid12-3 mobile-grid-half">
                             <?php echo $this->getPriceHtml ($_product, TRUE) ?>
-                            <?php if (!$_product->canConfigure () && $_product->isSaleable ()): ?>
+                            <?php if (!$_product->canConfigure () && $_product->isSaleable ()): 
+						$stock = Mage::getSingleton('cataloginventory/stock_item')->loadByProduct($_product);
+                        $productCount=intval($stock->getQty());
+						$cartUrl = Mage::helper('checkout/cart')->getAddUrl($_product);
+							?>
                                 <!--=================== by brt =================-->
-                                <?php
-                                $stock        = Mage::getModel ('cataloginventory/stock_item')
-                                    ->loadByProduct ($_product);
-                                $productCount = intval ($stock->getQty ());
-                                ?>
-                                <!--=================== by brt ends =================-->
-                                <!--                <input type="text" class="input-text qty" title="Qty" value="0" maxlength="12" id="qty" name="qty">-->
-                                <?php if ($productCount > 0) { ?>
-                                    <!--=================== by brt =================-->
-                                    <select class="input-text qty" name="qty" id="qty">
-                                        <?php $i = 1 ?>
-                                        <?php do { ?>
-                                            <option value="<?php echo $i ?>">
-                                                <?php echo $i ?>
-                                                <?php $i++ ?>
-                                            </option>
-                                        <?php } while ($i <= $productCount) ?>
-                                    </select>
-                                    <!--=================== by brt ends =================-->
-                                <?php } ?>
-                                
-                                    <button type="button" title="<?php echo $this->__ ('Add to Cart') ?>"
-                                            class="button btn-cart"
-                                            onclick="setLocation('<?php echo $this->getAddToCartUrl ($_product) ?>')">
-                                        <span><span><?php echo $this->__ ('Add to Cart') ?></span></span></button>
-                                
+ 							<form action="<?php echo $cartUrl; ?>" method="post" class="product_addtocart_form product_addtocart_form_<?php echo $_product->getSku(); ?>" name="product_addtocart_form<?php echo $_product->getId(); ?>" id="product_addtocart_form<?php echo $_product->getId(); ?>"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+                            <?php echo $this->getBlockHtml('formkey'); ?>
+                             <!--input type="hidden" name="qty" value="1"-->
+                            <input type="hidden" id="<?php echo $_product->getSku()."-addtourl"; ?>" name="addtourl" value="<?php echo $cartUrl;?>">
+                            <input type="hidden" name="product" value="<?php echo $_product->getId();?>">
+                            <input type="hidden" name="related_product" value="">
+                            <input type="hidden" name="return_url" value="">
+                                <div class="<?php echo $_product->getSku()."-addto"; ?>">
+									<select class="input-text qty" name="qty" id="qty">
+										<?php $i = 1 ?>
+										<?php do { ?>
+											<option value="<?php echo $i?>">
+												<?php echo $i?>
+												<?php $i++ ?>
+											</option>
+										<?php } while ($i <= $productCount) ?>
+									</select>
+									<!--=================== by brt ends =================-->
+									
+									   <!--button type="button" title="<?php echo $this->__ ('Add to Cart') ?>"
+											class="button btn-cart"
+											onclick="setLocation('<?php echo $this->getAddToCartUrl ($_product) ?>')"><span><span><?php echo $this->__ ('Add to Cart') ?></span></span>
+										</button-->
+									<button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart <?php echo $_product->getSku()."-del"; ?>" id="" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><span><i class="icon ic ic-bag"></i><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+								</div>
+								<div class="<?php echo $_product->getSku()."-addremove"; ?>" style="display:none;">
+									<button type="button" title="<?php echo $this->__('Added/Remove') ?>" class="button btn-cart add-remove" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><span><span><?php echo $this->__('Added/Remove') ?></span></span></button>
+								</div>
+                                </form>
+						<script type="text/javascript">
+                                //<![CDATA[
+                                var productAddToCartForm<?php echo $_product->getId(); ?> = new VarienForm('product_addtocart_form<?php echo $_product->getId(); ?>');
+                                //]]>
+						</script>                               
                             <?php elseif ($_product->getStockItem () && $_product->getStockItem ()->getIsInStock ()): ?>
 								<?php if($_product->canConfigure()): ?>
 									<a title="<?php echo $this->__('See Options') ?>" class="button btn-cart" href="<?php echo $_product->getProductUrl() ?>"><?php echo $this->__('See Options') ?></a>
@@ -389,7 +403,7 @@ $_collectionSize = $_productCollection->count ();
                         ?>
                     <!--=================== by brt ends =================-->
                 <?php
-                        $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+                        $stock = Mage::getSingleton('cataloginventory/stock_item')->loadByProduct($_product);
                         $productCount=intval($stock->getQty());
 						$cartUrl = Mage::helper('checkout/cart')->getAddUrl($_product);
                 ?>
@@ -397,7 +411,7 @@ $_collectionSize = $_productCollection->count ();
                                         <!--===================== by brt ========================-->
                 <?php
                 if($_product->isConfigurable()){
-                  /* //$product = Mage::getModel("catalog/product")->load($_product->getId());
+                  /* //$product = Mage::getSingleton("catalog/product")->load($_product->getId());
                 //$attVal = $_product->getTypeInstance(TRUE)->getConfigurableAttributesAsArray($_product);
                 $optStr = "";
 				Mage::unregister('product');
@@ -524,17 +538,16 @@ $_collectionSize = $_productCollection->count ();
                         </div>
                         <!-- end: actions -->
                         <?php $getId = $_product->getId (); ?>
-                        <?php $getIdcls = "rating-and-qty-block" . $_product->getId (); ?>
+                        <?php $getIdcls = "rating-and-qty-block" . $getId; ?>
                         <div class="rating-and-qty-block  <?php echo $getIdcls; ?>"><!-- start: rating-and-qty-block-->
                             <div class="ratings"> <!-- start: ratings -->
-                                <div class="star_container <?php echo Mage::getModel ('catalog/product')
-                                    ->load ($_product->getId ())->getSku (); ?>"></div>
+                                <div class="star_container <?php echo $_product->getSku(); ?>"></div>
                             </div>
                             <!-- end: ratings -->
-							<?php if(!$_product->canConfigure()): ?>
+							<?php if(!$_product->canConfigure() && $_product->isSaleable()): ?>
                             <div class="qty-in-stock qty-<?php echo $_product->getId() ?>"><!-- start: Qty in stock -->
                                 <?php
-                                $stock = Mage::getModel ('cataloginventory/stock_item')->loadByProduct ($_product);
+                                //$stock = Mage::getSingleton ('cataloginventory/stock_item')->loadByProduct ($_product);
                                 echo $this->__ ("Qty in Stock: ") . intval ($stock->getQty ());
                                 ?>
                             </div>

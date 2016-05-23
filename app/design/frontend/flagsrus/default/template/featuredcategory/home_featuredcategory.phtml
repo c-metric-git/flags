@@ -50,12 +50,11 @@
                 <?php foreach($categories as $category):?>
                     <?php
 
-                        $categoryID = $category->getId();//id
-                        $imageUrl =  Mage::getModel('catalog/category')->load($categoryID)->getImageUrl();// base path
-                        $category = Mage::getModel('catalog/category')->load($categoryID);
+                        //$categoryID = $category->getId();//id
                         $categoryImage = $category->getImage(); // image name
-                        $basePath = Mage::getBaseDir(Mage_Core_Model_Store::URL_TYPE_MEDIA).'/catalog/category/'.$category->getImage();
+                        $basePath = Mage::getBaseDir(Mage_Core_Model_Store::URL_TYPE_MEDIA).'/catalog/category/'.$categoryImage;
                         $newImageCategoriesResized = Mage::helper('featuredcategory')->resizeImgCategories($categoryImage, $basePath, $imageCategoriesWidth, $imageCategoriesHeight );
+						$categoryname = $category->getName()
                     ?>
                         <?php if($category->featured_category):?>
                             <?php /*if (($i % ($numberCategoriesPerRow)) == 0): ?>
@@ -63,12 +62,12 @@
                             <?php endif */?>
                                 <div class="item<?php if(($i-1)%$numberCategoriesPerRow==0): ?> first<?php elseif($i%$numberCategoriesPerRow==0): ?> last<?php endif; ?>">
                                     <div class="featuredcategory-image">
-										<a title="<?php echo $category->getName() ?>" alt="<?php echo $category->getName() ?>" href="<?php echo $category->getUrl() ?>">
-                                        <!--img class="owl-lazy" data-src-retina="<?php echo $this->getSkinUrl('images/loader.gif') ?>" data-src="<?php if($category->getImage()) echo $newImageCategoriesResized?>" height="<?php echo $imageCategoriesHeight?>" width="<?php echo $imageCategoriesWidth?>" alt="<?php echo $category->getName() ?>"/-->
-                                        <img class="owl-lazy" data-src="<?php if($category->getImage()) echo $newImageCategoriesResized?>" height="<?php echo $imageCategoriesHeight?>" width="<?php echo $imageCategoriesWidth?>" alt="<?php echo $category->getName() ?>"/>
+										<a title="<?php echo $categoryname ?>" alt="<?php echo $categoryname ?>" href="<?php echo $category->getUrl() ?>">
+                                        <!--img class="owl-lazy" data-src-retina="<?php echo $this->getSkinUrl('images/loader.gif') ?>" data-src="<?php if($categoryImage) echo $newImageCategoriesResized?>" height="<?php echo $imageCategoriesHeight?>" width="<?php echo $imageCategoriesWidth?>" alt="<?php echo $categoryname ?>"/-->
+                                        <img class="owl-lazy" data-src="<?php if($categoryImage) echo $newImageCategoriesResized?>" height="<?php echo $imageCategoriesHeight?>" width="<?php echo $imageCategoriesWidth?>" alt="<?php echo $categoryname ?>"/>
 										</a>
 									</div>
-									<div class="featuredcategory-name" style="width:<?php echo $imageCategoriesWidth?>px"><h5><a title="<?php echo $category->getName() ?>" alt="<?php echo $category->getName() ?>" href="<?php echo $category->getUrl() ?>" target="_blank"><?php echo $category->getName() ?></a></h5></div>
+									<div class="featuredcategory-name" style="width:<?php echo $imageCategoriesWidth?>px"><h5><a title="<?php echo $categoryname ?>" alt="<?php echo $categoryname ?>" href="<?php echo $category->getUrl() ?>" target="_blank"><?php echo $categoryname ?></a></h5></div>
                                 </div>
                             <?php $i++?>
                             <?php /*if ((($i % ($numberCategoriesPerRow)) == 0)): ?>

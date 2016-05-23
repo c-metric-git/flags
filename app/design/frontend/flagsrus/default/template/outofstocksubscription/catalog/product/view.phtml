@@ -112,8 +112,12 @@
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
 <div class="product-view nested-container" <?php if ($useRichSnippets) echo $helperSnippets->getProductItemscope(); ?>>
     <?php $_storeId = Mage::app()->getStore()->getId(); ?>
-    <?php $_isActive = Mage::getStoreConfig('outofstocksubscription/mail/active', $_storeId); ?>
-    <?php if(!$_product->isSaleable() && $_isActive): ?>
+    <?php $_isActive = Mage::getStoreConfig('outofstocksubscription/mail/active', $_storeId);
+		  $is_salable = $_product->isSaleable();
+		  $is_grouped = $_product->isGrouped();
+		$iconlabel = $_product->getIconlabel(); 
+	?>
+    <?php if(!$is_salable && $_isActive): ?>
         <?php $_url = $this->getUrl('outofstocksubscription') ?>
     <?php else: ?>
         <?php $_url = $this->getSubmitUrl($_product); ?>
@@ -126,9 +130,9 @@
 		</div>
 		<div class="product-img-column <?php echo $grid['imgCol']; ?>">
 			<?php echo $this->getChildHtml('media') ?>
-			<?php if($_product->getIconlabel()!=''): ?>
-				<!--span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $_product->getIconlabel(); ?></span></span-->
-				<span class="tag-label-<?php echo strtolower(str_replace(' ','',$_product->getIconlabel())); ?>"></span>
+			<?php if($iconlabel!=''): ?>
+					<!--span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $iconlabel; ?></span></span-->
+					<span class="tag-label-<?php echo strtolower(str_replace(' ', '', $iconlabel)); ?>"></span>
 			<?php endif; ?>
 			<?php //echo $this->helper('ultimo/labels')->getLabels($_product); //Product labels ?>
 			<?php echo $this->getChildHtml('container_product_image_1'); ?>
@@ -156,7 +160,7 @@
 				<?php 
 				echo $this->__("Product Id: ");?>
 	            <span class="sku-val">
-				<?php echo $_product->getSku();?>
+				<?php echo $product_sku;?>
 	            </span>
 	            </div>
 	         </div>
@@ -170,29 +174,28 @@
 		    {
 		    	$grouped_simpleitem_min_qty='null';
 		    }   
-     
          ?>
-	      <?php if(!$_product->isSaleable() && $_isActive && !$_product->isGrouped()): ?>   
+	      <?php if(!$is_salable && $_isActive && !$is_grouped): ?>   
 	          <div class="col-sm-4" id="product_detail_stock_lable" style="padding-top:10px"> 	
                <strong><?php echo $this->__('Out of Stock') ?></strong>
 	         </div>     
 	      <?php  endif; ?>  
-	       <?php if($_product->isGrouped() && $grouped_simpleitem_min_qty == 0): ?>   
+	       <?php if($is_grouped && $grouped_simpleitem_min_qty == 0): ?>   
 	          <div class="col-sm-4" id="product_detail_stock_lable" style="padding-top:10px"> 	
                <strong><?php echo $this->__('Out of Stock') ?></strong>
 	         </div>     
 	      <?php  endif; ?>   
 	     </div>   
-		<?php if($_product->isSaleable() && !$_product->isGrouped() ): ?>			
+		<?php if($is_salable && !$is_grouped ): ?>			
 			<div style="display:inline-block">
 				<?php 
-				   $stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product);
+				   $stock = Mage::getSingleton('cataloginventory/stock_item')->loadByProduct($_product);
 				?>
 				<span class="instock-qty"><?php if($stock->getQty()>0): ?><?php echo $this->__("Quantity in Stock: ");echo intval($stock->getQty()); ?><?php else: ?>&nbsp;<?php endif; ?></span>
 				&nbsp;<span class="expected-qty">&nbsp;</span>
             </div>
 		<?php endif; ?>
-		<?php if($_product->isGrouped()): ?>
+		<?php if($is_grouped): ?>
 	
 			<div style="display:inline-block">
 			<span class="instock-qty">
@@ -209,7 +212,7 @@
             <!--Want more than we have? <a>Click Here</a>-->
 			<?php echo $this->getChildHtml('container_product_primary_1'); ?>
 			<?php if (isset($p['primCol_1'])) echo $p['primCol_1']; ?>
-			<?php if ($sku = $_product->getSku()): ?>
+			<?php if ($sku = $product_sku): ?>
 				<?php if ($theme->getCfg('product_page/sku')): ?>
 					<div class="sku">
 						<span class="label"><?php echo $this->__('SKU'); ?>: </span>
@@ -224,24 +227,24 @@
 			<?php endif; ?>
 			<?php //end: offers ?>
 			<?php if (!$this->hasOptions()): //add to cart when no options (e.g. simple products) ?>
-				<?php if($_product->isSaleable() && !$_product->isGrouped() ): ?>
+				<?php if($is_salable && !$is_grouped ): ?>
 					<div class="add-to-box">
 						<?php echo $this->getChildHtml('addtocart') ?>
 					</div>
 				<?php endif; ?>
-				<?php if($_product->isGrouped() && $grouped_simpleitem_min_qty > 0 ): ?>
+				<?php if($is_grouped && $grouped_simpleitem_min_qty > 0 ): ?>
 					<div class="add-to-box">
 						<?php echo $this->getChildHtml('addtocart') ?>
 					</div>
 				<?php endif; ?>
 				<?php echo $this->getChildHtml('extra_buttons') ?>
 			<?php endif; ?>
-			<?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+			<?php if ($is_salable && $this->hasOptions()): ?>
 				<?php if ($container1_html = $this->getChildChildHtml('container1', '', true, true)): ?>
 					<div class="container1-wrapper"><?php echo $container1_html; ?></div>
 				<?php endif; ?>
 			<?php endif;?>	
-		<?php if( !$_product->isSaleable() && $_isActive && !$_product->isGrouped()): ?>
+		<?php if( !$is_salable && $_isActive && !$is_grouped): ?>
                 <div class="product-options">
                     <table width="100%">
                                              
@@ -269,7 +272,7 @@
                     </table>
                 </div>
             <?php endif; ?>	
-            <?php if( $_product->isGrouped()  &&  $grouped_simpleitem_min_qty == 0  ): ?>
+            <?php if( $is_grouped  &&  $grouped_simpleitem_min_qty == 0  ): ?>
                 <div class="product-options">
                     <table width="100%">
                                              
@@ -320,7 +323,7 @@
 				</div>
 			</div> <!-- end: product-secondary-column -->
 		<?php endif; ?>
-		<?php if ($_product->isSaleable() && $this->hasOptions()): ?>
+		<?php if ($is_salable && $this->hasOptions()): ?>
 			<?php if ($container2_html = $this->getChildChildHtml('container2', '', true, true)): ?>
 				<div class="box-additional <?php echo $grid['cont2Col']; ?>">
 					<div class="container2-wrapper"><?php echo $container2_html; ?></div>
