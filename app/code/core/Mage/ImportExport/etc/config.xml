@@ -96,12 +96,14 @@
                 <configurable>importexport/import_entity_product_type_configurable</configurable>
                 <virtual>importexport/import_entity_product_type_simple</virtual>
                 <grouped>importexport/import_entity_product_type_grouped</grouped>
+                <bundle>importexport/import_entity_product_type_bundle</bundle> 
             </import_product_types>
             <export_product_types>
                 <simple>importexport/export_entity_product_type_simple</simple>
                 <configurable>importexport/export_entity_product_type_configurable</configurable>
                 <virtual>importexport/export_entity_product_type_simple</virtual>
                 <grouped>importexport/export_entity_product_type_grouped</grouped>
+                <bundle>importexport/export_entity_product_type_bundle</bundle> 
             </export_product_types>
             <import>
                 <catalog_product>
