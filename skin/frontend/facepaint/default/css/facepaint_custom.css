@@ -233,8 +233,12 @@ input[type="radio"]{
 #credit-card-type .DI{
 	background-position:-153px -32px;
 }
-
 /* bundle product*/
 .product-options dd .qty-holder{
 	display:none;
+}
+/* social login*/
+#magestore-popup{
+	top:80px !important;
+	position: fixed !important;
 }

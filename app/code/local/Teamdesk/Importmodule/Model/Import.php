@@ -443,7 +443,7 @@ class Teamdesk_Importmodule_Model_Import extends Mage_ImportExport_Model_Abstrac
         $this->addLogComment(Mage::helper('importexport')->__('Begin data validation')); 
         $result = $this->_getEntityAdapter()
             ->setSource($this->_getSourceAdapter($sourceFile))
-            ->isDataValid(); 
+            ->isDataValid();     
         $messages = $this->getOperationResultMessages($result);   
         $this->addLogComment($messages);
         if ($result) {

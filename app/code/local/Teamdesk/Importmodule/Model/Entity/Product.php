@@ -429,7 +429,7 @@ class Teamdesk_Importmodule_Model_Entity_Product extends Teamdesk_Importmodule_M
     public function __construct()
     {
         parent::__construct();
-
+          
         $this->_initWebsites()
             ->_initStores()
             ->_initAttributeSets()

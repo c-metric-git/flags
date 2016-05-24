@@ -60,16 +60,34 @@ function showNiceXML($xml){
                                'accountID'=>CAAccountID,
                                'orderIDList'=>array($Orderid)
                       );
-                $result=$client->GetOrderFulfillmentDetailList($arrData); 
+                $result=$client->GetOrderFulfillmentDetailList($arrData);
                 if($result->GetOrderFulfillmentDetailListResult->Status == 'Success') {
-                    foreach($result->GetOrderFulfillmentDetailListResult->ResultData->OrderFulfillmentResponse->FulfillmentList->FulfillmentDetailResponse->ItemList as $item_detail_list) {
-                        $item_shipping_sku = $item_detail_list->SKU;
-                        $itemlist = array(
-                                    'FulfillmentItemSubmit' => array(
-                                        'FulfillmentItemID'=>$item_detail_list->FulfillmentItemID,
-                                        'Quantity'=>$qty_shipped[$item_shipping_sku]
-                                        ));
-                    }       
+                    $total_items_count = isset($result->GetOrderFulfillmentDetailListResult->ResultData->OrderFulfillmentResponse->FulfillmentList->FulfillmentDetailResponse->ItemList->FulfillmentItemDetailResponse)?count($result->GetOrderFulfillmentDetailListResult->ResultData->OrderFulfillmentResponse->FulfillmentList->FulfillmentDetailResponse->ItemList->FulfillmentItemDetailResponse):count($result->GetOrderFulfillmentDetailListResult->ResultData->OrderFulfillmentResponse->FulfillmentList->FulfillmentDetailResponse->ItemList);
+                    if($total_items_count==1){
+                        foreach($result->GetOrderFulfillmentDetailListResult->ResultData->OrderFulfillmentResponse->FulfillmentList->FulfillmentDetailResponse->ItemList as $item_detail_list) {
+                            $item_shipping_sku = $item_detail_list->SKU;
+                            $itemlist = array(
+                                        'FulfillmentItemSubmit' => array(
+                                            'FulfillmentItemID'=>$item_detail_list->FulfillmentItemID,
+                                            'Quantity'=>$qty_shipped[$item_shipping_sku]
+                                            ));
+                        }
+                    }
+                    else {  
+                        $i=0;  
+                        foreach($result->GetOrderFulfillmentDetailListResult->ResultData->OrderFulfillmentResponse->FulfillmentList->FulfillmentDetailResponse->ItemList->FulfillmentItemDetailResponse as $item_detail_list) {
+                            $item_shipping_sku = $item_detail_list->SKU;
+                            $itemlist['FulfillmentItemSubmit'][$i]['FulfillmentItemID'] = $item_detail_list->FulfillmentItemID;
+                            $itemlist['FulfillmentItemSubmit'][$i]['Quantity'] = $qty_shipped[$item_shipping_sku] ;
+                            $i++;
+                        } 
+                    }          
+                    if($carrier_code=='usps') {
+                        $carrier_code = "US Postal Service";
+                    } 
+                    if($shipping_method=='First Class Parcel') {
+                       $shipping_method='First-Class Mail';
+                    }   
                     $fulfillmentList[0] = array(
                                    'FulfillmentType'=> 'Ship',
                                    'FulfillmentStatus'=> 'Complete',
@@ -87,7 +105,7 @@ function showNiceXML($xml){
                                    'fulfillmentList'=>$fulfillmentList 
                           );
                      $result=$client->CreateOrderFulfillments($arrData);  
-                     if($result->CreateOrderFulfillmentsResult->Status == 'Success') {   
+                     if($result->CreateOrderFulfillmentsResult->ResultData->FulfillmentOperationResponse->Success == 'true') {   
                          $orderModel = Mage::getModel('sales/order')->loadByIncrementId($increment_id);
                            $orderModel->setChannelAdvisorTrackingUpdated("Yes")
                                 ->save();

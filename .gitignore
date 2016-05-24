@@ -1,6 +1,7 @@
 index.php
-/var/www/html/app/etc/local.xml
+app/etc/local.xml
 var/*
 media/*
 dbs/*
 includes/*
+db_backup/*

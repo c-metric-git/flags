@@ -27,6 +27,22 @@
                 <class>Teamdesk_Importmodule_Helper</class>
             </importmodule>
         </helpers> 
+      <!-- <importmodule module="importmodule">
+            <import_product_types>
+                <simple>importmodule/import_entity_product_type_simple</simple>
+                <configurable>importmodule/import_entity_product_type_configurable</configurable>
+                <virtual>importmodule/import_entity_product_type_simple</virtual>
+                <grouped>importmodule/import_entity_product_type_grouped</grouped>
+                <bundle>importmodule/import_entity_product_type_bundle</grouped>
+            </import_product_types>
+            <export_product_types>
+                <simple>importmodule/export_entity_product_type_simple</simple>
+                <configurable>importmodule/export_entity_product_type_configurable</configurable>
+                <virtual>importmodule/export_entity_product_type_simple</virtual>
+                <grouped>importmodule/export_entity_product_type_grouped</grouped>
+                <bundle>importmodule/export_entity_product_type_bundle</bundle>  
+            </export_product_types>
+        </importmodule>  -->      
     </global>
     <admin>
         <routers>

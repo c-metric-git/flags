@@ -794,14 +794,14 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
             // common actions
             try {
                 /** @var $import Mage_ImportExport_Model_Import */
-                /*$import = Mage::getModel('importmodule/import');  
+                $import = Mage::getModel('importmodule/import');  
                 $validationResult = $import->validateSource($data);       
                 $result='';
                 if(count($validationResult) > 0) {
                     foreach($validationResult as $validresult) {   
                         $result['error'] .= $validresult."<br />";
                     }    
-                } */
+                } 
                 $importModel = Mage::getModel('importexport/import');
                 $importModel->behaviour = 'replace';           
                 $importModel->importSource();  
