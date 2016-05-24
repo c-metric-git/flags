@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Stripedsocks_Outofstockdisplaylast>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Stripedsocks_Outofstockdisplaylast>
+    </modules>
+</config>
