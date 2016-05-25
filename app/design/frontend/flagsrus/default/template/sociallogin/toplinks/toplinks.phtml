@@ -48,8 +48,8 @@
 						<span><span><?php echo $this->__('Login')?></span></span>
 					</button>
 					<div class="forgot-pass-text">
-					<a id="magestore-forgot-password" href="javascript:void(0);"><?php echo $this->__('Forgot Your Password?') ?></a>
-					<a id="magestore-sociallogin-create-new-customer" href="javascript:void(0);"><?php echo ('Create New Account') ?></a>
+					<a id="magestore-forgot-password" href="javascript:void(0);javascript:socialLogin.reposition();"><?php echo $this->__('Forgot Your Password?') ?></a>
+					<a id="magestore-sociallogin-create-new-customer" href="javascript:void(0);javascript:socialLogin.reposition();"><?php echo ('Create New Account') ?></a>
 					</div>
 				</div>
 			</form>		
@@ -74,7 +74,7 @@
 				<div id="magestore-invalid-email-forgot" class="magestore-invalid-email"></div>
 				<!-- sumbit -->
 				<div class="magestore-login-popup-button">					
-					<a id="magestore-forgot-back" href="javascript:void(0);"><?php echo $this->__('Back to Form Login') ?></a>
+					<a id="magestore-forgot-back" href="javascript:void(0);javascript:socialLogin.reposition();"><?php echo $this->__('Back to Form Login') ?></a>
 					<button id="magestore-button-sociallogin-forgot" class="button popup_click_btn" title="<?php echo $this->__('Send Password');?>" type="button">
 						<span><span><?php echo $this->__('Send Password')?></span></span>
 					</button>
@@ -130,7 +130,7 @@
 				<!-- error invalid create ACC -->
 				<div id="magestore-invalid-create" class="magestore-invalid-email"></div>
 				<div class="magestore-create-popup-button">					
-					<a id="magestore-create-back" href="javascript:void(0);"><?php echo $this->__('Back to Form Login') ?></a>
+					<a id="magestore-create-back" href="javascript:void(0);javascript:socialLogin.reposition();"><?php echo $this->__('Back to Form Login') ?></a>
 					<button id="magestore-button-sociallogin-create" class="button popup_click_btn" title="<?php echo $this->__('Submit');?>" type="button" style="margin-right: 17px">
 						<span><span><?php echo $this->__('Submit')?></span></span>
 					</button>

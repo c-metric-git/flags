@@ -23,6 +23,12 @@
 */
 var Lightboxsocial = Class.create({
 	open : function () {
+		var login_validator = new Validation('magestore-sociallogin-form');
+		login_validator.reset();
+		var login_validator_forgot = new Validation('magestore-sociallogin-form-forgot');
+		login_validator_forgot.reset();
+		var login_validator_create = new Validation('magestore-sociallogin-form-create');
+		login_validator_create.reset();
 		this._centerWindow(this.container);
 		this._fade('open', this.container);
 	},
@@ -76,5 +82,8 @@ var Lightboxsocial = Class.create({
 		document.body.appendChild(screen);
 		}
 		this._hideLayer(this.container);
-	}
+	},
+	reposition : function () {
+		this._centerWindow(this.container);
+	}	
 }); 

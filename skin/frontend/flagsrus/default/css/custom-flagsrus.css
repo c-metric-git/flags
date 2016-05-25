@@ -3545,3 +3545,13 @@ div.home_latestpost .home_blog_li_ div_month {
     line-height: 12px;
 	font-size: 16px;
 }
+
+
+.cms-index-index .tabs li a {
+    border-right: 1px solid #0086d4 !important;
+}	
+
+
+.cms-page-view .main-container a{
+	text-decoration:underline !important;
+}

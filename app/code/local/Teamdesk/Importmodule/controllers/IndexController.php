@@ -582,15 +582,15 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
 					ini_set("display_errors",1);
                     /*require_once('lib/Teamdesk/class.FP_import_teamdesk_webprofiles.php'); 
                     $objTDProducts = new FPTeamDeskWebprofiles(); 
-                    $strReturn = $objTDProducts->importTeamdeskProduct();    */
+                    $strReturn = $objTDProducts->importTeamdeskProduct(); */  
                     $strMessage = "Product Import Status"; 
                     if($strReturn !='') {
                         $strMessage .= $strReturn; 
-                    } 
+                    }           
                     $succ_message ='';       
                     $product_csv_counter = $_SESSION['product_csv_counter']!=''?$_SESSION['product_csv_counter']:0;  
                     $counter_loop = 0;
-                    for($i=0;$i<=$product_csv_counter;$i++) {                   
+                    for($i=0;$i<=0;$i++) {                   
                         $succ_message['error'] .= "<br /><br />Processing File => FP_Products$i.csv<br />";   
                         $succ_message['success'] .= "<br /><br />Processing File => FP_Products$i.csv<br />";    
                         $tmp_succ_message = $this->AddProduct("var/import/products/FP_BundleProducts.csv");

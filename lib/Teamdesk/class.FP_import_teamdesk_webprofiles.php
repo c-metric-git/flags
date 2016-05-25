@@ -454,7 +454,9 @@ class FPTeamDeskWebprofiles {
                                             $csv_row[] = $tdProduct['Product - Next Date Due To Arrive']>date("Y-m-d")?$tdProduct['Product - Next Date Due To Arrive']:""; //date_of_arrival                             
                                             $csv_row[] = $tdProduct['Product - QTY On Current POs']; //qy_on_current_po 
                                             $csv_row[] = $tdProduct['requiredProductSKUForKit']; //requiredskuforkit   
-                                            $csv_row[] = $tdProduct['numOfOptionsForKit']; //num_of_options_for_kit   
+                                            $csv_row[] = $tdProduct['numOfOptionsForKit']; //num_of_options_for_kit 
+                                            $csv_row[] = $tdProduct['kitType']=='Build Your Own'?'1':''; //price_type 
+                                            $csv_row[] = $tdProduct['kitType']=='Build Your Own'?'As Low as':''; //price_view 
                                             $csv_row[] = ""; //custom_layout_update
                                             $csv_row[] = ""; //custom_design   ultimo/default
                                             $csv_row[] = "1 column";  //page_layout
@@ -597,7 +599,7 @@ class FPTeamDeskWebprofiles {
                                             $csv_row[] = $tdProduct['kitType']=='Build Your Own'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Product - FP Solo PinnacleSKU']:"";//bundle_sku  
                                             $csv_row[] = $tdProduct['kitType']=='Build Your Own'?$web_option:"";//bundle_option_title   
                                             $csv_row[] = $tdProduct['kitType']=='Build Your Own'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Attribute']:"";//bundle_attribute 
-                                            $csv_row[] = $tdProduct['kitType']=='Build Your Own'?$attributePrice:"";//bundle_price    
+                                            $csv_row[] = $tdProduct['kitType']=='Build Your Own'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['BYOAttributeUpcharge']:"";//bundle_price    
                                         }
                                         else {
                                                 $csv_row[] = ""; //sku
@@ -644,6 +646,8 @@ class FPTeamDeskWebprofiles {
                                                 $csv_row[] = ""; //qy_on_current_po  
                                                 $csv_row[] = ""; //requiredskuforkit 
                                                 $csv_row[] = ""; //num_of_options_for_kit 
+                                                $csv_row[] = ""; //price_type  
+                                                $csv_row[] = ""; //price_view  
                                                 $csv_row[] = ""; //custom_layout_update
                                                 $csv_row[] = ""; //custom design
                                                 $csv_row[] = ""; //page layout
@@ -763,7 +767,7 @@ class FPTeamDeskWebprofiles {
                                                 $csv_row[] = $tdProduct['kitType']=='Build Your Own'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Product - FP Solo PinnacleSKU']:"";//bundle_sku  
                                                 $csv_row[] = $tdProduct['kitType']=='Build Your Own'?$web_option:"";//bundle_option_title   
                                                 $csv_row[] = $tdProduct['kitType']=='Build Your Own'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Attribute']:"";//bundle_attribute 
-                                                $csv_row[] = $tdProduct['kitType']=='Build Your Own'?$attributePrice:"";//bundle_price    
+                                                $csv_row[] = $tdProduct['kitType']=='Build Your Own'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['BYOAttributeUpcharge']:"";//bundle_price    
                                         }        
                                         fputcsv($this->fp,$csv_row);
                                     } // End of for largest counter loop
@@ -873,7 +877,7 @@ class FPTeamDeskWebprofiles {
         /**
         * @desc  create string of columns to be retreived from the query  
         */
-        $strColumns = "[Web Option Label],[Attribute],[priority],[PriceCalced],[DiscountPriceCalced],[Product - Quantity Available],[PinnacleAttributeSku],[Related Web Profile],[Product - FP Solo PinnacleSKU]";  
+        $strColumns = "[Web Option Label],[Attribute],[priority],[PriceCalced],[DiscountPriceCalced],[Product - Quantity Available],[PinnacleAttributeSku],[Related Web Profile],[Product - FP Solo PinnacleSKU],[BYOAttributeUpcharge]";  
        try
        {
            
@@ -986,8 +990,10 @@ class FPTeamDeskWebprofiles {
 				  $product_header_row[] = "iconlabel";   
                   $product_header_row[] = "date_of_arrival"; 
                   $product_header_row[] = "qty_on_current_po";
-                  $product_header_row[] = "num_of_options_for_kit";
                   $product_header_row[] = "requiredskuforkit";
+                  $product_header_row[] = "num_of_options_for_kit";
+                  $product_header_row[] = "price_type";  
+                  $product_header_row[] = "price_view";  
                   
                   $product_header_row[] = "custom_layout_update";
                   $product_header_row[] = "custom_design"; 

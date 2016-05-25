@@ -1,6 +1,6 @@
 <!-- by brt-->
 <?php
-$attribute = Mage::getSingleton('eav/config')->getAttribute('catalog_product', 'fl_filter_section');
+$attribute = Mage::getSingleton('eav/config')->getAttribute('catalog_product', 'fp_searchbarlabel');
 $options = $attribute->getSource()->getAllOptions(false);
 $sel_filter = Mage::app()->getRequest()->getParam('searchBarOrder');
 ?>

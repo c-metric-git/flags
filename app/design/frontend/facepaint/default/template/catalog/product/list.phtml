@@ -218,10 +218,20 @@ $_collectionSize = $_productCollection->count ();
                             <?php if (!$_product->canConfigure () && $_product->isSaleable ()): ?>
                                 <!--=================== by brt =================-->
                                 <?php
-                                $stock        = Mage::getModel ('cataloginventory/stock_item')
-                                    ->loadByProduct ($_product);
+                                $stock        = Mage::getModel ('cataloginventory/stock_item')->loadByProduct ($_product);
                                 $productCount = intval ($stock->getQty ());
-                                ?>
+                                $cartUrl = Mage::helper('checkout/cart')->getAddUrl($_product);
+                            ?>
+                                <!--=================== by brt =================-->
+                            <form action="<?php echo $cartUrl; ?>" method="post" class="product_addtocart_form product_addtocart_form_<?php echo $_product->getSku(); ?>" name="product_addtocart_form<?php echo $_product->getId(); ?>" id="product_addtocart_form<?php echo $_product->getId(); ?>" <?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>
+                            <?php echo $this->getBlockHtml('formkey'); ?>
+                             <!--input type="hidden" name="qty" value="1"-->
+                            <input type="hidden" id="<?php echo $_product->getSku()."-addtourl"; ?>" name="addtourl" value="<?php echo $cartUrl;?>">
+                            <input type="hidden" name="product" value="<?php echo $_product->getId();?>">
+                            <input type="hidden" name="related_product" value="">
+                            <input type="hidden" name="return_url" value="">
+
+                        
                                 <!--=================== by brt ends =================-->
                                 <!--                <input type="text" class="input-text qty" title="Qty" value="0" maxlength="12" id="qty" name="qty">-->
                             <div class="actions"> 
@@ -241,11 +251,14 @@ $_collectionSize = $_productCollection->count ();
                                 
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-add-to-cart-ico"> <span class="fa fa-shopping-bag"></span> </button>
-                                    <button type="button" title="<?php echo $this->__ ('Add to Cart') ?>"
-                                            class="btn btn-add-to-cart"
-                                            onclick="setLocation('<?php echo $this->getAddToCartUrl ($_product) ?>')"><?php echo $this->__('Add to cart') ?>
-                                    </button>
+                                    <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="btn btn-add-to-cart <?php echo $_product->getSku()."-del"; ?>" id="" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $_product->getId(); ?>);"><?php echo $this->__('Add to Cart') ?></button>
                                 </div>
+                         </form>   
+                                    <script type="text/javascript">
+                                //<![CDATA[
+                                var productAddToCartForm<?php echo $_product->getId(); ?> = new VarienForm('product_addtocart_form<?php echo $_product->getId(); ?>');
+                                //]]>
+                        </script>   
                             </div> <!-- .actions -->           
                                 
                             <?php elseif ($_product->getStockItem () && $_product->getStockItem ()->getIsInStock ()): ?>
