@@ -114,12 +114,11 @@
                                     </label>
                                     <!-- START MEANBEE ESTIMATED DELIVERY -->
                                 <br/>
-								<?php //echo "<pre>";print_r($_rate->getData());?>
-                                <?php if($codestirng_explode[0]=="matrixrate"):?>
-								<?php echo Mage::helper('meanbee_estimateddelivery')->getEstimatedDeliveryText($final_codestirng); ?>
-                                <?php else:?>
-                                <?php echo Mage::helper('meanbee_estimateddelivery')->getEstimatedDeliveryText($_rate->getCode()); ?>
-                                <?php endif;?>
+								<?php  if($codestirng_explode[0]=="matrixrate"):?>
+                                        <b><?php  echo Mage::helper('meanbee_estimateddelivery')->getEstimatedDeliveryText($final_codestirng); ?></b>
+                                    <?php else:?>
+                                        <b><?php echo Mage::helper('meanbee_estimateddelivery')->getEstimatedDeliveryText($_rate->getCode()); ?></b>
+                                    <?php endif;?>
                                 <!-- END MEANBEE ESTIMATED DELIVERY --> 
                                <?php endif ?>
                             </li>

@@ -3555,3 +3555,13 @@ div.home_latestpost .home_blog_li_ div_month {
 .cms-page-view .main-container a{
 	text-decoration:underline !important;
 }
+
+
+@media (min-width: 1025px){
+
+.cms-index-index .gen-tabs .tabs li a:hover{
+    background:#1C2452;
+	color:#FFFFFF;
+	border: 1px solid #1C2452;
+}
+}

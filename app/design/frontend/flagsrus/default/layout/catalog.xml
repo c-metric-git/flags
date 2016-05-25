@@ -109,7 +109,11 @@ Category layered navigation layout
     <catalog_category_layered translate="label">
         <label>Catalog Category (Anchor)</label>
         <reference name="left">
-            <block type="catalog/layer_view" name="catalog.leftnav" after="currency" template="catalog/layer/view.phtml"/>
+			<remove name="left.reports.product.viewed"/>
+			<remove name="wishlist_sidebar"/>
+			<block type="reports/product_viewed" name="left.reports.product.viewedd" before="-" template="reports/product_viewed.phtml" />
+			<block type="wishlist/customer_sidebar" name="wishlist_sidebarr" as="wishlist" before="-" template="wishlist/sidebar.phtml"/>
+			<block type="catalog/layer_view" name="catalog.leftnav" template="catalog/layer/view.phtml"/>
         </reference>
         <reference name="content">
             <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">

@@ -1099,7 +1099,7 @@ h1, h2, h3, h4, h5, h6 {
 /*.owl-stage-outer {
 	height: auto !important;
 }*/
-.std ul li {
+.std ul li , .why-shop ul li {
 	list-style: outside  disc;line-height: 20px;margin-bottom: 5px;
 }
 .footer-list li, .add-to-links li {
@@ -1459,7 +1459,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0ea9cc', end
      margin-top: 0 !important;
 }
 .top-links .links{ float:right;}
-#user-menu-wrapper-regular .right-column.right-second{ float:right; width:93%;}
+#user-menu-wrapper-regular .right-column.right-second{ float:right; width:96%;}
 .user-menu  .caret{ border-color:#0184a2 transparent transparent;}
 .home-page-widget span.widget select{background:url("../../images/se-arrow.png") no-repeat right 10px #fff ;border-radius: 5px;
     color: #333333;
@@ -1574,6 +1574,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0ea9cc', end
 }
 .itemslider.equal-height .item{ width:100%;}
 .checkout-cart-index .owl-theme .owl-controls{left: 9px;}
+.fp-product-cust .actions .qty{ float:left;}
 
 @media not all {
 #account-links-wrapper-regular, #header-compare {
@@ -1854,10 +1855,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0ea9cc', end
 
 @media (min-width:767px) {
 .owl-carousel {
-       max-height: 440px;
+       max-height: 392px;
 }
 .owl-carousel-0 .owl-carousel {
-    max-height: 266px;
+    max-height: 240px;
 }
 .owl-carousel-0 .itemgrid .item {
     float: left;

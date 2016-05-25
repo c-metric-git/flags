@@ -77,9 +77,9 @@
                                 <!-- START MEANBEE ESTIMATED DELIVERY -->      
                                 <br/><?php 
                                     if($codestirng_explode[0]=="matrixrate"):?>
-                                        <?php  echo Mage::helper('meanbee_estimateddelivery')->getEstimatedDeliveryText($final_codestirng); ?>
+                                        <b><?php  echo Mage::helper('meanbee_estimateddelivery')->getEstimatedDeliveryText($final_codestirng); ?></b>
                                     <?php else:?>
-                                        <?php echo Mage::helper('meanbee_estimateddelivery')->getEstimatedDeliveryText($_rate->getCode()); ?>
+                                        <b><?php echo Mage::helper('meanbee_estimateddelivery')->getEstimatedDeliveryText($_rate->getCode()); ?></b>
                                     <?php endif;?>
                                 <!-- END MEANBEE ESTIMATED DELIVERY -->
                             <?php endif ?>

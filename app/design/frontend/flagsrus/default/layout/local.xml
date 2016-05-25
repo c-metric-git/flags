@@ -140,9 +140,9 @@
 			<action method="unsetChild"><name>left.newsletter</name></action>
 			<action method="unsetChild"><name>tags_popular</name></action>
 			<block type="catalog/product_compare_sidebar" name="catalog.compare.sidebar" template="catalog/product/compare/sidebar.phtml"/>
-			<block type="reports/product_compared" name="right.reports.product.compared" template="reports/product_compared.phtml" />
-			<block type="reports/product_viewed" name="left.reports.product.viewed" template="reports/product_viewed.phtml" />
-			<block type="wishlist/customer_sidebar" name="wishlist_sidebar" as="wishlist" template="wishlist/sidebar.phtml"/>
+			<!--block type="reports/product_compared" name="right.reports.product.compared" template="reports/product_compared.phtml" /-->
+			<!--	block type="reports/product_viewed" name="left.reports.product.viewed" before="-" template="reports/product_viewed.phtml" />
+			<block type="wishlist/customer_sidebar" name="wishlist_sidebar" as="wishlist" before="-" template="wishlist/sidebar.phtml"/-->
 			<block type="poll/activePoll" name="right.poll">
 				<action method="setPollTemplate"><template>poll/active.phtml</template><type>poll</type></action>
 				<action method="setPollTemplate"><template>poll/result.phtml</template><type>results</type></action>
@@ -652,6 +652,14 @@
 	<!-- CATEGORY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
 	<!-- Default category (without layered navigation) -->
 	<catalog_category_default>
+		<reference name="left">
+			<remove name="catalog.compare.sidebar"/>
+			<remove name="wishlist_sidebar"/>
+			<remove name="catalog.leftnav"/>
+			<block type="reports/product_viewed" name="left.reports.product.viewed" before="-" template="reports/product_viewed.phtml" />
+			<block type="wishlist/customer_sidebar" name="wishlist_sidebar" as="wishlist" before="-" template="wishlist/sidebar.phtml"/>
+			<block type="catalog/navigation" name="catalog.leftnav" after="currency" template="catalog/navigation/left.phtml"/>
+		</reference>
 		<reference name="head">
 				<action method="addJs"><script>list/skuswap.js</script></action>
 				<action method="addItem"><type>skin_js</type><name>js/genralinline.js</name></action>
