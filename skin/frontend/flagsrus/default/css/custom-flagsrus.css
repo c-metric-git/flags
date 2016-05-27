@@ -3565,3 +3565,10 @@ div.home_latestpost .home_blog_li_ div_month {
 	border: 1px solid #1C2452;
 }
 }
+
+#product-addtocart-button:active .icon.ic.ic-bag {
+    border-right: 1px solid #0070b2;
+}
+#product-addtocart-button:focust .icon.ic.ic-bag {
+    border-right: 1px solid #0070b2;
+}

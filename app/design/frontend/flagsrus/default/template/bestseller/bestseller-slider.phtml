@@ -566,10 +566,12 @@ Varien_Profiler::start('LabelForCodeFragmentToProfile');
                    </div><!-- end: ratings -->                    
                        <?php  
                            //$stock = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product); ?>
-						<?php if($productCount>0): ?>
-							<div class="qty-in-stock"><!-- start: Qty in stock -->
-								<? echo $this->__("Qty in Stock: ").intval($productCount); ?>
-						   </div><!-- end: Qty in stock -->                   
+						<?php if(!$_product->canConfigure() && $_product->isSaleable()): ?>
+							<?php if($productCount>0): ?>
+								<div class="qty-in-stock"><!-- start: Qty in stock -->
+									<? echo $this->__("Qty in Stock: ").intval($productCount); ?>
+							   </div><!-- end: Qty in stock -->                   
+							<?php endif; ?>               
 						<?php endif; ?>               
                    
                </div><!-- end: rating-and-qty-block-->

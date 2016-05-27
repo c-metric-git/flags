@@ -45,7 +45,17 @@ $imageCategoriesHeight  = 120;
 $imageCategoriesWidth   = 120;
 if($currentCategoryId)
 {
-	$_subcategories = $_category->getChildrenCategories ();
+	//$_subcategories = $_category->getChildrenCategories ();
+	$_subcategories = Mage::getModel('catalog/category')->getCollection()
+    ->addAttributeToSelect('*')
+    ->addAttributeToFilter('parent_id', $currentCategoryId)
+	->addAttributeToSelect('image')	
+	->addAttributeToSelect('url_key')
+	->addAttributeToSelect('name')
+	->addAttributeToSelect('all_children')
+	->addAttributeToSelect('is_anchor')
+	->setOrder('position', Varien_Db_Select::SQL_ASC)
+	->joinUrlRewrite();
 }
 $appliedFilters = Mage::getSingleton('catalog/layer')->getState()->getFilters(); 
 //echo "currentCategoryId->".$currentCategoryId;
@@ -63,7 +73,7 @@ $appliedFilters = Mage::getSingleton('catalog/layer')->getState()->getFilters();
             foreach ($_subcategories as $category) {
                 $categoryID    = $category->getId ();//id
                 //$imageUrl      = Mage::getSingleton ('catalog/category')->load ($categoryID)->getImageUrl ();// base path
-                $category      = Mage::getSingleton ('catalog/category')->load ($categoryID);
+                //$category      = Mage::getSingleton ('catalog/category')->load ($categoryID);
                 $categoryImage = $category->getImage (); // image name
                 $basePath      = Mage::getBaseDir (Mage_Core_Model_Store::URL_TYPE_MEDIA) . '/catalog/category/' . $category->getImage ();
                 //$imageUrl = $baseMediaUrl.'/catalog/category/'.$category->getImage();
@@ -96,8 +106,8 @@ $appliedFilters = Mage::getSingleton('catalog/layer')->getState()->getFilters();
 <?php endif;?>
    <!--==================by brt for sub-catgory list ends==================-->
 <?php endif ?>
-<?php $sa_reviews = "<script type='text/javascript'> function saLoadScript(src) { var js = window.document.createElement('script'); js.src = src; js.type = 'text/javascript'; document.getElementsByTagName('head')[0].appendChild(js); } saLoadScript('//www.shopperapproved.com/widgets/group2.0/15857.js'); </script>";
-echo $sa_reviews; ?>
+<?php $sa_reviews = "<script type='text/javascript'> function saLoadScript(src) { var js = window.document.createElement('script'); js.src = src; js.type = 'text/javascript'; document.getElementsByTagName('head')[0].appendChild(js); } saLoadScript('//www.shopperapproved.com/widgets/group2.0/12756.js'); </script>";
+//echo $sa_reviews; ?>
 <?php
 $_productCollection = $this->getLoadedProductCollection ();
 $_collectionSize = $_productCollection->getSize();
@@ -540,9 +550,9 @@ $_collectionSize = $_productCollection->getSize();
                         <?php $getId = $_product->getId (); ?>
                         <?php $getIdcls = "rating-and-qty-block" . $getId; ?>
                         <div class="rating-and-qty-block  <?php echo $getIdcls; ?>"><!-- start: rating-and-qty-block-->
-                            <div class="ratings"> <!-- start: ratings -->
+                            <!--div class="ratings">
                                 <div class="star_container <?php echo $_product->getSku(); ?>"></div>
-                            </div>
+                            </div-->
                             <!-- end: ratings -->
 							<?php if(!$_product->canConfigure() && $_product->isSaleable()): ?>
                             <div class="qty-in-stock qty-<?php echo $_product->getId() ?>"><!-- start: Qty in stock -->
