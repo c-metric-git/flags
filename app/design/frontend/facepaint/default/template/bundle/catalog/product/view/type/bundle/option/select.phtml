@@ -32,12 +32,12 @@
 <?php $_default     = $_option->getDefaultSelection(); ?>
 <?php list($_defaultQty, $_canChangeQty) = $this->_getDefaultValues(); ?>
 <?php $tierPriceHtml = ''; ?>
-<?php  if($this->escapeHtml($_option->getTitle()) != "Palettes"): ?>
+<?php  if($this->escapeHtml($_option->getTitle()) != strtolower("Palettes") ): ?>
         <dt>
             <label<?php if ($_option->getRequired()) echo ' class="required"' ?>><?php echo $this->escapeHtml($_option->getTitle()) ?><?php if ($_option->getRequired()) echo '<em>*</em>' ?></label>
         </dt>
 <?php  endif; ?>
-<dd<?php if ($_option->decoratedIsLast){?> class="last"<?php }?> <?php if($this->escapeHtml($_option->getTitle()) == "Palettes") { ?> style='display:none' <?php } ?> >
+<dd<?php if ($_option->decoratedIsLast){?> class="last"<?php }?> <?php if($this->escapeHtml($_option->getTitle()) == strtolower("Palettes") ) { ?> style='display:none' <?php } ?> >
     <div class="input-box">
     <?php /** @var $_selection Mage_Catalog_Model_Product*/ ?>
     <?php if ($this->_showSingle()): ?>
@@ -52,8 +52,13 @@
         <?php foreach ($_selections as $_selection): ?>
             <?php if ($_selection->getSelectionCanChangeQty() && $this->_isSelected($_selection)): ?>
                 <?php $tierPriceHtml = $this->getTierPriceHtml($_selection); ?>
+
             <?php endif; ?>
-            <option value="<?php echo $_selection->getSelectionId() ?>"<?php if ($this->_isSelected($_selection)) echo ' selected="selected"' ?><?php if (!$_selection->isSaleable()) echo ' disabled="disabled"' ?>><?php echo $_selection->getName() ?></option> <!--  $this->getSelectionTitlePrice($_selection, false) -->
+    <?php $bundle_fixed_price = ( $_selection->getSelectionPriceValue() > 0 ?  '+'.Mage::helper('core')->currency($_selection->getSelectionPriceValue()) : '' )?>
+    <?php $pallete_color_name =Mage::getModel('catalog/product')->load($_selection->getId())->getAttributeText('fp_color'); 
+          $bundle_assoc_item_name = (!empty($pallete_color_name) ? $pallete_color_name : $_selection->getName());
+     ?>
+            <option value="<?php echo $_selection->getSelectionId() ?>"<?php if ($this->_isSelected($_selection)) echo ' selected="selected"' ?><?php if (!$_selection->isSaleable()) echo ' disabled="disabled"' ?>><?php echo $bundle_assoc_item_name.' '.$bundle_fixed_price ?></option> <!--  $this->getSelectionTitlePrice($_selection, false) -->
         <?php endforeach; ?>
         </select>
     <?php endif; ?>

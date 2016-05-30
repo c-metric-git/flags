@@ -716,7 +716,7 @@ class FLTeamDeskWebprofiles {
                             if($pr_type == 'Parent') {
                                  if($tdProduct['kitType'] == 'Fixed') {
                                      //$attribute_set='Filter New Products/Filter Section/Filter Type/Feature/Filter Size/Multi Seasons/Season Subthemes/Holiday/Holiday Subthemes/Occassion/Occassion Subthemes/Multi Themes/Theme Subthemes/Multi Brand';  
-                                     $product_type = "grouped";  
+                                     $product_type = "bundle";  
                                  }
                                  else {   
                                     $product_type = "configurable";
@@ -927,6 +927,7 @@ class FLTeamDeskWebprofiles {
                                             $csv_row[] = $finish_value; //Finish 
                                             $csv_row[] = $letter_value; //Letter  
                                             
+                                            $csv_row[] = $tdProduct['kitType']== 'Fixed'?"1":"0"; //is_fixed_kit 
                                             $csv_row[] = $tdProduct['iconLabel']; //iconlabel 
                                             $csv_row[] = $tdProduct['Product - Next Date Due To Arrive']>date("Y-m-d")?$tdProduct['Product - Next Date Due To Arrive']:""; //date_of_arrival
                                             $csv_row[] = $tdProduct['Product - QTY On Current POs']; //qy_on_current_po 
@@ -1094,6 +1095,7 @@ class FLTeamDeskWebprofiles {
                                                 $csv_row[] = ""; //finish 
                                                 $csv_row[] = ""; //letter 
                                             
+                                                $csv_row[] = ""; //is_fixed_kit  
                                                 $csv_row[] = ""; //iconlabel
                                                 $csv_row[] = ""; //date_of_arrival
                                                 $csv_row[] = ""; //qy_on_current_po  
@@ -1233,11 +1235,14 @@ class FLTeamDeskWebprofiles {
         * @desc  create the Teamdesk query, to fetch all the products that are marked as sendToPinnacle
         */ 
         if($type != '') {
-            if($type == 'Parent') {
-                $type = " AND ([Type Attribute]='".$type."' OR [Type Attribute]='Monogram')";  
+            if($type=='Fixed') {
+                $type = " AND ([kitType]='".$type."')"; 
+            }   
+            elseif($type == 'Parent') {
+                $type = " AND Nz([kitType],'')<>'Fixed' AND ([Type Attribute]='".$type."' OR [Type Attribute]='Monogram')";  
             }
             else {    
-                $type = " AND [Type Attribute]='".$type."'";
+                $type = "  AND Nz([kitType],'')<>'Fixed' AND [Type Attribute]='".$type."'";
             }    
         }
         $arrQueries = "WHERE [SendToPinnacle] $type AND [is_visible]";
@@ -1410,7 +1415,8 @@ class FLTeamDeskWebprofiles {
                   $product_header_row[] = "finish";
                   $product_header_row[] = "letter";
                   
-                  $product_header_row[] = "iconlabel";   
+                  $product_header_row[] = "is_fixed_kit";
+                  $product_header_row[] = "iconlabel";
                   $product_header_row[] = "date_of_arrival"; 
                   $product_header_row[] = "qty_on_current_po";
                   $product_header_row[] = "custom_layout_update";

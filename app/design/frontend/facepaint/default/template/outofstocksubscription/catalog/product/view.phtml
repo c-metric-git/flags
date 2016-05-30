@@ -34,6 +34,21 @@
 	$section = array();
 	$relatedProductsHtml = '';
 	$upsellProductsHtml = '';
+    if($_product->getTypeId() == 'bundle' && $_product->getIsFixedKit() ){
+       $bundle_option_items_arr=array();
+       $bundle_options=Mage::getResourceModel('bundle/selection')->getChildrenIds($_product->getId() ,false);
+       foreach ($bundle_options as  $bundle_option) {
+           foreach ($bundle_option as  $bundle_option_product) {
+              $product_obj=Mage::getModel('catalog/product')->load($bundle_option_product);
+              $bundle_option_items_arr[]=intval(Mage::getModel('cataloginventory/stock_item')->loadByProduct($product_obj)->getIsInStock());
+           }
+          
+       }
+      if(in_array(0,$bundle_option_items_arr)){
+         $_product->setData('is_salable',0);      	
+       }
+    }
+	
 	//Related products.
 	//If related products not assigned to collateral data container.
 	if (!$theme->getCfg('product_page/collateral_related'))

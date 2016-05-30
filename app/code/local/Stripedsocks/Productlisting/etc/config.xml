@@ -18,6 +18,12 @@
 					<cart_crosssell>Stripedsocks_Productlisting_Block_Checkout_Cart_Crosssell</cart_crosssell>
 				</rewrite>
 			</checkout>
+                <!-- <bundle>
+                <rewrite>
+                    <Catalog_Product_View_Type_Bundle_Option>Stripedsocks_Productlisting_Block_Catalog_Product_View_Type_Bundle_Option
+                    </Catalog_Product_View_Type_Bundle_Option>
+                </rewrite>
+            </bundle> -->
         </blocks>
         <models>
             <catalog>
@@ -53,6 +59,22 @@
                     <use>core_read</use>
                 </connection>
             </productlisting_read>
+             <bundlecolor_setup>
+                  <setup>
+                      <module>Stripedsocks_Productlisting</module>
+                  </setup>
+                  <connection>
+                      <use>core_setup</use>
+                  </connection>
+             </bundlecolor_setup>
+             <bundle_isfixedkit_setup>
+                  <setup>
+                      <module>Stripedsocks_Productlisting</module>
+                  </setup>
+                  <connection>
+                      <use>core_setup</use>
+                  </connection>
+             </bundle_isfixedkit_setup>
         </resources>
     </global>
 </config>

@@ -112,9 +112,9 @@ abstract class Mage_ImportExport_Model_Import_Entity_Product_Type_Abstract
                 $this->_entityModel->addMessageTemplate($errorCode, $message);
             }
 
-            if (isset($params['attributes'])) {
+            if (isset($params['attributes'])) {    
                 $this->_attributes = $params['attributes'];
-            } else {
+            } else {          
                 $this->_initAttributes();
             }
         }
@@ -128,7 +128,7 @@ abstract class Mage_ImportExport_Model_Import_Entity_Product_Type_Abstract
      * @return Mage_ImportExport_Model_Import_Entity_Product_Type_Abstract
      */
     protected function _addAttributeParams($attrSetName, array $attrParams)
-    {
+    {        
         if (!$attrParams['apply_to'] || in_array($this->_type, $attrParams['apply_to'])) {
             $this->_attributes[$attrSetName][$attrParams['code']] = $attrParams;
         }
@@ -169,7 +169,7 @@ abstract class Mage_ImportExport_Model_Import_Entity_Product_Type_Abstract
                 $attributeId   = $attribute->getId();
                    
                 if ($attribute->getIsVisible() || in_array($attributeCode, $this->_forcedAttributesCodes)) {
-                    if (!isset($attributesCache[$attributeId])) {
+                    if (!isset($attributesCache[$attributeId])) {      
                         $attributesCache[$attributeId] = array(
                             'id'               => $attributeId,
                             'code'             => $attributeCode,
@@ -190,7 +190,7 @@ abstract class Mage_ImportExport_Model_Import_Entity_Product_Type_Abstract
                     $this->_addAttributeParams($attributeSet->getAttributeSetName(), $attributesCache[$attributeId]);
                 }
             }
-        }
+        }   
         return $this;
     }
 
@@ -297,8 +297,8 @@ abstract class Mage_ImportExport_Model_Import_Entity_Product_Type_Abstract
     public function prepareAttributesForSave(array $rowData, $withDefaultValue = true)
     {
         $resultAttrs = array();
-
-        foreach ($this->_getProductAttributes($rowData) as $attrCode => $attrParams) {
+             
+        foreach ($this->_getProductAttributes($rowData) as $attrCode => $attrParams) {         
             if (!$attrParams['is_static']) {
                 if (isset($rowData[$attrCode]) && strlen($rowData[$attrCode])) {
                     $resultAttrs[$attrCode] =

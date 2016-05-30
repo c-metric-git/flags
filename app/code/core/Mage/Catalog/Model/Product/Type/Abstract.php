@@ -646,7 +646,7 @@ abstract class Mage_Catalog_Model_Product_Type_Abstract
      * @return Mage_Catalog_Model_Product_Type_Abstract
      */
     public function save($product = null)
-    {
+    {        
         return $this;
     }
 

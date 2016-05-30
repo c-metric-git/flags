@@ -3572,3 +3572,8 @@ div.home_latestpost .home_blog_li_ div_month {
 #product-addtocart-button:focust .icon.ic.ic-bag {
     border-right: 1px solid #0070b2;
 }
+@media only screen and (max-width: 767px){
+	.block-layered-nav {
+		clear:both;
+	}
+}

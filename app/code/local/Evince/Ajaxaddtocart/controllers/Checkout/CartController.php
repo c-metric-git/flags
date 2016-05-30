@@ -40,6 +40,15 @@ class Evince_Ajaxaddtocart_Checkout_CartController extends Mage_Checkout_CartCon
 
         $cart = $this->_getCart();
         $params = $this->getRequest()->getParams();
+        if(Mage::getModel('catalog/product')->load($request_group_product_id)->getTypeID() == 'bundle')
+        {
+            foreach($params['bundle_option'] as $key => $bundleoptoins)
+            {
+                if(is_array($bundleoptoins)){
+                 $params['bundle_option'][$key]=explode(',',$bundleoptoins[0]);   
+                } 
+            }
+        }
         try {
             if (isset($params['qty'])) {
                 $filter = new Zend_Filter_LocalizedToNormalized(

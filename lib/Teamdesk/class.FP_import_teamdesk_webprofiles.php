@@ -457,6 +457,7 @@ class FPTeamDeskWebprofiles {
                                             $csv_row[] = $tdProduct['numOfOptionsForKit']; //num_of_options_for_kit 
                                             $csv_row[] = $tdProduct['kitType']=='Build Your Own'?'1':''; //price_type 
                                             $csv_row[] = $tdProduct['kitType']=='Build Your Own'?'As Low as':''; //price_view 
+                                            $csv_row[] = $tdProduct['kitType']== 'Fixed'?"1":"0"; //is_fixed_kit
                                             $csv_row[] = ""; //custom_layout_update
                                             $csv_row[] = ""; //custom_design   ultimo/default
                                             $csv_row[] = "1 column";  //page_layout
@@ -548,7 +549,7 @@ class FPTeamDeskWebprofiles {
                                             $csv_row[] = $tdProduct['Image Alt Text 1']; //_media_lable
                                             $csv_row[] = "1"; //_media_position
                                             $csv_row[] = "0"; //_media_is_disabled
-                                            $csv_row[] = $tdProduct['kitType']!='Fixed' && $tdProduct['kitType']=='Build Your Own'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Product - FP Solo PinnacleSKU']:""; //$tdProduct["PinnacleAttributeSKU"];  //_super_products_sku
+                                            $csv_row[] = $tdProduct['kitType']!='Fixed' && $tdProduct['kitType']!='Build Your Own'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Product - FP Solo PinnacleSKU']:""; //$tdProduct["PinnacleAttributeSKU"];  //_super_products_sku
                                             if(strtolower($this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Web Option Label'])=='size') {
                                                 $web_option = 'fp_size';
                                             }
@@ -647,7 +648,8 @@ class FPTeamDeskWebprofiles {
                                                 $csv_row[] = ""; //requiredskuforkit 
                                                 $csv_row[] = ""; //num_of_options_for_kit 
                                                 $csv_row[] = ""; //price_type  
-                                                $csv_row[] = ""; //price_view  
+                                                $csv_row[] = ""; //price_view 
+                                                $csv_row[] = ""; //is_fixed_kit 
                                                 $csv_row[] = ""; //custom_layout_update
                                                 $csv_row[] = ""; //custom design
                                                 $csv_row[] = ""; //page layout
@@ -993,7 +995,8 @@ class FPTeamDeskWebprofiles {
                   $product_header_row[] = "requiredskuforkit";
                   $product_header_row[] = "num_of_options_for_kit";
                   $product_header_row[] = "price_type";  
-                  $product_header_row[] = "price_view";  
+                  $product_header_row[] = "price_view"; 
+                  $product_header_row[] = "is_fixed_kit"; 
                   
                   $product_header_row[] = "custom_layout_update";
                   $product_header_row[] = "custom_design"; 
@@ -1068,7 +1071,7 @@ class FPTeamDeskWebprofiles {
                   $product_header_row[] = "_super_attribute_option";
                   $product_header_row[] = "_super_attribute_price_corr";
                   $product_header_row[] = "bundle_sku";
-                  $product_header_row[] = "bundle_option_title";
+                  $product_header_row[] = "bundle_option_title"; 
                   $product_header_row[] = "bundle_attribute";
                   $product_header_row[] = "bundle_price";  
                   fputcsv($this->fp,$product_header_row);

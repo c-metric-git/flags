@@ -32,7 +32,7 @@ var ajaxaddtocart = {
                 new Ajax.Request(url, {
                     onCreate	: function() {
                         _this.g.warn("Processing...", {
-                            life: 5
+                            life: 2
                         });
                     },
                     onSuccess	: function(response) {
@@ -131,7 +131,7 @@ var ajaxaddtocart = {
 
                     //show loading
                     _this.g.warn("Processing...", {
-                        life: 5
+                        life: 2
                     });
 
                     obj.form.submit();
@@ -155,7 +155,7 @@ var ajaxaddtocart = {
 							else
 							{
 								_this.g.warn("Processing...", {
-									life: 5
+									life: 2
 								});
 							}	
                         },
@@ -246,7 +246,7 @@ var ajaxaddtocart = {
         new Ajax.Request(url, {
             onCreate	: function() {
                 _this.g.warn("Processing...", {
-                    life: 5
+                    life: 2
                 });
             },
             onSuccess	: function(response) {
@@ -279,7 +279,7 @@ var ajaxaddtocart = {
 
     showSuccess: function(message) {
         this.g.info(message, {
-            life: 5
+            life: 2
         });
     },
 
@@ -288,12 +288,12 @@ var ajaxaddtocart = {
 
         if(typeof error == 'string') {
             _this.g.error(error, {
-                life: 5
+                life: 2
             });
         } else {
             error.each(function(message){
                 _this.g.error(message, {
-                    life: 5
+                    life: 2
                 });
             });
         }

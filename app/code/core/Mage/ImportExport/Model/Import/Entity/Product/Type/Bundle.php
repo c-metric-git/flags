@@ -25,7 +25,7 @@
  */
 
 /**
- * Import entity bundle product type model
+ * Import entity grouped product type model
  *
  * @category    Mage
  * @package     Mage_ImportExport
@@ -39,7 +39,7 @@ class Mage_ImportExport_Model_Import_Entity_Product_Type_Bundle
      *
      * @var array
      */
-    protected $_particularAttributes = array(
-        'bundle_sku', 'bundle_option_title', 'bundle_attribute','bundle_price','bundle_quantity'
+    protected $_forcedAttributesCodes = array(
+        'bundle_sku', 'bundle_option_title', 'bundle_attribute','bundle_price','bundle_quantity','price_type',
     );
 }

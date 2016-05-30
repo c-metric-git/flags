@@ -605,7 +605,7 @@ class Mage_ImportExport_Model_Import_Entity_Product extends Mage_ImportExport_Mo
             }
             if ($model->isSuitable()) {
                 $this->_productTypeModels[$type] = $model;
-            }
+            }         
             $this->_particularAttributes = array_merge(
                 $this->_particularAttributes,
                 $model->getParticularAttributes()
@@ -1409,11 +1409,11 @@ class Mage_ImportExport_Model_Import_Entity_Product extends Mage_ImportExport_Mo
                     if (is_null($productType)) {
                         continue;
                     }
-                }     
+                }           
                 $rowData = $this->_productTypeModels[$productType]->prepareAttributesForSave(
                     $rowData,
                     !isset($this->_oldSku[$rowSku])
-                );    
+                );        
                 try {       
                     $attributes = $this->_prepareAttributes($rowData, $rowScope, $attributes, $rowSku, $rowStore);
                 } catch (Exception $e) {

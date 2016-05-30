@@ -151,9 +151,9 @@ h3.product-name {
 	padding-left: 15px !important;
 	padding-right: 15px !important;
 }
-.catalog-product-view .required{
+/*.catalog-product-view .required{
 	display: none;
-}
+}*/
 .catalog-product-view .fp-prod-price li{
 	margin: 15px 0px;
 	padding-left: 0px;
@@ -238,10 +238,10 @@ input[type="radio"]{
 	display:none;
 }
 /* social login*/
-#magestore-popup{
+/*#magestore-popup{
 	top:80px !important;
 	position: fixed !important;
-}
+}*/
 /* account page*/
 .addresses-list address {
 	word-wrap:break-word;

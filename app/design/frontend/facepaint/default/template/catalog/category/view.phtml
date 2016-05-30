@@ -59,8 +59,9 @@
 <?php endif; ?>
 
 <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
-    <div class="col-md-9">
-        <p><?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?></p>
+    <div class="col-md-9 ">
+    
+        <div class="category-description std"><p><?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?></p></div>
     </div>
 <?php endif; ?>
 </div>

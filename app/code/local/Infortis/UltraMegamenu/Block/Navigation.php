@@ -2,7 +2,14 @@
      if($code_store == 'flagsrus' || $code_store == 'facepaint') {
        /* 	$imageSize=getimagesize(Mage::getBaseUrl().'media/magebuzz/featuredcategories/resized/120x120/'.$res['image']);
        if(is_array($imageSize)){*/
-        $x1c .='<img height="50" width="50" class="lazy" src="'.Mage::getBaseUrl().'media/magebuzz/featuredcategories/noimage-icon.jpg" data-original="'.Mage::getBaseUrl().'media/magebuzz/featuredcategories/resized/120x120/'.$res['image'].'" >';
+	   if($code_store == 'facepaint')
+	   {
+        $x1c .='<img height="80" width="80" class="lazy" src="'.Mage::getBaseUrl().'media/magebuzz/featuredcategories/noimage-icon.jpg" data-original="'.Mage::getBaseUrl().'media/magebuzz/featuredcategories/resized/120x120/'.$res['image'].'" >';
+	   }
+	   else
+	   {
+		$x1c .='<img height="50" width="50" class="lazy" src="'.Mage::getBaseUrl().'media/magebuzz/featuredcategories/noimage-icon.jpg" data-original="'.Mage::getBaseUrl().'media/magebuzz/featuredcategories/resized/120x120/'.$res['image'].'" >';
+	   }
        /*}
        else
        {

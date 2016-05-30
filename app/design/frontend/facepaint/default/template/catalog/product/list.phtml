@@ -335,7 +335,26 @@ $_collectionSize = $_productCollection->count ();
         ?>
         <div class="fp-product-wrapper mb15 row">
            <!-- <ul class="products-grid category-products-grid itemgrid itemgrid-adaptive itemgrid-<?php echo $columnCount; ?>col<?php if ($gridClasses) echo $gridClasses; ?>"> -->
-                <?php foreach ($_productCollection as $_product): ?>
+                <?php foreach ($_productCollection as $_product): ?> 
+                <?php 
+                 if($_product->getTypeId() == 'bundle' && $_product->getIsFixedKit() ){
+                       $bundle_option_items_arr=array();
+                        $bundle_options=Mage::getResourceModel('bundle/selection')->getChildrenIds($_product->getId() ,false);
+                       foreach ($bundle_options as  $bundle_option) {   
+                           foreach ($bundle_option as  $bundle_option_product) {  
+                              $product_obj=Mage::getModel('catalog/product')->load($bundle_option_product);
+                              $bundle_option_items_arr[]=intval(Mage::getModel('cataloginventory/stock_item')->loadByProduct($product_obj)->getIsInStock());
+                           }
+                          
+                       }
+                      if(in_array(0,$bundle_option_items_arr)){
+                      //  $stockItem = Mage::getModel('cataloginventory/stock_item')->loadByProduct($_product->getId());
+                      //  $stockItem->setData('is_in_stock', 0);
+                       // $stockItem->save();     
+                        $_product->getStockItem()->setData('is_in_stock', 0);
+                       }
+                    }
+                ?>
                 <div class="col-md-4 col-sm-6 fp-product-cust">
                     <div class="item" id="<?php echo $_product->getId (); ?>">
                         <div class="product-image-wrapper">
