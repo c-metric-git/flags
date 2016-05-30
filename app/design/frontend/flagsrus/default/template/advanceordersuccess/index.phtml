@@ -283,7 +283,7 @@ $addressDiff = array_diff($oBillingAddressFiltered, $oShippingAddressFiltered);
                             ?>
                         </td>
                         <td><?php echo $this->helper('checkout')->formatPrice($i->getPrice()); ?></td>
-                        <td><?php echo $i->getQtyOrdered(); ?></td>
+                        <td><?php echo (int)$i->getQtyOrdered(); ?></td>
                         <!--td><?php echo $i->getSku(); ?></td-->
                         <td><?php echo $this->helper('checkout')->formatPrice($i->getRowTotal()); ?></td>
                     </tr>

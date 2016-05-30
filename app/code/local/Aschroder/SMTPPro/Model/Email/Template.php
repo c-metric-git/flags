@@ -125,7 +125,8 @@ class Aschroder_SMTPPro_Model_Email_Template extends Mage_Core_Model_Email_Templ
                 'mail' => $mail,
                 'template' => $this,
                 'variables' => $variables,
-                'transport' => $transport
+				'transport' => $transport,
+				'storeid' => Mage::app()->getStore()->getStoreId()
             ));
 
             if ($transport->getTransport()) { // if set by an observer, use it

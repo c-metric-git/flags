@@ -41,7 +41,8 @@ class Aschroder_SMTPPro_Model_Email extends Mage_Core_Model_Email {
         Mage::dispatchEvent('aschroder_smtppro_before_send', array(
             'mail' => $mail,
             'email' => $this,
-            'transport' => $transport
+            'transport' => $transport,
+			'storeid' => Mage::app()->getStore()->getStoreId()
         ));
 
         if ($transport->getTransport()) { // if set by an observer, use it
