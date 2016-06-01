@@ -1,0 +1,17 @@
+<?php /* @var Potato_CheckoutCouponCode_Block_List $this */ ?>
+<?php $couponList = $this->getCouponList(); ?>
+<?php if ($this->canShow() && count($couponList)): ?>
+    <table class="data-table">
+        <?php foreach ($couponList as $couponCode => $discountAmount) :?>
+            <tr>
+                <td>
+                    <?php if ($this->canRenderRemoveLink()): ?>
+                        <a href="<?php echo $this->getRemoveLink($couponCode); ?>" title="<?php echo $this->__('Remove'); ?>" class="btn-remove"></a>
+                    <?php endif; ?>
+                    <?php echo $this->__('Discount (%s)', $couponCode); ?>
+                </td>
+                <td>-<?php echo $this->helper('checkout')->formatPrice($discountAmount); ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+<?php endif; ?>

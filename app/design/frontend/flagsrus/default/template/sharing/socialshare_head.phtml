@@ -5,7 +5,7 @@
  */
 $horizontalShareSettings = $this->getHorizontalSharingSettings();
 $verticalShareSettings = $this->getVerticalSharingSettings();
-if ($horizontalShareSettings['horizontalShareEnable'] == "1" || $verticalShareSettings['verticalShareEnable'] == "1") {
+if (($horizontalShareSettings['horizontalShareEnable'] == "1" || $verticalShareSettings['verticalShareEnable'] == "1") && Mage::registry('current_product')) {
 //    $sharingScript = '<script type="text/javascript">var islrsharing = true; var islrsocialcounter = true;</script> <script type="text/javascript" src="//sharecdn.social9.com/v1/social9.min.js" id="lrsharescript"></script><script type="text/javascript">';
 
     $sharingScript = '<script type="text/javascript">var islrsharing = true; var islrsocialcounter = true;</script> <script type="text/javascript" src="'. Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN).'frontend/flagsrus/default/js/social9.min.js" id="lrsharescript"></script><script type="text/javascript">';

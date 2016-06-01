@@ -1,0 +1,177 @@
+/* TAB LABEL */
+#system_config_tabs .po_core dt.label{
+    background-image: url("../images/logo.png");
+    background-position: 1px 1px;
+    background-repeat: no-repeat;
+    background-size: 25px auto;
+    font-size: 14px;
+    padding-left: 26px;
+}
+/* Extensions table */
+#po_core_extensions {
+    font-size: 14px;
+    padding: 0;
+}
+#po_core_extensions > .field-row {
+    display: none;
+}
+#po_core_extensions p.name {
+    text-decoration: none;
+    font-size: 14px;
+    vertical-align: top;
+    margin-bottom: 0;
+}
+#po_core_extensions a {
+    text-decoration: none;
+    font-size: 14px;
+    vertical-align: top;
+    color: #2980b9;
+}
+#po_core_extensions a:hover {
+    text-decoration: underline;
+}
+#po_core_extensions table {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #666;
+    font-size: 12px;
+    background: #eaebec;
+    border: 0;
+}
+#po_core_extensions table th {
+    padding: 5px 10px 5px 10px;
+    border: 0;
+    border-bottom: 1px solid #e0e0e0;
+    background: #ecf0f1;
+    font-size: 14px;
+    color: #2c3e50;
+}
+#po_core_extensions table th:first-child {
+    text-align: left;
+    padding-left: 20px;
+}
+#po_core_extensions table tr {
+    text-align: center;
+    padding-left: 20px;
+}
+#po_core_extensions table td:first-child {
+    text-align: left;
+    padding-left: 20px;
+    border-left: 0;
+}
+#po_core_extensions table td {
+    vertical-align: middle;
+    padding: 10px;
+    border: 0;
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    border-left: 1px solid #e0e0e0;
+
+    background: #fafafa;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
+    background: -moz-linear-gradient(top, #fbfbfb, #fafafa);
+}
+#po_core_extensions table tr.even td {
+    background: #f6f6f6;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f8f8f8), to(#f6f6f6));
+    background: -moz-linear-gradient(top, #f8f8f8, #f6f6f6);
+}
+#po_core_extensions table tr:last-child td {
+    border-bottom: 0;
+}
+#po_core_extensions table tr:hover td {
+    background: #f2f2f2;
+    background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
+    background: -moz-linear-gradient(top, #f2f2f2, #f0f0f0);
+}
+#po_core_extensions .po-core-table-version{
+    font-size: 16px;
+    font-weight: bold;
+}
+#po_core_extensions .po-core-last-version {
+    color: #208627;
+    margin: 0;
+}
+#po_core_extensions .po-core-old-version {
+    color: #e74c3c;
+    vertical-align: bottom;
+    margin: 0;
+}
+#po_core_extensions a.po-core-doc img {
+    width: 20px;
+}
+#po_core_extensions a.po-core-review {
+    position: absolute;
+    right: 15px;
+    display: none;
+}
+#po_core_extensions a.po-core-table-update-extension
+{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 16px;
+    background-image: url('../images/update.png');
+}
+#po_core_extensions table {
+    position: relative;
+    width: 100%;
+}
+#po_core_extensions table tr:hover a.po-core-review {
+    display: inline;
+}
+/** ABOUT US */
+#po_core_aboutus a{
+    color: #2980b9;
+}
+
+
+/** CONTACT US fieldset */
+.po-core-contactus-header {
+    padding: 5px 5px 5px 30px;
+    display: block;
+    width: 378px;
+    margin: 0 0 10px 0;
+    border: 2px solid #3498db;
+    background-color: #ecf0f1;
+    background-image: url("../images/help.png");
+    background-repeat: no-repeat;
+    background-size: 18px;
+    background-position: 5px;
+    color: #2c3e50;
+}
+#po_core_contactus div.po-core-contactus-two-rows,
+#po_core_contactus div.po-core-contactus-one-row {
+    width: 421px;
+    padding: 0 0 5px 0;
+}
+#po_core_contactus div.po-core-contactus-two-rows > div {
+    display: inline-block;
+    padding: 0 5px 0 0;
+}
+#po_core_contactus label {
+    float: none;
+    display: block;
+}
+#po_core_contactus label:after {
+    color: #ff3b30;
+    content: " *";
+}
+#po_core_contactus textarea {
+    height: 12em;
+    width: 414px;
+}
+#po_core_contactus input {
+    width: 414px;
+}
+#po_core_contactus div.po-core-contactus-two-rows input {
+    width: 200px;
+}
+#po-core-contactus-btn {
+    width: auto !important;
+    float: right;
+}
+#po_core_contactus .validation-advice {
+    margin: 0;
+}

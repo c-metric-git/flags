@@ -6,15 +6,16 @@
     {
          $product = $observer->getProduct();
          $bundle_parmas=Mage::app()->getRequest()->getParams(); 
-         if($bundle_parmas['product']['price_type'] == 0) //dynamice
-         {
-            $product->setPriceType(0);	
+         if(empty($bundle_parmas['id'])) {
+             if($bundle_parmas['product']['price_type'] == 0) //dynamice
+             {
+                $product->setPriceType(0);	
+             }
+             else
+             {
+                $product->setPriceType(1); //fixed		
+             }
          }
-         else
-         {
-            $product->setPriceType(1); //fixed		
-         }
-         
 
     }
 

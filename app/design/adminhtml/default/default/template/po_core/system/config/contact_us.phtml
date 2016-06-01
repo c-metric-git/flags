@@ -1,0 +1,40 @@
+<?php /** @var Mage_Core_Block_Template $this */?>
+<div class="po-core-contactus-header">
+    <?php echo $this->__("Need some <strong>help</strong> or <strong>customization</strong>? Submit a ticket from this form.");?>
+</div>
+
+<div class="po-core-contactus-two-rows">
+    <div>
+        <span class="field-row">
+            <label for="po-core-contactus-name"><?php echo $this->__('Your Name');?></label>
+            <input id="po-core-contactus-name" name="contact_us_name" value="" type="text">
+        </span>
+    </div>
+    <div>
+        <span class="field-row">
+            <label for="po-core-contactus-email"><?php echo $this->__('Your Email');?></label>
+            <input id="po-core-contactus-email" name="contact_us_email" value="" class="validate-email" type="text">
+        </span>
+    </div>
+</div>
+
+<div class="po-core-contactus-one-row">
+    <span class="field-row">
+        <label for="po-core-contactus-subject"><?php echo $this->__('Ticket Subject');?></label>
+        <input id="po-core-contactus-subject" name="contact_us_subject" value="" type="text">
+    </span>
+</div>
+
+<div class="po-core-contactus-one-row">
+    <span class="field-row" style="margin:0">
+        <label for="po-core-contactus-message"><?php echo $this->__('Message');?></label>
+        <textarea id="po-core-contactus-message" name="contact_message"></textarea>
+    </span>
+</div>
+
+<div class="po-core-contactus-one-row">
+    <input id="po-core-contactus-btn" value="<?php echo $this->__('Submit Ticket');?>" onclick="contactForm.submit()"
+           class="form-button" type="button">
+</div>
+
+<script type="text/javascript">var contactForm = new PotatoCoreContactForm();</script>

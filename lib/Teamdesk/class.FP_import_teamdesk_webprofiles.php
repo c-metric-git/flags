@@ -33,7 +33,9 @@ class FPTeamDeskWebprofiles {
     private $blank_weights = array(); 
     private $image_not_found = array();
     private $product_counter = 0;
+    private $bundle_product_counter = 0;   
     private $csv_counter=0;
+    private $bundle_csv_counter=0;  
     private $fp;
     private $arrProductConfigurableAttributes;
     private $arrColor;
@@ -188,7 +190,8 @@ class FPTeamDeskWebprofiles {
             
             $attribute_set='';   
             $product_type='';  
-            $site_images_path = "/";  
+            $site_images_path = "/"; 
+            $type_of_product='';  
            /**
             * @desc code to create the solo products csv file for uploading in magento
             */
@@ -210,16 +213,19 @@ class FPTeamDeskWebprofiles {
             * @desc code to create the attributes configurable products csv file for uploading in magento
             */
             if (isset($arrBundleTDProducts) && is_array($arrBundleTDProducts) && count($arrBundleTDProducts) > 0) {   
-                $this->fp = fopen("var/import/products/FP_BundleProducts.csv","w+"); 
+                $this->fp = fopen("var/import/products/FP_BundleProducts".$this->bundle_csv_counter.".csv","w+"); 
                 $pr_type = 'Parent';
+                $type_of_product = 'bundle'; 
                 $this->add_header_into_csv();   
-                $this->add_data_into_csv($arrBundleTDProducts,$arrTDProductsAttributes,$pr_type);   
+                $this->add_data_into_csv($arrBundleTDProducts,$arrTDProductsAttributes,$pr_type,$type_of_product);   
             }  // End of isset prduct loop
             fclose($this->fp); 
             $this->send_missing_product_images_mail();
             echo "<br />total products count =".$this->product_counter;
             echo "<br />total csv counter =".$this->csv_counter;
             $_SESSION['product_csv_counter'] = $this->csv_counter; 
+            echo "<br />Bundle product total csv counter =".$this->bundle_csv_counter;  
+            $_SESSION['bundle_product_csv_counter'] = $this->bundle_csv_counter; 
             return $strReturn;
         }                         
         else {
@@ -247,7 +253,7 @@ class FPTeamDeskWebprofiles {
              } 
              mail("dhiraj@clownantics.com","Products Details not found on FP site ",$mail_message,$headers);   
     } 
-    function add_data_into_csv($arrSoloTDProducts,$arrTDProductsAttributes,$pr_type='Solo')
+    function add_data_into_csv($arrSoloTDProducts,$arrTDProductsAttributes,$pr_type='Solo',$type_of_product='')
     {
         $site_images_path = "/"; 
         	 
@@ -263,7 +269,12 @@ class FPTeamDeskWebprofiles {
                        $categories_counter = 0;
                        $attributes_counter = 0;                       
 					   
-                       $this->product_counter++;           
+                       if($type_of_product=='bundle') {
+                            $this->bundle_product_counter++;           
+                       }
+                       else {
+                           $this->product_counter++; 
+                       }        
                        $lowerpinnacleSKU = strtolower($tdProduct['PinnacleSKU']);
                        if(($tdProduct["Product - Weight"]<= 0) || ($tdProduct["Product - Weight"]==''))  
                        {
@@ -774,10 +785,16 @@ class FPTeamDeskWebprofiles {
                                         fputcsv($this->fp,$csv_row);
                                     } // End of for largest counter loop
                             } // End of if not in product added array  
-                            if($this->product_counter % 800 == 0) {
+                            if($this->product_counter % 800 == 0 && $type_of_product!='bundle') {
                                  $this->csv_counter++;  
                                  fclose($this->fp);
                                  $this->fp = fopen("var/import/products/FP_Products".$this->csv_counter.".csv","w+");
+                                 $this->add_header_into_csv();   
+                            } 
+                            if($this->bundle_product_counter % 800 == 0 && $type_of_product=='bundle') {
+                                 $this->bundle_csv_counter++;  
+                                 fclose($this->fp);
+                                 $this->fp = fopen("var/import/products/FP_BundleProducts".$this->bundle_csv_counter.".csv","w+");  
                                  $this->add_header_into_csv();   
                             }  
                    } // End of foreach product loop 

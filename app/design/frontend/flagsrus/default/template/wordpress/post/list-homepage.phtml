@@ -36,7 +36,7 @@ $('.responsiveGallery-wrapper').responsiveGallery({
   <section id="responsiveGallery-container" class="">
    <!--<a class="responsiveGallery-btn responsiveGallery-btn_prev" href="javascript:void(0);"></a> 
    <a class="responsiveGallery-btn responsiveGallery-btn_next" href="javascript:void(0);"></a>-->
-    <div class="col-md-12">
+    <div class="col-sm-12 col-md-12">
 		<?php foreach($posts as $post): ?>
 			<?php $featuredImage = $post->getFeaturedImage(); ?>
 			
@@ -51,7 +51,7 @@ $('.responsiveGallery-wrapper').responsiveGallery({
                     $month = date('M', $timestamp);
 			     ?>
 
-				<div class="col-md-4 home_latestpost">
+				<div class="col-sm-4 col-md-4 home_latestpost">
 					<a href="<?php echo $post->getPermalink() ?>" class="responsivGallery-link"><img class="lazy" src="<?php echo $this->getSkinUrl('images/loader.gif') ?>" data-original="<?php echo $featuredImageobj['guid'] ?>" alt="" width="350px" height="250px"></a>
 				</br>
 						<div class="col-md-3" style="padding-left:0px">

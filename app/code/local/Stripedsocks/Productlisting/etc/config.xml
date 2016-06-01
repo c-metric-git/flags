@@ -25,6 +25,14 @@
                 </rewrite>
             </bundle> -->
         </blocks>
+         <helpers>
+            <bundle>
+                <rewrite>
+                  <catalog_product_configuration>Stripedsocks_Productlisting_Helper_Catalog_Product_Configuration</catalog_product_configuration>
+                </rewrite> 
+            </bundle>  
+
+         </helpers> 
         <models>
             <catalog>
                 <rewrite>

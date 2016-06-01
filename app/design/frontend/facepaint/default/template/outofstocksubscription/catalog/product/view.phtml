@@ -167,11 +167,11 @@
 								<div class="short-description"><div class="std" itemprop="description"><?php echo $shortDescription; ?></div></div>
 							<?php endif; */?>
 						 
-					            <label class="fp-prod-id" ><?php echo $this->__("Product ID: ");?>
+					           <!-- <label class="fp-prod-id" ><?php echo $this->__("Product ID: ");?>
 						            <span class="sku-val">
 									<?php echo $_product->getSku();?>
 						            </span>
-						        </label>
+						        </label>-->
 			              </ul>
 			          </div>  <!-- .fp-prod-price -->  
 			       <?php  
@@ -187,14 +187,35 @@
 		     
 		         ?>
 			      <?php if(!$_product->isSaleable() && $_isActive && !$_product->isGrouped()): ?>   
-			          <div class="col-sm-4" id="product_detail_stock_lable" style="padding-top:10px"> 	
-		               <strong><?php echo $this->__('Out of Stock') ?></strong>
-			         </div>     
+			      <div class="row" >
+				      	<div class="col-sm-6" >
+				                   <div class="sku" style="font-family:Lato; font-weight:bold;">               
+									Product Id: 	            <span class="sku-val">
+									<?php echo $_product->getSku();?>	            </span>
+	                             </div>
+				       </div>			        
+				       <div class="col-sm-4" id="product_detail_stock_lable" style="padding-top:10px"> 	
+			               <strong><?php echo $this->__('Out of Stock') ?></strong>
+				       </div>     
+				   </div>     
 			      <?php  endif; ?>  
 			       <?php if($_product->isGrouped() && $grouped_simpleitem_min_qty == 0): ?>   
-			          <div class="col-sm-4" id="product_detail_stock_lable" style="padding-top:10px"> 	
-		               <strong><?php echo $this->__('Out of Stock') ?></strong>
-			         </div>     
+			        <div class="row" >
+			           <div class="col-sm-6" >
+			                   <!--<label class="fp-prod-id" ><?php echo $this->__("Product ID: ");?>
+						            <span class="sku-val">
+									<?php echo $_product->getSku();?>
+						            </span>
+						        </label> -->
+						        <div class="sku" style="font-family:Lato; font-weight:bold;">               
+									Product Id: 	            <span class="sku-val">
+									<?php echo $_product->getSku();?>	            </span>
+	                             </div>
+			            </div>
+			           <div class="col-sm-4" id="product_detail_stock_lable" style="padding-top:10px"> 	
+		                 <strong><?php echo $this->__('Out of Stock') ?></strong>
+			           </div> 
+			        </div>        
 			      <?php  endif; ?>   
 			     <!--</div>   -->
 				<?php if($_product->isSaleable() && !$_product->isGrouped() ): ?>			

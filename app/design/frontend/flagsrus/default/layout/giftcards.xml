@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <layout>
     <default>
-        <!--reference name="head">
+        <reference name="head">
             <action method="addCss">
                 <stylesheet>css/webtexgiftcards.css</stylesheet>
             </action>
@@ -9,18 +9,9 @@
             <action method="addItem"><type>js</type><name>calendar/calendar.js</name></action>
             <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name></action>
             <block type="core/html_calendar" name="head.calendar" as="calendar" template="page/js/calendar.phtml"/>
-        </reference-->
+        </reference>
     </default>
     <PRODUCT_TYPE_giftcards>
-	        <reference name="head">
-            <action method="addCss">
-                <!--stylesheet>css/webtexgiftcards.css</stylesheet-->
-            </action>
-            <action method="addItem"><type>js_css</type><name>calendar/calendar-win2k-1.css</name><params/></action>
-            <action method="addItem"><type>js</type><name>calendar/calendar.js</name></action>
-            <action method="addItem"><type>js</type><name>calendar/calendar-setup.js</name></action>
-            <block type="core/html_calendar" name="head.calendar" as="calendar" template="page/js/calendar.phtml"/>
-        </reference>
         <reference name="product.info">
             <block type="giftcards/product_type" name="product.info.giftcards" as="product_type_data" template="webtex/giftcards/product/type.phtml"/>
 

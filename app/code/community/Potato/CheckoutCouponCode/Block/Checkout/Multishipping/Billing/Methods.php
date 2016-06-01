@@ -1,0 +1,6 @@
+<?php
+
+class Potato_CheckoutCouponCode_Block_Checkout_Multishipping_Billing_Methods extends Mage_Checkout_Block_Multishipping_Billing
+{
+
+}

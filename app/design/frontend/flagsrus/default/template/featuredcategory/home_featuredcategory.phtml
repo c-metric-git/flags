@@ -26,6 +26,7 @@
                 ->addFieldToFilter('featured_category', 1)  // by brt
 		->addAttributeToFilter('path', array('like' => "1/{$rootCategoryId}/%"))
 		->addAttributeToSelect('featured_category', 1);	
+		//$categories->setPageSize(8);
 
     if($showCategoriesAlphabet){
         $categories = Mage::getModel('catalog/category')->getCollection()
@@ -64,7 +65,8 @@
                                     <div class="featuredcategory-image">
 										<a title="<?php echo $categoryname ?>" alt="<?php echo $categoryname ?>" href="<?php echo $category->getUrl() ?>">
                                         <!--img class="owl-lazy" data-src-retina="<?php echo $this->getSkinUrl('images/loader.gif') ?>" data-src="<?php if($categoryImage) echo $newImageCategoriesResized?>" height="<?php echo $imageCategoriesHeight?>" width="<?php echo $imageCategoriesWidth?>" alt="<?php echo $categoryname ?>"/-->
-                                        <img class="owl-lazy" data-src="<?php if($categoryImage) echo $newImageCategoriesResized?>" height="<?php echo $imageCategoriesHeight?>" width="<?php echo $imageCategoriesWidth?>" alt="<?php echo $categoryname ?>"/>
+                                        <!--img class="owl-lazy" data-src="<?php if($categoryImage) echo $newImageCategoriesResized?>" height="<?php echo $imageCategoriesHeight?>" width="<?php echo $imageCategoriesWidth?>" alt="<?php echo $categoryname ?>"/-->
+                                        <img class="lazy" src="<?php echo $this->getSkinUrl('images/loader.gif') ?>" data-original="<?php if($categoryImage) echo $newImageCategoriesResized?>" height="<?php echo $imageCategoriesHeight?>" width="<?php echo $imageCategoriesWidth?>" alt="<?php echo $categoryname ?>"/>
 										</a>
 									</div>
 									<div class="featuredcategory-name" style="width:<?php echo $imageCategoriesWidth?>px"><h5><a title="<?php echo $categoryname ?>" alt="<?php echo $categoryname ?>" href="<?php echo $category->getUrl() ?>" target="_blank"><?php echo $categoryname ?></a></h5></div>

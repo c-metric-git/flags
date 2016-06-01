@@ -1,0 +1,22 @@
+<?php /* @var $this Potato_CheckoutCouponCode_Block_Checkout_Multishipping_Billing_Methods */ ?>
+<?php
+$_methods       = $this->getMethods();
+$_methodsCount  = count($_methods);
+?>
+<?php foreach ($_methods as $_method): $_code = $_method->getCode() ?>
+    <dt>
+        <?php if ($_methodsCount > 1): ?>
+            <input type="radio" id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" name="payment[method]" title="<?php echo $this->escapeHtml($_method->getTitle()) ?>" onclick="payment.switchMethod('<?php echo $_code ?>')"<?php if ($this->getSelectedMethodCode() == $_code): ?> checked="checked"<?php endif; ?> class="radio"/>
+        <?php else : ?>
+            <span class="no-display">
+                <input type="radio" id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" name="payment[method]" checked="checked" class="radio"/>
+            </span>
+        <?php endif; ?>
+        <label for="p_method_<?php echo $_code ?>"><?php echo $this->escapeHtml($_method->getTitle()); ?></label>
+    </dt>
+    <?php if ($html = $this->getChildHtml('payment.method.' . $_code)) : ?>
+        <dd>
+            <?php echo $html; ?>
+        </dd>
+    <?php endif; ?>
+<?php endforeach; ?>

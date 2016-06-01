@@ -66,7 +66,10 @@ class Stripedsocks_Productlisting_Block_Product_List extends Mage_Catalog_Block_
 				$this->_productCollection->setVisibility(array(
 									Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH,
 									Mage_Catalog_Model_Product_Visibility::VISIBILITY_IN_CATALOG));
-				$this->_productCollection->addAttributeToFilter('type_id', array('nin' => array('configurable')));
+				//$this->_productCollection->addAttributeToFilter('type_id', array('nin' => array('configurable')));
+				$this->_productCollection->joinAttribute('display_product_in_filter', 'catalog_product/display_product_in_filter', 'entity_id', null, 'left');
+				$this->_productCollection->getSelect()->where("`e`.`type_id` NOT IN ('configurable') OR at_display_product_in_filter.value = 1");
+				//echo $this->_productCollection->getSelect()->__toString();
 				if(!$layer->getCurrentCategory()->getHasSets())
 				{
 					$this->_productCollection->addAttributeToFilter('type_id', array('nin' => array('grouped')));

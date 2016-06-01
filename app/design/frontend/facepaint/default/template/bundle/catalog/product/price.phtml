@@ -75,7 +75,7 @@ if ($_product->getPriceType() == 1) {
 ?>
 
 <div class="price-box">
-    <div class="sku" style="font-family:Lato Regular">               
+    <div class="sku" style="">               
             ID: <?php echo $_product->getSku() ?>        
      </div>
         <?php if ($_product->getPriceView()): ?>
@@ -106,10 +106,30 @@ if ($_product->getPriceType() == 1) {
                         <?php echo $_coreHelper->currency($_minimalPriceInclTax) ?>
                     </span>
             <?php else: ?>
+                <?php                   
+                         $SpecialPrice=$_product->getSpecialPrice();
+                         $Price=$_product->getPrice();
+                         $FinalPrice =$_product->getFinalPrice(); 
+                 ?>
                 <?php if ($_taxHelper->displayPriceIncludingTax()): ?>
                     <?php echo $_coreHelper->currency($_minimalPriceInclTax) ?>
                 <?php else: ?>
-                    <?php  echo $_coreHelper->currency($_minimalPriceTax) ?>
+                            <?php  if(isset($SpecialPrice) && ( $SpecialPrice < $Price  ) ): ?> 
+                           <div class="price-right"> 
+                                 <p class="old-price" style="margin-bottom:10px">
+                                    <span class="price" id="old-price-<?php echo $_product->getId() ?>">
+                                         <?php  echo Mage::helper('core')->currency($Price,true,false); ?>                  
+                                     </span>
+                                 </p>    
+                                 <p class="special-price">
+                                    <span class="price" id="product-price-<?php echo $_product->getId() ?>">
+                                       <?php  echo $_coreHelper->currency($_minimalPriceTax) ?>                
+                                     </span>
+                                </p>
+                            </div>
+                            <?php  else: ?>
+                            <?php  echo $_coreHelper->currency($_minimalPriceTax) ?>
+                            <?php  endif; ?>
                 <?php endif; ?>
                 <?php if ($_weeeTaxAmount && $_product->getPriceType() == 1 && $_weeeHelper->typeOfDisplay($_product, array(2, 1, 4))): ?>
                     <span class="weee">(<small>

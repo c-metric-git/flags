@@ -1,0 +1,18 @@
+
+<?php if ($this->helper('clearprint')->isEnabledPrintProduct()): ?>
+
+	<?php
+	$_product = $this->getProduct();
+	$url = "clearprint/catalog_product/view/".$_product->getEntityId();
+	$buttonTitle = $this->__('Print Product');
+	?>
+	
+	<?php /*
+	<button style="margin-left:2px" type="button" title="<?php echo $buttonTitle ?>" class="button btn-cart" onclick='window.open("<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).'clearprint/catalog_product/view/id/'.$_product->getEntityId() ?>", "_blank", "toolbar=0,location=0,menubar=0");'><span><span><?php echo $buttonTitle ?></span></span></button>
+	*/ ?>
+
+	<ul class="add-to-links">	
+		<li style="margin-left:5px"><a href="#" onclick='window.open("<?php echo $this->getBaseUrl().'clearprint/catalog_product/view/id/'.$_product->getEntityId() //echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).'clearprint/catalog_product/view/id/'.$_product->getEntityId() ?>", "_blank", "toolbar=0,location=0,menubar=0");' class="link-wishlist"><?php echo $this->__('Print Product') ?></a></li>
+	</ul>
+	
+<?php endif; ?>

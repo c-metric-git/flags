@@ -32,12 +32,12 @@
 <?php $_default     = $_option->getDefaultSelection(); ?>
 <?php list($_defaultQty, $_canChangeQty) = $this->_getDefaultValues(); ?>
 <?php $tierPriceHtml = ''; ?>
-<?php  if($this->escapeHtml($_option->getTitle()) != strtolower("Palettes") ): ?>
+<?php  if($this->escapeHtml(strtolower($_option->getTitle())) != "palettes" ): ?>
         <dt>
             <label<?php if ($_option->getRequired()) echo ' class="required"' ?>><?php echo $this->escapeHtml($_option->getTitle()) ?><?php if ($_option->getRequired()) echo '<em>*</em>' ?></label>
         </dt>
 <?php  endif; ?>
-<dd<?php if ($_option->decoratedIsLast){?> class="last"<?php }?> <?php if($this->escapeHtml($_option->getTitle()) == strtolower("Palettes") ) { ?> style='display:none' <?php } ?> >
+<dd<?php if ($_option->decoratedIsLast){?> class="last"<?php }?> <?php if($this->escapeHtml( strtolower($_option->getTitle())) == "palettes" ) { ?> style='display:none' <?php } ?> >
     <div class="input-box">
     <?php /** @var $_selection Mage_Catalog_Model_Product*/ ?>
     <?php if ($this->_showSingle()): ?>

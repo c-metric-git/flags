@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <po_core translate="label" module="po_core">
+            <label>POTATOCOMMERCE</label>
+            <class>po_core</class>
+            <sort_order>300</sort_order>
+        </po_core>
+    </tabs>
+    <sections>
+        <po_core translate="label" module="po_core">
+            <label>Info</label>
+            <tab>po_core</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>99999</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <extensions translate="label">
+                    <label>Installed Extensions</label>
+                    <frontend_type>text</frontend_type>
+                    <frontend_model>po_core/system_config_form_fieldset_extensions</frontend_model>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </extensions>
+                <aboutus translate="label">
+                    <label>About Us</label>
+                    <frontend_type>text</frontend_type>
+                    <frontend_model>po_core/system_config_form_fieldset_aboutUs</frontend_model>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </aboutus>
+                <contactus translate="label">
+                    <label>Submit Ticket</label>
+                    <frontend_type>text</frontend_type>
+                    <frontend_model>po_core/system_config_form_fieldset_contactUs</frontend_model>
+                    <sort_order>30</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                </contactus>
+            </groups>
+        </po_core>
+    </sections>
+</config>

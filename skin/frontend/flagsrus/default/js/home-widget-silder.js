@@ -56,7 +56,7 @@ jQuery( document ).ready(function() {
     });
 
     
-    jQuery(function () {
+    /*jQuery(function () {
       var owl20 = jQuery('#itemslider-category');
            owl20.owlCarousel({
                 lazyLoad: true,
@@ -74,7 +74,7 @@ jQuery( document ).ready(function() {
                 goToFirst: true,
                 navigationText: false
             }); //end: owl
-     });
+     });*/
 
    
    /* var itemCount = jQuery("#owl-demo div").length;

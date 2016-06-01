@@ -1593,7 +1593,7 @@ button, input, select, textarea {
     padding-right:0 30px;
 }
 .block-layered-nav dl dd ol > li > a, .block-layered-nav dl dd ol > li > span{ padding:3px 12px 3px 0;}
-.nav-regular .nav-block.nav-block--right.std.grid12-5{position: absolute; top: -12px; right: -72px;}
+.nav-regular .nav-block.nav-block--right.std.grid12-7{position: absolute; top: -12px; right: -188px; z-index: -4;}
 #nav.nav-regular .nav-panel-inner{ padding:23px 0;}
 .header-regular #header-nav .inner-container {  padding-left: 0 !important;}
 #nav.nav-regular .nav-panel--dropdown .nav-block.nav-block--bottom.std{float: right; margin-top: -31px; width: 58%;}
@@ -1603,7 +1603,10 @@ font-family: "Lato Bold";font-size: 18px;line-height: 20px;}
 -moz-box-shadow:    3px 3px 5px 0px rgba(50, 50, 50, 0.75);
 box-shadow:         3px 3px 5px 0px rgba(50, 50, 50, 0.75); margin-right: 20px;}
 #nav.nav-regular .nav-submenu--mega > li{padding-bottom:15px;}
-
+.button.btn-cart{min-width: 200px;  font-size: 12px;line-height: 55px;   padding: 0 7px;}
+.product_detail_email_sunscription{ vertical-align:middle;}
+.fp-prod-price li span.old-price, .sku-val{color:#0184a2;}
+ 
 @media not all {
 #account-links-wrapper-regular, #header-compare {
     position: absolute;
@@ -1764,7 +1767,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0ea9cc', end
 .catalog-product-view .fp-cust-add-cart {
 	width: 224px;
 }
-}
+.itemgrid .item{ float:none;}
+.owl-carousel-0 .owl-item, .owl-carousel-11 .owl-item{ max-width:none;}
+} 
 
 @media (max-width:639px) {
 .box-account .box-head h2 {
@@ -1887,6 +1892,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0ea9cc', end
    
     line-height: 32px;
     padding: 0 7px;
+}
+
+input.input-text, select {
+    height: 36px;
 }
 
 @media (min-width:767px) {

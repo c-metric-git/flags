@@ -123,16 +123,8 @@ class Mage_Bundle_Helper_Catalog_Product_Configuration extends Mage_Core_Helper_
 
                         foreach ($bundleSelections as $bundleSelection) {
                             $qty = $this->getSelectionQty($product, $bundleSelection->getSelectionId()) * 1;
-                            $fpname=$bundleSelection->getAttributeText('fp_color');
-                            $itemame=$bundleSelection->getName();
-                            if(!empty($fpname)){
-                             $optioname=$fpname;
-                             }
-                             else{
-                                 $optioname=$itemame;
-                             }
                             if ($qty) {
-                                $option['value'][] = $qty . ' x ' . $this->escapeHtml($optioname)
+                                $option['value'][] = $qty . ' x ' . $this->escapeHtml($bundleSelection->getName())
                                     . ' ' . Mage::helper('core')->currency(
                                         $this->getSelectionFinalPrice($item, $bundleSelection)
                                     );

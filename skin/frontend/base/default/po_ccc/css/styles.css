@@ -1,0 +1,17 @@
+.po_ccc_wrapper {
+    padding-bottom: 8px;
+}
+
+.po_ccc-discount-form .opc-please-wait,
+.po_ccc-discount-form .please-wait {
+    line-height: 21px;
+}
+
+#po_ccc_coupon_list {
+    margin-top: 5px;
+}
+
+.po_ccc_wrapper a.btn-remove {
+    display: inline-block;
+    margin-top: 3px;
+}

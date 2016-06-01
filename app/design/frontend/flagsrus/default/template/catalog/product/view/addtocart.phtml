@@ -60,14 +60,14 @@
     $productCount=intval($stock->getQty());
 ?>
 <!--=================== by brt ends =================-->
-
+<?php  $product_type=$_product->getTypeId(); ?>
 <?php //if ($_product->isSaleable() && ($productCount>0)){
 	if ($_product->isSaleable()){ ?>
 
 
     <div class="add-to-cart left-side">
 
-        <?php if(!$_product->isGrouped()): ?>
+        <?php if(!$_product->isGrouped() && $product_type != 'bundle' ): ?>
 
             <div class="qty-wrapper">
 
@@ -86,6 +86,31 @@
                 </select>
             </div>
 
+        <?php endif; ?>
+         <?php if($product_type == 'bundle'): ?>
+              <?php
+                   $bundle_item_qty=array();
+                   $bundle_options=Mage::getResourceModel('bundle/selection')->getChildrenIds($_product->getId() ,false);
+                   foreach ($bundle_options as  $bundle_option) {
+                       foreach ($bundle_option as  $bundle_option_product) {
+                          $product_obj=Mage::getModel('catalog/product')->load($bundle_option_product);
+                          $bundle_item_qty[]=intval(Mage::getModel('cataloginventory/stock_item')->loadByProduct($product_obj)->getQty());
+                       }
+                   }
+                   $min_bundle_item_qty=min($bundle_item_qty);
+              ?>                  
+             <div class="qty-wrapper">
+                <label for="qty"><?php echo $this->__('Qty:') ?></label>
+                <select class="input-text qty qty-select-<?php echo $_product->getId(); ?>" name="qty" id="qty">
+                <?php $i = 1 ?>
+                <?php do { ?>
+                <option value="<?php echo $i?>">
+                <?php echo $i?>
+                <?php $i++ ?>
+                </option>
+                <?php } while ($i <= $min_bundle_item_qty) ?>
+                </select>
+            </div>
         <?php endif; ?>
 
           <?php if($_product->isGrouped()): ?>
@@ -111,6 +136,9 @@
     </div>
 <input type="hidden" class="is_paypal" value="0" id="is_paypal"/>
     <div class="paypal-wrapper"><?php echo $this->getChildHtml('', true, true) ?></div>
+    <div class="gotocheckout-wrapper"><button type="button" title="Go To Checkout" class="button" onclick="location.href='<?php echo $this->getUrl('checkout/cart'); ?>'"><span><span>Go Checkout</span></span></button>
+	</div>
+	
 
 <?php }else{
     

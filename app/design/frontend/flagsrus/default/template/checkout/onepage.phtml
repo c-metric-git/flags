@@ -67,9 +67,14 @@
 			onepage: ''
 		);
 	<?php endif; ?>
-	checkout.gotoSection = function (section, reloadProgressBlock) {
-	Checkout.prototype.gotoSection.call(this, section, reloadProgressBlock);
-	$('opc-' + section).scrollTo();
-	};
+var breakpointMedium = 768;
+var isResponsive = jQuery('body').hasClass('responsive');
+    if (isResponsive && jQuery(window).width() < breakpointMedium)
+    {
+		checkout.gotoSection = function (section, reloadProgressBlock) {
+		Checkout.prototype.gotoSection.call(this, section, reloadProgressBlock);
+		$('opc-' + section).scrollTo();
+		};
+    }
 //]]>
 </script>

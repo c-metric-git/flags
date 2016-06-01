@@ -35,7 +35,9 @@ class FLTeamDeskWebprofiles {
     private $blank_weights = array(); 
     private $image_not_found = array();
     private $product_counter = 0;
+    private $bundle_product_counter = 0; 
     private $csv_counter=0;
+    private $bundle_csv_counter=0;
     private $fp;
     private $arrProductConfigurableAttributes;
     private $arrThemeSubtheme;
@@ -244,7 +246,14 @@ class FLTeamDeskWebprofiles {
             else {
                 $arrParentTDProducts = $this->getTDProducts('Parent');
                 $_SESSION['arrParentTDProducts'] = $arrParentTDProducts; 
-            }   
+            }  
+            if($_SESSION['FLarrBundleTDProducts'] !='' && isset($_SESSION['FLarrBundleTDProducts'])) {
+                $arrBundleTDProducts = $_SESSION['FLarrBundleTDProducts'];
+            }
+            else {
+                $arrBundleTDProducts = $this->getTDProducts('Fixed');
+                $_SESSION['FLarrBundleTDProducts'] = $arrBundleTDProducts; 
+            } 
             echo "<br />count of design family contents = ".count($_SESSION['arrTDDesignFamilyContents']);
             echo "<br />count of prodct family content = ".count($_SESSION['arrTDProductFamilyContents']);
             echo "<br />count of season = ".count($_SESSION['arrFilterSeason']);
@@ -257,6 +266,7 @@ class FLTeamDeskWebprofiles {
             echo "<br />count of season subthemes = ".count($_SESSION['arrSeasonSubtheme']);
             echo "<br />count of occassion subthemes = ".count($_SESSION['arrOccassionSubtheme']);
             echo "<br />count of holiday subthemes = ".count($_SESSION['arrHolidaySubtheme']);
+            echo "<br />count of bundled products = ".count($_SESSION['FLarrBundleTDProducts']);  
             /*echo '<pre>';
             print_R($_SESSION['arrThemeSubtheme']);
             print_R($_SESSION['arrSeasonSubtheme']);
@@ -270,7 +280,8 @@ class FLTeamDeskWebprofiles {
             $attribute_set='';   
             $product_type='';  
             $site_images_path = "/";  
-           /**
+            $type_of_product='';
+            /**
             * @desc code to create the solo products csv file for uploading in magento
             */
             if (isset($arrSoloTDProducts) && is_array($arrSoloTDProducts) && count($arrSoloTDProducts) > 0) {
@@ -551,11 +562,24 @@ class FLTeamDeskWebprofiles {
                 $pr_type = 'Parent';
                 $this->add_data_into_csv($arrParentTDProducts,$arrTDProductsAttributes,$pr_type);   
             }  // End of isset prduct loop
-            $this->send_missing_product_images_mail();
             fclose($this->fp); 
+            /**
+            * @desc code to create the attributes configurable products csv file for uploading in magento
+            */
+            if (isset($arrBundleTDProducts) && is_array($arrBundleTDProducts) && count($arrBundleTDProducts) > 0) {   
+                $this->fp = fopen("var/import/products/FL_BundleProducts".$this->bundle_csv_counter.".csv","w+"); 
+                $pr_type = 'Parent';
+                $type_of_product = 'bundle';
+                $this->add_header_into_csv();   
+                $this->add_data_into_csv($arrBundleTDProducts,$arrTDProductsAttributes,$pr_type,$type_of_product);   
+            }  // End of isset prduct loop
+            fclose($this->fp); 
+            $this->send_missing_product_images_mail();
             echo "<br />total products count =".$this->product_counter;
             echo "<br />total csv counter =".$this->csv_counter;
             $_SESSION['product_csv_counter'] = $this->csv_counter; 
+            echo "<br />Bundle product total csv counter =".$this->bundle_csv_counter;  
+            $_SESSION['bundle_product_csv_counter'] = $this->bundle_csv_counter; 
              /**
              * @desc code to check the new products added in the csv file or not.  
              */
@@ -633,7 +657,7 @@ class FLTeamDeskWebprofiles {
              } 
              mail("dhiraj@clownantics.com","Products Details not found on FL site ",$mail_message,$headers);   
     } 
-    function add_data_into_csv($arrSoloTDProducts,$arrTDProductsAttributes,$pr_type='Solo')
+    function add_data_into_csv($arrSoloTDProducts,$arrTDProductsAttributes,$pr_type='Solo',$type_of_product='')
     {
         $site_images_path = "/"; 
         $holiday_arr = $this->arrFilterSeason['holiday'];
@@ -661,7 +685,12 @@ class FLTeamDeskWebprofiles {
                        $season_counter = 0; 
                        $feature_counter=0;
                        
-                       $this->product_counter++;           
+                       if($type_of_product=='bundle') {
+                            $this->bundle_product_counter++;           
+                       }
+                       else {
+                           $this->product_counter++; 
+                       }    
                        $lowerpinnacleSKU = strtolower($tdProduct['PinnacleSKU']);
                        if(($tdProduct["Product - Weight"]<= 0) || ($tdProduct["Product - Weight"]==''))  
                        {
@@ -930,7 +959,10 @@ class FLTeamDeskWebprofiles {
                                             $csv_row[] = $tdProduct['kitType']== 'Fixed'?"1":"0"; //is_fixed_kit 
                                             $csv_row[] = $tdProduct['iconLabel']; //iconlabel 
                                             $csv_row[] = $tdProduct['Product - Next Date Due To Arrive']>date("Y-m-d")?$tdProduct['Product - Next Date Due To Arrive']:""; //date_of_arrival
-                                            $csv_row[] = $tdProduct['Product - QTY On Current POs']; //qy_on_current_po 
+                                            $csv_row[] = $tdProduct['Product - QTY On Current POs']; //qty_on_current_po
+                                            $csv_row[] = $tdProduct['kitType']=='Fixed'?'1':'1'; //price_type   
+                                            $csv_row[] = $tdProduct['kitType']=='Fixed'?'As Low as':''; //price_view 
+                                            $csv_row[] = $tdProduct['flagShowInMonogramFilter?']=="1"?'yes':'no'; //display_product_in_filter
                                             $csv_row[] = ""; //custom_layout_update
                                             $csv_row[] = ""; //custom_design   ultimo/default
                                             $csv_row[] = "1 column";  //page_layout
@@ -1009,9 +1041,9 @@ class FLTeamDeskWebprofiles {
                                             $csv_row[] = ""; //_links_crosssell_position
                                             $csv_row[] = "";//$this->arrTDDesignFamilyContents[$related_design_family][$i]['related_web_profile']; //_links_upsell_sku
                                             $csv_row[] = "";  //_links_upsell_position
-                                            $csv_row[] = $tdProduct['kitType']=='Fixed'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Product - FL Solo PinnacleSKU']:"";  //_associated_sku
-                                            $csv_row[] = $tdProduct['kitType']=='Fixed'?1:""; //_associated_default_qty
-                                            $csv_row[] = $tdProduct['kitType']=='Fixed'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['priority']:""; //_associated_position
+                                            $csv_row[] = "";  //_associated_sku
+                                            $csv_row[] = ""; //_associated_default_qty
+                                            $csv_row[] = ""; //_associated_position
                                             $csv_row[] = ""; //_tier_price_website
                                             $csv_row[] = ""; //_tier_price_customer_group
                                             $csv_row[] = ""; //_tier_price_qty
@@ -1059,7 +1091,12 @@ class FLTeamDeskWebprofiles {
                                                      $price  = $attributePrice - $tmpProductPrice; 
                                                  } 
                                             }  
-                                            $csv_row[] = $price;//_super_attribute_price_corr
+                                            $csv_row[] = $tdProduct['kitType']!='Fixed'?$price:"";//_super_attribute_price_corr
+                                            $csv_row[] = $tdProduct['kitType']=='Fixed'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Product - FL Solo PinnacleSKU']:"";//bundle_sku  
+                                            $csv_row[] = $tdProduct['kitType']=='Fixed'?$web_option:"";//bundle_option_title   
+                                            $csv_row[] = $tdProduct['kitType']=='Fixed'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Attribute']:"";//bundle_attribute 
+                                            $csv_row[] = $tdProduct['kitType']=='Fixed'?$attributePrice:"";//bundle_price  
+                                            $csv_row[] = $tdProduct['kitType']=='Fixed'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['priority']:"";//bundle_position   
                                         }
                                         else {
                                                 $csv_row[] = ""; //sku
@@ -1098,7 +1135,10 @@ class FLTeamDeskWebprofiles {
                                                 $csv_row[] = ""; //is_fixed_kit  
                                                 $csv_row[] = ""; //iconlabel
                                                 $csv_row[] = ""; //date_of_arrival
-                                                $csv_row[] = ""; //qy_on_current_po  
+                                                $csv_row[] = ""; //qty_on_current_po  
+                                                $csv_row[] = ""; //price_type   
+                                                $csv_row[] = ""; //price_view
+                                                $csv_row[] = ""; //display_product_in_filter    
                                                 $csv_row[] = ""; //custom_layout_update
                                                 $csv_row[] = ""; //custom design
                                                 $csv_row[] = ""; //page layout
@@ -1154,9 +1194,9 @@ class FLTeamDeskWebprofiles {
                                                 $csv_row[] = ""; //_links_crosssell_position
                                                 $csv_row[] = "";//$this->arrTDDesignFamilyContents[$related_design_family][$i]['related_web_profile']; //_links_upsell_sku
                                                 $csv_row[] = "";  //_links_upsell_position
-                                                $csv_row[] = $tdProduct['kitType']=='Fixed'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Product - FL Solo PinnacleSKU']:"";  //_associated_sku
-                                                $csv_row[] = $tdProduct['kitType']=='Fixed'?1:""; //_associated_default_qty
-                                                $csv_row[] = $tdProduct['kitType']=='Fixed'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['priority']:""; //_associated_position
+                                                $csv_row[] = "";  //_associated_sku
+                                                $csv_row[] = ""; //_associated_default_qty
+                                                $csv_row[] = ""; //_associated_position
                                                 $csv_row[] = ""; //_tier_price_website
                                                 $csv_row[] = ""; //_tier_price_customer_group
                                                 $csv_row[] = ""; //_tier_price_qty
@@ -1204,17 +1244,29 @@ class FLTeamDeskWebprofiles {
                                                          $price  = $attributePrice - $tmpProductPrice; 
                                                      } 
                                                 }  
-                                                $csv_row[] = $price; //_super_attribute_price_corr
+                                                $csv_row[] = $tdProduct['kitType']!='Fixed'?$price:""; //_super_attribute_price_corr
+                                                $csv_row[] = $tdProduct['kitType']=='Fixed'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Product - FL Solo PinnacleSKU']:"";//bundle_sku  
+                                                $csv_row[] = $tdProduct['kitType']=='Fixed'?$web_option:"";//bundle_option_title   
+                                                $csv_row[] = $tdProduct['kitType']=='Fixed'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['Attribute']:"";//bundle_attribute 
+                                                $csv_row[] = $tdProduct['kitType']=='Fixed'?$attributePrice:"";//bundle_price  
+                                                $csv_row[] = $tdProduct['kitType']=='Fixed'?$this->arrProductConfigurableAttributes[$lowerpinnacleSKU][$i]['priority']:"";//bundle_position   
+
                                         }        
                                         fputcsv($this->fp,$csv_row);
                                     } // End of for largest counter loop
                             } // End of if not in product added array  
-                            if($this->product_counter % 900 == 0) {
+                            if($this->product_counter % 700 == 0 && $type_of_product!='bundle') {
                                  $this->csv_counter++;  
                                  fclose($this->fp);
                                  $this->fp = fopen("var/import/products/FL_Products".$this->csv_counter.".csv","w+");
                                  $this->add_header_into_csv();   
-                            }  
+                            } 
+                            if($this->bundle_product_counter % 500 == 0 && $type_of_product=='bundle') {
+                                 $this->bundle_csv_counter++;  
+                                 fclose($this->fp);
+                                 $this->fp = fopen("var/import/products/FL_BundleProducts".$this->bundle_csv_counter.".csv","w+");  
+                                 $this->add_header_into_csv();   
+                            } 
                    } // End of foreach product loop 
     }
     /**
@@ -1249,10 +1301,10 @@ class FLTeamDeskWebprofiles {
         /**
         * @desc  create string of columns to be retreived from the query  
         */       
-        $strColumns = "[isNewProduct?], [Product - VENDOR - DisplayLabelEnteredFL],[Product - Type - DisplayLabelEnteredFL],[Product - Filter - Size - DisplayLabelEnteredFL],[Product - Seasons], [Product - Themes], [Product - SubThemes],[Product - Themes Full Name],[PinnacleSKU],[Description],[Display Name],[PriceCalced],[DiscountPriceCalced],[overview],[is_visible],[Product - Weight],[Quantity Available],[imgLocationCustom],[Related Product],[meta_description],[meta_keywords],[meta_title],[kitType],[Related Design Family],[Related Product Family],[Priority_Cached],[FLFilterSectionCalced],[url],[flagFeaturesSearchLabel],[Image Alt Text 1],[Product - Next Date Due To Arrive],[Product - QTY On Current POs],[iconLabel]";   
+        $strColumns = "[flagShowInMonogramFilter?], [isNewProduct?], [Product - VENDOR - DisplayLabelEnteredFL],[Product - Type - DisplayLabelEnteredFL],[Product - Filter - Size - DisplayLabelEnteredFL],[Product - Seasons], [Product - Themes], [Product - SubThemes],[Product - Themes Full Name],[PinnacleSKU],[Description],[Display Name],[PriceCalced],[DiscountPriceCalced],[overview],[is_visible],[Product - Weight],[Quantity Available],[imgLocationCustom],[Related Product],[meta_description],[meta_keywords],[meta_title],[kitType],[Related Design Family],[Related Product Family],[Priority_Cached],[FLFilterSectionCalced],[url],[flagFeaturesSearchLabel],[Image Alt Text 1],[Product - Next Date Due To Arrive],[Product - QTY On Current POs],[iconLabel]";   
         try
         {        
-            $arrResults = $this->api->Query("SELECT TOP 800 ".$strColumns." FROM [FL Web Profile] ".$arrQueries." ORDER BY [PinnacleSKU]");     
+            $arrResults = $this->api->Query("SELECT TOP 800 ".$strColumns." FROM [FL Web Profile] ".$arrQueries." ORDER BY [PinnacleSKU]"); 
             if (isset($arrResults->Rows)) { 
                  foreach ($arrResults->Rows as $productDetails) {
                     $last_record = $productDetails['PinnacleSKU'];
@@ -1419,6 +1471,10 @@ class FLTeamDeskWebprofiles {
                   $product_header_row[] = "iconlabel";
                   $product_header_row[] = "date_of_arrival"; 
                   $product_header_row[] = "qty_on_current_po";
+                  $product_header_row[] = "price_type";  
+                  $product_header_row[] = "price_view"; 
+                  $product_header_row[] = "display_product_in_filter";  
+                  
                   $product_header_row[] = "custom_layout_update";
                   $product_header_row[] = "custom_design"; 
                   $product_header_row[] = "page_layout";   
@@ -1493,6 +1549,11 @@ class FLTeamDeskWebprofiles {
                   $product_header_row[] = "_super_attribute_code";
                   $product_header_row[] = "_super_attribute_option";
                   $product_header_row[] = "_super_attribute_price_corr";
+                  $product_header_row[] = "bundle_sku";
+                  $product_header_row[] = "bundle_option_title"; 
+                  $product_header_row[] = "bundle_attribute";
+                  $product_header_row[] = "bundle_price"; 
+                  $product_header_row[] = "bundle_position"; 
                   fputcsv($this->fp,$product_header_row);
            }
     }    

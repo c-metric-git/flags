@@ -1,0 +1,81 @@
+<?php /* @var $this Potato_CheckoutCouponCode_Block_Coupon_Multishipping */ ?>
+<?php if ($this->canShow()) : ?>
+<div id="po_ccc_wrapper" class="po_ccc_wrapper box">
+    <div class="box-title">
+        <h2><?php echo $this->__('Discount Code'); ?></h2>
+    </div>
+    <ul class="po_ccc-message messages" style="display: none;"></ul>
+    <div class="po_ccc-discount-form field-row">
+        <input type="text" class="input-text" id="po_ccc_coupon_code" name="coupon_code" value="<?php echo $this->getCouponCode(); ?>">
+        <button type="button" id="po_ccc-apply" title="<?php echo $this->__('Apply Coupon'); ?>" class="button" value="<?php echo $this->__('Apply Coupon'); ?>"<?php if ($this->isCouponApplied() && $this->_getApi()->canShowCancelButton()): ?> style="display:none;"<?php endif; ?>>
+            <span>
+                <span><?php echo $this->__('Apply Coupon'); ?></span>
+            </span>
+        </button>
+        <button type="button" id="po_ccc-cancel" title="<?php echo $this->__('Cancel Coupon'); ?>" class="button" value="<?php echo $this->__('Cancel Coupon'); ?>"<?php if (!$this->isCouponApplied() || !$this->_getApi()->canShowCancelButton()): ?> style="display:none;"<?php endif; ?>>
+            <span>
+                <span><?php echo $this->__('Cancel Coupon'); ?></span>
+            </span>
+        </button>
+        <span id="po_ccc-please-wait" style="display: none;" class="opc-please-wait please-wait f-right">
+            <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif'); ?>" class="v-middle" alt="" />
+            <?php echo $this->__('Please Wait...'); ?>
+        </span>
+    </div>
+    <div id="po_ccc_coupon_list">
+        <?php echo $this->getChildHtml('po_ccc.coupon_list'); ?>
+    </div>
+</div>
+
+<script type="text/javascript">
+    // Add coupon field to payment section
+    var themeConfig = {
+        'couponCodeContainerSelector'  : '#po_ccc_wrapper',
+        'paymentStepContainerSelector' : '.multiple-checkout .col-2'
+    };
+    (function() {
+        var couponCodeContainer = $$(themeConfig.couponCodeContainerSelector).first();
+        var paymentSection = $$(themeConfig.paymentStepContainerSelector).first();
+        if (!couponCodeContainer || !paymentSection) {
+            return this;
+        }
+
+        if (paymentSection.firstChild) {
+            paymentSection.insertBefore(couponCodeContainer, paymentSection.firstChild);
+        } else {
+            paymentSection.appendChild(couponCodeContainer);
+        }
+    })();
+
+    // Init coupon code logic
+    var poCouponConfig = {
+        // DOM Elements Config
+        'couponCodeInputSelector'        : '#po_ccc_coupon_code',
+        'applyCouponButtonSelector'      : '#po_ccc-apply',
+        'cancelCouponButtonSelector'     : '#po_ccc-cancel',
+        'loadingIndicatorSelector'       : '#po_ccc-please-wait',
+        'couponCodeContainerSelector'    : '#po_ccc_container',
+        'unobtrusiveCheckboxSelector'    : '#use_coupon_code',
+        'msgContainerSelector'           : '.po_ccc-message',
+        'couponCodeListSelector'         : '#po_ccc_coupon_list',
+        'paymentMethodContainerSelector' : '.sp-methods',
+        // Form Config
+        'applyCouponUrl'  : '<?php echo $this->getApplyCouponUrl(); ?>',
+        'cancelCouponUrl' : '<?php echo $this->getCancelCouponUrl(); ?>',
+        'cartUrl'         : '<?php echo $this->getCartUrl(); ?>',
+        'isCouponApplied' : <?php var_export($this->isCouponApplied()); ?>,
+        'isEnabledUnobtrusiveInterface' : <?php var_export($this->isEnabledUnobtrusiveInterface()); ?>,
+        // API config
+        'canShowCancelButton'          : <?php var_export($this->_getApi()->canShowCancelButton()); ?>,
+        'isCleanCouponCodeAfterApply'  : <?php var_export($this->_getApi()->isCleanCouponCodeAfterApply()); ?>,
+        'isCleanCouponCodeAfterCancel' : <?php var_export($this->_getApi()->isCleanCouponCodeAfterCancel()); ?>,
+        // Messages Config
+        'successMessageBoxCssClass' : 'success-msg',
+        'errorMessageBoxCssClass'   : 'error-msg',
+        'defaultSuccessMsg'         : '<?php echo $this->__('Ok'); ?>',
+        'defaultErrorMsg'           : '<?php echo $this->__('Oops something went wrong'); ?>'
+    };
+
+    var poCoupon = new PoCheckoutCoupon(poCouponConfig);
+</script>
+<?php endif; ?>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<config>
+
+    <modules>
+
+        <Chapagain_ClearPrint>
+
+            <active>false</active>
+
+            <codePool>community</codePool>
+
+        </Chapagain_ClearPrint>
+
+    </modules>
+
+</config> 
+

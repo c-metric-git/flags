@@ -333,6 +333,18 @@ jQuery(document).ready(function () {
                 }
             });
         }
+		if (jQuery('#search-wrapper-regular').length)
+        {
+            enquire.register('screen and (max-width: ' + (breakpointMedium - 1) + 'px)', {
+                match: function () {
+					jQuery('#header-search').insertAfter(jQuery('.after-mobile-logo'));
+                },
+                unmatch: function () {
+                    // Move layered nav back to left column
+                    jQuery('#search-wrapper-regular').append(jQuery('#header-search'))
+                }
+            });
+        }
     }
 
     // ==============================================

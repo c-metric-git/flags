@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<layout version="0.1.0">
+    <checkout_onepage_index>
+        <reference name="head">
+            <action method="addCss"><stylesheet>po_ccc/css/styles.css</stylesheet></action>
+            <action method="addItem"><type>js</type><name>po_ccc/coupon.js</name></action>
+        </reference>
+        <reference name="content">
+            <block type="po_ccc/coupon_onepage" name="po_ccc.coupon" template="po_ccc/coupon/onepage.phtml">
+                <block type="po_ccc/list" name="po_ccc.coupon_list" template="po_ccc/list.phtml" />
+            </block>
+        </reference>
+    </checkout_onepage_index>
+    <checkout_multishipping_billing>
+        <reference name="head">
+            <action method="addCss"><stylesheet>po_ccc/css/styles.css</stylesheet></action>
+            <action method="addItem"><type>js</type><name>po_ccc/coupon.js</name></action>
+        </reference>
+        <reference name="content">
+            <block type="po_ccc/coupon_multishipping" name="po_ccc.coupon" template="po_ccc/coupon/multishipping.phtml">
+                <block type="po_ccc/list" name="po_ccc.coupon_list" template="po_ccc/list.phtml" />
+            </block>
+        </reference>
+    </checkout_multishipping_billing>
+    <po_ccc_multishipping_billing_methods>
+        <block type="po_ccc/checkout_multishipping_billing_methods" name="po_ccc.multishipping_billing_methods" template="po_ccc/checkout/multishipping/billing/methods.phtml" />
+    </po_ccc_multishipping_billing_methods>
+</layout>

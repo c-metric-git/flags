@@ -1,0 +1,6 @@
+
+<?php if ($this->helper('clearprint')->isEnabledPrintCart()): ?>
+
+	<a href="#" onclick='window.open("<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_WEB).'clearprint/checkout_cart/index' ?>", "_blank", "toolbar=0,location=0,menubar=0");' class="link-wishlist"><?php echo $this->__('Print Shopping Cart') ?></a>
+
+<?php endif; ?>
