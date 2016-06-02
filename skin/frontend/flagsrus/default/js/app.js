@@ -335,7 +335,7 @@ jQuery(document).ready(function () {
         }
 		if (jQuery('#search-wrapper-regular').length)
         {
-            enquire.register('screen and (max-width: ' + (breakpointMedium - 1) + 'px)', {
+            enquire.register('screen and (max-width: ' + (breakpointMedium) + 'px)', {
                 match: function () {
 					jQuery('#header-search').insertAfter(jQuery('.after-mobile-logo'));
                 },

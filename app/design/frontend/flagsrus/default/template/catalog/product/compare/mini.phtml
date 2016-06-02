@@ -41,9 +41,9 @@
 
 ?>
 
-<div id="mini-compare-wrapper-regular" onclick="window.open('<?php echo $_helper->getListUrl() ?>','_self')">
+<div id="mini-compare-wrapper-regular">
   <div id="mini-compare" class="mini-compare dropdown<?php echo (!$count ? ' is-empty' : ' is-not-empty'); ?>">
-    <div class="mini-compare-heading dropdown-heading cover skip-link skip-compare" title="<?php echo $mainTitle; ?>" style="cursor:pointer"> <span><span class="icon ic"><img height="19" width="19" src="<?php if($code_store == 'stripedsocks'):?><?php echo $this->getSkinUrl('images/infortis/_shared/compare.jpg');?><?php else:?><?php echo $this->getSkinUrl('images/flagsrus-compare.jpg');?><?php endif;?>" alt="Compare" /></span>
+    <div class="mini-compare-heading dropdown-heading cover skip-link skip-compare" title="<?php echo $mainTitle; ?>"> <span><span class="icon ic"><img height="19" width="19" src="<?php if($code_store == 'stripedsocks'):?><?php echo $this->getSkinUrl('images/infortis/_shared/compare.jpg');?><?php else:?><?php echo $this->getSkinUrl('images/flagsrus-compare.jpg');?><?php endif;?>" alt="Compare" /></span>
       <?php if ($count > 0): ?>
       <span class="count"><?php echo $count; ?></span>
       <?php endif; ?>
@@ -52,12 +52,15 @@
       <?php if($count > 0): ?>
       <div class="block-subtitle"><?php echo $this->__('Recently added item(s)'); ?></div>
       <ol id="compare-items" class="mini-products-list">
+        <?php  $compare_count=0; ?>
         <?php foreach($_items as $_index => $_item): ?>
-        <li class="item">
-          <input type="hidden" class="compare-item-id" value="<?php echo $_item->getId() ?>" />
-          <a href="<?php echo $_helper->getRemoveUrl($_item) ?>" title="<?php echo $this->__('Remove This Item') ?>" class="btn-remove" onclick="return confirm('<?php echo $this->__('Are you sure you would like to remove this item from the compare products?') ?>');"></a>
-          <p class="product-name"><a href="<?php echo $this->getProductUrl($_item) ?>"><?php echo $this->helper('catalog/output')->productAttribute($_item, $_item->getName(), 'name') ?></a></p>
-        </li>
+        <?php $compare_count++; if($compare_count <= 5) :  ?> 
+          <li class="item">
+            <input type="hidden" class="compare-item-id" value="<?php echo $_item->getId() ?>" />
+            <a href="<?php echo $_helper->getRemoveUrl($_item) ?>" title="<?php echo $this->__('Remove This Item') ?>" class="btn-remove" onclick="return confirm('<?php echo $this->__('Are you sure you would like to remove this item from the compare products?') ?>');"></a>
+            <p class="product-name"><a href="<?php echo $this->getProductUrl($_item) ?>"><?php echo $this->helper('catalog/output')->productAttribute($_item, $_item->getName(), 'name') ?></a></p>
+          </li>
+      <?php  endif; ?>
         <?php endforeach; ?>
       </ol>
       <script type="text/javascript">decorateList('compare-items')</script>

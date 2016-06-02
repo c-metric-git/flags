@@ -13,10 +13,13 @@ class Webtex_Giftcards_Model_Giftcards extends Mage_Core_Model_Abstract
     const USED = 2;
     const EXPIRED = 3;
     const REFUNDED = 4;
+    
+    protected $_helper;
 
     protected function _construct()
     {
         $this->_init('giftcards/giftcards');
+        $this->_helper = Mage::helper('giftcards');
         parent::_construct();
     }
 
@@ -69,7 +72,7 @@ class Webtex_Giftcards_Model_Giftcards extends Mage_Core_Model_Abstract
             $storeId = 1;
         }
 
-        $amount = number_format(Mage::app()->getStore($storeId)->convertPrice($this->getCardAmount(), false, false),2);
+        $amount = Mage::app()->getStore($storeId)->formatPrice($this->getCardAmount(), false);
   
         if(Mage::helper('giftcards')->isUseDefaultPicture() || !$this->getProductId()) {
            $picture = Mage::getDesign()->getSkinUrl('images/giftcard.png',array('_area'=>'frontend'));
@@ -82,7 +85,7 @@ class Webtex_Giftcards_Model_Giftcards extends Mage_Core_Model_Abstract
            }
         }
          $post = array(
-             'amount'        => $this->_addCurrencySymbol($amount,$this->getCardCurrency()),
+             'amount'        => $amount, //$this->_addCurrencySymbol($amount,$this->getCardCurrency()),
              'code'          => $this->getCardCode(),
              'email-to'      => $this->getMailTo(),
              'email-from'    => $this->getMailFrom(),
@@ -109,7 +112,7 @@ class Webtex_Giftcards_Model_Giftcards extends Mage_Core_Model_Abstract
             $storeId = 1;
         }
 
-        $amount = number_format(Mage::app()->getStore($storeId)->convertPrice($this->getCardAmount(), false, false),2);
+        $amount = Mage::app()->getStore($storeId)->formatPrice($this->getCardAmount(), false);
 
         if(Mage::helper('giftcards')->isUseDefaultPicture() || !$this->getProductId()) {
            $picture = Mage::getDesign()->getSkinUrl('images/giftcard.png',array('_area'=>'frontend'));
@@ -123,7 +126,7 @@ class Webtex_Giftcards_Model_Giftcards extends Mage_Core_Model_Abstract
         }
 
         $post = array(
-            'amount'        => $this->_addCurrencySymbol($amount,$this->getCardCurrency()),
+            'amount'        => $amount, //$this->_addCurrencySymbol($amount,$this->getCardCurrency()),
             'code'          => $this->getCardCode(),
             'email-to'      => $this->getMailTo(),
             'email-from'    => $this->getMailFrom(),
@@ -143,7 +146,7 @@ class Webtex_Giftcards_Model_Giftcards extends Mage_Core_Model_Abstract
             $storeId = 1;
         }
 
-        $amount = number_format(Mage::app()->getStore($storeId)->convertPrice($this->getCardAmount(), false, false),2);
+        $amount = Mage::app()->getStore($storeId)->formatPrice($this->getCardAmount(), false);
 
         if(Mage::helper('giftcards')->isUseDefaultPicture() || !$this->getProductId()) {
              $picture = Mage::getDesign()->getSkinUrl('images/giftcard.png',array('_area'=>'frontend'));
@@ -156,7 +159,7 @@ class Webtex_Giftcards_Model_Giftcards extends Mage_Core_Model_Abstract
              }
         }
         $post = array(
-            'amount'        => $this->_addCurrencySymbol($amount,$this->getCardCurrency()),
+            'amount'        => $amount, //$this->_addCurrencySymbol($amount,$this->getCardCurrency()),
             'code'          => $this->getCardCode(),
             'email-to'      => $this->getMailTo(),
             'email-from'    => $this->getMailFrom(),
@@ -208,15 +211,15 @@ class Webtex_Giftcards_Model_Giftcards extends Mage_Core_Model_Abstract
      */
     public function send($storeId = null)
     {
-        if (!$storeId && $this->getOrderId()) {
-            $order = Mage::getModel('sales/order')->load($this->getOrderId());
+        if (!$storeId && $this->getData('order_id')) {
+            $order = Mage::getModel('sales/order')->load($this->getData('order_id'));
             $storeId = $order->getStoreId();
         }
-        if ($this->getCardType() == 'email') {
+        if ($this->getData('card_type') == 'email') {
             $this->_sendEmailCard($storeId);
-        } else if ($this->getCardType() == 'print') {
+        } else if ($this->getData('card_type') == 'print') {
             $this->_sendPrintCard($storeId);
-        } else if ($this->getCardType() == 'offline') {
+        } else if ($this->getData('card_type') == 'offline') {
             $this->_sendOfflineCard($storeId);
         }
         return true;
@@ -238,11 +241,11 @@ class Webtex_Giftcards_Model_Giftcards extends Mage_Core_Model_Abstract
     protected function _beforeSave()
     {
         if (!$this->getId()) {
-            $code = $this->getCardCode();
+            $code = $this->getData('card_code');
             if(!isset($code)) {
-                $this->setCardCode($this->getUniqueCardCode());
+                $this->setData('card_code', $this->getUniqueCardCode());
             }
-            $this->setCardBalance($this->getCardAmount());
+            $this->setData('card_balance', $this->getData('card_amount'));
         }
     }
 
@@ -254,11 +257,54 @@ class Webtex_Giftcards_Model_Giftcards extends Mage_Core_Model_Abstract
         }
         
         $currencySymbol = Mage::app()->getLocale()->currency($currencyCode)->getSymbol();
-        if($currencySymbol == '€') {
-            $currencySymbol = '&euro;';
-        } elseif($currencySymbol == '£') {
-            $currencySymbol = '&pound;';
-        }
+
+        $currencySymbol = str_replace(array('€', '£'), array('&euro', '&pound'), $currencySymbol);
+        
         return $currencySymbol.$amount;
+   }
+
+   public function getOriginalBalance()
+   {
+       return $this->getData('card_balance');
+   }
+
+   public function getBaseBalance()
+   {
+       $originalCurrency = $this->getData('card_currency');
+       if(!$originalCurrency){
+            $originalCurrency = Mage::app()->getStore()->getBaseCurrencyCode();
+       }
+       $baseCurrency     = Mage::app()->getStore()->getBaseCurrencyCode();
+       if($originalCurrency != $baseCurrency) {
+           return Mage::helper('giftcards')->currencyConvert($this->getData('card_balance'), $originalCurrency, $baseCurrency);
+       }
+       return $this->getData('card_balance');
+   }
+
+   public function getCurrentBalance()
+   {
+       $originalCurrency = $this->getData('card_currency');
+       if(!$originalCurrency){
+            $originalCurrency = Mage::app()->getStore()->getBaseCurrencyCode();
+       }
+       $currentCurrency  = Mage::app()->getStore()->getCurrentCurrencyCode();
+       if($originalCurrency != $currentCurrency) {
+           return Mage::helper('giftcards')->currencyConvert($this->getData('card_balance'), $originalCurrency, $currentCurrency);
+       }
+       return $this->getData('card_balance');
+   }
+   
+   public function getCardAmount($convertValue = false)
+   {
+       if($convertValue){
+           $cardCurrency = $this->getCardCurrency();
+           if(!$cardCurrency){
+               $cardCurrency = Mage::app()->getStore()->getBaseCurrencyCode();
+           }
+           $currentCurrency  = Mage::app()->getStore()->getCurrentCurrencyCode();
+           return $this->_helper->currencyConvert($this->getData('card_amount'), $cardCurrency, $currentCurrency);
+       } else {
+           return $this->getData('card_amount');
+       }
    }
 }

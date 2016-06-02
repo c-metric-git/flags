@@ -196,6 +196,11 @@
 			</div>
 			<div class="grid12-6 mobile-grid-half">
             	<?php echo $this->getChildHtml('coupon') ?>
+                <!-- Gift Card Section -->
+                <?php if(Mage::getStoreConfig('giftcards/default/show_in_shopping_cart')): ?>
+                    <?php echo $this->getChildHtml('giftcards') ?>
+                <?php endif; ?>
+                <!-- Gift Card Section -->
             </div>
             <div class="grid-full alpha omega">
                 <?php echo $this->getChildHtml('crosssell') ?>

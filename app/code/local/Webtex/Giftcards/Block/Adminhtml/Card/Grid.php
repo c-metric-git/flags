@@ -120,6 +120,16 @@ class Webtex_Giftcards_Block_Adminhtml_Card_Grid extends Mage_Adminhtml_Block_Wi
             ),
         ));
         
+        if (!Mage::app()->isSingleStoreMode()) {
+            $this->addColumn('website_id', array(
+                'header'    => Mage::helper('giftcards')->__('Store'),
+                'index'     => 'website_id',
+                'type'      => 'store',
+                'store_view'=> true,
+                'display_deleted' => true,
+            ));
+        }
+
         $this->addColumn('card_actions', array(
             'header'    => Mage::helper('giftcards')->__('Action'),
             'width'     => 10,

@@ -395,7 +395,7 @@ input[type="checkbox"] {
 }
 .owl-carousel-11 .owl-item:hover > div, .fp-product-wrapper .fp-product-cust:hover {
 	border-radius: 5px;
-	border: 1px solid #DDD;
+	/*border: 1px solid #DDD;*/
 	z-index: 10;
 	background: none;
 	box-shadow: 0px 0px 12px #194ba1;
@@ -545,7 +545,7 @@ h3.product-name a {
 	position: relative;
 }
 .search-header form input#search {
-	width: 59%;
+	width:75%;
 	font-size: 14px;
 	height: 37px;
 	overflow: hidden;
@@ -731,7 +731,8 @@ h3.product-name a {
 /*Product page*/
 .search-input-div .button-start-search {
 	background-image: none;
-	float: right;
+	position:absolute;right: 0;
+    top: 0;
 	margin: 9px;
 }
 .searchBarnav .fa.fa-caret-down {
@@ -819,8 +820,10 @@ h3.product-name a {
 .btn-add-to-cart-ico {
 	padding: 15px 14px;
 }
+.btn-add-to-cart-ico:hover, .btn-add-to-cart:hover{ color:#fff;}
+.btn-add-to-cart:hover{border-left:1px solid #01738d;}
 .btn-add-to-cart {
-	padding: 15px 36px;
+	padding: 15px 36px; border-left:1px solid #01738d;
 }
 .btn-text {
 	line-height: 50px;
@@ -1572,12 +1575,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0ea9cc', end
     margin-right: 0;
 }
 .category-products-grid.hover-effect .item:hover {
-    border: medium none;
+   
     box-shadow: 0 0 12px #194ba1;
-    margin-left: -1%;
+   /* margin-left: -1%; border: medium none;
     margin-right: -1%;
     padding-left: 2%;
-    padding-right: 2%;
+    padding-right: 2%;*/
     z-index: 10;
 }
 .itemslider.equal-height .item{ width:100%;}
@@ -1921,7 +1924,7 @@ input.input-text, select {
 }
 
 .search-header form input#search {
-    max-width: 250px;
+    
 }
 
 .search-input-div .button-start-search {

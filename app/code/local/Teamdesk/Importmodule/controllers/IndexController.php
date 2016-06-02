@@ -531,7 +531,7 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
 						 unset($_SESSION["$clearsession_result"]);					
 					 }   
 					ini_set("display_errors",1);
-                    require_once('lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php'); 
+                    /*require_once('lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php'); 
                     $objTDProducts = new FLTeamDeskWebprofiles(); 
                     $strReturn = $objTDProducts->importTeamdeskProduct();       
                     $strMessage = "Product Import Status"; 
@@ -567,19 +567,19 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                         if($tmp_succ_message['error']!='') {
                              $succ_message['error'] .= $tmp_succ_message['error'];
                         } 
-                    }    
+                    } */   
                     $i=0;
                     /**
                     * @desc code to update the bundle products data 
                     */
-                   /* for($i=0;$i<=0;$i++) {    
+                    for($i=0;$i<=2;$i++) {    
                         $tmp_succ_message = $this->FLUpdateBundleProductData("var/import/products/FL_BundleProducts$i.csv"); 
                         if(count($tmp_succ_message) > 0) {
                             foreach($tmp_succ_message as $key=> $temp_error ) {
                                 $succ_message['error'] .= "<br />Error in Bundle Product $key => ".$temp_error;
                             }    
                         }
-                    }*/    
+                    }  
                     //unset($_SESSION['product_csv_counter']);
                     if($succ_message['success']!='') { 
                         Mage::getSingleton('core/session')->addSuccess($succ_message['success']);
@@ -604,7 +604,7 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
 						 unset($_SESSION["$clearsession_result"]);					
 					 }   
 					ini_set("display_errors",1);
-                    /*require_once('lib/Teamdesk/class.FP_import_teamdesk_webprofiles.php'); 
+                    require_once('lib/Teamdesk/class.FP_import_teamdesk_webprofiles.php'); 
                     $objTDProducts = new FPTeamDeskWebprofiles(); 
                     $strReturn = $objTDProducts->importTeamdeskProduct();    
                     $strMessage = "Product Import Status";                   
@@ -640,17 +640,17 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                         if($tmp_succ_message['error']!='') {
                              $succ_message['error'] .= $tmp_succ_message['error'];
                         } 
-                    }    */                                                 
+                    }   
                     //unset($_SESSION['product_csv_counter']);
                     /**
                     * @desc code to update the bundle products data 
                     */
-                    $tmp_succ_message = $this->UpdateBundleProductData("var/import/products/FP_BundleProducts0.csv"); 
+                    /*$tmp_succ_message = $this->UpdateBundleProductData("var/import/products/FP_BundleProducts0.csv"); 
                     if(count($tmp_succ_message) > 0) {
                         foreach($tmp_succ_message as $key=> $temp_error ) {
                             $succ_message['error'] .= "<br />Error in Bundle Product $key => ".$temp_error;
                         }    
-                    } 
+                    } */
                     if($succ_message['success']!='') { 
                         Mage::getSingleton('core/session')->addSuccess($succ_message['success']);
                     }
@@ -1331,9 +1331,9 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                             Mage::register('product', $bundleProduct);
                             $bundleProduct->save();
                             $bundleProduct->setData('price_type',1);
-                            $bundleProduct->getResource()->saveAttribute($bundleProduct,'price_type');
-                            Mage::unregister('product', $bundleProduct); 
+                            $bundleProduct->getResource()->saveAttribute($bundleProduct,'price_type');   
                             $bundleProduct->clearInstance();
+                            Mage::unregister('product', $bundleProduct);  
                         }
                     }    
                     return $error_sku_names;

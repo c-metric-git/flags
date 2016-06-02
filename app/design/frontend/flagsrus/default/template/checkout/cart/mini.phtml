@@ -99,8 +99,11 @@
 <div id="mini-cart" class="mini-cart dropdown<?php echo $cartClasses; ?>">
 
 
-
-    <a onclick="window.open('<?php echo $this->getUrl('checkout/cart'); ?>','_self')" href="<?php echo $this->getUrl('checkout/cart'); ?>" class="mini-cart-heading dropdown-heading cover skip-link skip-cart">
+	<?php if (Mage::registry('current_category') && !Mage::registry('current_product')): ?>
+		<a onclick="window.open('<?php echo $this->getUrl('checkout/cart'); ?>','_self')" href="<?php echo $this->getUrl('checkout/cart'); ?>" class="mini-cart-heading dropdown-heading cover skip-link skip-cart">
+	<?php else: ?>
+		<a onclick="window.open('<?php echo $this->getUrl('checkout/cart'); ?>','_self')" href="<?php echo $this->getUrl('checkout/cart'); ?>" class="mini-cart-heading dropdown-heading cover skip-link updated-skip-link skip-cart">
+	<?php endif; ?>
 
         <span>
 

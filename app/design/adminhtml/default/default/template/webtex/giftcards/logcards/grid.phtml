@@ -174,7 +174,7 @@ $numColumns = sizeof($this->getColumns());
 
                     <?php if($_column->getId() == 'expand_row'): ?>
                         <td onclick="<?php echo ($_display == 'block' ? 'toggleRows(this, '.$_groupId.');' : 'return false;' ) ?>" class="a-center closed" <?php if($_display == 'none'):?> style="border-top:0px;<?php if($counter == $_collection->getSize()-1): ?>border-bottom:0px;<?php endif;?>"<?php else:?> style="vertical-align:middle;"<?php endif;?> >
-                            <?php if($_display == 'block'): ?><img id="img_<?php echo $_groupId; ?>" src="<?php echo $this->getSkinUrl()?>/images/accordion_open.png" /><?php else:?>&nbsp;<?php endif; ?>
+                            <?php if($_display == 'block'): ?><img id="img_<?php echo $_groupId; ?>" src="<?php echo $this->getSkinUrl('images/accordion_open.png')?>" /><?php else:?>&nbsp;<?php endif; ?>
                         </td>
                     <?php else: ?>
                         <td <?php echo ($_rowspan ? 'rowspan="' . $_rowspan . '" ' : '') ?>class="<?php echo $_column->getCssProperty() ?> <?php echo ++$i==$numColumns?'last':'' ?>">
@@ -253,10 +253,10 @@ $numColumns = sizeof($this->getColumns());
     function toggleRows(element, id){
         $$('#hidden_'+id).each(function(el){el.toggle()});
         if(element.hasClassName('closed')){
-            $('img_'+id).src = '<?php echo $this->getSkinUrl()?>images/accordion_close.png';
+            $('img_'+id).src = '<?php echo $this->getSkinUrl('images/accordion_close.png')?>';
             element.removeClassName('closed');
         } else {
-            $('img_'+id).src = '<?php echo $this->getSkinUrl()?>images/accordion_open.png';
+            $('img_'+id).src = '<?php echo $this->getSkinUrl('images/accordion_open.png')?>';
             element.addClassName('closed');
         }
     }

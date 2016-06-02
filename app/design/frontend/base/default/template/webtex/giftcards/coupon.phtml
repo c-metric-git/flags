@@ -16,7 +16,7 @@
 }
 </style>
 
-<?php $oGiftCardSession = Mage::getSingleton('giftcards/session'); ?>
+<?php $_session = Mage::getSingleton('giftcards/session'); ?>
 <?php $loadFromSSL = $_SERVER['SERVER_PORT']==443?true:false; ?>
 <?php $isGiftCard = $this->isGiftCard(); ?>
 
@@ -37,20 +37,22 @@
             </div>
         </form>
 
-        <?php $currencySymbol = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol(); $temp = 0; ?>
-        <?php if($oGiftCardSession->getActive())
+        <?php $currencySymbol = Mage::app()->getLocale()->currency(Mage::app()->getStore()->getCurrentCurrencyCode())->getSymbol();
+              $temp = 0;
+        ?>
+        <?php if($_session->getActive())
                     echo '<br/>';
-                    foreach($oGiftCardSession->getFrontOptions() as $k => $v)
+                    foreach($_session->getCards() as $_id => $_value)
                     {
                         if($temp) {
                             echo '<br/><br/>';
                         }
-                        echo '<div id="edit-div""><input id="edit-card-amount-'.$k.'" style="width:50px;text-align:right;" value="'. $v['applied']. '" />';
-                        echo '<span id="apply-btn"><a onclick="applyAmount('.$k.'); return false;"><img src="'.$this->getSkinUrl('images/giftcard_apply.gif').'" alt=""></a></span>';
-                        echo '</div><b><span id="card-amount" class="card-amount" onclick="editAmount()">'.$currencySymbol.$v['applied'].'</span> '.$this->__('applied from Gift Card').' '.$v['code'].'.';
-                        echo '<input id="edit-card-code-'.$k.'" style="display:none;" value="'.$v['code'].'">';
+                        echo '<div id="edit-div""><input id="edit-card-amount-'.$_id.'" style="width:50px;text-align:right;" value="'. ($_value['original_card_balance']-$_value['card_balance']). '" />';
+                        echo '<span id="apply-btn"><a onclick="applyAmount('.$_id.'); return false;"><img src="'.$this->getSkinUrl('images/giftcard_apply.gif').'" alt=""></a></span>';
+                        echo '</div><b><span id="card-amount" class="card-amount" onclick="editAmount()">'.$currencySymbol.($_value['original_card_balance']-$_value['card_balance']).'</span> '.$this->__('applied from Gift Card').' '.$_value['card_code'].'.';
+                        echo '<input id="edit-card-code-'.$_id.'" style="display:none;" value="'.$_value['card_code'].'">';
                         echo '<br/>';
-                        echo $this->__('Remaining card balance').': '.$currencySymbol.$v['remaining'].'. (<a href="'.$this->getUrl("giftcards/cart/deActivateGiftCard/id/$k", array( '_secure'=>$loadFromSSL)).'">'.$this->__('Remove').'</a>)</b>';
+                        echo $this->__('Remaining card balance').': '.$currencySymbol.$_value['card_balance'].'. (<a href="'.$this->getUrl("giftcards/cart/deActivateGiftCard/id/$_id", array( '_secure'=>$loadFromSSL)).'">'.$this->__('Remove').'</a>)</b>';
                         $temp = 1;
                     }
         ?>

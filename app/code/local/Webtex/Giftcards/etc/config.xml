@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Webtex_Giftcards>
-            <version>4.3.2</version>
+            <version>4.3.8</version>
         </Webtex_Giftcards>
     </modules>
     <admin>
@@ -188,28 +188,17 @@
                     </webtex_giftcards_observer_checkpriceiszero>
                 </observers>
             </core_block_abstract_to_html_after>
-
-            <!--observers for gift card discount calculation-->
-            <!--<sales_quote_address_collect_totals_after>
+<!--
+            <paypal_prepare_line_items>
                 <observers>
-                    <webtex_giftcards_discount_observer_testdiscountquoteaddress>
+                    <webtex_giftcards_observer_paypal_prepare>
                         <type>singleton</type>
-                        <class>giftcards/discount_observer</class>
-                        <method>testDiscountQuoteAddress</method>
-                    </webtex_giftcards_discount_observer_testdiscountquoteaddress>
+                        <class>giftcards/observer</class>
+                        <method>paypalPrepareLineItems</method>
+                    </webtex_giftcards_observer_paypal_prepare>
                 </observers>
-            </sales_quote_address_collect_totals_after>-->
-            <sales_quote_collect_totals_after>
-                <observers>
-                    <webtex_giftcards_discount_observer_testdiscountquote>
-                        <type>singleton</type>
-                        <class>giftcards/discount_observer</class>
-                        <method>testDiscountQuote</method>
-                    </webtex_giftcards_discount_observer_testdiscountquote>
-                </observers>
-            </sales_quote_collect_totals_after>
-            <!--end observers for gift card discount calculation-->
-
+            </paypal_prepare_line_items>
+-->
         </events>
         <template>
             <email>
@@ -251,11 +240,19 @@
         <sales>
             <quote>
                 <totals>
+<!--
+                    <giftcards>
+                        <class>giftcards/sales_quote_giftcard</class>
+                        <after>subtotal,freeshipping,tax_subtotal,shipping</after>
+                        <before>grand_total</before>
+                    </giftcards>
+-->
                     <discount>
-                        <class>giftcards/discount</class>
+                        <class>giftcards/sales_quote_giftcard</class>
                         <after>subtotal,shipping</after>
                         <before>grand_total</before>
                     </discount>
+
                 </totals>
             </quote>
         </sales>

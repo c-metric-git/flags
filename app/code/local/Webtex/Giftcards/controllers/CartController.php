@@ -8,14 +8,15 @@ class Webtex_Giftcards_CartController extends Mage_Checkout_CartController
         $giftCardCode = trim((string)$this->getRequest()->getParam('giftcard_code'));
         $amount = (float)$this->getRequest()->getParam('giftcard_amount');
         $card = Mage::getModel('giftcards/giftcards')->load($giftCardCode, 'card_code');
-        if($amount > $card->getCardBalance()){
+
+        if($amount > $card->getCurrentBalance()){
             $this->_getSession()->addError(
                 $this->__('Invalid Card Amount')
             );
             $this->_goBack();
         } else {
 
-            $storeId = Mage::app()->getStore()->getWebsiteId();
+            $storeId = Mage::app()->getStore()->getId();
             $currDate = date('Y-m-d');
 
             if($card->getId() && ($card->getWebsiteId() == $storeId || $card->getWebsiteId() == 0) && (!$card->getDateEnd() || $card->getDateEnd() >= $currDate)){
@@ -27,6 +28,7 @@ class Webtex_Giftcards_CartController extends Mage_Checkout_CartController
                     );
                     Mage::getSingleton('giftcards/session')->setActive('1');
                     $this->_setSessionVars($card, $amount);
+                    $this->_getQuote()->collectTotals()->save();
                 } else {
                     if($card->getId() && ($card->getCardStatus() == 2)) {
                         $this->_getSession()->addError(
@@ -53,7 +55,7 @@ class Webtex_Giftcards_CartController extends Mage_Checkout_CartController
         $giftCardCode = trim((string)$this->getRequest()->getParam('giftcard_code'));
         $card = Mage::getModel('giftcards/giftcards')->load($giftCardCode, 'card_code');
         $response = array();
-        $storeId = Mage::app()->getStore()->getWebsiteId();
+        $storeId = Mage::app()->getStore()->getId();
         $currDate = date('Y-m-d');
 
         if($card->getId() && ($card->getWebsiteId() == $storeId || $card->getWebsiteId() == 0) && (!$card->getDateEnd() || $card->getDateEnd() >= $currDate)){
@@ -64,6 +66,7 @@ class Webtex_Giftcards_CartController extends Mage_Checkout_CartController
                 $response['message'] = $this->__('Gift Card "%s" was added.', Mage::helper('core')->escapeHtml($giftCardCode));
                 Mage::getSingleton('giftcards/session')->setActive('1');
                 $this->_setSessionVars($card);
+                $this->_getQuote()->collectTotals()->save();
 
             } else {
                 if($card->getId() && ($card->getCardStatus() == 2)) {
@@ -86,18 +89,17 @@ class Webtex_Giftcards_CartController extends Mage_Checkout_CartController
     public function removegiftcardAction()
     {
         $cardId = $this->getRequest()->getParam('id');
-        $oSession = Mage::getSingleton('giftcards/session');
-        $cardIds = $oSession->getGiftCardsIds();
-        $sessionBalance = $oSession->getGiftCardBalance();
-        $newSessionBalance = $sessionBalance - $cardIds[$cardId]['balance'];
-        $cardCode = $cardIds[$cardId]['code'];
-        unset($cardIds[$cardId]);
-        if(empty($cardIds))
+        $_session = Mage::getSingleton('giftcards/session');
+        $cards = $_session->getCards();
+        $cardCode = $cards[$cardId]['card_code'];
+        unset($cards[$cardId]);
+        if(empty($cards))
         {
             Mage::getSingleton('giftcards/session')->clear();
         }
-        $oSession->setGiftCardBalance($newSessionBalance);
-        $oSession->setGiftCardsIds($cardIds);
+
+        $_session->setCards($cards);
+        $this->_getQuote()->collectTotals()->save();
 
         $result = array('success' => true,
             'message' => $this->__('Gift Card "%s" was succefuly removed.', Mage::helper('core')->escapeHtml($cardCode)),
@@ -108,48 +110,39 @@ class Webtex_Giftcards_CartController extends Mage_Checkout_CartController
 
     public function applyamountAction()
     {
-        $oSession = Mage::getSingleton('giftcards/session');
+        $_session = Mage::getSingleton('giftcards/session');
         $cardId = $this->getRequest()->getParam('id');
         $cardAmount = $this->getRequest()->getParam('amount', false);
 
         $card = Mage::getModel('giftcards/giftcards')->load($cardId);
 
         if(!$cardAmount){
-            $cardAmount = min($card->getCardBalance(), Mage::getSingleton('checkout/session')->getGrandTotal());
+            $cardAmount = min($card->getCurrentBalance(), Mage::helper('giftcards')->getCleanGrandTotal());
         }
 
-        if($cardAmount > $card->getCardBalance()){
+        if($cardAmount > $card->getCurrentBalance()){
             $result = array('error' => true,
-                'message' => $this->__('Invalid Card Amount'),
-                'update' => $this->getLayout()->createBlock('giftcards/checkout_coupon')->toHtml(),
-                'table' => $this->getLayout()->createBlock('giftcards/checkout_items')->toHtml());
+                            'message' => $this->__('Invalid Card Amount'),
+                            'update' => $this->getLayout()->createBlock('giftcards/checkout_coupon')->toHtml(),
+                            'table' => $this->getLayout()->createBlock('giftcards/checkout_items')->toHtml());
             $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($result));
         } else {
 
-            $cardIds = $oSession->getGiftCardsIds();
-            $sessionBalance = $oSession->getGiftCardBalance();
-            $newSessionBalance = $sessionBalance + $cardAmount;
+            $cards = $_session->getCards();
 
-            if (!empty($cardIds)) {
-                $giftCardsIds = $oSession->getGiftCardsIds();
-
-                $giftCardsIds[$cardId] =  array('balance' => $giftCardsIds[$cardId]['balance']-$cardAmount, 'code' => $card->getCardCode(), 'card_amount' => $giftCardsIds[$cardId]['card_amount']+$cardAmount);
-                $oSession->setGiftCardsIds($giftCardsIds);
-
-                $newBalance = $oSession->getGiftCardBalance() + $cardAmount;
-                $oSession->setGiftCardBalance($newBalance);
-
-            } else {
-                $cardIds[$cardId] = array('balance' => $card->getCardBalance()-$cardAmount, 'code' => $card->getCardCode(), 'card_amount' => $cardAmount);
-                $oSession->setGiftCardsIds($cardIds);
-
-                $oSession->setGiftCardBalance($cardAmount);
-            }
+            $cards[$cardId] =  array('card_code' => $card->getCardCode(),
+                                     'card_balance' => $card->getCurrentBalance(),
+                                     'base_card_balance' => $card->getBaseBalance(),
+                                     'original_card_balance' => $card->getCurrentBalance(),
+                                     'original_base_card_balance' => $card->getBaseBalance());
+                
+            $_session->setCards($cards);
+            $this->_getQuote()->collectTotals()->save();
 
             $result = array('success' => true,
-                'message' => $this->__('Gift Card "%s" was applied.', Mage::helper('core')->escapeHtml($card->getCardCode())),
-                'update' => $this->getLayout()->createBlock('giftcards/checkout_coupon')->toHtml(),
-                'table' => $this->getLayout()->createBlock('giftcards/checkout_items')->toHtml());
+                            'message' => $this->__('Gift Card "%s" was applied.', Mage::helper('core')->escapeHtml($card->getCardCode())),
+                            'update' => $this->getLayout()->createBlock('giftcards/checkout_coupon')->toHtml(),
+                            'table' => $this->getLayout()->createBlock('giftcards/checkout_items')->toHtml());
             $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($result));
         }
     }
@@ -157,47 +150,42 @@ class Webtex_Giftcards_CartController extends Mage_Checkout_CartController
 
     public function deActivateGiftCardAction()
     {
-        $oSession = Mage::getSingleton('giftcards/session');
+        $_session = Mage::getSingleton('giftcards/session');
         $cardId = $this->getRequest()->getParam('id');
-        $cardIds = $oSession->getGiftCardsIds();
-Mage::log($cardIds);
-        $sessionBalance = $oSession->getGiftCardBalance();
-        $newSessionBalance = $sessionBalance - $cardIds[$cardId]['balance'];
-        unset($cardIds[$cardId]);
-        if(empty($cardIds))
+        $cards  = $_session->getCards();
+
+        unset($cards[$cardId]);
+        if(empty($cards))
         {
             Mage::getSingleton('giftcards/session')->clear();
         }
-        $oSession->setGiftCardBalance($newSessionBalance);
-        $oSession->setGiftCardsIds($cardIds);
-Mage::log($oSession->getData());
+        $_session->setCards($cards);
+        $this->_getQuote()->collectTotals()->save();
+
         $this->_goBack();
     }
 
     private function _setSessionVars($card, $amount)
     {
-        $oSession = Mage::getSingleton('giftcards/session');
+        $_session = Mage::getSingleton('giftcards/session');
 
         if($amount == 0){
-            $amount = min($card->getCardBalance(), Mage::helper('giftcards')->getCleanGrandTotal());
+            $amount = min($card->getCurrentBalance(), Mage::helper('giftcards')->getCleanGrandTotal());
         }
 
-        $giftCardsIds = $oSession->getGiftCardsIds();
-        //append applied gift card id to gift card session
-        //append applied gift card balance to gift card session
-        if (!empty($giftCardsIds)) {
-            $giftCardsIds[$card->getId()] =  array('balance' => $card->getCardBalance()-$amount, 'code' => $card->getCardCode(), 'card_amount' => $amount);
-            $oSession->setGiftCardsIds($giftCardsIds);
-
-            $newBalance = $oSession->getGiftCardBalance() + $amount;
-            $oSession->setGiftCardBalance($newBalance);
-
-        } else {
-            $giftCardsIds[$card->getId()] = array('balance' => $card->getCardBalance()-$amount, 'code' => $card->getCardCode(), 'card_amount' => $amount);
-            $oSession->setGiftCardsIds($giftCardsIds);
-
-            $oSession->setGiftCardBalance($amount);
+        $cards = $_session->getCards();
+        if(!$cards){
+            $cards = array();
         }
+
+        $cards[$card->getId()] =  array('card_code' => $card->getCardCode(),
+                                        'card_balance' => $card->getCurrentBalance(),
+                                        'base_card_balance' => $card->getBaseBalance(),
+                                        'original_card_balance' => $card->getCurrentBalance(),
+                                        'original_base_card_balance' => $card->getBaseBalance());
+                
+        $_session->setCards($cards);
+
     }
 
     public function agreeToUseAction()
@@ -220,7 +208,6 @@ Mage::log($oSession->getData());
             'html' => $this->_getUpdatedCoupon()
         );
 
-
         $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($result));
     }
 
@@ -232,11 +219,10 @@ Mage::log($oSession->getData());
         $card = Mage::getModel('giftcards/giftcards')->load($giftCardCode, 'card_code');
 
         if($amount == 0){
-            $amount = min($card->getCardBalance(), Mage::getSingleton('checkout/session')->getGrandTotal());
-            //$amount = $card->getCardBalance();
+            $amount = min($card->getCurrentBalance(), Mage::helper('giftcards')->getCleanGrandTotal());
         }
 
-        $storeId = Mage::app()->getStore()->getWebsiteId();
+        $storeId = Mage::app()->getStore()->getId();
         $currDate = date('Y-m-d');
 
         if($card->getId() && ($card->getWebsiteId() == $storeId || $card->getWebsiteId() == 0) && (!$card->getDateEnd() || $card->getDateEnd() >= $currDate)){
@@ -271,18 +257,18 @@ Mage::log($oSession->getData());
 
     public function ajaxDeActivateGiftCardAction()
     {
-        $oSession = Mage::getSingleton('giftcards/session');
+        $_session = Mage::getSingleton('giftcards/session');
         $cardId = $this->getRequest()->getParam('id');
-        $cardIds = $oSession->getGiftCardsIds();
-        $sessionBalance = $oSession->getGiftCardBalance();
-        $newSessionBalance = $sessionBalance - $cardIds[$cardId]['card_amount'];
-        unset($cardIds[$cardId]);
-        if(empty($cardIds))
+        $cards = $_session->getCards();
+
+        unset($cards[$cardId]);
+
+        if(empty($cards))
         {
             Mage::getSingleton('giftcards/session')->clear();
         }
-        $oSession->setGiftCardBalance($newSessionBalance);
-        $oSession->setGiftCardsIds($cardIds);
+
+        $_session->setCards($cards);
 
         $this->_getQuote()->collectTotals()->save();
 
@@ -325,16 +311,30 @@ Mage::log($oSession->getData());
     public function activateCheckoutGiftCardAction()
     {
         $giftCardCode = trim((string)$this->getRequest()->getParam('giftcard_code'));
+        $amount = (float)$this->getRequest()->getParam('giftcard_amount');
+
         $card = Mage::getModel('giftcards/giftcards')->load($giftCardCode, 'card_code');
 
-        if ($card->getId() && ($card->getCardStatus() == 1)) {
+        if($amount == 0){
+            $amount = min($card->getCurrentBalance(), Mage::helper('giftcards')->getCleanGrandTotal());
+        }
+
+        $storeId = Mage::app()->getStore()->getId();
+        $currDate = date('Y-m-d');
+
+        if($card->getId() && ($card->getWebsiteId() == $storeId || $card->getWebsiteId() == 0) && (!$card->getDateEnd() || $card->getDateEnd() >= $currDate) && $card->getCardStatus() == 1){
+        // if ($card->getId() && ($card->getCardStatus() == 1)) {
+
             $card->activateCard();
 
             Mage::getSingleton('core/session')->addSuccess(
                 $this->__('Gift Card "%s" was applied.', Mage::helper('core')->escapeHtml($giftCardCode))
             );
+
             Mage::getSingleton('giftcards/session')->setActive('1');
-            $this->_setSessionVars($card);
+
+            $this->_setSessionVars($card, $amount);
+            $this->_getQuote()->collectTotals()->save();
         } else {
             if($card->getId() && ($card->getCardStatus() == 2)) {
                 Mage::getSingleton('core/session')->addError(
@@ -350,19 +350,20 @@ Mage::log($oSession->getData());
 
     public function deActivateCheckoutGiftCardAction()
     {
-        $oSession = Mage::getSingleton('giftcards/session');
+        $_session = Mage::getSingleton('giftcards/session');
         $cardId = $this->getRequest()->getParam('id');
-        $cardIds = $oSession->getGiftCardsIds();
-        $sessionBalance = $oSession->getGiftCardBalance();
-        $newSessionBalance = $sessionBalance - $cardIds[$cardId]['balance'];
-        unset($cardIds[$cardId]);
-        if(empty($cardIds))
+        $redirect = $this->getRequest()->getParam('redirect', 'onepage');
+        $cards = $_session->getCards();
+
+        unset($cards[$cardId]);
+        if(empty($cards))
         {
             Mage::getSingleton('giftcards/session')->clear();
         }
-        $oSession->setGiftCardBalance($newSessionBalance);
-        $oSession->setGiftCardsIds($cardIds);
-        $this->_redirect('onestepcheckout/index/index');
+
+        $_session->setCards($cards);
+        $this->_getQuote()->collectTotals()->save();
+        $this->_redirect($redirect);
         return;
     }
 

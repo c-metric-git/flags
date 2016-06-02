@@ -46,7 +46,6 @@ class Webtex_Giftcards_Adminhtml_Giftcards_GiftcardsController extends Mage_Admi
         $this->loadLayout();
         $this->_setActiveMenu('customer/giftcards');
         $this->_addContent($this->getLayout()->createBlock('giftcards/adminhtml_card_load'));
-             //->_addLeft($this->getLayout()->createBlock('giftcards/adminhtml_card_load_tabs'));
         $this->renderLayout();
     }
 
@@ -92,8 +91,7 @@ class Webtex_Giftcards_Adminhtml_Giftcards_GiftcardsController extends Mage_Admi
                         'card_status' => $model->getCardStatus(),
                         'user_name'   => $user,
                         'user'        => 'Staff',
-                                
-                    );
+                        );
                     $_logger->writelog($logData);
                 }
                 
@@ -225,7 +223,7 @@ class Webtex_Giftcards_Adminhtml_Giftcards_GiftcardsController extends Mage_Admi
                     $this->_getSession()->addSuccess(
                         $this->__('Gift Card "%s" was applied.', Mage::helper('core')->escapeHtml($giftCardCode))
                     );
-                    Mage::getSingleton('giftcards/session')->setActive('1');
+                    Mage::getSingleton('giftcards/session')->setActive(1);
                     $this->_setSessionVars($card, $amount);
                     $result['success'] = true;
                     $result['card_code'] = $card->getCardCode();
@@ -253,45 +251,38 @@ class Webtex_Giftcards_Adminhtml_Giftcards_GiftcardsController extends Mage_Admi
 
     public function deActivateGiftCardAction()
     {
-        $oSession = Mage::getSingleton('giftcards/session');
+        $_session = Mage::getSingleton('giftcards/session');
         $cardId = $this->getRequest()->getParam('id');
-        $cardIds = $oSession->getGiftCardsIds();
-        $sessionBalance = $oSession->getGiftCardBalance();
-        $newSessionBalance = $sessionBalance - $cardIds[$cardId]['balance'];
-        unset($cardIds[$cardId]);
-        if(empty($cardIds))
+        $_cards = $_session->getCards();
+
+        unset($_cards[$cardId]);
+        if(empty($_cards))
         {
             Mage::getSingleton('giftcards/session')->clear();
         }
-        $oSession->setGiftCardBalance($newSessionBalance);
-        $oSession->setGiftCardsIds($cardIds);
         exit;
-
     }
 
     private function _setSessionVars($card, $amount)
     {
-        $oSession = Mage::getSingleton('giftcards/session');
+        $_session = Mage::getSingleton('giftcards/session');
 
         if($amount == 0){
-            $amount = min($card->getCardBalance(), Mage::helper('giftcards')->getAdminCleanGrandTotal());
+            $amount = min($card->getCurrentBalance(), Mage::helper('giftcards')->getAdminCleanGrandTotal());
         }
-        $giftCardsIds = $oSession->getGiftCardsIds();
-        //append applied gift card id to gift card session
-        //append applied gift card balance to gift card session
-        if (!empty($giftCardsIds)) {
-            $giftCardsIds[$card->getId()] =  array('balance' => $card->getCardBalance()-$amount, 'code' => $card->getCardCode(), 'card_amount' => $amount);
-            $oSession->setGiftCardsIds($giftCardsIds);
 
-            $newBalance = $oSession->getGiftCardBalance() + $amount;
-            $oSession->setGiftCardBalance($newBalance);
-
-        } else {
-            $giftCardsIds[$card->getId()] = array('balance' => $card->getCardBalance()-$amount, 'code' => $card->getCardCode(), 'card_amount' => $amount);
-            $oSession->setGiftCardsIds($giftCardsIds);
-
-            $oSession->setGiftCardBalance($amount);
+        $cards = $_session->getCards();
+        if(!$cards){
+            $cards = array();
         }
+
+        $cards[$card->getId()] =  array('card_code' => $card->getCardCode(),
+                                        'card_balance' => $card->getCurrentBalance(),
+                                        'base_card_balance' => $card->getBaseBalance(),
+                                        'original_card_balance' => $card->getCurrentBalance(),
+                                        'original_base_card_balance' => $card->getBaseBalance());
+                
+        $_session->setCards($cards);
     }
 
     public function ajaxUpdateGiftCardBlockAction()

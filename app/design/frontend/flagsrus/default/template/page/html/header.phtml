@@ -253,7 +253,7 @@
             <?php /*if (!empty($searchHtml) || $existsInChildBlock['search']): ?>
             <a href="#header-search" class="skip-link skip-search"> <span class="icon ic ic-search"></span> <span class="label"><?php echo $this->__('Search'); ?></span> </a>
             <?php endif;*/ ?>
-			<a href="#narrow-by-list" class="skip-link skip-search"> <span class="icon ic ic-filter"></span><span class="label"><?php echo $this->__('Filter'); ?></span> </a>
+			<a href="#narrow-by-list" class="skip-link res-filter skip-search"> <span class="icon ic ic-filter"></span><span class="label"><?php echo $this->__('Filter'); ?></span> </a>
             <?php if ($existsInChildBlock['account-links']): ?>
             <a href="#header-account" class="skip-link skip-account"> <span class="icon ic ic-user"></span> <span class="label"><?php echo $this->__('My Account'); ?></span> </a>
             <?php endif; ?>
@@ -265,22 +265,22 @@
             <span class="label"><?php echo $this->__('Compare'); ?></span> </a>
             <?php endif; ?>
 			<?php else: ?>
-				            <?php if (!empty($menuHtml)): ?>
-						<a href="#header-nav" class="skip-link skip-nav"> <span class="icon ic ic-menu"></span> <span class="label"><?php echo $this->__('Menu'); ?></span> </a>
-						<?php endif; ?>
-						<?php /*if (!empty($searchHtml) || $existsInChildBlock['search']): ?>
-						<a href="#header-search" class="skip-link skip-search"> <span class="icon ic ic-search"></span> <span class="label"><?php echo $this->__('Search'); ?></span> </a>
-						<?php endif;*/ ?>
-						<?php if ($existsInChildBlock['account-links']): ?>
-						<a href="#header-account" class="skip-link skip-account"> <span class="icon ic ic-user"></span> <span class="label"><?php echo $this->__('My Account'); ?></span> </a>
-						<?php endif; ?>
-						<?php if (!empty($compareHtml) || $existsInChildBlock['compare']): ?>
-						<a href="#header-compare" class="skip-link skip-compare"> <span class="icon ic ic-compare"></span>
-						<?php if (($compareCount = Mage::registry('miniCompareProductCount')) > 0): ?>
-						<span class="count"><?php echo $compareCount; ?></span>
-						<?php endif; ?>
-						<span class="label"><?php echo $this->__('Compare'); ?></span> </a>
-						<?php endif; ?>
+				<?php if (!empty($menuHtml)): ?>
+				<a href="#header-nav" class="skip-link updated-skip-link skip-nav"> <span class="icon ic ic-menu"></span> <span class="label"><?php echo $this->__('Menu'); ?></span> </a>
+				<?php endif; ?>
+				<?php /*if (!empty($searchHtml) || $existsInChildBlock['search']): ?>
+				<a href="#header-search" class="skip-link skip-search"> <span class="icon ic ic-search"></span> <span class="label"><?php echo $this->__('Search'); ?></span> </a>
+				<?php endif;*/ ?>
+				<?php if ($existsInChildBlock['account-links']): ?>
+				<a href="#header-account" class="skip-link updated-skip-link skip-account"> <span class="icon ic ic-user"></span> <span class="label"><?php echo $this->__('My Account'); ?></span> </a>
+				<?php endif; ?>
+				<?php if (!empty($compareHtml) || $existsInChildBlock['compare']): ?>
+				<a href="#header-compare" class="skip-link updated-skip-link skip-compare"> <span class="icon ic ic-compare"></span>
+				<?php if (($compareCount = Mage::registry('miniCompareProductCount')) > 0): ?>
+				<span class="count"><?php echo $compareCount; ?></span>
+				<?php endif; ?>
+				<span class="label"><?php echo $this->__('Compare'); ?></span> </a>
+				<?php endif; ?>
 			<?php endif; ?>
             
             <!-- Mini cart wrapper for cart and its skip link on mobile devices -->
@@ -391,10 +391,10 @@
 <div class="container">
   <div class="header-container3">
     <div class="header-top-container">
-		<div id="addtooverlay" style="display:none;">
+		<!--div id="addtooverlay" style="display:none;">
 			<div id="acp-overlay" class=""></div>
 			<div id="ajaxcartpro-progress" class="" style="height: auto; width: auto; left: 533.5px; top: 266px;"> <img src="<?php echo $this->getSkinUrl('images/processing.gif');?>" alt="Loading"> <p>Please wait...</p> </div>
-		</div>
+		</div-->
       <div class="header-top header container clearer<?php if ($classes['top']) echo $classes['top']; ?>" style="border:none;">
         <div class="inner-container" style="padding-left:0;padding-right:0;">
  

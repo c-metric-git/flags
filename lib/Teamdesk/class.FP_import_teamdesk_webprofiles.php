@@ -466,7 +466,7 @@ class FPTeamDeskWebprofiles {
                                             $csv_row[] = $tdProduct['Product - QTY On Current POs']; //qy_on_current_po 
                                             $csv_row[] = $tdProduct['requiredProductSKUForKit']; //requiredskuforkit   
                                             $csv_row[] = $tdProduct['numOfOptionsForKit']; //num_of_options_for_kit 
-                                            $csv_row[] = $tdProduct['kitType']=='Build Your Own'?'1':''; //price_type 
+                                            $csv_row[] = $tdProduct['kitType']=='Build Your Own'?'1':'1'; //price_type 
                                             $csv_row[] = $tdProduct['kitType']=='Build Your Own'?'As Low as':''; //price_view 
                                             $csv_row[] = $tdProduct['kitType']== 'Fixed'?"1":"0"; //is_fixed_kit
                                             $csv_row[] = ""; //custom_layout_update

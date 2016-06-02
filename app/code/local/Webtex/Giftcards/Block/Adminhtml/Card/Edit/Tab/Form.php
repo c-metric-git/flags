@@ -114,8 +114,8 @@ class Webtex_Giftcards_Block_Adminhtml_Card_Edit_Tab_Form extends Mage_Adminhtml
             ),
         ));
 
-        $cardFieldset->addField('store', 'select', array(
-            'name' => 'store',
+        $cardFieldset->addField('website_id', 'select', array(
+            'name' => 'website_id',
             'label' => Mage::helper('giftcards')->__('Gift Card Store'),
             'options' => $this->_getStoreList(),
         ));

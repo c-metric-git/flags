@@ -47,7 +47,8 @@ class Webtex_Giftcards_Model_Observer extends Mage_Core_Model_Abstract
         }
 
         $quote = $observer->getEvent()->getQuote();
-        $giftcardDiscount = Mage::getSingleton('giftcards/session')->getGiftcardDiscount();
+        $_session = Mage::getSingleton('giftcards/session');
+
         if ($quote) {
             try {
                 /* Create cards if its present in order */
@@ -75,13 +76,22 @@ class Webtex_Giftcards_Model_Observer extends Mage_Core_Model_Abstract
                                 $data[$field] = $options[$field]->getValue();
                             }
                         }
-                        $data['card_amount'] = $item->getCalculationPrice()+$item->getTaxAmount();
+                        $qty = $item->getQty();
+
+                        $product = Mage::getModel('catalog/product')->load($item->getProductId());
+                        
+                        //if($product->getPrice()){
+                        //    $data['card_amount'] = $product->getPrice();
+                        //} else {
+                            $data['card_amount'] = $item->getCalculationPrice()+$item->getTaxAmount()/$qty;
+                        //}
+                        
                         $data['product_id'] = $item->getProductId();
                         $data['card_status'] = 0;
                         $data['order_id'] = $order->getId();
                         
                         if(Mage::getStoreConfig('giftcards/default/website_id')){
-                            $data['website_id'] = Mage::app()->getStore()->getWebsiteId();
+                            $data['website_id'] = Mage::app()->getStore()->getId();
                         } else {
                             $data['website_id'] = 0;
                         }
@@ -92,15 +102,15 @@ class Webtex_Giftcards_Model_Observer extends Mage_Core_Model_Abstract
 
                         $curDate = date('m/d/Y');
                         for ($i = 0; $i < $item->getQty(); $i++) {
-                          $prod = Mage::getModel('catalog/product')->load($item->getProductId());
-                          if($prod->getAttributeText('wts_gc_pregenerate') == 'Yes'){
-                            $preModel = Mage::getModel('giftcards/pregenerated')->getCollection()->addFieldToFilter('product_id', $item->getProductId())->addFieldToFilter('card_status',1);
-                            $preCard = $preModel->getData();
-                            $data['card_code'] = $preCard[0]['card_code'];
-                            $preModel = Mage::getModel('giftcards/pregenerated')->load($preCard[0]['card_id']);
-                            $preModel->setCardStatus(0);
-                            $preModel->save();
-                          }
+                            $prod = Mage::getModel('catalog/product')->load($item->getProductId());
+                            if($prod->getAttributeText('wts_gc_pregenerate') == 'Yes'){
+                                $preModel = Mage::getModel('giftcards/pregenerated')->getCollection()->addFieldToFilter('product_id', $item->getProductId())->addFieldToFilter('card_status',1);
+                                $preCard = $preModel->getData();
+                                $data['card_code'] = $preCard[0]['card_code'];
+                                $preModel = Mage::getModel('giftcards/pregenerated')->load($preCard[0]['card_id']);
+                                $preModel->setCardStatus(0);
+                                $preModel->save();
+                            }
                             $model = Mage::getModel('giftcards/giftcards');
                             $model->setData($data);
                             if (in_array($order->getState(), array('complete'))) {
@@ -128,64 +138,53 @@ class Webtex_Giftcards_Model_Observer extends Mage_Core_Model_Abstract
                                 'user_name'   => $customer,
                                 'user'        => 'Customer',
                                 
-                            );
+                                );
                             $this->_logger->writelog($logData);
                         }
                     }
                 }
 
-                if ($quote->getUseGiftcards()) {
-                    $oSession = Mage::getSingleton('giftcards/session');
-                    $giftCardsIds = $oSession->getGiftCardsIds();
+                if ($_session->getActive()) {
 
-                    $ids = array_keys($giftCardsIds);
+                    $_cards = $_session->getCards();
 
-                    $cards = Mage::getModel('giftcards/giftcards')->getCollection()
+                    $ids = array_keys($_cards);
+
+                    $cardsCollection = Mage::getModel('giftcards/giftcards')->getCollection()
                         ->addFieldToFilter('card_status', 1)
-                        ->addFieldToFilter('card_id', array(
-                            'in' => $ids
-                        ));
+                        ->addFieldToFilter('card_id', array('in' => $ids));
 
                     $baseCurrency = $quote->getBaseCurrencyCode();
-                    
-                    //$orderModel = Mage::getModel('sales/order')->load($order->getId());
+                    $currentCurrencyCode = Mage::app()->getStore()->getCurrentCurrencyCode();
 
-                    foreach ($cards as $card) {
-                        $oGiftCardOrder = Mage::getModel('giftcards/order');
-                        
-                        if (is_null($card->getCardCurrency()) || $card->getCardCurrency() == $baseCurrency) {
-                            $useAmount = $giftCardsIds[$card->getId()]['card_amount'];
-                            if ($useAmount > 0) {
-                                $card->setCardBalance($giftCardsIds[$card->getId()]['balance']);
-                                if ( $card->getCardBalance() == 0) {
-                                    $card->setCardStatus(2); //set status to 'used' when gift card balance is 0;
-                                }
-                                $card->save();
-
-                                $oGiftCardOrder->setIdGiftcard($card->getId());
-                                $oGiftCardOrder->setIdOrder($order->getId());
-                                $oGiftCardOrder->setDiscounted((float)$useAmount);
-                                $oGiftCardOrder->save();
+                    foreach ($cardsCollection as $card) {
+                        $_giftCardOrder = Mage::getModel('giftcards/order');
+                        $_card = $_cards[$card->getId()];
+                        if (is_null($card->getCardCurrency()) || $card->getCardCurrency() == $currentCurrencyCode) {
+                            $card->setCardBalance($_card['card_balance']);
+                            if ($_card['card_balance'] == 0) {
+                                $card->setCardStatus(2); //set status to 'used' when gift card balance is 0;
                             }
+                            $card->save();
+
+                            $_giftCardOrder->setIdGiftcard($card->getId());
+                            $_giftCardOrder->setIdOrder($order->getId());
+                            $_giftCardOrder->setDiscounted((float)$_card['original_card_balance'] - $_card['card_balance']);
+                            $_giftCardOrder->save();
                         } else {
-                            $convertedUseAmount = Mage::helper('giftcards')->currencyConvert($giftCardsIds[$card->getId()]['card_amount'], /*from*/
-                                                                                             $card->getCardCurrency(), /*to*/
-                                                                                             $baseCurrency);
-                            $useAmount = $convertedUseAmount;
-                            if ($useAmount > 0) {
-                                $newCardBalance = Mage::helper('giftcards')->currencyConvert($giftCardsIds[$card->getId()]['balance'], $baseCurrency, $card->getCardCurrency());
-                                $card->setCardBalance($newCardBalance);
-                                if ($newCardBalance == 0) {
-                                    $card->setCardStatus(2); //set status to 'used' when gift card balance is 0;
-                                }
-                                $card->save();
-
-                                $oGiftCardOrder->setIdGiftcard($card->getId());
-                                $oGiftCardOrder->setIdOrder($order->getId());
-
-                                $oGiftCardOrder->setDiscounted((float)$useAmount);
-                                $oGiftCardOrder->save();
+                            $card->setCardBalance(Mage::helper('giftcards')->currencyConvert($_card['card_balance'], $currentCurrencyCode, $card->getCardCurrency()));
+                            if ($_card['card_balance'] == 0) {
+                                $card->setCardStatus(2); //set status to 'used' when gift card balance is 0;
                             }
+                            $card->save();
+
+                            $_giftCardOrder->setIdGiftcard($card->getId());
+                            $_giftCardOrder->setIdOrder($order->getId());
+                            $_giftCardOrder->setDiscounted((float) Mage::helper('giftcards')->currencyConvert(
+                                                               $_card['original_card_balance'] - $_card['card_balance'],
+                                                               $currentCurrencyCode,
+                                                               $card->getCardCurrency()));
+                            $_giftCardOrder->save();
                         }
                         $logData = array(
                             'card_action' => 'Used',
@@ -198,7 +197,7 @@ class Webtex_Giftcards_Model_Observer extends Mage_Core_Model_Abstract
                             'user_name'   => $customer,
                             'user'        => 'Customer',
                                 
-                        );
+                            );
                         $this->_logger->writelog($logData);
                     }
                 }
@@ -245,11 +244,11 @@ class Webtex_Giftcards_Model_Observer extends Mage_Core_Model_Abstract
                 $card->setCardStatus(1);
                 $card->save();
 
-                $oGiftCardOrder = Mage::getModel('giftcards/order');
-                $oGiftCardOrder->setIdGiftcard($card->getId());
-                $oGiftCardOrder->setIdOrder($order->getId());
-                $oGiftCardOrder->setDiscounted(-(float)$discounted[$card->getId()]);
-                $oGiftCardOrder->save();
+                $_giftCardOrder = Mage::getModel('giftcards/order');
+                $_giftCardOrder->setIdGiftcard($card->getId());
+                $_giftCardOrder->setIdOrder($order->getId());
+                $_giftCardOrder->setDiscounted(-(float)$discounted[$card->getId()]);
+                $_giftCardOrder->save();
             }
         }
         
@@ -272,8 +271,7 @@ class Webtex_Giftcards_Model_Observer extends Mage_Core_Model_Abstract
                 'order_id'    => $order->getIncrementId(),
                 'user_name'   => $staff,
                 'user'        => 'Staff',
-                                
-                            );
+                );
             $this->_logger->writelog($logData);
         }
     }
@@ -290,57 +288,48 @@ class Webtex_Giftcards_Model_Observer extends Mage_Core_Model_Abstract
     {
         $oCreditmemo = $observer['creditmemo'];
         $oOrder = $oCreditmemo->getOrder();
-        foreach($oCreditmemo->getAllItems() as $_item){
-            $giftCardsOrderCollection = Mage::getModel('giftcards/order')->getCollection()->addFieldToFilter('id_order', $oOrder->getId());
-            foreach($giftCardsOrderCollection as $giftCardOrder){
-                $giftCard = Mage::getModel('giftcards/giftcards')->load($giftCardOrder->getIdGiftcard());
-                $hash_data = unserialize($giftCard->getHashData());
-                $cardItem = $hash_data[$giftCardOrder->getIdGiftcard()];
-                $orderItem = $_item->getOrderItem();
-                $refundAmountArray = $cardItem['items'][$orderItem->getQuoteItemId()];
-                $refundAmount = $refundAmountArray['item_discount'] / (isset($refundAmountArray['qty']) ? $refundAmountArray['qty'] : 1);
-                if (is_null($giftCard->getCardCurrency()) || $giftCard->getCardCurrency() == $oOrder->getBaseCurrencyCode()) {
-                    $refundValue = $refundAmount * $_item->getQty();
-                } else {
-                    $refundValue = Mage::helper('giftcards')->currencyConvert($refundAmount, $oOrder->getBaseCurrencyCode(), $giftCard->getCardCurrency()) * $_item->getQty();
-                }
-                if($refundValue > 0 ){
-                    $hash_data[$giftCardOrder->getIdGiftcard()]['items'][$orderItem->getQuoteItemId()]['item_discount'] = $hash_data[$giftCardOrder->getIdGiftcard()]['items'][$orderItem->getQuoteItemId()]['item_discount'] - $refundValue;
-                    $giftCard->setCardBalance($giftCard->getCardBalance() + $refundValue);
-                    $giftCard->setCardStatus(1);
-                    $giftCard->setHashData(serialize($hash_data));
-                    $giftCard->save();
-                    $oGiftCardOrder = Mage::getModel('giftcards/order');
-                    $oGiftCardOrder->setIdGiftcard($giftCard->getId());
-                    $oGiftCardOrder->setIdOrder($oOrder->getId());
-                    $oGiftCardOrder->setDiscounted(-(float)$refundValue);
-                    $oGiftCardOrder->save();
-                }
-                if($oCreditmemo->getShippingAmount() > 0){
-                    $refundValue = $hash_data[$giftCardOrder->getIdGiftcard()]['shipping_discount'];
-                    //if($refundValue){
-                    //    $oCreditmemo->setShippingAmount(0);
-                    //}
-                    $hash_data[$giftCardOrder->getIdGiftcard()]['shipping_discount'] = 0 ;
-                    $giftCard->setCardBalance($giftCard->getCardBalance() + $refundValue);
-                    $giftCard->setCardStatus(1);
-                    $giftCard->setHashData(serialize($hash_data));
-                    $giftCard->save();
-                    $oGiftCardOrder = Mage::getModel('giftcards/order');
-                    $oGiftCardOrder->setIdGiftcard($giftCard->getId());
-                    $oGiftCardOrder->setIdOrder($oOrder->getId());
-                    $oGiftCardOrder->setDiscounted(-(float)$refundValue);
-                    $oGiftCardOrder->save();
-                }
-            }
-            
-        }
+        $totalDiscount = $oOrder->getDiscountInvoiced();
+        $_refundAmount = abs($oOrder->getDiscountAmount());
+        $_orderCurrency = $oOrder->getOrderCurrencyCode();
+        $_shippingDiscountAmount = $oCreditmemo->getShippingAmount();
         
-        $createdGiftCardsCollection = Mage::getModel('giftcards/giftcards')->getCollection()
-            ->addFieldToFilter('order_id', $oOrder->getId());
+        $orderedGiftCardsCollection = Mage::getModel('giftcards/order')->getCollection()
+            ->addFieldToFilter('id_order', $oOrder->getId());
+        
+        foreach($oCreditmemo->getAllItems() as $_item){
+            $_originalItemDiscountAmount = abs($_item->getDiscountAmount());
+            foreach($orderedGiftCardsCollection as $_cardOrder){
+                $_giftCard = Mage::getModel('giftcards/giftcards')->load($_cardOrder->getIdGiftcard());
+                $_itemDiscountAmount = Mage::helper('giftcards')->currencyConvert($_originalItemDiscountAmount, $_orderCurrency, $_giftCard->getCardCurrency());
+                $_shippingDiscountAmount = Mage::helper('giftcards')->currencyConvert($_shippingDiscountAmount, $_orderCurrency, $_giftCard->getCardCurrency());
+                $cardDiscount = $_giftCard->getCardAmount() - $_giftCard->getCardBalance();
+                $shippingRefund = min($cardDiscount, $_shippingDiscountAmount);
+                $_shippingDiscountAmount -= $shippingRefund;
+                $cardDiscount -= $shippingRefund;
+                $cardRefund = min($_itemDiscountAmount, $cardDiscount);
+
+                $_giftCard->setCardBalance($_giftCard->getCardBalance() + $cardRefund + $shippingRefund);
+                $_giftCard->setCardStatus(1);
+                $_giftCard->save();
+                
+                if($cardRefund+$shippingRefund > 0){
+                    $_cardOrder = Mage::getModel('giftcards/order');
+                    $_cardOrder->setIdGiftcard($_giftCard->getId());
+                    $_cardOrder->setIdOrder($oOrder->getId());
+                    $_cardOrder->setDiscounted(-(float)($cardRefund + $shippingRefund));
+                    $_cardOrder->save();
+                }
+                
+                $_itemDiscountAmount -= $cardRefund;
+                $_originalItemDiscountAmount = Mage::helper('giftcards')->currencyConvert($_itemDiscountAmount, $_giftCard->getCardCurrency(), $_orderCurrency);
+            }
+        }
         
         $adminUser = Mage::getSingleton('admin/session');
         $staff = $adminUser->getUser()->getFirstname() . ' ' . $adminUser->getUser()->getLastname();
+
+        $createdGiftCardsCollection = Mage::getModel('giftcards/giftcards')->getCollection()
+            ->addFieldToFilter('order_id', $oOrder->getId());
         
         foreach($createdGiftCardsCollection as $item){
             $item->setCardStatus(Webtex_Giftcards_Model_Giftcards::REFUNDED);
@@ -355,51 +344,11 @@ class Webtex_Giftcards_Model_Observer extends Mage_Core_Model_Abstract
                 'order_id'    => $oOrder->getIncrementId(),
                 'user_name'   => $staff,
                 'user'        => 'Staff',
-                                
-                            );
+                );
             $this->_logger->writelog($logData);
         }
         
     }
-
-/*
-    public function saleOrderPaymentRefund($observer)
-    {
-        $oCreditmemo = $observer['creditmemo'];
-        $oOrder = $oCreditmemo->getOrder();
-        $giftCardsOrderCollection = Mage::getModel('giftcards/order')->getCollection()->addFieldToFilter('id_order', $oOrder->getId());
-        if($giftCardsOrderCollection->getSize() > 0) {
-            $gcAmountDiscount = 0;
-            foreach ($giftCardsOrderCollection as $giftCardOrderItem) {
-                $giftCardsIds[] = $giftCardOrderItem->getIdGiftcard();
-                $gcAmountDiscount += $oCreditmemo->getDiscountAmount();
-                $aDiscounted[$giftCardOrderItem->getIdGiftcard()] = $oCreditmemo->getDiscountAmount();
-            }
-            
-            $cards = Mage::getModel('giftcards/giftcards')->getCollection()
-                     ->addFieldToFilter('card_id', $giftCardsIds);
-
-            foreach ($cards as $card) {
-                if (is_null($card->getCardCurrency()) || $card->getCardCurrency() == $oOrder->getBaseCurrencyCode()) {
-                    $card->setCardBalance($card->getCardBalance() + $aDiscounted[$card->getId()]);
-                } else {
-                    $reddemedValue = Mage::helper('giftcards')->currencyConvert($aDiscounted[$card->getId()], $oOrder->getBaseCurrencyCode(), $card->getCardCurrency());
-                    $card->setCardBalance($card->getCardBalance() + $reddemedValue);
-                }
-
-                $card->setCardStatus(1);
-                $card->save();
-
-                $oGiftCardOrder = Mage::getModel('giftcards/order');
-                $oGiftCardOrder->setIdGiftcard($card->getId());
-                $oGiftCardOrder->setIdOrder($oOrder->getId());
-                $oGiftCardOrder->setDiscounted(-(float)$aDiscounted[$card->getId()]);
-                $oGiftCardOrder->save();
-            }
-        }
-    }
-
-*/
 
     /**
      * Process order saving
@@ -450,8 +399,7 @@ class Webtex_Giftcards_Model_Observer extends Mage_Core_Model_Abstract
                         'order_id'    => $order->getIncrementId(),
                         'user_name'   => $userName,
                         'user'        => 'Customer',
-                                
-                    );
+                        );
                     $this->_logger->writelog($logData);
                 }
             }

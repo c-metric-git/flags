@@ -38,24 +38,23 @@ $_preValues = $_product->getPreconfiguredValues();
         <?php else: ?>
         <?php echo $this->getPriceHtml($_product) ?>
         <?php endif; ?>
-		<div style="clear:both"></div>
-        <div class="field" style="margin-top:5px;">
-            <label for="mail-from" style="line-height:30px;width:100px"><?php echo $this->__('From Name') ?>:</label>
-            <input style="width:200px;margin-left;5px" type="text" id="mail-from" name="mail_from" class="input-text" value="<?php echo $_preValues->getMailFrom();?>"/>
+        <div class="field">
+            <label for="mail-from"><?php echo $this->__('From Name') ?>:</label><br/>
+            <input style="width:200px;" type="text" id="mail-from" name="mail_from" class="input-text" value="<?php echo $_preValues->getMailFrom();?>"/>
         </div>
-        <div class="field" style="margin-top:5px;">
-            <label for="mail-to" style="line-height:30px;width:100px"><?php echo $this->__('To Name') ?>:</label>
-            <input style="width:200px;margin-left;5px" type="text" id="mail-to" name="mail_to" class="input-text" value="<?php echo $_preValues->getMailTo();?>"/>
+        <div class="field">
+            <label for="mail-to"><?php echo $this->__('To Name') ?>:</label><br/>
+            <input style="width:200px;" type="text" id="mail-to" name="mail_to" class="input-text" value="<?php echo $_preValues->getMailTo();?>"/>
         </div>
         <?php if ($this->getCardType() == 'email'): ?>
-            <div class="field" style="margin-top:5px;">
-                <label for="mail-to-email" class="required" style="line-height:30px;width:100px;display:inline-block"><?php echo $this->__('To E-mail') ?><em>*</em>:</label>
-                <input style="width:200px;margin-left;5px" type="text" id="mail-to-email" name="mail_to_email" class="input-text required-entry validate-email" value="<?php echo $_preValues->getMailToEmail();?>"/>
+            <div class="field">
+                <label for="mail-to-email" class="required"><?php echo $this->__('To E-mail') ?><em>*</em>:</label><br/>
+                <input style="width:200px;" type="text" id="mail-to-email" name="mail_to_email" class="input-text required-entry validate-email" value="<?php echo $_preValues->getMailToEmail();?>"/>
             </div>
         <?php endif; ?>
-        <div class="field" style="margin-top:5px;">
-            <label for="mail-message" style="line-height:30px;width:100px"><?php echo $this->__('Message') ?>:</label>
-            <textarea id="mail-message" name="mail_message" style="border:1px solid #DDD"><?php echo $_preValues->getMailMessage();?></textarea>
+        <div class="field">
+            <label for="mail-message"><?php echo $this->__('Message') ?>:</label><br/>
+            <textarea id="mail-message" name="mail_message" ><?php echo $_preValues->getMailMessage();?></textarea>
         </div>
 
         <?php if($this->getCardType() == 'email' && Mage::getStoreConfig('giftcards/default/show_mail_delivery_date_field')): ?>

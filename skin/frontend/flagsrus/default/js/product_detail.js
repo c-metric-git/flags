@@ -8,8 +8,12 @@ jQuery( document ).ready(function() {
 	jQuery('.sa_jump').on( "click",function(e){
 		e.preventDefault();
 		jQuery( "#tab-tabreviews > a" ).trigger( "click" );
-		jQuery('body').animate({
+		jQuery('body,html').animate({
 		scrollTop: jQuery("#tab-tabreviews").offset().top
+		},'slow');
+		jQuery( "#acctab-tabreviews" ).trigger( "click" );
+		jQuery('body,html').animate({
+		scrollTop: jQuery("#acctab-tabreviews").offset().top
 		},'slow');
 	});
 
