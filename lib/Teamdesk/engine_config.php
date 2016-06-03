@@ -10,7 +10,7 @@
     define('TD_UPDATE_MAIL_ID','dhiraj@clownantics.com');
     
     if($_SERVER['HTTP_HOST'] == 'amazon.flagsrus.org') {
-        define('DB_HOST', 'flagsrusnew.cuobrtussnxi.us-east-1.rds.amazonaws.com');
+        define('DB_HOST', 'localhost');
         define('DB_USER', 'flagsrusnew');
         define('DB_PASSWORD', 'harddisk');
         define('DB_NAME', 'flagsrus');
