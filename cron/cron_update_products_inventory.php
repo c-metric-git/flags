@@ -17,20 +17,19 @@ $strMessage = "<br><b>Stripedsocks</b></br><br /><br />Total product inventory u
                Total product attributes updated :- <b>".$strReturn["totalAttributesUpdate"]."</b><br>"; 
 echo $strMessage;
 
-/*require_once(BASE_PATH."lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php"); 
+require_once(BASE_PATH."lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php"); 
 $objTDProduct_fl = new FLTeamDeskWebprofiles(); 
 $strReturn_fl = $objTDProduct_fl->updateProductInventory($db);  
 $strMessage_fl = "<br><b>Flagsrus</b></br><br /><br />Total product inventory updated :- <b>".$strReturn_fl["totalProductsUpdated"]."</b><br>"; 
 echo $strMessage_fl;
-*/
 
-/*require_once(BASE_PATH."lib/Teamdesk/class.FP_import_teamdesk_webprofiles.php"); 
+
+require_once(BASE_PATH."lib/Teamdesk/class.FP_import_teamdesk_webprofiles.php"); 
 
 $objTDProduct_fp = new FPTeamDeskWebprofiles(); 
 $strReturn_fp = $objTDProduct_fp->updateProductInventory($db);  
 $strMessage_fp = "<br><b>Facepaint</b></br><br /><br />Total product inventory updated :- <b>".$strReturn_fp["totalProductsUpdated"]."</b><br>"; 
 echo $strMessage_fp;
-*/
 $db->done();
 
 $mageFilename = BASE_PATH.'app/Mage.php';
