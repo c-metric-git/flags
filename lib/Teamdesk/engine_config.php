@@ -11,7 +11,7 @@
     
     if($_SERVER['HTTP_HOST'] == 'amazon.flagsrus.org') {
         define('DB_HOST', 'localhost');
-        define('DB_USER', 'flagsrusnew');
+        define('DB_USER', 'root');
         define('DB_PASSWORD', 'harddisk');
         define('DB_NAME', 'flagsrus');
     }     
