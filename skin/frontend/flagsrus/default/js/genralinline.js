@@ -61,6 +61,7 @@ jQuery( document ).ready(function() {
 	
 	/*Responsive filter scroll*/
 	jQuery( ".res-filter" ).click(function(e) {
+		jQuery( "p.block-subtitle--filter" ).trigger( "click" );
 		jQuery("html, body").animate({ scrollTop: jQuery('.block-layered-nav').offset().top }, 1000);
 	});
 });

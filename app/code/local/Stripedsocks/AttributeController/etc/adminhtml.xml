@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<config>
+    <menu>
+        <import_menu translate="title" module="importmodule">
+            <title>Teamdesk</title>
+            <sort_order>9999</sort_order>
+        </import_menu>
+    </menu>
+    <menu>
+        <import_menu>
+            <children>
+                <insert_attribute_options translate="title" module="attributecontroller">
+                    <title>Manipulate Attribute Options</title>
+                    <action>attributecontroller/index/index</action>
+                    <sort_order>20</sort_order>
+                </insert_attribute_options>
+			</children>
+        </import_menu>
+    </menu>
+</config>

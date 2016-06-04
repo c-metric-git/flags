@@ -60,7 +60,7 @@ if($currentCategoryId)
 $appliedFilters = Mage::getSingleton('catalog/layer')->getState()->getFilters(); 
 //echo "currentCategoryId->".$currentCategoryId;
 ?>
-<?php if ($_subcategories->getSize() > 0 && ($currentCategoryId != 146)): ?>
+<?php if ($_subcategories->getSize() > 0 && ($currentCategoryId != 146) && $_category->getName() != 'Top Sellers' ): ?>
 <?php if(is_array($appliedFilters) && count($appliedFilters)==0):
 ?>
     <div class="page-title featured-category-page-title">

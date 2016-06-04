@@ -355,7 +355,9 @@ class FPTeamDeskWebprofiles {
                                     $color_type = $f_color;
                                 }
                                 else {
-                                    $fp_colors[] = $f_color;
+                                    if($f_color!='zz None') {
+                                        $fp_colors[] = $f_color;
+                                    }    
                                 }    
                             }    
                             $fp_color_counter = count($fp_colors);

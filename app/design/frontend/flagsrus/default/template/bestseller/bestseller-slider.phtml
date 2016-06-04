@@ -11,6 +11,13 @@ Varien_Profiler::start('LabelForCodeFragmentToProfile');
 <?php
 
     $bestseller_collection = $this->getBestsellerProduct();//$this->getLoadedProductCollection();
+/* 	$bestseller_collection->joinField('is_in_stock',
+'cataloginventory/stock_item',
+'is_in_stock',
+'product_id=entity_id',
+'is_in_stock=1',
+'{{table}}.stock_id=1',
+'left'); */
    /*  foreach($bestseller_collection as $collection){
 
         $pr_result = $collection->getEntityId();

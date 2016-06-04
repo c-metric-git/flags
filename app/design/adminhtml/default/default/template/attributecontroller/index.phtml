@@ -1,0 +1,112 @@
+<?php
+/**
+ * By Ps
+ *
+ */
+ $attributes_fp =array("brand_and_size"=>"Brand & Size","fp_color"=>"FP Color","fp_design"=>"FP Design","brush"=>"Brush","face_paint_kit_accessory"=>"Face Paint Kit Accessory","fp_filter_brands"=>"FP Filter Brands","fp_filter_character"=>"FP Filter Character","fp_filter_color_types"=>"FP Filter Color Types","fp_filter_colors"=>"FP Filter Colors","fp_filter_size"=>"FP Filter Size","fp_filter_types"=>"FP Filter Types","fp_size"=>"FP Size","fp_style"=>"FP Style","kit_accessory"=>"Kit Accessory","skin_color"=>"Skin Color","stencil_kit_accessory"=>"Stencil Kit Accessory","title"=>"Title","type"=>"Type");
+  $attributes_fl =array("accessory"=>"Accessory","feature"=>"Feature","finish"=>"Finish","fl_filter_size"=>"FL Filter Size","fl_filter_type"=>"FL Filter Type","fl_option"=>"FL Option","fl_size"=>"FL Size","holiday"=>"Holiday","holiday_subtheme"=>"Holiday Subtheme","letter"=>"Letter","multi_brand"=>"Multi Brand","multi_seasons"=>"Multi Seasons","multi_themes"=>"Multi Themes","occassion"=>"Occcassion","occassion_subthemes"=>"Occassion Subthemes","season_subtheme"=>"Season Subtheme","theme_subthemes"=>"Theme Subthemes");
+?>
+<div class="content-header">    
+    <table cellspacing="0">
+        <tbody>
+            <tr>
+                <td style="width: 50%;"><h3 class="icon-head head-upcoming"><?php echo $this->getTitle(); ?></h3></td>
+                <td class="a-right">&nbsp;</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="entry-edit">
+    <form action="" method="post" id="import-form" name="import-form">
+        <fieldset id="my-fieldset">
+            <table cellspacing="0" class="form-list">
+                <tr>
+                    <td colspan="2" class="label">
+                       <label for="allstore"><b><?php echo $this->__("Insert Or Update Attribute Options");?></b></label>
+                       <select name="insert">
+                       <option value=""><b><?php echo $this->__("Select FP Attribute Options..");?></b></option>
+                        <?php 
+                       
+                            foreach($attributes_fp as $key_fp=>$value_fp) 
+                            {
+                               $value_fp = htmlspecialchars($value_fp); 
+                               echo '<option value="'. $key_fp .'">'.$value_fp.'</option>';
+                            }
+                        ?>
+                        <option value=""><b><?php echo $this->__("Select FL Attribute Options..  ");?></b></option>
+                        <?php 
+                       
+                            foreach($attributes_fl as $key_fl=>$value_fl) 
+                            {
+                               $value_fl = htmlspecialchars($value_fl); 
+                               echo '<option value="'. $key_fl .'">'.$value_fl.'</option>';
+                            }
+                        ?>
+                       </select>
+                    </td>
+                </tr>
+                <tr align="center">
+                    <td colspan="2" class="button">
+                        <button type="submit"><?php echo $this->__('Submit'); ?></button>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+        <input type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" name="form_key">
+    </form>
+    <form action="" method="post" id="import-form" name="import-form">
+        <fieldset id="my-fieldset">
+            <table cellspacing="0" class="form-list">
+                <tr>
+                <label for="allstore"><b><?php echo $this->__("Delete Attribute Options");?></b></label>
+                    <td colspan="2" class="label">
+                       <select name="delete">
+                       <option value=""><b><?php echo $this->__("Select Attribute Options...  ");?></b></option>
+                        <?php 
+                            foreach($attributes_fp as $key_fp=>$value_fp) 
+                            {
+                               $value_fp = htmlspecialchars($value_fp); 
+                               echo '<option value="'. $key_fp .'">'.$value_fp.'</option>';
+                            }
+                        ?>
+                        <option value=""><b><?php echo $this->__("Select FL Attribute Options..  ");?></b></option>
+                        <?php 
+                       
+                            foreach($attributes_fl as $key_fl=>$value_fl) 
+                            {
+                               $value_fl = htmlspecialchars($value_fl); 
+                               echo '<option value="'. $key_fl .'">'.$value_fl.'</option>';
+                            }
+                        ?>
+                       </select>
+                    </td>
+                </tr>
+                <tr align="center">
+                    <td colspan="2" class="button">
+                        <button type="submit"><?php echo $this->__('Submit'); ?></button>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+        <input type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" name="form_key">
+    </form>
+    <form action="" method="post" id="import-form" name="import-form">
+        <fieldset id="my-fieldset">
+            <table cellspacing="0" class="form-list">
+                <tr>
+                <label for="allstore"><b><?php echo $this->__("Create AttributeSets");?></b></label>
+                    <td colspan="2" class="label">
+                       <input type="text" name="attributesets" value="">
+                       <input type="hidden" name="create_attributesets" id="create_attributesets" value="create_attributesets">
+                    </td>
+                </tr>
+                <tr align="center">
+                    <td colspan="2" class="button">
+                        <button type="submit"><?php echo $this->__('Submit'); ?></button>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+        <input type="hidden" value="<?php echo Mage::getSingleton('core/session')->getFormKey(); ?>" name="form_key">
+    </form>
+</div>

@@ -40,20 +40,23 @@
     // Add coupon field to payment section
     var themeConfig = {
         'couponCodeContainerSelector'  : '#po_ccc_wrapper',
-        'paymentStepContainerSelector' : '#checkout-step-payment'
+        'paymentStepContainerSelector' : '#ccwrapper',
+        'giftcardContainerSelector' : '#giftcard-section'
     };
     (function() {
         var couponCodeContainer = $$(themeConfig.couponCodeContainerSelector).first();
         var paymentSection = $$(themeConfig.paymentStepContainerSelector).first();
+        var giftcardcontainer = $$(themeConfig.giftcardContainerSelector).first();
         if (!couponCodeContainer || !paymentSection) {
             return this;
         }
-
-        if (paymentSection.firstChild) {
-            paymentSection.insertBefore(couponCodeContainer, paymentSection.firstChild);
-        } else {
-            paymentSection.appendChild(couponCodeContainer);
-        }
+          paymentSection.appendChild(couponCodeContainer);
+          paymentSection.appendChild(giftcardcontainer);
+      //  if (paymentSection.firstChild) {
+       //     paymentSection.insertBefore(couponCodeContainer, paymentSection.firstChild);
+       // } else {
+        //    paymentSection.appendChild(couponCodeContainer);
+       // }
     })();
 
     // Init coupon code logic

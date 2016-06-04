@@ -1183,6 +1183,10 @@ select.form-control, .form-list .input-box select {
 	height: 36px;
 	padding: 6px 12px;
 }
+.container {
+    max-width: 960px;
+    width: 96%;
+}
 .container, .footer-container {
 	max-width: 1100px
 }
@@ -1609,6 +1613,10 @@ box-shadow:         3px 3px 5px 0px rgba(50, 50, 50, 0.75); margin-right: 20px;}
 .button.btn-cart{min-width: 200px;  font-size: 12px;line-height: 55px;   padding: 0 7px;}
 .product_detail_email_sunscription{ vertical-align:middle;}
 .fp-prod-price li span.old-price, .sku-val{color:#0184a2;}
+/*.container {
+    max-width: 960px;
+    width: 96%;
+}*/
  
 @media not all {
 #account-links-wrapper-regular, #header-compare {

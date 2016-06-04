@@ -244,9 +244,8 @@
             
             <div class="logo-wrapper--mobile"> <a class="logo logo--mobile" href="<?php echo $this->getUrl('') ?>" title="<?php echo $this->getLogoAlt() ?>"> <img src="<?php echo (($small = $this->getLogoSrcSmall()) ? $small : $this->getLogoSrc()); ?>" alt="<?php echo $this->getLogoAlt() ?>" /> </a> </div>
             <div class="clearer after-mobile-logo"></div>
-            
             <!-- Skip links -->
-			<?php if (Mage::registry('current_category')): ?>
+			<?php if ((Mage::registry('current_category') && !Mage::registry('current_product')) || $this->getRequest()->getModuleName()=='search' || Mage::getSingleton('cms/page')->getIdentifier()=='filter.html'): ?>
             <?php if (!empty($menuHtml)): ?>
             <a href="#header-nav" class="skip-link skip-nav"> <span class="icon ic ic-menu"></span> <span class="label"><?php echo $this->__('Menu'); ?></span> </a>
             <?php endif; ?>
@@ -266,16 +265,17 @@
             <?php endif; ?>
 			<?php else: ?>
 				<?php if (!empty($menuHtml)): ?>
-				<a href="#header-nav" class="skip-link updated-skip-link skip-nav"> <span class="icon ic ic-menu"></span> <span class="label"><?php echo $this->__('Menu'); ?></span> </a>
+				<a href="#header-nav" class="skip-link skip-nav"> <span class="icon ic ic-menu"></span> <span class="label"><?php echo $this->__('Menu'); ?></span> </a>
 				<?php endif; ?>
 				<?php /*if (!empty($searchHtml) || $existsInChildBlock['search']): ?>
 				<a href="#header-search" class="skip-link skip-search"> <span class="icon ic ic-search"></span> <span class="label"><?php echo $this->__('Search'); ?></span> </a>
 				<?php endif;*/ ?>
+				<a onclick="window.open('<?php echo $store_url.'filter.html' ?>','_self')" href="javascript:void(0);" class="skip-link skip-search"> <span class="icon ic ic-filter"></span><span class="label"><?php echo $this->__('Filter'); ?></span> </a>
 				<?php if ($existsInChildBlock['account-links']): ?>
-				<a href="#header-account" class="skip-link updated-skip-link skip-account"> <span class="icon ic ic-user"></span> <span class="label"><?php echo $this->__('My Account'); ?></span> </a>
+				<a href="#header-account" class="skip-link skip-account"> <span class="icon ic ic-user"></span> <span class="label"><?php echo $this->__('My Account'); ?></span> </a>
 				<?php endif; ?>
 				<?php if (!empty($compareHtml) || $existsInChildBlock['compare']): ?>
-				<a href="#header-compare" class="skip-link updated-skip-link skip-compare"> <span class="icon ic ic-compare"></span>
+				<a href="#header-compare" class="skip-link skip-compare"> <span class="icon ic ic-compare"></span>
 				<?php if (($compareCount = Mage::registry('miniCompareProductCount')) > 0): ?>
 				<span class="count"><?php echo $compareCount; ?></span>
 				<?php endif; ?>

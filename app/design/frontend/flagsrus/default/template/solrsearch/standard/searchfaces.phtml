@@ -1,12 +1,13 @@
 <?php if ($this->isLayerNavigationActive()):?>
 <?php $filterQuery = $this->getFilterQuery(); ?>
 <?php $limit = $this->getLimit(); ?>
-<div class="block block-layered-nav" id="solr_search_facets">
-    <div class="block-title">
+<div id="layered-nav-marker"></div>
+<form name="searchFacets" method="get" action="<?php echo $this->helper('solrsearch')->getResultUrl() ?>">
+<div class="block block-layered-nav block-layered-nav--no-filters" id="solr_search_facetss">
+    <!--div class="block-title">
         <strong><span><?php echo $this->__('Shop By') ?></span></strong>
-    </div>
-    <div class="block-content">
-    	<form name="searchFacets" method="get" action="<?php echo $this->helper('solrsearch')->getResultUrl() ?>">
+    </div-->
+    <div class="block-content toggle-content">
 			<input type="hidden" name="q" value="<?php echo $this->getData('querytext') ?>" />
     		<?php if($this->isSelectedFacetActive()) : ?>
 			<div class="currently">
@@ -42,7 +43,7 @@
 			</div>
 			<?php endif; ?>
 			<?php if($this->isShoppingOptionsActive()): ?>
-	            <p class="block-subtitle"><?php echo $this->__('Shopping Options') ?></p>
+	            <p class="block-subtitle block-subtitle--filter"><?php echo $this->__('Filter') ?></p>
 	            <dl id="narrow-by-list">
                     <!-- code added by lav -->
                     <?php $getFacetFields = $this->getFacetFields(); unset($getFacetFields['category_facet']);unset($getFacetFields['category_path']);?>
@@ -52,8 +53,8 @@
 							<?php echo $this->getRangeFacets($key); ?>
 						<?php else: ?>
 		                    <?php if (count($face) > 0 && $key!= 'fl_filter_section_facet'):?>
-			                    <dt id="solr_search_<?php echo $key ?>_expander" onclick="Effect.toggle('content_holder_<?php echo $key ?>', 'slide', { duration: 0.3 }); $('solr_search_<?php echo $key ?>_expander').toggleClassName('collapsed'); return false;"><i class="fa fa-chevron-down"></i><?php echo $this->getFacetLabel($key); ?></dt>
-			                    <dd id="content_holder_<?php echo $key ?>">
+			                    <dt id="solr_search_<?php echo $key ?>_expander" class="section-title collapsable_head collapsable_head-up" ><?php echo $this->getFacetLabel($key); ?></dt>
+			                    <dd id="content_holder_<?php echo $key ?>" class="solr_search_<?php echo $key ?>_expander">
 			                    	<?php if ($key == 'category_path' || $key == 'category_facet'):?>
 			                    		<?php echo $this->parseCategoryPathFacet($face); ?>
 			                    	<?php else:?>
@@ -88,9 +89,9 @@
 	                <?php echo $this->getPriceFacets() ?>
 	            </dl>
             <?php endif;?>
-         </form>
     </div>
 </div>
+ </form>
 <script type="text/javascript">
 //<![CDATA[
 function sbtogglemoreless(element) {

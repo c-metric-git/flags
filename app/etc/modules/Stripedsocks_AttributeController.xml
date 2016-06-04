@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Stripedsocks_AttributeController>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Stripedsocks_AttributeController>
+    </modules>
+</config>

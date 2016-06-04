@@ -18,7 +18,7 @@ class  Stripedsocks_Layercategory_Model_Layer extends  Mage_Catalog_Model_Layer 
         }
         else
         {
-                $category = Mage::getModel('catalog/category')->load(11922);
+                $category = Mage::getModel('catalog/category')->load(11909);
                 $this->setData('current_category', $category);
         }
         return $category;

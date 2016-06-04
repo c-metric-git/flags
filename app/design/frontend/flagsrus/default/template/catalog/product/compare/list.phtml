@@ -25,6 +25,12 @@
  */
 /* @var $this Mage_Catalog_Block_Product_Compare_List */
 ?>
+ <?php 
+   $compare_count1=0;
+   $compare_count2=0;
+   $compare_count3=0; 
+   $compare_count4=0;
+ ?>
 <div class="page-title title-buttons section-title">
     <h1><?php echo $this->__('Compare Products') ?></h1>
     <a href="#" onclick="window.print(); return false;" class="link-print"><?php echo $this->__('Print This Page') ?></a>
@@ -47,7 +53,9 @@
                 <?php if($_i++%10==0): ?>
                     <th>&nbsp;</th>
                 <?php endif; ?>
+             <?php $compare_count1++; if($compare_count1 <= 5) :  ?>    
                 <td class="a-right"><a href="#" class="btn-remove" onclick="removeItem('<?php echo $this->helper('catalog/product_compare')->getRemoveUrl($_item) ?>');" title="<?php echo $this->__('Remove This Item') ?>"><?php echo $this->__('Remove This Item') ?></a></td>
+              <?php endif; ?>  
             <?php endforeach; ?>
             </tr>
         </thead>
@@ -59,6 +67,7 @@
                 <?php if($_i++%10==0): ?>
                     <th>&nbsp;</th>
                 <?php endif; ?>
+             <?php $compare_count2++; if($compare_count2 <= 5) :  ?>  
                 <td>
                     <a class="product-image" href="#" onclick="setPLocation('<?php echo $this->getProductUrl($_item) ?>', true)" title="<?php echo $this->stripTags($_item->getName(), null, true) ?>"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'small_image')->resize(295, 295); ?>" width="295" height="295" alt="<?php echo $this->stripTags($_item->getName(), null, true) ?>" /></a>
                     <h2 class="product-name"><a href="#" onclick="setPLocation('<?php echo $this->getProductUrl($_item) ?>', true)" title="<?php echo $this->stripTags($_item->getName(), null, true) ?>"><?php echo $this->helper('catalog/output')->productAttribute($_item, $_item->getName(), 'name') ?></a></h2>
@@ -75,6 +84,7 @@
                         </ul>
                     <?php endif; ?>
                 </td>
+               <?php endif; ?>  
             <?php endforeach; ?>
             </tr>
         </tbody>
@@ -86,6 +96,11 @@
                 <?php if($_i++%10==0): ?>
                 <th><span class="nobr"><?php echo $_attribute->getStoreLabel() ?></span></th>
                 <?php endif; ?>
+                <?php $compare_count3++; if($compare_count3 > 5) { 
+                        $compare_count3=0;
+                        break;
+
+                 } ?> 
                 <td>
                     <?php switch ($_attribute->getAttributeCode()) {
                         case "price": ?>
@@ -115,6 +130,7 @@
                 <?php if($_i++%10==0): ?>
                 <th>&nbsp;</th>
                 <?php endif; ?>
+                <?php $compare_count4++; if($compare_count4 <= 5) :  ?> 
                 <td>
                     <?php echo $this->getPriceHtml($_item, true, '-compare-list-bottom') ?>
                     <?php if($_item->isSaleable()): ?>
@@ -128,6 +144,7 @@
                         </ul>
                     <?php endif; ?>
                 </td>
+                 <?php endif; ?>
                 <?php endforeach; ?>
             </tr>
         </tbody>

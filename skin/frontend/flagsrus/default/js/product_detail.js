@@ -7,14 +7,20 @@ jQuery( document ).ready(function() {
 	//jQuery('.sa_jump_to_reviews').attr("onclick","return false");
 	jQuery('.sa_jump').on( "click",function(e){
 		e.preventDefault();
-		jQuery( "#tab-tabreviews > a" ).trigger( "click" );
-		jQuery('body,html').animate({
-		scrollTop: jQuery("#tab-tabreviews").offset().top
-		},'slow');
-		jQuery( "#acctab-tabreviews" ).trigger( "click" );
-		jQuery('body,html').animate({
-		scrollTop: jQuery("#acctab-tabreviews").offset().top
-		},'slow');
+		if (jQuery(window).width() > 768)
+		{
+			jQuery( "#tab-tabreviews > a" ).trigger( "click" );
+			jQuery('body,html').animate({
+			scrollTop: jQuery("#tab-tabreviews").offset().top
+			},'slow');
+		}
+		else
+		{
+			jQuery( "#acctab-tabreviews" ).trigger( "click" );
+			jQuery('body,html').animate({
+			scrollTop: jQuery("#acctab-tabreviews").offset().top
+			},'slow');
+		}
 	});
 
 },2000);

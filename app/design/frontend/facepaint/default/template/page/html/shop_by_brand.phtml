@@ -1,0 +1,62 @@
+ 
+        <div class="main-title">
+          <h3>Shop By Brand</h3>
+        </div>
+     
+        <div class="owl-carousel owl-carousel-0 owl-theme owl-loaded">
+            <div id="itemslider-category2" class="products-grid category-products-grid itemgrid itemgrid-adaptive centered itemslider products-grid">
+
+                <?php
+
+                $children = Mage::getModel('catalog/category')->getCategories(11917);
+                $count_category=1;
+                $is_odd_category=1;
+                foreach ($children as $key => $category) {
+                  $imageurl=Mage::getModel('catalog/category')->load($category->getId())->getImageUrl();
+                  $linkurl=Mage::getModel('catalog/category')->load($category->getId())->getUrl();
+                  
+                  if($count_category == 1 ) : $is_odd_category=1;  ?> <div class="item"> <?php endif; ?>
+                            <div>
+                            <a href="<?php echo $linkurl; ?>" class="responsivGallery-link"><img src='<?php echo $imageurl; ?>' alt=''/></a>
+                            </div>
+                  <?php if($count_category == 2 ) :
+                        $is_odd_category=0;
+                         echo "</div>"; 
+                         endif; 
+                   
+                        if($count_category == 1) {
+                          $count_category++;
+                        } 
+                        else{
+                          $count_category=1;
+                    }
+                 
+                }
+               
+               if($is_odd_category == 1) : echo "</div>"; endif;
+               
+                ?>
+                 </div>
+         </div>
+
+  <script>
+  jQuery(function () {
+      var owl25 = jQuery('#itemslider-category2');
+           owl25.owlCarousel({
+                lazyLoad: true,
+                responsiveClass:true,
+                responsive: {0:{items:1},480:{items:2},960:{items:6}},
+                responsiveRefreshRate: 50,
+                slideSpeed: 200,
+                paginationSpeed: 500,
+                scrollPerPage: true,
+                stopOnHover: true,
+                loop: true,
+                rewindSpeed: 600,
+                pagination: false,
+                nav: true,
+                goToFirst: true,
+                navigationText: false
+            }); //end: owl
+     });
+  </script>       

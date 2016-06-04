@@ -1,4 +1,8 @@
 <?php
+set_time_limit(0);
+ini_set("memory_limit","1024M");
+ini_set("display_errors",1);   
+            
 class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Action
 {  
     public function indexAction()
@@ -9,9 +13,6 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
             $import_type = $_POST['import_type'];
             require_once('lib/Teamdesk/engine_config.php'); 
             require_once('lib/Teamdesk/engine_teamdesk_api.php');   
-            set_time_limit(0);
-            ini_set("memory_limit","512M");
-            ini_set("display_errors",1);   
             switch($import_type) {
                 case 'SS_categories' : 
 				require_once('lib/Teamdesk/class.import_teamdesk_category.php'); 
@@ -606,7 +607,7 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
 					ini_set("display_errors",1);
                     require_once('lib/Teamdesk/class.FP_import_teamdesk_webprofiles.php'); 
                     $objTDProducts = new FPTeamDeskWebprofiles(); 
-                    $strReturn = $objTDProducts->importTeamdeskProduct();    
+                    $strReturn = $objTDProducts->importTeamdeskProduct();     
                     $strMessage = "Product Import Status";                   
                     if($strReturn !='') {
                         $strMessage .= $strReturn; 
@@ -645,12 +646,12 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                     /**
                     * @desc code to update the bundle products data 
                     */
-                    /*$tmp_succ_message = $this->UpdateBundleProductData("var/import/products/FP_BundleProducts0.csv"); 
+                    $tmp_succ_message = $this->UpdateBundleProductData("var/import/products/FP_BundleProducts0.csv"); 
                     if(count($tmp_succ_message) > 0) {
                         foreach($tmp_succ_message as $key=> $temp_error ) {
                             $succ_message['error'] .= "<br />Error in Bundle Product $key => ".$temp_error;
                         }    
-                    } */
+                    } 
                     if($succ_message['success']!='') { 
                         Mage::getSingleton('core/session')->addSuccess($succ_message['success']);
                     }
@@ -1124,7 +1125,7 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                     return $error_sku_names;
            }   
     }
-	public function FLUpdateBundleProductData($csvFile) {
+	public function FLUpdateBundleProductData($csvFile) {       
            if($csvFile!='') {
                    $file_handle = fopen($csvFile, 'r');
                    $i=0;
@@ -1147,25 +1148,30 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                             $i=0;
                             $sku = $arr['sku'];
                         }
-                        if($arr!='') {
+                        if($arr['bundle_sku']!='') {
                             $bundle_arr[$sku][$i] = $arr;
                             $i++;
                         }    
-                    }          
+                    }
+                    //$db = Mage::getSingleton('core/resource')->getConnection('core_read');
                     /**
                     * @desc code to update the bundle product options and data   
                     */
                     $k=0;
-                    foreach($bundle_arr as $key => $bundle_details) {     
-                        echo "<br />product sku ".$key;
-                        //if($key =='F50420K' || $key=='F50420T' || $key=='F10699 SP' || $key=='F50420C' || $key=='F62099 SP' || $key=='M61200' || $key='M61202'  ) {
+                    $product_counter_processed=1;
+                    foreach($bundle_arr as $key => $bundle_details) { 
+                        /*if($product_counter_processed % 6 == 1) {
+                            $db->getConnection();
+                        } */
+                        echo "<br />product sku ".$key;  
+                        // if($key =='CA45206-X' || $key=='CA45348-X' || $key=='CA45359-X' || $key=='CA45376-X' || $key=='CA45421-X' || $key=='CA45427-S-X' || $key=='CA45556-X') {
                         $num_of_options=0;
                         $required_sku_for_kit='';
                         $is_fix_kit = $bundle_details[0]['is_fixed_kit'];
                         $num_of_options = $bundle_details[0]['num_of_options_for_kit'];
                         $required_sku_for_kit = $bundle_details[0]['requiredskuforkit'];
-                        $bundleProduct = Mage::getModel('catalog/product')->loadByAttribute('sku',$key);  
-                        $main_product_id = $bundleProduct->entity_id;  
+                        $bundleProduct = Mage::getSingleton('catalog/product')->loadByAttribute('sku',$key);  
+                        $main_product_id = $bundleProduct->getData('entity_id');
                         $bundleProduct->setIsSuperMode(true);
                         $bundleProduct->setData('_edit_mode', true);
                         //$bundleProduct->setData('price_type', 1);   
@@ -1184,13 +1190,13 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                             */
                             $bundled_items = array(); 
                             $bundled_product_details = Mage::getModel('catalog/product')->load($main_product_id);          
-                            $optionCollection = $bundled_product_details->getTypeInstance(true)->getOptionsCollection($bundled_product_details); 
+                            $optionCollection = $bundled_product_details->getTypeInstance(true)->getOptionsCollection($bundled_product_details);         
                             $selectionCollection = $bundled_product_details->getTypeInstance(true)->getSelectionsCollection(
                                 $bundled_product_details->getTypeInstance(true)->getOptionsIds($bundled_product_details), $bundled_product_details);    
                             /**
                             * @desc code to create the array of options and selections.
                             */ 
-                            if(count($selectionCollection) >0) {
+                            if($selectionCollection->getSize() >0) {
                                 foreach($selectionCollection as $option) 
                                 {
                                     $option_id = $option->getData('option_id');  
@@ -1204,14 +1210,19 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                                     $bundled_items[$option_id][$selection_id] = $option->product_id;
                                 }  
                             } 
-                            foreach ($optionCollection as $option_val) {
-                                if ($bundled_items[$option_val->getOptionId()]=='')
-                                {
-                                   $bundled_items[$option_val->getOptionId()] = array(); 
-                                   $option_array[$option_val->getOptionId()] = $option_val; 
+                            if($optionCollection->getSize() >0) {
+                                foreach ($optionCollection as $option_val) {
+                                    if ($bundled_items[$option_val->getOptionId()]=='')
+                                    {
+                                       $bundled_items[$option_val->getOptionId()] = array(); 
+                                       $option_array[$option_val->getOptionId()] = $option_val; 
+                                    }
                                 }
-                            }    
+                            }        
                         } 
+                        /*echo "bundle items:";
+                        echo '<pre>';
+                        print_R($bundled_items); */
                         if($bundleProduct!='') {
                             $bundleOptions = array();
                             $bundleSelections = array();
@@ -1226,14 +1237,14 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                             $bundleselect_arr=array(); 
                             foreach($bundle_details as $bundle_values) {
                                 if($bundle_values['bundle_sku'] !='') { 
-                                    if(count($bundled_items) > 0) {     
+                                    if(count($bundled_items) > 0) {       
                                          $bundle_product_id='';
-                                         $bundle_product_id = Mage::getModel("catalog/product")->getIdBySku($bundle_values['bundle_sku']);  
+                                         $bundle_product_id = Mage::getSingleton("catalog/product")->getIdBySku($bundle_values['bundle_sku']);  
                                          if($bundle_product_id!= '') {
                                            foreach($bundled_items as $opt_id => $bundle_pr_selection) { 
                                               if(!in_array($opt_id,$options_added_array)) {
                                                  $options_added_array[] = $opt_id; 
-                                                 $bundleOptions[$j]['title'] = $option_array[$opt_id]->getData('default_title');
+                                                 $bundleOptions[$j]['title'] = $option_array[$opt_id]->getData('default_title')!=''?$option_array[$opt_id]->getData('default_title'):$bundle_values['bundle_option_title'];
                                                  $bundleOptions[$j]['option_id'] =$opt_id;
                                                  $bundleOptions[$j]['delete'] ='';
                                                  $bundleOptions[$j]['type'] = $option_array[$opt_id]->getData('type');
@@ -1282,13 +1293,14 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                                         $j=0;
                                              $cnt = $i+1;
                                              $bundleOptions[0]['title'] = $bundle_values['bundle_option_title'];
+                                             $bundleOptions[0]['default_title'] = $bundle_values['bundle_option_title'];
                                              $bundleOptions[0]['option_id'] ='';
                                              $bundleOptions[0]['delete'] ='';
                                              $bundleOptions[0]['type'] = 'multi';
                                              $bundleOptions[0]['required'] ='1';
                                              $bundleOptions[0]['position'] =1; 
                                             $bundle_product_id='';
-                                            $bundle_product_id = Mage::getModel("catalog/product")->getIdBySku($bundle_values['bundle_sku']); 
+                                            $bundle_product_id = Mage::getSingleton("catalog/product")->getIdBySku($bundle_values['bundle_sku']); 
                                             if($bundle_product_id!= '') {
                                                 $bundleSelections[0][$k]['product_id'] = $bundle_product_id;
                                                 $bundleSelections[0][$k]['delete'] = ''; 
@@ -1325,16 +1337,40 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                             if(count($bundleOptions)>0) {
                                 $bundleProduct->setBundleOptionsData($bundleOptions);
                             }
-                            //print_R($bundleselect_arr);
-                            //print_R($error_sku_names);
-                            //exit;  
-                            Mage::register('product', $bundleProduct);
-                            $bundleProduct->save();
-                            $bundleProduct->setData('price_type',1);
-                            $bundleProduct->getResource()->saveAttribute($bundleProduct,'price_type');   
-                            $bundleProduct->clearInstance();
-                            Mage::unregister('product', $bundleProduct);  
+                            try {
+                                
+                                echo '<pre>';
+                                print_R($bundleOptions); 
+                                print_R($bundleselect_arr);   
+                                //print_R($error_sku_names);
+                                $optionModel = Mage::getModel('bundle/option')->setData($bundleOptions)
+                                               ->setParentId($main_product_id)
+                                               ->setStoreId(2);
+                                $optionModel->save();
+                                echo "done";
+                                exit;
+                                
+                                $selectionModel = Mage::getModel('bundle/selection')->setData($bundleselect_arr);
+                                $selectionModel->save();
+                                echo "done";
+                                exit;
+                                /*Mage::register('product', $bundleProduct);   
+                                $bundleProduct->save();
+                                $bundleProduct->setData('price_type',1);
+                                $bundleProduct->getResource()->saveAttribute($bundleProduct,'price_type'); */  
+                                Mage::unregister('product', $bundleProduct);
+                            }catch ( Exception $e ) {
+                                Mage::log ( $e->getMessage () );
+                                echo $e->getMessage ();
+                            }    
+                            $bundleProduct=null; 
+                            /*if($product_counter_processed % 5 == 0) {
+                                $db->closeConnection();
+                            } */                        
+                            $product_counter_processed++;
+                            echo "<br /> pr counter".$product_counter_processed;
                         }
+                      //  }  
                     }    
                     return $error_sku_names;
            }   
