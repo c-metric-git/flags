@@ -1085,7 +1085,7 @@ class FLTeamDeskWebprofiles {
                                             }       
                                             if ($attributePrice != 0 && $attributePrice != '') {
                                                  if ($tmpProductPrice > $attributePrice) {
-                                                     $price  = $tmpProductPrice - $attributePrice;    
+                                                     $price  = "-".($tmpProductPrice - $attributePrice);    
                                                  } 
                                                  elseif ($tmpProductPrice < $attributePrice) {
                                                      $price  = $attributePrice - $tmpProductPrice; 
@@ -1238,7 +1238,7 @@ class FLTeamDeskWebprofiles {
                                                 }       
                                                 if ($attributePrice != 0 && $attributePrice != '') {
                                                      if ($tmpProductPrice > $attributePrice) {
-                                                         $price  = $tmpProductPrice - $attributePrice;    
+                                                         $price  = "-".($tmpProductPrice - $attributePrice);    
                                                      } 
                                                      elseif ($tmpProductPrice < $attributePrice) {
                                                          $price  = $attributePrice - $tmpProductPrice; 

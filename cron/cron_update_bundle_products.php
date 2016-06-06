@@ -1,11 +1,10 @@
 <?php
 define('BASE_PATH', dirname(__FILE__).'/../'); 
 set_time_limit(0);
-ini_set("memory_limit","512M");
-ini_set("display_errors",1);   
+ini_set("memory_limit","1024M");
+ini_set("display_errors",1);  
             
 $mageFilename = BASE_PATH.'app/Mage.php';
-echo 'got';exit;
 require_once $mageFilename;
 Mage::app();
 for($i=1;$i<=2;$i++) {    
@@ -16,7 +15,7 @@ for($i=1;$i<=2;$i++) {
         }    
     }
 }  
-  function FLUpdateBundleProductData($csvFile) {
+ function FLUpdateBundleProductData($csvFile) {       
            if($csvFile!='') {
                    $file_handle = fopen($csvFile, 'r');
                    $i=0;
@@ -39,25 +38,26 @@ for($i=1;$i<=2;$i++) {
                             $i=0;
                             $sku = $arr['sku'];
                         }
-                        if($arr!='') {
+                        if($arr['bundle_sku']!='') {
                             $bundle_arr[$sku][$i] = $arr;
                             $i++;
                         }    
-                    }          
+                    }
                     /**
                     * @desc code to update the bundle product options and data   
                     */
                     $k=0;
+                    $product_counter_processed=0;
                     foreach($bundle_arr as $key => $bundle_details) {     
                         echo "<br />product sku ".$key;
-                        //if($key =='F50420K' || $key=='F50420T' || $key=='F10699 SP' || $key=='F50420C' || $key=='F62099 SP' || $key=='M61200' || $key='M61202'  ) {
+                       // if($key =='CA45206-X' || $key=='CA45348-X' || $key=='CA45359-X' || $key=='CA45376-X' || $key=='CA45421-X' || $key=='CA45427-S-X' || $key=='CA45556-X') {
                         $num_of_options=0;
                         $required_sku_for_kit='';
                         $is_fix_kit = $bundle_details[0]['is_fixed_kit'];
                         $num_of_options = $bundle_details[0]['num_of_options_for_kit'];
                         $required_sku_for_kit = $bundle_details[0]['requiredskuforkit'];
-                        $bundleProduct = Mage::getModel('catalog/product')->loadByAttribute('sku',$key);  
-                        $main_product_id = $bundleProduct->entity_id;  
+                        $bundleProduct = Mage::getSingleton('catalog/product')->loadByAttribute('sku',$key);  
+                        $main_product_id = $bundleProduct->getData('entity_id');
                         $bundleProduct->setIsSuperMode(true);
                         $bundleProduct->setData('_edit_mode', true);
                         //$bundleProduct->setData('price_type', 1);   
@@ -76,13 +76,13 @@ for($i=1;$i<=2;$i++) {
                             */
                             $bundled_items = array(); 
                             $bundled_product_details = Mage::getModel('catalog/product')->load($main_product_id);          
-                            $optionCollection = $bundled_product_details->getTypeInstance(true)->getOptionsCollection($bundled_product_details); 
+                            $optionCollection = $bundled_product_details->getTypeInstance(true)->getOptionsCollection($bundled_product_details);         
                             $selectionCollection = $bundled_product_details->getTypeInstance(true)->getSelectionsCollection(
                                 $bundled_product_details->getTypeInstance(true)->getOptionsIds($bundled_product_details), $bundled_product_details);    
                             /**
                             * @desc code to create the array of options and selections.
                             */ 
-                            if(count($selectionCollection) >0) {
+                            if($selectionCollection->getSize() >0) {
                                 foreach($selectionCollection as $option) 
                                 {
                                     $option_id = $option->getData('option_id');  
@@ -96,14 +96,19 @@ for($i=1;$i<=2;$i++) {
                                     $bundled_items[$option_id][$selection_id] = $option->product_id;
                                 }  
                             } 
-                            foreach ($optionCollection as $option_val) {
-                                if ($bundled_items[$option_val->getOptionId()]=='')
-                                {
-                                   $bundled_items[$option_val->getOptionId()] = array(); 
-                                   $option_array[$option_val->getOptionId()] = $option_val; 
+                            if($optionCollection->getSize() >0) {
+                                foreach ($optionCollection as $option_val) {
+                                    if ($bundled_items[$option_val->getOptionId()]=='')
+                                    {
+                                       $bundled_items[$option_val->getOptionId()] = array(); 
+                                       $option_array[$option_val->getOptionId()] = $option_val; 
+                                    }
                                 }
-                            }    
-                        }    
+                            }        
+                        } 
+                        /*echo "bundle items:";
+                        echo '<pre>';
+                        print_R($bundled_items); */
                         if($bundleProduct!='') {
                             $bundleOptions = array();
                             $bundleSelections = array();
@@ -118,14 +123,14 @@ for($i=1;$i<=2;$i++) {
                             $bundleselect_arr=array(); 
                             foreach($bundle_details as $bundle_values) {
                                 if($bundle_values['bundle_sku'] !='') { 
-                                    if(count($bundled_items) > 0) {     
+                                    if(count($bundled_items) > 0) {       
                                          $bundle_product_id='';
-                                         $bundle_product_id = Mage::getModel("catalog/product")->getIdBySku($bundle_values['bundle_sku']);  
+                                         $bundle_product_id = Mage::getSingleton("catalog/product")->getIdBySku($bundle_values['bundle_sku']);  
                                          if($bundle_product_id!= '') {
                                            foreach($bundled_items as $opt_id => $bundle_pr_selection) { 
                                               if(!in_array($opt_id,$options_added_array)) {
                                                  $options_added_array[] = $opt_id; 
-                                                 $bundleOptions[$j]['title'] = $option_array[$opt_id]->getData('default_title');
+                                                 $bundleOptions[$j]['title'] = $option_array[$opt_id]->getData('default_title')!=''?$option_array[$opt_id]->getData('default_title'):$bundle_values['bundle_option_title'];
                                                  $bundleOptions[$j]['option_id'] =$opt_id;
                                                  $bundleOptions[$j]['delete'] ='';
                                                  $bundleOptions[$j]['type'] = $option_array[$opt_id]->getData('type');
@@ -180,7 +185,7 @@ for($i=1;$i<=2;$i++) {
                                              $bundleOptions[0]['required'] ='1';
                                              $bundleOptions[0]['position'] =1; 
                                             $bundle_product_id='';
-                                            $bundle_product_id = Mage::getModel("catalog/product")->getIdBySku($bundle_values['bundle_sku']); 
+                                            $bundle_product_id = Mage::getSingleton("catalog/product")->getIdBySku($bundle_values['bundle_sku']); 
                                             if($bundle_product_id!= '') {
                                                 $bundleSelections[0][$k]['product_id'] = $bundle_product_id;
                                                 $bundleSelections[0][$k]['delete'] = ''; 
@@ -217,24 +222,22 @@ for($i=1;$i<=2;$i++) {
                             if(count($bundleOptions)>0) {
                                 $bundleProduct->setBundleOptionsData($bundleOptions);
                             }
-                            //print_R($bundleselect_arr);
+                            /*echo '<pre>';
+                            print_R($bundleOptions); 
+                            print_R($bundleselect_arr);   */ 
                             //print_R($error_sku_names);
-                            //exit;  
-                            try {
-                                Mage::register('product', $bundleProduct);
-                                $bundleProduct->save();
-                                $bundleProduct->setData('price_type',1);
-                                $bundleProduct->getResource()->saveAttribute($bundleProduct,'price_type');   
-                                $bundleProduct->clearInstance();
-                                Mage::unregister('product', $bundleProduct); 
-                            }
-                            catch (Exception $e) {
-                                echo $e->getMessage();
-                            }    
-                            echo "dodffddfne";exit; 
+                            Mage::register('product', $bundleProduct);   
+                            $bundleProduct->save();
+                            $bundleProduct->setData('price_type',1);
+                            $bundleProduct->getResource()->saveAttribute($bundleProduct,'price_type');   
+                            Mage::unregister('product', $bundleProduct);
+                            $bundleProduct=null; 
+                            $product_counter_processed++;
+                            echo "done";exit;
                         }
+                      //  }  
                     }    
                     return $error_sku_names;
            }   
-    }   
+    }  
 ?>

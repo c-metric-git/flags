@@ -208,6 +208,11 @@ input[type="radio"]{
   dt#Color_Types{
   	display: none;
   }
+#blog-post-title{
+	text-transform: capitalize;
+	color: #0184a2;	
+	font-size: 16px;
+}
 /* onepage */
 #credit-card-type li {
     display: block;

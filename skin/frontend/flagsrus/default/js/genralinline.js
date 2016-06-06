@@ -1,4 +1,6 @@
 jQuery( document ).ready(function() {	
+	if (jQuery(window).width() > 768)
+{
 	jQuery(".collapsable_head").click(function(){		
 		var collapsable_id=jQuery(this).attr('id');	
 			jQuery("."+collapsable_id).slideToggle(400);		
@@ -12,7 +14,7 @@ jQuery( document ).ready(function() {
 		 		      jQuery(this).addClass("collapsable_head-up");
 		 		 }	
 		 	});
-
+}
 
    jQuery('.link-wishlist').click(function(){
        var productId=jQuery(this).parent().parent().parent().parent().attr('id');

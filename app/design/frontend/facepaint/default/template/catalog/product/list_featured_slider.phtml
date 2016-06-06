@@ -260,8 +260,9 @@ $_productCollection = $this->getLoadedProductCollection ();
         <div id="home-newproduct"
              class="products-grid category-products-grid itemgrid itemgrid-adaptive centered hover-effect equal-height itemslider<?php if ($sliderClasses) echo $sliderClasses; ?> products-grid<?php if ($gridClasses) echo $gridClasses; ?>">
 
-            <?php foreach ($_productCollection as $_product): ?>
-
+            <?php foreach ($_productCollection as $_product):  
+                  if(!$_product->getStockItem()->getIsInStock())  {continue;}
+              ?>    
                 <div class="item" style="height:380px" id="<?php echo $_product->getId (); ?>">
 
 

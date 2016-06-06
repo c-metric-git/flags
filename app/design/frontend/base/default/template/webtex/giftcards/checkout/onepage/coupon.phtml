@@ -25,7 +25,7 @@
         <form method="post" action="<?php echo $this->getUrl('giftcards/cart/giftcardActive'); ?>" id="giftcardAgree">
             <div class="input-box">
                 <input type="checkbox" value="1" name="giftcard_use" id="giftcard_use" class="checkbox" onclick="agreeMethod.save();" <?php echo $_session->getActive() ? 'checked="checked"' : '' ?>>
-                <label for="giftcard_use"><?php echo $this->__('Gift Cards'); ?></label>
+                <label for="giftcard_use"><?php echo $this->__('Gift Certificates'); ?></label>
             </div>
         </form>
     </div>

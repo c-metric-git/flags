@@ -25,7 +25,8 @@
 		->addFieldToFilter('is_active', array('eq'=>'1'))
                 ->addFieldToFilter('featured_category', 1)  // by brt
 		->addAttributeToFilter('path', array('like' => "1/{$rootCategoryId}/%"))
-		->addAttributeToSelect('featured_category', 1);	
+		->addAttributeToSelect('featured_category', 1)
+		->addAttributeToSort('position');
 		//$categories->setPageSize(8);
 
     if($showCategoriesAlphabet){

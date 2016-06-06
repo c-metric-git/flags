@@ -89,12 +89,12 @@ $canApplyMAP  = Mage::helper('catalog')->canApplyMsrp($_product);
                      <p class="old-price">
                             <span class="price-label">Original Price:</span>
                             <span class="price" id="old-price-<?php echo $_product->getId() ?>">
-                                <?php  echo $Price; ?>            
+                                <?php  echo Mage::helper('core')->currency($Price,true,false); ?>            
                             </span>
                     </p>
                     <p class="special-price">
                             <span class="price-label">Special Price:</span>
-                            <span class="price" id="product-price-<?php echo $_product->getId() ?>">
+                            <span class="price" id="">
                              <?php  echo Mage::helper('core')->currency($SpecialPrice,true,false); ?>               
                              </span>
                     </p>          

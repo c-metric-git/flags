@@ -175,6 +175,9 @@
 			<block type="tag/popular" name="tags_popular" template="tag/popular.phtml"/>
 			<block type="paypal/logo" name="paypal.partner.right.logo" template="paypal/partner/logo.phtml"/>
 			<!-- Deprecated: custom static blocks -->
+			 <block type="cms/block" name="quick-links" after="">
+                <action method="setBlockId"><block_id>fp-quick-links</block_id></action>
+            </block>
 			<block type="cms/block" name="block_left_top" before="-">
 				<action method="setBlockId"><block_id>block_left_top</block_id></action>
 			</block>

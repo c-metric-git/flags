@@ -51,8 +51,9 @@ $('.responsiveGallery-wrapper').responsiveGallery({
 			                 <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7"> 
 			                 <?php
 			                  echo $day."<br>";
+                             ?>
 
-			                  echo $post->getPostTitle() ?>
+			                 <a id="blog-post-title" href="<?php echo $post->getPermalink() ?>"><?php echo $post->getPostTitle() ?></a>
 			                 </div>
 			            </div>
 			        </div>
@@ -64,5 +65,4 @@ $('.responsiveGallery-wrapper').responsiveGallery({
     </div>
 
 <?php endif; ?>
-
 
