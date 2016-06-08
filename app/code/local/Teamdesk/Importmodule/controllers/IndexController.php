@@ -532,9 +532,9 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
 						 unset($_SESSION["$clearsession_result"]);					
 					 }   
 					ini_set("display_errors",1);
-                    require_once('lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php'); 
+                    /*require_once('lib/Teamdesk/class.FL_import_teamdesk_webprofiles.php'); 
                     $objTDProducts = new FLTeamDeskWebprofiles(); 
-                    $strReturn = $objTDProducts->importTeamdeskProduct();     
+                    $strReturn = $objTDProducts->importTeamdeskProduct();    */ 
                     $strMessage = "Product Import Status"; 
                     if($strReturn !='') {
                         $strMessage .= $strReturn; 
@@ -542,7 +542,7 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                     $succ_message ='';       
                     $product_csv_counter = $_SESSION['product_csv_counter']!=''?$_SESSION['product_csv_counter']:0;   
                     $counter_loop = 0; 
-                    for($i=10;$i<=13;$i++) {                   
+                    for($i=3;$i<=$product_csv_counter;$i++) {                   
                         $succ_message['error'] .= "<br /><br />Processing File => FL_Products$i.csv<br />";   
                         $succ_message['success'] .= "<br /><br />Processing File => FL_Products$i.csv<br />";    
                         $tmp_succ_message = $this->AddProduct("var/import/products/FL_Products$i.csv");
@@ -555,7 +555,6 @@ class Teamdesk_Importmodule_IndexController extends Mage_Adminhtml_Controller_Ac
                              $succ_message['error'] .= $tmp_succ_message['error'];
                         } 
                     }
-                    exit;          
                     $bundle_product_csv_counter = $_SESSION['bundle_product_csv_counter']!=''?$_SESSION['bundle_product_csv_counter']:0;   
                     for($i=0;$i<=$bundle_product_csv_counter;$i++) {                   
                         $succ_message['error'] .= "<br /><br />Processing File => FL_BundleProducts$i.csv<br />";   
