@@ -102,12 +102,12 @@ class SolrBridge_Solrsearch_Block_Product_List extends Mage_Catalog_Block_Produc
     		}
 
     		$store = Mage::app()->getStore();
-    		$collection = Mage::getModel('catalog/product')->getCollection();
-
+    		$collection = Mage::getModel('catalog/product')->getCollection();  
+             
     		Mage::getSingleton('catalog/product_status')->addVisibleFilterToCollection($collection);
 
     		$collection->addAttributeToFilter('entity_id', array('in' => $productIds));
-
+            
     		if (method_exists($collection,'addPriceData'))
     		{
     			$collection->addPriceData();
@@ -120,7 +120,7 @@ class SolrBridge_Solrsearch_Block_Product_List extends Mage_Catalog_Block_Produc
     		}else{
     			Mage::getSingleton('catalog/product_visibility')->addVisibleInSiteFilterToCollection($collection);
     		}
-
+           
     		Mage::helper('solrsearch')->applyInstockCheck($collection);
 
     		$collection->getSelect()->order("find_in_set(e.entity_id,'".implode(',',$productIds)."')");
@@ -187,7 +187,7 @@ class SolrBridge_Solrsearch_Block_Product_List extends Mage_Catalog_Block_Produc
         }
 
         // set collection to toolbar and apply sort
-        $solrCollection = Mage::getModel('solrsearch/solr_collection');
+        $solrCollection = Mage::getModel('solrsearch/solr_collection');  
         $solrCollection->setSolrData($this->_solrData);
         $toolbar->setCollection($solrCollection);
         //$toolbar->setSolrData($this->_solrData);
