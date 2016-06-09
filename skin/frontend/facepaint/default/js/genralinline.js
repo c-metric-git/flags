@@ -86,17 +86,15 @@ jQuery( document ).ready(function() {
     jQuery('dl#narrow-by-list dd.Color').prepend(jQuery('dl#narrow-by-list dd.Color_Types'));
 
 });
-/*jQuery(function() {
-    jQuery(".nav-panel-inner img.lazy").lazyload({});
-});*/
-jQuery(function() {
-    jQuery(".nav-panel-inner img.lazy").lazyload({});
-	/*jQuery(".nav-panel-inner img.lazy").lazyload({
+jQuery( window ).load(function() {
+	
+
+	var timeout = setTimeout(	function() { 
+		jQuery(".nav-panel-inner img.lazy").lazyload({
         event : "sporty"
     });
-	var timeout = setTimeout(function() { jQuery(".nav-panel-inner img.lazy").trigger("sporty") }, 500);*/
+	jQuery(".nav-panel-inner img.lazy").trigger("sporty") }, 100);
 });
-
 function  wishlistProductid(productId)
 {
 

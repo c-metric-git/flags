@@ -4179,3 +4179,7 @@ font-size: 12px;
 float: left;
 margin: 0;
 }
+.catalog-product-view #itoris_qa_form_add_question .value input,.catalog-product-view #itoris_qa_form_add_question .value textarea
+{
+	border: 1px solid #ddd;
+}
