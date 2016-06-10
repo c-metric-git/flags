@@ -1662,14 +1662,12 @@ a.secured_icon {
 	-webkit-appearance: none !important;
 	-moz-appearance: none !important;
 	background: url("../images/se-arrow2.png") no-repeat scroll right 6px;
-	padding:0 16px 0 5px;
 }
 .limiter select {
 	appearance: none !important;
 	-webkit-appearance: none !important;
 	-moz-appearance: none !important;
 	background: url("../images/se-arrow2.png") no-repeat scroll right 6px;
-	padding:0 16px 0 5px;
 }
 #review_header .stars {
 	width: auto;
@@ -3235,6 +3233,7 @@ div.home_latestpost .home_blog_li_ div_month {
 	padding-right: 0\9; /* IE6, IE7, IE8, IE9 */
 	padding-right: 0\0; /* IE8, IE9 */
 	padding-right: 0\9\0;/*Only works in IE9*/
+	padding:0 16px 0 6px;
 }
 .validation-popup .validation-popup-close_button {
 	cursor: pointer;

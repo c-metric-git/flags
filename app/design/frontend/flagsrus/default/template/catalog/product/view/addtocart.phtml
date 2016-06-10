@@ -132,9 +132,6 @@
         <?php endif; ?>
         
         <button type="button" title="<?php echo $buttonTitle ?>" id="product-addtocart-button" class="button btn-cart" onclick="productAddToCartForm.submit(this)"><span><i class="icon ic ic-bag"></i><span><?php echo $buttonTitle ?></span></span></button>
-        <div class="<?php echo $productsku."-addremove"; ?>" style="display:none;">
-							<button type="button" title="<?php echo $this->__('Added/Remove') ?>" class="button btn-cart  add-remove" onclick="ajaxaddtocart.ajaxCartSubmit(productAddToCartForm<?php echo $productid; ?>);"><span><span><?php echo $this->__('Added/Remove') ?></span></span></button>
-		</div>
 
     </div>
 <input type="hidden" class="is_paypal" value="0" id="is_paypal"/>
