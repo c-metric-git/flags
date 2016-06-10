@@ -1662,12 +1662,14 @@ a.secured_icon {
 	-webkit-appearance: none !important;
 	-moz-appearance: none !important;
 	background: url("../images/se-arrow2.png") no-repeat scroll right 6px;
+	padding:0 16px 0 5px;
 }
 .limiter select {
 	appearance: none !important;
 	-webkit-appearance: none !important;
 	-moz-appearance: none !important;
 	background: url("../images/se-arrow2.png") no-repeat scroll right 6px;
+	padding:0 16px 0 5px;
 }
 #review_header .stars {
 	width: auto;

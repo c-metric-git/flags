@@ -751,16 +751,11 @@ $_productCollection = $this->getItems();
 
 
                     <?php endif; ?>
-
-
-
-
-
-
-
-                    <?php echo $helpLabels->getLabels($_product); //Product labels ?>
-
-
+                    
+                    <?php //echo $helpLabels->getLabels($_product); //Product labels ?>
+                    <?php if($_product->getIconlabel()!=''): ?>
+									<span class="tag-label-<?php echo strtolower(str_replace(' ', '', $_product->getIconlabel())); ?>"></span>
+					<?php endif; ?>
 
                 </a>
 

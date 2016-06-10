@@ -32,11 +32,29 @@
     var lastPrice;
 //]]>
 </script>
+
+<!--gift card section-->
+<?php if(Mage::getStoreConfig('giftcards/default/show_as_payment_method')): ?>
+    <script type="text/javascript" src="<?php echo $this->getJsUrl('webtex/giftcards/onepagegiftcard.js') ?>"></script>
+    <div id="giftcard-section"><?php echo $this->getChildHtml('onepagegiftcard'); ?></div>
+    <script type="text/javascript">
+        //&lt;![CDATA[
+        var activateGiftCard = new OnepageGiftcard('activateGiftCard',"<?php echo $this->getUrl('giftcards/cart/ajaxActivateGiftCard',array('_secure'=>true)) ?>");
+        var agreeMethod = new OnepageGiftcard('giftcardAgree', "<?php echo $this->getUrl('giftcards/cart/agreeToUse',array('_secure'=>true)) ?>");
+        var deActivateGiftCard = new OnepageGiftcard( null, "<?php echo $this->getUrl('giftcards/cart/ajaxDeActivateGiftCard',array('_secure'=>true)) ?>");
+        //]]&gt;
+    </script>
+<?php endif; ?>
+<!-- end gift card section-->
+
 <form action="" id="co-payment-form">
     <fieldset>
         <?php echo $this->getChildHtml('methods') ?>
     </fieldset>
 </form>
+<div id="ccwrapper">
+&nbsp;
+</div>
 <div class="tool-tip" id="payment-tool-tip" style="display:none;">
     <div class="btn-close"><a href="#" id="payment-tool-tip-close" title="<?php echo $this->__('Close') ?>"><?php echo $this->__('Close') ?></a></div>
     <div class="tool-tip-content"><img src="<?php echo $this->getSkinUrl('images/cvv.gif') ?>" alt="<?php echo $this->__('Card Verification Number Visual Reference') ?>" title="<?php echo $this->__('Card Verification Number Visual Reference') ?>" /></div>

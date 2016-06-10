@@ -10,7 +10,7 @@ $sel_filter = Mage::app()->getRequest()->getParam('searchBarOrder');
         <form id="search_mini_form" action="<?php echo $this->helper('solrsearch')->getResultUrl() ?>" method="get" class="topsearch">
             <!-- by brt-->
             
-                <select id="resizing_select" name="searchBarOrder" class=""  style="border:none;width:83px;margin-left:3px;background:#f2f2f2;font-weight:bold;border-right:1px solid #a1a1a1;height:36px">  <!-- Style sheet added on 08032016 -->
+                <select id="resizing_select" name="searchBarOrder" class="fp-search-filter" >  <!-- Style sheet added on 08032016 -->
                     <option value="">All</option>
 
                     <?php    foreach($options as $key => $filtertype){ ?>
@@ -22,7 +22,7 @@ $sel_filter = Mage::app()->getRequest()->getParam('searchBarOrder');
                  <select id="width_tmp_select" style="display: none;">
                   <option id="width_tmp_option">All</option>
                  </select>
-                <input id="search" style="border:none" type="text" name="<?php echo $this->helper('catalogsearch')->getQueryParamName() ?>" value="<?php echo trim(trim($this->helper('catalogsearch')->getEscapedQueryText(),'"')) ?>" class="input-text" placeholder="What would you like to find today?" autocomplete="off" />
+                <input id="search" style="border:none" type="text" name="<?php echo $this->helper('catalogsearch')->getQueryParamName() ?>" value="<?php echo trim(trim($this->helper('catalogsearch')->getEscapedQueryText(),'"')) ?>" class="input-text" placeholder="" autocomplete="off" />
                <!-- <button type="submit" title="<?php echo $this->__('Search') ?>" class="button"><span><span><?php echo $this->__('Search') ?></span></span></button>-->
                <input type="image" src="<?php echo $this->getSkinUrl('images/search-ico.png') ?>"  class="button-start-search submit-image " alt="Go!">
                 

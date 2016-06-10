@@ -30,6 +30,7 @@ function fatal_handler() {
     echo("<pre>");
     print_r($error);
 }*/
+
  ini_set("memory_limit","512M");  
  // ini_set("max_execution_time","1800");  
  set_time_limit(0);                 

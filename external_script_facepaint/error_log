@@ -1,0 +1,32 @@
+[22-Apr-2016 11:27:15 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`stripeds_beta`.`eav_attribute`, CONSTRAINT `FK_EAV_ATTRIBUTE_ENTITY_TYPE_ID_EAV_ENTITY_TYPE_ENTITY_TYPE_ID` FOREIGN KEY (`entity_type_id`) REFERENCES `eav_entity_type` (`entity_type_id`) ON D)' in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /home/stripedsocks/beta/lib/Varien/Db/Statement/Pdo/Mysql.php(110): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /home/stripedsocks/beta/app/code/core/Zend/Db/Statement.php(291): Varien_Db_Statement_Pdo_Mysql->_execute(Array)
+#3 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Abstract.php(480): Zend_Db_Statement->execute(Array)
+#4 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query('INSERT INTO `ea...', Array)
+#5 /home/stripedsocks/beta/lib/Varien/ in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php on line 235
+[22-Apr-2016 11:28:57 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`stripeds_beta`.`eav_attribute`, CONSTRAINT `FK_EAV_ATTRIBUTE_ENTITY_TYPE_ID_EAV_ENTITY_TYPE_ENTITY_TYPE_ID` FOREIGN KEY (`entity_type_id`) REFERENCES `eav_entity_type` (`entity_type_id`) ON D)' in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /home/stripedsocks/beta/lib/Varien/Db/Statement/Pdo/Mysql.php(110): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /home/stripedsocks/beta/app/code/core/Zend/Db/Statement.php(291): Varien_Db_Statement_Pdo_Mysql->_execute(Array)
+#3 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Abstract.php(480): Zend_Db_Statement->execute(Array)
+#4 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query('INSERT INTO `ea...', Array)
+#5 /home/stripedsocks/beta/lib/Varien/ in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php on line 235
+[22-Apr-2016 11:31:06 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`stripeds_beta`.`eav_attribute`, CONSTRAINT `FK_EAV_ATTRIBUTE_ENTITY_TYPE_ID_EAV_ENTITY_TYPE_ENTITY_TYPE_ID` FOREIGN KEY (`entity_type_id`) REFERENCES `eav_entity_type` (`entity_type_id`) ON D)' in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /home/stripedsocks/beta/lib/Varien/Db/Statement/Pdo/Mysql.php(110): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /home/stripedsocks/beta/app/code/core/Zend/Db/Statement.php(291): Varien_Db_Statement_Pdo_Mysql->_execute(Array)
+#3 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Abstract.php(480): Zend_Db_Statement->execute(Array)
+#4 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query('INSERT INTO `ea...', Array)
+#5 /home/stripedsocks/beta/lib/Varien/ in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php on line 235
+[22-Apr-2016 11:32:57 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1452 Cannot add or update a child row: a foreign key constraint fails (`stripeds_beta`.`eav_attribute`, CONSTRAINT `FK_EAV_ATTRIBUTE_ENTITY_TYPE_ID_EAV_ENTITY_TYPE_ENTITY_TYPE_ID` FOREIGN KEY (`entity_type_id`) REFERENCES `eav_entity_type` (`entity_type_id`) ON D)' in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php:228
+Stack trace:
+#0 /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php(228): PDOStatement->execute(Array)
+#1 /home/stripedsocks/beta/lib/Varien/Db/Statement/Pdo/Mysql.php(110): Zend_Db_Statement_Pdo->_execute(Array)
+#2 /home/stripedsocks/beta/app/code/core/Zend/Db/Statement.php(291): Varien_Db_Statement_Pdo_Mysql->_execute(Array)
+#3 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Abstract.php(480): Zend_Db_Statement->execute(Array)
+#4 /home/stripedsocks/beta/lib/Zend/Db/Adapter/Pdo/Abstract.php(238): Zend_Db_Adapter_Abstract->query('INSERT INTO `ea...', Array)
+#5 /home/stripedsocks/beta/lib/Varien/ in /home/stripedsocks/beta/lib/Zend/Db/Statement/Pdo.php on line 235

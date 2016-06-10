@@ -4,7 +4,13 @@
  */
 ?>
 <?php
-$_productCollection = $this->getLoadedProductCollection ();
+$instockIds = Mage::getModel('cataloginventory/stock_item')->getCollection()->addQtyFilter('>=', 1);
+foreach($instockIds as $stock) {
+    $idarray[] = $stock->getProductId();
+}
+$categoryId = 9561;
+$_productCollection = Mage::getModel('catalog/category')->load($categoryId)->getProductCollection()->addIdFilter($idarray)->addAttributeToSelect('*');
+//$_productCollection = $this->getLoadedProductCollection()->addIdFilter($idarray);
 ?>
 <?php /*if ($_productCollection && ($_collectionSize = $this->getCollectionCount ())):*/ ?>
 <?php if ($_productCollection && ($_collectionSize = $_productCollection->getSize())): ?>
@@ -129,13 +135,13 @@ $_productCollection = $this->getLoadedProductCollection ();
     echo $sa_reviews; */
     ?>
     <div class="page-title">
-        <h3 class="section-title"><?php echo $this->getBlockName (); ?></h3>
+        <h3 class="section-title"><a href="<?php echo $this->getUrl()."new-designs.html";?>" style="color:#194ba1;"><?php echo $this->getBlockName (); ?></a></h3>
     </div>
     <div class="itemslider-wrapper slider-arrows1 slider-arrows1-pos-top-right slider-pagination1">
         <div id="<?php echo $sliderId; ?>"
              class="products-grid category-products-grid itemgrid itemgrid-adaptive centered hover-effect equal-height itemslider<?php if ($sliderClasses) echo $sliderClasses; ?> products-grid<?php if ($gridClasses) echo $gridClasses; ?>">
 <?php $productcount = $_productCollection->getSize();  ?>
- <?php foreach ($_productCollection as $_product): 
+ <?php foreach ($_productCollection as $_product):     
 	if($_product){
 	?>
 		<?php 

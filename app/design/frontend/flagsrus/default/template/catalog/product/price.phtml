@@ -212,13 +212,15 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
                     <?php echo $_coreHelper->currency($_price + $weeeAmountToDisplay, true, true) ?>
                 </span>
             <?php else: ?>
-                <span class="regular-price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
-                    <?php if ($_finalPrice == $_price): ?>
-                        <?php echo $_coreHelper->formatPrice($_price, true) ?>
-                    <?php else: ?>
-                        <?php echo $_coreHelper->formatPrice($_finalPrice, true) ?>
-                    <?php endif; ?>
-                </span>
+			    <?php if (!$_minimalPriceValue || $_convertedFinalPrice <= $_minimalPriceValue): ?>
+					<span class="regular-price" id="product-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
+						<?php if ($_finalPrice == $_price): ?>
+							<?php echo $_coreHelper->formatPrice($_price, true) ?>
+						<?php else: ?>
+							<?php echo $_coreHelper->formatPrice($_finalPrice, true) ?>
+						<?php endif; ?>
+					</span>
+				<?php endif; ?>
             <?php endif; ?>
         <?php endif; ?>
     <?php else: /* if ($_finalPrice == $_price): */ ?>
@@ -432,7 +434,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
         <?php else: ?>
             <span class="minimal-price-link">
         <?php endif ?>
-        <span class="label"><?php echo $this->__('As low as:') ?></span>
+        <!--span class="label"><?php echo $this->__('As low as:') ?></span-->
         <span class="price" id="product-minimal-price-<?php echo $_id ?><?php echo $this->getIdSuffix() ?>">
                 <?php echo $_coreHelper->formatPrice($_minimalPriceDisplayValue, false) ?>
             </span>
@@ -441,7 +443,7 @@ $_specialPriceStoreLabel = $this->getProductAttribute('special_price')->getStore
         <?php else: ?>
             </span>
         <?php endif ?>
-    <?php endif; /* if ($this->getDisplayMinimalPrice() && $_minimalPrice && $_minimalPrice < $_finalPrice): */ ?>
+    <?php endif;	 /* if ($this->getDisplayMinimalPrice() && $_minimalPrice && $_minimalPrice < $_finalPrice): */ ?>
     <!--/div-->
 
 <?php else: /* if (!$_product->isGrouped()): */ ?>

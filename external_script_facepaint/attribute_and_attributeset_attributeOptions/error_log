@@ -1,0 +1,7 @@
+[22-Apr-2016 10:03:37 UTC] PHP Fatal error:  Uncaught exception 'Mage_Eav_Exception' with message 'Wrong attribute group ID' in /home/stripedsocks/beta/app/Mage.php:580
+Stack trace:
+#0 /home/stripedsocks/beta/app/code/core/Mage/Eav/Model/Entity/Setup.php(522): Mage::exception('Mage_Eav', 'Wrong attribute...')
+#1 /home/stripedsocks/beta/app/code/core/Mage/Eav/Model/Entity/Setup.php(1083): Mage_Eav_Model_Entity_Setup->getAttributeGroupId('4', 51, 'General')
+#2 /home/stripedsocks/beta/external_script_facepaint/attribute_and_attributeset_attributeOptions/creating-a-newAttributes.php(41): Mage_Eav_Model_Entity_Setup->addAttributeToGroup('catalog_product', 51, 'General', 'type')
+#3 {main}
+  thrown in /home/stripedsocks/beta/app/Mage.php on line 580

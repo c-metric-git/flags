@@ -725,9 +725,8 @@ $_productCollection = $this->getItems();
                         <?php echo $theme->getAltImgHtml($_product, $imgWidth, $imgHeight); ?>
                     <?php endif; ?>
 					<?php //echo $helpLabels->getLabels ($_product); //Product labels ?>
-					<?php if($iconlabel!=''): ?>
-							<!--span class="sticker-wrapper top-left"><span class="sticker new"><?php echo $iconlabel; ?></span></span-->
-							<span class="tag-label-<?php echo strtolower(str_replace(' ', '', $iconlabel)); ?>"></span>
+					<?php if($_product->getIconlabel()!=''): ?>
+							<span class="tag-label-<?php echo strtolower(str_replace(' ', '', $_product->getIconlabel())); ?>"></span>
 					<?php endif; ?>
                 </a>
             

@@ -1,0 +1,2 @@
+[02-Jun-2016 11:46:05 UTC] PHP Warning:  require_once(app/Mage.php): failed to open stream: No such file or directory in /home/stripedsocks/beta/cron/cron_update_bundle_products.php on line 7
+[02-Jun-2016 11:46:05 UTC] PHP Fatal error:  require_once(): Failed opening required 'app/Mage.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/stripedsocks/beta/cron/cron_update_bundle_products.php on line 7

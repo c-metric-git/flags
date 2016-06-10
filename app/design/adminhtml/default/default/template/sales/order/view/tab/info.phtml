@@ -45,6 +45,7 @@
             <fieldset>
                 <?php echo $this->getPaymentHtml() ?>
                 <div><?php echo Mage::helper('sales')->__('Order was placed using %s', $_order->getOrderCurrencyCode()) ?></div>
+                <?php echo Mage::helper('giftcards')->getUsedGiftCards($_order->getId())?>
             </fieldset>
         </div>
     </div>

@@ -25,6 +25,7 @@
  */
 /* @var $this Mage_Catalog_Block_Product_Compare_List */
 ?>
+<?php $see_option_product=array('bundle','configurable','grouped'); ?>
 <div class="page-title title-buttons section-title">
     <h1><?php echo $this->__('Compare Products') ?></h1>
     <a href="#" onclick="window.print(); return false;" class="link-print"><?php echo $this->__('Print This Page') ?></a>
@@ -65,7 +66,11 @@
                     <?php echo $this->getReviewsSummaryHtml($_item, 'short') ?>
                     <?php echo $this->getPriceHtml($_item, true, '-compare-list-top') ?>
                     <?php if($_item->isSaleable()): ?>
+                    <?php if(!in_array($_item->getTypeId(),$see_option_product)): ?>
                         <p style="padding-top: 5px;float: right;"><button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setPLocation('<?php echo $this->helper('catalog/product_compare')->getAddToCartUrl($_item) ?>', true)"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button></p>
+                    <?php else: ?>
+                        <a style="color:#ffffff" title="<?php echo $this->__('See Options') ?>" class="button btn-cart" style="float:none" href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->__('See Options') ?></a>
+                    <?php endif; ?>    
                     <?php else: ?>
                         <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
                     <?php endif; ?>
@@ -118,7 +123,11 @@
                 <td>
                     <?php echo $this->getPriceHtml($_item, true, '-compare-list-bottom') ?>
                     <?php if($_item->isSaleable()): ?>
+                       <?php if(!in_array($_item->getTypeId(),$see_option_product)): ?>
                         <p style="padding-top: 5px;float: right;"><button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setPLocation('<?php echo $this->helper('catalog/product_compare')->getAddToCartUrl($_item) ?>', true)"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button></p>
+                        <?php else: ?>
+                        <a style="color:#ffffff" title="<?php echo $this->__('See Options') ?>" class="button btn-cart" style="float:none" href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->__('See Options') ?></a>
+                        <?php endif; ?>  
                     <?php else: ?>
                         <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
                     <?php endif; ?>
