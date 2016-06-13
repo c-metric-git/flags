@@ -87,7 +87,7 @@ class Meanbee_EstimatedDelivery_Helper_Data extends Mage_Core_Helper_Abstract {
         return $deliveryFromDate;
     }
 
-    /**
+    /**                                     
      * Compute the date of dispatch. $date defaults to today if not provided.
      *
      * @param $shippingMethod
@@ -277,7 +277,7 @@ class Meanbee_EstimatedDelivery_Helper_Data extends Mage_Core_Helper_Abstract {
         $localDate = clone $date;
         //print_R($date);
         $estimatedDelivery = $this->_getEstimatedDeliveryData($shippingMethod);
-        
+                       
         $localDate = $this->_computeCustomValidDate($estimatedDelivery->getDeliverableDays(), $localDate,$offset);       
         //$localDate->addDay($offset);
         $localDate = $this->_computeClosestValidDate($estimatedDelivery->getDeliverableDays(), $localDate);
@@ -350,8 +350,8 @@ class Meanbee_EstimatedDelivery_Helper_Data extends Mage_Core_Helper_Abstract {
      * @param Zend_Date $date
      * @return Zend_Date
      */
-    protected function _handleLatestDispatch($estimatedDelivery, $date) {
-        $localDate = clone $date;
+    protected function _handleLatestDispatch($estimatedDelivery, $date) { 
+        $localDate = clone $date;       
         $latestDispatchTime = intval(str_replace(':', '', $estimatedDelivery->getLastDispatchTime()));
         $currentTime = intval($localDate->toString('HHmmss'));
 
