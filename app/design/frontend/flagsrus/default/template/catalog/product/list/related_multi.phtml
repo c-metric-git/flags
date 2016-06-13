@@ -689,9 +689,12 @@ $_productCollection = $this->getItems();
     <div id="<?php echo $sliderId; ?>" class="products-grid category-products-grid itemgrid itemgrid-adaptive centered hover-effect equal-height itemslider<?php if($sliderClasses) echo $sliderClasses; ?> products-grid<?php if($gridClasses) echo $gridClasses; ?>">
 
 
-<?php $productcount = $_productCollection->getSize();  ?>
+<?php $productcount = $_productCollection->getSize();
+      $current_prd_count = count($_SESSION['childskus']);
+	  $productcount = $productcount - $current_prd_count;
+  ?>
 <?php foreach ($_productCollection as $_product): 
-	if($_product){
+	if($_product && !in_array($_product['sku'],$_SESSION['childskus'])){
 	?>
 		<?php 
 			$productid = $_product->getId();

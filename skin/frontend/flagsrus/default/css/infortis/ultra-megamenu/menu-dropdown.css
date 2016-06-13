@@ -85,7 +85,8 @@
 -------------------------------------------------------------- */
 
 #nav .nav-panel-inner {
-	padding: 23px;
+	padding: 0 23px 23px;
+	
 } /* Required value in pixels to keep padding consistent in different dropdowns */
 #nav .nav-panel-inner:before,  #nav .nav-panel-inner:after {
 	display: table;

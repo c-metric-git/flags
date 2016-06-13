@@ -3902,3 +3902,4 @@ span#po_ccc-please-wait {
 #solr_search_facetss li.more-less:hover, #solr_search_facetss li.more-less a:hover {
     background:none;
 }
+.cart-empty a{color:#194ba1 !important; font-weight:bold;}

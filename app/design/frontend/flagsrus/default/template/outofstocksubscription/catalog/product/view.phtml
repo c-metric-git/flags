@@ -9,6 +9,20 @@
 <?php
 	$_helper = $this->helper('catalog/output');
 	$_product = $this->getProduct();
+	/*Added by Ps*/
+	unset($_SESSION['childskus']);
+	if($_product->getTypeId() == 'configurable') {
+		$childProducts = Mage::getModel('catalog/product_type_configurable')->getUsedProducts(null, $_product);
+		$childskus = array();
+		foreach($childProducts as $k=>$v)
+		{
+				$childskus[] = $v['sku'];
+		}
+		$_SESSION['childskus']=$childskus;
+	}
+	/*End by Ps*/
+
+
 	$theme = $this->helper('ultimo');
 	$helperThis = $this->helper('ultimo/template_catalog_product_view');
 	$helperSnippets = $this->helper('ultimo/rsnippets');
